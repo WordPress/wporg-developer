@@ -1,0 +1,23 @@
+{
+	"name": "wporg-developer",
+	"version": "1.0.0",
+	"description": "The codebase and development environment for Developer.WordPress.org.",
+	"author": "WordPress.org",
+	"license": "GPL-2.0-or-later",
+	"private": true,
+	"dependencies": {},
+	"devDependencies": {
+		"@wordpress/env": "^4.5.0"
+	},
+	"scripts": {
+		"setup:tools": "yarn && composer install && TEXTDOMAIN=wporg composer exec update-configs",
+		"setup": "yarn setup:wp && yarn setup:parse",
+		"setup:wp": "wp-env run cli \"bash env/setup.sh\"",
+		"setup:parse": "wp-env run cli \"wp devhub parse --user_id=1\"",
+		"update:tools": "composer update && TEXTDOMAIN=wporg composer exec update-configs",
+		"wp-env": "wp-env"
+	},
+	"workspaces": [
+		"source/wp-content/themes/wporg-developer"
+	]
+}
