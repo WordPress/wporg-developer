@@ -112,7 +112,6 @@
 	},
 	"scripts": {
 		"format": "phpcbf -p",
-		"lint": "phpcs",
-		"post-update-cmd": "cd ./source/wp-content/plugins/phpdoc-parser && composer update"
+		"lint": "phpcs"
 	}
 }

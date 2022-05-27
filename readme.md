@@ -73,6 +73,12 @@ These must be run in the project's root folder, _not_ in theme/plugin subfolders
     yarn update:tools
     ```
 
+* Parse the code reference again. This is run as part of the project setup.
+
+    ```bash
+    yarn parse
+    ```
+
 ### Asset management
 
 * Build assets once: `yarn workspace wporg-parent-2021 build`
