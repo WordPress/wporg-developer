@@ -1070,25 +1070,29 @@
 				margin-bottom: 0;
 			}
 			dd {
-				.desc {
-					.type, .required {
-						font-style: italic;
-					}
-				}
-				.default {
-					font-style: italic;
-				}
+				margin-bottom: 2em;
 
 				ul {
 					margin-left: 25px;
 					margin-left: 2.5rem;
 				}
 			}
+
+			dd:last-child {
+				margin-bottom: 0;
+			}
+
 			.param-hash {
 				margin-left: 1.2em;
 				margin-bottom: 0.5em;
+				list-style: none;
+
+				.desc {
+					margin-left: 1.5em;
+				}
+
 				> li {
-					margin-top: 1em;
+					margin-top: 1.5em;
 				}
 				li li {
 					list-style-type: circle;
@@ -1096,6 +1100,33 @@
 				.param-hash > li {
 					list-style-type: disc;
 				}
+			}
+
+			.desc {
+				margin: 1rem 0 0.5rem;
+			}
+			
+			.type, .required {
+				margin: 0 4px;
+				font-weight: 400;
+			}
+
+			.type {
+				margin-left: 8px;
+				color: #dc3232;
+				font-size: 14px;
+				font-style: normal;
+			}
+
+			.required {
+				font-size: 12px;
+			}
+
+			code {
+				background: #efefef;
+				border-radius: 4px;
+				padding: 2px 6px;
+				font-weight: 400;
 			}
 		}
 		.learn-more {

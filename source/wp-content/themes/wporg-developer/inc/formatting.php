@@ -597,9 +597,9 @@ class DevHub_Formatting {
 					$name = ltrim( $name, '$' );
 				}
 				if ( $name ) {
-					$new_text .= "<b>'{$name}'</b><br />";
+					$new_text .= "<code>{$name}</code>";
 				}
-				$new_text .= "<i><span class='type'>({$type})</span></i> {$description}";
+				$new_text .= "<span class='type'>{$type}</span><p class='desc'>{$description}</p>";
 				if ( ! $skip_closing_li ) {
 					$new_text .= '</li>';
 				}
