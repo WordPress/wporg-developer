@@ -1077,6 +1077,11 @@
 					margin-left: 2.5rem;
 				}
 			}
+
+			dd:last-child {
+				margin-bottom: 0;
+			}
+
 			.param-hash {
 				margin-left: 1.2em;
 				margin-bottom: 0.5em;

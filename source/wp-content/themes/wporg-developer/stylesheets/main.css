@@ -1477,6 +1477,10 @@ input {
   margin-left: 2.5rem;
 }
 
+.devhub-wrap .wp-parser-class .parameters dd:last-child, .devhub-wrap .wp-parser-function .parameters dd:last-child, .devhub-wrap .wp-parser-hook .parameters dd:last-child, .devhub-wrap .wp-parser-method .parameters dd:last-child {
+  margin-bottom: 0;
+}
+
 .devhub-wrap .wp-parser-class .parameters .param-hash, .devhub-wrap .wp-parser-function .parameters .param-hash, .devhub-wrap .wp-parser-hook .parameters .param-hash, .devhub-wrap .wp-parser-method .parameters .param-hash {
   margin-left: 1.2em;
   margin-bottom: 0.5em;
