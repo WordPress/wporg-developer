@@ -1202,19 +1202,23 @@
 	.source-code-links {
 		margin-left: 2em;
 		margin-top: 1em;
-	}
 
-	.source-code-links span {
-		border-left: 1px solid #999;
-		margin-left: 1em;
-		padding-left: 1em;
-	}
+		span {
+			border-right: 1px solid #999;
+			margin-right: 1em;
+			padding-right: 1em;
 
-	.source-code-links span:first-child {
-		display: none;
-		border-left: 0;
-		margin-left: 1em;
-		padding-left: 0;
+			&:last-of-type {
+				border-right: none;
+			}
+
+			&:first-child {
+				display: none;
+				border-left: 0;
+				margin-left: 1em;
+				padding-left: 0;
+			}
+		}
 	}
 
 	.source-code-container {
