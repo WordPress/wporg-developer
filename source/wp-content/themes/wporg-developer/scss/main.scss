@@ -1198,6 +1198,13 @@
 			width: 50%;
 		}
 
+		.used-by, .uses {
+			td.related-title span {
+				display: block;
+				color: #666;
+			}
+		}
+
 		@media (max-width: 43em) {
 			.related-desc, span {
 				display: none;

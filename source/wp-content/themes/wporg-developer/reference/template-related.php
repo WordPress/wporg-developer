@@ -36,9 +36,9 @@ if ( show_usage_info() ) :
 					<tbody>
 						<?php while ( $uses->have_posts() ) : $uses->the_post(); ?>
 						<tr>
-							<td>
-								<span><?php echo esc_attr( get_source_file() ); ?>:</span>
+							<td class="related-title">
 								<a href="<?php the_permalink(); ?>"><?php the_title(); ?><?php if ( ! in_array( get_post_type(), array( 'wp-parser-class', 'wp-parser-hook' ), true ) ) : ?>()<?php endif; ?></a>
+								<span><?php echo esc_attr( get_source_file() ); ?></span>
 							</td>
 							<td class="related-desc">
 								<?php echo get_summary(); ?>
@@ -76,9 +76,9 @@ if ( show_usage_info() ) :
 					<tbody>
 						<?php while ( $used_by->have_posts() ) : $used_by->the_post(); ?>
 						<tr>
-							<td>
-								<span><?php echo esc_attr( get_source_file() ); ?>:</span>
+							<td class="related-title">
 								<a href="<?php the_permalink(); ?>"><?php the_title(); ?><?php if ( ! in_array( get_post_type(), array( 'wp-parser-class', 'wp-parser-hook' ), true ) ) : ?>()<?php endif; ?></a>
+									<span><?php echo esc_attr( get_source_file() ); ?></span>
 							</td>
 							<td class="related-desc">
 								<?php echo get_summary(); ?>
