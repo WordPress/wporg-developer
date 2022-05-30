@@ -1341,7 +1341,7 @@ namespace DevHub {
 	 * @return array
 	 */
 	function get_post_types_with_source_code() {
-		return array( 'wp-parser-class', 'wp-parser-method', 'wp-parser-function' );
+		return array( 'wp-parser-class', 'wp-parser-method', 'wp-parser-function', 'wp-parser-hook' );
 	}
 
 	/**
