@@ -83,7 +83,3 @@ These must be run in the project's root folder, _not_ in theme/plugin subfolders
 
 * Build assets once: `yarn workspace wporg-parent-2021 build`
 * Watch assets and build on changes: `yarn workspace wporg-parent-2021 start`
-
-## History
-
-This is started as a fork of [Blockbase](https://github.com/Automattic/themes/tree/trunk/blockbase). The [News Theme](https://github.com/WordPress/wporg-news-2021) was the first iteration of this generation of new sites.
