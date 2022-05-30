@@ -1429,35 +1429,40 @@ input {
   margin: 24px 0;
   padding-left: 100px;
   text-indent: -100px;
-  color: #24831d;
-  font-family: monospace;
   font-size: 20px;
-}
-
-.devhub-wrap .wp-parser-class h1 .hook-func, .devhub-wrap .wp-parser-function h1 .hook-func, .devhub-wrap .wp-parser-hook h1 .hook-func, .devhub-wrap .wp-parser-method h1 .hook-func {
-  color: #888888;
-}
-
-.devhub-wrap .wp-parser-class h1 .arg-type, .devhub-wrap .wp-parser-function h1 .arg-type, .devhub-wrap .wp-parser-hook h1 .arg-type, .devhub-wrap .wp-parser-method h1 .arg-type {
-  color: #cd2f23;
-  font-style: italic;
-}
-
-.devhub-wrap .wp-parser-class h1 .arg-name, .devhub-wrap .wp-parser-function h1 .arg-name, .devhub-wrap .wp-parser-hook h1 .arg-name, .devhub-wrap .wp-parser-method h1 .arg-name {
-  color: #0f55c8;
-}
-
-.devhub-wrap .wp-parser-class h1 .arg-default, .devhub-wrap .wp-parser-function h1 .arg-default, .devhub-wrap .wp-parser-hook h1 .arg-default, .devhub-wrap .wp-parser-method h1 .arg-default {
-  color: #000000;
-}
-
-.devhub-wrap .wp-parser-class h1 a:hover, .devhub-wrap .wp-parser-function h1 a:hover, .devhub-wrap .wp-parser-hook h1 a:hover, .devhub-wrap .wp-parser-method h1 a:hover {
-  border-bottom: 1px dotted #21759b;
 }
 
 .devhub-wrap .wp-parser-class h2, .devhub-wrap .wp-parser-function h2, .devhub-wrap .wp-parser-hook h2, .devhub-wrap .wp-parser-method h2 {
   font-family: Georgia, Times, serif;
   margin-bottom: .5em;
+}
+
+.devhub-wrap .wp-parser-class h1, .devhub-wrap .wp-parser-class .signature-highlight, .devhub-wrap .wp-parser-function h1, .devhub-wrap .wp-parser-function .signature-highlight, .devhub-wrap .wp-parser-hook h1, .devhub-wrap .wp-parser-hook .signature-highlight, .devhub-wrap .wp-parser-method h1, .devhub-wrap .wp-parser-method .signature-highlight {
+  color: #24831d;
+  font-family: monospace;
+  font-weight: normal;
+}
+
+.devhub-wrap .wp-parser-class h1 .hook-func, .devhub-wrap .wp-parser-class .signature-highlight .hook-func, .devhub-wrap .wp-parser-function h1 .hook-func, .devhub-wrap .wp-parser-function .signature-highlight .hook-func, .devhub-wrap .wp-parser-hook h1 .hook-func, .devhub-wrap .wp-parser-hook .signature-highlight .hook-func, .devhub-wrap .wp-parser-method h1 .hook-func, .devhub-wrap .wp-parser-method .signature-highlight .hook-func {
+  color: #888888;
+}
+
+.devhub-wrap .wp-parser-class h1 .arg-type, .devhub-wrap .wp-parser-class .signature-highlight .arg-type, .devhub-wrap .wp-parser-function h1 .arg-type, .devhub-wrap .wp-parser-function .signature-highlight .arg-type, .devhub-wrap .wp-parser-hook h1 .arg-type, .devhub-wrap .wp-parser-hook .signature-highlight .arg-type, .devhub-wrap .wp-parser-method h1 .arg-type, .devhub-wrap .wp-parser-method .signature-highlight .arg-type {
+  color: #cd2f23;
+  font-style: italic;
+  font-size: 0.9em;
+}
+
+.devhub-wrap .wp-parser-class h1 .arg-name, .devhub-wrap .wp-parser-class .signature-highlight .arg-name, .devhub-wrap .wp-parser-function h1 .arg-name, .devhub-wrap .wp-parser-function .signature-highlight .arg-name, .devhub-wrap .wp-parser-hook h1 .arg-name, .devhub-wrap .wp-parser-hook .signature-highlight .arg-name, .devhub-wrap .wp-parser-method h1 .arg-name, .devhub-wrap .wp-parser-method .signature-highlight .arg-name {
+  color: #0f55c8;
+}
+
+.devhub-wrap .wp-parser-class h1 .arg-default, .devhub-wrap .wp-parser-class .signature-highlight .arg-default, .devhub-wrap .wp-parser-function h1 .arg-default, .devhub-wrap .wp-parser-function .signature-highlight .arg-default, .devhub-wrap .wp-parser-hook h1 .arg-default, .devhub-wrap .wp-parser-hook .signature-highlight .arg-default, .devhub-wrap .wp-parser-method h1 .arg-default, .devhub-wrap .wp-parser-method .signature-highlight .arg-default {
+  color: #000000;
+}
+
+.devhub-wrap .wp-parser-class h1 a:hover, .devhub-wrap .wp-parser-class .signature-highlight a:hover, .devhub-wrap .wp-parser-function h1 a:hover, .devhub-wrap .wp-parser-function .signature-highlight a:hover, .devhub-wrap .wp-parser-hook h1 a:hover, .devhub-wrap .wp-parser-hook .signature-highlight a:hover, .devhub-wrap .wp-parser-method h1 a:hover, .devhub-wrap .wp-parser-method .signature-highlight a:hover {
+  border-bottom: 1px dotted #21759b;
 }
 
 .devhub-wrap .wp-parser-class .return-type, .devhub-wrap .wp-parser-function .return-type, .devhub-wrap .wp-parser-hook .return-type, .devhub-wrap .wp-parser-method .return-type {
@@ -1592,6 +1597,11 @@ input {
 
 .devhub-wrap .related th, .devhub-wrap .related td {
   width: 50%;
+}
+
+.devhub-wrap .related .used-by td.related-title span, .devhub-wrap .related .uses td.related-title span {
+  display: block;
+  color: #666;
 }
 
 @media (max-width: 43em) {
