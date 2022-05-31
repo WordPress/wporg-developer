@@ -58,7 +58,7 @@ function loop_pagination( $args = array() ) {
 		//'next_text'  => __( 'Next &raquo;' ), // This is the WordPress default.
 		'show_all'     => false,
 		'end_size'     => 1,
-		'mid_size'     => 1,
+		'mid_size'     => 2,
 		'add_fragment' => '',
 		'type'         => 'plain',
 
