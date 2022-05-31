@@ -10,9 +10,9 @@ The main parts of the code are:
 
 `source/wp-content/themes/wporg-developer` - this is the theme that is used to display doc pages. If you want to change front-end stuff, CSS, etc, then start here.
 
-`source/wp-content/plugins/phpdoc-parser` - this is the code that imports PHPDoc documentiation blocks into the database.
+`source/wp-content/plugins/phpdoc-parser` - this is the [phpdoc-parser plugin](https://github.com/WordPress/phpdoc-parser) that imports PHPDoc documentiation blocks into the database.
 
-`source/wp-content/themes/wporg-developer/inc/cli-commands.php` - a WP-CLI wrapper around the `phpdoc-parser` plugin that runs the PHPDoc import.
+`source/wp-content/themes/wporg-developer/inc/cli-commands.php` - a WP-CLI wrapper around the `phpdoc-parser` plugin. It handles things like fetching a fresh copy of WordPress to parse.
 
 You can run an import in this repo with this command which is part of the setup:
 
