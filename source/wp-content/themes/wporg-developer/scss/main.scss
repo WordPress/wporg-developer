@@ -1066,13 +1066,32 @@
 				color: #000000;
 			}
 
-			a:hover {
-				border-bottom: 1px dotted #21759b;
+			a {
+				text-decoration: none;
+
+				&:hover {
+					border-bottom: 1px dotted #21759b;
+				}
 			}
 		}
 
-		.return-type {
-			font-style: italic;
+		.return .return-type {
+			margin-right: 8px;
+			font-size: 14px;
+		}
+
+		.return-type,
+		.parameters .type {
+			color: #dc3232;
+
+			a {
+				color: inherit;
+				text-decoration: none;
+
+				&:hover {
+					border-bottom: 1px dotted #21759b;
+				}
+			}
 		}
 
 		.parameters {
@@ -1123,7 +1142,6 @@
 
 			.type {
 				margin-left: 8px;
-				color: #dc3232;
 				font-size: 14px;
 				font-style: normal;
 			}
