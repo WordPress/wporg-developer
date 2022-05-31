@@ -52,16 +52,6 @@
 					}
 				},
 				{
-					"name": "wordpress-meta/handbook",
-					"type": "wordpress-plugin",
-					"version": "1",
-					"source": {
-						"type": "svn",
-						"url": "https://meta.svn.wordpress.org/sites/",
-						"reference": "trunk/wordpress.org/public_html/wp-content/plugins/handbook/"
-					}
-				},
-				{
 					"name": "wordpress-meta/wporg-markdown",
 					"type": "wordpress-plugin",
 					"version": "1",
@@ -96,7 +86,6 @@
 		"wpackagist-plugin/jetpack": "*",
 		"wordpress-meta/wporg": "1",
 		"wordpress-meta/pub": "1",
-		"wordpress-meta/handbook": "1",
 		"wordpress-meta/wporg-markdown": "1",
 		"wordpress/phpdoc-parser": "dev-master",
 		"wporg/wporg-repo-tools": "dev-trunk",
