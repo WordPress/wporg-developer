@@ -188,8 +188,10 @@ class DevHub_Command extends WP_CLI_Command {
 		}
 
 		// 3. Run the parser.
+		// If running locally, run a quick parse which skips DB replication-lag sleep()'s
+		$quick = in_array( wp_get_environment_type(), array( 'local', 'development' ) ) ? '--quick' : '';
 		WP_CLI::log( 'Running the parser (this will take awhile)...' );
-		WP_CLI::runcommand( "parser create {$path} --user={$user_id}" );
+		WP_CLI::runcommand( "parser create {$path} --user={$user_id} {$quick}" );
 
 		// 4. Deactivate phpdoc-parser plugin.
 		WP_CLI::log( 'Deactivating phpdoc-parser plugin...' );
