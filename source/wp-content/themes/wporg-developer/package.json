@@ -1,5 +1,6 @@
 {
     "name": "wporg-developer",
+    "version": "1.0.0",
     "description": "Theme for WordPress Developer Resources",
     "repository": {
         "type": "svn",
