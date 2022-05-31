@@ -20,7 +20,7 @@
 1. Build the assets. If there's anything that needs setting up.
 
     ```bash
-    yarn workspaces run build
+    yarn build
     ```
 
 1. Start the local environment.
@@ -76,7 +76,7 @@ These must be run in the project's root folder, _not_ in theme/plugin subfolders
 * Watch for SCSS changes and rebuild the CSS as needed.
 
     ```bash
-    yarn workspaces run grunt watch
+    yarn build watch
     ```
 
 * Parse the code reference again. This is run as part of the project setup.
