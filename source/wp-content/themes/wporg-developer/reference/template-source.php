@@ -21,9 +21,15 @@ if ( ! empty( $source_file ) ) :
 		</p>
 
 		<?php if ( post_type_has_source_code() ) : ?>
-			<div class="source-code-container">
-				<pre class="brush: php; toolbar: false; first-line: <?php echo esc_attr( get_post_meta( get_the_ID(), '_wp-parser_line_num', true ) ); ?>"><?php echo htmlentities( get_source_code() ); ?></pre>
-			</div>
+			<?php
+				echo do_blocks(
+					sprintf(
+						'<!-- wp:code {"lineNumbers":true} --><pre class="wp-block-code"><code lang="php" class="language-php line-numbers">%s</code></pre><!-- /wp:code -->',
+						htmlentities( get_source_code() )
+					)
+				);
+			?>
+
 			<p class="source-code-links">
 				<span>
 					<a href="#" class="show-complete-source"><?php _e( 'Expand full source code', 'wporg' ); ?></a>

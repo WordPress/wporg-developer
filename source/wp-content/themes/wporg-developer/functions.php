@@ -170,7 +170,8 @@ function init() {
 	add_filter( 'breadcrumb_trail_items', __NAMESPACE__ . '\\breadcrumb_trail_items_for_hooks', 10, 2 );
 	add_filter( 'breadcrumb_trail_items', __NAMESPACE__ . '\\breadcrumb_trail_items_for_handbook_root', 10, 2 );
 
-	add_filter( 'syntaxhighlighter_htmlresult', __NAMESPACE__ . '\\syntaxhighlighter_htmlresult' );
+	add_filter( 'mkaz_code_syntax_force_loading', '__return_true' );
+	add_filter( 'mkaz_prism_css_path', __NAMESPACE__ . '\\update_prism_css_path' );
 }
 
 /**
@@ -397,42 +398,12 @@ function rename_comments_meta_box( $post_type, $post ) {
 }
 
 /**
- * If a syntax highlighted code block exceeds a given number of lines, wrap the
- * markup with other markup to trigger the code expansion/collapse JS handling
- * already implemented for the code reference.
+ * Customize the syntax highlighter style.
+ * See https://github.com/PrismJS/prism-themes.
  *
- * @param  string $text The pending result of the syntax highlighting.
+ * @param string $path Path to the file to override, relative to the theme.
  * @return string
  */
-function syntaxhighlighter_htmlresult( $text ) {
-
-	// is_admin() is true in front end AJAX requests.
-	if ( is_admin() && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
-		return $text;
-	}
-
-	$new_text      = '';
-	// Collapse is handled for >10 lines. But just go ahead and show the full
-	// code if that is just barely being exceeded (no one wants to expand to
-	// see one or two more lines).
-	$lines_to_show = 12;
-	$do_collapse   = ( substr_count( $text, "\n" ) - 1 ) > $lines_to_show;
-
-	if ( $do_collapse ) {
-		$new_text .= '<section class="source-content">';
-		$new_text .= '<div class="source-code-container">';
-	}
-
-	$new_text .= $text;
-
-	if ( $do_collapse ) {
-		$new_text .= '</div>';
-		$new_text .= '<p class="source-code-links"><span>';
-		$new_text .= '<a href="#" class="show-complete-source">' . __( 'Expand full source code', 'wporg' ) . '</a>';
-		$new_text .= '<a href="#" class="less-complete-source">' . __( 'Collapse full source code', 'wporg' ) . '</a>';
-		$new_text .= '</span></p>';
-		$new_text .= '</section>';
-	}
-
-	return $new_text;
+function update_prism_css_path( $path ) {
+	return '/stylesheets/prism.css';
 }
