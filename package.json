@@ -5,7 +5,9 @@
 	"author": "WordPress.org",
 	"license": "GPL-2.0-or-later",
 	"private": true,
-	"dependencies": {},
+	"dependencies": {
+		"@wordpress/scripts": "^23.1.0"
+	},
 	"devDependencies": {
 		"@wordpress/env": "^4.5.0"
 	},
