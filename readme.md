@@ -73,6 +73,12 @@ These must be run in the project's root folder, _not_ in theme/plugin subfolders
     yarn update:tools
     ```
 
+* Watch for SCSS changes and rebuild the CSS as needed.
+
+    ```bash
+    yarn workspaces run grunt watch
+    ```
+
 * Parse the code reference again. This is run as part of the project setup.
 
     ```bash
