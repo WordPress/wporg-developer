@@ -45,19 +45,6 @@ class DevHub_Formatting {
 		add_filter( 'devhub-format-hash-param-description', array( __CLASS__, 'fix_param_description_parsedown_bug' ) );
 
 		add_filter( 'devhub-function-return-type', array( __CLASS__, 'autolink_references' ) );
-
-		add_filter( 'syntaxhighlighter_htmlresult', array( __CLASS__, 'fix_code_entity_encoding' ), 20 );
-	}
-
-	/**
-	 * Fixes bug in (or at least in using) SyntaxHighlighter code shortcodes that
-	 * causes double-encoding of `>` character.
-	 *
-	 * @param string $content The text being handled as code.
-	 * @return string
-	 */
-	public static function fix_code_entity_encoding( $content ) {
-		return str_replace( '&amp;gt;', '&gt;', $content );
 	}
 
 	/**
