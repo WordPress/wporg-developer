@@ -147,6 +147,9 @@ if ( ! isset( $content_width ) ) {
 add_action( 'init', __NAMESPACE__ . '\\init' );
 add_action( 'widgets_init', __NAMESPACE__ . '\\widgets_init' );
 
+/**
+ * Set up the theme.
+ */
 function init() {
 
 	register_nav_menus();
@@ -164,8 +167,8 @@ function init() {
 	add_theme_support( 'title-tag' );
 
 	// Modify default breadcrumbs.
-	add_filter( 'breadcrumb_trail_items',  __NAMESPACE__ . '\\breadcrumb_trail_items_for_hooks', 10, 2 );
-	add_filter( 'breadcrumb_trail_items',  __NAMESPACE__ . '\\breadcrumb_trail_items_for_handbook_root', 10, 2 );
+	add_filter( 'breadcrumb_trail_items', __NAMESPACE__ . '\\breadcrumb_trail_items_for_hooks', 10, 2 );
+	add_filter( 'breadcrumb_trail_items', __NAMESPACE__ . '\\breadcrumb_trail_items_for_handbook_root', 10, 2 );
 
 	add_filter( 'syntaxhighlighter_htmlresult', __NAMESPACE__ . '\\syntaxhighlighter_htmlresult' );
 }
@@ -177,15 +180,15 @@ function init() {
  * Trail plugin to introduce trail items related to the parent that shouldn't
  * be shown.
  *
- * @param  array $items The breadcrumb trail items
- * @param  array $args  Original args
+ * @param  array $items The breadcrumb trail items.
+ * @param  array $args  Original args.
  * @return array
  */
 function breadcrumb_trail_items_for_hooks( $items, $args ) {
 	$post_type = 'wp-parser-hook';
 
 	// Bail early when not the single archive for hook
-	if ( ! is_singular() || $post_type !== get_post_type() || ! isset( $items[4] ) ) {
+	if ( ! is_singular() || get_post_type() !== $post_type || ! isset( $items[4] ) ) {
 		return $items;
 	}
 
@@ -208,8 +211,8 @@ function breadcrumb_trail_items_for_hooks( $items, $args ) {
  * item that simply links to the currently loaded page. The trailing breadcrumb
  * item is already the unlinked handbook name, which is sufficient.
  *
- * @param  array $items The breadcrumb trail items
- * @param  array $args  Original args
+ * @param  array $items The breadcrumb trail items.
+ * @param  array $args  Original args.
  * @return array
  */
 function breadcrumb_trail_items_for_handbook_root( $items, $args ) {
@@ -225,43 +228,51 @@ function breadcrumb_trail_items_for_handbook_root( $items, $args ) {
 }
 
 /**
- * widgets_init function.
+ * Register widget areas.
  *
  * @access public
  * @return void
  */
 function widgets_init() {
-	register_sidebar( array(
-		'name'          => __( 'Sidebar', 'wporg' ),
-		'id'            => 'sidebar-1',
-		'before_widget' => '<aside id="%1$s" class="box gray widget %2$s">',
-		'after_widget'  => '</div></aside>',
-		'before_title'  => '<h1 class="widget-title">',
-		'after_title'   => '</h1><div class="widget-content">',
-	) );
+	register_sidebar(
+		array(
+			'name'          => __( 'Sidebar', 'wporg' ),
+			'id'            => 'sidebar-1',
+			'before_widget' => '<aside id="%1$s" class="box gray widget %2$s">',
+			'after_widget'  => '</div></aside>',
+			'before_title'  => '<h1 class="widget-title">',
+			'after_title'   => '</h1><div class="widget-content">',
+		)
+	);
 
-	register_sidebar( array(
-		'name'          => __( 'Landing Page Footer - Left', 'wporg' ),
-		'id'            => 'landing-footer-1',
-		'description'   => __( 'Appears in footer of the primary landing page', 'wporg' ),
-		'before_widget' => '<div id="%1$s" class="widget box %2$s">',
-		'after_widget'  => '</div>',
-		'before_title'  => '<h4 class="widget-title">',
-		'after_title'   => '</h4>',
-	) );
+	register_sidebar(
+		array(
+			'name'          => __( 'Landing Page Footer - Left', 'wporg' ),
+			'id'            => 'landing-footer-1',
+			'description'   => __( 'Appears in footer of the primary landing page', 'wporg' ),
+			'before_widget' => '<div id="%1$s" class="widget box %2$s">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<h4 class="widget-title">',
+			'after_title'   => '</h4>',
+		)
+	);
 
-	register_sidebar( array(
-		'name'          => __( 'Landing Page Footer - Center', 'wporg' ),
-		'id'            => 'landing-footer-2',
-		'description'   => __( 'Appears in footer of the primary landing page', 'wporg' ),
-		'before_widget' => '<div id="%1$s" class="widget box %2$s">',
-		'after_widget'  => '</div>',
-		'before_title'  => '<h4 class="widget-title">',
-		'after_title'   => '</h4>',
-	) );
+	register_sidebar(
+		array(
+			'name'          => __( 'Landing Page Footer - Center', 'wporg' ),
+			'id'            => 'landing-footer-2',
+			'description'   => __( 'Appears in footer of the primary landing page', 'wporg' ),
+			'before_widget' => '<div id="%1$s" class="widget box %2$s">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<h4 class="widget-title">',
+			'after_title'   => '</h4>',
+		)
+	);
 }
 
 /**
+ * Modify the default query.
+ *
  * @param \WP_Query $query
  */
 function pre_get_posts( $query ) {
@@ -278,13 +289,17 @@ function pre_get_posts( $query ) {
 	// For search query modifications see DevHub_Search.
 }
 
+/**
+ * Regiser navigation menu area.
+ */
 function register_nav_menus() {
-
-	\register_nav_menus( array(
-		'devhub-menu' => __( 'Developer Resources Menu', 'wporg' ),
-		'devhub-cli-menu' => __( 'WP-CLI Commands Menu', 'wporg' ),
-		'reference-home-api' => __( 'Reference API Menu', 'wporg' ),
-	) );
+	\register_nav_menus(
+		array(
+			'devhub-menu' => __( 'Developer Resources Menu', 'wporg' ),
+			'devhub-cli-menu' => __( 'WP-CLI Commands Menu', 'wporg' ),
+			'reference-home-api' => __( 'Reference API Menu', 'wporg' ),
+		)
+	);
 }
 
 /**
@@ -308,6 +323,9 @@ function method_permalink( $link, $post ) {
 	return home_url( user_trailingslashit( "reference/classes/$class/$method" ) );
 }
 
+/**
+ * Filer the permalink for a taxonomy.
+ */
 function taxonomy_permalink( $link, $term, $taxonomy ) {
 	global $wp_rewrite;
 
@@ -315,16 +333,17 @@ function taxonomy_permalink( $link, $term, $taxonomy ) {
 		return $link;
 	}
 
-	if ( $taxonomy === 'wp-parser-source-file' ) {
+	if ( 'wp-parser-source-file' === $taxonomy ) {
 		$slug = $term->slug;
 		if ( substr( $slug, -4 ) === '-php' ) {
 			$slug = substr( $slug, 0, -4 ) . '.php';
 			$slug = str_replace( '_', '/', $slug );
 		}
 		$link = home_url( user_trailingslashit( "reference/files/$slug" ) );
-	} elseif ( $taxonomy === 'wp-parser-since' ) {
+	} elseif ( 'wp-parser-since' === $taxonomy ) {
 		$link = str_replace( $term->slug, str_replace( '-', '.', $term->slug ), $link );
 	}
+
 	return $link;
 }
 
@@ -343,8 +362,12 @@ function header_js() {
 	</script>\n";
 }
 
+/**
+ * Register and enqueue the theme assets.
+ */
 function theme_scripts_styles() {
 	wp_enqueue_style( 'dashicons' );
+	// phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
 	wp_enqueue_style( 'open-sans', '//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600' );
 	wp_enqueue_style( 'wporg-developer-style', get_stylesheet_uri(), array(), filemtime( __DIR__ . '/style.css' ) );
 	wp_enqueue_style(
@@ -378,13 +401,13 @@ function rename_comments_meta_box( $post_type, $post ) {
  * markup with other markup to trigger the code expansion/collapse JS handling
  * already implemented for the code reference.
  *
- * @param string  $text The pending result of the syntax highlighting.
+ * @param  string $text The pending result of the syntax highlighting.
  * @return string
  */
 function syntaxhighlighter_htmlresult( $text ) {
 
 	// is_admin() is true in front end AJAX requests.
-	if ( is_admin() && !( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
+	if ( is_admin() && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
 		return $text;
 	}
 
@@ -395,7 +418,7 @@ function syntaxhighlighter_htmlresult( $text ) {
 	$lines_to_show = 12;
 	$do_collapse   = ( substr_count( $text, "\n" ) - 1 ) > $lines_to_show;
 
-	if ( $do_collapse )  {
+	if ( $do_collapse ) {
 		$new_text .= '<section class="source-content">';
 		$new_text .= '<div class="source-code-container">';
 	}
