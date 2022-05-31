@@ -45,6 +45,20 @@ class DevHub_Formatting {
 		add_filter( 'devhub-format-hash-param-description', array( __CLASS__, 'fix_param_description_parsedown_bug' ) );
 
 		add_filter( 'devhub-function-return-type', array( __CLASS__, 'autolink_references' ) );
+
+		add_shortcode( 'php', array( __CLASS__, 'do_shortcode_php' ) );
+		add_shortcode( 'js', array( __CLASS__, 'do_shortcode_js' ) );
+		add_shortcode( 'css', array( __CLASS__, 'do_shortcode_css' ) );
+
+		add_filter(
+			'no_texturize_shortcodes',
+			function ( $shortcodes ) {
+				$shortcodes[] = 'php';
+				$shortcodes[] = 'js';
+				$shortcodes[] = 'css';
+				return $shortcodes;
+			}
+		);
 	}
 
 	/**
@@ -655,6 +669,63 @@ class DevHub_Formatting {
 		}
 
 		return $text;
+	}
+
+	/**
+	 * Render the php shortcode using the Code Syntax Block syntax.
+	 *
+	 * This is a workaround for user-submitted code, which used the php shortcode from Syntax Highlighter Evolved.
+	 *
+	 * @param array|string $attr    Shortcode attributes array or empty string.
+	 * @param string       $content Shortcode content.
+	 * @param string       $tag     Shortcode name.
+	 * @return string
+	 */
+	public static function do_shortcode_php( $attr, $content, $tag ) {
+		return do_blocks(
+			sprintf(
+				'<!-- wp:code {"lineNumbers":true} --><pre class="wp-block-code"><code lang="php" class="language-php line-numbers">%s</code></pre><!-- /wp:code -->',
+				trim( $content )
+			)
+		);
+	}
+
+	/**
+	 * Render the js shortcode using the Code Syntax Block syntax.
+	 *
+	 * This is a workaround for user-submitted code, which used the php shortcode from Syntax Highlighter Evolved.
+	 *
+	 * @param array|string $attr    Shortcode attributes array or empty string.
+	 * @param string       $content Shortcode content.
+	 * @param string       $tag     Shortcode name.
+	 * @return string
+	 */
+	public static function do_shortcode_js( $attr, $content, $tag ) {
+		return do_blocks(
+			sprintf(
+				'<!-- wp:code {"lineNumbers":true} --><pre class="wp-block-code"><code lang="javascript" class="language-javascript line-numbers">%s</code></pre><!-- /wp:code -->',
+				trim( $content )
+			)
+		);
+	}
+
+	/**
+	 * Render the css shortcode using the Code Syntax Block syntax.
+	 *
+	 * This is a new shortcode, but built to mirror the above two, `js` & `php`.
+	 *
+	 * @param array|string $attr    Shortcode attributes array or empty string.
+	 * @param string       $content Shortcode content.
+	 * @param string       $tag     Shortcode name.
+	 * @return string
+	 */
+	public static function do_shortcode_css( $attr, $content, $tag ) {
+		return do_blocks(
+			sprintf(
+				'<!-- wp:code {"lineNumbers":true} --><pre class="wp-block-code"><code lang="css" class="language-css line-numbers">%s</code></pre><!-- /wp:code -->',
+				trim( $content )
+			)
+		);
 	}
 
 } // DevHub_Formatting
