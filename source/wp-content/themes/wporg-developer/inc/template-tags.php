@@ -1296,6 +1296,7 @@ namespace DevHub {
 			'connected_type'      => $connection_types,
 			'connected_direction' => array( 'from', 'from' ),
 			'connected_items'     => $post_id,
+			'post__not_in'        => _get_functions_to_exclude_from_uses(),
 			'nopaging'            => true,
 		) );
 
@@ -1374,6 +1375,30 @@ namespace DevHub {
 		) );
 
 		return $connected;
+	}
+
+	/**
+	 * Find functions & methods that are often used by other functions and methods.
+	 */
+	function _get_functions_to_exclude_from_uses() {
+		global $wpdb;
+
+		$ids = get_transient( __METHOD__ );
+		if ( $ids ) {
+			return $ids;
+		}
+
+		$ids = $wpdb->get_col(
+			"SELECT p2p_to
+			FROM {$wpdb->p2p} p2p
+			WHERE p2p_type IN ( 'methods_to_functions', 'functions_to_functions', 'methods_to_methods', 'functions_to_methods' )
+			GROUP BY p2p_to
+			HAVING COUNT(*) > 50"
+		);
+
+		set_transient( __METHOD__, $ids, DAY_IN_SECONDS );
+
+		return $ids;
 	}
 
 	/**
