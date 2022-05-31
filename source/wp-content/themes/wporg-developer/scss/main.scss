@@ -1038,15 +1038,26 @@
 			margin: 24px 0;
 			padding-left: 100px;
 			text-indent: -100px;
+			font-size: 20px;
+		}
+
+		h2 {
+			font-family: $serif-font;
+			margin-bottom: .5em;
+		}
+
+		h1, .signature-highlight {
 			color: #24831d;
 			font-family: $code-font;
-			font-size: 20px;
+			font-weight: normal;
+
 			.hook-func {
 				color: #888888;
 			}
 			.arg-type {
 				color: #cd2f23;
 				font-style: italic;
+				font-size: 0.9em;
 			}
 			.arg-name {
 				color: #0f55c8;
@@ -1054,17 +1065,16 @@
 			.arg-default {
 				color: #000000;
 			}
+
 			a:hover {
 				border-bottom: 1px dotted #21759b;
 			}
 		}
-		h2 {
-			font-family: $serif-font;
-			margin-bottom: .5em;
-		}
+
 		.return-type {
 			font-style: italic;
 		}
+
 		.parameters {
 			p {
 				margin-bottom: 0;
@@ -1217,6 +1227,13 @@
 
 		th, td {
 			width: 50%;
+		}
+
+		.used-by, .uses {
+			td.related-title span {
+				display: block;
+				color: #666;
+			}
 		}
 
 		@media (max-width: 43em) {

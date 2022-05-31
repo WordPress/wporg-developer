@@ -1245,10 +1245,24 @@ namespace DevHub {
 	 * @return boolean
 	 */
 	function post_type_has_uses_info( $post_type = null ) {
-		$post_type             = $post_type ? $post_type : get_post_type();
-		$post_types_with_uses  = array( 'wp-parser-function', 'wp-parser-method', 'wp-parser-class' );
+		$post_type            = $post_type ? $post_type : get_post_type();
+		$post_types_with_uses = array( 'wp-parser-function', 'wp-parser-method', 'wp-parser-class' );
 
 		return in_array( $post_type, $post_types_with_uses );
+	}
+
+	/**
+	 * Does the post type support hooks information?
+	 *
+	 * @param string $post_type Optional. The post type name. If blank, assumes current post type.
+	 *
+	 * @return boolean
+	 */
+	function post_type_has_hooks_info( $post_type = null ) {
+		$post_type             = $post_type ? $post_type : get_post_type();
+		$post_types_with_hooks = array( 'wp-parser-function', 'wp-parser-method' );
+
+		return in_array( $post_type, $post_types_with_hooks );
 	}
 
 	/**
@@ -1272,15 +1286,42 @@ namespace DevHub {
 			) );
 			return $connected;
 		} elseif ( 'wp-parser-function' === $post_type ) {
-			$connection_types = array( 'functions_to_functions', 'functions_to_methods', 'functions_to_hooks' );
+			$connection_types = array( 'functions_to_functions', 'functions_to_methods' );
 		} else {
-			$connection_types = array( 'methods_to_functions', 'methods_to_methods', 'methods_to_hooks' );
+			$connection_types = array( 'methods_to_functions', 'methods_to_methods' );
 		}
 
 		$connected = new \WP_Query( array(
-			'post_type'           => array( 'wp-parser-function', 'wp-parser-method', 'wp-parser-hook' ),
+			'post_type'           => array( 'wp-parser-function', 'wp-parser-method' ),
 			'connected_type'      => $connection_types,
-			'connected_direction' => array( 'from', 'from', 'from' ),
+			'connected_direction' => array( 'from', 'from' ),
+			'connected_items'     => $post_id,
+			'nopaging'            => true,
+		) );
+
+		return $connected;
+	}
+
+	/**
+	 * Retrieves a WP_Query object for the hook posts that the current post is linked to.
+	 *
+	 * @param int|WP_Post|null $post Optional. Post ID or post object. Default is global $post.
+	 * @return WP_Query|null   The WP_Query if the post's post type supports 'uses', null otherwise.
+	 */
+	function get_hooks( $post = null ) {
+		$post_id   = get_post_field( 'ID', $post );
+		$post_type = get_post_type( $post );
+
+		if ( 'wp-parser-function' === $post_type ) {
+			$connection_types = array( 'functions_to_hooks' );
+		} else {
+			$connection_types = array( 'methods_to_hooks' );
+		}
+
+		$connected = new \WP_Query( array(
+			'post_type'           => 'wp-parser-hook',
+			'connected_type'      => $connection_types,
+			'connected_direction' => array( 'from' ),
 			'connected_items'     => $post_id,
 			'nopaging'            => true,
 		) );
@@ -1859,6 +1900,7 @@ namespace DevHub {
 			'return',
 			'explanation',
 			'source',
+			'hooks',
 			'related',
 			'methods',
 			'changelog',
