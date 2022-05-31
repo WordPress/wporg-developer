@@ -782,6 +782,11 @@ namespace DevHub {
 		}
 		$signature .= ')';
 
+		$return = get_return( $post_id, false );
+		if ( $return ) {
+			$signature .= ': ' . $return;
+		}
+
 		return wp_kses_post( $signature );
 	}
 
@@ -915,7 +920,7 @@ namespace DevHub {
 	 *
 	 * @return string
 	 */
-	function get_return( $post_id = null ) {
+	function get_return( $post_id = null, $include_description = true ) {
 
 		if ( empty( $post_id ) ) {
 			$post_id = get_the_ID();
@@ -934,7 +939,11 @@ namespace DevHub {
 		$type        = empty( $return['types'] ) ? '' : esc_html( implode( '|', $return['types'] ) );
 		$type        = apply_filters( 'devhub-function-return-type', $type, $post_id );
 
-		return "<span class='return-type'>({$type})</span> $description";
+		if ( $include_description ) {
+			return "<span class='return-type'>{$type}</span> $description";
+		} else {
+			return "<span class='return-type'>{$type}</span>";
+		}
 	}
 
 	/**
