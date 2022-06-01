@@ -317,7 +317,7 @@ class DevHub_Formatting {
 		// Simple allowable tags that should get unencoded.
 		// Note: This precludes them from being able to be used in an encoded fashion
 		// within a parameter description.
-		$allowable_tags = array( 'code' );
+		$allowable_tags = array( 'code', 'br' );
 		foreach ( $allowable_tags as $tag ) {
 			$text = str_replace( array( "&lt;{$tag}&gt;", "&lt;/{$tag}&gt;" ), array( "<{$tag}>", "</{$tag}>" ), $text );
 		}
@@ -526,6 +526,8 @@ class DevHub_Formatting {
 
 		// If list detected.
 		if ( $inline_list ) {
+			$text = str_replace( "<br>", "\n<br>", $text );
+
 			// Replace first item, ensuring the opening 'ul' tag is prepended.
 			$text = preg_replace( '~^' . preg_quote( $li ) . '(.+)$~mU', "<ul><li>\$1</li>\n", $text, 1 );
 			// Wrap subsequent list items in 'li' tags.
@@ -536,11 +538,19 @@ class DevHub_Formatting {
 			//$text = preg_replace( '~(</li>)(\s+</li>)~smU', '$1</ul>$2', $text );
 			$text = preg_replace( '~(</li>)(\s*</li>)~smU', '$1</ul>$2', $text );
 
-			// Closethe list if it hasn't been closed and it's the end of the description.
-			if ( '</li>' === substr( trim( $text ), -5 ) ) {
-				$text .= '</ul>';
+			// Close the list after the last item if it hasn't been closed and it's the end of the description.
+			$closing_li = strrpos( $text, '</li>' );
+			$closing_ul = strrpos( $text, '</ul>' );
+			if ( ! $closing_ul || $closing_li > $closing_ul ) {
+				$text = substr( $text, 0, $closing_li ) . '</li></ul>' . trim( substr( $text, $closing_li + 5 ) );
 			}
+
+			// Remove new lines at the end of list items / lists.
+			$text = preg_replace( '!(</(ul|li)>)\s*?(<br/?>)+!i', '$1', $text );
 		}
+
+		// Trim off any newlines at the end of the section.
+		$text = preg_replace( '!(<br/?>)+$!i', '', $text );
 
 		return $text;
 	}
@@ -613,7 +623,7 @@ class DevHub_Formatting {
 				if ( $name ) {
 					$new_text .= "<code>{$name}</code>";
 				}
-				$new_text .= "<span class='type'>{$type}</span><p class='desc'>{$description}</p>";
+				$new_text .= "<span class='type'>{$type}</span><div class='desc'>{$description}</div>";
 				if ( ! $skip_closing_li ) {
 					$new_text .= '</li>';
 				}
