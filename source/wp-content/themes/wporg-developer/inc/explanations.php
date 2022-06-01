@@ -101,6 +101,7 @@ class WPORG_Explanations {
 			'menu_icon'         => 'dashicons-info',
 			'show_in_admin_bar' => false,
 			'show_in_nav_menus' => false,
+			'show_in_rest'      => true,
 			'capability_type'   => 'explanation',
 			'map_meta_cap'      => true,
 			'supports'          => array( 'editor', 'revisions' ),
