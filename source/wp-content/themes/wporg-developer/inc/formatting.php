@@ -43,6 +43,7 @@ class DevHub_Formatting {
 
 		add_filter( 'devhub-format-hash-param-description', array( __CLASS__, 'autolink_references' ) );
 		add_filter( 'devhub-format-hash-param-description', array( __CLASS__, 'fix_param_description_parsedown_bug' ) );
+		add_filter( 'devhub-format-hash-param-description', array( __CLASS__, 'convert_lists_to_markup' ) );
 
 		add_filter( 'devhub-function-return-type', array( __CLASS__, 'autolink_references' ) );
 
