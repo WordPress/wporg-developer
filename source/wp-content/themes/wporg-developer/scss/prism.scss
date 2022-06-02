@@ -6,13 +6,13 @@
  * https://github.com/PrismJS/prism/blob/gh-pages/themes/prism-okaidia.css
  */
 
-@import "colors";
+@import "settings/index";
 
 code[class*="language-"],
 pre[class*="language-"] {
 	color: get-color(gray-100);
 	background: none;
-	font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+	font-family: $code-font;
 	text-align: left;
 	white-space: pre;
 	word-spacing: normal;

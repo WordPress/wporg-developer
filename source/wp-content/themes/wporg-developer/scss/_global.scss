@@ -1,11 +1,7 @@
 /* =Global
 ----------------------------------------------- */
-// stylelint-disable
-$header-font: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,sans-serif;
-$body-font: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-$code-font: monospace;
-$serif-font: Georgia,Times,serif;
-// stylelint-enable
+@import "settings/index";
+
 body,
 button,
 input,
