@@ -10,7 +10,7 @@ namespace DevHub;
 
 $source_file = get_source_file();
 if ( ! empty( $source_file ) ) :
-	$source_code = get_source_code();
+	$source_code = post_type_has_source_code() ? get_source_code() : '';
 	?>
 	<hr />
 	<section class="source-content">
@@ -32,7 +32,7 @@ if ( ! empty( $source_file ) ) :
 			?>
 		</p>
 
-		<?php if ( post_type_has_source_code() && ! empty( $source_code ) ) : ?>
+		<?php if ( ! empty( $source_code ) ) : ?>
 			<?php
 				echo do_blocks(
 					sprintf(
