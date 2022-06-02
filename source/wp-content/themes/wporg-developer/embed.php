@@ -46,11 +46,12 @@ function get_signature( $post_id ) {
 
 	if ( 'wp-parser-hook' === get_post_type( $post_id ) ) {
 		$hook_type = DevHub\get_hook_type_name( $post_id );
+		$delimiter = false !== strpos( $title, '$' ) ? '"' : "'";
 
 		if ( $has_args ) {
-			return "{$hook_type}( <span class=\"wp-embed-hook\">'{$title}',</span> ... )";
+			return "{$hook_type}( <span class=\"wp-embed-hook\">{$delimiter}{$title}{$delimiter},</span> ... )";
 		}
-		return "{$hook_type}( <span class=\"wp-embed-hook\">'{$title}'</span> )";
+		return "{$hook_type}( <span class=\"wp-embed-hook\">{$delimiter}{$title}{$delimiter}</span> )";
 	}
 
 	if ( $has_args ) {
