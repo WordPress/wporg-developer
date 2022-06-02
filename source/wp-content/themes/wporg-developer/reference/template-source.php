@@ -15,9 +15,20 @@ if ( ! empty( $source_file ) ) :
 	<section class="source-content">
 		<h2><?php _e( 'Source', 'wporg' ); ?></h2>
 		<p>
-			<?php printf( __( 'File: %s', 'wporg' ),
-				'<a href="' . esc_url( get_source_file_archive_link( $source_file ) ) . '">' . esc_html( $source_file ) . '</a>'
-			); ?>
+			<?php
+			printf(
+				__( 'File: %s.', 'wporg' ),
+				'<code>' . esc_html( $source_file ) . '</code>'
+			);
+			?>
+
+			<?php
+			printf(
+				'<a href="%s">%s</a>',
+				esc_url( get_source_file_archive_link( $source_file ) ),
+				__( 'View all references', 'wporg' )
+			);
+			?>
 		</p>
 
 		<?php if ( post_type_has_source_code() ) : ?>
