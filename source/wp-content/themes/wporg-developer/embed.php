@@ -48,9 +48,9 @@ function get_signature( $post_id ) {
 		$hook_type = DevHub\get_hook_type_name( $post_id );
 
 		if ( $has_args ) {
-			return $hook_type . '( "<span class="wp-embed-hook">' . $title . '</span>", ... )';
+			return "{$hook_type}( <span class=\"wp-embed-hook\">'{$title}',</span> ... )";
 		}
-		return $hook_type . '( "<span class="wp-embed-hook">' . $title . '</span>" )';
+		return "{$hook_type}( <span class=\"wp-embed-hook\">'{$title}'</span> )";
 	}
 
 	if ( $has_args ) {
@@ -81,6 +81,10 @@ $parameter_display_max = 4; // We truncate the display of params
 	do_action( 'embed_head' );
 	?>
 	<style>
+		.wp-embed {
+			color: #50575e;
+		}
+
 		code {
 			background: #efefef;
 			border-radius: 4px;
@@ -88,8 +92,13 @@ $parameter_display_max = 4; // We truncate the display of params
 			font-weight: 400;
 		}
 
-		.wp-embed-heading {
+		p.wp-embed-heading {
 			font-weight: normal;
+			font-family:
+				Hack, "Fira Code", Consolas, Menlo, Monaco, "Andale Mono",
+				"Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono",
+				"Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L",
+				"Courier New", Courier, monospace;
 		}
 
 		.wp-embed-parameters-title {
@@ -116,8 +125,11 @@ $parameter_display_max = 4; // We truncate the display of params
 			color: #24831d;
 		}
 
+		.wp-embed-footer a {
+			color: #135e96;
+		}
 	</style>
-	
+
 </head>
 <body <?php body_class(); ?>>
 	<div <?php post_class( 'wp-embed' ); ?>>
