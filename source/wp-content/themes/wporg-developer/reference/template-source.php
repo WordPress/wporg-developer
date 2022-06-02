@@ -9,7 +9,6 @@
 namespace DevHub;
 
 $source_file = get_source_file();
-
 if ( ! empty( $source_file ) ) :
 	$source_code = get_source_code();
 	?>
