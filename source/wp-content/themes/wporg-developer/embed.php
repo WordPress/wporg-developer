@@ -5,8 +5,6 @@
  * @package wporg-developer
  */
 
-use DevHub;
-
 remove_action( 'embed_content_meta', 'print_embed_comments_button' );
 
 if ( ! headers_sent() ) {
@@ -38,13 +36,13 @@ function get_params( $post_id ) {
 /**
  * Returns a function string to display.
  *
- * @param int     $post_id
- * @param boolean $has_args
+ * @param int $post_id
  *
  * @return string
  */
-function get_signature( $post_id, $has_args ) {
+function get_signature( $post_id ) {
 	$title = get_the_title();
+	$has_args = count( get_params( $post_id ) ) > 0;
 
 	if ( 'wp-parser-hook' === get_post_type( $post_id ) ) {
 		$hook_type = DevHub\get_hook_type_name( $post_id );
@@ -64,7 +62,7 @@ function get_signature( $post_id, $has_args ) {
 
 $embed_post_id         = get_the_ID();
 $params                = get_params( $embed_post_id );
-$embed_title           = get_signature( $embed_post_id, count( $params ) > 0 );
+$embed_title           = get_signature( $embed_post_id );
 $param_count           = count( $params );
 $parameter_display_max = 4; // We truncate the display of params
 
