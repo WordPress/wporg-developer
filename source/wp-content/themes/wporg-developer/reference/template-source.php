@@ -18,7 +18,7 @@ if ( ! empty( $source_file ) ) :
 			<?php
 			printf(
 				__( 'File: %s.', 'wporg' ),
-				esc_html( $source_file )
+				'<code>' . esc_html( $source_file ) . '</code>'
 			);
 			?>
 
