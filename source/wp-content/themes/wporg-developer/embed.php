@@ -11,63 +11,60 @@ if ( ! headers_sent() ) {
 	header( 'X-WP-embed: true' );
 }
 
-$post_id = get_the_ID();
+/**
+ * Returns list of parameter => data type.
+ *
+ * @param int $post_id
+ *
+ * @return array
+ */
+function get_params( $post_id ) {
+	$tags   = get_post_meta( $post_id, '_wp-parser_tags', true );
+	$params = array();
 
-$args                  = get_post_meta( $post_id, '_wp-parser_args', true );
-$tags                  = get_post_meta( $post_id, '_wp-parser_tags', true );
-$types                 = array();
-$formatted_args        = array();
-$PARAMETER_DISPLAY_MAX = 3;
-
-
-if ( $tags ) {
-	foreach ( $tags as $tag ) {
-		if ( is_array( $tag ) && 'param' == $tag['name'] ) {
-			$types[ $tag['variable'] ] = implode( ' | ', $tag['types'] );
+	if ( $tags ) {
+		foreach ( $tags as $tag ) {
+			if ( is_array( $tag ) && 'param' == $tag['name'] ) {
+				$params[ $tag['variable'] ] = implode( ' | ', $tag['types'] );
+			}
 		}
 	}
+
+	return $params;
 }
 
-// If it's a hook, the object is shaped differently
-if ( 'wp-parser-hook' === get_post_type( $post_id ) ) {
-	foreach ( $types as $arg => $type ) {
-		$formatted_args[] = array( $arg, $type );
-	}
-} else {
-	foreach ( $args as $arg ) {
-		$name = '';
-
-		if ( ! empty( $arg['name'] ) && ! empty( $types[ $arg['name'] ] ) ) {
-			$name = $types[ $arg['name'] ];
-		}
-
-		if ( ! empty( $arg['name'] ) ) {
-			$name = $arg['name'];
-		}
-
-		$formatted_args[] = array( $name, $types[ $arg['name'] ] );
-	}
-}
-
-
-function get_signature( $post_id, $args ) {
+/**
+ * Returns a function string to display.
+ *
+ * @param int     $post_id
+ * @param boolean $has_args
+ *
+ * @return string
+ */
+function get_signature( $post_id, $has_args ) {
 	$title = get_the_title();
 
 	if ( 'wp-parser-hook' === get_post_type( $post_id ) ) {
 		$hook_type = DevHub\get_hook_type_name( $post_id );
 
-		if ( $args ) {
+		if ( $has_args ) {
 			return $hook_type . '( "<span class="wp-embed-hook">' . $title . '</span>", ... )';
 		}
 		return $hook_type . '( "<span class="wp-embed-hook">' . $title . '</span>" )';
 	}
 
-	if ( $args ) {
+	if ( $has_args ) {
 		return $title . '( ... )';
 	}
 
 	return $title . '()';
 }
+
+$embed_post_id         = get_the_ID();
+$params                = get_params( $embed_post_id );
+$embed_title           = get_signature( $embed_post_id, count( $params ) > 0 );
+$param_count           = count( $params );
+$parameter_display_max = 3; // We truncate the display of params
 
 ?>
 <!DOCTYPE html>
@@ -127,27 +124,33 @@ function get_signature( $post_id, $args ) {
 
 		<p class="wp-embed-heading">
 			<a href="<?php the_permalink(); ?>" target="_top">
-				<?php echo wp_kses_post( get_signature( $post_id, $formatted_args ) ); ?>
+				<?php echo wp_kses_post( $embed_title ); ?>
 			</a>
 		</p>
 
 		<div class="wp-embed-excerpt">
 			<?php the_excerpt(); ?>
 
-			<?php if ( $formatted_args ) : ?>
+			<?php if ( $params ) : ?>
 				<div class="wp-embed-parameters">
-					<h6 class="wp-embed-parameters-title">Parameters</h6>
+					<h6 class="wp-embed-parameters-title"><?php echo __( 'Parameters', 'wporg' ); ?></h6>
 					<ul>
-						<?php for ( $i = 0; $i < min( count( $formatted_args ), $PARAMETER_DISPLAY_MAX ); $i++ ) : ?>
+						<?php
+						for ( $i = 0; $i < min( $param_count, $parameter_display_max ); $i++ ) {
+							$key = array_keys( $params )[ $i ];
+							?>
 							<li>
-								<code><?php echo esc_html( $formatted_args[ $i ][0] ); ?></code>
-								<span class="wp-embed-parameters-type"><?php echo esc_html( $formatted_args[ $i ][1] ); ?></span>
+								<code><?php echo esc_html( $key ); ?></code>
+								<span class="wp-embed-parameters-type"><?php echo esc_html( $params[ $key ] ); ?></span>
 							</li>
-						<?php endfor; ?>
+						<?php } ?>
 
-						<?php if ( count( $formatted_args ) > $PARAMETER_DISPLAY_MAX ) : ?>
-							<li>... <?php echo count( $formatted_args ) - $PARAMETER_DISPLAY_MAX; ?> more </li>
-						<?php endif; ?>
+						<?php
+						if ( ! empty( $params ) && $param_count > $parameter_display_max ) {
+							/* translators: %d number of non printed parameter */
+							echo '<li>' . sprintf( '... %s more', esc_attr( $param_count - $parameter_display_max ) ) . '</li>';
+						}
+						?>
 					</ul>
 				</div>
 			<?php endif; ?>
