@@ -156,8 +156,7 @@ $parameter_display_max = 3; // We truncate the display of params
 			<?php endif; ?>
 
 		</div>
-
-
+		
 		<?php
 		/**
 		 * Print additional content after the embed excerpt.
