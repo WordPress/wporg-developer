@@ -7,6 +7,8 @@
 
 use DevHub;
 
+remove_action( 'embed_content_meta', 'print_embed_comments_button' );
+
 if ( ! headers_sent() ) {
 	header( 'X-WP-embed: true' );
 }
@@ -64,7 +66,7 @@ $embed_post_id         = get_the_ID();
 $params                = get_params( $embed_post_id );
 $embed_title           = get_signature( $embed_post_id, count( $params ) > 0 );
 $param_count           = count( $params );
-$parameter_display_max = 3; // We truncate the display of params
+$parameter_display_max = 4; // We truncate the display of params
 
 ?>
 <!DOCTYPE html>
@@ -133,7 +135,7 @@ $parameter_display_max = 3; // We truncate the display of params
 
 			<?php if ( $params ) : ?>
 				<div class="wp-embed-parameters">
-					<h6 class="wp-embed-parameters-title"><?php echo __( 'Parameters', 'wporg' ); ?></h6>
+					<h6 class="wp-embed-parameters-title"><?php echo esc_html__( 'Parameters:', 'wporg' ); ?></h6>
 					<ul>
 						<?php
 						for ( $i = 0; $i < min( $param_count, $parameter_display_max ); $i++ ) {
@@ -179,6 +181,15 @@ $parameter_display_max = 3; // We truncate the display of params
 				do_action( 'embed_content_meta' );
 				?>
 			</div>
+
+			<?php
+				/**
+				 * Print scripts or data before the closing body tag in the embed template.
+				 *
+				 * @since 4.4.0
+				 */
+				do_action( 'embed_footer' );
+			?>
 		</div>
 	</div>
 </body>
