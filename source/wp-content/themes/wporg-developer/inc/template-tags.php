@@ -707,7 +707,7 @@ namespace DevHub {
 		$types        = array();
 
 		if ( 'wp-parser-class' === get_post_type( $post_id ) ) {
-			return $signature;
+			return '<span class="keyword">class</span> ' . $signature . ' {}';
 		}
 
 		if ( $tags ) {

@@ -1401,13 +1401,21 @@ input {
 }
 
 .devhub-wrap .wp-parser-class h1 .hook-func,
+.devhub-wrap .wp-parser-class h1 .keyword,
 .devhub-wrap .wp-parser-class .signature-highlight .hook-func,
+.devhub-wrap .wp-parser-class .signature-highlight .keyword,
 .devhub-wrap .wp-parser-function h1 .hook-func,
+.devhub-wrap .wp-parser-function h1 .keyword,
 .devhub-wrap .wp-parser-function .signature-highlight .hook-func,
+.devhub-wrap .wp-parser-function .signature-highlight .keyword,
 .devhub-wrap .wp-parser-hook h1 .hook-func,
+.devhub-wrap .wp-parser-hook h1 .keyword,
 .devhub-wrap .wp-parser-hook .signature-highlight .hook-func,
+.devhub-wrap .wp-parser-hook .signature-highlight .keyword,
 .devhub-wrap .wp-parser-method h1 .hook-func,
-.devhub-wrap .wp-parser-method .signature-highlight .hook-func {
+.devhub-wrap .wp-parser-method h1 .keyword,
+.devhub-wrap .wp-parser-method .signature-highlight .hook-func,
+.devhub-wrap .wp-parser-method .signature-highlight .keyword {
   color: #646970;
 }
 
