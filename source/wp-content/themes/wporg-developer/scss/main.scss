@@ -1074,7 +1074,8 @@
 			font-family: $code-font;
 			font-weight: 400;
 
-			.hook-func {
+			.hook-func,
+			.keyword {
 				color: get-color(gray-50);
 			}
 
