@@ -1,9 +1,6 @@
 /* =Global
 ----------------------------------------------- */
-$header-font: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,sans-serif;
-$body-font: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-$code-font: monospace;
-$serif-font: Georgia,Times,serif;
+@import "settings/index";
 
 body,
 button,
@@ -18,11 +15,17 @@ textarea {
 }
 
 /* Headings */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
 	clear: both;
 	font-family: $header-font;
 	font-weight: 300;
 }
+
 hr {
 	background-color: #dfdfdf;
 	border: 0;
@@ -34,38 +37,54 @@ hr {
 p {
 	margin-bottom: 1.5em;
 }
-ul, ol {
+
+ul,
+ol {
 	margin: 0 0 1.5em 3em;
 }
+
 ul {
 	list-style: disc;
 }
+
 ol {
 	list-style: decimal;
 }
+
 li > ul,
 li > ol {
 	margin-bottom: 0;
 	margin-left: 1.5em;
 }
+
 dt {
-	font-weight: bold;
+	font-weight: 700;
 }
+
 dd {
 	margin: 0 1.5em 1.5em;
 }
-b, strong {
-	font-weight: bold;
+
+b,
+strong {
+	font-weight: 700;
 }
-dfn, cite, em, i {
+
+dfn,
+cite,
+em,
+i {
 	font-style: italic;
 }
+
 blockquote {
 	margin: 0 1.5em;
 }
+
 address {
 	margin: 0 0 1.5em;
 }
+
 pre {
 	background: #eee;
 	font-family: "Courier 10 Pitch", Courier, monospace;
@@ -77,16 +96,26 @@ pre {
 	overflow: auto;
 	padding: 1.6em;
 }
-code, kbd, tt, var {
-	font: 15px Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+
+code,
+kbd,
+tt,
+var {
+	font-family: $code-font;
+	font-size: 15px;
 }
-abbr, acronym {
+
+abbr,
+acronym {
 	cursor: help;
 }
-mark, ins {
+
+mark,
+ins {
 	background: #fff9c0;
 	text-decoration: none;
 }
+
 sup,
 sub {
 	font-size: 75%;
@@ -95,32 +124,41 @@ sub {
 	position: relative;
 	vertical-align: baseline;
 }
+
 sup {
 	bottom: 1ex;
 }
+
 sub {
-	top: .5ex;
+	top: 0.5ex;
 }
+
 small {
 	font-size: 75%;
 }
+
 big {
 	font-size: 125%;
 }
+
 figure {
 	margin: 0;
 }
+
 table {
 	margin: 0 0 1.5em;
 	width: 100%;
 }
+
 th {
-	font-weight: bold;
+	font-weight: 700;
 }
+
 img {
 	height: auto; /* Make sure images are scaled correctly. */
 	max-width: 100%; /* Adhere to container width. */
 }
+
 /* Form Elements */
 button,
 input,
@@ -132,21 +170,25 @@ textarea {
 	*vertical-align: middle; /* Improves appearance and consistency in all browsers */
 	font-weight: 300;
 }
+
 button,
 input {
 	line-height: normal; /* Addresses FF3/4 setting line-height using !important in the UA stylesheet */
 }
+
 /* Alignment */
 .alignleft {
 	display: inline;
 	float: left;
 	margin-right: 1.5em;
 }
+
 .alignright {
 	display: inline;
 	float: right;
 	margin-left: 1.5em;
 }
+
 .aligncenter {
 	clear: both;
 	display: block;
