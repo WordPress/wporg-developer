@@ -1414,8 +1414,6 @@ input {
 
 .devhub-wrap .wp-parser-class h1, .devhub-wrap .wp-parser-function h1, .devhub-wrap .wp-parser-hook h1, .devhub-wrap .wp-parser-method h1 {
   margin: 24px 0;
-  padding-left: 100px;
-  text-indent: -100px;
   font-size: 20px;
 }
 

@@ -6,7 +6,13 @@
 
 	<?php echo get_private_access_message(); ?>
 
-	<h1><?php echo get_signature(); ?></h1>
+	<h1><?php echo do_blocks(
+			sprintf(
+				'<!-- wp:code {"lineNumbers":false} --><div class="wp-block-code"><code lang="php" class="language-php">%s</code></div><!-- /wp:code -->',
+				get_signature()
+			)
+		);
+	?></h1>
 
 	<section class="summary">
 		<?php echo get_summary(); ?>
