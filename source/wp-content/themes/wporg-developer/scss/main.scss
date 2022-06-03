@@ -178,25 +178,23 @@
 		}
 
 		&.shiny-blue {
-			background-color: #21759b;
-			background-image: linear-gradient(to bottom, #2a95c5, #21759b);
-			border-color: #21759b;
-			border-bottom-color: #1e6a8d;
-			-webkit-box-shadow: inset 0 1px 0 rgba(120, 200, 230, 0.5);
-			box-shadow: inset 0 1px 0 rgba(120, 200, 230, 0.5);
+			background-color: get-color(blue-50);
+			border-color: get-color(blue-50);
+			border-bottom-color: get-color(blue-70);
 			color: #fff;
 			text-decoration: none;
-			text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
-			padding: 3px 8px;
 
-			&:hover {
-				background-color: #278ab7;
-				background-image: linear-gradient(to bottom, #2e9fd2, #21759b);
-				border-color: #1b607f;
-				-webkit-box-shadow: inset 0 1px 0 rgba(120, 200, 230, 0.6);
-				box-shadow: inset 0 1px 0 rgba(120, 200, 230, 0.6);
+			&:hover,
+			&:focus,
+			&:active {
+				background-color: get-color(blue-60);
+				border-color: get-color(blue-80);
 				color: #fff;
-				text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+			}
+
+			&:focus,
+			&:active {
+				box-shadow: 0 0 3px 1px get-color(yellow-30);
 			}
 		}
 
@@ -777,12 +775,14 @@
 	.archive-filter-form {
 		margin: 5rem 0;
 		font-size: 1.5rem;
+		line-height: 1.5;
 
+		select,
 		input[type="submit"] {
 			margin-left: 0.5em;
-			padding: 0.2em 0.5em;
-			line-height: 1;
-			font-size: 1.5rem;
+			padding: 0.333em 1em;
+			font-size: inherit;
+			line-height: inherit;
 		}
 	}
 
