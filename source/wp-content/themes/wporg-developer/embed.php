@@ -95,6 +95,7 @@ $parameter_display_max = 4; // We truncate the display of params
 
 		p.wp-embed-heading {
 			font-weight: normal;
+			font-size: 1.25rem;
 			font-family:
 				Hack, "Fira Code", Consolas, Menlo, Monaco, "Andale Mono",
 				"Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono",
