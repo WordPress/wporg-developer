@@ -159,23 +159,6 @@ img {
 	max-width: 100%; /* Adhere to container width. */
 }
 
-/* Form Elements */
-button,
-input,
-select,
-textarea {
-	font-size: 100%; /* Corrects font size not being inherited in all browsers */
-	margin: 0; /* Addresses margins set differently in IE6/7, F3/4, S5, Chrome */
-	vertical-align: baseline; /* Improves appearance and consistency in all browsers */
-	*vertical-align: middle; /* Improves appearance and consistency in all browsers */
-	font-weight: 300;
-}
-
-button,
-input {
-	line-height: normal; /* Addresses FF3/4 setting line-height using !important in the UA stylesheet */
-}
-
 /* Alignment */
 .alignleft {
 	display: inline;

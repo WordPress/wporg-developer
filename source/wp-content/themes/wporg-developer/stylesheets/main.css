@@ -243,28 +243,6 @@ img {
   /* Adhere to container width. */
 }
 
-/* Form Elements */
-button,
-input,
-select,
-textarea {
-  font-size: 100%;
-  /* Corrects font size not being inherited in all browsers */
-  margin: 0;
-  /* Addresses margins set differently in IE6/7, F3/4, S5, Chrome */
-  vertical-align: baseline;
-  /* Improves appearance and consistency in all browsers */
-  *vertical-align: middle;
-  /* Improves appearance and consistency in all browsers */
-  font-weight: 300;
-}
-
-button,
-input {
-  line-height: normal;
-  /* Addresses FF3/4 setting line-height using !important in the UA stylesheet */
-}
-
 /* Alignment */
 .alignleft {
   display: inline;
@@ -502,8 +480,7 @@ input {
 .devhub-wrap input[type="submit"]:active {
   border-color: #aaa #bbb #bbb #bbb;
   background: #f0f0f0;
-  -webkit-box-shadow: inset 0 1px 0 rgba(120, 200, 230, 0.6), 1px 1px 2px rgba(0, 0, 0, 0.4);
-  box-shadow: inset 0 1px 0 rgba(120, 200, 230, 0.6), 1px 1px 2px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 3px #3582c4;
 }
 
 .devhub-wrap a.button.shiny-blue,
