@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "60cbbc835f1fd87925789a9b2c30e88c",
+    "content-hash": "b5f4eaf703c1a073d9bfa5c01eee4e4d",
     "packages": [
         {
             "name": "composer/installers",
@@ -619,21 +619,39 @@
         },
         {
             "name": "wpackagist-plugin/gutenberg",
-            "version": "13.2.2",
+            "version": "13.3.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/gutenberg/",
-                "reference": "tags/13.2.2"
+                "reference": "tags/13.3.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/gutenberg.13.2.2.zip"
+                "url": "https://downloads.wordpress.org/plugin/gutenberg.13.3.0.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/gutenberg/"
+        },
+        {
+            "name": "wpackagist-plugin/jetpack",
+            "version": "11.0-a.11",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/jetpack/",
+                "reference": "tags/11.0-a.11"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/jetpack.11.0-a.11.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/jetpack/"
         },
         {
             "name": "wpackagist-plugin/posts-to-posts",
@@ -2424,12 +2442,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "f88fcbc9b25cfa37735e016d7d92835ef30c1676"
+                "reference": "5e2719947a22c3cd9a6545dbb66d44b81bc0a1e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/f88fcbc9b25cfa37735e016d7d92835ef30c1676",
-                "reference": "f88fcbc9b25cfa37735e016d7d92835ef30c1676",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/5e2719947a22c3cd9a6545dbb66d44b81bc0a1e6",
+                "reference": "5e2719947a22c3cd9a6545dbb66d44b81bc0a1e6",
                 "shasum": ""
             },
             "require": {
@@ -2473,7 +2491,7 @@
                 "source": "https://github.com/squizlabs/PHP_CodeSniffer",
                 "wiki": "https://github.com/squizlabs/PHP_CodeSniffer/wiki"
             },
-            "time": "2022-05-23T01:24:33+00:00"
+            "time": "2022-05-31T22:48:23+00:00"
         },
         {
             "name": "theseer/tokenizer",
