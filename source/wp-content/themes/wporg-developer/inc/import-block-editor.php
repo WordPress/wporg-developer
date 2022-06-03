@@ -316,7 +316,7 @@ class DevHub_Block_Editor_Importer extends DevHub_Docs_Importer {
 	 * @return string
 	 */
 	public function wporg_markdown_edit_link( $link, $post_id ) {
-		if ( $this->get_post_type() === get_post_type( $post_id ) ) {
+		if ( $this->get_post_type() === get_post_type( $post_id ) && defined( 'WP_CORE_STABLE_BRANCH' ) ) {
 			$link = str_replace( '/wp/' . WP_CORE_STABLE_BRANCH . '/', '/trunk/', $link );
 		}
 

@@ -93,6 +93,7 @@
 		"wpackagist-plugin/code-syntax-block": "*",
 		"wpackagist-plugin/posts-to-posts": "*",
 		"wpackagist-plugin/syntaxhighlighter": "*",
+		"wpackagist-plugin/jetpack": "*",
 		"wordpress-meta/wporg": "1",
 		"wordpress-meta/pub": "1",
 		"wordpress-meta/handbook": "1",

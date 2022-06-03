@@ -17,3 +17,6 @@ wp option update show_on_front page
 # Add an empty menu for the top of DevHub.
 wp menu create "Developer Resources Menu"
 wp menu location assign developer-resources-menu devhub-menu
+
+# Run all cron tasks (Including Handbook imports from GitHub)
+wp cron event run --all
