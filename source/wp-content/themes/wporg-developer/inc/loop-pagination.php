@@ -54,8 +54,8 @@ function loop_pagination( $args = array() ) {
 		'total'        => $max_num_pages,
 		'current'      => $current,
 		'prev_next'    => true,
-		'prev_text'  => __( 'Previous' ),
-		'next_text'  => __( 'Next' ),
+		'prev_text'    => __( 'Previous', 'wporg' ),
+		'next_text'    => __( 'Next', 'wporg' ),
 		'show_all'     => false,
 		'end_size'     => 2,
 		'mid_size'     => 1,
@@ -110,4 +110,4 @@ function loop_pagination( $args = array() ) {
 		return $page_links;
 }
 
-?>
+
