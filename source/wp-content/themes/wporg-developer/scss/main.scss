@@ -1374,10 +1374,39 @@
 		}
 	}
 
+
 	.loop-pagination {
-		text-align: center;
-		font-size: 18px;
-		margin-bottom: 20px;
+		display: flex;
+		margin: 3rem 0;
+		list-style: none;
+		justify-content: center;
+		align-items: center;
+		gap: 0.75rem;
+
+		.page-numbers {
+			display: inline-block;
+			padding: 1rem 1.25rem;
+			background: $color-white;
+			border: 1px solid get-color(gray-5);
+			border-radius: 2px;
+			line-height: 1;
+			text-decoration: none;
+
+			&:hover,
+			&:active {
+				color: $wp4--link-color--hover;
+			}
+
+			&.current {
+				border: 1px solid get-color(gray-90);
+				background: get-color(gray-90);
+				color: $color-white;
+			}
+
+			&.dots {
+				border: none;
+			}
+		}
 	}
 
 	/* Comments */

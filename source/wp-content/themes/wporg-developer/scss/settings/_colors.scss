@@ -3,11 +3,13 @@
 $color-white: #fff;
 $color-black: #000;
 
-// Color map of all of the hex values.
-// Please keep this map in sync with the HTML
+// wp4.css Colors.
+$wp4--link-color: #21759b;
+$wp4--link-color--hover: #d54e21;
+
+// Color map of the WordPress core palette hex values.
+// Please keep this map in sync with the reference: https://codepen.io/ryelle/full/WNGVEjw.
 $colors: (
-	white: #fff,
-	black: #000,
 	gray-0: #f6f7f7,
 	gray-2: #f0f0f1,
 	gray-5: #dcdcde,

@@ -1914,9 +1914,36 @@ input {
 }
 
 .devhub-wrap .loop-pagination {
-  text-align: center;
-  font-size: 18px;
-  margin-bottom: 20px;
+  display: flex;
+  margin: 3rem 0;
+  list-style: none;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.devhub-wrap .loop-pagination .page-numbers {
+  display: inline-block;
+  padding: 1rem 1.25rem;
+  background: #fff;
+  border: 1px solid #dcdcde;
+  border-radius: 2px;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.devhub-wrap .loop-pagination .page-numbers:hover, .devhub-wrap .loop-pagination .page-numbers:active {
+  color: #d54e21;
+}
+
+.devhub-wrap .loop-pagination .page-numbers.current {
+  border: 1px solid #1d2327;
+  background: #1d2327;
+  color: #fff;
+}
+
+.devhub-wrap .loop-pagination .page-numbers.dots {
+  border: none;
 }
 
 .devhub-wrap .comment-content a {
