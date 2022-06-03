@@ -706,8 +706,10 @@ namespace DevHub {
 		$args_strings = array();
 		$types        = array();
 
+
 		if ( 'wp-parser-class' === get_post_type( $post_id ) ) {
-			return $signature;
+			/* translators: %s: The name of the class. */
+			return sprintf( __( 'Class %s {}', 'wporg'), $signature );
 		}
 
 		if ( $tags ) {
