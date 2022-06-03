@@ -1543,7 +1543,6 @@ input {
 .devhub-wrap .wp-parser-hook .return dt code,
 .devhub-wrap .wp-parser-method .parameters dt code,
 .devhub-wrap .wp-parser-method .return dt code {
-  color: #135e96;
   font-weight: 400;
 }
 
@@ -1638,7 +1637,6 @@ input {
 .devhub-wrap .wp-parser-method .return .param-hash > li > code {
   background: transparent;
   padding: unset;
-  color: #135e96;
 }
 
 .devhub-wrap .wp-parser-class .parameters .param-hash li li,
