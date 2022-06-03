@@ -2918,10 +2918,6 @@ body.responsive-show #o2-expand-editor {
     float: none;
     clear: both;
   }
-  .devhub-wrap .wp-parser-class h1, .devhub-wrap .wp-parser-function h1, .devhub-wrap .wp-parser-hook h1, .devhub-wrap .wp-parser-method h1 {
-    padding-left: 45px;
-    text-indent: -45px;
-  }
   .devhub-wrap .two-columns .box {
     width: 99%;
   }
