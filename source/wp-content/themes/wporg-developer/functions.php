@@ -137,6 +137,11 @@ if ( is_admin() ) {
 }
 
 /**
+ * Function reference sidebar menu.
+ */
+require __DIR__ . '/inc/sidebar-menu.php';
+
+/**
  * Set the content width based on the theme's design and stylesheet.
  */
 if ( ! isset( $content_width ) ) {
@@ -172,6 +177,8 @@ function init() {
 
 	add_filter( 'mkaz_code_syntax_force_loading', '__return_true' );
 	add_filter( 'mkaz_prism_css_path', __NAMESPACE__ . '\\update_prism_css_path' );
+
+	add_filter( 'body_class', __NAMESPACE__ . '\\body_class' );
 }
 
 /**
@@ -258,17 +265,26 @@ function widgets_init() {
 		)
 	);
 
-	register_sidebar(
-		array(
-			'name'          => __( 'Landing Page Footer - Center', 'wporg' ),
-			'id'            => 'landing-footer-2',
-			'description'   => __( 'Appears in footer of the primary landing page', 'wporg' ),
-			'before_widget' => '<div id="%1$s" class="widget box %2$s">',
-			'after_widget'  => '</div>',
-			'before_title'  => '<h4 class="widget-title">',
-			'after_title'   => '</h4>',
-		)
-	);
+	register_sidebar( array(
+		'name'          => __( 'Landing Page Footer - Center', 'wporg' ),
+		'id'            => 'landing-footer-2',
+		'description'   => __( 'Appears in footer of the primary landing page', 'wporg' ),
+		'before_widget' => '<div id="%1$s" class="widget box %2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h4 class="widget-title">',
+		'after_title'   => '</h4>',
+	) );
+
+	register_sidebar( array(
+		'id'            => 'wp-parser-function',
+		'name'          => __( 'Function Reference Sidebar', 'wporg' ),
+		'description'   => __( 'Sidebar for function reference pages', 'wporg' ),
+		'before_widget' => '<aside id="%1$s" class="box gray widget %2$s">',
+		'after_widget'  => '</div></aside>',
+		'before_title'  => '<h1 class="widget-title">',
+		'after_title'   => '</h1><div class="widget-content">',
+	) );
+
 }
 
 /**
@@ -405,4 +421,13 @@ function rename_comments_meta_box( $post_type, $post ) {
  */
 function update_prism_css_path( $path ) {
 	return '/stylesheets/prism.css';
+}
+
+function body_class( $classes ) {
+	// Trick the CSS into displaying a handbook menu on the function reference pages
+	if ( is_singular() && 'wp-parser-function' === get_post_type() ) {
+		$classes[] = 'single-handbook';
+	}
+
+	return $classes;
 }
