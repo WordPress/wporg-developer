@@ -1070,33 +1070,34 @@
 
 		h1,
 		.signature-highlight {
-			color: #24831d;
+			color: get-color(green-50);
 			font-family: $code-font;
 			font-weight: 400;
 
 			.hook-func {
-				color: #888;
+				color: get-color(gray-50);
 			}
 
 			.arg-type {
-				color: #cd2f23;
+				color: get-color(red-50);
 				font-style: italic;
 				font-size: 0.9em;
 			}
 
 			.arg-name {
-				color: #0f55c8;
+				color: get-color(blue-60);
 			}
 
 			.arg-default {
-				color: #000;
+				color: $color-black;
 			}
 
 			a {
 				text-decoration: none;
+				color: inherit;
 
 				&:hover {
-					border-bottom: 1px dotted #21759b;
+					border-bottom: 1px dotted get-color(blue-50);
 				}
 			}
 		}
@@ -1107,22 +1108,29 @@
 		}
 
 		.return-type,
+		.return .type,
 		.parameters .type {
-			color: #dc3232;
+			color: get-color(red-50);
 
 			a {
 				color: inherit;
 				text-decoration: none;
+				border-bottom: 1px dotted get-color(gray-70);
 
 				&:hover {
-					border-bottom: 1px dotted #21759b;
+					border-bottom-style: solid;
 				}
 			}
 		}
 
-		.parameters {
+		.parameters,
+		.return {
 			p {
 				margin-bottom: 0;
+			}
+
+			dt code {
+				font-weight: 400;
 			}
 
 			dd {
@@ -1130,6 +1138,12 @@
 
 				ul {
 					margin-left: 2.5rem;
+				}
+
+				code {
+					background: #efefef;
+					border-radius: 4px;
+					padding: 2px 6px;
 				}
 			}
 
@@ -1148,6 +1162,11 @@
 
 				> li {
 					margin-top: 1.5em;
+
+					> code {
+						background: transparent;
+						padding: unset;
+					}
 				}
 
 				li li {
@@ -1177,13 +1196,6 @@
 
 			.required {
 				font-size: 12px;
-			}
-
-			code {
-				background: #efefef;
-				border-radius: 4px;
-				padding: 2px 6px;
-				font-weight: 400;
 			}
 		}
 

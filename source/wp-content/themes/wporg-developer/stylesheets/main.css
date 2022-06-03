@@ -1395,7 +1395,7 @@ input {
 .devhub-wrap .wp-parser-hook .signature-highlight,
 .devhub-wrap .wp-parser-method h1,
 .devhub-wrap .wp-parser-method .signature-highlight {
-  color: #24831d;
+  color: #008a20;
   font-family: Hack, "Fira Code", Consolas, Menlo, Monaco, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", "Courier New", Courier, monospace;
   font-weight: 400;
 }
@@ -1408,7 +1408,7 @@ input {
 .devhub-wrap .wp-parser-hook .signature-highlight .hook-func,
 .devhub-wrap .wp-parser-method h1 .hook-func,
 .devhub-wrap .wp-parser-method .signature-highlight .hook-func {
-  color: #888;
+  color: #646970;
 }
 
 .devhub-wrap .wp-parser-class h1 .arg-type,
@@ -1419,7 +1419,7 @@ input {
 .devhub-wrap .wp-parser-hook .signature-highlight .arg-type,
 .devhub-wrap .wp-parser-method h1 .arg-type,
 .devhub-wrap .wp-parser-method .signature-highlight .arg-type {
-  color: #cd2f23;
+  color: #d63638;
   font-style: italic;
   font-size: 0.9em;
 }
@@ -1432,7 +1432,7 @@ input {
 .devhub-wrap .wp-parser-hook .signature-highlight .arg-name,
 .devhub-wrap .wp-parser-method h1 .arg-name,
 .devhub-wrap .wp-parser-method .signature-highlight .arg-name {
-  color: #0f55c8;
+  color: #135e96;
 }
 
 .devhub-wrap .wp-parser-class h1 .arg-default,
@@ -1455,6 +1455,7 @@ input {
 .devhub-wrap .wp-parser-method h1 a,
 .devhub-wrap .wp-parser-method .signature-highlight a {
   text-decoration: none;
+  color: inherit;
 }
 
 .devhub-wrap .wp-parser-class h1 a:hover,
@@ -1465,7 +1466,7 @@ input {
 .devhub-wrap .wp-parser-hook .signature-highlight a:hover,
 .devhub-wrap .wp-parser-method h1 a:hover,
 .devhub-wrap .wp-parser-method .signature-highlight a:hover {
-  border-bottom: 1px dotted #21759b;
+  border-bottom: 1px dotted #2271b1;
 }
 
 .devhub-wrap .wp-parser-class .return .return-type,
@@ -1477,147 +1478,242 @@ input {
 }
 
 .devhub-wrap .wp-parser-class .return-type,
+.devhub-wrap .wp-parser-class .return .type,
 .devhub-wrap .wp-parser-class .parameters .type,
 .devhub-wrap .wp-parser-function .return-type,
+.devhub-wrap .wp-parser-function .return .type,
 .devhub-wrap .wp-parser-function .parameters .type,
 .devhub-wrap .wp-parser-hook .return-type,
+.devhub-wrap .wp-parser-hook .return .type,
 .devhub-wrap .wp-parser-hook .parameters .type,
 .devhub-wrap .wp-parser-method .return-type,
+.devhub-wrap .wp-parser-method .return .type,
 .devhub-wrap .wp-parser-method .parameters .type {
-  color: #dc3232;
+  color: #d63638;
 }
 
 .devhub-wrap .wp-parser-class .return-type a,
+.devhub-wrap .wp-parser-class .return .type a,
 .devhub-wrap .wp-parser-class .parameters .type a,
 .devhub-wrap .wp-parser-function .return-type a,
+.devhub-wrap .wp-parser-function .return .type a,
 .devhub-wrap .wp-parser-function .parameters .type a,
 .devhub-wrap .wp-parser-hook .return-type a,
+.devhub-wrap .wp-parser-hook .return .type a,
 .devhub-wrap .wp-parser-hook .parameters .type a,
 .devhub-wrap .wp-parser-method .return-type a,
+.devhub-wrap .wp-parser-method .return .type a,
 .devhub-wrap .wp-parser-method .parameters .type a {
   color: inherit;
   text-decoration: none;
+  border-bottom: 1px dotted #3c434a;
 }
 
 .devhub-wrap .wp-parser-class .return-type a:hover,
+.devhub-wrap .wp-parser-class .return .type a:hover,
 .devhub-wrap .wp-parser-class .parameters .type a:hover,
 .devhub-wrap .wp-parser-function .return-type a:hover,
+.devhub-wrap .wp-parser-function .return .type a:hover,
 .devhub-wrap .wp-parser-function .parameters .type a:hover,
 .devhub-wrap .wp-parser-hook .return-type a:hover,
+.devhub-wrap .wp-parser-hook .return .type a:hover,
 .devhub-wrap .wp-parser-hook .parameters .type a:hover,
 .devhub-wrap .wp-parser-method .return-type a:hover,
+.devhub-wrap .wp-parser-method .return .type a:hover,
 .devhub-wrap .wp-parser-method .parameters .type a:hover {
-  border-bottom: 1px dotted #21759b;
+  border-bottom-style: solid;
 }
 
 .devhub-wrap .wp-parser-class .parameters p,
+.devhub-wrap .wp-parser-class .return p,
 .devhub-wrap .wp-parser-function .parameters p,
+.devhub-wrap .wp-parser-function .return p,
 .devhub-wrap .wp-parser-hook .parameters p,
-.devhub-wrap .wp-parser-method .parameters p {
+.devhub-wrap .wp-parser-hook .return p,
+.devhub-wrap .wp-parser-method .parameters p,
+.devhub-wrap .wp-parser-method .return p {
   margin-bottom: 0;
 }
 
+.devhub-wrap .wp-parser-class .parameters dt code,
+.devhub-wrap .wp-parser-class .return dt code,
+.devhub-wrap .wp-parser-function .parameters dt code,
+.devhub-wrap .wp-parser-function .return dt code,
+.devhub-wrap .wp-parser-hook .parameters dt code,
+.devhub-wrap .wp-parser-hook .return dt code,
+.devhub-wrap .wp-parser-method .parameters dt code,
+.devhub-wrap .wp-parser-method .return dt code {
+  font-weight: 400;
+}
+
 .devhub-wrap .wp-parser-class .parameters dd,
+.devhub-wrap .wp-parser-class .return dd,
 .devhub-wrap .wp-parser-function .parameters dd,
+.devhub-wrap .wp-parser-function .return dd,
 .devhub-wrap .wp-parser-hook .parameters dd,
-.devhub-wrap .wp-parser-method .parameters dd {
+.devhub-wrap .wp-parser-hook .return dd,
+.devhub-wrap .wp-parser-method .parameters dd,
+.devhub-wrap .wp-parser-method .return dd {
   margin-bottom: 2em;
 }
 
 .devhub-wrap .wp-parser-class .parameters dd ul,
+.devhub-wrap .wp-parser-class .return dd ul,
 .devhub-wrap .wp-parser-function .parameters dd ul,
+.devhub-wrap .wp-parser-function .return dd ul,
 .devhub-wrap .wp-parser-hook .parameters dd ul,
-.devhub-wrap .wp-parser-method .parameters dd ul {
+.devhub-wrap .wp-parser-hook .return dd ul,
+.devhub-wrap .wp-parser-method .parameters dd ul,
+.devhub-wrap .wp-parser-method .return dd ul {
   margin-left: 2.5rem;
 }
 
+.devhub-wrap .wp-parser-class .parameters dd code,
+.devhub-wrap .wp-parser-class .return dd code,
+.devhub-wrap .wp-parser-function .parameters dd code,
+.devhub-wrap .wp-parser-function .return dd code,
+.devhub-wrap .wp-parser-hook .parameters dd code,
+.devhub-wrap .wp-parser-hook .return dd code,
+.devhub-wrap .wp-parser-method .parameters dd code,
+.devhub-wrap .wp-parser-method .return dd code {
+  background: #efefef;
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+
 .devhub-wrap .wp-parser-class .parameters dd:last-child,
+.devhub-wrap .wp-parser-class .return dd:last-child,
 .devhub-wrap .wp-parser-function .parameters dd:last-child,
+.devhub-wrap .wp-parser-function .return dd:last-child,
 .devhub-wrap .wp-parser-hook .parameters dd:last-child,
-.devhub-wrap .wp-parser-method .parameters dd:last-child {
+.devhub-wrap .wp-parser-hook .return dd:last-child,
+.devhub-wrap .wp-parser-method .parameters dd:last-child,
+.devhub-wrap .wp-parser-method .return dd:last-child {
   margin-bottom: 0;
 }
 
 .devhub-wrap .wp-parser-class .parameters .param-hash,
+.devhub-wrap .wp-parser-class .return .param-hash,
 .devhub-wrap .wp-parser-function .parameters .param-hash,
+.devhub-wrap .wp-parser-function .return .param-hash,
 .devhub-wrap .wp-parser-hook .parameters .param-hash,
-.devhub-wrap .wp-parser-method .parameters .param-hash {
+.devhub-wrap .wp-parser-hook .return .param-hash,
+.devhub-wrap .wp-parser-method .parameters .param-hash,
+.devhub-wrap .wp-parser-method .return .param-hash {
   margin-left: 1.2em;
   margin-bottom: 0.5em;
   list-style: none;
 }
 
 .devhub-wrap .wp-parser-class .parameters .param-hash .desc,
+.devhub-wrap .wp-parser-class .return .param-hash .desc,
 .devhub-wrap .wp-parser-function .parameters .param-hash .desc,
+.devhub-wrap .wp-parser-function .return .param-hash .desc,
 .devhub-wrap .wp-parser-hook .parameters .param-hash .desc,
-.devhub-wrap .wp-parser-method .parameters .param-hash .desc {
+.devhub-wrap .wp-parser-hook .return .param-hash .desc,
+.devhub-wrap .wp-parser-method .parameters .param-hash .desc,
+.devhub-wrap .wp-parser-method .return .param-hash .desc {
   margin-left: 1.5em;
 }
 
 .devhub-wrap .wp-parser-class .parameters .param-hash > li,
+.devhub-wrap .wp-parser-class .return .param-hash > li,
 .devhub-wrap .wp-parser-function .parameters .param-hash > li,
+.devhub-wrap .wp-parser-function .return .param-hash > li,
 .devhub-wrap .wp-parser-hook .parameters .param-hash > li,
-.devhub-wrap .wp-parser-method .parameters .param-hash > li {
+.devhub-wrap .wp-parser-hook .return .param-hash > li,
+.devhub-wrap .wp-parser-method .parameters .param-hash > li,
+.devhub-wrap .wp-parser-method .return .param-hash > li {
   margin-top: 1.5em;
 }
 
+.devhub-wrap .wp-parser-class .parameters .param-hash > li > code,
+.devhub-wrap .wp-parser-class .return .param-hash > li > code,
+.devhub-wrap .wp-parser-function .parameters .param-hash > li > code,
+.devhub-wrap .wp-parser-function .return .param-hash > li > code,
+.devhub-wrap .wp-parser-hook .parameters .param-hash > li > code,
+.devhub-wrap .wp-parser-hook .return .param-hash > li > code,
+.devhub-wrap .wp-parser-method .parameters .param-hash > li > code,
+.devhub-wrap .wp-parser-method .return .param-hash > li > code {
+  background: transparent;
+  padding: unset;
+}
+
 .devhub-wrap .wp-parser-class .parameters .param-hash li li,
+.devhub-wrap .wp-parser-class .return .param-hash li li,
 .devhub-wrap .wp-parser-function .parameters .param-hash li li,
+.devhub-wrap .wp-parser-function .return .param-hash li li,
 .devhub-wrap .wp-parser-hook .parameters .param-hash li li,
-.devhub-wrap .wp-parser-method .parameters .param-hash li li {
+.devhub-wrap .wp-parser-hook .return .param-hash li li,
+.devhub-wrap .wp-parser-method .parameters .param-hash li li,
+.devhub-wrap .wp-parser-method .return .param-hash li li {
   list-style-type: circle;
 }
 
 .devhub-wrap .wp-parser-class .parameters .param-hash .param-hash > li,
+.devhub-wrap .wp-parser-class .return .param-hash .param-hash > li,
 .devhub-wrap .wp-parser-function .parameters .param-hash .param-hash > li,
+.devhub-wrap .wp-parser-function .return .param-hash .param-hash > li,
 .devhub-wrap .wp-parser-hook .parameters .param-hash .param-hash > li,
-.devhub-wrap .wp-parser-method .parameters .param-hash .param-hash > li {
+.devhub-wrap .wp-parser-hook .return .param-hash .param-hash > li,
+.devhub-wrap .wp-parser-method .parameters .param-hash .param-hash > li,
+.devhub-wrap .wp-parser-method .return .param-hash .param-hash > li {
   list-style-type: disc;
 }
 
 .devhub-wrap .wp-parser-class .parameters .desc,
+.devhub-wrap .wp-parser-class .return .desc,
 .devhub-wrap .wp-parser-function .parameters .desc,
+.devhub-wrap .wp-parser-function .return .desc,
 .devhub-wrap .wp-parser-hook .parameters .desc,
-.devhub-wrap .wp-parser-method .parameters .desc {
+.devhub-wrap .wp-parser-hook .return .desc,
+.devhub-wrap .wp-parser-method .parameters .desc,
+.devhub-wrap .wp-parser-method .return .desc {
   margin: 1rem 0 0.5rem;
 }
 
 .devhub-wrap .wp-parser-class .parameters .type,
 .devhub-wrap .wp-parser-class .parameters .required,
+.devhub-wrap .wp-parser-class .return .type,
+.devhub-wrap .wp-parser-class .return .required,
 .devhub-wrap .wp-parser-function .parameters .type,
 .devhub-wrap .wp-parser-function .parameters .required,
+.devhub-wrap .wp-parser-function .return .type,
+.devhub-wrap .wp-parser-function .return .required,
 .devhub-wrap .wp-parser-hook .parameters .type,
 .devhub-wrap .wp-parser-hook .parameters .required,
+.devhub-wrap .wp-parser-hook .return .type,
+.devhub-wrap .wp-parser-hook .return .required,
 .devhub-wrap .wp-parser-method .parameters .type,
-.devhub-wrap .wp-parser-method .parameters .required {
+.devhub-wrap .wp-parser-method .parameters .required,
+.devhub-wrap .wp-parser-method .return .type,
+.devhub-wrap .wp-parser-method .return .required {
   margin: 0 4px;
   font-weight: 400;
 }
 
 .devhub-wrap .wp-parser-class .parameters .type,
+.devhub-wrap .wp-parser-class .return .type,
 .devhub-wrap .wp-parser-function .parameters .type,
+.devhub-wrap .wp-parser-function .return .type,
 .devhub-wrap .wp-parser-hook .parameters .type,
-.devhub-wrap .wp-parser-method .parameters .type {
+.devhub-wrap .wp-parser-hook .return .type,
+.devhub-wrap .wp-parser-method .parameters .type,
+.devhub-wrap .wp-parser-method .return .type {
   margin-left: 8px;
   font-size: 14px;
   font-style: 400;
 }
 
 .devhub-wrap .wp-parser-class .parameters .required,
+.devhub-wrap .wp-parser-class .return .required,
 .devhub-wrap .wp-parser-function .parameters .required,
+.devhub-wrap .wp-parser-function .return .required,
 .devhub-wrap .wp-parser-hook .parameters .required,
-.devhub-wrap .wp-parser-method .parameters .required {
+.devhub-wrap .wp-parser-hook .return .required,
+.devhub-wrap .wp-parser-method .parameters .required,
+.devhub-wrap .wp-parser-method .return .required {
   font-size: 12px;
-}
-
-.devhub-wrap .wp-parser-class .parameters code,
-.devhub-wrap .wp-parser-function .parameters code,
-.devhub-wrap .wp-parser-hook .parameters code,
-.devhub-wrap .wp-parser-method .parameters code {
-  background: #efefef;
-  border-radius: 4px;
-  padding: 2px 6px;
-  font-weight: 400;
 }
 
 .devhub-wrap .wp-parser-class .learn-more,
