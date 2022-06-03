@@ -687,6 +687,36 @@ namespace DevHub {
 	}
 
 	/**
+	 * Returns the hook string.
+	 *
+	 * @param int $post_id
+	 *
+	 * @return string
+	 */
+	function get_hook_type_name( $post_id ) {
+		$hook_type = get_post_meta( $post_id, '_wp-parser_hook_type', true );
+		if ( false !== strpos( $hook_type, 'action' ) ) {
+			if ( 'action_reference' === $hook_type ) {
+				$hook_type = 'do_action_ref_array';
+			} elseif ( 'action_deprecated' === $hook_type ) {
+				$hook_type = 'do_action_deprecated';
+			} else {
+				$hook_type = 'do_action';
+			}
+		} else {
+			if ( 'filter_reference' === $hook_type ) {
+				$hook_type = 'apply_filters_ref_array';
+			} elseif ( 'filter_deprecated' === $hook_type ) {
+				$hook_type = 'apply_filters_deprecated';
+			} else {
+				$hook_type = 'apply_filters';
+			}
+		}
+
+		return $hook_type;
+	}
+
+	/**
 	 * Retrieve function name and arguments as signature string
 	 *
 	 * @param int $post_id
@@ -725,24 +755,7 @@ namespace DevHub {
 				$hook_args[] = ' <nobr><span class="arg-type">' . esc_html( $type ) . '</span> <span class="arg-name">' . esc_html( $arg ) . '</span></nobr>';
 			}
 
-			$hook_type = get_post_meta( $post_id, '_wp-parser_hook_type', true );
-			if ( false !== strpos( $hook_type, 'action' ) ) {
-				if ( 'action_reference' === $hook_type ) {
-					$hook_type = 'do_action_ref_array';
-				} elseif ( 'action_deprecated' === $hook_type ) {
-					$hook_type = 'do_action_deprecated';
-				} else {
-					$hook_type = 'do_action';
-				}
-			} else {
-				if ( 'filter_reference' === $hook_type ) {
-					$hook_type = 'apply_filters_ref_array';
-				} elseif ( 'filter_deprecated' === $hook_type ) {
-					$hook_type = 'apply_filters_deprecated';
-				} else {
-					$hook_type = 'apply_filters';
-				}
-			}
+			$hook_type = get_hook_type_name( $post_id );
 
 			$delimiter = false !== strpos( $signature, '$' ) ? '"' : "'";
 			$signature = $delimiter . $signature . $delimiter;
