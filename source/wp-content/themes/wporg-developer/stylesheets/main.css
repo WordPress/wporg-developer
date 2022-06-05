@@ -849,6 +849,10 @@ img {
 
 .devhub-wrap .home-landing .section .widget-title {
   line-height: 2.4;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  font-weight: inherit;
 }
 
 .devhub-wrap .home-landing .section.search-guide {

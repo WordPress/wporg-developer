@@ -536,6 +536,10 @@
 
 		.widget-title {
 			line-height: 2.4;
+			cursor: pointer;
+			text-decoration: none;
+			color: inherit;
+			font-weight: inherit;
 		}
 
 		&.search-guide {
