@@ -905,6 +905,9 @@ img {
   display: block;
   margin: 0 auto;
   opacity: 0.4;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .devhub-wrap .section .widget-title .dashicons.dashicons-rest-api {

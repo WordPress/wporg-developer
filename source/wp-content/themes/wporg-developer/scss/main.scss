@@ -591,6 +591,9 @@
 				display: block;
 				margin: 0 auto;
 				opacity: 0.4;
+				display: flex;
+    			align-items: center;
+    			flex-direction: column;
 
 				&.dashicons-rest-api {
 					font-size: 9rem;
