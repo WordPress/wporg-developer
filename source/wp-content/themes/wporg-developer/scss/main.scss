@@ -788,6 +788,10 @@
 		height: auto;
 		position: relative;
 
+		.search-bar {
+			display: flex;
+		}
+
 		input[type="text"] {
 			border-radius: 0;
 			margin: 0 auto;
@@ -796,18 +800,27 @@
 		}
 
 		.button-search {
-			background: transparent;
-			border: none;
+			background: #fff;
 			border-radius: 0;
 			box-shadow: none;
 			color: #32373c;
 			display: block;
-			height: 40px;
 			padding: 0.5rem 1rem;
-			position: absolute;
-			right: 0;
-			top: 0;
 			text-shadow: none;
+			border: 1px solid #ccc;
+			border-left: unset;
+			margin: 0;
+
+			&:focus {
+				outline-style: auto;
+				outline-color: get-color(blue-50);
+				z-index: 1;
+			}
+
+			&:active {
+				background: get-color(gray-5);
+				transform: translateY(0);
+			}
 		}
 
 		label {

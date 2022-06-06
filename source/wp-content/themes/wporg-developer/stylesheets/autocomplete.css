@@ -32,6 +32,10 @@ div.awesomplete li:hover mark, div.awesomplete li[aria-selected="true"] mark {
 	width: 100%;
 }
 
+.devhub-wrap div.awesomplete > input {
+	border-right: unset;
+}
+
 .devhub-wrap .searchform div.search-post-type {
 	clear: both;
 }
