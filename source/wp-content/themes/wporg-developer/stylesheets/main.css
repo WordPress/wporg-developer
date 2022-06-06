@@ -529,6 +529,7 @@ img {
 .devhub-wrap input[type="button"] .dashicons,
 .devhub-wrap input[type="reset"] .dashicons,
 .devhub-wrap input[type="submit"] .dashicons {
+  transform: scale(-1, 1);
   vertical-align: text-bottom;
 }
 
@@ -1061,6 +1062,7 @@ img {
 .devhub-wrap div#inner-search div#inner-search-icon-container div#inner-search-icon .dashicons-search {
   height: auto;
   width: auto;
+  transform: scale(-1, 1);
 }
 
 .devhub-wrap div#inner-search div#inner-search-icon-container div#inner-search-icon .dashicons-search::before {

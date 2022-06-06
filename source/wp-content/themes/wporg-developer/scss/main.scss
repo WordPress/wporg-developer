@@ -198,6 +198,7 @@
 		}
 
 		.dashicons {
+			transform: scale(-1, 1);
 			vertical-align: text-bottom;
 		}
 	}
@@ -753,6 +754,7 @@
 				.dashicons-search {
 					height: auto;
 					width: auto;
+					transform: scale(-1, 1);
 
 					&::before {
 						font-size: 36px;
