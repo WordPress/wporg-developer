@@ -1921,10 +1921,10 @@ namespace DevHub {
 			'params',
 			'return',
 			'explanation',
+			'methods',
 			'source',
 			'hooks',
 			'related',
-			'methods',
 			'changelog',
 			'notes'
 		);
