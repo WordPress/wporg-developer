@@ -194,3 +194,22 @@ pre.line-numbers > code {
   padding-right: 0.8em;
   text-align: right;
 }
+
+/* Copy button */
+pre.wp-block-code {
+  position: relative;
+}
+
+pre.wp-block-code > button {
+  display: none;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.4rem;
+  z-index: 2;
+}
+
+pre.wp-block-code:hover > button,
+pre.wp-block-code:focus-within > button {
+  display: revert;
+}

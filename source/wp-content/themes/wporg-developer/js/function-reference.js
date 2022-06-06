@@ -1,11 +1,11 @@
-/* @global jQuery */
+/* global jQuery, wporgFunctionReferenceI18n */
 /**
  * function-reference.js
  *
  * Handles all interactivity on the single function page
  */
 
-jQuery( function( $ ) {
+jQuery( function ( $ ) {
 	let $usesList, $usedByList, $showMoreUses, $hideMoreUses, $showMoreUsedBy, $hideMoreUsedBy;
 
 	function toggleUsageListInit() {
@@ -47,4 +47,35 @@ jQuery( function( $ ) {
 	}
 
 	toggleUsageListInit();
+
+	// Inject the "copy" button into every code block.
+	$( '.wp-block-code' ).each( function ( i, element ) {
+		const $element = $( element );
+		let timeoutId;
+
+		const $button = $( document.createElement( 'button' ) );
+		$button.text( wporgFunctionReferenceI18n.copy );
+		$button.on( 'click', function () {
+			clearTimeout( timeoutId );
+			const code = $element.find( 'code' ).text();
+			if ( ! code ) {
+				return;
+			}
+
+			// This returns a promise which will resolve if the copy suceeded,
+			// and we can set the button text to tell the user it worked.
+			// We don't do anything if it fails.
+			window.navigator.clipboard.writeText( code ).then( function () {
+				$button.text( wporgFunctionReferenceI18n.copied );
+				wp.a11y.speak( wporgFunctionReferenceI18n.copied );
+
+				// After 5 seconds, reset the button text.
+				timeoutId = setTimeout( function () {
+					$button.text( wporgFunctionReferenceI18n.copy );
+				}, 5000 );
+			} );
+		} );
+
+		$element.prepend( $button );
+	} );
 } );

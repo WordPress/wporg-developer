@@ -35,8 +35,9 @@ if ( ! empty( $source_file ) ) :
 			<?php
 				echo do_blocks(
 					sprintf(
-						'<!-- wp:code {"lineNumbers":true} --><pre class="wp-block-code" data-start="%s"><code lang="php" class="language-php line-numbers">%s</code></pre><!-- /wp:code -->',
+						'<!-- wp:code {"lineNumbers":true} --><pre class="wp-block-code" data-start="%1$s" aria-label="%2$s"><code lang="php" class="language-php line-numbers">%3$s</code></pre><!-- /wp:code -->',
 						esc_attr( get_post_meta( get_the_ID(), '_wp-parser_line_num', true ) ),
+						__( 'Function source code', 'wporg' ),
 						htmlentities( get_source_code() )
 					)
 				);
