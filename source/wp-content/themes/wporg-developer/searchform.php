@@ -19,9 +19,11 @@
 	?>
 
 	<form role="search" method="get" class="searchform<?php echo esc_attr( $form_class ); ?>" action="<?php echo esc_url( $search_url ); ?>">
-		<label for="search-field" class="screen-reader-text"><?php _ex( 'Search for:', 'label', 'wporg' ); ?></label>
-		<input type="text" id="search-field" class="search-field" placeholder="<?php echo esc_attr_x( 'Search &hellip;', 'placeholder', 'wporg' ); ?>" value="<?php echo esc_attr( get_search_query() ); ?>" name="s">
-		<button class="button button-primary button-search"><i class="dashicons dashicons-search"></i><span class="screen-reader-text"><?php _e( 'Search plugins', 'wporg' ); ?></span></button>
+		<div class="search-bar">
+			<label for="search-field" class="screen-reader-text"><?php _ex( 'Search for:', 'label', 'wporg' ); ?></label>
+			<input type="text" id="search-field" class="search-field" placeholder="<?php echo esc_attr_x( 'Search in Code Reference &hellip;', 'placeholder', 'wporg' ); ?>" value="<?php echo esc_attr( get_search_query() ); ?>" name="s">
+			<button class="button button-primary button-search"><i class="dashicons dashicons-search"></i><span class="screen-reader-text"><?php _e( 'Search plugins', 'wporg' ); ?></span></button>
+		</div>
 	<?php if ( $filters ) : ?>
 
 		<div class="search-post-type">
