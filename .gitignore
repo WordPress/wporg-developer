@@ -25,5 +25,6 @@ phpcs.xml.dist
 # ...except the actual source of this project.
 !/source/wp-content/themes
 !/source/wp-content/themes/wporg-developer
+!/source/wp-content/themes/wporg-developer-v2
 !/source/wp-content/plugins
 !/source/wp-content/plugins/handbook

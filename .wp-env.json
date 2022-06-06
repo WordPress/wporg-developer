@@ -13,11 +13,13 @@
 		"./source/wp-content/plugins/posts-to-posts",
 		"./source/wp-content/plugins/syntaxhighlighter",
 		"./source/wp-content/plugins/wordpress-importer",
-		"./source/wp-content/plugins/jetpack"
+		"./source/wp-content/plugins/jetpack",
+		"./source/wp-content/plugins/devdocs-blocks"
 	],
 	"themes": [
 		"./source/wp-content/themes/wporg",
-		"./source/wp-content/themes/wporg-developer"
+		"./source/wp-content/themes/wporg-developer",
+		"./source/wp-content/themes/wporg-developer-v2"
 	],
 	"mappings": {
 		"env": "./env",
