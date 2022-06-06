@@ -2,7 +2,6 @@
 	"version": 2,
 	"settings": {
 		"color": {
-			"gradients": [],
 			"palette": [
 				{
 					"slug": "black",
@@ -99,7 +98,6 @@
 		"custom": {
 			"alignment": {
 				"alignedMaxWidth": "50%",
-				"//edge-spacing": "The min and max values represent the mobile and desktop spacing; the calc() value is for tablets.",
 				"edge-spacing": "clamp( 24px, calc( 100vw / 18 ), 80px )"
 			},
 			"button": {
@@ -376,7 +374,6 @@
 			"wideSize": "var(--wp--custom--layout--wide-size)"
 		},
 		"spacing": {
-			"//blockGap": "The design calls for a 24px gap. Coincidentally, that's the default value that Gutenberg defines. The default could change in the future, though, so this should be explicitly set.",
 			"blockGap": "24px",
 			"customPadding": true,
 			"units": [ "%", "px", "em", "rem", "vh", "vw" ]
