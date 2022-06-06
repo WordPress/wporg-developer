@@ -1,0 +1,87 @@
+/*
+Theme Name: WordPress Developer V2
+Theme URI: https://developer.wordpress.org
+Author: WordPress
+Author URI: http://wordpress.org
+Description: The dev documentation site theme for WordPress.org
+Version: 1.0
+License: GNU General Public License
+License URI: license.txt
+Text Domain: wporg-docs
+Domain Path: /languages/
+Tags:
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+*/
+
+/* Layout CSS, this can't be done in the editor _yet_ */
+div.title-row {
+	position: relative;
+	width: 100vw;
+	overflow: hidden;
+}
+
+.title-row * {
+	z-index: 2;
+}
+
+main.main-content,
+.editor-styles-wrapper main.main-content {
+	align-items: stretch;
+	align-content: flex-start;
+}
+
+.navigation-sidebar {
+	flex: 0 0 350px;
+	background: var(--wp--preset--color--off-white);
+	padding: 15px 0 20px;
+	min-height: 75vh;
+}
+
+.page-content {
+	flex: 1;
+	padding: 20px;
+	background-color: #fff;
+}
+
+.docs-footer {
+	margin: 0;
+}
+
+.title-row::after,
+.block-editor-block-list__layout .title-row::after {
+	content: "";
+	position: absolute;
+	top: -125px;
+	left: 100px;
+	height: 220px;
+	width: 100vw;
+	z-index: 1;
+	background-color: var(--wp--preset--color--blue-2);
+	-webkit-mask-image: url(images/brush-stroke-big.svg);
+	mask-image: url(images/brush-stroke-big.svg);
+	-webkit-mask-position: left center;
+	mask-position: left center;
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+	-webkit-mask-size: cover;
+	mask-size: cover;
+}
+
+.docs-type-nav {
+	border-bottom: 1px solid var(--wp--preset--color--beige-2);
+	margin: 0;
+}
+
+.docs-type-nav .wp-block-navigation-item__content {
+	padding: 0 50px 15px;
+}
+
+.docs-type-nav .wp-block-home-link {
+	font-weight: medium;
+	color: var(--wp--preset--color--blue-2);
+	border-bottom: 3px solid var(--wp--preset--color--blue-2);
+	padding-top: 2px;
+	margin-bottom: -2px;
+}
