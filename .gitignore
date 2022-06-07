@@ -27,4 +27,7 @@ phpcs.xml.dist
 !/source/wp-content/themes/wporg-developer
 !/source/wp-content/plugins
 !/source/wp-content/plugins/handbook
-!/source/wp-content/themes/wporg-developer-v2
+!/source/wp-content/themes/wporg-developer-blocks
+
+# ...and block build directories in the theme.
+!/source/wp-content/themes/wporg-developer-blocks/inc/blocks/**/build
