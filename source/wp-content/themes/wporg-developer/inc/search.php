@@ -76,9 +76,7 @@ class DevHub_Search {
 			switch ( $qualifier ) {
 				case 'hook':
 				case 'function':
-				case 'functions':
 				case 'method':
-				case 'methods':
 				case 'class':
 					$query->set( 's',         substr( $query->get( 's' ) , strlen($qualifier) + 1  ) );
 					$query->set( 'post_type', array( 'wp-parser-'. $qualifier ) );
