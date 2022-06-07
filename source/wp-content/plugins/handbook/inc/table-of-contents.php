@@ -8,10 +8,16 @@ class WPorg_Handbook_TOC {
 	protected $post_types = array();
 
 	protected $styles = '<style>
-		.toc-jump { text-align: right; font-size: 12px; }
-		.toc-heading a { color: inherit; font-weight: inherit; margin-left: -25px; text-decoration: none !important; }
-		.toc-heading a:before { vertical-align: middle; margin-top: -5px; margin-right: 5px; }
-		.toc-heading:target a:before { margin-left: -8px; margin-right: 13px; }
+		.toc-header { display: flex; justify-content: space-between; }
+		.toc-jump { text-align: right; font-size: 0.75em; order: 2; }
+		.toc-heading a { color: inherit; font-weight: inherit; margin-left: -32px; text-decoration: none !important; }
+		/* icon is 20px wide in a 32px space, so add a 12px margin. */
+		.toc-heading a:before { vertical-align: middle; margin: -4px 8px 0 4px; }
+		@media (max-width: 876px) {
+			.toc-heading a { margin-left: -20px; }
+			/* icon is 16px wide in a 20px space, so add a 4px margin. */
+			.toc-heading a:before { margin: -2px 4px 0 2px; width: 14px; height: 14px; font-size: 14px; }
+		}
 	</style>';
 
 	/**
