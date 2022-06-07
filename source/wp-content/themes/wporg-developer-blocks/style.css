@@ -102,11 +102,16 @@ main.main-content,
 	background: var(--wp--preset--color--off-white-2);
 	padding: 15px 0 20px;
 	min-height: 75vh;
+	max-width: 350px;
 }
 
 .content-section {
 	flex: 1;
 	background-color: #fff;
+}
+
+.page-content img {
+	max-width: 100%;
 }
 
 .docs-footer {
@@ -115,5 +120,13 @@ main.main-content,
 
 .template-part-footer {
 	--wp--style--block-gap: 0;
+}
+
+/* Hide the link icons on headings, it's OTT */
+h2.toc-heading a {
+	margin-left: 0;
+}
+h2.toc-heading a:before {
+	display: none;
 }
 

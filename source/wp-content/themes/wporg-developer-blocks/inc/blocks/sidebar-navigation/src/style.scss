@@ -1,5 +1,105 @@
-.wp-block-wporg-developer-sidebar-navigation,
-.editor-styles-wrapper ul.wp-block-wporg-developer-sidebar-navigation {
-	margin-left: 17px;
-	padding-left: 0;
+/*
+ Only custom marker for summary/details
+ For cross browser compatible styling hide Firefox's marker by setting summary { display: block }
+ and Chrome and Safari's marker by setting ::-webkit-details-marker {display: none;}
+*/
+summary {
+	display: block;
+	cursor: pointer;
+	outline: 0;
+}
+
+summary::-webkit-details-marker {
+	display: none;
+}
+
+nav.tree-nav {
+	margin-left: -0.4rem;
+}
+
+.tree-nav__item {
+	display: block;
+	color: #ccc;
+	position: relative;
+}
+
+.tree-nav__item.is-expandable[open]::before {
+	border-left: 2px solid var(--wp--preset--color--blue-3);
+	content: "";
+	height: 100%;
+	left: 0.5rem;
+	position: absolute;
+	top: 2.3rem;
+	height: calc(100% - 2.8rem);
+	opacity: 0.3;
+}
+
+.tree-nav__item .tree-nav__item {
+	margin-left: 1.5rem;
+}
+
+.tree-nav__item.is-expandable[open] {
+	margin-bottom: 15px;
+}
+
+.tree-nav__item.is-expandable[open]>.tree-nav__item-title::before {
+	font-family: "dashicons";
+	transform: rotate(90deg);
+}
+
+.tree-nav__item > .tree-nav__item-title {
+	padding-left: 0.4em;
+	padding-right: 2em;
+}
+
+.tree-nav__item.is-expandable>.tree-nav__item-title::before {
+	position: absolute;
+	will-change: transform;
+	transition: transform 300ms ease;
+	font-family: "dashicons";
+	color: var(--wp--preset--color--blue-3);
+	font-size: 1.1rem;
+	content: "\f345";
+	right: 0;
+	display: inline-block;
+	width: 1.6rem;
+	text-align: center;
+}
+
+.tree-nav__item-title {
+	cursor: pointer;
+	display: block;
+	outline: 0;
+	margin-bottom: 0.8em;
+}
+
+.tree-nav__item-title a {
+	text-decoration: none;
+}
+
+.tree-nav__item-title .icon {
+	display: inline;
+	padding-left: 1.6rem;
+	margin-right: 0.8rem;
+	color: #666;
+	font-size: 1.4rem;
+	position: relative;
+}
+
+.tree-nav__item-title .icon::before {
+	top: 0;
+	position: absolute;
+	left: 0;
+	display: inline-block;
+	width: 1.6rem;
+	text-align: center;
+}
+
+.tree-nav__item-title::-webkit-details-marker {
+	display: none;
+}
+
+.tree-nav .current_page_item > summary a,
+.tree-nav .current_page_ancestor > summary a {
+	color: #000;
 }
