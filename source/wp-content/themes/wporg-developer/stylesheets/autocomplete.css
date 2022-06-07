@@ -3,8 +3,10 @@
  *
  * Mainly overrides for awesomplete.css
  */
+
 div.awesomplete > ul > li:hover {
 	background: hsl(200, 40%, 90%);
+	color: #000;
 }
 
 div.awesomplete > ul > li[aria-selected="true"] {
@@ -16,7 +18,8 @@ div.awesomplete mark {
 	color: #404040;
 }
 
-div.awesomplete li:hover mark, div.awesomplete li[aria-selected="true"] mark {
+div.awesomplete li:hover mark,
+div.awesomplete li[aria-selected="true"] mark {
 	background: hsl(65, 100%, 49%);
 }
 
@@ -24,11 +27,11 @@ div.awesomplete li:hover mark, div.awesomplete li[aria-selected="true"] mark {
 	max-height: 13.5em;
 	color: #404040;
 	overflow: auto;
-	background: linear-gradient(to bottom right, white, hsla(0,0%,100%,.9));
+	background: linear-gradient(to bottom right, #fff, hsla(0, 0%, 100%, 0.9));
 }
 
 .devhub-wrap .searchform label div.awesomplete > input,
-.devhub-wrap div.awesomplete {	
+.devhub-wrap div.awesomplete {
 	width: 100%;
 }
 
@@ -43,14 +46,11 @@ div.awesomplete li:hover mark, div.awesomplete li[aria-selected="true"] mark {
 .devhub-wrap .searchform,
 .devhub-wrap .searchform div:first-child,
 .devhub-wrap div.awesomplete {
+
 	/* Needs to be visible for the awesomplete popup */
 	overflow: visible;
 }
 
-div.awesomplete > ul > li:hover {
-	color: black;
-}
-
-div.awesomplete > ul:before {
+div.awesomplete > ul::before {
 	content: none;
 }
