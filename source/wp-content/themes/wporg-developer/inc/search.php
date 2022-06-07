@@ -62,6 +62,43 @@ class DevHub_Search {
 	}
 
 	/**
+	 * Modifies the query if user has used advanced search filters
+	 *
+	 * @param \WP_Query $query
+	 * @return void
+	 */
+	public static function process_qualifiers( $query ) {
+		// Check if {qualifier}:{keyword} is used;
+		$split = explode(':', $query->get( 's' ));
+		if( count( $split ) > 1 ) {
+			$qualifier = strtolower( $split[0] );
+			
+			switch ( $qualifier ) {
+				case 'hook':
+				case 'function':
+				case 'functions':
+				case 'method':
+				case 'methods':
+				case 'class':
+					$query->set( 's',         substr( $query->get( 's' ) , strlen($qualifier) + 1  ) );
+					$query->set( 'post_type', array( 'wp-parser-'. $qualifier ) );
+
+			}
+		}
+
+		// If user has '()' at end of a search string, assume they want a specific function/method.
+		$s = htmlentities( $query->get( 's' ) );
+		if ( '()' === substr( $s, -2 ) || '(' == substr( $s, -1 ) ) {
+			// Enable exact search.
+			$query->set( 'exact',     true );
+			// Modify the search query to omit the parentheses.
+			$query->set( 's',         substr( $s, 0, -2 ) ); // remove '()'
+			// Restrict search to function-like content.
+			$query->set( 'post_type', array( 'wp-parser-function', 'wp-parser-method' ) );
+		}
+	}
+
+	/**
 	 * Query modifications.
 	 *
 	 * @param \WP_Query $query
@@ -92,16 +129,7 @@ class DevHub_Search {
 			// Just to make sure. post type should already be set.
 			$query->set( 'post_type', wporg_get_current_handbook() );
 		} else {
-			// If user has '()' at end of a search string, assume they want a specific function/method.
-			$s = htmlentities( $query->get( 's' ) );
-			if ( '()' === substr( $s, -2 ) || '(' == substr( $s, -1 ) ) {
-				// Enable exact search.
-				$query->set( 'exact',     true );
-				// Modify the search query to omit the parentheses.
-				$query->set( 's',         trim( $s, '()' ) );
-				// Restrict search to function-like content.
-				$query->set( 'post_type', array( 'wp-parser-function', 'wp-parser-method' ) );
-			}
+			self::process_qualifiers( $query );
 		}
 
 		// Get post types (if used, or set above)
