@@ -1382,6 +1382,13 @@ img {
   margin-bottom: 0.5em;
 }
 
+.devhub-wrap .wp-parser-class .toc-header,
+.devhub-wrap .wp-parser-function .toc-header,
+.devhub-wrap .wp-parser-hook .toc-header,
+.devhub-wrap .wp-parser-method .toc-header {
+  margin-top: 0 !important;
+}
+
 .devhub-wrap .wp-parser-class h1,
 .devhub-wrap .wp-parser-class .signature-highlight,
 .devhub-wrap .wp-parser-function h1,

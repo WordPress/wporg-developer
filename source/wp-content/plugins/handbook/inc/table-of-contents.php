@@ -8,7 +8,7 @@ class WPorg_Handbook_TOC {
 	protected $post_types = array();
 
 	protected $styles = '<style>
-		.toc-header { display: flex; justify-content: space-between; }
+		.toc-header { display: flex; justify-content: space-between; margin-top: 48px !important; }
 		.toc-jump { text-align: right; font-size: 0.75em; order: 2; }
 		.toc-heading a { color: inherit; font-weight: inherit; margin-left: -32px; text-decoration: none !important; }
 		/* icon is 20px wide in a 32px space, so add a 12px margin. */
