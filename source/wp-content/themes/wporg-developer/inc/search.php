@@ -70,6 +70,8 @@ class DevHub_Search {
 	public static function process_qualifiers( $query ) {
 		// Check if {qualifier}:{keyword} is used;
 		$split = explode(':', $query->get( 's' ));
+
+		// TODO - We don't want to match on ::
 		if( count( $split ) > 1 ) {
 			$qualifier = strtolower( $split[0] );
 			
@@ -78,9 +80,8 @@ class DevHub_Search {
 				case 'function':
 				case 'method':
 				case 'class':
-					$query->set( 's',         substr( $query->get( 's' ) , strlen($qualifier) + 1  ) );
+					$query->set( 's', substr( $query->get( 's' ), strlen($qualifier) + 1 ) );
 					$query->set( 'post_type', array( 'wp-parser-'. $qualifier ) );
-
 			}
 		}
 
