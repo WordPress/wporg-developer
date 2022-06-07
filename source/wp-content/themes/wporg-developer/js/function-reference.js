@@ -16,8 +16,7 @@ jQuery( function ( $ ) {
 	}
 
 	function sourceCodeHighlightInit() {
-
-		// We require the SyntaxHighlighter javascript library
+		// We require the Prism javascript library
 		if ( undefined === window.Prism ) {
 			return;
 		}
@@ -29,46 +28,54 @@ jQuery( function ( $ ) {
 	}
 
 	function sourceCodeDisplay( element ) {
-
+		let sourceCode = [];
 		if ( element !== undefined ) {
 			// Find table inside a specific source code element if passed.
-			var sourceCode = $( '.source-content', element ).find( 'pre' );
+			sourceCode = $( '.source-content', element ).find( 'pre' );
 		} else {
 			// Find table inside all source code elements.
-			var sourceCode = $( '.source-content' ).find( 'pre' );
+			sourceCode = $( '.source-content' ).find( 'pre' );
 		}
 
-		if ( !sourceCode.length ) {
+		if ( ! sourceCode.length ) {
 			return;
 		}
 
-		sourceCode.each( function( t ) {
-			if ( ( $sourceCollapsedHeight - 12 ) < $( this ).height() ) {
-
-				var sourceContent = $( this );//.closest( '.wp-block-code' );
+		sourceCode.each( function () {
+			if ( $sourceCollapsedHeight - 12 < $( this ).height() ) {
+				const sourceContent = $( this ); //.closest( '.wp-block-code' );
 
 				// Do this with javascript so javascript-less can enjoy the total sourcecode
 				sourceContent.css( {
-					height: $sourceCollapsedHeight + 'px'
+					height: $sourceCollapsedHeight + 'px',
 				} );
 
 				sourceContent.next( '.source-code-links' ).find( 'span:first' ).show();
 				sourceContent.parent().find( '.show-complete-source' ).show();
-				sourceContent.parent().find( '.show-complete-source' ).off( 'click.togglesource' ).on( 'click.togglesource', toggleCompleteSource );
-				sourceContent.parent().find( '.less-complete-source' ).off( 'click.togglesource' ).on( 'click.togglesource', toggleCompleteSource );
+				sourceContent
+					.parent()
+					.find( '.show-complete-source' )
+					.off( 'click.togglesource' )
+					.on( 'click.togglesource', toggleCompleteSource );
+				sourceContent
+					.parent()
+					.find( '.less-complete-source' )
+					.off( 'click.togglesource' )
+					.on( 'click.togglesource', toggleCompleteSource );
 			}
 		} );
 	}
 
-	function toggleCompleteSource( e ) {
-		e.preventDefault();
+	function toggleCompleteSource( event ) {
+		event.preventDefault();
 
-		var sourceContent = $( this ).closest( '.source-content' ).find( 'pre' );
+		const sourceContent = $( this ).closest( '.source-content' ).find( 'pre' );
+		let heightGoal = 0;
 
 		if ( $( this ).parent().find( '.show-complete-source' ).is( ':visible' ) ) {
-			var heightGoal = sourceContent.find('code').height() + 45; // takes into consideration potential x-scrollbar
+			heightGoal = sourceContent.find( 'code' ).height() + 45; // takes into consideration potential x-scrollbar
 		} else {
-			var heightGoal = $sourceCollapsedHeight;
+			heightGoal = $sourceCollapsedHeight;
 		}
 
 		sourceContent.animate( { height: heightGoal + 'px' } );
@@ -154,5 +161,4 @@ jQuery( function ( $ ) {
 	} );
 
 	$( onLoad );
-
 } );
