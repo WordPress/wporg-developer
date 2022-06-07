@@ -256,6 +256,19 @@
 		width: 98%;
 	}
 
+	select {
+		appearance: none;
+		background-color: $color-white;
+		background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' width='24' height='24' aria-hidden='true'%3E%3Cpath d='M17.5 11.6 12 16l-5.5-4.4.9-1.2L12 14l4.5-3.6 1 1.2z'/%3E%3C/svg%3E%0A");
+		background-position: right center;
+		background-repeat: no-repeat;
+		background-size: 1.5em 1.5em;
+		padding-right: 2em;
+		color: get-color(gray-70);
+		border: 1px solid get-color(gray-70);
+		border-radius: 3px;
+	}
+
 	/* Text meant only for screen readers */
 	.screen-reader-text {
 		clip: rect(1px, 1px, 1px, 1px);
@@ -784,10 +797,14 @@
 
 		select,
 		input[type="submit"] {
-			margin-left: 0.5em;
+			margin: 0 0 0 0.5em;
 			padding: 0.333em 1em;
 			font-size: inherit;
 			line-height: inherit;
+		}
+
+		select {
+			padding-right: 2em;
 		}
 	}
 
