@@ -379,40 +379,50 @@ class DevHub_Formatting {
 				$content = " $piece "; // Pad with whitespace to simplify the regexes
 
 				// Only if the text contains something that might be a function.
-				if ( false !== strpos( $content, '()' ) ) {
+				if ( str_contains( $content, '()' ) || str_contains( $content, '::' ) || str_contains( $content, '->' ) ) {
 
 					// Detect references to class methods, e.g. WP_Query::query()
 					// or functions, e.g. register_post_type().
 					$content = preg_replace_callback(
 						'~
-							(?!<.*?)       # Non-capturing check to ensure not matching what looks like the inside of an HTML tag.
-							(              # 1: The full method or function name.
-								((\w+)::)? # 2: The class prefix, if a method reference.
-								(\w+)      # 3: The method or function name.
+							(?!<.*?)                  # Non-capturing check to ensure not matching what looks like the inside of an HTML tag.
+							(?P<name>
+								(?P<class>
+									(\w+)             # Class Name
+									(::|->|-&gt;)     # Object reference
+									(\w+)             # Method
+									(?P<after>\(\)| ) # () or whitespace to terminate.
+								)
+								|
+								(?P<function>\w+\(\)) # Functions must always end in ().
 							)
-							\(\)           # The () that signifies either a method or function.
-							(?![^<>]*?>)   # Non-capturing check to ensure not matching what looks like the inside of an HTML tag.
+							(?![^<>]*?>)              # Non-capturing check to ensure not matching what looks like the inside of an HTML tag.
 						~x',
-						function ( $matches ) {
+						function( $matches ) {
+							$name  = rtrim( $matches['name'], '() ' );
+							$after = ( '()' === $matches['after'] ? '' : ' ' );
+
 							// Reference to a class method.
-							if ( $matches[2] ) {
+							if ( $matches['class'] ) {
+								$name = str_replace( array( '->', '-&gt;' ), '::', $name );
+
 								// Only link actually parsed methods.
-								if ( $post = get_page_by_title( $matches[1], OBJECT, 'wp-parser-method' ) ) {
+								if ( $post = get_page_by_title( $name, OBJECT, 'wp-parser-method' ) ) {
 									return sprintf(
-										'<a href="%s">%s</a>',
+										'<a href="%s">%s</a>' . $after,
 										get_permalink( $post->ID ),
-										$matches[0]
+										$name . '()'
 									);
 								}
 
 							// Reference to a function.
 							} else {
 								// Only link actually parsed functions.
-								if ( $post = get_page_by_title( $matches[1], OBJECT, 'wp-parser-function' ) ) {
+								if ( $post = get_page_by_title( $name, OBJECT, 'wp-parser-function' ) ) {
 									return sprintf(
-										'<a href="%s">%s</a>',
+										'<a href="%s">%s</a>' . $after,
 										get_permalink( $post->ID ),
-										$matches[0]
+										$name . '()'
 									);
 								}
 							}
