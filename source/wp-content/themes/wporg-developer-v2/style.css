@@ -16,14 +16,71 @@ Use it to make something cool, have fun, and share what you've learned with othe
 */
 
 /* Layout CSS, this can't be done in the editor _yet_ */
+
 div.title-row {
-	position: relative;
-	width: 100vw;
-	overflow: hidden;
+	padding: 0 35px 0 25px;
 }
 
-.title-row * {
-	z-index: 2;
+.home div.title-row, div.front-title {
+	padding: 0 var(--wp--custom--alignment--edge-spacing);
+}
+
+div.title-row input {
+	font-size: var(--wp--preset--font-size--small);
+	padding: 3px 10px;
+}
+
+.secondary-nav {
+	padding-left: 2px;
+}
+
+.secondary-nav a.wp-block-navigation-item__content {
+	display: inline-block;
+	padding: 12px 15px;
+}
+
+.secondary-nav li:first-child a {
+	padding-left: 0;
+}
+
+.secondary-nav li.current-page-item a {
+	background: var(--wp--preset--color--blue-2);
+}
+
+div.front-title {
+	padding-top: 50px;
+	padding-bottom: 35px;
+}
+
+div.front-title h1 {
+	line-height: 0.85;
+}
+
+div.front-title h1 {
+	line-height: 0.85;
+}
+
+.front-content .wp-block-group {
+	border-bottom: 1px solid var(--wp--preset--color--light-grey);
+	width: 50%;
+	padding: 50px;
+}
+
+.front-content .wp-block-group:nth-child(odd) {
+	padding-left: var(--wp--custom--alignment--edge-spacing);
+	border-right: 1px solid var(--wp--preset--color--light-grey);
+}
+.front-content .wp-block-group:nth-last-child(2),
+.front-content .wp-block-group:last-child {
+	border-bottom: none;
+}
+
+.front-content .wp-block-group h2 a {
+	color: #000;
+	text-decoration: none;
+}
+.front-content .wp-block-group h2 a:hover {
+	color: var(--wp--preset--color--blue-2);
 }
 
 main.main-content,
@@ -34,14 +91,13 @@ main.main-content,
 
 .navigation-sidebar {
 	flex: 0 0 350px;
-	background: var(--wp--preset--color--off-white);
+	background: var(--wp--preset--color--off-white-2);
 	padding: 15px 0 20px;
 	min-height: 75vh;
 }
 
-.page-content {
+.content-section {
 	flex: 1;
-	padding: 20px;
 	background-color: #fff;
 }
 
@@ -49,39 +105,7 @@ main.main-content,
 	margin: 0;
 }
 
-.title-row::after,
-.block-editor-block-list__layout .title-row::after {
-	content: "";
-	position: absolute;
-	top: -125px;
-	left: 100px;
-	height: 220px;
-	width: 100vw;
-	z-index: 1;
-	background-color: var(--wp--preset--color--blue-2);
-	-webkit-mask-image: url(images/brush-stroke-big.svg);
-	mask-image: url(images/brush-stroke-big.svg);
-	-webkit-mask-position: left center;
-	mask-position: left center;
-	-webkit-mask-repeat: no-repeat;
-	mask-repeat: no-repeat;
-	-webkit-mask-size: cover;
-	mask-size: cover;
+.template-part-footer {
+	--wp--style--block-gap: 0;
 }
 
-.docs-type-nav {
-	border-bottom: 1px solid var(--wp--preset--color--beige-2);
-	margin: 0;
-}
-
-.docs-type-nav .wp-block-navigation-item__content {
-	padding: 0 50px 15px;
-}
-
-.docs-type-nav .wp-block-home-link {
-	font-weight: medium;
-	color: var(--wp--preset--color--blue-2);
-	border-bottom: 3px solid var(--wp--preset--color--blue-2);
-	padding-top: 2px;
-	margin-bottom: -2px;
-}

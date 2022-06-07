@@ -1,7 +1,7 @@
 {
-	"name": "docs-navigation",
+	"name": "sidebar-navigation",
 	"version": "0.1.0",
-	"description": "Example static block scaffolded with Create Block tool.",
+	"description": "Show an expandable sidebar navigation for all developer documentation pages.",
 	"author": "The WordPress Contributors",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",

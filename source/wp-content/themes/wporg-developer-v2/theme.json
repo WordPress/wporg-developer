@@ -1,6 +1,7 @@
 {
 	"version": 2,
 	"settings": {
+		"appearanceTools": true,
 		"color": {
 			"palette": [
 				{
@@ -235,12 +236,12 @@
 				"breakpoint": {
 					"mobile": {
 						"typography": {
-							"fontSize": "clamp(26px, 4vw, 50px)"
+							"fontSize": "clamp(26px, 4vw, 44px)"
 						}
 					}
 				},
 				"typography": {
-					"fontSize": "26px",
+					"fontSize": "44px",
 					"lineHeight": "var(--wp--custom--heading--typography--line-height)"
 				}
 			},
@@ -381,7 +382,7 @@
 		"typography": {
 			"customFontSize": true,
 			"customFontWeight": true,
-			"customLineHeight": false,
+			"customLineHeight": true,
 			"customTextDecorations": false,
 			"dropCap": false,
 			"fontFamilies": [
@@ -389,6 +390,11 @@
 					"fontFamily": "'EB Garamond', serif",
 					"slug": "eb-garamond",
 					"name": "EB Garamond"
+				},
+				{
+					"fontFamily": "'Jost', 'Jost*', sans-serif",
+					"slug": "jost",
+					"name": "Jost"
 				},
 				{
 					"fontFamily": "'Inter', sans-serif",

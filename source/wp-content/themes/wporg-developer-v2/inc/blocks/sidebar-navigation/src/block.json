@@ -1,17 +1,16 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "create-block/docs-navigation",
+	"name": "wporg-developer/sidebar-navigation",
 	"version": "0.1.0",
-	"title": "Docs Navigation",
+	"title": "Developer Site Sidebar Navigation",
 	"category": "widgets",
 	"icon": "smiley",
-	"description": "Example static block scaffolded with Create Block tool.",
+	"description": "Show an expandable sidebar navigation for all developer documentation pages.",
 	"supports": {
 		"html": false
 	},
-	"textdomain": "docs-navigation",
+	"textdomain": "sidebar-navigation",
 	"editorScript": "file:./index.js",
-	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css"
 }
