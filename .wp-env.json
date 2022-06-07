@@ -19,7 +19,7 @@
 	"themes": [
 		"./source/wp-content/themes/wporg",
 		"./source/wp-content/themes/wporg-developer",
-		"./source/wp-content/themes/wporg-developer-v2"
+		"./source/wp-content/themes/wporg-developer-blocks"
 	],
 	"mappings": {
 		"env": "./env",

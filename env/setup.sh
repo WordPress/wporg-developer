@@ -1,6 +1,6 @@
 #!/bin/bash
 
-wp theme activate wporg-developer-v2
+wp theme activate wporg-developer-blocks
 
 wp rewrite structure '/%year%/%monthnum%/%postname%/'
 wp rewrite flush
