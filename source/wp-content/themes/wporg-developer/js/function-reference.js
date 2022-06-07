@@ -57,9 +57,15 @@ jQuery( function ( $ ) {
 		$button.text( wporgFunctionReferenceI18n.copy );
 		$button.on( 'click', function () {
 			clearTimeout( timeoutId );
-			const code = $element.find( 'code' ).text();
+			const $code = $element.find( 'code' );
+			let code = $code.text();
 			if ( ! code ) {
 				return;
+			}
+
+			// For single-line shell scripts, trim off the initial `$ `, if exists.
+			if ( 'shell' === $code.attr( 'lang' ) && code.startsWith( '$ ' ) && ! code.includes( '\n' ) ) {
+				code = code.slice( 2 );
 			}
 
 			// This returns a promise which will resolve if the copy suceeded,

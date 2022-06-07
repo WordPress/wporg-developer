@@ -49,6 +49,7 @@ class DevHub_Formatting {
 		add_shortcode( 'php', array( __CLASS__, 'do_shortcode_php' ) );
 		add_shortcode( 'js', array( __CLASS__, 'do_shortcode_js' ) );
 		add_shortcode( 'css', array( __CLASS__, 'do_shortcode_css' ) );
+		add_shortcode( 'code', array( __CLASS__, 'do_shortcode_code' ) );
 
 		add_filter(
 			'no_texturize_shortcodes',
@@ -56,6 +57,7 @@ class DevHub_Formatting {
 				$shortcodes[] = 'php';
 				$shortcodes[] = 'js';
 				$shortcodes[] = 'css';
+				$shortcodes[] = 'code';
 				return $shortcodes;
 			}
 		);
@@ -695,7 +697,7 @@ class DevHub_Formatting {
 		return do_blocks(
 			sprintf(
 				'<!-- wp:code {"lineNumbers":true} --><pre class="wp-block-code"><code lang="php" class="language-php line-numbers">%s</code></pre><!-- /wp:code -->',
-				trim( $content )
+				self::_trim_code( $content )
 			)
 		);
 	}
@@ -714,7 +716,7 @@ class DevHub_Formatting {
 		return do_blocks(
 			sprintf(
 				'<!-- wp:code {"lineNumbers":true} --><pre class="wp-block-code"><code lang="javascript" class="language-javascript line-numbers">%s</code></pre><!-- /wp:code -->',
-				trim( $content )
+				self::_trim_code( $content )
 			)
 		);
 	}
@@ -733,11 +735,55 @@ class DevHub_Formatting {
 		return do_blocks(
 			sprintf(
 				'<!-- wp:code {"lineNumbers":true} --><pre class="wp-block-code"><code lang="css" class="language-css line-numbers">%s</code></pre><!-- /wp:code -->',
-				trim( $content )
+				self::_trim_code( $content )
 			)
 		);
 	}
 
+	/**
+	 * Render the code shortcode using the Code Syntax Block syntax.
+	 *
+	 * This is used in the handbooks content.
+	 *
+	 * @param array|string $attr    Shortcode attributes array or empty string.
+	 * @param string       $content Shortcode content.
+	 * @param string       $tag     Shortcode name.
+	 * @return string
+	 */
+	public static function do_shortcode_code( $attr, $content, $tag ) {
+		// Use an allowedlist of languages, falling back to PHP.
+		// This should account for all languages used in the handbooks.
+		$lang_list = [ 'js', 'json', 'sh', 'bash', 'html', 'css', 'scss', 'php', 'markdown', 'yaml' ];
+		$lang = in_array( $attr['lang'], $lang_list ) ? $attr['lang'] : 'php';
+
+		// Shell is flagged with `sh` or `bash` in the handbooks, but Prism uses `shell`.
+		if ( 'sh' === $lang || 'bash' === $lang ) {
+			$lang = 'shell';
+		}
+
+		return do_blocks(
+			sprintf(
+				'<!-- wp:code {"lineNumbers":true} --><pre class="wp-block-code"><code lang="%1$s" class="language-%1$s line-numbers">%2$s</code></pre><!-- /wp:code -->',
+				$lang,
+				self::_trim_code( $content )
+			)
+		);
+	}
+
+	/**
+	 * Trim off any extra space, including initial new lines.
+	 * Strip out <br /> and <p> added by WordPress.
+	 *
+	 * @param string $content Shortcode content.
+	 * @return string
+	 */
+	public static function _trim_code( $content ) {
+		$content = preg_replace( '/<br \/>/', '', $content );
+		$content = preg_replace( '/<\/p>\s*<p>/', "\n\n", $content );
+		// Trim everything except leading spaces.
+		$content = trim( $content, "\n\r\t\v\x00" );
+		return $content;
+	}
 } // DevHub_Formatting
 
 DevHub_Formatting::init();
