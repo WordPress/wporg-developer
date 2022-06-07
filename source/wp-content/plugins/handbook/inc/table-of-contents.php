@@ -209,7 +209,7 @@ class WPorg_Handbook_TOC {
 				$extra_attrs,
 				$title
 			);
-			$replacements[] = $replacement;
+			$replacements[] = '<header class="toc-header">' . $replacement . '</header>';
 		}
 
 		if ( $replacements ) {
