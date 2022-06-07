@@ -8,7 +8,6 @@
 */
 summary {
   display: block;
-  cursor: pointer;
   outline: 0;
 }
 
@@ -27,14 +26,14 @@ nav.tree-nav {
 }
 
 .tree-nav__item.is-expandable[open]::before {
-  border-left: 2px solid var(--wp--preset--color--blue-3);
+  border-left: 2px solid var(--wp--preset--color--blue-4);
   content: "";
   height: 100%;
-  left: 0.5rem;
+  left: 0.6rem;
   position: absolute;
-  top: 2.3rem;
+  top: 2.7rem;
   height: calc(100% - 2.8rem);
-  opacity: 0.3;
+  z-index: 1;
 }
 
 .tree-nav__item .tree-nav__item {
@@ -58,7 +57,7 @@ nav.tree-nav {
 .tree-nav__item.is-expandable > .tree-nav__item-title::before {
   position: absolute;
   will-change: transform;
-  transition: transform 300ms ease;
+  transition: transform 200ms ease-in-out;
   font-family: "dashicons";
   color: var(--wp--preset--color--blue-3);
   font-size: 1.1rem;
@@ -70,10 +69,13 @@ nav.tree-nav {
 }
 
 .tree-nav__item-title {
+  position: relative;
+  background-color: var(--wp--preset--color--off-white-2);
+  z-index: 2;
   cursor: pointer;
   display: block;
   outline: 0;
-  margin-bottom: 0.8em;
+  padding-bottom: 0.8em;
 }
 
 .tree-nav__item-title a {
@@ -102,9 +104,42 @@ nav.tree-nav {
   display: none;
 }
 
-.tree-nav .current_page_item > summary a,
-.tree-nav .current_page_ancestor > summary a {
+.tree-nav .current_page_ancestor > summary:after,
+.tree-nav .current_page_item > summary:after {
+  position: absolute;
+  border-left: 2px solid #000;
+  content: "";
+  height: calc(100% - 0.8rem);
+  left: -2px;
+  top: 0;
+}
+
+.tree-nav .current_page_ancestor > summary,
+.tree-nav .current_page_item > summary {
+  padding-left: 0;
+  margin-left: -0.9em;
+  padding-left: 1.3em;
+  font-weight: 600;
+  border-left: 2px solid var(--wp--preset--color--blue-4);
+}
+
+.tree-nav .current_page_item > summary {
+  padding-left: 1.15em;
+}
+
+.tree-nav .current_page_ancestor > summary:after {
+  border-color: var(--wp--preset--color--blue-3);
+}
+
+.tree-nav .current_page_item > summary a {
   color: #000;
+}
+
+.tree-nav > .current_page_ancestor > summary:after,
+.tree-nav > .current_page_item > summary:after,
+.tree-nav > .current_page_ancestor > summary,
+.tree-nav > .current_page_item > summary {
+  border: none;
 }
 
 /*# sourceMappingURL=style-index.css.map*/

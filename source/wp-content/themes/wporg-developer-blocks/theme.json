@@ -55,6 +55,11 @@
 					"name": "Blue 3"
 				},
 				{
+					"slug": "blue-4",
+					"color": "#CED5FF",
+					"name": "Blue 4"
+				},
+				{
 					"slug": "blue-5",
 					"color": "#2541D6",
 					"name": "Blue 5"
