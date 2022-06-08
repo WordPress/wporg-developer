@@ -29,7 +29,20 @@ if ( $params = get_params() ) :
 				<dd>
 					<div class="desc">
 						<?php if ( ! empty( $param['content'] ) ) : ?>
-							<span class="description"><?php echo wp_kses_post( $param['content'] ); ?></span>
+							<?php
+								if ( $extra = get_param_reference( $param ) ) {
+									?>
+									<details>
+										<summary>
+											<span class="description"><?php echo wp_kses_post( $param['content'] ); ?></span>
+										</summary>
+										<span class="description"><?php echo wp_kses_post( $extra['content'] ); ?></span>
+									</details>
+									<?php
+								} else {
+							?>
+								<span class="description"><?php echo wp_kses_post( $param['content'] ); ?></span>
+							<?php } ?>
 						<?php endif; ?>
 					</div>
 					<?php if ( ! empty( $param['default'] ) ) : ?>
