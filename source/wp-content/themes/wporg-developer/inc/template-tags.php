@@ -883,12 +883,8 @@ namespace DevHub {
 	function get_param_reference( $param, $recursion_limit = 3 ) {
 		if ( $recursion_limit > 0 && preg_match_all( '#rel="(function|method)">([^<>()]+)[(][)]</a>#', $param[ 'content' ], $matches, PREG_SET_ORDER ) ) {
 			foreach ( $matches as $match ) {
-				#var_dump( "looking for post", $match[1], $match[2] );
-				#var_dump( "get_page_by_title( $match[2], OBJECT, 'wp-parser-' . $match[1] )" );
 				if ( $_post = get_page_by_title( $match[2], OBJECT, 'wp-parser-' . $match[1] ) ) {
-					#var_dump( 'got post', $_post->post_name, $_post->ID );
 					if ( $_params = get_params( $_post->ID ) ) {
-						#echo '<pre>'; var_dump( $param['variable'], 'inner params', $_params ); echo '</pre>';
 
 						$arg_names_to_try = array_unique([
 							$param['variable'], // An exact match for the name eg $args
@@ -900,10 +896,8 @@ namespace DevHub {
 								// Sometimes the referenced doc page has another level of indirection!
 								$recurse = get_param_reference( $_params[ $variable_name ], $recursion_limit - 1 );
 								if ( $recurse ) {
-									#var_dump( "Found recursive: ", $recurse );
 									return $recurse;
 								} else {
-									#var_dump( "Found here: ", $_params[ $variable_name ] );
 									return $_params[ $variable_name ];
 								}
 							}
