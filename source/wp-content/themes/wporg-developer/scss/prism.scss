@@ -28,6 +28,8 @@ pre[class*="language-"] {
 	-moz-hyphens: none;
 	-ms-hyphens: none;
 	hyphens: none;
+
+	transition: height 500ms;
 }
 
 /* Code blocks */
@@ -210,17 +212,24 @@ pre.line-numbers > code {
 pre.wp-block-code {
 	position: relative;
 
-	> button {
+	> .wp-code-block-button-container {
 		display: none;
 		position: absolute;
 		top: 1rem;
 		right: 1rem;
-		font-size: 1.4rem;
 		z-index: 2;
+
+		button {
+			font-size: 1.4rem;
+		}
+
+		button + button {
+			margin-left: 0.5em;
+		}
 	}
 
-	&:hover > button,
-	&:focus-within > button {
+	&:hover > .wp-code-block-button-container,
+	&:focus-within > .wp-code-block-button-container {
 		display: revert;
 	}
 }
