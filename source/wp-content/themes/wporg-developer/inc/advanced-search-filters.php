@@ -130,6 +130,14 @@ class Advanced_Search_Filters {
 		$query->set( 's', $keyword );
 	}
 
+	/**
+	 * Reset the keyword back to the original keyword after we retrieve the posts.
+	 * We need to because we removed parts in modify_query().
+	 *
+	 * @param WP_Post[] $posts
+	 * @param WP_Query  $query
+	 * @return WP_Post[]
+	 */
 	public static function modify_search( $posts, $query ) {
 		// Reset the keyword so we don't lose the qualifiers
 		$query->set( 's', $query->query['s'] );
