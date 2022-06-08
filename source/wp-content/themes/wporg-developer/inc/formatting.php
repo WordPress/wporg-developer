@@ -684,6 +684,7 @@ class DevHub_Formatting {
 			// HTML tags are untouched.
 			if ( str_starts_with( $piece, '<' ) ) {
 				$text .= $piece;
+				continue;
 			}
 
 			// Pipe delimited types inline.
