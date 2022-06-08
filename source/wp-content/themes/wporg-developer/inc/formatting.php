@@ -43,6 +43,7 @@ class DevHub_Formatting {
 
 		add_filter( 'devhub-format-hash-param-description', array( __CLASS__, 'autolink_references' ) );
 		add_filter( 'devhub-format-hash-param-description', array( __CLASS__, 'fix_param_description_parsedown_bug' ) );
+		add_filter( 'devhub-format-hash-param-description', array( __CLASS__, 'convert_lists_to_markup' ) );
 
 		add_filter( 'devhub-function-return-type', array( __CLASS__, 'autolink_references' ) );
 
@@ -316,7 +317,7 @@ class DevHub_Formatting {
 		// Simple allowable tags that should get unencoded.
 		// Note: This precludes them from being able to be used in an encoded fashion
 		// within a parameter description.
-		$allowable_tags = array( 'code' );
+		$allowable_tags = array( 'code', 'br' );
 		foreach ( $allowable_tags as $tag ) {
 			$text = str_replace( array( "&lt;{$tag}&gt;", "&lt;/{$tag}&gt;" ), array( "<{$tag}>", "</{$tag}>" ), $text );
 		}
@@ -496,6 +497,11 @@ class DevHub_Formatting {
 	 * list processing during parsing.
 	 *
 	 * Recognizes lists where list items are denoted with an asterisk or dash.
+	 * Examples:
+	 * - https://developer.wordpress.org/reference/functions/add_menu_page/
+	 * - https://developer.wordpress.org/reference/classes/wp_term_query/__construct/
+	 * - https://developer.wordpress.org/reference/hooks/password_change_email/
+	 * - https://developer.wordpress.org/reference/classes/WP_Query/parse_query/
 	 *
 	 * Does not handle nesting of lists.
 	 *
@@ -503,43 +509,22 @@ class DevHub_Formatting {
 	 * @return string
 	 */
 	public static function convert_lists_to_markup( $text ) {
-		$inline_list = false;
-		$li = '<br /> * ';
+		// Expand new lines for ease of matching.
+		$text = preg_replace( '!<br>\s*!', "<br>\n", $text );
 
-		// Convert asterisks to a list.
-		// Example: https://developer.wordpress.org/reference/functions/add_menu_page/
-		if ( false !== strpos( $text, ' * ' ) )  {
-			// Display as simple plaintext list.
-			$text = str_replace( ' * ', "\n" . $li, $text );
-			$inline_list = true;
+		// Trim any trailing <br>s on strings.
+		$text = preg_replace( '/<br>\s*$/s', '', $text );
+
+		// Add line items
+		$text = preg_replace( '!^\s*[*-] (.+?)(<br>)*$!m', '<li>$1</li>', $text, -1, $replacements_made );
+
+		if ( ! $replacements_made ) {
+			return $text;
 		}
 
-		// Convert dashes to a list.
-		// Example: https://developer.wordpress.org/reference/classes/wp_term_query/__construct/
-		// Example: https://developer.wordpress.org/reference/hooks/password_change_email/
-		if ( false !== strpos( $text, ' - ' ) )  {
-			// Display as simple plaintext list.
-			$text = str_replace( ' - ', "\n" . $li, $text );
-			$inline_list = true;
-		}
-
-		// If list detected.
-		if ( $inline_list ) {
-			// Replace first item, ensuring the opening 'ul' tag is prepended.
-			$text = preg_replace( '~^' . preg_quote( $li ) . '(.+)$~mU', "<ul><li>\$1</li>\n", $text, 1 );
-			// Wrap subsequent list items in 'li' tags.
-			$text = preg_replace( '~^' . preg_quote( $li ) . '(.+)$~mU', "<li>\$1</li>\n", $text ); 
-			$text = trim( $text );
-
-			// Close the list if it hasn't been closed before start of next hash parameter.
-			//$text = preg_replace( '~(</li>)(\s+</li>)~smU', '$1</ul>$2', $text );
-			$text = preg_replace( '~(</li>)(\s*</li>)~smU', '$1</ul>$2', $text );
-
-			// Closethe list if it hasn't been closed and it's the end of the description.
-			if ( '</li>' === substr( trim( $text ), -5 ) ) {
-				$text .= '</ul>';
-			}
-		}
+		// Wrap in a `ul`.
+		$text = substr_replace( $text, '<ul><li>', strpos( $text, '<li>' ), 4 ); // First instance
+		$text = substr_replace( $text, '</li></ul>', strrpos( $text, '</li>' ), 5 ); // Last instance.
 
 		return $text;
 	}
@@ -612,7 +597,7 @@ class DevHub_Formatting {
 				if ( $name ) {
 					$new_text .= "<code>{$name}</code>";
 				}
-				$new_text .= "<span class='type'>{$type}</span><p class='desc'>{$description}</p>";
+				$new_text .= "<span class='type'>{$type}</span><div class='desc'>{$description}</div>";
 				if ( ! $skip_closing_li ) {
 					$new_text .= '</li>';
 				}
