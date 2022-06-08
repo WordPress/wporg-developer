@@ -7,94 +7,131 @@ class Advanced_Search_Filters {
 	}
 
 	/**
+	 * Returns a tax query array for appending wp-parse-source-file taxonomy searches
+	 *
+	 * @param string $name
+	 * @return array
+	 */
+	public static function get_file_tax_query( $name ) {
+		// Get the tax IDs first
+		$tax_ids = get_terms(
+			array(
+				'taxonomy'   => 'wp-parser-source-file',
+				'name__like' => $name,
+				'fields'     => 'ids',
+			)
+		);
+
+		return array(
+			'taxonomy' => 'wp-parser-source-file',
+			'terms'    => $tax_ids,
+		);
+	}
+
+	/**
+	 * Returns a tax query array for appending wp-parser-since taxonomy searches
+	 *
+	 * @param string $term
+	 * @return array
+	 */
+	public static function get_version_tax_query( $term ) {
+		return array(
+			'taxonomy' => 'wp-parser-since',
+			'field'    => 'name',
+			'terms'    => $term,
+		);
+	}
+
+	/**
+	 * Returns a post type string. wp-parser-{post_type}
+	 *
+	 * @param string $post_type_partial
+	 * @return string
+	 */
+	public static function get_post_type_string( $post_type_partial ) {
+		return 'wp-parser-' . strtolower( $post_type_partial );
+	}
+
+	/**
 	 * Modifies the query if user has used advanced search filters
 	 *
 	 * @param \WP_Query $query
 	 * @return void
 	 */
 	public static function modify_query( $query ) {
-		$post_types = [];
-		$tax_queries = [];
+		$post_types  = array();
+		$tax_queries = array();
 
-		// Clean up keyword
+		// Clean up keyword.
 		$keyword = trim( $query->get( 's' ) );
 
-		// Split on spaces
-		$groups = explode( " ", $keyword );
+		// Split on spaces.
+		$groups = explode( ' ', $keyword );
 
 		// Loop through groups
-		foreach( $groups as $group ){
-			// Check if {qualifier}:{keyword} is used;
+		foreach ( $groups as $group ) {
+			// Check if {qualifier}:{keyword} is used.
 			$split = explode( ':', $group );
 
-			// We have mo qualifier
-			if( count( $split ) < 2 ) {
+			// We have no qualifier.
+			if ( ! isset( $split[1] ) ) {
+				// If user has '()' at end of a search string, assume they want a specific function/method.
+				$s = htmlentities( $split[0] );
+
+				if ( str_contains( $s, '()' ) ) {
+					// Modify the search query to omit the parentheses.
+					$keyword = str_replace( '()', '', $keyword );
+
+					// Restrict search to function-like content.
+					$post_types[] = 'wp-parser-function';
+					$post_types[] = 'wp-parser-method';
+				}
+
 				continue;
 			}
-	
-			$qualifier = strtolower( $split[ 0 ] );
-		
+
+			$qualifier = strtolower( $split[0] );
+
 			switch ( $qualifier ) {
 				case 'type':
-					// TO DO Validate the type
-					$post_types[] = 'wp-parser-'. strtolower($split[1]);
+					$type = self::get_post_type_string( $split[1] );
 
-					// Remove "type"	
-					$keyword = str_replace( $qualifier . ':' , '', $keyword );
+					if ( in_array( $type, DevHub\get_parsed_post_types() ) ) {
+						$post_types[] = $type;
+
+						// Remove "type"
+						$keyword = str_replace( $qualifier . ':', '', $keyword );
+					}
+
 					break;
 				case 'file':
-					// Get the tax ids first
-					$tax_ids = get_terms( array(
-							'taxonomy' => 'wp-parser-source-file',
-							'name__like' => $split[1],
-							'fields' => 'ids'
-						) );
+					$tax_queries[] = self::get_file_tax_query( $split[1] );
 
-					$tax_queries[] = array(
-							'taxonomy' => 'wp-parser-source-file',
-							'terms' => $tax_ids
-					);
-				
-					// Remove everything from the query
-					$keyword = str_replace( $group , '', $keyword );
+					// Remove everything from the query.
+					$keyword = str_replace( $group, '', $keyword );
 					break;
 				case 'version':
-					$tax_queries[] = array(
-							'taxonomy' => 'wp-parser-since',
-							'field'    => 'name',
-							'terms'    => $split[1],
-					);
+					$tax_queries[] = self::get_version_tax_query( $split[1] );
 
-					// Remove everything from the query
-					$keyword = str_replace( $group , '', $keyword );
+					// Remove everything from the query.
+					$keyword = str_replace( $group, '', $keyword );
 					break;
 			}
 		}
 
-		if( count( $tax_queries ) > 0 ) {
-			$query->set( 'tax_query', $tax_queries );
-		}
+		// Add relevant tax queries
+		$query->set( 'tax_query', array_merge( $query->get( 'tax_query' ) ?: array(), $tax_queries ) );
 
 		// Add relevant post_types
-		$query->set( 'post_type', array_merge( $query->get( 'post_type' ) ?: [], $post_types ) );
+		$query->set( 'post_type', array_merge( $query->get( 'post_type' ) ?: array(), $post_types ) );
 
 		// Reset the keyword
 		$query->set( 's', $keyword );
-
-		// If user has '()' at end of a search string, assume they want a specific function/method.
-		$s = htmlentities( $query->get( 's' ) );
-		if ( '()' === substr( $s, -2 ) ) {
-			// Enable exact search.
-			$query->set( 'exact',     true );
-			// Modify the search query to omit the parentheses.
-			$query->set( 's',         substr( $s, 0, -2 ) ); // remove '()'
-			// Restrict search to function-like content.
-			$query->set( 'post_type', array( 'wp-parser-function', 'wp-parser-method' ) );
-		}
 	}
 
-	public function modify_search( $posts, $query ) {
-		$query->set('s', $query->query["s"]);
+	public static function modify_search( $posts, $query ) {
+		// Reset the keyword so we don't lose the qualifiers
+		$query->set( 's', $query->query['s'] );
 		return $posts;
 	}
 }
