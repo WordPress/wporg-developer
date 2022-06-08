@@ -100,8 +100,7 @@ class Advanced_Search_Filters {
 					if ( in_array( $type, DevHub\get_parsed_post_types() ) ) {
 						$post_types[] = $type;
 
-						// Remove "type"
-						$keyword = str_replace( $split[0] . ':', '', $keyword );
+						$keyword = str_replace( 'type:', '', $keyword );
 					}
 
 					break;
