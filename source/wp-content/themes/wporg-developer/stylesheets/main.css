@@ -282,7 +282,6 @@ img {
 .devhub-wrap {
   padding-bottom: 1.5em;
   /* Override inline style from wporg-markdown plugin. */
-  /* Text meant only for screen readers */
   /* Clearing */
   /* =Content
 	----------------------------------------------- */
@@ -608,33 +607,6 @@ img {
   color: #3c434a;
   border: 1px solid #3c434a;
   border-radius: 3px;
-}
-
-.devhub-wrap .screen-reader-text {
-  clip: rect(1px, 1px, 1px, 1px);
-  position: absolute !important;
-}
-
-.devhub-wrap .screen-reader-text:hover,
-.devhub-wrap .screen-reader-text:active,
-.devhub-wrap .screen-reader-text:focus {
-  background-color: #f1f1f1;
-  border-radius: 3px;
-  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
-  clip: auto !important;
-  color: #21759b;
-  display: block;
-  font-size: 14px;
-  font-weight: 700;
-  height: auto;
-  left: 5px;
-  line-height: normal;
-  padding: 15px 23px 14px;
-  text-decoration: none;
-  top: 5px;
-  width: auto;
-  z-index: 100000;
-  /* Above WP toolbar */
 }
 
 .devhub-wrap .clear::before,
@@ -1589,6 +1561,17 @@ img {
   margin-left: 2.5rem;
 }
 
+.devhub-wrap .wp-parser-class .parameters dd ul ul,
+.devhub-wrap .wp-parser-class .return dd ul ul,
+.devhub-wrap .wp-parser-function .parameters dd ul ul,
+.devhub-wrap .wp-parser-function .return dd ul ul,
+.devhub-wrap .wp-parser-hook .parameters dd ul ul,
+.devhub-wrap .wp-parser-hook .return dd ul ul,
+.devhub-wrap .wp-parser-method .parameters dd ul ul,
+.devhub-wrap .wp-parser-method .return dd ul ul {
+  margin-bottom: 0.5em;
+}
+
 .devhub-wrap .wp-parser-class .parameters dd code,
 .devhub-wrap .wp-parser-class .return dd code,
 .devhub-wrap .wp-parser-function .parameters dd code,
@@ -2472,6 +2455,12 @@ img {
 .devhub-wrap.archive .hentry, .devhub-wrap.blog .hentry {
   padding: 0 0 1.5em 0;
   border-bottom: 1px solid #ddd;
+}
+
+/** Fix screen-reader-text font size. **/
+a.screen-reader-text:focus,
+.screen-reader-text:focus {
+  font-size: 1.4rem;
 }
 
 /** Site Header **/

@@ -378,7 +378,6 @@ function theme_scripts_styles() {
 		filemtime( __DIR__ . '/stylesheets/main.css' )
 	);
 	wp_enqueue_script( 'wporg-developer-navigation', get_stylesheet_directory_uri() . '/js/navigation.js', array(), filemtime( __DIR__ . '/js/navigation.js' ), true );
-	wp_enqueue_script( 'wporg-developer-skip-link-focus-fix', get_stylesheet_directory_uri() . '/js/skip-link-focus-fix.js', array(), filemtime( __DIR__ . '/js/skip-link-focus-fix.js' ), true );
 	wp_enqueue_script( 'wporg-developer-search', get_stylesheet_directory_uri() . '/js/search.js', array(), filemtime( __DIR__ . '/js/search.js' ), true );
 	wp_enqueue_script( 'wporg-developer-chapters', get_stylesheet_directory_uri() . '/js/chapters.js', array( 'jquery' ), filemtime( __DIR__ . '/js/chapters.js' ) );
 	wp_enqueue_script( 'wporg-developer-menu', get_stylesheet_directory_uri() . '/js/menu.js', array( 'jquery' ), filemtime( __DIR__ . '/js/menu.js' ), true );

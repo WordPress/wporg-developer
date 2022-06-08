@@ -7,6 +7,8 @@
  * @package wporg-developer
  */
 
+\WordPressdotorg\skip_to( '#content' );
+
 echo do_blocks( '<!-- wp:wporg/global-header /-->' );
 
 ?>
@@ -38,8 +40,6 @@ echo do_blocks( '<!-- wp:wporg/global-header /-->' );
 </header><!-- #masthead -->
 
 <div id="page" class="hfeed site devhub-wrap">
-	<a href="#main" class="screen-reader-text"><?php _e( 'Skip to content', 'wporg' ); ?></a>
-
 	<?php do_action( 'before' ); ?>
 	<?php
 	if ( DevHub\should_show_search_bar() ) : ?>
