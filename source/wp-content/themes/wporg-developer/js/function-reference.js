@@ -14,13 +14,16 @@ jQuery( function ( $ ) {
 	function collapseCodeBlock( $element, $button ) {
 		$button.text( wporgFunctionReferenceI18n.expand );
 		$button.attr( 'aria-expanded', 'false' );
+		// This uses `css()` instead of `height()` to prevent jQuery from adding
+		// in the padding. We want to add in just the top padding, since the
+		// bottom is intentionally cut off.
 		$element.css( { height: MIN_HEIGHT + 'px' } );
 	}
 
 	function expandCodeBlock( $element, $button ) {
 		$button.text( wporgFunctionReferenceI18n.collapse );
 		$button.attr( 'aria-expanded', 'true' );
-		$element.css( { height: $element.data( 'height' ) + 'px' } );
+		$element.height( $element.data( 'height' ) );
 	}
 
 	// For each code block, add the copy button & expanding functionality.
