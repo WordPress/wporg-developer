@@ -888,6 +888,7 @@ namespace DevHub {
 
 						$arg_names_to_try = array_unique([
 							$param['variable'], // An exact match for the name eg $args
+							'$args',
 							'$query', // For example get_terms( $args ) -> WP_Term_Query::__construct( $query )
 						]);
 
