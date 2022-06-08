@@ -137,7 +137,7 @@ if ( is_admin() ) {
 }
 
 /**
- * Custom class of modifying search queries.
+ * Custom class for modifying search queries.
  */
 require __DIR__ . '/inc/advanced-search-filters.php';
 
