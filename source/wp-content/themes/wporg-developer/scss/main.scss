@@ -1992,32 +1992,51 @@ aside[id^="nav_menu"] .widget-title {
 	background-color: #fff;
 }
 
-/** Table of Contents */
-.site-main .table-of-contents {
-	float: right;
-	width: 250px;
-	border: 1px solid #eee;
-	margin: 0 0 15px 15px;
-	z-index: 1;
-	position: relative;
-	color: #555d66;
-	background-color: #fff;
-	box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-	border-radius: 3px;
-
-	@media (min-width: 971px) {
-		margin: 0 -30px 15px 15px;
+/** Header layout: H1, Summary and Table of Contents **/
+.site-main {
+	.post-header {
+		display: flex;
+		
+		.post-title {
+			flex: 1;
+		}
 	}
+	
+	.table-of-contents {
+		position: fixed;
+		top: 210px;
+		right: 30px;
+		width: 250px;
+		border: 1px solid #eee;
+		// Top margin matches H1
+		margin: 24px 0 15px 15px;
+		z-index: 1;
+		color: #555d66;
+		background-color: #fff;
+		box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+		border-radius: 3px;
+		
+		@media (max-width: 1475px) {
+			position: static;
+			top: initial;
+			right: initial;
+		}
 
-	h2 {
-		margin: 0;
-		padding: 0.7rem 1.2rem;
-		font-family: HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
-		font-size: 1.3em;
-		color: #32373c;
-		text-transform: uppercase;
-		border-bottom: 1px solid #eee;
-		margin-bottom: 0;
+		@media (max-width: 970px) {
+			position: fixed;
+			visibility: hidden;
+		}
+
+		h2 {
+			margin: 0;
+			padding: 0.7rem 1.2rem;
+			font-family: HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+			font-size: 1.3em;
+			color: #32373c;
+			text-transform: uppercase;
+			border-bottom: 1px solid #eee;
+			margin-bottom: 0;
+		}
 	}
 }
 

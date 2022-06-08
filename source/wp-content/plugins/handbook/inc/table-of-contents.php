@@ -130,7 +130,7 @@ class WPorg_Handbook_TOC {
 	 * @access public
 	 *
 	 * @param string $content Content.
-	 * @return string Modified content.
+	 * @return array toc => Table of Contents, content => Modified Content.
 	 */
 	public function add_toc( $content ) {
 		if ( ! in_the_loop() ) {
@@ -193,7 +193,7 @@ class WPorg_Handbook_TOC {
 
 		$toc .= "</ul>\n</div>\n";
 
-		return $toc . $content;
+		return array('toc' => $toc, 'content' => $content);
 	}
 
 	/**
