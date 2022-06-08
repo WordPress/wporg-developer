@@ -137,6 +137,11 @@ if ( is_admin() ) {
 }
 
 /**
+ * Custom class of modifying search queries.
+ */
+require __DIR__ . '/inc/advanced-search-filters.php';
+
+/**
  * Set the content width based on the theme's design and stylesheet.
  */
 if ( ! isset( $content_width ) ) {
