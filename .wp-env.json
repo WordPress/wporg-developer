@@ -13,7 +13,8 @@
 		"./source/wp-content/plugins/posts-to-posts",
 		"./source/wp-content/plugins/syntaxhighlighter",
 		"./source/wp-content/plugins/wordpress-importer",
-		"./source/wp-content/plugins/jetpack"
+		"./source/wp-content/plugins/jetpack",
+		"./source/wp-content/plugins/create-block-theme"
 	],
 	"themes": [
 		"./source/wp-content/themes/wporg",

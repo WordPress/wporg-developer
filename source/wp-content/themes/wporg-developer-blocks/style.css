@@ -114,6 +114,19 @@ main.main-content,
 	max-width: 100%;
 }
 
+.page-content h2 {
+	border-top: 1px solid var(--wp--preset--color--light-grey);
+	padding-top: 30px;
+}
+
+.page-content h2, .page-content h3 {
+	margin: 40px 0 0;
+}
+
+.page-content h2 + p, .page-content h3 + p {
+	margin-top: 15px;
+}
+
 .docs-footer {
 	margin: 0;
 }
@@ -123,10 +136,10 @@ main.main-content,
 }
 
 /* Hide the link icons on headings, it's OTT */
-h2.toc-heading a {
+h2.toc-heading a, h3.toc-heading a {
 	margin-left: 0;
 }
-h2.toc-heading a:before {
+h2.toc-heading a:before, h3.toc-heading a:before, .toc-jump {
 	display: none;
 }
 
