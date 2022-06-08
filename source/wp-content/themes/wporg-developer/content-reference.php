@@ -10,10 +10,10 @@
 			'header_text' => __( 'Contents', 'wporg' )
 		) );
 		
-		$TOC_parts = $TOC->add_toc( $content );
+		$parts = $TOC->parse_content( $content );
 
-		$content = $TOC_parts['content'];
-		$toc = $TOC_parts['toc'];
+		$content = $parts['content'];
+		$toc = $parts['toc'];
 	endif;
 
 endif; ?>
