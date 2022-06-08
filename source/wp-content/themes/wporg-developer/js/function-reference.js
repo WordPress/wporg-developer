@@ -13,13 +13,13 @@ jQuery( function ( $ ) {
 
 	function collapseCodeBlock( $element, $button ) {
 		$button.text( wporgFunctionReferenceI18n.expand );
-		$element.data( 'is-expanded', false );
+		$button.attr( 'aria-expanded', 'false' );
 		$element.css( { height: MIN_HEIGHT + 'px' } );
 	}
 
 	function expandCodeBlock( $element, $button ) {
 		$button.text( wporgFunctionReferenceI18n.collapse );
-		$element.data( 'is-expanded', true );
+		$button.attr( 'aria-expanded', 'true' );
 		$element.css( { height: $element.data( 'height' ) + 'px' } );
 	}
 
@@ -65,7 +65,7 @@ jQuery( function ( $ ) {
 			const $expandButton = $( document.createElement( 'button' ) );
 			$expandButton.addClass( 'button-link' );
 			$expandButton.on( 'click', function () {
-				if ( $element.data( 'is-expanded' ) ) {
+				if ( 'true' === $expandButton.attr( 'aria-expanded' ) ) {
 					collapseCodeBlock( $element, $expandButton );
 				} else {
 					expandCodeBlock( $element, $expandButton );
