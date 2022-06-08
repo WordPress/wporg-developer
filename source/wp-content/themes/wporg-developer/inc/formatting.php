@@ -40,6 +40,7 @@ class DevHub_Formatting {
 		add_filter( 'devhub-format-description', array( __CLASS__, 'fix_param_hash_formatting' ), 9 );
 		add_filter( 'devhub-format-description', array( __CLASS__, 'fix_param_description_html_as_code' ) );
 		add_filter( 'devhub-format-description', array( __CLASS__, 'convert_lists_to_markup' ) );
+		add_filter( 'devhub-format-hash-param-description', array( __CLASS__, 'fix_param_description_quotes_to_code' ) );
 
 		add_filter( 'devhub-format-hash-param-description', array( __CLASS__, 'autolink_references' ) );
 		add_filter( 'devhub-format-hash-param-description', array( __CLASS__, 'fix_param_description_parsedown_bug' ) );
@@ -663,6 +664,39 @@ class DevHub_Formatting {
 	public static function fix_param_description_html_as_code( $text ) {
 		if ( false !== strpos( $text, "'&lt;" ) ) {
 			$text = preg_replace( '/\'(&lt;[^\']+&gt;)\'/', '<code>$1</code>', $text );
+		}
+
+		return $text;
+	}
+
+	/**
+	 * Wraps code-like references within 'code' tags.
+	 *
+	 * Example: https://developer.wordpress.org/reference/classes/wp_term_query/__construct/
+	 *
+	 * @param string $text Text.
+	 * @return string
+	 */
+	public static function fix_param_description_quotes_to_code( $text ) {
+		$textarr = preg_split( '/(<[^<>]+>)/', $text, -1, PREG_SPLIT_DELIM_CAPTURE ); // split out HTML tags
+		$text    = '';
+		foreach ( $textarr as $piece ) {
+			// HTML tags are untouched.
+			if ( str_starts_with( $piece, '<' ) ) {
+				$text .= $piece;
+			}
+
+			// Pipe delimited types inline.
+			$piece = preg_replace( "/(([\w'\[\]]+\|)+[\w'\[\]]+)/", '<code>$1</code>', $piece, -1 );
+
+			// Quoted strings.
+			$piece = preg_replace( "/('[^']{0,20}')/", '<code>$1</code>', $piece, -1 );
+
+			// Replace ###PARAM### too.
+			// Example: http://localhost:8888/reference/hooks/password_change_email/
+			$piece = preg_replace( "/((#{2,})\w+\\2)/", '<code>$1</code>', $piece );
+
+			$text .= $piece;
 		}
 
 		return $text;
