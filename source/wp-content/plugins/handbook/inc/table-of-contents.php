@@ -130,18 +130,31 @@ class WPorg_Handbook_TOC {
 	 * @access public
 	 *
 	 * @param string $content Content.
-	 * @return array toc => Table of Contents, content => Modified Content.
+	 * @return string toc => Modified Content.
 	 */
 	public function add_toc( $content ) {
+		$parts = $this->parse_content( $content );
+   		return $parts['toc'] . $parts['content'];
+	}
+
+	/**
+	 * Parses given content and returns modified content and the ToC.
+	 *
+	 * @access public
+	 *
+	 * @param string $content Content.
+	 * @return array toc => Table of Contents, content => Modified Content.
+	 */
+	public function parse_content( $content ) {
 		if ( ! in_the_loop() ) {
-			return $content;
+			return array('content' => $content, 'toc' => null);
 		}
 
 		$toc   = '';
 		$items = $this->get_tags( 'h(?P<level>[1-4])', $content );
 
 		if ( count( $items ) < 2 ) {
-			return $content;
+			return array('content' => $content, 'toc' => null);
 		}
 
 		// Remove any links we don't need.
@@ -167,7 +180,7 @@ class WPorg_Handbook_TOC {
 		$content = $this->add_ids_and_jumpto_links( $items, $content );
 
 		if ( ! apply_filters( 'handbook_display_toc', true ) ) {
-			return $content;
+			return array('content' => $content, 'toc' => null);
 		}
 
 		$contents_header = 'h' . reset( $items )['level']; // Duplicate the first <h#> tag in the document for the TOC header
