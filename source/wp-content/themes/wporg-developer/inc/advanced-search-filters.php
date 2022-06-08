@@ -74,10 +74,13 @@ class Advanced_Search_Filters {
 			$split = explode( ':', $group );
 
 			// We have no qualifier.
-			if ( ! isset( $split[1] ) ) {
+			if ( ! isset( $split[1] ) ||
+				empty( $split[0] ) || // Missing a qualifier. Ie: :init
+				$split[1][0] == ':'  // Searching for a class method. Ie: {Class}::init()
+			) {
+
 				// If user has '()' at end of a search string, assume they want a specific function/method.
 				$s = htmlentities( $split[0] );
-
 				if ( str_contains( $s, '()' ) ) {
 					// Modify the search query to omit the parentheses.
 					$keyword = str_replace( '()', '', $keyword );
@@ -90,9 +93,7 @@ class Advanced_Search_Filters {
 				continue;
 			}
 
-			$qualifier = strtolower( $split[0] );
-
-			switch ( $qualifier ) {
+			switch ( strtolower( $split[0] ) ) {
 				case 'type':
 					$type = self::get_post_type_string( $split[1] );
 
@@ -100,7 +101,7 @@ class Advanced_Search_Filters {
 						$post_types[] = $type;
 
 						// Remove "type"
-						$keyword = str_replace( $qualifier . ':', '', $keyword );
+						$keyword = str_replace( $split[0] . ':', '', $keyword );
 					}
 
 					break;
