@@ -10,6 +10,7 @@ namespace DevHub;
 
 $source_file = get_source_file();
 if ( ! empty( $source_file ) ) :
+	$source_code = post_type_has_source_code() ? get_source_code() : '';
 	?>
 	<hr />
 	<section class="source-content">
@@ -31,14 +32,14 @@ if ( ! empty( $source_file ) ) :
 			?>
 		</p>
 
-		<?php if ( post_type_has_source_code() ) : ?>
+		<?php if ( ! empty( $source_code ) ) : ?>
 			<?php
 				echo do_blocks(
 					sprintf(
 						'<!-- wp:code {"lineNumbers":true} --><pre class="wp-block-code" data-start="%1$s" aria-label="%2$s"><code lang="php" class="language-php line-numbers">%3$s</code></pre><!-- /wp:code -->',
 						esc_attr( get_post_meta( get_the_ID(), '_wp-parser_line_num', true ) ),
 						__( 'Function source code', 'wporg' ),
-						htmlentities( get_source_code() )
+						htmlentities( $source_code )
 					)
 				);
 			?>
