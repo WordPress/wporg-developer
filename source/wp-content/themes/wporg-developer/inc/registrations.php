@@ -76,7 +76,8 @@ class DevHub_Registrations {
 
 		// Methods
 		add_rewrite_rule( 'reference/classes/page/([0-9]{1,})/?$', 'index.php?post_type=wp-parser-class&paged=$matches[1]', 'top' );
-		add_rewrite_rule( 'reference/classes/([^/]+)/([^/]+)/?$', 'index.php?post_type=wp-parser-method&name=$matches[1]-$matches[2]', 'top' );
+		add_rewrite_rule( 'reference/classes/([^/]+)/(?!embed)([^/]+)/?$', 'index.php?post_type=wp-parser-method&name=$matches[1]-$matches[2]', 'top' );
+		add_rewrite_rule( 'reference/classes/([^/]+)/(?!embed)([^/]+)/embed/?$', 'index.php?post_type=wp-parser-method&name=$matches[1]-$matches[2]&embed=true', 'top' );
 
 		// Classes
 		register_post_type( 'wp-parser-class', array(
