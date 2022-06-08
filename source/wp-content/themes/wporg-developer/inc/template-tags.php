@@ -113,7 +113,7 @@ namespace {
 
 			// Check if the current page is a reply to a note.
 			$reply_id = 0;
-			if ( isset( $_GET['replytocom'] ) && $_GET['replytocom'] ) {		
+			if ( isset( $_GET['replytocom'] ) && $_GET['replytocom'] ) {
 				/* Javascript uses preventDefault() when clicking links with '?replytocom={comment_ID}'
 				 * We assume Javascript is disabled when visiting a page with this query var.
 				 * There are no consequences if Javascript is enabled.
@@ -175,7 +175,7 @@ namespace {
 			$is_user_logged_in  = is_user_logged_in();
 			$can_user_post_note = DevHub\can_user_post_note( true, get_the_ID() );
 			$is_user_verified   = $is_user_logged_in && $can_user_post_note;
-		
+
 			$args['updated_note'] = 0;
 			if ( isset( $_GET['updated-note'] ) && $_GET['updated-note'] ) {
 				$args['updated_note'] = absint( $_GET['updated-note'] );
@@ -1296,7 +1296,6 @@ namespace DevHub {
 			'connected_type'      => $connection_types,
 			'connected_direction' => array( 'from', 'from' ),
 			'connected_items'     => $post_id,
-			'post__not_in'        => _get_functions_to_exclude_from_uses(),
 			'nopaging'            => true,
 		) );
 
@@ -1399,6 +1398,32 @@ namespace DevHub {
 		set_transient( __METHOD__, $ids, DAY_IN_SECONDS );
 
 		return $ids;
+	}
+
+	/**
+	 * Rearrange the results of get_uses() so that frequent functions are pushed to the bottom.
+	 * Sorts the array in-place.
+	 *
+	 * @return int The number of infrequent items in the list (ie the cutoff point for show/hide).
+	 */
+	function split_uses_by_frequent_funcs( &$posts ) {
+
+		$frequent_funcs = _get_functions_to_exclude_from_uses();
+
+		// Sort the posts array so frequently used functions are at the end
+		usort( $posts, function( $a, $b ) use ( $frequent_funcs ) {
+			return (int) in_array( $a->ID, $frequent_funcs ) - (int) in_array( $b->ID, $frequent_funcs );
+		} );
+
+		$infrequent_count = 0;
+		foreach ( $posts as $i => $post ) {
+			if ( in_array( $post->ID, $frequent_funcs ) ) {
+				break;
+			}
+			$infrequent_count = $i + 1;
+		}
+
+		return $infrequent_count;
 	}
 
 	/**

@@ -16,6 +16,10 @@ if ( show_usage_info() ) :
 	$uses_to_show    = 5;
 	$used_by_to_show = 5;
 
+	if ( $has_uses ) {
+		$uses_to_show = min( $uses_to_show, split_uses_by_frequent_funcs( $uses->posts ) );
+	}
+
 	if ( $has_uses || $has_used_by ) :
 	?>
 	<hr />
