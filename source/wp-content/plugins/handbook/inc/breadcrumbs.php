@@ -63,7 +63,7 @@ class WPorg_Handbook_Breadcrumbs {
 		// Add in links to current handbook page and all of its ancestor pages.
 		$page = $current_page = get_post();
 		$pages = [];
-		
+
 		do {
 			$parent_id = wp_get_post_parent_id( $page );
 			if ( $parent_id ) {
@@ -75,7 +75,7 @@ class WPorg_Handbook_Breadcrumbs {
 		$pages = array_reverse( $pages );
 		foreach ( $pages as $page ) {
 			$links[] = $page;
-		}	
+		}
 
 		// Last link is the current handbook page, unless it's the landing page.
 		if ( ! wporg_is_handbook_landing_page() ) {

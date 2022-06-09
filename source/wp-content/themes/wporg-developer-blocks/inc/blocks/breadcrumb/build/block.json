@@ -8,7 +8,10 @@
   "icon": "smiley",
   "description": "Show a breadcrumb of page heirarchy",
   "supports": {
-    "html": false
+    "html": false,
+    "typography": {
+      "fontSize": true
+    }
   },
   "textdomain": "breadcrumb",
   "editorScript": "file:./index.js",
