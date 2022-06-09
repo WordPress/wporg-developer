@@ -214,7 +214,7 @@ pre.wp-block-code:focus-within > button {
   display: revert;
 }
 
-/* Workaround for partial highlights */
-code.language-php > span.token.language-php:first-child > span.token.delimiter.important:first-child {
+/* Workaround for partial highlighting. See https://github.com/WordPress/wporg-developer/issues/67 */
+section.source-content code > span.token.language-php:first-child > span.token.delimiter.important:first-child {
   display: none;
 }
