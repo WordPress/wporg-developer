@@ -104,11 +104,18 @@ class DevHub_Search_Form_Autocomplete {
 		$search = get_posts( $args );
 
 		if ( ! empty( $search ) ) {
-			$titles             = wp_list_pluck( $search, 'post_title', 'ID' );
-			$titles             = array_unique( $titles );
-			$titles             = array_flip( $titles );
-			$titles             = array_map( 'get_permalink', $titles );
-			$form_data['posts'] = $titles;
+			$post_types_function_like = array( 'wp-parser-function', 'wp-parser-method' );
+
+			foreach ( $search as $post ) {
+				$permalink = get_permalink( $post->ID );
+				$title     = $post->post_title;
+
+				if ( in_array( $post->post_type, $post_types_function_like ) ) {
+					$title .= '()';
+				}
+
+				$form_data['posts'][ $title ] = $permalink;
+			}
 		}
 
 		wp_send_json_success ( $form_data );
