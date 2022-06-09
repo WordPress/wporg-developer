@@ -1714,6 +1714,18 @@ img {
   margin-top: 1em;
 }
 
+.devhub-wrap .wp-parser-class .parameters .extended-description summary,
+.devhub-wrap .wp-parser-class .return .extended-description summary,
+.devhub-wrap .wp-parser-function .parameters .extended-description summary,
+.devhub-wrap .wp-parser-function .return .extended-description summary,
+.devhub-wrap .wp-parser-hook .parameters .extended-description summary,
+.devhub-wrap .wp-parser-hook .return .extended-description summary,
+.devhub-wrap .wp-parser-method .parameters .extended-description summary,
+.devhub-wrap .wp-parser-method .return .extended-description summary {
+  color: #21759b;
+  text-decoration: underline;
+}
+
 .devhub-wrap .wp-parser-class .parameters .type,
 .devhub-wrap .wp-parser-class .parameters .required,
 .devhub-wrap .wp-parser-class .return .type,
