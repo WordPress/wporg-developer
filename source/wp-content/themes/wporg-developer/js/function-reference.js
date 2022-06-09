@@ -23,7 +23,9 @@ jQuery( function ( $ ) {
 	function expandCodeBlock( $element, $button ) {
 		$button.text( wporgFunctionReferenceI18n.collapse );
 		$button.attr( 'aria-expanded', 'true' );
-		$element.height( $element.data( 'height' ) );
+		// 45px: button height.
+		// { height: auto; } can't be used here or the transition effect won't work.
+		$element.height( $element.data( 'height' ) + 45 );
 	}
 
 	// For each code block, add the copy button & expanding functionality.
