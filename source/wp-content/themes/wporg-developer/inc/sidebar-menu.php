@@ -11,20 +11,21 @@
 	<h2 class="widget-title">Chapters</h2>
 <div class="menu-table-of-contents-container">
 <ul>
-<li class="page_item menu-item page_item_has_children menu-item-has-children current_page_ancestor current-menu-ancestor open"><div class="expandable"><a href="https://developer.wordpress.org/reference/functions/">Functions</a><button class="dashicons dashicons-arrow-down-alt2" aria-expanded="false"></button></div>
+<li class="page_item menu-item page_item_has_children menu-item-has-children current_page_ancestor current-menu-ancestor open">
 <?php
 	if ( 'wp-parser-function' === get_post_type() ) {
 		global $post;
 
 		$_post_id = $post->ID;
 
-		$terms = wp_get_post_terms( $post->ID, 'wp-parser-package', [ 'fields' => 'names' ] );
+		$terms = wp_get_post_terms( $post->ID, 'wp-parser-source-file', [ 'fields' => 'names' ] );
 		if ( $terms ) {
-			// If more than one package, don't use WordPress.
-			if ( count( $terms ) > 1 ) {
-				$terms = array_diff( $terms, [ 'WordPress' ] );
-			}
-
+			?>
+				<div class="expandable">
+					<a href="/reference/files/<?php echo esc_attr( $terms[0] ); ?>/"><?php echo esc_html( basename($terms[0]) ?? __('Functions', 'wporg') ); ?></a>
+					<button class="dashicons dashicons-arrow-down-alt2" aria-expanded="false"></button>
+				</div>
+			<?php
 			$q1 = new WP_Query( [
 				'post_type' => 'wp-parser-function',
 				'posts_per_page' => -1,
@@ -33,7 +34,7 @@
 				'tax_query' => [
 						'relation' => 'OR',
 						[
-						'taxonomy' => 'wp-parser-package',
+						'taxonomy' => 'wp-parser-source-file',
 						'terms' => $terms,
 						'field' => 'name',
 					]
@@ -48,11 +49,11 @@
 					$q1->the_post();
 					if ( get_the_ID() == $_post_id ) {
 						?>
-						<li class="page_item menu-item"><a class="active" href="<?php echo esc_url( get_the_permalink() ); ?>"><?php the_title() ?></a></li>
+						<li class="page_item menu-item"><a class="active" href="<?php echo esc_url( get_the_permalink() ); ?>"><?php the_title() ?>()</a></li>
 <?php
 					} else {
 						?>
-						<li class="page_item menu-item"><a href="<?php echo esc_url( get_the_permalink() ); ?>"><?php the_title() ?></a></li>
+						<li class="page_item menu-item"><a href="<?php echo esc_url( get_the_permalink() ); ?>"><?php the_title() ?>()</a></li>
 <?php
 					}
 				}
