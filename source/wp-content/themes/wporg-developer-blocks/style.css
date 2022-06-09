@@ -127,6 +127,13 @@ main.main-content,
 	margin-top: 15px;
 }
 
+.entry-content p:first-child {
+	font-size: 26px;
+	line-height: 1.6em;
+	color: #444;
+	font-family: var(--wp--preset--font-family--eb-garamond);
+}
+
 .docs-footer {
 	margin: 0;
 }

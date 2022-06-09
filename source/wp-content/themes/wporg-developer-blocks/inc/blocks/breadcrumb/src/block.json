@@ -1,0 +1,16 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "wporg-developer/breadcrumb",
+	"version": "0.1.0",
+	"title": "Developer Site Breadcrumb Navigation",
+	"category": "widgets",
+	"icon": "smiley",
+	"description": "Show a breadcrumb of page heirarchy",
+	"supports": {
+		"html": false
+	},
+	"textdomain": "breadcrumb",
+	"editorScript": "file:./index.js",
+	"style": "file:./style-index.css"
+}
