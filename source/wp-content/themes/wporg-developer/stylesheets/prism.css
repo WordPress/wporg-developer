@@ -202,11 +202,14 @@ pre.wp-block-code {
 }
 
 pre.wp-block-code > .wp-code-block-button-container {
-  display: none;
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
+  display: flex;
+  justify-content: right;
   z-index: 2;
+  position: sticky;
+  left: 0;
+  top: 0;
+  visibility: hidden;
+  margin-bottom: 1rem;
 }
 
 pre.wp-block-code > .wp-code-block-button-container button {
@@ -219,5 +222,5 @@ pre.wp-block-code > .wp-code-block-button-container button + button {
 
 pre.wp-block-code:hover > .wp-code-block-button-container,
 pre.wp-block-code:focus-within > .wp-code-block-button-container {
-  display: revert;
+  visibility: visible;
 }
