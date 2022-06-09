@@ -84,19 +84,22 @@ jQuery( function ( $ ) {
 	}
 
 	function toggleUsageListInit() {
+		var usesToShow   = $( '#uses-table' ).data( 'show' ),
+			usedByToShow = $( '#used-by-table' ).data( 'show' );
+
 		// We only expect one used_by and uses per document
 		$usedByList = $( 'tbody tr', '#used-by-table' );
 		$usesList = $( 'tbody tr', '#uses-table' );
 
-		if ( $usedByList.length > 5 ) {
-			$usedByList = $usedByList.slice( 5 ).hide();
+		if ( $usedByList.length > usedByToShow ) {
+			$usedByList = $usedByList.slice( usedByToShow ).hide();
 
 			$showMoreUsedBy = $( '.used-by .show-more' ).show().on( 'click', toggleMoreUsedBy );
 			$hideMoreUsedBy = $( '.used-by .hide-more' ).on( 'click', toggleMoreUsedBy );
 		}
 
-		if ( $usesList.length > 5 ) {
-			$usesList = $usesList.slice( 5 ).hide();
+		if ( $usesList.length > usesToShow ) {
+			$usesList = $usesList.slice( usesToShow ).hide();
 
 			$showMoreUses = $( '.uses .show-more' ).show().on( 'click', toggleMoreUses );
 			$hideMoreUses = $( '.uses .hide-more' ).on( 'click', toggleMoreUses );
