@@ -1,4 +1,4 @@
-/* global jQuery, wporgFunctionReferenceI18n */
+/* global jQuery, Prism, wporgFunctionReferenceI18n */
 /**
  * function-reference.js
  *
@@ -85,7 +85,7 @@ jQuery( function ( $ ) {
 	let $usesList, $usedByList, $showMoreUses, $hideMoreUses, $showMoreUsedBy, $hideMoreUsedBy;
 
 	function toggleUsageListInit() {
-		var usesToShow   = $( '#uses-table' ).data( 'show' ),
+		var usesToShow = $( '#uses-table' ).data( 'show' ),
 			usedByToShow = $( '#used-by-table' ).data( 'show' );
 
 		// We only expect one used_by and uses per document
@@ -126,4 +126,23 @@ jQuery( function ( $ ) {
 	}
 
 	toggleUsageListInit();
+
+	// Runs before the highlight parsing is run.
+	// `env` is defined here: https://github.com/PrismJS/prism/blob/2815f699970eb8387d741e3ac886845ce5439afb/prism.js#L583-L588
+	Prism.hooks.add( 'before-highlight', function ( env ) {
+		if ( 'php' === env.language && ! env.code.startsWith( '<?' ) ) {
+			env.code = '<? ' + env.code;
+			env.hasAddedTag = true;
+		}
+	} );
+
+	// Runs before `highlightedCode` is set to the `innerHTML` of the container.
+	Prism.hooks.add( 'before-insert', function ( env ) {
+		if ( env.hasAddedTag ) {
+			env.highlightedCode = env.highlightedCode.replace(
+				'<span class="token delimiter important">&lt;?</span> ',
+				''
+			);
+		}
+	} );
 } );
