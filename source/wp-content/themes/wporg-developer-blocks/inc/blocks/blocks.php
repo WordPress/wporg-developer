@@ -4,3 +4,4 @@
 require_once( __DIR__ . '/landing-links/block.php' );
 require_once( __DIR__ . '/sidebar-navigation/block.php' );
 require_once( __DIR__ . '/breadcrumb/block.php' );
+require_once( __DIR__ . '/toc/block.php' );

@@ -23,7 +23,9 @@ function wporg_developer_build_breadcrumb() {
 	if ( wporg_is_handbook_landing_page() ) {
 		$links[] = $handbook_name;
 	} else {
-		$links[] = sprintf( '<a href="%s">%s</a>', esc_url( wporg_get_current_handbook_home_url() ), $handbook_name );
+		if ( ! empty( $handbook_name ) ) {
+			$links[] = sprintf( '<a href="%s">%s</a>', esc_url( wporg_get_current_handbook_home_url() ), $handbook_name );
+		}
 	}
 
 	// Add in links to current handbook page and all of its ancestor pages.
@@ -44,8 +46,13 @@ function wporg_developer_build_breadcrumb() {
 	}
 
 	// Last link is the current handbook page, unless it's the landing page.
-	if ( ! wporg_is_handbook_landing_page() ) {
-		$links[] = get_the_title( $current_page );
+	$title = get_the_title( $current_page );
+	if ( ! empty( $title ) && ! wporg_is_handbook_landing_page() ) {
+		$links[] = $title;
+	}
+
+	if ( count( $links ) === 1 ) {
+		$links[] = "Current Page";
 	}
 
 	$output = '<div ' . $wrapper_attributes . '>';

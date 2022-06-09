@@ -23,7 +23,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 	src: url(./inc/fonts/Jost/Jost-Black.ttf) format("truetype");
 }
 
-/* Layout CSS, this can't be done in the editor _yet_ */
+/** Headers **************/
 
 div.title-row {
 	padding: 0 35px 0 25px;
@@ -68,6 +68,8 @@ div.front-title h1 {
 	line-height: 0.85;
 }
 
+/** Content Sections **************/
+
 .front-content .wp-block-group {
 	border-bottom: 1px solid var(--wp--preset--color--light-grey);
 	width: 50%;
@@ -91,6 +93,8 @@ div.front-title h1 {
 	color: var(--wp--preset--color--blue-2);
 }
 
+/** Layout **************/
+
 main.main-content,
 .editor-styles-wrapper main.main-content {
 	align-items: stretch;
@@ -106,9 +110,16 @@ main.main-content,
 }
 
 .content-section {
-	flex: 1;
+	flex-grow: 1;
 	background-color: #fff;
+	max-width: calc( 100% - 700px );
 }
+
+.wp-block-wporg-developer-toc {
+	flex: 0 0 350px;
+}
+
+/** Page Content **************/
 
 .page-content img {
 	max-width: 100%;
@@ -140,6 +151,8 @@ main.main-content,
 	margin-top: 0;
 }
 
+/** Footer **************/
+
 .docs-footer {
 	margin: 0;
 }
@@ -148,11 +161,8 @@ main.main-content,
 	--wp--style--block-gap: 0;
 }
 
-/* Hide the link icons on headings, it's OTT */
-h2.toc-heading a, h3.toc-heading a {
-	margin-left: 0;
-}
-h2.toc-heading a:before, h3.toc-heading a:before, .toc-jump {
-	display: none;
+
+.wp-block-syntaxhighlighter-code {
+	max-width: 100%;
 }
 

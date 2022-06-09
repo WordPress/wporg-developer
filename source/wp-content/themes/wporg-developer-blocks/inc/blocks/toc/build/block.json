@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "wporg-developer/toc",
+  "version": "0.1.0",
+  "title": "Table of contents for handbook pages.",
+  "category": "widgets",
+  "icon": "smiley",
+  "description": "Show a table of contents for handbook pages.",
+  "supports": {
+    "html": false,
+    "typography": {
+      "fontSize": true
+    }
+  },
+  "textdomain": "wporg-developer-toc",
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css"
+}

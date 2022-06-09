@@ -71,13 +71,16 @@ class WPorg_Handbook_TOC {
 	 * }
 	 */
 	public function __construct( $post_types, $args = array() ) {
-		$this->post_types = (array) $post_types;
-		add_action( 'template_redirect', array( $this, 'load_filters' ) );
-
 		$this->args = (object) wp_parse_args( $args, array(
-			'header_text' => __( 'Topics', 'wporg' ),
-			'top_text'    => __( 'Top &uarr;', 'wporg' ),
+			'header_text'		=> __( 'Topics', 'wporg' ),
+			'top_text'			=> __( 'Top &uarr;', 'wporg' ),
+			'override_filter'	=> false,
 		) );
+
+		if ( ! $this->args->override_filter && apply_filters( 'do_toc', true ) ) {
+			$this->post_types = (array) $post_types;
+			add_action( 'template_redirect', array( $this, 'load_filters' ) );
+		}
 	}
 
 	public function load_filters() {
@@ -150,39 +153,34 @@ class WPorg_Handbook_TOC {
 			return array('content' => $content, 'toc' => null);
 		}
 
-		$toc   = '';
-		$items = $this->get_tags( 'h(?P<level>[1-4])', $content );
+		$items = $this->get_items( $content );
 
-		if ( count( $items ) < 2 ) {
+		if ( empty( $items ) ) {
 			return array('content' => $content, 'toc' => null);
-		}
-
-		// Remove any links we don't need.
-		foreach ( $items as $i => $item ) {
-			// If an element is all HTML, don't link to it.
-			if ( empty( trim( strip_tags( $item['title'] ) ) ) ) {
-				unset( $items[ $i ] );
-			}
-		}
-
-		// Generate a list of the IDs in the document (generating them as needed).
-		$this->used_ids = $this->get_reserved_ids();
-		foreach ( $items as $i => $item ) {
-			$items[ $i ]['id'] = $this->get_id_for_item( $item );
 		}
 
 		// Replace each level of the headings.
 		$content .= $this->styles . "\n";
-		//var_dump( $this->styles ); // they look fine on sandbox, not missing like they are on local
-		// so why don't they work?
-		//wp_die();
-		//die( 'main handbook .org' );
 		$content = $this->add_ids_and_jumpto_links( $items, $content );
 
 		if ( ! apply_filters( 'handbook_display_toc', true ) ) {
 			return array('content' => $content, 'toc' => null);
 		}
 
+		$toc = $this->build_toc( $items );
+		return array('content' => $content, 'toc' => $toc);
+	}
+
+	/**
+	 * Builds the TOC content
+	 *
+	 * @access public
+	 *
+	 * @param array $items TOC items.
+	 * @return string TOC html.
+	 */
+	public function build_toc( $items ) {
+		$toc   = '';
 		$contents_header = 'h' . reset( $items )['level']; // Duplicate the first <h#> tag in the document for the TOC header
 		$toc            .= '<div class="table-of-contents">';
 		$toc            .= "<$contents_header>" . esc_html( $this->args->header_text ) . "</$contents_header><ul class=\"items\">";
@@ -205,8 +203,39 @@ class WPorg_Handbook_TOC {
 		}
 
 		$toc .= "</ul>\n</div>\n";
+		return $toc;
+	}
 
-		return array('toc' => $toc, 'content' => $content);
+	/**
+	 * Converts given content to dynamically add the ToC.
+	 *
+	 * @access public
+	 *
+	 * @param string $content Content.
+	 * @return array TOC items.
+	 */
+	public function get_items( $content ) {
+		$items = $this->get_tags( 'h(?P<level>[1-4])', $content );
+
+		if ( count( $items ) < 2 ) {
+			return false;
+		}
+
+		// Remove any links we don't need.
+		foreach ( $items as $i => $item ) {
+			// If an element is all HTML, don't link to it.
+			if ( empty( trim( strip_tags( $item['title'] ) ) ) ) {
+				unset( $items[ $i ] );
+			}
+		}
+
+		// Generate a list of the IDs in the document (generating them as needed).
+		$this->used_ids = $this->get_reserved_ids();
+		foreach ( $items as $i => $item ) {
+			$items[ $i ]['id'] = $this->get_id_for_item( $item );
+		}
+
+		return $items;
 	}
 
 	/**
