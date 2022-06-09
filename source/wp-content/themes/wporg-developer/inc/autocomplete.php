@@ -99,6 +99,7 @@ class DevHub_Search_Form_Autocomplete {
 			'orderby'              => '',
 			'search_orderby_title' => 1,
 			'order'                => 'ASC',
+			'_autocomplete_search' => true,
 		);
 
 		$search = get_posts( $args );

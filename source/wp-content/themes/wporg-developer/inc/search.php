@@ -68,7 +68,16 @@ class DevHub_Search {
 	 */
 	public static function pre_get_posts( $query ) {
 		// Don't modify anything if not a non-admin main search query.
-		if ( ! ( ! is_admin() && $query->is_main_query() && $query->is_search() ) ) {
+		if (
+			(
+				// Not the admin
+				is_admin() ||
+				// Not non-main queries / non-searches
+				( ! $query->is_main_query() || ! $query->is_search() )
+			) &&
+			// but yes if it's the autocomplete search (which is admin, and not the main query).
+			! $query->get( '_autocomplete_search' )
+		) {
 			return;
 		}
 
