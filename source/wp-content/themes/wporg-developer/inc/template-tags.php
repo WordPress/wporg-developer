@@ -897,9 +897,14 @@ namespace DevHub {
 								// Sometimes the referenced doc page has another level of indirection!
 								$recurse = get_param_reference( $_params[ $variable_name ], $recursion_limit - 1 );
 								if ( $recurse ) {
+									$recurse[ 'parent' ] = $_post->post_title;
+									$recurse[ 'parent_var' ] = $variable_name;
 									return $recurse;
 								} else {
-									return $_params[ $variable_name ];
+									$result = $_params[ $variable_name ];
+									$result[ 'parent' ] = $_post->post_title;
+									$result[ 'parent_var' ] = $variable_name;
+									return $result;
 								}
 							}
 						}

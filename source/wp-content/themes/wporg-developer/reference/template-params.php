@@ -33,7 +33,7 @@ if ( $params = get_params() ) :
 								<span class="description"><?php echo wp_kses_post( $param['content'] ); ?></span>
 								<details class="extended-description">
 									<summary>
-										<?php esc_html_e( 'More Arguments', 'wporg' ); ?>
+										<?php echo esc_html( sprintf( __( 'More Arguments from %s( ... %s )', 'wporg' ), $extra[ 'parent' ], $extra['parent_var'] ) ); ?>
 									</summary>
 									<span class="description"><?php echo wp_kses_post( $extra['content'] ); ?></span>
 								</details>
