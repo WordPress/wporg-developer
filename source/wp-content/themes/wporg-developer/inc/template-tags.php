@@ -1492,6 +1492,14 @@ namespace DevHub {
 			fclose( $handle );
 		}
 
+		// Trim leading whitespace.
+		if ( preg_match_all( "!(?:^|\n)([\t ]*)!", $source_code, $m ) ) {
+			$strip_prefix = min( array_map( 'strlen', array_filter( $m[1] ) ) );
+			if ( $strip_prefix ) {
+				$source_code = preg_replace( "!(^|\n)[\t ]{" . $strip_prefix . "}!", '$1', $source_code );
+			}
+		}
+
 		update_post_meta( $post_id, $meta_key, addslashes( $source_code ) );
 
 		return $source_code;
