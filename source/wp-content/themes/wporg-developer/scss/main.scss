@@ -2106,10 +2106,14 @@ aside[id^="nav_menu"] .widget-title {
 
 /** Header layout: H1, Summary and Table of Contents **/
 .site-main {
-	.table-of-contents,
+	.table-of-contents {
+		position: absolute;
+		visibility: hidden;
+	}
+
 	.navigation {
 		position: fixed;
-		top: 230px;
+		top: 210px;
 		right: 30px;
 		width: 250px;
 		border: 1px solid #eee;
@@ -2119,20 +2123,11 @@ aside[id^="nav_menu"] .widget-title {
 		background-color: #fff;
 		box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 		border-radius: 3px;
+		max-height: 67vh;
+		overflow: scroll;
 		
 		@media (max-width: 1500px) {
 			visibility: hidden;
-		}
-
-		&-title {
-			margin: 0;
-			padding: 0.7rem 1.2rem;
-			font-family: HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
-			font-size: 1.3em;
-			color: #32373c;
-			text-transform: uppercase;
-			border-bottom: 1px solid #eee;
-			margin-bottom: 0;
 		}
 	}
 }
