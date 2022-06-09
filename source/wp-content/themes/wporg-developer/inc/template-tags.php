@@ -1493,10 +1493,19 @@ namespace DevHub {
 		}
 
 		// Trim leading whitespace.
-		if ( preg_match_all( "!(?:^|\n)([\t ]*)!", $source_code, $m ) ) {
-			$strip_prefix = min( array_map( 'strlen', array_filter( $m[1] ) ) );
-			if ( $strip_prefix ) {
-				$source_code = preg_replace( "!(^|\n)[\t ]{" . $strip_prefix . "}!", '$1', $source_code );
+		if ( preg_match_all( "!^([\t ]*)(.*)$!m", $source_code, $m ) ) {
+			$non_empty_line_prefixes = array_filter(
+				$m[1],
+				function( $index ) use( $m ) {
+					return ! empty( $m[2][ $index ] );
+				},
+				ARRAY_FILTER_USE_KEY
+			);
+			if ( $non_empty_line_prefixes ) {
+				$strip_prefix = min( array_map( 'strlen', $non_empty_line_prefixes ) );
+				if ( $strip_prefix ) {
+					$source_code = preg_replace( "!^[\t ]{" . $strip_prefix . "}!m", '$1', $source_code );
+				}
 			}
 		}
 
