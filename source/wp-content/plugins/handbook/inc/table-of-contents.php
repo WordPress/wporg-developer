@@ -130,7 +130,7 @@ class WPorg_Handbook_TOC {
 	 * @access public
 	 *
 	 * @param string $content Content.
-	 * @return string toc => Modified Content.
+	 * @return string Modified content.
 	 */
 	public function add_toc( $content ) {
 		$parts = $this->parse_content( $content );
