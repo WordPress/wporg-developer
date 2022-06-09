@@ -94,11 +94,11 @@ class DevHub_Search {
 		} else {
 			// If user has '()' at end of a search string, assume they want a specific function/method.
 			$s = htmlentities( $query->get( 's' ) );
-			if ( '()' === substr( $s, -2 ) ) {
+			if ( '()' === substr( $s, -2 ) || '(' == substr( $s, -1 ) ) {
 				// Enable exact search.
 				$query->set( 'exact',     true );
 				// Modify the search query to omit the parentheses.
-				$query->set( 's',         substr( $s, 0, -2 ) ); // remove '()'
+				$query->set( 's',         trim( $s, '()' ) );
 				// Restrict search to function-like content.
 				$query->set( 'post_type', array( 'wp-parser-function', 'wp-parser-method' ) );
 			}
