@@ -2774,21 +2774,13 @@ aside[id^="nav_menu"] .widget-title {
 }
 
 /** Header layout: H1, Summary and Table of Contents **/
-.site-main .post-header {
-  display: flex;
-}
-
-.site-main .post-header .post-title {
-  flex: 1;
-}
-
 .site-main .table-of-contents {
   position: fixed;
-  top: 210px;
+  top: 230px;
   right: 30px;
   width: 250px;
   border: 1px solid #eee;
-  margin: 24px 0 15px 15px;
+  margin: 0 0 15px 15px;
   z-index: 1;
   color: #555d66;
   background-color: #fff;
@@ -2796,22 +2788,13 @@ aside[id^="nav_menu"] .widget-title {
   border-radius: 3px;
 }
 
-@media (max-width: 1475px) {
+@media (max-width: 1500px) {
   .site-main .table-of-contents {
-    position: static;
-    top: initial;
-    right: initial;
-  }
-}
-
-@media (max-width: 970px) {
-  .site-main .table-of-contents {
-    position: fixed;
     visibility: hidden;
   }
 }
 
-.site-main .table-of-contents h2 {
+.site-main .table-of-contents-title {
   margin: 0;
   padding: 0.7rem 1.2rem;
   font-family: HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
