@@ -177,8 +177,6 @@ function init() {
 
 	add_filter( 'mkaz_code_syntax_force_loading', '__return_true' );
 	add_filter( 'mkaz_prism_css_path', __NAMESPACE__ . '\\update_prism_css_path' );
-
-	add_filter( 'body_class', __NAMESPACE__ . '\\add_body_class' );
 }
 
 /**
@@ -423,11 +421,3 @@ function update_prism_css_path( $path ) {
 	return '/stylesheets/prism.css';
 }
 
-function add_body_class( $classes ) {
-	// Trick the CSS into displaying a handbook menu on the function reference pages
-	if ( is_singular() && 'wp-parser-function' === get_post_type() ) {
-		$classes[] = 'single-handbook';
-	}
-
-	return $classes;
-}
