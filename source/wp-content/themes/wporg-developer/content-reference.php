@@ -25,11 +25,13 @@ endif; ?>
 	<?php echo get_private_access_message(); ?>
 
 	<header class="post-header">
-		<?php if ( is_single() ) :
+		<nav class="navigation">
+			<?php if ( is_single() ) :
 
-			echo $toc;
+				echo function_reference_sidebar_menu();
 
-		endif; ?>
+			endif; ?>
+		</nav>
 		<div class="post-title">
 
 			<h1><?php echo get_signature(); ?></h1>

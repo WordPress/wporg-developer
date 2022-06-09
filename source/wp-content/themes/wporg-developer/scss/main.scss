@@ -2106,7 +2106,8 @@ aside[id^="nav_menu"] .widget-title {
 
 /** Header layout: H1, Summary and Table of Contents **/
 .site-main {
-	.table-of-contents {
+	.table-of-contents,
+	.navigation {
 		position: fixed;
 		top: 230px;
 		right: 30px;

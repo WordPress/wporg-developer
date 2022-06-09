@@ -7,7 +7,7 @@
 
 get_header(); ?>
 
-<?php get_sidebar(); ?>
+<div id="content-area" <?php body_class( 'code-reference' ); ?>>
 
 	<main id="primary" <?php post_class( 'site-main' ); ?> role="main">
 
@@ -22,4 +22,5 @@ get_header(); ?>
 		<?php endwhile; // end of the loop. ?>
 
 	</main><!-- #main -->
+</div><!-- #primary -->
 <?php get_footer(); ?>
