@@ -213,3 +213,8 @@ pre.wp-block-code:hover > button,
 pre.wp-block-code:focus-within > button {
   display: revert;
 }
+
+/* Workaround for partial highlights */
+code.language-php > span.token.language-php:first-child > span.token.delimiter.important:first-child {
+  display: none;
+}
