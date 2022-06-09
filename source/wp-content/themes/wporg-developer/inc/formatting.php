@@ -39,11 +39,12 @@ class DevHub_Formatting {
 		add_filter( 'devhub-format-description', array( __CLASS__, 'autolink_references' ) );
 		add_filter( 'devhub-format-description', array( __CLASS__, 'fix_param_hash_formatting' ), 9 );
 		add_filter( 'devhub-format-description', array( __CLASS__, 'fix_param_description_html_as_code' ) );
+		add_filter( 'devhub-format-description', array( __CLASS__, 'fix_param_description_quotes_to_code' ) );
 		add_filter( 'devhub-format-description', array( __CLASS__, 'convert_lists_to_markup' ) );
-		add_filter( 'devhub-format-hash-param-description', array( __CLASS__, 'fix_param_description_quotes_to_code' ) );
 
 		add_filter( 'devhub-format-hash-param-description', array( __CLASS__, 'autolink_references' ) );
 		add_filter( 'devhub-format-hash-param-description', array( __CLASS__, 'fix_param_description_parsedown_bug' ) );
+		add_filter( 'devhub-format-hash-param-description', array( __CLASS__, 'fix_param_description_quotes_to_code' ) );
 		add_filter( 'devhub-format-hash-param-description', array( __CLASS__, 'convert_lists_to_markup' ) );
 
 		add_filter( 'devhub-function-return-type', array( __CLASS__, 'autolink_references' ) );
@@ -678,6 +679,11 @@ class DevHub_Formatting {
 	 * @return string
 	 */
 	public static function fix_param_description_quotes_to_code( $text ) {
+		// Don't do anything if this is a hash notation string.
+		if ( ! $text || str_starts_with( $text, '{' ) || str_contains( $text, '<ul class="param-hash">' ) ) {
+			return $text;
+		}
+
 		$textarr = preg_split( '/(<[^<>]+>)/', $text, -1, PREG_SPLIT_DELIM_CAPTURE ); // split out HTML tags
 		$text    = '';
 		foreach ( $textarr as $piece ) {
