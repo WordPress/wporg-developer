@@ -1451,7 +1451,7 @@ namespace DevHub {
 		// Get the source code stored in post meta.
 		$meta_key = '_wp-parser_source_code';
 		if ( ! $force_parse && $source_code = get_post_meta( $post_id, $meta_key, true ) ) {
-			return $source_code;
+			return '<?' . $source_code;
 		}
 
 		/* Source code hasn't been stored in post meta, so parse source file to get it. */
@@ -1494,7 +1494,7 @@ namespace DevHub {
 
 		update_post_meta( $post_id, $meta_key, addslashes( $source_code ) );
 
-		return $source_code;
+		return '<?' . $source_code;
 	}
 
 	/**

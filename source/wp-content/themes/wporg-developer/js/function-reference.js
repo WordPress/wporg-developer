@@ -143,6 +143,12 @@ jQuery( function ( $ ) {
 				code = code.slice( 2 );
 			}
 
+			// For PHP scripts, trim off the initial `<?`, if exists.
+			// See https://github.com/WordPress/wporg-developer/issues/67
+			if ( 'php' === $code.attr( 'lang' ) && code.startsWith( '<?' ) && ! code.startsWith( '<?php' ) ) {
+				code = code.slice( 2 );
+			}
+
 			// This returns a promise which will resolve if the copy suceeded,
 			// and we can set the button text to tell the user it worked.
 			// We don't do anything if it fails.
