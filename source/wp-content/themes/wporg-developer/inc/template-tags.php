@@ -629,7 +629,14 @@ namespace DevHub {
 	 * @return string
 	 */
 	function get_site_section_title() {
-		return __( 'Developer Resources', 'wporg' );
+		$parts = explode( '/', $GLOBALS['wp']->request );
+		switch ( $parts[0] ) {
+			case 'resources':
+			case 'resource':
+				return sprintf( __( 'Developer Resources: %s', 'wporg' ), get_the_title() );
+			default:
+				return __( 'Developer Resources', 'wporg' );
+		}
 	}
 
 	/**
