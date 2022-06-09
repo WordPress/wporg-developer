@@ -2776,6 +2776,7 @@ aside[id^="nav_menu"] .widget-title {
 /** Header layout: H1, Summary and Table of Contents **/
 .site-main .post-header {
   display: flex;
+  flex-direction: row-reverse;
 }
 
 .site-main .post-header .post-title {
@@ -2796,22 +2797,7 @@ aside[id^="nav_menu"] .widget-title {
   border-radius: 3px;
 }
 
-@media (max-width: 1475px) {
-  .site-main .table-of-contents {
-    position: static;
-    top: initial;
-    right: initial;
-  }
-}
-
-@media (max-width: 970px) {
-  .site-main .table-of-contents {
-    position: fixed;
-    visibility: hidden;
-  }
-}
-
-.site-main .table-of-contents h2 {
+.site-main .table-of-contents-title {
   margin: 0;
   padding: 0.7rem 1.2rem;
   font-family: HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -2895,12 +2881,6 @@ h2.toc-heading + h3.toc-heading:target {
 
 .toc-jump a {
   z-index: 1;
-}
-
-@media (max-width: 480px) {
-  .table-of-contents {
-    display: none;
-  }
 }
 
 /** Menu */
@@ -3218,6 +3198,14 @@ body.responsive-show #o2-expand-editor {
   }
 }
 
+@media (max-width: 94em) {
+  .devhub-wrap .table-of-contents {
+    position: static;
+    top: initial;
+    right: initial;
+  }
+}
+
 @media (max-width: 59.999999em) {
   .devhub-wrap {
     max-width: 100%;
@@ -3265,6 +3253,13 @@ body.responsive-show #o2-expand-editor {
     clear: both;
   }
   #content-area.has-sidebar .widget-area .widget {
+    width: 100%;
+  }
+  .devhub-wrap .post-header {
+    flex-direction: column;
+  }
+  .devhub-wrap .table-of-contents {
+    margin-left: 0;
     width: 100%;
   }
   .devhub-wrap .three-columns .box,
@@ -3320,11 +3315,6 @@ body.responsive-show #o2-expand-editor {
 }
 
 @media (max-width: 32em) {
-  .devhub-wrap .table-of-contents {
-    float: none;
-    margin-left: 0;
-    width: 100%;
-  }
   .devhub-wrap section {
     overflow: inherit;
   }

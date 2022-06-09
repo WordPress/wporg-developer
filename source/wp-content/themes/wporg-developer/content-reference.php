@@ -25,6 +25,11 @@ endif; ?>
 	<?php echo get_private_access_message(); ?>
 
 	<header class="post-header">
+		<?php if ( is_single() ) :
+
+			echo $toc;
+
+		endif; ?>
 		<div class="post-title">
 
 			<h1><?php echo get_signature(); ?></h1>
@@ -33,11 +38,6 @@ endif; ?>
 				<?php echo get_summary(); ?>
 			</section>
 		</div>
-		<?php if ( is_single() ) :
-
-			echo $toc;
-
-		endif; ?>
 	</header>
 
 <?php if ( is_single() ) :  

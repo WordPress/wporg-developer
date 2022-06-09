@@ -2108,6 +2108,7 @@ aside[id^="nav_menu"] .widget-title {
 .site-main {
 	.post-header {
 		display: flex;
+		flex-direction: row-reverse;
 		
 		.post-title {
 			flex: 1;
@@ -2127,19 +2128,8 @@ aside[id^="nav_menu"] .widget-title {
 		background-color: #fff;
 		box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 		border-radius: 3px;
-		
-		@media (max-width: 1475px) {
-			position: static;
-			top: initial;
-			right: initial;
-		}
 
-		@media (max-width: 970px) {
-			position: fixed;
-			visibility: hidden;
-		}
-
-		h2 {
+		&-title {
 			margin: 0;
 			padding: 0.7rem 1.2rem;
 			font-family: HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -2215,12 +2205,6 @@ h2.toc-heading + h3.toc-heading:target {
 
 .toc-jump a {
 	z-index: 1;
-}
-
-@media (max-width: 480px) {
-	.table-of-contents {
-		display: none;
-	}
 }
 
 /** Menu */
@@ -2565,6 +2549,16 @@ body.responsive-show {
 	}
 }
 
+@media ( max-width: 94em ) {
+	.devhub-wrap {
+		.table-of-contents {
+			position: static;
+			top: initial;
+			right: initial;
+		}
+	}
+}
+
 @media ( max-width: 59.999999em ) {
 	.devhub-wrap {
 		max-width: 100%;
@@ -2636,6 +2630,15 @@ body.responsive-show {
 	}
 
 	.devhub-wrap {
+		.post-header {
+			flex-direction: column;
+		}
+
+		.table-of-contents {
+			margin-left: 0;
+			width: 100%;
+		}
+
 		.three-columns .box,
 		.section .box,
 		.home-primary-content,
@@ -2702,12 +2705,6 @@ body.responsive-show {
 
 @media (max-width: 32em) {
 	.devhub-wrap {
-		.table-of-contents {
-			float: none;
-			margin-left: 0;
-			width: 100%;
-		}
-
 		section {
 			overflow: inherit;
 		}
