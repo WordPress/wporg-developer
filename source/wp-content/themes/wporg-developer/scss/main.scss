@@ -1358,13 +1358,6 @@
 			&:last-of-type {
 				border-right: none;
 			}
-
-			&:first-child {
-				display: none;
-				border-left: 0;
-				margin-left: 1em;
-				padding-left: 0;
-			}
 		}
 	}
 

@@ -176,6 +176,8 @@ class DevHub_User_Submitted_Content {
 				array(
 					'copy'   => __( 'Copy', 'wporg' ),
 					'copied' => __( 'Code copied', 'wporg' ),
+					'expand'   => __( 'Expand code', 'wporg' ),
+					'collapse' => __( 'Collapse code', 'wporg' ),
 				)
 			);
 

@@ -5,83 +5,84 @@
  * Handles all interactivity on the single function page
  */
 
+// eslint-disable-next-line id-length -- $ OK.
 jQuery( function ( $ ) {
-	let $usesList, $usedByList, $showMoreUses, $hideMoreUses, $showMoreUsedBy, $hideMoreUsedBy;
-	let $sourceCollapsedHeight;
+	// 22.5px (line height) * 10 for 10 lines + 15px top padding + 10px extra.
+	// The extra 10px added to partially show next line so it's clear there is more.
+	const MIN_HEIGHT = 22.5 * 10 + 15 + 10;
 
-	function onLoad() {
-		sourceCodeHighlightInit();
-
-		toggleUsageListInit();
+	function collapseCodeBlock( $element, $button ) {
+		$button.text( wporgFunctionReferenceI18n.expand );
+		$button.attr( 'aria-expanded', 'false' );
+		// This uses `css()` instead of `height()` to prevent jQuery from adding
+		// in the padding. We want to add in just the top padding, since the
+		// bottom is intentionally cut off.
+		$element.css( { height: MIN_HEIGHT + 'px' } );
 	}
 
-	function sourceCodeHighlightInit() {
-		// We require the Prism javascript library
-		if ( undefined === window.Prism ) {
-			return;
-		}
-
-		// 1em (margin) + 10 * 17px + 10. Lines are 1.1em which rounds to 17px: calc( 1em + 17px * 10 + 10 ).
-		// Extra 10px added to partially show next line so it's clear there is more.
-		$sourceCollapsedHeight = 196;
-		sourceCodeDisplay();
+	function expandCodeBlock( $element, $button ) {
+		$button.text( wporgFunctionReferenceI18n.collapse );
+		$button.attr( 'aria-expanded', 'true' );
+		$element.height( $element.data( 'height' ) );
 	}
 
-	function sourceCodeDisplay( element ) {
-		let sourceCode = [];
-		if ( element !== undefined ) {
-			// Find table inside a specific source code element if passed.
-			sourceCode = $( '.source-content', element ).find( 'pre' );
-		} else {
-			// Find table inside all source code elements.
-			sourceCode = $( '.source-content' ).find( 'pre' );
-		}
+	// For each code block, add the copy button & expanding functionality.
+	$( '.wp-block-code' ).each( function ( i, element ) {
+		const $element = $( element );
+		let timeoutId;
 
-		if ( ! sourceCode.length ) {
-			return;
-		}
-
-		sourceCode.each( function () {
-			if ( $sourceCollapsedHeight - 12 < $( this ).height() ) {
-				const sourceContent = $( this ); //.closest( '.wp-block-code' );
-
-				// Do this with javascript so javascript-less can enjoy the total sourcecode
-				sourceContent.css( {
-					height: $sourceCollapsedHeight + 'px',
-				} );
-
-				sourceContent.next( '.source-code-links' ).find( 'span:first' ).show();
-				sourceContent.parent().find( '.show-complete-source' ).show();
-				sourceContent
-					.parent()
-					.find( '.show-complete-source' )
-					.off( 'click.togglesource' )
-					.on( 'click.togglesource', toggleCompleteSource );
-				sourceContent
-					.parent()
-					.find( '.less-complete-source' )
-					.off( 'click.togglesource' )
-					.on( 'click.togglesource', toggleCompleteSource );
+		const $copyButton = $( document.createElement( 'button' ) );
+		$copyButton.text( wporgFunctionReferenceI18n.copy );
+		$copyButton.on( 'click', function () {
+			clearTimeout( timeoutId );
+			const code = $element.find( 'code' ).text();
+			if ( ! code ) {
+				return;
 			}
+
+			// This returns a promise which will resolve if the copy suceeded,
+			// and we can set the button text to tell the user it worked.
+			// We don't do anything if it fails.
+			window.navigator.clipboard.writeText( code ).then( function () {
+				$copyButton.text( wporgFunctionReferenceI18n.copied );
+				wp.a11y.speak( wporgFunctionReferenceI18n.copied );
+
+				// After 5 seconds, reset the button text.
+				timeoutId = setTimeout( function () {
+					$copyButton.text( wporgFunctionReferenceI18n.copy );
+				}, 5000 );
+			} );
 		} );
-	}
 
-	function toggleCompleteSource( event ) {
-		event.preventDefault();
+		const $container = $( document.createElement( 'div' ) );
+		$container.addClass( 'wp-code-block-button-container' );
 
-		const sourceContent = $( this ).closest( '.source-content' ).find( 'pre' );
-		let heightGoal = 0;
+		$container.append( $copyButton );
 
-		if ( $( this ).parent().find( '.show-complete-source' ).is( ':visible' ) ) {
-			heightGoal = sourceContent.find( 'code' ).height() + 45; // takes into consideration potential x-scrollbar
-		} else {
-			heightGoal = $sourceCollapsedHeight;
+		// Check code block height, and if it's larger, add in the collapse
+		// button, and set it to be collapsed differently.
+		const originalHeight = $element.height();
+		if ( originalHeight > MIN_HEIGHT ) {
+			$element.data( 'height', originalHeight );
+
+			const $expandButton = $( document.createElement( 'button' ) );
+			$expandButton.addClass( 'button-link' );
+			$expandButton.on( 'click', function () {
+				if ( 'true' === $expandButton.attr( 'aria-expanded' ) ) {
+					collapseCodeBlock( $element, $expandButton );
+				} else {
+					expandCodeBlock( $element, $expandButton );
+				}
+			} );
+
+			collapseCodeBlock( $element, $expandButton );
+			$container.append( $expandButton );
 		}
 
-		sourceContent.animate( { height: heightGoal + 'px' } );
+		$element.prepend( $container );
+	} );
 
-		$( this ).parent().find( 'a' ).toggle();
-	}
+	let $usesList, $usedByList, $showMoreUses, $hideMoreUses, $showMoreUsedBy, $hideMoreUsedBy;
 
 	function toggleUsageListInit() {
 		var usesToShow   = $( '#uses-table' ).data( 'show' ),
@@ -125,43 +126,4 @@ jQuery( function ( $ ) {
 	}
 
 	toggleUsageListInit();
-
-	// Inject the "copy" button into every code block.
-	$( '.wp-block-code' ).each( function ( i, element ) {
-		const $element = $( element );
-		let timeoutId;
-
-		const $button = $( document.createElement( 'button' ) );
-		$button.text( wporgFunctionReferenceI18n.copy );
-		$button.on( 'click', function () {
-			clearTimeout( timeoutId );
-			const $code = $element.find( 'code' );
-			let code = $code.text();
-			if ( ! code ) {
-				return;
-			}
-
-			// For single-line shell scripts, trim off the initial `$ `, if exists.
-			if ( 'shell' === $code.attr( 'lang' ) && code.startsWith( '$ ' ) && ! code.includes( '\n' ) ) {
-				code = code.slice( 2 );
-			}
-
-			// This returns a promise which will resolve if the copy suceeded,
-			// and we can set the button text to tell the user it worked.
-			// We don't do anything if it fails.
-			window.navigator.clipboard.writeText( code ).then( function () {
-				$button.text( wporgFunctionReferenceI18n.copied );
-				wp.a11y.speak( wporgFunctionReferenceI18n.copied );
-
-				// After 5 seconds, reset the button text.
-				timeoutId = setTimeout( function () {
-					$button.text( wporgFunctionReferenceI18n.copy );
-				}, 5000 );
-			} );
-		} );
-
-		$element.prepend( $button );
-	} );
-
-	$( onLoad );
 } );

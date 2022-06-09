@@ -23,6 +23,7 @@ pre[class*="language-"] {
   -moz-hyphens: none;
   -ms-hyphens: none;
   hyphens: none;
+  transition: height 500ms;
 }
 
 /* Code blocks */
@@ -200,16 +201,23 @@ pre.wp-block-code {
   position: relative;
 }
 
-pre.wp-block-code > button {
+pre.wp-block-code > .wp-code-block-button-container {
   display: none;
   position: absolute;
   top: 1rem;
   right: 1rem;
-  font-size: 1.4rem;
   z-index: 2;
 }
 
-pre.wp-block-code:hover > button,
-pre.wp-block-code:focus-within > button {
+pre.wp-block-code > .wp-code-block-button-container button {
+  font-size: 1.4rem;
+}
+
+pre.wp-block-code > .wp-code-block-button-container button + button {
+  margin-left: 0.5em;
+}
+
+pre.wp-block-code:hover > .wp-code-block-button-container,
+pre.wp-block-code:focus-within > .wp-code-block-button-container {
   display: revert;
 }

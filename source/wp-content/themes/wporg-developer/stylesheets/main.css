@@ -1907,13 +1907,6 @@ img {
   border-right: none;
 }
 
-.devhub-wrap .source-code-links span:first-child {
-  display: none;
-  border-left: 0;
-  margin-left: 1em;
-  padding-left: 0;
-}
-
 .devhub-wrap .source-code-container {
   overflow-x: auto;
   overflow-y: hidden;
