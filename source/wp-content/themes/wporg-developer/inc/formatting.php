@@ -684,12 +684,20 @@ class DevHub_Formatting {
 			return $text;
 		}
 
-		$textarr = preg_split( '/(<[^<>]+>)/', $text, -1, PREG_SPLIT_DELIM_CAPTURE ); // split out HTML tags
-		$text    = '';
+		$textarr     = preg_split( '/(<[^<>]+>)/', $text, -1, PREG_SPLIT_DELIM_CAPTURE ); // split out HTML tags
+		$text        = '';
+		$within_code = false;
 		foreach ( $textarr as $piece ) {
 			// HTML tags are untouched.
-			if ( str_starts_with( $piece, '<' ) ) {
+			if ( str_starts_with( $piece, '<' ) || $within_code ) {
 				$text .= $piece;
+
+				if ( str_starts_with( $piece, '</code' ) ) {
+					$within_code = false;
+				} elseif ( ! $within_code ) {
+					$within_code = str_starts_with( $piece, '<code' );
+				}
+
 				continue;
 			}
 
