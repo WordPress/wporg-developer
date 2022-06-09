@@ -29,7 +29,7 @@ if ( show_usage_info() ) :
 		<?php if ( $has_uses ) : ?>
 			<article class="uses">
 				<h3><?php _e( 'Uses', 'wporg' ); ?></h3>
-				<table id="uses-table">
+				<table id="uses-table" data-show="<?php echo esc_attr( $uses_to_show ) ?>">
 					<caption class="screen-reader-text"><?php esc_html_e( 'Uses', 'wporg' ); ?></caption>
 					<thead>
 						<tr>
@@ -69,7 +69,7 @@ if ( show_usage_info() ) :
 
 			<article class="used-by">
 				<h3><?php esc_html_e( 'Used By', 'wporg' ); ?></h3>
-				<table id="used-by-table">
+				<table id="used-by-table" data-show="<?php echo esc_attr( $used_by_to_show ) ?>">
 					<caption class="screen-reader-text"><?php esc_html_e( 'Used By', 'wporg' ); ?></caption>
 					<thead>
 						<tr>
