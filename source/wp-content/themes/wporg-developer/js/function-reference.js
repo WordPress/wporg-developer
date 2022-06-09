@@ -1,14 +1,13 @@
+/* global jQuery, wporgFunctionReferenceI18n */
 /**
  * function-reference.js
  *
  * Handles all interactivity on the single function page
  */
-var wporg_developer = ( function( $ ) {
-	'use strict';
 
-	var $sourceCollapsedHeight;
-
-	var $usesList, $usedByList, $showMoreUses, $hideMoreUses, $showMoreUsedBy, $hideMoreUsedBy;
+jQuery( function ( $ ) {
+	let $usesList, $usedByList, $showMoreUses, $hideMoreUses, $showMoreUsedBy, $hideMoreUsedBy;
+	let $sourceCollapsedHeight;
 
 	function onLoad() {
 		sourceCodeHighlightInit();
@@ -17,13 +16,10 @@ var wporg_developer = ( function( $ ) {
 	}
 
 	function sourceCodeHighlightInit() {
-
-		// We require the SyntaxHighlighter javascript library
-		if ( undefined === window.SyntaxHighlighter ) {
+		// We require the Prism javascript library
+		if ( undefined === window.Prism ) {
 			return;
 		}
-
-		SyntaxHighlighter.highlight();
 
 		// 1em (margin) + 10 * 17px + 10. Lines are 1.1em which rounds to 17px: calc( 1em + 17px * 10 + 10 ).
 		// Extra 10px added to partially show next line so it's clear there is more.
@@ -32,49 +28,57 @@ var wporg_developer = ( function( $ ) {
 	}
 
 	function sourceCodeDisplay( element ) {
-
+		let sourceCode = [];
 		if ( element !== undefined ) {
 			// Find table inside a specific source code element if passed.
-			var sourceCode = $( '.source-content', element ).find( 'table' );
+			sourceCode = $( '.source-content', element ).find( 'pre' );
 		} else {
 			// Find table inside all source code elements.
-			var sourceCode = $( '.source-content' ).find( 'table' );
+			sourceCode = $( '.source-content' ).find( 'pre' );
 		}
 
-		if ( !sourceCode.length ) {
+		if ( ! sourceCode.length ) {
 			return;
 		}
 
-		sourceCode.each( function( t ) {
-			if ( ( $sourceCollapsedHeight - 12 ) < $( this ).height() ) {
-
-				var sourceContent = $( this ).closest( '.source-content' );
+		sourceCode.each( function () {
+			if ( $sourceCollapsedHeight - 12 < $( this ).height() ) {
+				const sourceContent = $( this ); //.closest( '.wp-block-code' );
 
 				// Do this with javascript so javascript-less can enjoy the total sourcecode
-				sourceContent.find( '.source-code-container' ).css( {
-					height: $sourceCollapsedHeight + 'px'
+				sourceContent.css( {
+					height: $sourceCollapsedHeight + 'px',
 				} );
 
-				sourceContent.find( '.source-code-links' ).find( 'span:first' ).show();
-				sourceContent.find( '.show-complete-source' ).show();
-				sourceContent.find( '.show-complete-source' ).off( 'click.togglesource' ).on( 'click.togglesource', toggleCompleteSource );
-				sourceContent.find( '.less-complete-source' ).off( 'click.togglesource' ).on( 'click.togglesource', toggleCompleteSource );
+				sourceContent.next( '.source-code-links' ).find( 'span:first' ).show();
+				sourceContent.parent().find( '.show-complete-source' ).show();
+				sourceContent
+					.parent()
+					.find( '.show-complete-source' )
+					.off( 'click.togglesource' )
+					.on( 'click.togglesource', toggleCompleteSource );
+				sourceContent
+					.parent()
+					.find( '.less-complete-source' )
+					.off( 'click.togglesource' )
+					.on( 'click.togglesource', toggleCompleteSource );
 			}
 		} );
 	}
 
-	function toggleCompleteSource( e ) {
-		e.preventDefault();
+	function toggleCompleteSource( event ) {
+		event.preventDefault();
 
-		var sourceContent = $( this ).closest( '.source-content' );
+		const sourceContent = $( this ).closest( '.source-content' ).find( 'pre' );
+		let heightGoal = 0;
 
 		if ( $( this ).parent().find( '.show-complete-source' ).is( ':visible' ) ) {
-			var heightGoal = sourceContent.find( 'table' ).height() + 45; // takes into consideration potential x-scrollbar
+			heightGoal = sourceContent.find( 'code' ).height() + 45; // takes into consideration potential x-scrollbar
 		} else {
-			var heightGoal = $sourceCollapsedHeight;
+			heightGoal = $sourceCollapsedHeight;
 		}
 
-		sourceContent.find( '.source-code-container:first' ).animate( { height: heightGoal + 'px' } );
+		sourceContent.animate( { height: heightGoal + 'px' } );
 
 		$( this ).parent().find( 'a' ).toggle();
 	}
@@ -85,7 +89,7 @@ var wporg_developer = ( function( $ ) {
 
 		// We only expect one used_by and uses per document
 		$usedByList = $( 'tbody tr', '#used-by-table' );
-		$usesList   = $( 'tbody tr', '#uses-table' );
+		$usesList = $( 'tbody tr', '#uses-table' );
 
 		if ( $usedByList.length > usedByToShow ) {
 			$usedByList = $usedByList.slice( usedByToShow ).hide();
@@ -102,8 +106,8 @@ var wporg_developer = ( function( $ ) {
 		}
 	}
 
-	function toggleMoreUses( e ) {
-		e.preventDefault();
+	function toggleMoreUses( event ) {
+		event.preventDefault();
 
 		$usesList.toggle();
 
@@ -111,8 +115,8 @@ var wporg_developer = ( function( $ ) {
 		$hideMoreUses.toggle();
 	}
 
-	function toggleMoreUsedBy( e ) {
-		e.preventDefault();
+	function toggleMoreUsedBy( event ) {
+		event.preventDefault();
 
 		$usedByList.toggle();
 
@@ -120,11 +124,44 @@ var wporg_developer = ( function( $ ) {
 		$hideMoreUsedBy.toggle();
 	}
 
+	toggleUsageListInit();
+
+	// Inject the "copy" button into every code block.
+	$( '.wp-block-code' ).each( function ( i, element ) {
+		const $element = $( element );
+		let timeoutId;
+
+		const $button = $( document.createElement( 'button' ) );
+		$button.text( wporgFunctionReferenceI18n.copy );
+		$button.on( 'click', function () {
+			clearTimeout( timeoutId );
+			const $code = $element.find( 'code' );
+			let code = $code.text();
+			if ( ! code ) {
+				return;
+			}
+
+			// For single-line shell scripts, trim off the initial `$ `, if exists.
+			if ( 'shell' === $code.attr( 'lang' ) && code.startsWith( '$ ' ) && ! code.includes( '\n' ) ) {
+				code = code.slice( 2 );
+			}
+
+			// This returns a promise which will resolve if the copy suceeded,
+			// and we can set the button text to tell the user it worked.
+			// We don't do anything if it fails.
+			window.navigator.clipboard.writeText( code ).then( function () {
+				$button.text( wporgFunctionReferenceI18n.copied );
+				wp.a11y.speak( wporgFunctionReferenceI18n.copied );
+
+				// After 5 seconds, reset the button text.
+				timeoutId = setTimeout( function () {
+					$button.text( wporgFunctionReferenceI18n.copy );
+				}, 5000 );
+			} );
+		} );
+
+		$element.prepend( $button );
+	} );
+
 	$( onLoad );
-
-	// Expose the sourceCodeDisplay() function for usage outside of this function.
-	return {
-		sourceCodeDisplay: sourceCodeDisplay
-	};
-
-} )( jQuery );
+} );

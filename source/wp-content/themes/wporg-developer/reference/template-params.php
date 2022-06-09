@@ -27,12 +27,11 @@ if ( $params = get_params() ) :
 					</dt>
 				<?php endif; ?>
 				<dd>
-					<p class="desc">
-
+					<div class="desc">
 						<?php if ( ! empty( $param['content'] ) ) : ?>
 							<span class="description"><?php echo wp_kses_post( $param['content'] ); ?></span>
 						<?php endif; ?>
-					</p>
+					</div>
 					<?php if ( ! empty( $param['default'] ) ) : ?>
 						<p class="default"><?php _e( 'Default:', 'wporg' );?> <code><?php echo htmlentities( $param['default'] ); ?></code></p>
 					<?php endif; ?>

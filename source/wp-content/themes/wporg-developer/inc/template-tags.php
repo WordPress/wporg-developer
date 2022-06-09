@@ -687,6 +687,36 @@ namespace DevHub {
 	}
 
 	/**
+	 * Returns the hook string.
+	 *
+	 * @param int $post_id
+	 *
+	 * @return string
+	 */
+	function get_hook_type_name( $post_id ) {
+		$hook_type = get_post_meta( $post_id, '_wp-parser_hook_type', true );
+		if ( false !== strpos( $hook_type, 'action' ) ) {
+			if ( 'action_reference' === $hook_type ) {
+				$hook_type = 'do_action_ref_array';
+			} elseif ( 'action_deprecated' === $hook_type ) {
+				$hook_type = 'do_action_deprecated';
+			} else {
+				$hook_type = 'do_action';
+			}
+		} else {
+			if ( 'filter_reference' === $hook_type ) {
+				$hook_type = 'apply_filters_ref_array';
+			} elseif ( 'filter_deprecated' === $hook_type ) {
+				$hook_type = 'apply_filters_deprecated';
+			} else {
+				$hook_type = 'apply_filters';
+			}
+		}
+
+		return $hook_type;
+	}
+
+	/**
 	 * Retrieve function name and arguments as signature string
 	 *
 	 * @param int $post_id
@@ -707,7 +737,7 @@ namespace DevHub {
 		$types        = array();
 
 		if ( 'wp-parser-class' === get_post_type( $post_id ) ) {
-			return $signature;
+			return '<span class="keyword">class</span> ' . $signature . ' {}';
 		}
 
 		if ( $tags ) {
@@ -725,24 +755,7 @@ namespace DevHub {
 				$hook_args[] = ' <nobr><span class="arg-type">' . esc_html( $type ) . '</span> <span class="arg-name">' . esc_html( $arg ) . '</span></nobr>';
 			}
 
-			$hook_type = get_post_meta( $post_id, '_wp-parser_hook_type', true );
-			if ( false !== strpos( $hook_type, 'action' ) ) {
-				if ( 'action_reference' === $hook_type ) {
-					$hook_type = 'do_action_ref_array';
-				} elseif ( 'action_deprecated' === $hook_type ) {
-					$hook_type = 'do_action_deprecated';
-				} else {
-					$hook_type = 'do_action';
-				}
-			} else {
-				if ( 'filter_reference' === $hook_type ) {
-					$hook_type = 'apply_filters_ref_array';
-				} elseif ( 'filter_deprecated' === $hook_type ) {
-					$hook_type = 'apply_filters_deprecated';
-				} else {
-					$hook_type = 'apply_filters';
-				}
-			}
+			$hook_type = get_hook_type_name( $post_id );
 
 			$delimiter = false !== strpos( $signature, '$' ) ? '"' : "'";
 			$signature = $delimiter . $signature . $delimiter;
@@ -781,6 +794,11 @@ namespace DevHub {
 			$signature .= $args . '&nbsp;';
 		}
 		$signature .= ')';
+
+		$return = get_return( $post_id, false );
+		if ( $return ) {
+			$signature .= ': ' . $return;
+		}
 
 		return wp_kses_post( $signature );
 	}
@@ -915,7 +933,7 @@ namespace DevHub {
 	 *
 	 * @return string
 	 */
-	function get_return( $post_id = null ) {
+	function get_return( $post_id = null, $include_description = true ) {
 
 		if ( empty( $post_id ) ) {
 			$post_id = get_the_ID();
@@ -934,7 +952,11 @@ namespace DevHub {
 		$type        = empty( $return['types'] ) ? '' : esc_html( implode( '|', $return['types'] ) );
 		$type        = apply_filters( 'devhub-function-return-type', $type, $post_id );
 
-		return "<span class='return-type'>({$type})</span> $description";
+		if ( $include_description ) {
+			return "<span class='return-type'>{$type}</span> $description";
+		} else {
+			return "<span class='return-type'>{$type}</span>";
+		}
 	}
 
 	/**
@@ -1949,10 +1971,10 @@ namespace DevHub {
 			'params',
 			'return',
 			'explanation',
+			'methods',
 			'source',
 			'hooks',
 			'related',
-			'methods',
 			'changelog',
 			'notes'
 		);
