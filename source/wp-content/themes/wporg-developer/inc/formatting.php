@@ -691,7 +691,7 @@ class DevHub_Formatting {
 			$piece = preg_replace( "/(([\w'\[\]]+\|)+[\w'\[\]]+)/", '<code>$1</code>', $piece, -1 );
 
 			// Quoted strings.
-			$piece = preg_replace( "/('[^']{0,20}')/", '<code>$1</code>', $piece, -1 );
+			$piece = preg_replace( "/('[^' ]*')/", '<code>$1</code>', $piece, -1 );
 
 			// Replace ###PARAM### too.
 			// Example: http://localhost:8888/reference/hooks/password_change_email/
