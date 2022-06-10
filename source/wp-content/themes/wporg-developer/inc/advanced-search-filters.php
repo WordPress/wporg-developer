@@ -81,9 +81,9 @@ class Advanced_Search_Filters {
 
 				// If user has '()' at end of a search string, assume they want a specific function/method.
 				$s = htmlentities( $split[0] );
-				if ( str_contains( $s, '()' ) ) {
+				if ( str_contains( $s, '(' ) ) {
 					// Modify the search query to omit the parentheses.
-					$keyword = str_replace( '()', '', $keyword );
+					$keyword = rtrim( $keyword, '()' );
 
 					// Restrict search to function-like content.
 					$post_types[] = 'wp-parser-function';
