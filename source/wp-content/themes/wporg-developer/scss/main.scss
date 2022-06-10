@@ -1197,6 +1197,20 @@
 				margin: 1rem 0 0.5rem;
 			}
 
+			.extended-description {
+				margin: 1.5em 0 1.5em 1.2em;
+
+				summary + .description {
+					display: block;
+					margin-top: 1em;
+				}
+
+				summary {
+					color: #21759b;
+					text-decoration: underline;
+				}
+			}
+
 			.type,
 			.required {
 				margin: 0 4px;

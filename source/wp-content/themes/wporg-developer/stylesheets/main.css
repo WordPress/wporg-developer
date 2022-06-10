@@ -1691,6 +1691,41 @@ img {
   margin: 1rem 0 0.5rem;
 }
 
+.devhub-wrap .wp-parser-class .parameters .extended-description,
+.devhub-wrap .wp-parser-class .return .extended-description,
+.devhub-wrap .wp-parser-function .parameters .extended-description,
+.devhub-wrap .wp-parser-function .return .extended-description,
+.devhub-wrap .wp-parser-hook .parameters .extended-description,
+.devhub-wrap .wp-parser-hook .return .extended-description,
+.devhub-wrap .wp-parser-method .parameters .extended-description,
+.devhub-wrap .wp-parser-method .return .extended-description {
+  margin: 1.5em 0 1.5em 1.2em;
+}
+
+.devhub-wrap .wp-parser-class .parameters .extended-description summary + .description,
+.devhub-wrap .wp-parser-class .return .extended-description summary + .description,
+.devhub-wrap .wp-parser-function .parameters .extended-description summary + .description,
+.devhub-wrap .wp-parser-function .return .extended-description summary + .description,
+.devhub-wrap .wp-parser-hook .parameters .extended-description summary + .description,
+.devhub-wrap .wp-parser-hook .return .extended-description summary + .description,
+.devhub-wrap .wp-parser-method .parameters .extended-description summary + .description,
+.devhub-wrap .wp-parser-method .return .extended-description summary + .description {
+  display: block;
+  margin-top: 1em;
+}
+
+.devhub-wrap .wp-parser-class .parameters .extended-description summary,
+.devhub-wrap .wp-parser-class .return .extended-description summary,
+.devhub-wrap .wp-parser-function .parameters .extended-description summary,
+.devhub-wrap .wp-parser-function .return .extended-description summary,
+.devhub-wrap .wp-parser-hook .parameters .extended-description summary,
+.devhub-wrap .wp-parser-hook .return .extended-description summary,
+.devhub-wrap .wp-parser-method .parameters .extended-description summary,
+.devhub-wrap .wp-parser-method .return .extended-description summary {
+  color: #21759b;
+  text-decoration: underline;
+}
+
 .devhub-wrap .wp-parser-class .parameters .type,
 .devhub-wrap .wp-parser-class .parameters .required,
 .devhub-wrap .wp-parser-class .return .type,

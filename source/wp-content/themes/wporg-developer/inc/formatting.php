@@ -414,7 +414,7 @@ class DevHub_Formatting {
 								// Only link actually parsed methods.
 								if ( $post = get_page_by_title( $name, OBJECT, 'wp-parser-method' ) ) {
 									return sprintf(
-										'<a href="%s">%s</a>' . $after,
+										'<a href="%s" rel="method">%s</a>' . $after,
 										get_permalink( $post->ID ),
 										$name . '()'
 									);
@@ -425,7 +425,7 @@ class DevHub_Formatting {
 								// Only link actually parsed functions.
 								if ( $post = get_page_by_title( $name, OBJECT, 'wp-parser-function' ) ) {
 									return sprintf(
-										'<a href="%s">%s</a>' . $after,
+										'<a href="%s" rel="function">%s</a>' . $after,
 										get_permalink( $post->ID ),
 										$name . '()'
 									);
@@ -467,7 +467,7 @@ class DevHub_Formatting {
 						// Only link actually parsed classes.
 						if ( $post = get_page_by_title( $matches[0], OBJECT, 'wp-parser-class' ) ) {
 							return sprintf(
-								'<a href="%s">%s</a>',
+								'<a href="%s" rel="class">%s</a>',
 								get_permalink( $post->ID ),
 								$matches[0]
 							);
