@@ -200,10 +200,6 @@ pre.line-numbers > code {
 .wp-code-block-button-container {
   display: flex;
   justify-content: right;
-  z-index: 2;
-  position: sticky;
-  left: 0;
-  top: 0;
   padding: 1rem;
   background: #fff;
   border-width: 1px 1px 0;
