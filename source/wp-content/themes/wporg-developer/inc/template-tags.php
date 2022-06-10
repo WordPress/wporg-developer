@@ -1494,7 +1494,7 @@ namespace DevHub {
 
 		// Trim leading whitespace.
 		if ( preg_match_all( "!^([\t ]*).+$!m", $source_code, $m ) ) {
-			$strip_prefix = min( array_map( 'strlen', $m[1]) );
+			$strip_prefix = min( array_map( 'strlen', $m[1] ) );
 			if ( $strip_prefix ) {
 				$source_code = preg_replace( "!^[\t ]{" . $strip_prefix . "}!m", '$1', $source_code );
 			}
