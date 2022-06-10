@@ -3568,6 +3568,7 @@ button.code-tab.is-active {
 .search-wrap .searchform .search-post-type label {
   padding: 0.5rem 0.5rem 0.5rem 2.5rem;
   border-radius: 2px;
+  user-select: none;
 }
 
 .search-wrap .searchform .search-post-type input {
@@ -3576,6 +3577,11 @@ button.code-tab.is-active {
   z-index: 1;
   top: 4px;
   left: 6px;
+}
+
+.search-wrap .searchform .search-post-type label,
+.search-wrap .searchform .search-post-type input {
+  cursor: pointer;
 }
 
 .search-wrap.search-wrap-inline .searchform {

@@ -2946,6 +2946,7 @@ button.code-tab.is-active {
 			label {
 				padding: 0.5rem 0.5rem 0.5rem 2.5rem;
 				border-radius: 2px;
+				user-select: none;
 			}
 
 			input {
@@ -2956,6 +2957,10 @@ button.code-tab.is-active {
 				left: 6px;
 			}
 
+			label,
+			input {
+				cursor: pointer;
+			}
 		}
 	}
 
