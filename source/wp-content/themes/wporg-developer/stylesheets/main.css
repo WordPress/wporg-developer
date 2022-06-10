@@ -3563,7 +3563,7 @@ button.code-tab.is-active {
 }
 
 .search-wrap.search-wrap-embedded .search-post-type {
-  margin-top: 2rem;
+  margin-bottom: 2rem;
   justify-content: space-between;
   color: #fff;
   max-width: 450px;
