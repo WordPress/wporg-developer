@@ -1675,6 +1675,70 @@ namespace DevHub {
 		return $summary;
 	}
 
+	function get_short_example( $post_id = null ) {
+
+		if ( empty( $post_id ) ) {
+			$post_id = get_the_ID();
+		}
+
+		// Decorate and return hook arguments.
+		if ( get_hook_type( $post_id ) ) {
+
+			$args         = get_post_meta( $post_id, '_wp-parser_args', true );
+			$tags 		  = get_post_meta( $post_id, '_wp-parser_tags', true );
+			$hook         = get_the_title( $post_id );
+			$params       = get_params();
+			$args_strings = array();
+			$types        = array();
+
+			if ( $tags ) {
+				foreach ( $tags as $tag ) {
+					if ( is_array( $tag ) && 'param' == $tag['name'] ) {
+						$types[ $tag['variable'] ] = implode( '|', $tag['types'] );
+					}
+				}
+			}
+
+			$hook_args = array();
+			foreach ( $types as $arg => $type ) {
+				$hook_args[] = esc_html( $type ) . ' ' . esc_html( $arg );
+				$hook_arg_names[] = $arg;
+			}
+
+			$hook_type = get_hook_type_name( $post_id );
+
+			$arg_count = count( $hook_args );
+			$hook_args_all = join( ', ', $hook_args ) . ' ';
+
+			$code = '';
+			if ( in_array( get_hook_type( $post_id ), [ 'filter', 'filter_reference' ] ) ) {
+				$code =<<<EOF
+add_filter( '{$hook}', 'example_callback', 10, {$arg_count} );
+function example_callback( {$hook_args_all} ) {
+	return {$hook_arg_names[0]};
+}
+EOF;
+			} elseif ( in_array( get_hook_type( $post_id ), [ 'action', 'action_reference' ] ) ) {
+				$code =<<<EOF
+add_action( '{$hook}', 'example_callback', 10, {$arg_count} );
+function example_callback( {$hook_args_all}) {
+}
+EOF;
+			}
+		}
+
+		if ( $code ) {
+			echo do_blocks(
+				sprintf(
+					'<!-- wp:code {"lineNumbers":false} --><pre class="wp-block-code" aria-label="%1$s"><code lang="php" class="language-php">%2$s</code></pre><!-- /wp:code -->',
+					#esc_attr( get_post_meta( get_the_ID(), '_wp-parser_line_num', true ) ),
+					__( 'Example usage', 'wporg' ),
+					htmlentities( $code )
+				)
+			);
+		}
+	}
+
 	/**
 	 * Gets the description.
 	 *

@@ -10,6 +10,7 @@
 
 	<section class="summary">
 		<?php echo get_summary(); ?>
+		<?php echo get_short_example(); ?>
 	</section>
 
 <?php if ( is_single() ) : ?>
