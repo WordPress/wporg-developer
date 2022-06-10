@@ -42,10 +42,6 @@
 	#content-area {
 		padding: 0 #{"max( 20px, 2% )"};
 
-		.toc-heading {
-			clear: left;
-		}
-
 		table {
 			border: 1px solid #f0f0f0;
 
@@ -1078,6 +1074,10 @@
 			margin-bottom: 0.5em;
 		}
 
+		.toc-header {
+			margin-top: 0 !important;
+		}
+
 		h1,
 		.signature-highlight {
 			color: get-color(green-50);
@@ -1263,11 +1263,6 @@
 		.callout {
 			margin-top: 30px;
 		}
-
-		.toc-jump {
-			display: inline-block;
-			float: right;
-		}
 	}
 
 	.callout::before {
@@ -1354,10 +1349,6 @@
 				display: none;
 			}
 		}
-	}
-
-	.source-content {
-		overflow: auto;
 	}
 
 	.source-code-links {
@@ -2182,42 +2173,26 @@ aside[id^="nav_menu"] .widget-title {
 	}
 }
 
-/* Highlight current heading and adjust scroll position for fixed toolbar */
-.toc-heading:target {
-	position: initial;
-	padding-top: 50px;
-	margin-top: -50px;
+.toc-header {
+	margin-bottom: 1em;
 }
 
-/* Remove negative margin because there is no jump link before these headlines */
-.entry-content h2.toc-heading:first-of-type:target,
-.entry-content h3.toc-heading:first-of-type:target,
-h2.toc-heading + h3.toc-heading:target {
-	margin-top: 0;
-}
-
-.toc-heading:target::before {
-	content: "";
-	position: absolute;
-	left: -10px;
-	top: 50px;
-	border-left: 5px solid #0073aa;
-	height: calc(100% - 50px);
-}
-
-.toc-jump {
+.toc-heading {
 	position: relative;
-	height: 50px;
 }
 
-.toc-jump::after {
-	content: "";
-	display: table;
-	clear: both;
+.toc-heading a::before {
+	color: get-color(gray-30);
 }
 
-.toc-jump a {
-	z-index: 1;
+.toc-heading:target a::before {
+	color: inherit;
+}
+
+.toc-heading a:hover::before,
+.toc-heading a:active::before,
+.toc-heading a:focus::before {
+	color: get-color(blue-50);
 }
 
 @media (max-width: 480px) {
@@ -2810,12 +2785,6 @@ body.responsive-show {
 				color: #757575;
 			}
 		}
-	}
-
-	.toc-jump {
-		float: right;
-		font-size: 75%;
-		margin-top: 11px;
 	}
 
 	table {
