@@ -55,7 +55,7 @@ if ( show_usage_info() ) :
 				<?php if ( $uses->post_count > $uses_to_show ) : ?>
 				<a href="#" class="show-more"><?php
 					/* translators: %d: remaining 'uses' count */
-					printf( _n( 'Show %d more use', 'Show %d more uses', $uses->post_count - $uses_to_show, 'wporg' ),
+					printf( _n( 'Show %s more use', 'Show %s more uses', $uses->post_count - $uses_to_show, 'wporg' ),
 						number_format_i18n( $uses->post_count - $uses_to_show )
 					);
 					?></a>
@@ -95,7 +95,7 @@ if ( show_usage_info() ) :
 				<?php if ( $used_by->post_count > $used_by_to_show ) : ?>
 				<a href="#" class="show-more"><?php
 					/* translators: %d: remaining 'used by' count */
-					printf( _n( 'Show %d more used by', 'Show %d more used by', $used_by->post_count - $used_by_to_show, 'wporg' ),
+					printf( _n( 'Show %s more used by', 'Show %s more used by', $used_by->post_count - $used_by_to_show, 'wporg' ),
 						number_format_i18n( $used_by->post_count - $used_by_to_show )
 					);
 					?></a>
