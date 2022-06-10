@@ -1,48 +1,33 @@
 <?php
 
-if ( ! function_exists( 'wporg_developer_v2_support' ) ) :
+function wporg_developer_blocks_support() {
+	// Add support for block styles.
+	add_theme_support( 'wp-block-styles' );
 
-	/**
-	 * Sets up theme defaults and registers support for various WordPress features.
-     *
-	 * @return void
-	 */
-	function wporg_developer_v2_support() {
-		// Add support for block styles.
-		add_theme_support( 'wp-block-styles' );
+	// Enqueue editor styles.
+	add_editor_style( 'style.css' );
 
-		// Enqueue editor styles.
-		add_editor_style( 'style.css' );
-	}
+	// Apply syntax highlighter custom theme.
+	add_filter( 'syntaxhighlighter_cssthemeurl', function() {
+		return get_template_directory_uri() . '/inc/css/syntax-highlighter-theme.css';
+	} );
+}
+add_action( 'after_setup_theme', 'wporg_developer_blocks_support' );
 
-endif;
+function wporg_developer_blocks_styles() {
+	// Register theme stylesheet.
+	$theme_version = wp_get_theme()->get( 'Version' );
 
-add_action( 'after_setup_theme', 'wporg_developer_v2_support' );
+	$version_string = is_string( $theme_version ) ? $theme_version : false;
+	wp_register_style(
+		'wporg-developer-blocks-style',
+		get_template_directory_uri() . '/style.css',
+		array(),
+		$version_string
+	);
 
-if ( ! function_exists( 'wporg_developer_v2_styles' ) ) :
-
-	/**
-	 * Enqueue styles.
-	 *
-	 * @return void
-	 */
-	function wporg_developer_v2_styles() {
-		// Register theme stylesheet.
-		$theme_version = wp_get_theme()->get( 'Version' );
-
-		$version_string = is_string( $theme_version ) ? $theme_version : false;
-		wp_register_style(
-			'wporg-developer-v2-style',
-			get_template_directory_uri() . '/style.css',
-			array(),
-			$version_string
-		);
-
-		// Enqueue theme stylesheet.
-		wp_enqueue_style( 'wporg-developer-v2-style', '', [ 'dashicons'] );
-		wp_enqueue_script( 'wporg-developer-v2-script', get_template_directory_uri() . '/inc/helper.js' );
-	}
-
-endif;
-
-add_action( 'wp_enqueue_scripts', 'wporg_developer_v2_styles' );
+	// Enqueue theme stylesheet.
+	wp_enqueue_style( 'wporg-developer-blocks-style', '', [ 'dashicons'] );
+	wp_enqueue_script( 'wporg-developer-blocks-script', get_template_directory_uri() . '/inc/helper.js' );
+}
+add_action( 'wp_enqueue_scripts', 'wporg_developer_blocks_styles' );
