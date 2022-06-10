@@ -871,7 +871,7 @@
 
 		@media ( max-width: 688px ) {
 			width: 100%;
-			margin-left: 0
+			margin-left: 0;
 		}
 	}
 
@@ -1726,13 +1726,14 @@ a.screen-reader-text:focus,
 	&.has-actions {
 		display: flex;
 		justify-content: space-between;
-		align-items: center;	
+		align-items: center;
 
 		@media screen and (max-width: 500px) {
 			flex-direction: column;
 		}
 
 		.site-title {
+
 			@media screen and (max-width: 500px) {
 				margin-bottom: 2rem;
 			}
@@ -2916,7 +2917,7 @@ button.code-tab.is-active {
 			width: 40px;
 			align-items: center;
 			top: 0;
-		
+
 			&:active {
 				background: get-color(gray-5);
 			}
@@ -2937,7 +2938,7 @@ button.code-tab.is-active {
 			font-size: 13px;
 			flex-wrap: wrap;
 
-			> span, 
+			> span,
 			> div {
 				position: relative;
 				margin: 0.25rem;
@@ -2951,9 +2952,8 @@ button.code-tab.is-active {
 
 			input {
 				position: absolute;
-				left: 0;
 				z-index: 1;
-				top: 4px;
+				top: 3px;
 				left: 6px;
 			}
 
@@ -2986,7 +2986,7 @@ button.code-tab.is-active {
 		max-width: 450px;
 
 		input:checked + label {
-			content: '';
+			content: "";
 			background: #fff;
 			color: #000;
 		}

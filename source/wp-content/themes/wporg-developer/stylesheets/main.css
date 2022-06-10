@@ -3573,9 +3573,8 @@ button.code-tab.is-active {
 
 .search-wrap .searchform .search-post-type input {
   position: absolute;
-  left: 0;
   z-index: 1;
-  top: 4px;
+  top: 3px;
   left: 6px;
 }
 
@@ -3607,7 +3606,7 @@ button.code-tab.is-active {
 }
 
 .search-wrap.search-wrap-embedded .search-post-type input:checked + label {
-  content: '';
+  content: "";
   background: #fff;
   color: #000;
 }
