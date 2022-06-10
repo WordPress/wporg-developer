@@ -1,0 +1,48 @@
+.page-content .syntaxhighlighter {
+	font-size: 15px !important;
+	background-color: var(--wp--preset--color--dark-strokes-grey) !important;
+	padding: 0 1.4em !important;
+	width: auto !important;
+	overflow: hidden !important;
+}
+
+.page-content .syntaxhighlighter code,
+.page-content .syntaxhighlighter div {
+	font-family: Menlo, Consolas, monospace !important;
+}
+
+.page-content .syntaxhighlighter:after {
+	content: "";
+	position: absolute;
+	top: -25px;
+	right: -25px;
+	background: var(--wp--preset--color--white);
+	width: 40px;
+	height: 40px;
+	transform: rotate(45deg);
+}
+
+.page-content .syntaxhighlighter table {
+	table-layout: fixed !important;
+}
+
+.page-content .syntaxhighlighter table td.gutter {
+	width: 45px !important;
+	padding: 1.4em 0 !important;
+}
+
+.page-content .syntaxhighlighter table td.code {
+	width: 100% !important;
+	overflow: scroll !important;
+	padding: 1.4em 0 !important;
+}
+
+.page-content .syntaxhighlighter table td.code .line,
+.page-content .syntaxhighlighter table td.gutter .line {
+	padding: 0 0.5em 0.5em 0 !important;
+}
+
+.page-content .syntaxhighlighter .line.alt2,
+.page-content .syntaxhighlighter .line.alt1 {
+	background: none !important;
+}
