@@ -759,10 +759,6 @@ img {
   display: none;
 }
 
-.devhub-wrap .widget-area .search-section.hide-if-js {
-  display: block;
-}
-
 .devhub-wrap .infinite-scroll .paging-navigation,
 .devhub-wrap .infinite-scroll.neverending .site-footer {
   /* Theme Footer (when set to scrolling) */
@@ -1023,53 +1019,6 @@ img {
   }
 }
 
-.devhub-wrap .reference-landing .section.search-section {
-  padding-top: 0;
-}
-
-.devhub-wrap div#inner-search {
-  background-color: #666;
-  margin-bottom: 1em;
-  padding-top: 2px;
-}
-
-.devhub-wrap div#inner-search .section.search-section {
-  color: #fff;
-}
-
-.devhub-wrap div#inner-search div#inner-search-icon-container {
-  margin: 0 auto;
-  max-width: 60em;
-  cursor: pointer;
-}
-
-.devhub-wrap div#inner-search div#inner-search-icon-container div#inner-search-icon {
-  background-color: #666;
-  color: #fff;
-  text-align: center;
-  margin-right: 26px;
-  margin-left: 4px;
-  float: right;
-  padding: 5px;
-  -webkit-border-bottom-right-radius: 5px;
-  -webkit-border-bottom-left-radius: 5px;
-  -moz-border-radius-bottomright: 5px;
-  -moz-border-radius-bottomleft: 5px;
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
-}
-
-.devhub-wrap div#inner-search div#inner-search-icon-container div#inner-search-icon .dashicons-search {
-  height: auto;
-  width: auto;
-  transform: scale(-1, 1);
-}
-
-.devhub-wrap div#inner-search div#inner-search-icon-container div#inner-search-icon .dashicons-search::before {
-  font-size: 36px;
-  line-height: 36px;
-}
-
 .devhub-wrap .archive-filter-form {
   margin: 5rem 0;
   font-size: 1.5rem;
@@ -1096,8 +1045,7 @@ img {
   font-size: 14px;
 }
 
-.devhub-wrap .reference-landing .section,
-.devhub-wrap .search-section {
+.devhub-wrap .reference-landing .section {
   max-width: 97rem;
   margin: 0 auto;
   padding: 1.5em 1em;
@@ -3048,11 +2996,6 @@ body.responsive-show #secondary {
   left: 0;
   overflow-y: scroll;
   z-index: 500;
-}
-
-body.responsive-show #secondary .search-section {
-  margin-top: 32px;
-  width: 100%;
 }
 
 body.responsive-show #secondary-toggle {
