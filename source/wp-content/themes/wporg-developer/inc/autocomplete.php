@@ -99,16 +99,26 @@ class DevHub_Search_Form_Autocomplete {
 			'orderby'              => '',
 			'search_orderby_title' => 1,
 			'order'                => 'ASC',
+			'_autocomplete_search' => true,
 		);
 
 		$search = get_posts( $args );
 
 		if ( ! empty( $search ) ) {
-			$titles             = wp_list_pluck( $search, 'post_title', 'ID' );
-			$titles             = array_unique( $titles );
-			$titles             = array_flip( $titles );
-			$titles             = array_map( 'get_permalink', $titles );
-			$form_data['posts'] = $titles;
+			$post_types_function_like = array( 'wp-parser-function', 'wp-parser-method' );
+
+			foreach ( $search as $post ) {
+				$permalink = get_permalink( $post->ID );
+				$title     = $post->post_title;
+
+				if ( in_array( $post->post_type, $post_types_function_like ) ) {
+					$title .= '()';
+				}
+		if ( $post->post_type == 'wp-parser-class' ) {
+			$title =  'class ' . $title . ' {}';
+		}
+				$form_data['posts'][ $title ] = $permalink;
+			}
 		}
 
 		wp_send_json_success ( $form_data );
