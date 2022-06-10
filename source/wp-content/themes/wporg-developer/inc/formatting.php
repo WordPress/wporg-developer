@@ -524,32 +524,9 @@ class DevHub_Formatting {
 			return $text;
 		}
 
-		// Convert dashes to a list.
-		// Example: https://developer.wordpress.org/reference/classes/wp_term_query/__construct/
-		// Example: https://developer.wordpress.org/reference/hooks/password_change_email/
-		if ( false !== strpos( $text, ' - ' ) )  {
-			// Display as simple plaintext list.
-			$text = str_replace( ' - ', "\n" . $li, $text );
-			$inline_list = true;
-		}
-
-		// If list detected.
-		if ( $inline_list ) {
-			// Replace first item, ensuring the opening 'ul' tag is prepended.
-			$text = preg_replace( '~^' . preg_quote( $li ) . '(.+)$~mU', "<ul><li>\$1</li>\n", $text, 1 );
-			// Wrap subsequent list items in 'li' tags.
-			$text = preg_replace( '~^' . preg_quote( $li ) . '(.+)$~mU', "<li>\$1</li>\n", $text );
-			$text = trim( $text );
-
-			// Close the list if it hasn't been closed before start of next hash parameter.
-			//$text = preg_replace( '~(</li>)(\s+</li>)~smU', '$1</ul>$2', $text );
-			$text = preg_replace( '~(</li>)(\s*</li>)~smU', '$1</ul>$2', $text );
-
-			// Closethe list if it hasn't been closed and it's the end of the description.
-			if ( '</li>' === substr( trim( $text ), -5 ) ) {
-				$text .= '</ul>';
-			}
-		}
+		// Wrap in a `ul`.
+		$text = substr_replace( $text, '<ul><li>', strpos( $text, '<li>' ), 4 ); // First instance
+		$text = substr_replace( $text, '</li></ul>', strrpos( $text, '</li>' ), 5 ); // Last instance.
 
 		return $text;
 	}
