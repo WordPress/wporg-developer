@@ -8,15 +8,38 @@ class WPorg_Handbook_TOC {
 	protected $post_types = array();
 
 	protected $styles = '<style>
-		.toc-header { display: flex; justify-content: space-between; margin-top: 48px !important; }
-		.toc-jump { text-align: right; font-size: 0.75em; order: 2; }
-		.toc-heading a { color: inherit; font-weight: inherit; margin-left: -32px; text-decoration: none !important; }
-		/* icon is 20px wide in a 32px space, so add a 12px margin. */
-		.toc-heading a:before { vertical-align: middle; margin: -4px 8px 0 4px; }
+		.toc-header {
+			display: flex;
+			justify-content: space-between;
+			margin-top: 48px !important;
+		}
+		.toc-jump {
+			text-align: right;
+			font-size: 0.75em;
+			order: 2;
+		}
+		.toc-heading a {
+			color: inherit;
+			font-weight: inherit;
+			margin-left: -32px;
+			text-decoration: none !important;
+		}
+		.toc-heading a:before {
+			vertical-align: middle;
+			/* icon is 20px wide in a 32px space, so add 12px horizontal margin. */
+			margin: -4px 8px 0 4px;
+		}
 		@media (max-width: 876px) {
-			.toc-heading a { margin-left: -20px; }
-			/* icon is 16px wide in a 20px space, so add a 4px margin. */
-			.toc-heading a:before { margin: -2px 4px 0 2px; width: 14px; height: 14px; font-size: 14px; }
+			.toc-heading a {
+				margin-left: -20px;
+			}
+			.toc-heading a:before {
+				/* icon is 14px wide in a 20px space, so add 6px horizontal margin. */
+				margin: -2px 4px 0 2px;
+				width: 14px;
+				height: 14px;
+				font-size: 14px;
+			}
 		}
 	</style>';
 
