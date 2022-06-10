@@ -209,27 +209,31 @@ pre.line-numbers > code {
 }
 
 /* Copy button */
-pre.wp-block-code {
-	position: relative;
+.wp-code-block-button-container {
+	display: flex;
+	justify-content: right;
+	padding: 1rem;
+	background: $color-white;
+	border-width: 1px 1px 0;
+	border-style: solid;
+	border-color: get-color(gray-5);
+	border-top-left-radius: 0.3em;
+	border-top-right-radius: 0.3em;
 
-	> .wp-code-block-button-container {
-		display: none;
-		position: absolute;
-		top: 1rem;
-		right: 1rem;
-		z-index: 2;
-
-		button {
-			font-size: 1.4rem;
-		}
-
-		button + button {
-			margin-left: 0.5em;
-		}
+	button {
+		font-size: 1.2rem !important;
 	}
 
-	&:hover > .wp-code-block-button-container,
-	&:focus-within > .wp-code-block-button-container {
-		display: revert;
+	button + button {
+		margin-left: 0.5em;
+	}
+
+	+ pre {
+		margin-top: 0;
+		border-width: 0 1px 1px;
+		border-style: solid;
+		border-color: get-color(gray-5);
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
 	}
 }

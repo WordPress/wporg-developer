@@ -7,9 +7,9 @@
 
 // eslint-disable-next-line id-length -- $ OK.
 jQuery( function ( $ ) {
-	// 22.5px (line height) * 10 for 10 lines + 15px top padding + 10px extra.
+	// 22.5px (line height) * 15 for 15 lines + 15px top padding + 10px extra.
 	// The extra 10px added to partially show next line so it's clear there is more.
-	const MIN_HEIGHT = 22.5 * 10 + 15 + 10;
+	const MIN_HEIGHT = 22.5 * 15 + 15 + 10;
 
 	function collapseCodeBlock( $element, $button ) {
 		$button.text( wporgFunctionReferenceI18n.expand );
@@ -23,6 +23,7 @@ jQuery( function ( $ ) {
 	function expandCodeBlock( $element, $button ) {
 		$button.text( wporgFunctionReferenceI18n.collapse );
 		$button.attr( 'aria-expanded', 'true' );
+		// { height: auto; } can't be used here or the transition effect won't work.
 		$element.height( $element.data( 'height' ) );
 	}
 
@@ -66,7 +67,6 @@ jQuery( function ( $ ) {
 			$element.data( 'height', originalHeight );
 
 			const $expandButton = $( document.createElement( 'button' ) );
-			$expandButton.addClass( 'button-link' );
 			$expandButton.on( 'click', function () {
 				if ( 'true' === $expandButton.attr( 'aria-expanded' ) ) {
 					collapseCodeBlock( $element, $expandButton );
@@ -79,7 +79,7 @@ jQuery( function ( $ ) {
 			$container.append( $expandButton );
 		}
 
-		$element.prepend( $container );
+		$element.before( $container );
 	} );
 
 	let $usesList, $usedByList, $showMoreUses, $hideMoreUses, $showMoreUsedBy, $hideMoreUsedBy;
