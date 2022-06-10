@@ -2837,11 +2837,14 @@ button.code-tab.is-active {
 			border-radius: 2px;
 			box-shadow: none;
 			font-size: 13px;
+			width: 100%;
+			box-sizing: border-box;
 		}
 
 		.search-field {
 			position: relative;
 			margin-bottom: 2rem;
+			display: flex;
 			border: 1px solid #000;
 			border-radius: 4px;
 			width: 100%;
@@ -2903,6 +2906,19 @@ button.code-tab.is-active {
 			label,
 			input {
 				cursor: pointer;
+			}
+		}
+
+		&.searchform-handbook .search-field {
+			border-color: get-color(gray-10);
+			border-radius: 0;
+		}
+
+		.widget_search &.searchform-handbook {
+			padding-right: 1em;
+
+			@media (max-width: 876px) {
+				padding: 1.5em 1em 0;
 			}
 		}
 	}

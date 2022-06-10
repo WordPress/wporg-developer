@@ -3458,11 +3458,14 @@ button.code-tab.is-active {
   border-radius: 2px;
   box-shadow: none;
   font-size: 13px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .search-wrap .searchform .search-field {
   position: relative;
   margin-bottom: 2rem;
+  display: flex;
   border: 1px solid #000;
   border-radius: 4px;
   width: 100%;
@@ -3524,6 +3527,21 @@ button.code-tab.is-active {
 .search-wrap .searchform .search-post-type label,
 .search-wrap .searchform .search-post-type input {
   cursor: pointer;
+}
+
+.search-wrap .searchform.searchform-handbook .search-field {
+  border-color: #c3c4c7;
+  border-radius: 0;
+}
+
+.widget_search .search-wrap .searchform.searchform-handbook {
+  padding-right: 1em;
+}
+
+@media (max-width: 876px) {
+  .widget_search .search-wrap .searchform.searchform-handbook {
+    padding: 1.5em 1em 0;
+  }
 }
 
 .search-wrap.search-wrap-inline .searchform {

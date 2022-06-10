@@ -7,16 +7,20 @@
 
 $show_filters = DevHub\should_show_search_filters();
 
-// Add classes for different views
-$classes    = ( ! $show_filters && ! $GLOBALS['wp_query']->is_handbook ) ? ' search-wrap-inline' : '';
-$classes    .= ( is_page( 'reference' ) ) ? ' search-wrap-embedded' : '';
+$is_handbook = $GLOBALS['wp_query']->is_handbook;
 
-$search_url  = get_query_var( 'current_handbook_home_url' );
-$search_url  = $search_url ? $search_url : home_url( '/' );
+// Add classes for different views
+$classes  = ( ! $show_filters && ! $is_handbook ) ? ' search-wrap-inline' : '';
+$classes .= ( is_page( 'reference' ) ) ? ' search-wrap-embedded' : '';
+
+$form_class = ( $is_handbook ) ? 'searchform-handbook' : '';
+
+$search_url = get_query_var( 'current_handbook_home_url' );
+$search_url = $search_url ? $search_url : home_url( '/' );
 
 ?>
 <div class="search-wrap <?php echo esc_attr( $classes ); ?>">
-	<form role="search" method="get" class="searchform" action="<?php echo esc_url( $search_url ); ?>">
+	<form role="search" method="get" class="searchform <?php echo esc_attr( $form_class ); ?>" action="<?php echo esc_url( $search_url ); ?>">
 		<div class="search-field">
 			<input type="search" id="search-field" placeholder="<?php echo esc_attr_x( 'Search reference', 'placeholder', 'wporg' ); ?>" value="<?php echo esc_attr( get_search_query() ); ?>" name="s">
 			<button class="button-search" aria-label="<?php esc_html_e( 'Search', 'wporg' ); ?>">
