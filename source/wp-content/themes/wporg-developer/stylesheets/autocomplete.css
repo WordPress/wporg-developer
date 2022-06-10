@@ -23,32 +23,35 @@ div.awesomplete li[aria-selected="true"] mark {
 	background: hsl(65, 100%, 49%);
 }
 
-.devhub-wrap div.awesomplete > ul {
+.search-wrap div.awesomplete > ul {
+	top: 40px;
+	text-align: left;
 	max-height: 13.5em;
 	color: #404040;
 	overflow: auto;
 	background: linear-gradient(to bottom right, #fff, hsla(0, 0%, 100%, 0.9));
 }
 
-.devhub-wrap .searchform label div.awesomplete > input,
-.devhub-wrap div.awesomplete {
+.search-wrap-inline div.awesomplete > ul {
+	right: 0;
+	left: auto;
+}
+
+.search-wrap .searchform label div.awesomplete > input,
+.search-wrap div.awesomplete {	
 	width: 100%;
 }
 
-.devhub-wrap div.awesomplete > input {
-	border-right: unset;
-}
-
-.devhub-wrap .searchform div.search-post-type {
-	clear: both;
-}
-
-.devhub-wrap .searchform,
-.devhub-wrap .searchform div:first-child,
-.devhub-wrap div.awesomplete {
-
+.search-wrap .searchform,
+.search-wrap .searchform div:first-child,
+.search-wrap div.awesomplete {
 	/* Needs to be visible for the awesomplete popup */
 	overflow: visible;
+}
+
+.search-wrap div.awesomplete {
+	/* This is for the input to expand */
+	display: flex; 
 }
 
 div.awesomplete > ul::before {

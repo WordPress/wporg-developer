@@ -635,6 +635,10 @@ namespace DevHub {
 			case 'resource':
 				return sprintf( __( 'Developer Resources: %s', 'wporg' ), get_the_title() );
 			default:
+				if( is_page( 'reference' ) ) {
+					return __( 'Code Reference', 'wporg' );
+				}
+
 				return __( 'Developer Resources', 'wporg' );
 		}
 	}
@@ -1765,7 +1769,17 @@ namespace DevHub {
 		$post_types = get_parsed_post_types();
 		$taxonomies = array( 'wp-parser-since', 'wp-parser-package', 'wp-parser-source-file' );
 
-		return ! ( is_search() || is_404() ) && ( is_singular( $post_types ) || is_post_type_archive( $post_types ) || is_tax( $taxonomies ) );
+		return ! ( is_search() || is_404() ) && ( is_singular( $post_types ) || is_post_type_archive( $post_types ) || is_tax( $taxonomies ) || is_page( 'reference' ) );
+	}
+
+	/**
+	 * Should the search bar filters be shown?
+	 *
+	 * @return bool True if search bar filters should be shown.
+	 */
+	function should_show_search_filters() {
+		$is_handbook = $GLOBALS['wp_query']->is_handbook;
+		return ( is_page( 'reference' ) || is_search() ) && ! $is_handbook;
 	}
 
 	/**
