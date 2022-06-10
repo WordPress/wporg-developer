@@ -635,7 +635,7 @@ namespace DevHub {
 			case 'resource':
 				return sprintf( __( 'Developer Resources: %s', 'wporg' ), get_the_title() );
 			default:
-				if( is_search() ) {
+				if( is_page( 'reference' ) ) {
 					return __( 'Code Reference', 'wporg' );
 				}
 
