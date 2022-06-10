@@ -1,4 +1,52 @@
 /*!***************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/style.scss ***!
   \***************************************************************************************************************************************************************************************************************************************/
+.wp-block-wporg-developer-toc {
+  padding: 0 30px;
+  border-left: 1px solid #eee;
+}
 
+.wp-block-wporg-developer-toc h2 {
+  font-size: var(--wp--custom--h-4--typography--font-size);
+  margin: 10px 0 15px;
+}
+
+.wp-block-wporg-developer-toc .items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wp-block-wporg-developer-toc .items li {
+  margin-bottom: 0.6rem;
+}
+
+.wp-block-wporg-developer-toc .items li a {
+  text-decoration: none;
+  color: var(--wp--preset--color--dark-strokes-grey);
+}
+
+.wp-block-wporg-developer-toc .items ul {
+  margin: 0 0 0 3px;
+  padding-left: 15px;
+  list-style: none;
+  line-height: 160%;
+  padding: 10px 0 5px 15px;
+}
+
+.wp-block-wporg-developer-toc .items ul li {
+  position: relative;
+}
+
+.wp-block-wporg-developer-toc .items ul li:before {
+  position: absolute;
+  content: "";
+  top: -5px;
+  left: -15px;
+  border-bottom: 1px dotted #ccc;
+  border-left: 1px dotted #ccc;
+  height: 15px;
+  width: 5px;
+}
+
+/*# sourceMappingURL=style-index.css.map*/

@@ -18,7 +18,7 @@ function wporg_developer_toc_block_callback() {
 	}
 
 	$output = '<section ' . $wrapper_attributes . '>';
-	$output .= wporg_developer_toc_get_links();
+	$output .= $toc;
 	$output .= '</section>';
 
 	return $output;
@@ -26,10 +26,16 @@ function wporg_developer_toc_block_callback() {
 
 function wporg_developer_toc_get_links() {
 	$toc = new WPorg_Handbook_TOC( [ 'page' ], [
+		'header_text' => 'On this Page',
 		'override_filter' => true
 	] );
 
 	$items = $toc->get_items( get_the_content() );
+
+	if ( empty( $items ) ) {
+		return false;
+	}
+
 	$toc = $toc->build_toc( $items );
 
 	return $toc;

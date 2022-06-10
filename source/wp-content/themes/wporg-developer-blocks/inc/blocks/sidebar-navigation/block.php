@@ -32,7 +32,9 @@ function wporg_developer_sidebar_navigation_callback( $attributes, $content ) {
 }
 
 function wporg_developer_sidebar_navigation_render( $pages ) {
-	$output = '<div class="wp-block-wporg-developer-sidebar-navigation">';
+	$wrapper_attributes = get_block_wrapper_attributes();
+
+	$output = '<div ' . $wrapper_attributes . '>';
 	$output .= '<nav class="tree-nav">' . $pages . '</nav>';
 	$output .= "</div>";
 

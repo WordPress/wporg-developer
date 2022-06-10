@@ -1,23 +1,21 @@
 <!-- wp:template-part {"slug":"internal-page-header","theme":"wporg-developer-blocks"} /-->
 
-<!-- wp:group {"style":{"spacing":{"margin":{"top":"0px","bottom":"0px"},"padding":{"top":"35px","right":"35px","bottom":"45px","left":"35px"},"blockGap":"10px"}}} -->
-<div class="wp-block-group"
+<!-- wp:group {"style":{"spacing":{"margin":{"top":"0px","bottom":"0px"},"padding":{"top":"35px","right":"35px","bottom":"45px","left":"35px"},"blockGap":"10px"}},"className":"page-title-container"} -->
+<div class="wp-block-group page-title-container"
     style="margin-top:0px;margin-bottom:0px;padding-top:35px;padding-right:35px;padding-bottom:45px;padding-left:35px">
     <!-- wp:post-title {"fontSize":"huge"} /-->
 
-    <!-- wp:paragraph {"fontSize":"small"} -->
-    <p class="has-small-font-size"><a href="/">Developers</a> &gt; <a href="/block-editor">Block Editor Handbook</a>
-        &gt; <a href="/">How-to Guides</a> &gt; <a href="/">Blocks</a> &gt; Introducing Attributes and Editable Fields
-    </p>
-    <!-- /wp:paragraph -->
+    <!-- wp:wporg-developer/breadcrumb {"fontSize":"small"} /-->
 </div>
 <!-- /wp:group -->
 
-<!-- wp:group {"tagName":"main","style":{"spacing":{"margin":{"top":"0px","bottom":"0px"},"blockGap":"0px"}},"className":"main-content","layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"left","orientation":"horizontal","verticalAlignment":"top"}} -->
+<!-- wp:group {"tagName":"main","style":{"spacing":{"margin":{"top":"0px","bottom":"0px"},"blockGap":"0px"}},"className":"main-content","layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between","orientation":"horizontal","verticalAlignment":"top"}} -->
 <main class="wp-block-group main-content" style="margin-top:0px;margin-bottom:0px">
     <!-- wp:template-part {"slug":"sidebar","theme":"wporg-developer-blocks","tagName":"section","className":"navigation-sidebar"} /-->
 
     <!-- wp:template-part {"slug":"content","theme":"wporg-developer-blocks","tagName":"section","className":"page-content"} /-->
+
+    <!-- wp:wporg-developer/toc {"fontSize":"small"} /-->
 </main>
 <!-- /wp:group -->
 

@@ -57,7 +57,6 @@ nav.tree-nav {
 	transition: transform 200ms ease-in-out;
 	font-family: "dashicons";
 	color: var(--wp--preset--color--blue-3);
-	font-size: 1.1rem;
 	content: "\f345";
 	right: 0;
 	display: inline-block;
@@ -72,7 +71,7 @@ nav.tree-nav {
 	cursor: pointer;
 	display: block;
 	outline: 0;
-	padding-bottom: 0.8em;
+	padding-bottom: 0.7em;
 }
 
 .tree-nav__item-title a {
@@ -107,20 +106,20 @@ nav.tree-nav {
 	border-left: 2px solid #000;
 	content: "";
 	height: calc( 100% - 0.8rem );
-	left: -2px;
+	left: -0.15rem;
 	top: 0;
 }
 
 .tree-nav .current_page_ancestor > summary,
 .tree-nav .current_page_item > summary {
 	padding-left: 0;
-	margin-left: -0.9em;
-	padding-left: 1.3em;
+	margin-left: -1em;
+	padding-left: 1.4em;
 	font-weight: 600;
 	border-left: 2px solid var(--wp--preset--color--blue-4);
 }
 .tree-nav .current_page_item>summary {
-	padding-left: 1.15em;
+	padding-left: 1.3em;
 }
 .tree-nav .current_page_ancestor>summary:after {
 	border-color: var(--wp--preset--color--blue-3);

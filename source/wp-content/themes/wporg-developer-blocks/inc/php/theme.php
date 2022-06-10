@@ -40,6 +40,7 @@ if ( ! function_exists( 'wporg_developer_v2_styles' ) ) :
 
 		// Enqueue theme stylesheet.
 		wp_enqueue_style( 'wporg-developer-v2-style', '', [ 'dashicons'] );
+		wp_enqueue_script( 'wporg-developer-v2-script', get_template_directory_uri() . '/inc/helper.js' );
 	}
 
 endif;

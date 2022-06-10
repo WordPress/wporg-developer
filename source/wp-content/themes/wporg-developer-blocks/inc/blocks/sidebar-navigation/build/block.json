@@ -8,7 +8,10 @@
   "icon": "smiley",
   "description": "Show an expandable sidebar navigation for all developer documentation pages.",
   "supports": {
-    "html": false
+    "html": false,
+    "typography": {
+      "fontSize": true
+    }
   },
   "textdomain": "sidebar-navigation",
   "editorScript": "file:./index.js",

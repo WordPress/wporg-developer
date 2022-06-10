@@ -93,33 +93,53 @@ div.front-title h1 {
 	color: var(--wp--preset--color--blue-2);
 }
 
+
+
 /** Layout **************/
 
 main.main-content,
 .editor-styles-wrapper main.main-content {
 	align-items: stretch;
 	align-content: flex-start;
+	justify-content: space-around;
 }
 
 .navigation-sidebar {
-	flex: 0 0 350px;
+	flex: 0 0 300px;
 	background: var(--wp--preset--color--off-white-2);
-	padding: 15px 0 20px;
-	min-height: 75vh;
+	min-height: 100vh;
 	max-width: 350px;
+	position: sticky;
+	top: var(--wp-global-header-height);
 }
 
-.content-section {
-	flex-grow: 1;
-	background-color: #fff;
-	max-width: calc( 100% - 700px );
+.navigation-sidebar:after {
+	content: "";
+	position: absolute;
+	top: -25px;
+	right: -25px;
+	background: var(--wp--preset--color--white);
+	width: 40px;
+	height: 40px;
+	transform: rotate(45deg);
+}
+
+.page-content {
+	overflow-y: hidden;
+	flex: 1;
 }
 
 .wp-block-wporg-developer-toc {
-	flex: 0 0 350px;
+	flex: 0 0 250px;
+	position: sticky;
+	top: calc( var(--wp-global-header-height) + 20px );
+	align-self: flex-start;
+	min-height: calc( 100vh - var(--wp-global-header-height) - 20px );
 }
 
 /** Page Content **************/
+
+
 
 .page-content img {
 	max-width: 100%;
@@ -139,13 +159,17 @@ main.main-content,
 }
 
 .entry-content > p:first-child {
-	font-size: 26px;
+	font-size: 26px !important;
 	line-height: 1.6em;
 	color: #444;
 	font-family: var(--wp--preset--font-family--eb-garamond);
 }
+.entry-content>p:first-child em {
+	font-style: normal;
+}
 
-.page-content > h2:first-child {
+.page-content > h2:first-child,
+.entry-content > h2:first-child {
 	border: none;
 	padding-top: 0;
 	margin-top: 0;
@@ -161,8 +185,45 @@ main.main-content,
 	--wp--style--block-gap: 0;
 }
 
+/** Extras **************/
 
-.wp-block-syntaxhighlighter-code {
-	max-width: 100%;
+h2.toc-heading a,
+h3.toc-heading a,
+h4.toc-heading a {
+	margin-left: 0;
+}
+
+h2.toc-heading a:before,
+h3.toc-heading a:before,
+h4.toc-heading a:before,
+.toc-jump {
+	display: none;
+}
+
+.page-content .syntaxhighlighter {
+	background-color: var(--wp--preset--color--dark-strokes-grey) !important;
+	padding: 1.4em !important;
+	width: auto !important;
+}
+
+.page-content .syntaxhighlighter:after {
+	content: "";
+	position: absolute;
+	top: -25px;
+	right: -25px;
+	background: var(--wp--preset--color--white);
+	width: 40px;
+	height: 40px;
+	transform: rotate(45deg);
+}
+
+.page-content .syntaxhighlighter table td.code .line,
+.page-content .syntaxhighlighter table td.gutter .line {
+	padding: 0 0.5em 0.5em 0 !important;
+}
+
+.page-content .syntaxhighlighter .line.alt2,
+.page-content .syntaxhighlighter .line.alt1 {
+	background: none !important;
 }
 

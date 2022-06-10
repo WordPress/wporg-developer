@@ -181,10 +181,14 @@ class WPorg_Handbook_TOC {
 	 */
 	public function build_toc( $items ) {
 		$toc   = '';
-		$contents_header = 'h' . reset( $items )['level']; // Duplicate the first <h#> tag in the document for the TOC header
+		$contents_header = 'h' .  reset( $items )['level']; // Duplicate the first <h#> tag in the document for the TOC header
 		$toc            .= '<div class="table-of-contents">';
 		$toc            .= "<$contents_header>" . esc_html( $this->args->header_text ) . "</$contents_header><ul class=\"items\">";
 		$last_item       = false;
+
+		if ( empty( $items ) ) {
+			return $toc;
+		}
 
 		foreach ( $items as $item ) {
 			if ( $last_item ) {
@@ -245,6 +249,10 @@ class WPorg_Handbook_TOC {
 		$first = true;
 		$matches = array();
 		$replacements = array();
+
+		if ( empty( $items) ) {
+			return $content;
+		}
 
 		foreach ( $items as $item ) {
 			$replacement = '';
