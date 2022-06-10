@@ -114,9 +114,11 @@ class DevHub_Search_Form_Autocomplete {
 				if ( in_array( $post->post_type, $post_types_function_like ) ) {
 					$title .= '()';
 				}
-		if ( $post->post_type == 'wp-parser-class' ) {
-			$title =  'class ' . $title . ' {}';
-		}
+
+				if ( $post->post_type == 'wp-parser-class' ) {
+					$title =  'class ' . $title . ' {}';
+				}
+
 				$form_data['posts'][ $title ] = $permalink;
 			}
 		}
