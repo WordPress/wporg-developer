@@ -130,7 +130,9 @@ jQuery( function ( $ ) {
 	// Runs before the highlight parsing is run.
 	// `env` is defined here: https://github.com/PrismJS/prism/blob/2815f699970eb8387d741e3ac886845ce5439afb/prism.js#L583-L588
 	Prism.hooks.add( 'before-highlight', function ( env ) {
-		if ( 'php' === env.language && ! env.code.startsWith( '<?' ) ) {
+		// If the code starts with `<`, it's either already got an opening tag,
+		// or it starts with HTML. Either way, we don't want to inject here.
+		if ( 'php' === env.language && ! env.code.startsWith( '<' ) ) {
 			env.code = '<? ' + env.code;
 			env.hasAddedTag = true;
 		}
