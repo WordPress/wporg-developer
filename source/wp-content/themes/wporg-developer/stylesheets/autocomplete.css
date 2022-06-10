@@ -49,6 +49,11 @@ div.awesomplete li[aria-selected="true"] mark {
 	overflow: visible;
 }
 
+.search-wrap div.awesomplete {
+	/* This is for the input to expand */
+	display: flex; 
+}
+
 div.awesomplete > ul::before {
 	content: none;
 }
