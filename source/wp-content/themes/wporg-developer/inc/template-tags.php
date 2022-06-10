@@ -620,17 +620,7 @@ namespace DevHub {
 	 * @return string
 	 */
 	function get_site_section_url() {
-		$parts = explode( '/', $GLOBALS['wp']->request );
-		switch ( $parts[0] ) {
-			case 'reference':
-			case 'plugins':
-			case 'themes':
-				return home_url( '/' . $parts[0] . '/' );
-			case 'cli':
-				return home_url( '/cli/commands/' );
-			default:
-				return home_url( '/' );
-		}
+		return home_url( '/' );
 	}
 
 	/**
@@ -644,22 +634,6 @@ namespace DevHub {
 			case 'resources':
 			case 'resource':
 				return sprintf( __( 'Developer Resources: %s', 'wporg' ), get_the_title() );
-			case 'reference':
-				return __( 'Code Reference', 'wporg' );
-			case 'plugins':
-				return __( 'Plugin Handbook', 'wporg' );
-			case 'themes':
-				return __( 'Theme Handbook', 'wporg' );
-			case 'apis':
-				return __( 'Common APIs Handbook', 'wporg' );
-			case 'block-editor':
-				return __( 'Block Editor Handbook', 'wporg' );
-			case 'cli':
-				return __( 'WP-CLI Commands', 'wporg' );
-			case 'coding-standards':
-				return __( 'Coding Standards Handbook', 'wporg' );
-			case 'rest-api':
-				return __( 'REST API Handbook', 'wporg' );
 			default:
 				return __( 'Developer Resources', 'wporg' );
 		}
