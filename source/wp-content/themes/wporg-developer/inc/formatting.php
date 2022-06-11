@@ -728,12 +728,10 @@ class DevHub_Formatting {
 	 * @return string
 	 */
 	public static function do_shortcode_php( $attr, $content, $tag ) {
-		return do_blocks(
-			sprintf(
-				'<!-- wp:code {"lineNumbers":true} --><pre class="wp-block-code"><code lang="php" class="language-php line-numbers">%s</code></pre><!-- /wp:code -->',
-				self::_trim_code( $content )
-			)
-		);
+		$attr = is_array( $attr ) ? $attr : array();
+		$attr['lang'] = 'php';
+
+		return self::do_shortcode_code( $attr, $content, $tag );
 	}
 
 	/**
@@ -747,12 +745,10 @@ class DevHub_Formatting {
 	 * @return string
 	 */
 	public static function do_shortcode_js( $attr, $content, $tag ) {
-		return do_blocks(
-			sprintf(
-				'<!-- wp:code {"lineNumbers":true} --><pre class="wp-block-code"><code lang="javascript" class="language-javascript line-numbers">%s</code></pre><!-- /wp:code -->',
-				self::_trim_code( $content )
-			)
-		);
+		$attr = is_array( $attr ) ? $attr : array();
+		$attr['lang'] = 'js';
+
+		return self::do_shortcode_code( $attr, $content, $tag );
 	}
 
 	/**
@@ -766,12 +762,10 @@ class DevHub_Formatting {
 	 * @return string
 	 */
 	public static function do_shortcode_css( $attr, $content, $tag ) {
-		return do_blocks(
-			sprintf(
-				'<!-- wp:code {"lineNumbers":true} --><pre class="wp-block-code"><code lang="css" class="language-css line-numbers">%s</code></pre><!-- /wp:code -->',
-				self::_trim_code( $content )
-			)
-		);
+		$attr = is_array( $attr ) ? $attr : array();
+		$attr['lang'] = 'css';
+
+		return self::do_shortcode_code( $attr, $content, $tag );
 	}
 
 	/**
