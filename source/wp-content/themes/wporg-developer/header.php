@@ -22,7 +22,7 @@ $show_masthead = is_front_page() || is_page( 'reference' );
 	<?php if ( function_exists( 'wporg_is_handbook' ) && wporg_is_handbook() && ! is_search() ) : ?>
 		<a href="#" id="secondary-toggle" onclick="return false;"><strong><?php _e( 'Menu', 'wporg' ); ?></strong></a>
 	<?php endif; ?>
-	<div class="site-branding<?php echo ! $show_masthead ? ' has-actions': '' ?>">
+	<div class="site-branding<?php echo ! $show_masthead && $show_search ? ' has-actions': '' ?>">
 
 		<h1 class="site-title">
 			<a href="<?php echo esc_url( DevHub\get_site_section_url() ); ?>" rel="home"><?php echo DevHub\get_site_section_title(); ?></a>
