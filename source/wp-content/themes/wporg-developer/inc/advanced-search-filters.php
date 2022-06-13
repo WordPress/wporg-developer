@@ -139,7 +139,11 @@ class Advanced_Search_Filters {
 	 */
 	public static function modify_search( $posts, $query ) {
 		// Reset the keyword so we don't lose the qualifiers
-		$query->set( 's', $query->query['s'] );
+
+		if( isset( $query->query['s'] ) ) {
+			$query->set( 's', $query->query['s'] );
+		}
+
 		return $posts;
 	}
 }
