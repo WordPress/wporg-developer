@@ -783,7 +783,10 @@ class DevHub_Formatting {
 		// This should account for all languages used in the handbooks.
 		$lang_list = [ 'js', 'json', 'sh', 'bash', 'html', 'css', 'scss', 'php', 'markdown', 'yaml' ];
 		$lang = in_array( $attr['lang'], $lang_list ) ? $attr['lang'] : 'php';
-		$show_line_numbers = substr_count( $content, '<br />' ) > 5; // The content usually has 1-2 extra breaks.
+
+		$content = self::_trim_code( $content );
+		// Hides numbers if <= 4 lines of code (last line has no linebreak).
+		$show_line_numbers = substr_count( $content, "\n" ) > 3;
 
 		// Shell is flagged with `sh` or `bash` in the handbooks, but Prism uses `shell`.
 		if ( 'sh' === $lang || 'bash' === $lang ) {
@@ -794,7 +797,7 @@ class DevHub_Formatting {
 			sprintf(
 				'<!-- wp:code {"lineNumbers":$3$s} --><pre class="wp-block-code"><code lang="%1$s" class="language-%1$s %4$s">%2$s</code></pre><!-- /wp:code -->',
 				$lang,
-				self::_trim_code( $content ),
+				$content,
 				$show_line_numbers ? 'true' : 'false',
 				$show_line_numbers ? 'line-numbers' : ''
 			)
