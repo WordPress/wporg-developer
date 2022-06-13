@@ -81,7 +81,7 @@ class Advanced_Search_Filters {
 
 				// If user has '()' at end of a search string, assume they want a specific function/method.
 				$s = htmlentities( $split[0] );
-				if ( str_contains( $s, '(' ) || '(' == substr( $s, -1 ) ) {
+				if ( str_contains( $s, '(' ) ) {
 					// Modify the search query to omit the parentheses.
 					$keyword = str_replace( array( '()', '(' ), '', $keyword );
 
