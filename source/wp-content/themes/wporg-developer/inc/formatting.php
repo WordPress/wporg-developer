@@ -737,7 +737,7 @@ class DevHub_Formatting {
 	/**
 	 * Render the js shortcode using the Code Syntax Block syntax.
 	 *
-	 * This is a workaround for user-submitted code, which used the php shortcode from Syntax Highlighter Evolved.
+	 * This is a workaround for user-submitted code, which used the js shortcode from Syntax Highlighter Evolved.
 	 *
 	 * @param array|string $attr    Shortcode attributes array or empty string.
 	 * @param string       $content Shortcode content.
