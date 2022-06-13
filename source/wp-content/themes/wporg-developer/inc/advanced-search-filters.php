@@ -99,8 +99,8 @@ class Advanced_Search_Filters {
 
 					if ( in_array( $type, DevHub\get_parsed_post_types() ) ) {
 						$post_types[] = $type;
-
-						$keyword = str_replace( 'type:', '', $keyword );
+						// Remove everything from the query.
+						$keyword = str_replace( $group, '', $keyword );
 					}
 
 					break;
@@ -120,10 +120,10 @@ class Advanced_Search_Filters {
 		}
 
 		// Add relevant tax queries
-		$query->set( 'tax_query', array_merge( $query->get( 'tax_query' ) ?: array(), $tax_queries ) );
+		$query->set( 'tax_query', array_unique( array_merge( $query->get( 'tax_query' ) ?: array(), $tax_queries ), SORT_REGULAR ) );
 
 		// Add relevant post_types
-		$query->set( 'post_type', array_merge( $query->get( 'post_type' ) ?: array(), $post_types ) );
+		$query->set( 'post_type', array_unique( array_merge( $query->get( 'post_type' ) ?: array(), $post_types ), SORT_REGULAR ) );
 
 		// Reset the keyword
 		$query->set( 's', $keyword );
@@ -140,7 +140,7 @@ class Advanced_Search_Filters {
 	public static function modify_search( $posts, $query ) {
 		// Reset the keyword so we don't lose the qualifiers
 
-		if( isset( $query->query['s'] ) ) {
+		if ( isset( $query->query['s'] ) ) {
 			$query->set( 's', $query->query['s'] );
 		}
 
