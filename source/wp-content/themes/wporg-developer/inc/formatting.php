@@ -737,7 +737,7 @@ class DevHub_Formatting {
 	/**
 	 * Render the js shortcode using the Code Syntax Block syntax.
 	 *
-	 * This is a workaround for user-submitted code, which used the php shortcode from Syntax Highlighter Evolved.
+	 * This is a workaround for user-submitted code, which used the js shortcode from Syntax Highlighter Evolved.
 	 *
 	 * @param array|string $attr    Shortcode attributes array or empty string.
 	 * @param string       $content Shortcode content.
@@ -784,6 +784,10 @@ class DevHub_Formatting {
 		$lang_list = [ 'js', 'json', 'sh', 'bash', 'html', 'css', 'scss', 'php', 'markdown', 'yaml' ];
 		$lang = in_array( $attr['lang'], $lang_list ) ? $attr['lang'] : 'php';
 
+		$content = self::_trim_code( $content );
+		// Hides numbers if <= 4 lines of code (last line has no linebreak).
+		$show_line_numbers = substr_count( $content, "\n" ) > 3;
+
 		// Shell is flagged with `sh` or `bash` in the handbooks, but Prism uses `shell`.
 		if ( 'sh' === $lang || 'bash' === $lang ) {
 			$lang = 'shell';
@@ -791,9 +795,11 @@ class DevHub_Formatting {
 
 		return do_blocks(
 			sprintf(
-				'<!-- wp:code {"lineNumbers":true} --><pre class="wp-block-code"><code lang="%1$s" class="language-%1$s line-numbers">%2$s</code></pre><!-- /wp:code -->',
+				'<!-- wp:code {"lineNumbers":$3$s} --><pre class="wp-block-code"><code lang="%1$s" class="language-%1$s %4$s">%2$s</code></pre><!-- /wp:code -->',
 				$lang,
-				self::_trim_code( $content )
+				$content,
+				$show_line_numbers ? 'true' : 'false',
+				$show_line_numbers ? 'line-numbers' : ''
 			)
 		);
 	}
