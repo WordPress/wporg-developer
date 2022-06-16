@@ -61,7 +61,7 @@
 	#content-area,
 	.inner-wrap {
 		margin: 2rem auto 0;
-		max-width: 60em;
+		max-width: $devhub-wrap-content-width;
 	}
 
 	.page-header {
@@ -1554,7 +1554,7 @@
 	#content-area.has-sidebar {
 		float: none;
 		margin: 0 auto;
-		width: 60em;
+		width: $devhub-wrap-content-width;
 	}
 
 	.has-sidebar {
@@ -1993,31 +1993,32 @@ aside[id^="nav_menu"] .widget-title {
 }
 
 /** Table of Contents */
-.site-main .table-of-contents {
-	float: right;
-	width: 250px;
-	border: 1px solid #eee;
-	margin: 0 0 15px 15px;
-	z-index: 1;
-	position: relative;
-	color: #555d66;
-	background-color: #fff;
-	box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-	border-radius: 3px;
+.site-main {
+	.table-of-contents {
+		width: 100%;
+		border: 1px solid #eee;
+		margin: 30px 0;
+		z-index: 1;
+		position: relative;
+		color: #555d66;
+		background-color: #fff;
+		box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+		border-radius: 3px;
 
-	@media (min-width: 971px) {
-		margin: 0 -30px 15px 15px;
+		h2 {
+			margin: 0;
+			padding: 0.7rem 1.2rem;
+			font-family: HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+			font-size: 1.3em;
+			color: #32373c;
+			text-transform: uppercase;
+			border-bottom: 1px solid #eee;
+			margin-bottom: 0;
+		}
 	}
 
-	h2 {
-		margin: 0;
-		padding: 0.7rem 1.2rem;
-		font-family: HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
-		font-size: 1.3em;
-		color: #32373c;
-		text-transform: uppercase;
-		border-bottom: 1px solid #eee;
-		margin-bottom: 0;
+	.summary + .table-of-contents {
+		margin-top: 15px;
 	}
 }
 
@@ -2068,12 +2069,6 @@ aside[id^="nav_menu"] .widget-title {
 .toc-heading a:active::before,
 .toc-heading a:focus::before {
 	color: get-color(blue-50);
-}
-
-@media (max-width: 480px) {
-	.table-of-contents {
-		display: none;
-	}
 }
 
 /** Menu */
@@ -2235,7 +2230,7 @@ div[class*="-table-of-contents-container"] {
 	}
 
 	#content {
-		max-width: 960px;
+		max-width: $single-handbook-content-width;
 		margin: 0 auto;
 		display: flex;
 		padding-top: 0;
@@ -2258,7 +2253,7 @@ div[class*="-table-of-contents-container"] {
 		padding: 4rem 0 4rem 4rem;
 		background: #fff;
 		box-sizing: border-box;
-		width: 72%;
+		width: $single-handbook-content-primary-width * 100%;
 
 		@media (max-width: 876px) {
 			padding: 4rem 20px;
@@ -2442,7 +2437,30 @@ body.responsive-show {
 			}
 		}
 	}
+}
 
+@media (min-width: 94em) {
+	.site-main {
+		.summary + .table-of-contents {
+			position: fixed;
+			width: 250px;
+			top: 180px;
+			left: calc( #{ $devhub-wrap-content-width } + ( ( 100vw - #{ $devhub-wrap-content-width } ) / 2 ) );
+		}
+	}
+}
+
+@media (min-width: 62em) {
+	.site-main .table-of-contents:not(.summary + .table-of-contents) {
+		position: fixed;
+		width: 250px;
+		top: 165px;
+		left: calc(
+			#{ $single-handbook-content-width } * #{ $single-handbook-content-primary-width } 
+			+ ( ( 100vw - #{ $single-handbook-content-width } ) / 2 ) 
+			+ 15px
+		);
+	}
 }
 
 @media ( min-width: 43em ) {
