@@ -2686,10 +2686,9 @@ aside[id^="nav_menu"] .widget-title {
 
 /** Table of Contents */
 .site-main .table-of-contents {
-  float: right;
-  width: 250px;
+  width: 100%;
   border: 1px solid #eee;
-  margin: 0 0 15px 15px;
+  margin: 30px 0;
   z-index: 1;
   position: relative;
   color: #555d66;
@@ -2698,10 +2697,8 @@ aside[id^="nav_menu"] .widget-title {
   border-radius: 3px;
 }
 
-@media (min-width: 971px) {
-  .site-main .table-of-contents {
-    margin: 0 -30px 15px 15px;
-  }
+.code-reference .site-main .table-of-contents {
+  margin-top: 15px;
 }
 
 .site-main .table-of-contents h2 {
@@ -3103,6 +3100,24 @@ body.responsive-show #o2-expand-editor {
   }
   .devhub-wrap.archive .meta a, .devhub-wrap.search .meta a {
     color: #21759b;
+  }
+}
+
+@media (min-width: 94em) {
+  .code-reference .site-main .table-of-contents {
+    position: fixed;
+    width: 250px;
+    top: 210px;
+    left: calc( 60em + ( ( 100vw - 60em ) / 2 ));
+  }
+}
+
+@media (min-width: 62em) {
+  .site-main .table-of-contents:not(.code-reference .site-main .table-of-contents) {
+    position: fixed;
+    width: 250px;
+    top: 200px;
+    left: calc( 960px * 0.72  + ( ( 100vw - 960px ) / 2 )  + 15px);
   }
 }
 
