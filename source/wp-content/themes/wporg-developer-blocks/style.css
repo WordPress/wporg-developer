@@ -177,6 +177,11 @@ main.main-content,
 	margin-top: 0;
 }
 
+.entry-content>p:first-child+.toc-header h2 {
+	border: none;
+	padding-top: 0;
+}
+
 .page-content code {
 	background-color: #f5f5f5;
 	border: 1px solid #e1e1e1;
@@ -228,4 +233,9 @@ h3.toc-heading a:before,
 h4.toc-heading a:before,
 .toc-jump {
 	display: none;
+}
+
+header.toc-header {
+	margin-top: 0 !important;
+	display: block;
 }
