@@ -32,26 +32,25 @@ if ( ! empty( $source_file ) ) :
 			?>
 		</p>
 
-		<?php if ( ! empty( $source_code ) ) : ?>
-			<?php
-				echo do_blocks(
-					sprintf(
-						'<!-- wp:code {"lineNumbers":true} --><pre class="wp-block-code" data-start="%1$s" aria-label="%2$s"><code lang="php" class="language-php line-numbers">%3$s</code></pre><!-- /wp:code -->',
-						esc_attr( get_post_meta( get_the_ID(), '_wp-parser_line_num', true ) ),
-						__( 'Function source code', 'wporg' ),
-						htmlentities( $source_code )
-					)
-				);
-			?>
-
-			<p class="source-code-links">
-				<span><a href="<?php echo get_source_file_link(); ?>"><?php _e( 'View on Trac', 'wporg' ); ?></a></span>
-				<span><a href="<?php echo get_github_source_file_link(); ?>"><?php _e( 'View on GitHub', 'wporg' ); ?></a></span>
-			</p>
-		<?php else : ?>
-			<p>
-				<a href="<?php echo get_source_file_link(); ?>"><?php _e( 'View on Trac', 'wporg' ); ?></a>
-			</p>
-		<?php endif; ?>
+		<?php if ( ! empty( $source_code ) ) {
+			echo do_blocks(
+				sprintf(
+					'<!-- wp:code {"lineNumbers":true} --><pre class="wp-block-code" data-start="%1$s" aria-label="%2$s"><code lang="php" class="language-php line-numbers">%3$s</code></pre><!-- /wp:code -->',
+					esc_attr( get_post_meta( get_the_ID(), '_wp-parser_line_num', true ) ),
+					__( 'Function source code', 'wporg' ),
+					htmlentities( $source_code )
+				)
+			);
+		} ?>
 	</section>
+	<?php if ( ! empty( $source_code ) ) : ?>
+		<p class="source-code-links">
+			<span><a href="<?php echo get_source_file_link(); ?>"><?php _e( 'View on Trac', 'wporg' ); ?></a></span>
+			<span><a href="<?php echo get_github_source_file_link(); ?>"><?php _e( 'View on GitHub', 'wporg' ); ?></a></span>
+		</p>
+	<?php else : ?>
+		<p>
+			<a href="<?php echo get_source_file_link(); ?>"><?php _e( 'View on Trac', 'wporg' ); ?></a>
+		</p>
+	<?php endif; ?>
 <?php endif; ?>

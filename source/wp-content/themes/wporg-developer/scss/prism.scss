@@ -209,6 +209,9 @@ pre.line-numbers > code {
 
 /* Copy button */
 .wp-code-block-button-container {
+	position: sticky;
+	top: var(--wp-global-header-height);
+	z-index: 1;
 	display: flex;
 	justify-content: right;
 	padding: 1rem;
@@ -229,9 +232,11 @@ pre.line-numbers > code {
 
 	+ pre {
 		margin-top: 0;
+		margin-bottom: -4px;
 		border-width: 0 1px 1px;
 		border-style: solid;
 		border-color: get-color(gray-5);
+		padding-bottom: 4px;
 		border-top-left-radius: 0;
 		border-top-right-radius: 0;
 	}
