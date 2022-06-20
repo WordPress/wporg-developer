@@ -222,6 +222,10 @@ pre.line-numbers > code {
 	border-top-left-radius: 0.3em;
 	border-top-right-radius: 0.3em;
 
+	@media screen and (max-width: 876px) {
+		top: 0;
+	}
+
 	button {
 		font-size: 1.2rem !important;
 	}

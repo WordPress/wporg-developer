@@ -211,6 +211,12 @@ pre.line-numbers > code {
   border-top-right-radius: 0.3em;
 }
 
+@media screen and (max-width: 876px) {
+  .wp-code-block-button-container {
+    top: 0;
+  }
+}
+
 .wp-code-block-button-container button {
   font-size: 1.2rem !important;
 }

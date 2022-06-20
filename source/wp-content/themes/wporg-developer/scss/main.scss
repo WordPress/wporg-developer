@@ -2396,7 +2396,8 @@ body.responsive-show {
 	}
 
 	#page {
-		overflow-x: hidden;
+		overflow-x: hidden; // a fallback for 'overflow: clip' on Safari
+		overflow-x: clip; // make 'position: sticky' work while preventing the overflow
 	}
 
 	body.responsive-show {
