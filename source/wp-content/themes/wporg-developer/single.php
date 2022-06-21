@@ -7,11 +7,11 @@
 
 get_header(); ?>
 
-	<div id="content-area" <?php body_class( 'code-reference' ); ?>>
+<?php get_sidebar(); ?>
+
+	<main id="primary" <?php post_class( 'site-main' ); ?> role="main">
 
 		<?php breadcrumb_trail(); ?>
-
-		<main id="main" class="site-main" role="main">
 
 		<?php while ( have_posts() ) : the_post(); ?>
 
@@ -21,6 +21,5 @@ get_header(); ?>
 
 		<?php endwhile; // end of the loop. ?>
 
-		</main><!-- #main -->
-	</div><!-- #primary -->
+	</main><!-- #main -->
 <?php get_footer(); ?>
