@@ -13,7 +13,6 @@
 		$parts = $TOC->parse_content( $content );
 
 		$content = $parts['content'];
-		$toc = $parts['toc'];
 	endif;
 
 endif; ?>
@@ -33,11 +32,6 @@ endif; ?>
 				<?php echo get_summary(); ?>
 			</section>
 		</div>
-		<?php if ( is_single() ) :
-
-			echo $toc;
-
-		endif; ?>
 	</header>
 
 <?php if ( is_single() ) :  
