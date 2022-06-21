@@ -2070,12 +2070,6 @@ aside[id^="nav_menu"] .widget-title {
 	color: get-color(blue-50);
 }
 
-@media (max-width: 480px) {
-	.table-of-contents {
-		display: none;
-	}
-}
-
 /** Menu */
 #secondary aside.widget_wporg_handbook_pages,
 #secondary aside.widget_nav_menu {
@@ -2484,6 +2478,12 @@ body.responsive-show {
 	}
 
 	.devhub-wrap {
+		.table-of-contents {
+			float: none;
+			margin-left: 0;
+			width: 100%;
+		}
+
 		.three-columns .box,
 		.section .box,
 		.home-primary-content,
@@ -2537,12 +2537,6 @@ body.responsive-show {
 
 @media (max-width: 32em) {
 	.devhub-wrap {
-		.table-of-contents {
-			float: none;
-			margin-left: 0;
-			width: 100%;
-		}
-
 		section {
 			overflow: inherit;
 		}

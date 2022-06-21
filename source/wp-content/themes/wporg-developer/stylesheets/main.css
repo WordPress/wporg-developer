@@ -2774,12 +2774,6 @@ aside[id^="nav_menu"] .widget-title {
   color: #2271b1;
 }
 
-@media (max-width: 480px) {
-  .table-of-contents {
-    display: none;
-  }
-}
-
 /** Menu */
 #secondary aside.widget_wporg_handbook_pages,
 #secondary aside.widget_nav_menu {
@@ -3139,6 +3133,11 @@ body.responsive-show #o2-expand-editor {
   #content-area.has-sidebar .widget-area .widget {
     width: 100%;
   }
+  .devhub-wrap .table-of-contents {
+    float: none;
+    margin-left: 0;
+    width: 100%;
+  }
   .devhub-wrap .three-columns .box,
   .devhub-wrap .section .box,
   .devhub-wrap .home-primary-content,
@@ -3181,11 +3180,6 @@ body.responsive-show #o2-expand-editor {
 }
 
 @media (max-width: 32em) {
-  .devhub-wrap .table-of-contents {
-    float: none;
-    margin-left: 0;
-    width: 100%;
-  }
   .devhub-wrap section {
     overflow: inherit;
   }
