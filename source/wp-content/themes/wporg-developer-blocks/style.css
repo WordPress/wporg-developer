@@ -181,9 +181,13 @@ main.main-content,
 	margin-top: 0;
 }
 
+.entry-content>.toc-header:first-child h2,
 .entry-content>p:first-child+.toc-header h2 {
 	border: none;
 	padding-top: 0;
+}
+.entry-content>.toc-header:first-child h2 {
+	margin-top: 0;
 }
 
 .page-content code {
