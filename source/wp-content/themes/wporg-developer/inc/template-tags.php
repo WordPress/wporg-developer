@@ -773,10 +773,10 @@ namespace DevHub {
 		}
 		$signature .= ')';
 
-		$return = get_return( $post_id, false );
-		if ( $return ) {
-			$signature .= ': ' . $return;
-		}
+		// $return = get_return( $post_id, false );
+		// if ( $return ) {
+		// 	$signature .= ': ' . $return;
+		// }
 
 		return wp_kses_post( $signature );
 	}
