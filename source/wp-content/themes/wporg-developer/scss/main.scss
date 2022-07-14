@@ -1995,6 +1995,8 @@ aside[id^="nav_menu"] .widget-title {
 /** Table of Contents */
 .site-main {
 	.table-of-contents {
+		display: flex;
+		flex-direction: column;
 		width: 100%;
 		border: 1px solid #eee;
 		margin: 30px 0;
@@ -2019,6 +2021,10 @@ aside[id^="nav_menu"] .widget-title {
 			border-bottom: 1px solid #eee;
 			margin-bottom: 0;
 		}
+
+		.items {
+			overflow-y: scroll;
+		} 
 	}
 }
 
@@ -2440,24 +2446,37 @@ body.responsive-show {
 }
 
 @media (min-width: 94em) {
-	.code-reference .site-main .table-of-contents {
+	.site-main .table-of-contents {
 		position: fixed;
 		width: 250px;
-		top: 210px;
-		left: calc( #{ $devhub-wrap-content-width } + ( ( 100vw - #{ $devhub-wrap-content-width } ) / 2 ) );
+
+		.code-reference & {
+			top: $devhub-wrap-toc-position-top;
+			left: calc( #{ $devhub-wrap-content-width } + ( ( 100vw - #{ $devhub-wrap-content-width } ) / 2 ) );
+			max-height: calc(90vh - #{ $devhub-wrap-toc-position-top });
+		}
+
+		// Pages with sidebar
+		.widget-area + & {
+			top: $single-handbook-toc-position-top;
+			left: calc( #{ $single-handbook-content-width } + ( ( 100vw - #{ $single-handbook-content-width } ) / 2 ) );
+			max-height: calc(90vh - #{ $single-handbook-toc-position-top });
+		}
 	}
 }
 
 @media (min-width: 62em) {
-	.site-main .table-of-contents:not(.code-reference .site-main .table-of-contents) {
+	// Pages which are not code reference and without a sidebar
+	.site-main .table-of-contents:not(.code-reference .site-main .table-of-contents):not(.widget-area + .site-main .table-of-contents) {
 		position: fixed;
 		width: 250px;
-		top: 200px;
+		top: $single-handbook-toc-position-top;
 		left: calc(
 			#{ $single-handbook-content-width } * #{ $single-handbook-content-primary-width } 
 			+ ( ( 100vw - #{ $single-handbook-content-width } ) / 2 ) 
 			+ 15px
 		);
+		max-height: calc(90vh - #{ $single-handbook-toc-position-top });
 	}
 }
 
