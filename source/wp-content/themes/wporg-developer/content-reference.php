@@ -23,9 +23,7 @@
 			'header_text' => __( 'Contents', 'wporg' )
 		) );
 
-		$parts = $TOC->parse_content( $content );
-
-		$content = $parts['content'];
+		$content = $TOC->add_toc( $content );
 
 	endif;
 	?>
