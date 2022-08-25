@@ -190,15 +190,15 @@
         },
         {
             "name": "wpackagist-plugin/code-syntax-block",
-            "version": "3.0.0",
+            "version": "3.1.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/code-syntax-block/",
-                "reference": "tags/3.0.0"
+                "reference": "tags/3.1.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/code-syntax-block.3.0.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/code-syntax-block.3.1.1.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -208,15 +208,15 @@
         },
         {
             "name": "wpackagist-plugin/gutenberg",
-            "version": "13.4.0",
+            "version": "13.9.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/gutenberg/",
-                "reference": "tags/13.4.0"
+                "reference": "tags/13.9.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/gutenberg.13.4.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/gutenberg.13.9.0.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -226,15 +226,15 @@
         },
         {
             "name": "wpackagist-plugin/jetpack",
-            "version": "11.1-a.1",
+            "version": "11.3-a.11",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/jetpack/",
-                "reference": "tags/11.1-a.1"
+                "reference": "tags/11.3-a.11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/jetpack.11.1-a.1.zip"
+                "url": "https://downloads.wordpress.org/plugin/jetpack.11.3-a.11.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -302,18 +302,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/WordPress/wporg-mu-plugins.git",
-                "reference": "9784ff0f85f43a63556e6282fad45099003abec2"
+                "reference": "ca5d5afa2c482b962c78f6e3c152e0090f9ec25c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WordPress/wporg-mu-plugins/zipball/9784ff0f85f43a63556e6282fad45099003abec2",
-                "reference": "9784ff0f85f43a63556e6282fad45099003abec2",
+                "url": "https://api.github.com/repos/WordPress/wporg-mu-plugins/zipball/ca5d5afa2c482b962c78f6e3c152e0090f9ec25c",
+                "reference": "ca5d5afa2c482b962c78f6e3c152e0090f9ec25c",
                 "shasum": ""
             },
             "require": {
                 "composer/installers": "~1.0"
             },
             "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
+                "phpcompatibility/phpcompatibility-wp": "*",
+                "wp-coding-standards/wpcs": "2.*",
                 "wporg/wporg-repo-tools": "dev-trunk"
             },
             "type": "wordpress-muplugin",
@@ -325,6 +328,14 @@
                     }
                 }
             },
+            "scripts": {
+                "format": [
+                    "phpcbf -p"
+                ],
+                "lint": [
+                    "phpcs"
+                ]
+            },
             "license": [
                 "GPL-2.0-or-later"
             ],
@@ -333,7 +344,7 @@
                 "source": "https://github.com/WordPress/wporg-mu-plugins/tree/build",
                 "issues": "https://github.com/WordPress/wporg-mu-plugins/issues"
             },
-            "time": "2022-05-24T05:25:13+00:00"
+            "time": "2022-08-15T09:20:57+00:00"
         },
         {
             "name": "wporg/wporg-repo-tools",
@@ -341,12 +352,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/WordPress/wporg-repo-tools.git",
-                "reference": "325447b539639664a0867d233631e3af84e2d548"
+                "reference": "154b006a03d137a52d6fffd88fe3b3ef66b9c14b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WordPress/wporg-repo-tools/zipball/325447b539639664a0867d233631e3af84e2d548",
-                "reference": "325447b539639664a0867d233631e3af84e2d548",
+                "url": "https://api.github.com/repos/WordPress/wporg-repo-tools/zipball/154b006a03d137a52d6fffd88fe3b3ef66b9c14b",
+                "reference": "154b006a03d137a52d6fffd88fe3b3ef66b9c14b",
                 "shasum": ""
             },
             "default-branch": true,
@@ -363,7 +374,7 @@
                 "issues": "https://github.com/WordPress/wporg-repo-tools/issues",
                 "source": "https://github.com/WordPress/wporg-repo-tools/tree/trunk"
             },
-            "time": "2022-04-28T23:06:09+00:00"
+            "time": "2022-07-21T13:46:18+00:00"
         }
     ],
     "packages-dev": [
@@ -914,12 +925,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "9455bde915e322a823d464a2c41e5c0de03512a6"
+                "reference": "407c40dcfb0250d015a6996c99db4bf3194aaca9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/9455bde915e322a823d464a2c41e5c0de03512a6",
-                "reference": "9455bde915e322a823d464a2c41e5c0de03512a6",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/407c40dcfb0250d015a6996c99db4bf3194aaca9",
+                "reference": "407c40dcfb0250d015a6996c99db4bf3194aaca9",
                 "shasum": ""
             },
             "require": {
@@ -964,11 +975,11 @@
                 "issues": "https://github.com/phpDocumentor/ReflectionDocBlock/issues",
                 "source": "https://github.com/phpDocumentor/ReflectionDocBlock/tree/master"
             },
-            "time": "2022-04-02T20:16:01+00:00"
+            "time": "2022-07-27T20:03:43+00:00"
         },
         {
             "name": "phpdocumentor/type-resolver",
-            "version": "1.x-dev",
+            "version": "1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
@@ -988,7 +999,6 @@
                 "ext-tokenizer": "*",
                 "psalm/phar": "^4.8"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1023,12 +1033,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "bbcd7380b0ebf3961ee21409db7b38bc31d69a13"
+                "reference": "a4477cd17b481a6095494c9583316a3e3aa88916"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/bbcd7380b0ebf3961ee21409db7b38bc31d69a13",
-                "reference": "bbcd7380b0ebf3961ee21409db7b38bc31d69a13",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/a4477cd17b481a6095494c9583316a3e3aa88916",
+                "reference": "a4477cd17b481a6095494c9583316a3e3aa88916",
                 "shasum": ""
             },
             "require": {
@@ -1081,9 +1091,9 @@
             ],
             "support": {
                 "issues": "https://github.com/phpspec/prophecy/issues",
-                "source": "https://github.com/phpspec/prophecy/tree/v1.15.0"
+                "source": "https://github.com/phpspec/prophecy/tree/master"
             },
-            "time": "2021-12-08T12:19:24+00:00"
+            "time": "2022-08-24T11:41:26+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -2194,12 +2204,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "5e2719947a22c3cd9a6545dbb66d44b81bc0a1e6"
+                "reference": "53e0f59fff0657e03c2dfab631db30f18abf41f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/5e2719947a22c3cd9a6545dbb66d44b81bc0a1e6",
-                "reference": "5e2719947a22c3cd9a6545dbb66d44b81bc0a1e6",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/53e0f59fff0657e03c2dfab631db30f18abf41f3",
+                "reference": "53e0f59fff0657e03c2dfab631db30f18abf41f3",
                 "shasum": ""
             },
             "require": {
@@ -2243,7 +2253,7 @@
                 "source": "https://github.com/squizlabs/PHP_CodeSniffer",
                 "wiki": "https://github.com/squizlabs/PHP_CodeSniffer/wiki"
             },
-            "time": "2022-05-31T22:48:23+00:00"
+            "time": "2022-08-13T07:17:24+00:00"
         },
         {
             "name": "theseer/tokenizer",
@@ -2458,12 +2468,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Yoast/PHPUnit-Polyfills.git",
-                "reference": "6f0e762926dbdc787c26bddc43c123711b85551a"
+                "reference": "b0c727ed3fb2a6c4528c676af69651ec4f579655"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Yoast/PHPUnit-Polyfills/zipball/6f0e762926dbdc787c26bddc43c123711b85551a",
-                "reference": "6f0e762926dbdc787c26bddc43c123711b85551a",
+                "url": "https://api.github.com/repos/Yoast/PHPUnit-Polyfills/zipball/b0c727ed3fb2a6c4528c676af69651ec4f579655",
+                "reference": "b0c727ed3fb2a6c4528c676af69651ec4f579655",
                 "shasum": ""
             },
             "require": {
@@ -2512,7 +2522,7 @@
                 "issues": "https://github.com/Yoast/PHPUnit-Polyfills/issues",
                 "source": "https://github.com/Yoast/PHPUnit-Polyfills"
             },
-            "time": "2022-03-19T06:03:05+00:00"
+            "time": "2022-08-03T05:59:50+00:00"
         }
     ],
     "aliases": [],
@@ -2528,5 +2538,5 @@
     "platform-overrides": {
         "php": "7.2"
     },
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }
