@@ -1997,7 +1997,7 @@ aside[id^="nav_menu"] .widget-title {
 	.table-of-contents {
 		display: flex;
 		flex-direction: column;
-		width: 100%;
+		min-width: 230px;
 		border: 1px solid #eee;
 		margin: 30px 0;
 		z-index: 1;
@@ -2008,7 +2008,9 @@ aside[id^="nav_menu"] .widget-title {
 		border-radius: 3px;
 
 		.code-reference & {
+			float: right;
 			margin-top: 15px;
+			margin-left: 15px;
 		}
 
 		h2 {
@@ -2445,31 +2447,32 @@ body.responsive-show {
 	}
 }
 
-@media (min-width: 94em) {
+@media (min-width: 90em) {
 	.site-main .table-of-contents {
 		position: fixed;
-		width: 250px;
-
+		width: 15vw;
+		
 		.code-reference & {
-			top: $devhub-wrap-toc-position-top;
+			margin-left: 0;
 			left: calc( #{ $devhub-wrap-content-width } + ( ( 100vw - #{ $devhub-wrap-content-width } ) / 2 ) );
+			top: $devhub-wrap-toc-position-top;
 			max-height: calc(90vh - #{ $devhub-wrap-toc-position-top });
 		}
 
 		// Pages with sidebar
 		.widget-area + & {
-			top: $single-handbook-toc-position-top;
 			left: calc( #{ $single-handbook-content-width } + ( ( 100vw - #{ $single-handbook-content-width } ) / 2 ) );
+			top: $single-handbook-toc-position-top;
 			max-height: calc(90vh - #{ $single-handbook-toc-position-top });
 		}
 	}
 }
 
-@media (min-width: 62em) {
+@media (min-width: 877px) {
 	// Pages which are not code reference and without a sidebar
 	.site-main .table-of-contents:not(.code-reference .site-main .table-of-contents):not(.widget-area + .site-main .table-of-contents) {
 		position: fixed;
-		width: 250px;
+		width: 15vw;
 		top: $single-handbook-toc-position-top;
 		left: calc(
 			#{ $single-handbook-content-width } * #{ $single-handbook-content-primary-width } 
@@ -2492,6 +2495,15 @@ body.responsive-show {
 				float: left;
 			}
 		}
+	}
+}
+
+// Matches global header breakpoint
+@media ( max-width: 889px ) {
+	.code-reference .site-main .table-of-contents {
+		float: none;
+		margin-left: 0;
+		width: 100%;
 	}
 }
 
@@ -2519,12 +2531,6 @@ body.responsive-show {
 	}
 
 	.devhub-wrap {
-		.table-of-contents {
-			float: none;
-			margin-left: 0;
-			width: 100%;
-		}
-
 		.three-columns .box,
 		.section .box,
 		.home-primary-content,
