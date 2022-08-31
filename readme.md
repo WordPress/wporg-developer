@@ -87,5 +87,5 @@ These must be run in the project's root folder, _not_ in theme/plugin subfolders
 
 ### Asset management
 
-* Build assets once: `yarn workspace wporg-parent-2021 build`
-* Watch assets and build on changes: `yarn workspace wporg-parent-2021 start`
+* Build assets once: `yarn workspace wporg-developer build`
+* Watch assets and build on changes: `yarn workspace wporg-developer start`
