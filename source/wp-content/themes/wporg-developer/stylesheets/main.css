@@ -3142,7 +3142,7 @@ body.responsive-show #o2-expand-editor {
     position: fixed;
     width: 15vw;
     top: 200px;
-    left: calc( 960px * 0.72  + ( ( 100vw - 960px ) / 2 )  + 15px);
+    left: calc( 960px * 0.72 + ( ( 100vw - 960px ) / 2 ) + 15px);
     max-height: calc(90vh - 200px);
   }
 }

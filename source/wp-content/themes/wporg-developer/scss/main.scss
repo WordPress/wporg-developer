@@ -2035,7 +2035,7 @@ aside[id^="nav_menu"] .widget-title {
 
 		.items {
 			overflow-y: scroll;
-		} 
+		}
 	}
 }
 
@@ -2460,7 +2460,7 @@ body.responsive-show {
 	.site-main .table-of-contents {
 		position: fixed;
 		width: 15vw;
-		
+
 		.code-reference & {
 			margin-left: 0;
 			left: calc( #{ $devhub-wrap-content-width } + ( ( 100vw - #{ $devhub-wrap-content-width } ) / 2 ) );
@@ -2484,8 +2484,8 @@ body.responsive-show {
 		width: 15vw;
 		top: $single-handbook-toc-position-top;
 		left: calc(
-			#{ $single-handbook-content-width } * #{ $single-handbook-content-primary-width } 
-			+ ( ( 100vw - #{ $single-handbook-content-width } ) / 2 ) 
+			#{ $single-handbook-content-width } * #{ $single-handbook-content-primary-width }
+			+ ( ( 100vw - #{ $single-handbook-content-width } ) / 2 )
 			+ 15px
 		);
 		max-height: calc(90vh - #{ $single-handbook-toc-position-top });
