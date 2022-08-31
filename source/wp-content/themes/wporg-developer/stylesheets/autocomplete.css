@@ -34,7 +34,13 @@ div.awesomplete li[aria-selected="true"] mark {
 
 .search-wrap-inline div.awesomplete > ul {
 	right: 0;
-	left: auto;
+}
+
+/* Matches submenu breakpoint */
+@media screen and ( min-width: 501px ) {
+	.search-wrap-inline div.awesomplete > ul {
+		left: auto;
+	}
 }
 
 .search-wrap .searchform label div.awesomplete > input,
