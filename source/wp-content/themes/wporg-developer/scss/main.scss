@@ -40,7 +40,7 @@
 
 	#content,
 	#content-area {
-		padding: 0 #{"max( 20px, 2% )"};
+		padding: 0 12px; // Matches .site-branding padding
 
 		table {
 			border: 1px solid #f0f0f0;
@@ -58,10 +58,20 @@
 		}
 	}
 
+	@media ( min-width: 889px ) {
+		#content {
+			padding: 0;
+		}
+
+		#content-area {
+			padding: 0 24px;
+		}
+	}
+
 	#content-area,
 	.inner-wrap {
 		margin: 2rem auto 0;
-		max-width: 60em;
+		max-width: $devhub-wrap-content-width;
 	}
 
 	.page-header {
@@ -1554,7 +1564,7 @@
 	#content-area.has-sidebar {
 		float: none;
 		margin: 0 auto;
-		width: 60em;
+		width: $devhub-wrap-content-width;
 	}
 
 	.has-sidebar {
@@ -1673,7 +1683,7 @@ a.screen-reader-text:focus,
 	box-sizing: border-box;
 	margin: 0 auto;
 	max-width: 960px;
-	padding: 0 10px;
+	padding: 0 24px;
 	position: relative;
 
 	&.has-actions {
@@ -1993,31 +2003,40 @@ aside[id^="nav_menu"] .widget-title {
 }
 
 /** Table of Contents */
-.site-main .table-of-contents {
-	float: right;
-	width: 250px;
-	border: 1px solid #eee;
-	margin: 0 0 15px 15px;
-	z-index: 1;
-	position: relative;
-	color: #555d66;
-	background-color: #fff;
-	box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-	border-radius: 3px;
+.site-main {
+	.table-of-contents {
+		display: flex;
+		flex-direction: column;
+		min-width: 230px;
+		border: 1px solid #eee;
+		margin: 30px 0;
+		z-index: 1;
+		position: relative;
+		color: #555d66;
+		background-color: #fff;
+		box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+		border-radius: 3px;
 
-	@media (min-width: 971px) {
-		margin: 0 -30px 15px 15px;
-	}
+		.code-reference & {
+			float: right;
+			margin-top: 15px;
+			margin-left: 15px;
+		}
 
-	h2 {
-		margin: 0;
-		padding: 0.7rem 1.2rem;
-		font-family: HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
-		font-size: 1.3em;
-		color: #32373c;
-		text-transform: uppercase;
-		border-bottom: 1px solid #eee;
-		margin-bottom: 0;
+		h2 {
+			margin: 0;
+			padding: 0.7rem 1.2rem;
+			font-family: HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+			font-size: 1.3em;
+			color: #32373c;
+			text-transform: uppercase;
+			border-bottom: 1px solid #eee;
+			margin-bottom: 0;
+		}
+
+		.items {
+			overflow-y: scroll;
+		} 
 	}
 }
 
@@ -2229,10 +2248,10 @@ div[class*="-table-of-contents-container"] {
 	}
 
 	#content {
-		max-width: 960px;
+		max-width: $single-handbook-content-width;
 		margin: 0 auto;
 		display: flex;
-		padding-top: 0;
+		padding: 0 #{"max( 20px, 2% )"};
 	}
 
 	header {
@@ -2252,7 +2271,7 @@ div[class*="-table-of-contents-container"] {
 		padding: 4rem 0 4rem 4rem;
 		background: #fff;
 		box-sizing: border-box;
-		width: 72%;
+		width: $single-handbook-content-primary-width * 100%;
 
 		@media (max-width: 876px) {
 			padding: 4rem 20px;
@@ -2436,7 +2455,42 @@ body.responsive-show {
 			}
 		}
 	}
+}
 
+@media (min-width: 90em) {
+	.site-main .table-of-contents {
+		position: fixed;
+		width: 15vw;
+		
+		.code-reference & {
+			margin-left: 0;
+			left: calc( #{ $devhub-wrap-content-width } + ( ( 100vw - #{ $devhub-wrap-content-width } ) / 2 ) );
+			top: $devhub-wrap-toc-position-top;
+			max-height: calc(90vh - #{ $devhub-wrap-toc-position-top });
+		}
+
+		// Pages with sidebar
+		.widget-area + & {
+			left: calc( #{ $single-handbook-content-width } + ( ( 100vw - #{ $single-handbook-content-width } ) / 2 ) );
+			top: $single-handbook-toc-position-top;
+			max-height: calc(90vh - #{ $single-handbook-toc-position-top });
+		}
+	}
+}
+
+@media (min-width: 877px) {
+	// Pages which are not code reference and without a sidebar
+	.site-main .table-of-contents:not(.code-reference .site-main .table-of-contents):not(.widget-area + .site-main .table-of-contents) {
+		position: fixed;
+		width: 15vw;
+		top: $single-handbook-toc-position-top;
+		left: calc(
+			#{ $single-handbook-content-width } * #{ $single-handbook-content-primary-width } 
+			+ ( ( 100vw - #{ $single-handbook-content-width } ) / 2 ) 
+			+ 15px
+		);
+		max-height: calc(90vh - #{ $single-handbook-toc-position-top });
+	}
 }
 
 @media ( min-width: 43em ) {
@@ -2451,6 +2505,15 @@ body.responsive-show {
 				float: left;
 			}
 		}
+	}
+}
+
+// Matches global header breakpoint
+@media ( max-width: 889px ) {
+	.code-reference .site-main .table-of-contents {
+		float: none;
+		margin-left: 0;
+		width: 100%;
 	}
 }
 
@@ -2478,12 +2541,6 @@ body.responsive-show {
 	}
 
 	.devhub-wrap {
-		.table-of-contents {
-			float: none;
-			margin-left: 0;
-			width: 100%;
-		}
-
 		.three-columns .box,
 		.section .box,
 		.home-primary-content,
