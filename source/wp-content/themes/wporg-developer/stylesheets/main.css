@@ -3512,6 +3512,12 @@ button.code-tab.is-active {
   width: 100%;
 }
 
+.search-wrap .searchform .search-field ul {
+  width: fit-content;
+  max-width: calc( 100vw - 24px - 20px - 10px);
+  /* Remove padding/margin of parent elements, plus a visual buffer. */
+}
+
 .search-wrap .searchform .button-search {
   display: flex;
   padding: 0;

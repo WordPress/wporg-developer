@@ -2881,6 +2881,11 @@ button.code-tab.is-active {
 			border: 1px solid #000;
 			border-radius: 4px;
 			width: 100%;
+
+			ul {
+				width: fit-content;
+				max-width: calc( 100vw - 24px - 20px - 10px ); /* Remove padding/margin of parent elements, plus a visual buffer. */
+			}
 		}
 
 		.button-search {
