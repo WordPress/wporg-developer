@@ -40,7 +40,7 @@
 
 	#content,
 	#content-area {
-		padding: 0 #{"max( 20px, 2% )"};
+		padding: 0 12px; // Matches .site-branding padding
 
 		table {
 			border: 1px solid #f0f0f0;
@@ -55,6 +55,16 @@
 				padding: 0.8em 1em;
 				border: 1px solid #f0f0f0;
 			}
+		}
+	}
+
+	@media ( min-width: 889px ) {
+		#content {
+			padding: 0;
+		}
+
+		#content-area {
+			padding: 0 24px;
 		}
 	}
 
@@ -1673,7 +1683,7 @@ a.screen-reader-text:focus,
 	box-sizing: border-box;
 	margin: 0 auto;
 	max-width: 960px;
-	padding: 0 10px;
+	padding: 0 24px;
 	position: relative;
 
 	&.has-actions {
@@ -2241,7 +2251,7 @@ div[class*="-table-of-contents-container"] {
 		max-width: $single-handbook-content-width;
 		margin: 0 auto;
 		display: flex;
-		padding-top: 0;
+		padding: 0 #{"max( 20px, 2% )"};
 	}
 
 	header {
