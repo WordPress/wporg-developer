@@ -3482,6 +3482,10 @@ button.code-tab.is-active {
   display: block;
 }
 
+.search-wrap {
+  --search-field-width: 400px;
+}
+
 .search-wrap .searchform {
   display: flex;
   align-items: center;
@@ -3513,9 +3517,16 @@ button.code-tab.is-active {
 }
 
 .search-wrap .searchform .search-field ul {
+  --parent-padding-margin: 24px + 20px;
+  --parent-width: var(--search-field-width);
+  --right-edge-gap: 50vw - calc( var(--parent-width) / 2 );
+  --visual-buffer: 20px;
   width: fit-content;
-  max-width: calc( 100vw - 24px - 20px - 10px);
-  /* Remove padding/margin of parent elements, plus a visual buffer. */
+  max-width: calc( var(--parent-width) + var(--right-edge-gap) - var(--parent-padding-margin) - var(--visual-buffer));
+}
+
+.search-wrap .searchform .search-field ul li {
+  padding-right: 20px;
 }
 
 .search-wrap .searchform .button-search {
@@ -3602,7 +3613,7 @@ button.code-tab.is-active {
 
 .search-wrap.search-wrap-embedded .search-field {
   margin-bottom: 0;
-  max-width: 400px;
+  max-width: var(--search-field-width);
   border: none;
 }
 
