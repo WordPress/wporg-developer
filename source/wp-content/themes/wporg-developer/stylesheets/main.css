@@ -3519,6 +3519,10 @@ button.code-tab.is-active {
   /* Match parents padding/margin. */
 }
 
+.search-wrap .searchform .search-field ul li {
+  padding-right: 20px;
+}
+
 .search-wrap .searchform .button-search {
   display: flex;
   padding: 0;
