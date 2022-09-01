@@ -3513,9 +3513,10 @@ button.code-tab.is-active {
 }
 
 .search-wrap .searchform .search-field ul {
-  width: fit-content;
-  max-width: calc( 100vw - 24px - 20px - 10px);
-  /* Remove padding/margin of parent elements, plus a visual buffer. */
+  left: 50%;
+  transform: translate(-50%, 0);
+  max-width: calc(100vw - 40px - 48px);
+  /* Match parents padding/margin. */
 }
 
 .search-wrap .searchform .button-search {
