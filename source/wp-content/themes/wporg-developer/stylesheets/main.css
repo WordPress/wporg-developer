@@ -3519,6 +3519,9 @@ button.code-tab.is-active {
 .search-wrap .searchform .search-field ul {
   --parent-padding-margin: 24px + 20px;
   --parent-width: var(--search-field-width);
+  /*
+				todo this works fine above 500px, but not below. need to match size of input field
+				*/
   --right-edge-gap: 50vw - calc( var(--parent-width) / 2 );
   --visual-buffer: 20px;
   width: fit-content;

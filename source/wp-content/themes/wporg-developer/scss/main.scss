@@ -2887,11 +2887,16 @@ button.code-tab.is-active {
 			ul {
 				--parent-padding-margin: 24px + 20px;
 				--parent-width: var(--search-field-width);
+				/*
+				todo this works fine above 500px, but not below. need to match size of input field
+				*/
+
 				//--parent-width: min(
 				//	var(--search-field-width),
 				//	100vw
 				//	//calc( 100vw - var(--parent-padding-margin) )
 				//);
+
 				--right-edge-gap: 50vw - calc( var(--parent-width) / 2 );
 				--visual-buffer: 20px;
 
