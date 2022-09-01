@@ -145,7 +145,7 @@ _.prototype = {
 	},
 
 	close: function () {
-		this.ul.setAttribute("hidden", "");
+		//this.ul.setAttribute("hidden", "");
 		this.index = -1;
 
 		$.fire(this.input, "awesomplete-close");
