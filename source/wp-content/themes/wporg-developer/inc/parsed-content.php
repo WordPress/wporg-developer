@@ -163,7 +163,10 @@ class WPORG_Edit_Parsed_Content {
 	public function admin_enqueue_scripts() {
 		// Only enqueue 'wporg-parsed-content' script and styles on Code Reference post type screens.
 		if ( in_array( get_current_screen()->id, $this->post_types ) ) {
-			wp_enqueue_script( 'wporg-parsed-content', get_template_directory_uri() . '/js/parsed-content.js', array( 'jquery', 'utils' ), '20150824', true );
+			wp_enqueue_script( 'wporg-parsed-content', get_template_directory_uri() . '/js/parsed-content.js', array( 'jquery', 'utils' ),
+				filemtime( dirname( __DIR__ ) . '/js/parsed-content.js' ),
+				true
+			);
 
 			wp_localize_script( 'wporg-parsed-content', 'wporgParsedContent', array(
 				'ajaxURL'    => admin_url( 'admin-ajax.php' ),

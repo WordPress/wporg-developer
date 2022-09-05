@@ -511,7 +511,10 @@ class WPORG_Explanations {
 				$parsed_post_types_screen_ids,
 				$this->screen_ids
 		) ) ) {
-			wp_enqueue_script( 'wporg-explanations', get_template_directory_uri() . '/js/explanations.js', array( 'jquery', 'wp-util' ), '20160630', true );
+			wp_enqueue_script( 'wporg-explanations', get_template_directory_uri() . '/js/explanations.js', array( 'jquery', 'wp-util' ),
+				filemtime( dirname( __DIR__ ) . '/js/explanations.js' ),
+				true
+			);
 
 			wp_localize_script( 'wporg-explanations', 'wporg', array(
 				'editContentLabel' => __( 'Edit Explanation', 'wporg' ),

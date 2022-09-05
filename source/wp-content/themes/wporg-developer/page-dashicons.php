@@ -9,8 +9,12 @@
 
 require_once __DIR__ . '/inc/dashicons.php';
 
-wp_enqueue_style(  'dashicons-page', get_template_directory_uri() . '/stylesheets/page-dashicons.css', array(), '20210830' );
-wp_enqueue_script( 'dashicons-page', get_template_directory_uri() . '/js/page-dashicons.js', array( 'jquery', 'wp-util' ), '20210830' );
+wp_enqueue_style(  'dashicons-page', get_template_directory_uri() . '/stylesheets/page-dashicons.css', array(),
+	filemtime( __DIR__ . '/stylesheets/page-dashicons.css' )
+);
+wp_enqueue_script( 'dashicons-page', get_template_directory_uri() . '/js/page-dashicons.js', array( 'jquery', 'wp-util' ),
+	filemtime( __DIR__ . '/js/page-dashicons.js' )
+);
 
 get_header(); ?>
 
