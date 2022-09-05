@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "42b53abba09c60ad201b6be8aafca3d9",
+    "content-hash": "ae050d7bf7179353e5df1eab26bcde56",
     "packages": [],
     "packages-dev": [
         {
@@ -2360,24 +2360,6 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/posts-to-posts/"
-        },
-        {
-            "name": "wpackagist-plugin/syntaxhighlighter",
-            "version": "3.6.2",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/syntaxhighlighter/",
-                "reference": "tags/3.6.2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/syntaxhighlighter.3.6.2.zip"
-            },
-            "require": {
-                "composer/installers": "^1.0 || ^2.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/syntaxhighlighter/"
         },
         {
             "name": "wpackagist-plugin/wordpress-importer",
