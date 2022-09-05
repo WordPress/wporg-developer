@@ -72,7 +72,7 @@
 			"url": "git@github.com:WordPress/wporg-mu-plugins.git"
 		}
 	],
-	"require": {
+	"require-dev": {
 		"composer/installers": "~1.0",
 		"wpackagist-plugin/gutenberg": "*",
 		"wpackagist-plugin/wordpress-importer": "*",
@@ -84,9 +84,7 @@
 		"wordpress-meta/pub": "1",
 		"wordpress-meta/wporg-markdown": "1",
 		"wporg/wporg-repo-tools": "dev-trunk",
-		"wporg/wporg-mu-plugins": "dev-build"
-	},
-	"require-dev": {
+		"wporg/wporg-mu-plugins": "dev-build",
 		"dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
 		"wp-coding-standards/wpcs": "2.*",
 		"phpcompatibility/phpcompatibility-wp": "*",

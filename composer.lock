@@ -4,8 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "866a6878ed2f5e55e14d9551ec48b738",
-    "packages": [
+    "content-hash": "274c2b0562f9a699853b7c98fdd32fe3",
+    "packages": [],
+    "packages-dev": [
         {
             "name": "composer/installers",
             "version": "1.x-dev",
@@ -158,226 +159,6 @@
             ],
             "time": "2022-03-15T21:23:54+00:00"
         },
-        {
-            "name": "wordpress-meta/pub",
-            "version": "1",
-            "source": {
-                "type": "svn",
-                "url": "https://meta.svn.wordpress.org/sites/",
-                "reference": "trunk/wordpress.org/public_html/wp-content/mu-plugins/pub/"
-            },
-            "type": "wordpress-muplugin"
-        },
-        {
-            "name": "wordpress-meta/wporg",
-            "version": "1",
-            "source": {
-                "type": "svn",
-                "url": "https://meta.svn.wordpress.org/sites/",
-                "reference": "trunk/wordpress.org/public_html/wp-content/themes/pub/wporg/"
-            },
-            "type": "wordpress-theme"
-        },
-        {
-            "name": "wordpress-meta/wporg-markdown",
-            "version": "1",
-            "source": {
-                "type": "svn",
-                "url": "https://meta.svn.wordpress.org/sites/",
-                "reference": "trunk/wordpress.org/public_html/wp-content/plugins/wporg-markdown/"
-            },
-            "type": "wordpress-plugin"
-        },
-        {
-            "name": "wpackagist-plugin/code-syntax-block",
-            "version": "3.1.1",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/code-syntax-block/",
-                "reference": "tags/3.1.1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/code-syntax-block.3.1.1.zip"
-            },
-            "require": {
-                "composer/installers": "^1.0 || ^2.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/code-syntax-block/"
-        },
-        {
-            "name": "wpackagist-plugin/gutenberg",
-            "version": "14.0.2",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/gutenberg/",
-                "reference": "tags/14.0.2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/gutenberg.14.0.2.zip"
-            },
-            "require": {
-                "composer/installers": "^1.0 || ^2.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/gutenberg/"
-        },
-        {
-            "name": "wpackagist-plugin/jetpack",
-            "version": "11.3-beta3",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/jetpack/",
-                "reference": "tags/11.3-beta3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/jetpack.11.3-beta3.zip"
-            },
-            "require": {
-                "composer/installers": "^1.0 || ^2.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/jetpack/"
-        },
-        {
-            "name": "wpackagist-plugin/posts-to-posts",
-            "version": "1.7",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/posts-to-posts/",
-                "reference": "tags/1.7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/posts-to-posts.1.7.zip"
-            },
-            "require": {
-                "composer/installers": "^1.0 || ^2.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/posts-to-posts/"
-        },
-        {
-            "name": "wpackagist-plugin/syntaxhighlighter",
-            "version": "3.6.2",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/syntaxhighlighter/",
-                "reference": "tags/3.6.2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/syntaxhighlighter.3.6.2.zip"
-            },
-            "require": {
-                "composer/installers": "^1.0 || ^2.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/syntaxhighlighter/"
-        },
-        {
-            "name": "wpackagist-plugin/wordpress-importer",
-            "version": "0.7",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/wordpress-importer/",
-                "reference": "tags/0.7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wordpress-importer.0.7.zip"
-            },
-            "require": {
-                "composer/installers": "^1.0 || ^2.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/wordpress-importer/"
-        },
-        {
-            "name": "wporg/wporg-mu-plugins",
-            "version": "dev-build",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/WordPress/wporg-mu-plugins.git",
-                "reference": "d5c82344fbb9520d5359faf323a7c2e1ec5f570b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/WordPress/wporg-mu-plugins/zipball/d5c82344fbb9520d5359faf323a7c2e1ec5f570b",
-                "reference": "d5c82344fbb9520d5359faf323a7c2e1ec5f570b",
-                "shasum": ""
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "require-dev": {
-                "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
-                "phpcompatibility/phpcompatibility-wp": "*",
-                "wp-coding-standards/wpcs": "2.*",
-                "wporg/wporg-repo-tools": "dev-trunk"
-            },
-            "type": "wordpress-muplugin",
-            "extra": {
-                "sync-svn": {
-                    "main-branch": "trunk",
-                    "paths": {
-                        "mu-plugins/": "https://dotorg.svn.wordpress.org/wordpress/website/wp-content/mu-plugins/pub-sync/"
-                    }
-                }
-            },
-            "scripts": {
-                "format": [
-                    "phpcbf -p"
-                ],
-                "lint": [
-                    "phpcs"
-                ]
-            },
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "description": "`mu-plugins` for the WordPress.org network",
-            "support": {
-                "source": "https://github.com/WordPress/wporg-mu-plugins/tree/build",
-                "issues": "https://github.com/WordPress/wporg-mu-plugins/issues"
-            },
-            "time": "2022-09-01T20:11:47+00:00"
-        },
-        {
-            "name": "wporg/wporg-repo-tools",
-            "version": "dev-trunk",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/WordPress/wporg-repo-tools.git",
-                "reference": "154b006a03d137a52d6fffd88fe3b3ef66b9c14b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/WordPress/wporg-repo-tools/zipball/154b006a03d137a52d6fffd88fe3b3ef66b9c14b",
-                "reference": "154b006a03d137a52d6fffd88fe3b3ef66b9c14b",
-                "shasum": ""
-            },
-            "default-branch": true,
-            "bin": [
-                "bin/update-configs"
-            ],
-            "type": "library",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "description": "Common configurations and scripts used in projects for WordPress.org Meta",
-            "homepage": "https://wordpress.org",
-            "support": {
-                "issues": "https://github.com/WordPress/wporg-repo-tools/issues",
-                "source": "https://github.com/WordPress/wporg-repo-tools/tree/trunk"
-            },
-            "time": "2022-07-21T13:46:18+00:00"
-        }
-    ],
-    "packages-dev": [
         {
             "name": "dealerdirect/phpcodesniffer-composer-installer",
             "version": "v0.7.2",
@@ -2370,6 +2151,36 @@
             "time": "2022-06-03T18:03:27+00:00"
         },
         {
+            "name": "wordpress-meta/pub",
+            "version": "1",
+            "source": {
+                "type": "svn",
+                "url": "https://meta.svn.wordpress.org/sites/",
+                "reference": "trunk/wordpress.org/public_html/wp-content/mu-plugins/pub/"
+            },
+            "type": "wordpress-muplugin"
+        },
+        {
+            "name": "wordpress-meta/wporg",
+            "version": "1",
+            "source": {
+                "type": "svn",
+                "url": "https://meta.svn.wordpress.org/sites/",
+                "reference": "trunk/wordpress.org/public_html/wp-content/themes/pub/wporg/"
+            },
+            "type": "wordpress-theme"
+        },
+        {
+            "name": "wordpress-meta/wporg-markdown",
+            "version": "1",
+            "source": {
+                "type": "svn",
+                "url": "https://meta.svn.wordpress.org/sites/",
+                "reference": "trunk/wordpress.org/public_html/wp-content/plugins/wporg-markdown/"
+            },
+            "type": "wordpress-plugin"
+        },
+        {
             "name": "wp-coding-standards/wpcs",
             "version": "2.3.0",
             "source": {
@@ -2469,6 +2280,194 @@
             "time": "2022-08-30T21:14:52+00:00"
         },
         {
+            "name": "wpackagist-plugin/code-syntax-block",
+            "version": "3.1.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/code-syntax-block/",
+                "reference": "tags/3.1.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/code-syntax-block.3.1.1.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/code-syntax-block/"
+        },
+        {
+            "name": "wpackagist-plugin/gutenberg",
+            "version": "14.0.2",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/gutenberg/",
+                "reference": "tags/14.0.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/gutenberg.14.0.2.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/gutenberg/"
+        },
+        {
+            "name": "wpackagist-plugin/jetpack",
+            "version": "11.3-beta3",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/jetpack/",
+                "reference": "tags/11.3-beta3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/jetpack.11.3-beta3.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/jetpack/"
+        },
+        {
+            "name": "wpackagist-plugin/posts-to-posts",
+            "version": "1.7",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/posts-to-posts/",
+                "reference": "tags/1.7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/posts-to-posts.1.7.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/posts-to-posts/"
+        },
+        {
+            "name": "wpackagist-plugin/syntaxhighlighter",
+            "version": "3.6.2",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/syntaxhighlighter/",
+                "reference": "tags/3.6.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/syntaxhighlighter.3.6.2.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/syntaxhighlighter/"
+        },
+        {
+            "name": "wpackagist-plugin/wordpress-importer",
+            "version": "0.7",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/wordpress-importer/",
+                "reference": "tags/0.7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/wordpress-importer.0.7.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/wordpress-importer/"
+        },
+        {
+            "name": "wporg/wporg-mu-plugins",
+            "version": "dev-build",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WordPress/wporg-mu-plugins.git",
+                "reference": "af2bbf6b2af762e617b542a13fd72a6a14f6b70f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WordPress/wporg-mu-plugins/zipball/af2bbf6b2af762e617b542a13fd72a6a14f6b70f",
+                "reference": "af2bbf6b2af762e617b542a13fd72a6a14f6b70f",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
+                "phpcompatibility/phpcompatibility-wp": "*",
+                "wp-coding-standards/wpcs": "2.*",
+                "wporg/wporg-repo-tools": "dev-trunk"
+            },
+            "type": "wordpress-muplugin",
+            "extra": {
+                "sync-svn": {
+                    "main-branch": "trunk",
+                    "paths": {
+                        "mu-plugins/": "https://dotorg.svn.wordpress.org/wordpress/website/wp-content/mu-plugins/pub-sync/"
+                    }
+                }
+            },
+            "scripts": {
+                "format": [
+                    "phpcbf -p"
+                ],
+                "lint": [
+                    "phpcs"
+                ]
+            },
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "`mu-plugins` for the WordPress.org network",
+            "support": {
+                "source": "https://github.com/WordPress/wporg-mu-plugins/tree/build",
+                "issues": "https://github.com/WordPress/wporg-mu-plugins/issues"
+            },
+            "time": "2022-09-05T16:08:26+00:00"
+        },
+        {
+            "name": "wporg/wporg-repo-tools",
+            "version": "dev-trunk",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WordPress/wporg-repo-tools.git",
+                "reference": "154b006a03d137a52d6fffd88fe3b3ef66b9c14b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WordPress/wporg-repo-tools/zipball/154b006a03d137a52d6fffd88fe3b3ef66b9c14b",
+                "reference": "154b006a03d137a52d6fffd88fe3b3ef66b9c14b",
+                "shasum": ""
+            },
+            "default-branch": true,
+            "bin": [
+                "bin/update-configs"
+            ],
+            "type": "library",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "Common configurations and scripts used in projects for WordPress.org Meta",
+            "homepage": "https://wordpress.org",
+            "support": {
+                "issues": "https://github.com/WordPress/wporg-repo-tools/issues",
+                "source": "https://github.com/WordPress/wporg-repo-tools/tree/trunk"
+            },
+            "time": "2022-07-21T13:46:18+00:00"
+        },
+        {
             "name": "yoast/phpunit-polyfills",
             "version": "dev-develop",
             "source": {
@@ -2544,5 +2543,5 @@
     "platform-overrides": {
         "php": "7.2"
     },
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.3.0"
 }
