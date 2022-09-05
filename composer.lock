@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "274c2b0562f9a699853b7c98fdd32fe3",
+    "content-hash": "42b53abba09c60ad201b6be8aafca3d9",
     "packages": [],
     "packages-dev": [
         {
@@ -2149,6 +2149,16 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "time": "2022-06-03T18:03:27+00:00"
+        },
+        {
+            "name": "wordpress-meta/handbook",
+            "version": "1",
+            "source": {
+                "type": "svn",
+                "url": "https://meta.svn.wordpress.org/sites/",
+                "reference": "trunk/wordpress.org/public_html/wp-content/plugins/handbook/"
+            },
+            "type": "wordpress-plugin"
         },
         {
             "name": "wordpress-meta/pub",
