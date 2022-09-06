@@ -11,7 +11,6 @@
 		"./source/wp-content/plugins/wporg-markdown",
 		"./source/wp-content/plugins/code-syntax-block",
 		"./source/wp-content/plugins/posts-to-posts",
-		"./source/wp-content/plugins/syntaxhighlighter",
 		"./source/wp-content/plugins/wordpress-importer",
 		"./source/wp-content/plugins/jetpack"
 	],
