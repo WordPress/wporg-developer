@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Implements devhub commands.
  */
@@ -40,9 +41,9 @@ class DevHub_Command extends WP_CLI_Command {
 	 * @when after_wp_load
 	 */
 	public function parse( $args, $assoc_args ) {
-		$path = $assoc_args['src_path'] ?? null;
+		$path    = $assoc_args['src_path'] ?? null;
 		$user_id = $assoc_args['user_id'] ?? 5911429; // 5911429 = ID for wordpressdotorg
-		$wp_ver = $assoc_args['wp_ver'] ?? null;
+		$wp_ver  = $assoc_args['wp_ver'] ?? null;
 
 		// Verify path is a file or directory.
 		if ( $path ) {
@@ -85,7 +86,7 @@ class DevHub_Command extends WP_CLI_Command {
 		}
 
 		// Verify path looks like WP.
-		if ( ! file_exists ( $path . '/wp-includes/version.php' ) ) {
+		if ( ! file_exists( $path . '/wp-includes/version.php' ) ) {
 			WP_CLI::error( 'Path provided for WordPress source to parse does not contain WordPress files.' );
 		}
 
@@ -142,8 +143,8 @@ class DevHub_Command extends WP_CLI_Command {
 		 * Fires just before actual parsing process takes place.
 		 *
 		 * @param string  $path    Path to the directory containing the WP files to parse.
-		 * @param string  $version Versin of WP being parsed.
-		 * @param WP_User $user    User to be treated as post author for everything created.  
+		 * @param string  $version Version of WP being parsed.
+		 * @param WP_User $user    User to be treated as post author for everything created.
 		 */
 		do_action( 'wporg_devhub_cli_before_parsing', $path, $version, $user );
 
@@ -191,7 +192,7 @@ class DevHub_Command extends WP_CLI_Command {
 		 *
 		 * @param string  $path    Path to the directory containing the WP files to parse.
 		 * @param string  $version Versin of WP being parsed.
-		 * @param WP_User $user    User to be treated as post author for everything created.  
+		 * @param WP_User $user    User to be treated as post author for everything created.
 		 */
 		do_action( 'wporg_devhub_cli_after_parsing', $path, $version, $user );
 	}
@@ -207,7 +208,7 @@ class DevHub_Command extends WP_CLI_Command {
 	 *
 	 *     wp devhub pre-cache-source
 	 *
-	 * @when after_wp_load
+	 * @when       after_wp_load
 	 * @subcommand pre-cache-source
 	 */
 	public function pre_cache_source() {
@@ -218,7 +219,7 @@ class DevHub_Command extends WP_CLI_Command {
 		if ( $success ) {
 			WP_CLI::success( 'Pre-caching of source code is complete.' );
 		} else {
-			WP_CLI::error( 'Unable to pre-cache source codde.' );
+			WP_CLI::error( 'Unable to pre-cache source code.' );
 		}
 	}
 
@@ -257,7 +258,6 @@ class DevHub_Command extends WP_CLI_Command {
 		}
 
 		foreach ( $tmp_dirs as $tmp_dir ) {
-			//WP_CLI::log( "Deleting temporary directory $tmp_dir...");
 			$cmd = "rm -rf {$tmp_dir}";
 			WP_CLI::confirm( "About to delete temporary directory. Does this look proper? `$cmd`" );
 			WP_CLI::launch( $cmd, false, true );
@@ -278,7 +278,7 @@ class DevHub_Command extends WP_CLI_Command {
 	 *
 	 *     wp devhub last-parsed version
 	 *
-	 * @when after_wp_load
+	 * @when       after_wp_load
 	 * @subcommand last-parsed
 	 */
 	public function last_parsed( $args, $assoc_args ) {
