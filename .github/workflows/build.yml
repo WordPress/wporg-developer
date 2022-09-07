@@ -28,6 +28,7 @@ jobs:
             - name: Trim the repo down to just the theme
               run: |
                   rm -rf source/wp-content/themes/wporg-developer/node_modules
+                  rm -rf source/wp-content/themes/wporg-developer/scss
                   mv source/wp-content/themes/wporg-developer $RUNNER_TEMP
                   git rm -rfq .
                   rm -rf *
