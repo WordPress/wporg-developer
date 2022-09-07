@@ -98,7 +98,7 @@ class DevHub_Command extends WP_CLI_Command {
 		$last_parsed_wp_ver = get_option( 'wp_parser_imported_wp_version' );
 		if ( $last_parsed_wp_ver && $last_parsed_wp_ver == $version ) {
 			$last_parsed_date = get_option( 'wp_parser_last_import' );
-			WP_CLI::confirm( "Looks like WP $version was already parsed on " . date_i18n( 'Y-m-d H:i', $last_parsed_date ) . ". Proceed anyway?" );
+			WP_CLI::confirm( "\nLooks like WP $version was already parsed on " . date_i18n( 'Y-m-d H:i', $last_parsed_date ) . '. Proceed anyway?' );
 		}
 
 		// Determine importing user's ID.
@@ -136,7 +136,7 @@ class DevHub_Command extends WP_CLI_Command {
 		}
 
 		// Confirm the parsing.
-		WP_CLI::confirm( "Are you sure you want to parse the source code for WP {$version} (and that you've run a backup of the existing data)?" );
+		WP_CLI::confirm( "\nAre you sure you want to parse the source code for WP {$version} (and that you've run a backup of the existing data)?" );
 
 		/**
 		 * Fires just before actual parsing process takes place.
@@ -166,11 +166,11 @@ class DevHub_Command extends WP_CLI_Command {
 		// 3. Run the parser.
 		// If running locally, run a quick parse which skips DB replication-lag sleep()'s
 		$quick = in_array( wp_get_environment_type(), array( 'local', 'development' ) ) ? '--quick' : '';
-		WP_CLI::log( 'Running the parser (this will take awhile)...' );
+		WP_CLI::log( "\nRunning the parser (this will take awhile)..." );
 		WP_CLI::runcommand( "parser create {$path} --user={$user_id} {$quick}" );
 
 		// 4. Deactivate phpdoc-parser plugin.
-		WP_CLI::log( 'Deactivating phpdoc-parser plugin...' );
+		WP_CLI::log( "\nDeactivating phpdoc-parser plugin..." );
 		WP_CLI::runcommand( 'plugin deactivate ' . $plugins['phpdoc-parser'] );
 
 		// 5. Activate posts-to-posts plugin.
@@ -211,7 +211,7 @@ class DevHub_Command extends WP_CLI_Command {
 	 * @subcommand pre-cache-source
 	 */
 	public function pre_cache_source() {
-		WP_CLI::log( 'Pre-caching source code...' );
+		WP_CLI::log( "\nPre-caching source code..." );
 
 		$success = DevHub_Parser::cache_source_code();
 
@@ -241,7 +241,7 @@ class DevHub_Command extends WP_CLI_Command {
 	 * @when after_wp_load
 	 */
 	public function clean() {
-		WP_CLI::log( 'Cleaning up after the parser...' );
+		WP_CLI::log( "\nCleaning up after the parser..." );
 
 		// Dependencies aren't intended to be in production/staging environments, and could contain
 		// vulnerabilities if left. Remove also ensures that they're up to date when the job is run again.
@@ -253,7 +253,7 @@ class DevHub_Command extends WP_CLI_Command {
 		$tmp_dirs = glob( WP_CLI\Utils\get_temp_dir() . 'devhub_*' );
 
 		if ( count( $tmp_dirs ) > 1 ) {
-			WP_CLI::log( "Multiple temporary directories were detected. This can be the case if earlier parsings were aborted or cancelled without completing." );
+			WP_CLI::log( "\nMultiple temporary directories were detected. This can be the case if earlier parsings were aborted or cancelled without completing." );
 		}
 
 		foreach ( $tmp_dirs as $tmp_dir ) {
@@ -263,7 +263,7 @@ class DevHub_Command extends WP_CLI_Command {
 			WP_CLI::launch( $cmd, false, true );
 		}
 
-		WP_CLI::success( 'Clean-up is complete.' );
+		WP_CLI::success( "Clean-up is complete.\n" );
 	}
 
 	/**
