@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ae050d7bf7179353e5df1eab26bcde56",
+    "content-hash": "9b66bf10a32cc0e8ba553fcbbe37d7f5",
     "packages": [],
     "packages-dev": [
         {
@@ -1382,12 +1382,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/comparator.git",
-                "reference": "1071dfcef776a57013124ff35e1fc41ccd294758"
+                "reference": "1dc7ceb4a24aede938c7af2a9ed1de09609ca770"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/1071dfcef776a57013124ff35e1fc41ccd294758",
-                "reference": "1071dfcef776a57013124ff35e1fc41ccd294758",
+                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/1dc7ceb4a24aede938c7af2a9ed1de09609ca770",
+                "reference": "1dc7ceb4a24aede938c7af2a9ed1de09609ca770",
                 "shasum": ""
             },
             "require": {
@@ -1440,7 +1440,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/comparator/issues",
-                "source": "https://github.com/sebastianbergmann/comparator/tree/3.0"
+                "source": "https://github.com/sebastianbergmann/comparator/tree/3.0.5"
             },
             "funding": [
                 {
@@ -1448,7 +1448,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-11-30T08:04:30+00:00"
+            "time": "2022-09-14T12:31:48+00:00"
         },
         {
             "name": "sebastian/diff",
@@ -1585,12 +1585,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/exporter.git",
-                "reference": "77200c5b1b7b073a04aca7f593a26dad7df1de35"
+                "reference": "73a9676f2833b9a7c36968f9d882589cd75511e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/77200c5b1b7b073a04aca7f593a26dad7df1de35",
-                "reference": "77200c5b1b7b073a04aca7f593a26dad7df1de35",
+                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/73a9676f2833b9a7c36968f9d882589cd75511e6",
+                "reference": "73a9676f2833b9a7c36968f9d882589cd75511e6",
                 "shasum": ""
             },
             "require": {
@@ -1654,7 +1654,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-03-06T06:59:21+00:00"
+            "time": "2022-09-14T06:00:17+00:00"
         },
         {
             "name": "sebastian/global-state",
@@ -1991,12 +1991,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "53e0f59fff0657e03c2dfab631db30f18abf41f3"
+                "reference": "b860f758b87bf43b7e5a7e0ebe1804f2f9771f1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/53e0f59fff0657e03c2dfab631db30f18abf41f3",
-                "reference": "53e0f59fff0657e03c2dfab631db30f18abf41f3",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/b860f758b87bf43b7e5a7e0ebe1804f2f9771f1b",
+                "reference": "b860f758b87bf43b7e5a7e0ebe1804f2f9771f1b",
                 "shasum": ""
             },
             "require": {
@@ -2033,14 +2033,15 @@
             "homepage": "https://github.com/squizlabs/PHP_CodeSniffer",
             "keywords": [
                 "phpcs",
-                "standards"
+                "standards",
+                "static analysis"
             ],
             "support": {
                 "issues": "https://github.com/squizlabs/PHP_CodeSniffer/issues",
                 "source": "https://github.com/squizlabs/PHP_CodeSniffer",
                 "wiki": "https://github.com/squizlabs/PHP_CodeSniffer/wiki"
             },
-            "time": "2022-08-13T07:17:24+00:00"
+            "time": "2022-09-10T07:27:09+00:00"
         },
         {
             "name": "theseer/tokenizer",
@@ -2309,15 +2310,15 @@
         },
         {
             "name": "wpackagist-plugin/gutenberg",
-            "version": "14.0.2",
+            "version": "14.0.3",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/gutenberg/",
-                "reference": "tags/14.0.2"
+                "reference": "tags/14.0.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/gutenberg.14.0.2.zip"
+                "url": "https://downloads.wordpress.org/plugin/gutenberg.14.0.3.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -2327,15 +2328,15 @@
         },
         {
             "name": "wpackagist-plugin/jetpack",
-            "version": "11.3-beta3",
+            "version": "11.4-a.3",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/jetpack/",
-                "reference": "tags/11.3-beta3"
+                "reference": "tags/11.4-a.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/jetpack.11.3-beta3.zip"
+                "url": "https://downloads.wordpress.org/plugin/jetpack.11.4-a.3.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -2380,54 +2381,24 @@
             "homepage": "https://wordpress.org/plugins/wordpress-importer/"
         },
         {
+            "name": "wporg/phpdoc-parser",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WordPress/phpdoc-parser.git",
+                "reference": "master"
+            },
+            "type": "wordpress-plugin"
+        },
+        {
             "name": "wporg/wporg-mu-plugins",
             "version": "dev-build",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WordPress/wporg-mu-plugins.git",
-                "reference": "af2bbf6b2af762e617b542a13fd72a6a14f6b70f"
+                "reference": "build"
             },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/WordPress/wporg-mu-plugins/zipball/af2bbf6b2af762e617b542a13fd72a6a14f6b70f",
-                "reference": "af2bbf6b2af762e617b542a13fd72a6a14f6b70f",
-                "shasum": ""
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "require-dev": {
-                "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
-                "phpcompatibility/phpcompatibility-wp": "*",
-                "wp-coding-standards/wpcs": "2.*",
-                "wporg/wporg-repo-tools": "dev-trunk"
-            },
-            "type": "wordpress-muplugin",
-            "extra": {
-                "sync-svn": {
-                    "main-branch": "trunk",
-                    "paths": {
-                        "mu-plugins/": "https://dotorg.svn.wordpress.org/wordpress/website/wp-content/mu-plugins/pub-sync/"
-                    }
-                }
-            },
-            "scripts": {
-                "format": [
-                    "phpcbf -p"
-                ],
-                "lint": [
-                    "phpcs"
-                ]
-            },
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "description": "`mu-plugins` for the WordPress.org network",
-            "support": {
-                "source": "https://github.com/WordPress/wporg-mu-plugins/tree/build",
-                "issues": "https://github.com/WordPress/wporg-mu-plugins/issues"
-            },
-            "time": "2022-09-05T16:08:26+00:00"
+            "type": "wordpress-muplugin"
         },
         {
             "name": "wporg/wporg-repo-tools",
@@ -2435,29 +2406,9 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/WordPress/wporg-repo-tools.git",
-                "reference": "154b006a03d137a52d6fffd88fe3b3ef66b9c14b"
+                "reference": "trunk"
             },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/WordPress/wporg-repo-tools/zipball/154b006a03d137a52d6fffd88fe3b3ef66b9c14b",
-                "reference": "154b006a03d137a52d6fffd88fe3b3ef66b9c14b",
-                "shasum": ""
-            },
-            "default-branch": true,
-            "bin": [
-                "bin/update-configs"
-            ],
-            "type": "library",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "description": "Common configurations and scripts used in projects for WordPress.org Meta",
-            "homepage": "https://wordpress.org",
-            "support": {
-                "issues": "https://github.com/WordPress/wporg-repo-tools/issues",
-                "source": "https://github.com/WordPress/wporg-repo-tools/tree/trunk"
-            },
-            "time": "2022-07-21T13:46:18+00:00"
+            "type": "library"
         },
         {
             "name": "yoast/phpunit-polyfills",
@@ -2526,7 +2477,8 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "wporg/wporg-repo-tools": 20,
-        "wporg/wporg-mu-plugins": 20
+        "wporg/wporg-mu-plugins": 20,
+        "wporg/phpdoc-parser": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

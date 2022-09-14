@@ -93,6 +93,16 @@
 						"url": "https://github.com/WordPress/wporg-mu-plugins.git",
 						"reference": "build"
 					}
+				},
+				{
+					"name": "wporg/phpdoc-parser",
+					"type": "wordpress-plugin",
+					"version": "dev-master",
+					"source": {
+						"type": "git",
+						"url": "https://github.com/WordPress/phpdoc-parser.git",
+						"reference": "master"
+					}
 				}
 			]
 		}
@@ -110,6 +120,7 @@
 		"wordpress-meta/handbook": "1",
 		"wporg/wporg-repo-tools": "dev-trunk",
 		"wporg/wporg-mu-plugins": "dev-build",
+		"wporg/phpdoc-parser": "dev-master",
 		"dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
 		"wp-coding-standards/wpcs": "2.*",
 		"phpcompatibility/phpcompatibility-wp": "*",
