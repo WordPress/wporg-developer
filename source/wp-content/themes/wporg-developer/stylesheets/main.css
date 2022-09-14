@@ -2696,7 +2696,7 @@ aside[id^="nav_menu"] .widget-title {
 .site-main .table-of-contents {
   display: flex;
   flex-direction: column;
-  min-width: 230px;
+  min-width: 210px;
   border: 1px solid #eee;
   margin: 30px 0;
   z-index: 1;
@@ -2725,7 +2725,7 @@ aside[id^="nav_menu"] .widget-title {
 }
 
 .site-main .table-of-contents .items {
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .post-type-archive-handbook ul.items,
@@ -3126,23 +3126,13 @@ body.responsive-show #o2-expand-editor {
   }
   .code-reference .site-main .table-of-contents {
     margin-left: 0;
-    left: calc( 60em + ( ( 100vw - 60em ) / 2 ));
+    transform: translateX(calc( 60em - 24px));
     top: 210px;
-    max-height: calc(90vh - 210px);
+    max-height: calc( 90vh - 210px);
   }
   .widget-area + .site-main .table-of-contents {
-    left: calc( 960px + ( ( 100vw - 960px ) / 2 ));
+    transform: translateX(calc( ( 960px * 0.72 ) - max( 20px, 2% )));
     top: 200px;
-    max-height: calc(90vh - 200px);
-  }
-}
-
-@media (min-width: 877px) {
-  .site-main .table-of-contents:not(.code-reference .site-main .table-of-contents):not(.widget-area + .site-main .table-of-contents) {
-    position: fixed;
-    width: 15vw;
-    top: 200px;
-    left: calc( 960px * 0.72 + ( ( 100vw - 960px ) / 2 ) + 15px);
     max-height: calc(90vh - 200px);
   }
 }

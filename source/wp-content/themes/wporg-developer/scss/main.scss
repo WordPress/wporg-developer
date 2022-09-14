@@ -2006,7 +2006,7 @@ aside[id^="nav_menu"] .widget-title {
 	.table-of-contents {
 		display: flex;
 		flex-direction: column;
-		min-width: 230px;
+		min-width: 210px;
 		border: 1px solid #eee;
 		margin: 30px 0;
 		z-index: 1;
@@ -2034,7 +2034,7 @@ aside[id^="nav_menu"] .widget-title {
 		}
 
 		.items {
-			overflow-y: scroll;
+			overflow-y: auto;
 		}
 	}
 }
@@ -2250,7 +2250,7 @@ div[class*="-table-of-contents-container"] {
 		max-width: $single-handbook-content-width;
 		margin: 0 auto;
 		display: flex;
-		padding: 0 #{"max( 20px, 2% )"};
+		padding: 0 #{ $single-handbook-content-padding-horizontal };
 	}
 
 	header {
@@ -2270,7 +2270,7 @@ div[class*="-table-of-contents-container"] {
 		padding: 4rem 0 4rem 4rem;
 		background: #fff;
 		box-sizing: border-box;
-		width: $single-handbook-content-primary-width * 100%;
+		width: $single-handbook-content-width-primary-proportion * 100%;
 
 		@media (max-width: 876px) {
 			padding: 4rem 20px;
@@ -2463,32 +2463,17 @@ body.responsive-show {
 
 		.code-reference & {
 			margin-left: 0;
-			left: calc( #{ $devhub-wrap-content-width } + ( ( 100vw - #{ $devhub-wrap-content-width } ) / 2 ) );
+			transform: translateX( calc( #{ $devhub-wrap-content-width } - #{ $devhub-wrap-content-padding-horizontal } ) );
 			top: $devhub-wrap-toc-position-top;
-			max-height: calc(90vh - #{ $devhub-wrap-toc-position-top });
+			max-height: calc( 90vh - #{ $devhub-wrap-toc-position-top } );
 		}
 
 		// Pages with sidebar
 		.widget-area + & {
-			left: calc( #{ $single-handbook-content-width } + ( ( 100vw - #{ $single-handbook-content-width } ) / 2 ) );
+			transform: translateX( calc( ( #{ $single-handbook-content-width } * #{ $single-handbook-content-width-primary-proportion } ) - #{ $single-handbook-content-padding-horizontal } ) );
 			top: $single-handbook-toc-position-top;
 			max-height: calc(90vh - #{ $single-handbook-toc-position-top });
 		}
-	}
-}
-
-@media (min-width: 877px) {
-	// Pages which are not code reference and without a sidebar
-	.site-main .table-of-contents:not(.code-reference .site-main .table-of-contents):not(.widget-area + .site-main .table-of-contents) {
-		position: fixed;
-		width: 15vw;
-		top: $single-handbook-toc-position-top;
-		left: calc(
-			#{ $single-handbook-content-width } * #{ $single-handbook-content-primary-width }
-			+ ( ( 100vw - #{ $single-handbook-content-width } ) / 2 )
-			+ 15px
-		);
-		max-height: calc(90vh - #{ $single-handbook-toc-position-top });
 	}
 }
 
