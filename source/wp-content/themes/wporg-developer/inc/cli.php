@@ -2,7 +2,7 @@
 
 class DevHub_CLI {
 
-	private static $commands_manifest = 'https://raw.githubusercontent.com/wp-cli/handbook/master/bin/commands-manifest.json';
+	private static $commands_manifest = 'https://raw.githubusercontent.com/wp-cli/handbook/main/bin/commands-manifest.json';
 	private static $meta_key = 'wporg_cli_markdown_source';
 	private static $supported_post_types = array( 'command' );
 	private static $posts_per_page = -1;
