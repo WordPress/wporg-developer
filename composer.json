@@ -16,7 +16,7 @@
 			"composer/installers": true
 		},
 		"preferred-install": {
-			"wordpress-meta/*": "source",
+			"wordpress/*": "source",
 			"wporg/*": "source"
 		}
 	},
@@ -31,6 +31,18 @@
 		{
 			"type": "composer",
 			"url": "https://wpackagist.org/"
+		},
+		{
+			"type": "vcs",
+			"url": "git@github.com:WordPress/wporg-repo-tools.git"
+		},
+		{
+			"type": "vcs",
+			"url": "git@github.com:WordPress/wporg-mu-plugins.git"
+		},
+		{
+			"type": "vcs",
+			"url": "git@github.com:WordPress/phpdoc-parser.git"
 		},
 		{
 			"type": "package",
@@ -74,35 +86,6 @@
 						"url": "https://meta.svn.wordpress.org/sites/",
 						"reference": "trunk/wordpress.org/public_html/wp-content/plugins/handbook/"
 					}
-				},
-				{
-					"name": "wporg/wporg-repo-tools",
-					"version": "dev-trunk",
-					"source": {
-						"type": "git",
-						"url": "https://github.com/WordPress/wporg-repo-tools.git",
-						"reference": "trunk"
-					}
-				},
-				{
-					"name": "wporg/wporg-mu-plugins",
-					"type": "wordpress-muplugin",
-					"version": "dev-build",
-					"source": {
-						"type": "git",
-						"url": "https://github.com/WordPress/wporg-mu-plugins.git",
-						"reference": "build"
-					}
-				},
-				{
-					"name": "wporg/phpdoc-parser",
-					"type": "wordpress-plugin",
-					"version": "dev-master",
-					"source": {
-						"type": "git",
-						"url": "https://github.com/WordPress/phpdoc-parser.git",
-						"reference": "master"
-					}
 				}
 			]
 		}
@@ -120,7 +103,7 @@
 		"wordpress-meta/handbook": "1",
 		"wporg/wporg-repo-tools": "dev-trunk",
 		"wporg/wporg-mu-plugins": "dev-build",
-		"wporg/phpdoc-parser": "dev-master",
+		"wordpress/phpdoc-parser": "dev-master",
 		"dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
 		"wp-coding-standards/wpcs": "2.*",
 		"phpcompatibility/phpcompatibility-wp": "*",
