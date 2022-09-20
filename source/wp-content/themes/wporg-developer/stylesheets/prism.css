@@ -233,11 +233,21 @@ pre.line-numbers > code {
 
 .wp-code-block-button-container + pre {
   margin-top: 0;
-  margin-bottom: -4px;
   border-width: 0 1px 1px;
   border-style: solid;
   border-color: #dcdcde;
-  padding-bottom: 4px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+/* Make the sticky wp-code-block-button-container not overlap its parent's border */
+.wporg-developer-code-block {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.6em;
+}
+
+.wporg-developer-code-block::after {
+  content: "";
+  margin-bottom: -1.63em;
 }
