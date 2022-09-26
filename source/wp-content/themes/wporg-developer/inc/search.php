@@ -92,16 +92,7 @@ class DevHub_Search {
 			// Just to make sure. post type should already be set.
 			$query->set( 'post_type', wporg_get_current_handbook() );
 		} else {
-			// If user has '()' at end of a search string, assume they want a specific function/method.
-			$s = htmlentities( $query->get( 's' ) );
-			if ( '()' === substr( $s, -2 ) || '(' == substr( $s, -1 ) ) {
-				// Enable exact search.
-				$query->set( 'exact',     true );
-				// Modify the search query to omit the parentheses.
-				$query->set( 's',         trim( $s, '()' ) );
-				// Restrict search to function-like content.
-				$query->set( 'post_type', array( 'wp-parser-function', 'wp-parser-method' ) );
-			}
+			Advanced_Search_Filters::modify_query( $query );
 		}
 
 		// Get post types (if used, or set above)
