@@ -5,7 +5,7 @@
  * by positioning it slightly above
  */
 
-import { throttle } from './lodash.throttle.min.js';
+import { throttle } from './lodash-throttle.min.js';
 
 document.body.onload = () => {
 	const toc = document.querySelector( '.table-of-contents' );
