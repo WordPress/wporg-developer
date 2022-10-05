@@ -1,3 +1,5 @@
+/* eslint-disable jsdoc/check-tag-names, eqeqeq, no-var */
+
 /**
  * lodash (Custom Build) <https://lodash.com/>
  * Build: `lodash modularize exports="npm" -o ./`
@@ -35,6 +37,7 @@ var freeParseInt = parseInt;
 var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
 
 /** Detect free variable `self`. */
+// eslint-disable-next-line no-undef
 var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
 
 /** Used as a reference to the global object. */
@@ -173,6 +176,7 @@ function debounce( func, wait, options ) {
 	function remainingWait( time ) {
 		var timeSinceLastCall = time - lastCallTime,
 			timeSinceLastInvoke = time - lastInvokeTime,
+			// eslint-disable-next-line no-shadow
 			result = wait - timeSinceLastCall;
 
 		return maxing ? nativeMin( result, maxWait - timeSinceLastInvoke ) : result;
@@ -434,6 +438,7 @@ function toNumber( value ) {
 	}
 	value = value.replace( reTrim, '' );
 	var isBinary = reIsBinary.test( value );
+	// eslint-disable-next-line no-nested-ternary
 	return isBinary || reIsOctal.test( value )
 		? freeParseInt( value.slice( 2 ), isBinary ? 2 : 8 )
 		: reIsBadHex.test( value )
