@@ -302,7 +302,7 @@ function debounce( func, wait, options ) {
  * // Cancel the trailing throttled invocation.
  * jQuery(window).on('popstate', throttled.cancel);
  */
-function throttle( func, wait, options ) {
+export function throttle( func, wait, options ) {
 	var leading = true,
 		trailing = true;
 
@@ -445,5 +445,3 @@ function toNumber( value ) {
 		? NAN
 		: +value;
 }
-
-module.exports = throttle;

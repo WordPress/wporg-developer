@@ -3,8 +3,9 @@
  *
  * Stops the sticky table of contents on wide screens from overlapping the footer
  * by positioning it slightly above
- * Uses global rafThrottle from ./rafThrottle.min.js
  */
+
+import { throttle } from './lodash.throttle.js';
 
 document.body.onload = () => {
 	const toc = document.querySelector( '.table-of-contents' );
@@ -46,14 +47,16 @@ document.body.onload = () => {
 
 	setToCPosition();
 
-	// eslint-disable-next-line no-undef
-	window.addEventListener( 'scroll', rafThrottle( setToCPosition ) );
+	window.addEventListener( 'scroll', throttle( setToCPosition, 25, { trailing: true } ) );
 	window.addEventListener(
 		'resize',
-		// eslint-disable-next-line no-undef
-		rafThrottle( () => {
-			tocHeight = toc.offsetHeight;
-			setToCPosition();
-		} )
+		throttle(
+			() => {
+				tocHeight = toc.offsetHeight;
+				setToCPosition();
+			},
+			25,
+			{ trailing: true }
+		)
 	);
 };
