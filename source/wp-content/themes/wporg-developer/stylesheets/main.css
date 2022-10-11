@@ -2694,7 +2694,7 @@ aside[id^="nav_menu"] .widget-title {
 .site-main .table-of-contents {
   display: flex;
   flex-direction: column;
-  min-width: 230px;
+  min-width: 210px;
   border: 1px solid #eee;
   margin: 30px 0;
   z-index: 1;
@@ -2723,7 +2723,7 @@ aside[id^="nav_menu"] .widget-title {
 }
 
 .site-main .table-of-contents .items {
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .post-type-archive-handbook ul.items,
@@ -2925,7 +2925,6 @@ div[class*="-table-of-contents-container"] .sub-menu {
   background: linear-gradient(to right, #fafafa 35%, #fff 35%);
   max-width: 100%;
   padding: 0;
-  overflow: auto;
 }
 
 .single-handbook #content {
@@ -3119,29 +3118,12 @@ body.responsive-show #o2-expand-editor {
 
 @media (min-width: 90em) {
   .site-main .table-of-contents {
-    position: fixed;
+    position: sticky;
     width: 15vw;
-  }
-  .code-reference .site-main .table-of-contents {
-    margin-left: 0;
-    left: calc( 60em + ( ( 100vw - 60em ) / 2 ));
-    top: 210px;
-    max-height: calc(90vh - 210px);
-  }
-  .widget-area + .site-main .table-of-contents {
-    left: calc( 960px + ( ( 100vw - 960px ) / 2 ));
-    top: 200px;
-    max-height: calc(90vh - 200px);
-  }
-}
-
-@media (min-width: 877px) {
-  .site-main .table-of-contents:not(.code-reference .site-main .table-of-contents):not(.widget-area + .site-main .table-of-contents) {
-    position: fixed;
-    width: 15vw;
-    top: 200px;
-    left: calc( 960px * 0.72 + ( ( 100vw - 960px ) / 2 ) + 15px);
-    max-height: calc(90vh - 200px);
+    margin: 0 calc(-15vw - 30px) 0;
+    float: right;
+    top: 150px;
+    max-height: calc(80vh - 150px);
   }
 }
 
