@@ -32,6 +32,8 @@ jQuery( function ( $ ) {
 		const $element = $( element );
 		let timeoutId;
 
+		$element.wrap( '<div class="wporg-developer-code-block"></div>' );
+
 		const $copyButton = $( document.createElement( 'button' ) );
 		$copyButton.text( wporgFunctionReferenceI18n.copy );
 		$copyButton.on( 'click', function () {
@@ -85,7 +87,7 @@ jQuery( function ( $ ) {
 	let $usesList, $usedByList, $showMoreUses, $hideMoreUses, $showMoreUsedBy, $hideMoreUsedBy;
 
 	function toggleUsageListInit() {
-		var usesToShow = $( '#uses-table' ).data( 'show' ),
+		const usesToShow = $( '#uses-table' ).data( 'show' ),
 			usedByToShow = $( '#used-by-table' ).data( 'show' );
 
 		// We only expect one used_by and uses per document

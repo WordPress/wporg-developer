@@ -209,6 +209,9 @@ pre.line-numbers > code {
 
 /* Copy button */
 .wp-code-block-button-container {
+	position: sticky;
+	top: calc(var(--wp-global-header-height) + var(--wp-admin--admin-bar--height));
+	z-index: 1;
 	display: flex;
 	justify-content: right;
 	padding: 1rem;
@@ -218,6 +221,14 @@ pre.line-numbers > code {
 	border-color: get-color(gray-5);
 	border-top-left-radius: 0.3em;
 	border-top-right-radius: 0.3em;
+
+	@media screen and (max-width: 889px) {
+		top: var(--wp-admin--admin-bar--height);
+	}
+
+	@media screen and (max-width: 600px) {
+		top: 0;
+	}
 
 	button {
 		font-size: 1.2rem !important;
@@ -236,3 +247,16 @@ pre.line-numbers > code {
 		border-top-right-radius: 0;
 	}
 }
+
+/* Make the sticky wp-code-block-button-container not overlap its parent's border */
+.wporg-developer-code-block {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 1.6em;
+
+	&::after {
+		content: "";
+		margin-bottom: -1.63em;
+	}
+}
+
