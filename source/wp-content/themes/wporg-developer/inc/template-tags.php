@@ -1448,7 +1448,7 @@ namespace DevHub {
 	 * Rearrange the results of get_uses() so that frequent functions are pushed to the bottom.
 	 * Sorts the array in-place.
 	 *
-	 * @return int The number of infrequent items in the list (ie the cutoff point for show/hide).
+	 * @return int The number of infrequent items in the list.
 	 */
 	function split_uses_by_frequent_funcs( &$posts ) {
 
