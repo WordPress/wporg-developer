@@ -13,11 +13,12 @@ if ( show_usage_info() ) :
 	$has_uses    = ( post_type_has_uses_info()  && ( $uses    = get_uses()    ) && $uses->have_posts()    );
 	$has_used_by = ( post_type_has_usage_info() && ( $used_by = get_used_by() ) && $used_by->have_posts() );
 
-	$uses_to_show    = 5;
-	$used_by_to_show = 5;
+	$uses_to_show     = 5;
+	$min_uses_to_show = 2;
+	$used_by_to_show  = 5;
 
 	if ( $has_uses ) {
-		$uses_to_show = min( $uses_to_show, split_uses_by_frequent_funcs( $uses->posts ) );
+		$uses_to_show = min( $uses_to_show, max( split_uses_by_frequent_funcs( $uses->posts ), $min_uses_to_show ) );
 	}
 
 	if ( $has_uses || $has_used_by ) :
