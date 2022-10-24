@@ -248,11 +248,18 @@ pre.line-numbers > code {
 	}
 }
 
-/* Make the sticky wp-code-block-button-container not overlap its parent's border */
+/**
+ * Make the sticky wp-code-block-button-container not overlap its parent's border.
+ * A trikcy way is used here (plus and minus margin-bottom),
+ * as we can't just adjust the pre in _global.scss,
+ * or page like https://developer.wordpress.org/resource/dashicons/#randomize would be affected.
+ */
+
 .wporg-developer-code-block {
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 1.6em;
+	font-size: 16px;
 
 	&::after {
 		content: "";
