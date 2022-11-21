@@ -2578,12 +2578,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/WordPress/wporg-mu-plugins.git",
-                "reference": "b5fc8835e5e1c1bfa3dcbf1424845e6f23c80dea"
+                "reference": "cd33d9c10196100b19c3ea7ff68a0419eaef2014"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WordPress/wporg-mu-plugins/zipball/b5fc8835e5e1c1bfa3dcbf1424845e6f23c80dea",
-                "reference": "b5fc8835e5e1c1bfa3dcbf1424845e6f23c80dea",
+                "url": "https://api.github.com/repos/WordPress/wporg-mu-plugins/zipball/cd33d9c10196100b19c3ea7ff68a0419eaef2014",
+                "reference": "cd33d9c10196100b19c3ea7ff68a0419eaef2014",
                 "shasum": ""
             },
             "require-dev": {
@@ -2621,7 +2621,7 @@
                 "source": "https://github.com/WordPress/wporg-mu-plugins/tree/build",
                 "issues": "https://github.com/WordPress/wporg-mu-plugins/issues"
             },
-            "time": "2022-11-04T15:29:26+00:00"
+            "time": "2022-11-18T21:59:41+00:00"
         },
         {
             "name": "wporg/wporg-repo-tools",
