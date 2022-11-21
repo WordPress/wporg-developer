@@ -77,7 +77,12 @@ jQuery( function ( $ ) {
 				}
 			} );
 
-			collapseCodeBlock( $element, $expandButton );
+			if ( $element.hasClass( 'expanded' ) ) {
+				expandCodeBlock( $element, $expandButton );
+			} else {
+				collapseCodeBlock( $element, $expandButton );
+			}
+
 			$container.append( $expandButton );
 		}
 
