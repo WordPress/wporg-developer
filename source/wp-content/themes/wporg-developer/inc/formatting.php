@@ -597,7 +597,8 @@ class DevHub_Formatting {
 					$name = ltrim( $name, '$' );
 				}
 				if ( $name ) {
-					$new_text .= "<code>{$name}</code>";
+					// Trailing space included for selection purposes. See #meta6585
+					$new_text .= "<code>{$name}</code> ";
 				}
 				$new_text .= "<span class='type'>{$type}</span><div class='desc'>{$description}";
 				if ( ! $skip_closing_li ) {
