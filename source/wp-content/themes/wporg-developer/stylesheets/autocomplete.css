@@ -25,11 +25,22 @@ div.awesomplete li[aria-selected="true"] mark {
 
 .search-wrap div.awesomplete > ul {
 	top: 40px;
+	max-width: 100%;
 	text-align: left;
 	max-height: 13.5em;
 	color: #404040;
-	overflow: auto;
+	overflow-x: hidden;
 	background: linear-gradient(to bottom right, #fff, hsla(0, 0%, 100%, 0.9));
+}
+
+@media (min-width: 400px) {
+	.search-wrap div.awesomplete > ul {
+		max-width: calc( 100vw - 50% - var(--wp--custom--alignment--scroll-bar-width) );
+	}
+}
+
+.search-wrap div.awesomplete > ul li {
+	padding-right: 20px;
 }
 
 .search-wrap-inline div.awesomplete > ul {
@@ -44,7 +55,7 @@ div.awesomplete li[aria-selected="true"] mark {
 }
 
 .search-wrap .searchform label div.awesomplete > input,
-.search-wrap div.awesomplete {	
+.search-wrap div.awesomplete {
 	width: 100%;
 }
 
@@ -57,7 +68,7 @@ div.awesomplete li[aria-selected="true"] mark {
 
 .search-wrap div.awesomplete {
 	/* This is for the input to expand */
-	display: flex; 
+	display: flex;
 }
 
 div.awesomplete > ul::before {

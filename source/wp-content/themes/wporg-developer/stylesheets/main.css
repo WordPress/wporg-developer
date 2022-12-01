@@ -2376,6 +2376,10 @@ a.screen-reader-text:focus,
   }
 }
 
+.site-branding.has-actions .site-title {
+  margin-right: 20px;
+}
+
 @media screen and (max-width: 500px) {
   .site-branding.has-actions .site-title {
     margin-bottom: 2rem;
@@ -3570,8 +3574,15 @@ button.code-tab.is-active {
 }
 
 .search-wrap.search-wrap-inline .search-field {
+  width: calc(100vw - 60px);
   margin: 0;
   border: none;
+}
+
+@media (min-width: 501px) {
+  .search-wrap.search-wrap-inline .search-field {
+    width: 100%;
+  }
 }
 
 .search-wrap.search-wrap-embedded .search-field {
@@ -3581,7 +3592,7 @@ button.code-tab.is-active {
 }
 
 .search-wrap.search-wrap-embedded .search-post-type {
-  margin-top: 2rem;
+  margin-bottom: 2rem;
   justify-content: space-between;
   color: #fff;
   max-width: 450px;
