@@ -42,6 +42,10 @@
 		},
 		{
 			"type": "vcs",
+			"url": "git@github.com:WordPress/wporg-parent-2021.git"
+		},
+		{
+			"type": "vcs",
 			"url": "git@github.com:WordPress/phpdoc-parser.git"
 		},
 		{
@@ -103,6 +107,7 @@
 		"wordpress-meta/handbook": "1",
 		"wporg/wporg-repo-tools": "dev-trunk",
 		"wporg/wporg-mu-plugins": "dev-build",
+		"wporg/wporg-parent-2021": "dev-build",
 		"wordpress/phpdoc-parser": "dev-master",
 		"dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
 		"wp-coding-standards/wpcs": "2.*",
