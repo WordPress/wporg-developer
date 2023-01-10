@@ -1,0 +1,13 @@
+{
+    "name": "wporg-developer-2023",
+    "version": "1.0.0",
+    "description": "Theme for WordPress Developer Resources",
+	"author": "WordPress.org",
+	"license": "GPL-2.0-or-later",
+    "private": true,
+    "devDependencies": {},
+    "scripts": {},
+    "workspaces": [
+		"source/wp-content/themes/wporg-developer-2023"
+	]
+}
