@@ -22,6 +22,6 @@
 		"lint:css": "wp-scripts lint-style"
 	},
 	"workspaces": [
-		"source/wp-content/themes/wporg-developer"
+		"source/wp-content/themes/wporg-developer-2023"
 	]
 }

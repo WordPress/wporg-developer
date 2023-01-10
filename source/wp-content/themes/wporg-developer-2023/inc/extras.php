@@ -36,47 +36,6 @@ function wporg_developer_body_classes( $classes ) {
 add_filter( 'body_class', 'wporg_developer_body_classes' );
 
 /**
- * Prefixes excerpts for archive view with content type label.
- *
- * @param string  $excerpt The excerpt.
- * @return string
- */
-function wporg_filter_archive_excerpt( $excerpt ) {
-	if ( ! is_single() && ! $GLOBALS['wp_query']->is_handbook && 'command' !== get_query_var( 'post_type' ) ) {
-
-		$post_id = get_the_ID();
-		$type    = get_post_type_object( get_post_type( $post_id ) )->labels->singular_name;
-
-		if ( 'hook' === strtolower( $type ) ) {
-			$hook_type = \DevHub\get_hook_type( $post_id );
-
-			if ( isset( $hook_type ) ) {
-				switch ( $hook_type ) {
-					case 'action':
-					case 'action_reference':
-						$type = __( 'Action Hook', 'wporg' );
-						break;
-					case 'filter':
-					case 'filter_reference':
-						$type = __( 'Filter Hook', 'wporg' );
-						break;
-					case 'action_deprecated':
-						$type = __( 'Action Hook (deprecated)', 'wporg' );
-						break;
-					case 'filter_deprecated':
-						$type = __( 'Filter Hook (deprecated)', 'wporg' );
-						break;
-				}
-			}
-		}
-		$excerpt = '<b>' . $type . ': </b>' . $excerpt;
-	}
-
-	return $excerpt;
-}
-add_filter( 'get_the_excerpt', 'wporg_filter_archive_excerpt' );
-
-/**
  * Appends parentheses to titles in archive view for functions and methods.
  *
  * @param  string      $title The title.

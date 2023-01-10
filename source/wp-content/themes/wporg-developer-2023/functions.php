@@ -138,6 +138,9 @@ if ( ! isset( $content_width ) ) {
 	$content_width = 640; /* pixels */
 }
 
+// Block files
+require_once __DIR__ . '/src/search-title/index.php';
+require_once __DIR__ . '/src/search-usage-info/index.php';
 
 add_action( 'init', __NAMESPACE__ . '\\init' );
 add_action( 'widgets_init', __NAMESPACE__ . '\\widgets_init' );
@@ -374,19 +377,15 @@ function header_js() {
  * Register and enqueue the theme assets.
  */
 function theme_scripts_styles() {
-	wp_enqueue_style( 'dashicons' );
-	// phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
-	wp_enqueue_style( 'open-sans', '//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600' );
-	wp_enqueue_style( 'wporg-developer-style', get_stylesheet_uri(), array(), filemtime( __DIR__ . '/style.css' ) );
+	// The parent style is registered as `wporg-parent-2021-style`, and will be loaded unless
+	// explicitly unregistered. We can load any child-theme overrides by declaring the parent
+	// stylesheet as a dependency.
 	wp_enqueue_style(
-		'wp-dev-sass-compiled',
-		get_template_directory_uri() . '/stylesheets/main.css',
-		array( 'wporg-developer-style' ),
-		filemtime( __DIR__ . '/stylesheets/main.css' )
+		'wporg-developer-2023-style',
+		get_stylesheet_directory_uri() . '/build/style/style-index.css',
+		array( 'wporg-parent-2021-style', 'wporg-global-fonts' ),
+		filemtime( __DIR__ . '/build/style/style-index.css' )
 	);
-	wp_enqueue_script( 'wporg-developer-navigation', get_stylesheet_directory_uri() . '/js/navigation.js', array(), filemtime( __DIR__ . '/js/navigation.js' ), true );
-	wp_enqueue_script( 'wporg-developer-chapters', get_stylesheet_directory_uri() . '/js/chapters.js', array( 'jquery' ), filemtime( __DIR__ . '/js/chapters.js' ) );
-	wp_enqueue_script( 'wporg-developer-menu', get_stylesheet_directory_uri() . '/js/menu.js', array( 'jquery' ), filemtime( __DIR__ . '/js/menu.js' ), true );
 }
 
 /**
