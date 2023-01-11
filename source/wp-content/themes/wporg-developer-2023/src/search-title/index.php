@@ -54,7 +54,6 @@ function render( $attributes, $content, $block ) {
 
 	return sprintf(
 		'<div %1$s>%2$s <a href="%3$s">%4$s</a></div>',
-
 		$wrapper_attributes,
 		$type_html,
 		esc_url( get_permalink( $block->context['postId'] ) ),
