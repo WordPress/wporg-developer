@@ -1,0 +1,27 @@
+.wp-block-wporg-search-filters {
+	display: grid;
+	margin-top: var(--wp--preset--spacing--10);
+	font-size: var(--wp--preset--font-size--small);
+	grid-template-columns: 1fr 1fr;
+	gap: var(--wp--preset--spacing--10);
+}
+
+.wp-block-wporg-search-filters > *:first-child {
+	grid-column: 1/3;
+}
+
+.wp-block-wporg-search-filters > * {
+	display: flex;
+	align-items: center;
+}
+
+.wp-block-wporg-search-filters input[type="checkbox"] + label {
+	margin-left: 2px;
+}
+
+@media (min-width: 500px) {
+	.wp-block-wporg-search-filters {
+		display: flex;
+		align-items: center;
+	}
+}

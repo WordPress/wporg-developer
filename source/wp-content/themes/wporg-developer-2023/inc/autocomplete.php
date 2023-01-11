@@ -38,20 +38,20 @@ class DevHub_Search_Form_Autocomplete {
 
 		wp_enqueue_style(
 			'awesomplete-css',
-			get_template_directory_uri() . '/stylesheets/awesomplete.css',
+			get_stylesheet_directory_uri() . '/stylesheets/awesomplete.css',
 			array(),
 			filemtime( dirname( __DIR__ ) . '/stylesheets/awesomplete.css' )
 		);
 		wp_enqueue_style(
 			'autocomplete-css',
-			get_template_directory_uri() . '/stylesheets/autocomplete.css',
+			get_stylesheet_directory_uri() . '/stylesheets/autocomplete.css',
 			array(),
 			filemtime( dirname( __DIR__ ) . '/stylesheets/autocomplete.css' )
 		);
 
 		wp_register_script(
 			'awesomplete',
-			get_template_directory_uri() . '/js/awesomplete.min.js',
+			get_stylesheet_directory_uri() . '/js/awesomplete.min.js',
 			array(),
 			filemtime( dirname( __DIR__ ) . '/js/awesomplete.min.js' ),
 			true

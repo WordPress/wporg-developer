@@ -11,12 +11,12 @@
 		return;
 	}
 
-	var form = $( '.searchform' ).not(".searchform-handbook");
+	var form = $( '.awesomeplete-form-wrap > form' );
 	if ( ! form.length ) {
 		return;
 	}
 
-	var	searchfield = $( '#search-field', form ),
+	var	searchfield = $( 'input[type="search"]', form ),
 		processing = false,
 		search = '',
 		autocompleteResults = {};

@@ -132,13 +132,12 @@ if ( is_admin() ) {
 }
 
 /**
- * Set the content width based on the theme's design and stylesheet.
+ * Block Hooks.
  */
-if ( ! isset( $content_width ) ) {
-	$content_width = 640; /* pixels */
-}
+require __DIR__ . '/inc/block-hooks.php';
 
 // Block files
+require_once __DIR__ . '/src/search-filters/index.php';
 require_once __DIR__ . '/src/search-title/index.php';
 require_once __DIR__ . '/src/search-usage-info/index.php';
 

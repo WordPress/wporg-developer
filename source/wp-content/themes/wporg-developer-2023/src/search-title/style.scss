@@ -22,7 +22,7 @@
 .function {
 	&.wp-block-wporg-search-title,
 	a {
-		color: #008A20;
+		color: #008a20;
 	}
 
 	.wp-block-wporg-search-title__type {
@@ -33,7 +33,7 @@
 .hook {
 	&.wp-block-wporg-search-title,
 	a {
-		color: #D63638;
+		color: #d63638;
 	}
 
 	.wp-block-wporg-search-title__type {
@@ -44,7 +44,7 @@
 .class {
 	&.wp-block-wporg-search-title,
 	a {
-		color: #BD8600;
+		color: #bd8600;
 	}
 
 	.wp-block-wporg-search-title__type {
@@ -55,7 +55,7 @@
 .method {
 	&.wp-block-wporg-search-title,
 	a {
-		color: #135E96;
+		color: #135e96;
 	}
 
 	.wp-block-wporg-search-title__type {
@@ -66,9 +66,9 @@
 .wp-block-wporg-search-title__type {
 	background: var(--wp--preset--color--light-grey-2);
 	border-radius: 2px;
-	margin-right:  8px;
+	margin-right: 8px;
 	padding: 2px 8px;
 	font-family: var(--wp--preset--font-family--monospace);
-	font-size:  var(--wp--preset--font-size--small);
+	font-size: var(--wp--preset--font-size--small);
 	word-break: keep-all;
 }
