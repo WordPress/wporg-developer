@@ -138,6 +138,7 @@ require __DIR__ . '/inc/block-hooks.php';
 
 // Block files
 require_once __DIR__ . '/src/search-filters/index.php';
+require_once __DIR__ . '/src/search-results-context/index.php';
 require_once __DIR__ . '/src/search-title/index.php';
 require_once __DIR__ . '/src/search-usage-info/index.php';
 

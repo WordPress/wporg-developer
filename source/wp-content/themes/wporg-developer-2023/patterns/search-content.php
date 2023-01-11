@@ -21,6 +21,8 @@
 	<!-- wp:search {"label":"Search","showLabel":false,"buttonText":"Search","buttonPosition":"button-inside","buttonUseIcon":true,"className":"is-style-secondary-search-control wporg-filtered-search-form"} /--></div>
 	<!-- /wp:group -->
 
+	<!-- wp:wporg/search-results-context {"style":{"spacing":{"padding":{"top":"var:preset|spacing|20"}}}} /-->
+
 	<!-- wp:post-template -->
 	
 	<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|10","bottom":"var:preset|spacing|10"}}}} -->
@@ -31,8 +33,8 @@
 	<!-- /wp:group -->
 
 	<!-- /wp:post-template -->
-	<!-- wp:paragraph {"placeholder":"Add text or blocks that will display when a query returns no results.","style":{"spacing":{"margin":{"top":"var:preset|spacing|50"}}}} -->
-	<p style="margin-top:var(--wp--preset--spacing--50)"><?php esc_attr_e( 'Sorry, but nothing matched your search terms.', 'wporg' ); ?></p>
+	<!-- wp:paragraph {"placeholder":"Add text or blocks that will display when a query returns no results.","style":{"spacing":{"margin":{"top":"var:preset|spacing|40"}}}} -->
+	<p style="margin-top:var(--wp--preset--spacing--40)"><?php esc_attr_e( 'Sorry, but nothing matched your search terms.', 'wporg' ); ?></p>
 	<!-- /wp:paragraph --></div>
 	<!-- /wp:group -->
 
