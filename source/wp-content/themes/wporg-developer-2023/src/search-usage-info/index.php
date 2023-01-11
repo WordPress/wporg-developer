@@ -65,7 +65,7 @@ function render( $attributes, $content, $block ) {
 		$uses
 	);
 
-	$source_html = __( 'Source:', 'wporg' ) . ' <a class="wp-block-wporg-search-usage-info__source" href="'. get_github_source_file_link() .'">' . get_source_file() . ':' . get_line_number() .'</a>';
+	$source_html = __( 'Source:', 'wporg' ) . ' <a class="wp-block-wporg-search-usage-info__source external-link" href="'. get_github_source_file_link() .'">' . get_source_file() . ':' . get_line_number() .'</a>';
 
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(
