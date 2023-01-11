@@ -1,4 +1,3 @@
-
 <?php
 /**
  * Blocks hooks.
