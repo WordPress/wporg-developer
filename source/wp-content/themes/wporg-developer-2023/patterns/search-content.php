@@ -33,9 +33,11 @@
 	<!-- /wp:group -->
 
 	<!-- /wp:post-template -->
+		<!-- wp:query-no-results -->
 	<!-- wp:paragraph {"placeholder":"Add text or blocks that will display when a query returns no results.","style":{"spacing":{"margin":{"top":"var:preset|spacing|40"}}}} -->
 	<p style="margin-top:var(--wp--preset--spacing--40)"><?php esc_attr_e( 'Sorry, but nothing matched your search terms.', 'wporg' ); ?></p>
-	<!-- /wp:paragraph --></div>
+	<!-- /wp:paragraph -->
+	<!-- /wp:query-no-results --></div>
 	<!-- /wp:group -->
 
 	<!-- wp:query-pagination {"layout":{"type":"flex","justifyContent":"center"}} -->
@@ -44,10 +46,6 @@
 	<!-- wp:query-pagination-numbers /-->
 
 	<!-- wp:query-pagination-next /-->
-	<!-- /wp:query-pagination -->
-
-	<!-- wp:query-no-results -->
-
-	<!-- /wp:query-no-results --></div>
+	<!-- /wp:query-pagination --></div>
 	<!-- /wp:query --></main>
 <!-- /wp:group -->
