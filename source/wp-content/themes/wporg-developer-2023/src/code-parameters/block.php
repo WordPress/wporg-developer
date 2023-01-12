@@ -31,11 +31,22 @@ function render() {
 	$wrapper_attributes = get_block_wrapper_attributes();
 	$params = get_params();
 
-	$output = '<section ' . $wrapper_attributes . '>';
-	$output .= wporg_developer_code_reference_build_params( $params );
-	$output .= '</section>';
+	if ( empty( $params ) ) {
+		return '';
+	}
 
-	return $output;
+	$title_block = sprintf(
+		'<!-- wp:wporg/code-reference-section-title {"title":"%s"} /-->',
+		__( 'Parameters', 'wporg' )
+	);
+
+	$wrapper_attributes = get_block_wrapper_attributes();
+	return sprintf(
+		'<section %s>%s %s</section>',
+		$wrapper_attributes,
+		do_blocks( $title_block ),
+		wporg_developer_code_reference_build_params( $params )
+	);
 }
 
 /**
