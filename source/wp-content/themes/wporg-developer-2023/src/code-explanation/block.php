@@ -13,7 +13,6 @@ add_action( 'init', __NAMESPACE__ . '\init' );
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
 function init() {
-
 	register_block_type(
 		dirname( dirname( __DIR__ ) ) . '/build/code-explanation',
 			array(
