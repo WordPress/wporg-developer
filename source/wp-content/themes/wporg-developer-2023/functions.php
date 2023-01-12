@@ -138,10 +138,12 @@ require __DIR__ . '/inc/block-hooks.php';
 
 // Block files
 require_once __DIR__ . '/src/code-changelog/block.php';
+require_once __DIR__ . '/src/code-deprecated/block.php';
 require_once __DIR__ . '/src/code-description/block.php';
 require_once __DIR__ . '/src/code-explanation/block.php';
 require_once __DIR__ . '/src/code-hooks/block.php';
 require_once __DIR__ . '/src/code-parameters/block.php';
+require_once __DIR__ . '/src/code-private-access/block.php';
 require_once __DIR__ . '/src/code-related/block.php';
 require_once __DIR__ . '/src/code-return-value/block.php';
 require_once __DIR__ . '/src/code-source/block.php';
