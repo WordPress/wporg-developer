@@ -16,9 +16,8 @@
 <!-- wp:wporg/code-reference-parameters /-->
 <!-- wp:wporg/code-reference-return-value /-->
 <!-- wp:wporg/code-reference-source /-->
+<!-- wp:wporg/code-reference-hooks /-->
 <!-- wp:wporg/code-reference-related /-->
 <!-- wp:wporg/code-reference-changelog /-->
-<!-- wp:wporg/code-reference-user-notes /-->
-
-</main>
+<!-- wp:wporg/code-reference-user-notes /--></main>
 <!-- /wp:group -->
