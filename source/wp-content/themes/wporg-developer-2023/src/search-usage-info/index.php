@@ -36,10 +36,7 @@ function init() {
 /**
  * Render the block content.
  *
- * @param array    $attributes Block attributes.
- * @param string   $content    Block default content.
- * @param WP_Block $block      Block instance.
- *
+
  * @return string Returns the block markup.
  */
 function render( $attributes, $content, $block ) {

@@ -25,10 +25,6 @@ function init() {
 /**
  * Render the block content.
  *
- * @param array    $attributes Block attributes.
- * @param string   $content    Block default content.
- * @param WP_Block $block      Block instance.
- *
  * @return string Returns the block markup.
  */
 function render() {
@@ -52,6 +48,11 @@ function render() {
 	);
 }
 
+/**
+ * Return code description html.
+ *
+ * @return string
+ */
 function wporg_developer_code_reference_description_render() {
 	$output = '';
 	$description = get_description();

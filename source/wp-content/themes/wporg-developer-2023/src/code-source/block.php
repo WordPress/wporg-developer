@@ -29,10 +29,6 @@ function init() {
 /**
  * Render the block content.
  *
- * @param array    $attributes Block attributes.
- * @param string   $content    Block default content.
- * @param WP_Block $block      Block instance.
- *
  * @return string Returns the block markup.
  */
 function render() {
@@ -45,6 +41,11 @@ function render() {
 	return $output;
 }
 
+/**
+ * Returns code sample html.
+ *
+ * @return string
+ */
 function wporg_developer_code_reference_source_render() {
 	$source_file = get_source_file();
 	$output = '';
@@ -54,6 +55,7 @@ function wporg_developer_code_reference_source_render() {
 
 		$output .= '<p>' .
 			sprintf(
+				/* translators: %s: Source file name. */
 				__( 'File: %s.', 'wporg' ),
 				'<code>' . esc_html( $source_file ) . '</code>'
 			) .

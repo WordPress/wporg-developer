@@ -25,10 +25,6 @@ function init() {
 /**
  * Render the block content.
  *
- * @param array    $attributes Block attributes.
- * @param string   $content    Block default content.
- * @param WP_Block $block      Block instance.
- *
  * @return string Returns the block markup.
  */
 function render() {
@@ -42,6 +38,12 @@ function render() {
 	return $output;
 }
 
+/**
+ * Return code reference parameter html.
+ *
+ * @param [type] $params
+ * @return string
+ */
 function wporg_developer_code_reference_build_params( $params ) {
 	$output = '<dl>';
 
@@ -65,7 +67,9 @@ function wporg_developer_code_reference_build_params( $params ) {
 		$output .= '<div class="desc">';
 
 		if ( ! empty( $param['content'] ) ) {
-			if ( $extra = get_param_reference( $param ) ) {
+			$extra = get_param_reference( $param );
+
+			if ( $extra ) {
 				$output .= '<span class="description">' . wp_kses_post( $param['content'] ) . '</span>';
 				$output .= '<details class="extended-description">';
 				$output .= '<summary>' . esc_html( sprintf( __( 'More Arguments from %1$s( ... %2$s )', 'wporg' ), $extra['parent'], $extra['parent_var'] ) ) . '</summary>';
