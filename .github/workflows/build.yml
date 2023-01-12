@@ -2,7 +2,7 @@ name: Build and push to build branch.
 
 on:
     push:
-        branches: [trunk]
+        branches: [old]
 
 jobs:
     build:
