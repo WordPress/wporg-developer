@@ -11,7 +11,7 @@
 		"title": {
 			"type": "string",
 			"default": "Section Title"
-		},
+		}
 	},
 	"supports": {
 		"html": false,
