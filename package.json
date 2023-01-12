@@ -6,10 +6,10 @@
 	"license": "GPL-2.0-or-later",
 	"private": true,
 	"dependencies": {
-		"@wordpress/scripts": "^23.1.0"
+		"@wordpress/scripts": "^25.1.0"
 	},
 	"devDependencies": {
-		"@wordpress/env": "^4.5.0"
+		"@wordpress/env": "^5.9.0"
 	},
 	"scripts": {
 		"setup:tools": "yarn && composer install && TEXTDOMAIN=wporg composer exec update-configs && composer --working-dir=./source/wp-content/plugins/phpdoc-parser install",
