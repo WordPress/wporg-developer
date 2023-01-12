@@ -17,8 +17,8 @@ add_action( 'init', __NAMESPACE__ . '\init' );
 function init() {
 	register_block_type(
 		dirname( dirname( __DIR__ ) ) . '/build/code-hooks',
-			array(
-				'render_callback' => __NAMESPACE__ . '\render',
+		array(
+			'render_callback' => __NAMESPACE__ . '\render',
 		)
 	);
 }
@@ -33,9 +33,9 @@ function init() {
  * @return string Returns the block markup.
  */
 function render() {
-	$has_hooks   = ( post_type_has_hooks_info() && ( $hooks   = get_hooks()   ) && $hooks->have_posts()   );
+	$has_hooks   = ( post_type_has_hooks_info() && ( $hooks   = get_hooks() ) && $hooks->have_posts() );
 
-	if( ! $has_hooks ) {
+	if ( ! $has_hooks ) {
 		return '';
 	}
 

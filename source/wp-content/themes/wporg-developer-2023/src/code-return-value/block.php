@@ -15,8 +15,8 @@ add_action( 'init', __NAMESPACE__ . '\init' );
 function init() {
 	register_block_type(
 		dirname( dirname( __DIR__ ) ) . '/build/code-return-value',
-			array(
-				'render_callback' => __NAMESPACE__ . '\render',
+		array(
+			'render_callback' => __NAMESPACE__ . '\render',
 		)
 	);
 }
@@ -33,9 +33,22 @@ function init() {
 function render() {
 	$wrapper_attributes = get_block_wrapper_attributes();
 
-	$output = '<section ' . $wrapper_attributes . '>';
-	$output .= get_return();
-	$output .= "</section>";
+	$content = get_return();
 
-	return $output;
+	if ( empty( $content ) ) {
+		return '';
+	}
+
+	$title_block = sprintf(
+		'<!-- wp:wporg/code-reference-section-title {"title":"%s"} /-->',
+		__( 'Return', 'wporg' )
+	);
+
+	$wrapper_attributes = get_block_wrapper_attributes();
+	return sprintf(
+		'<section %s>%s %s</section>',
+		$wrapper_attributes,
+		do_blocks( $title_block ),
+		$content
+	);
 }

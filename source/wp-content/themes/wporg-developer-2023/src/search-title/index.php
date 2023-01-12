@@ -20,8 +20,8 @@ add_action( 'init', __NAMESPACE__ . '\init' );
 function init() {
 	register_block_type(
 		dirname( dirname( __DIR__ ) ) . '/build/search-title',
-			array(
-				'render_callback' => __NAMESPACE__ . '\render',
+		array(
+			'render_callback' => __NAMESPACE__ . '\render',
 		)
 	);
 }
@@ -45,12 +45,14 @@ function render( $attributes, $content, $block ) {
 
 	$type_html = sprintf(
 		'<span class="wp-block-wporg-search-title__type">%1$s</span>',
-		 $type
+		$type
 	);
 
-	$wrapper_attributes = get_block_wrapper_attributes( array(
-		'class' => $type,
-	) ) ;
+	$wrapper_attributes = get_block_wrapper_attributes(
+		array(
+			'class' => $type,
+		)
+	);
 
 	return sprintf(
 		'<div %1$s>%2$s <a href="%3$s">%4$s</a></div>',

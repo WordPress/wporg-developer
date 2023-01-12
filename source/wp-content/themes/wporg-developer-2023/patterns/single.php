@@ -21,9 +21,6 @@
 <h2 class="wp-block-heading">Parameters</h2>
 <!-- /wp:heading -->
 <!-- wp:wporg/code-reference-parameters /-->
-<!-- wp:heading -->
-<h2 class="wp-block-heading">Return</h2>
-<!-- /wp:heading -->
 <!-- wp:wporg/code-reference-return-value /-->
 <!-- wp:wporg/code-reference-explanation /-->
 <!-- wp:heading -->

@@ -13,8 +13,8 @@ add_action( 'init', __NAMESPACE__ . '\init' );
 function init() {
 	register_block_type(
 		dirname( dirname( __DIR__ ) ) . '/build/code-private-access',
-			array(
-				'render_callback' => __NAMESPACE__ . '\render',
+		array(
+			'render_callback' => __NAMESPACE__ . '\render',
 		)
 	);
 }
@@ -33,7 +33,7 @@ function render() {
 
 	$output = '<section ' . $wrapper_attributes . '>';
 	$output .= 'wporg:code-private-access: Not implemented';
-	$output .= "</section>";
+	$output .= '</section>';
 
 	return $output;
 }

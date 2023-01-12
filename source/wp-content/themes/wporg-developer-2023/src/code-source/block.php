@@ -20,8 +20,8 @@ add_action( 'init', __NAMESPACE__ . '\init' );
 function init() {
 	register_block_type(
 		dirname( dirname( __DIR__ ) ) . '/build/code-source',
-			array(
-				'render_callback' => __NAMESPACE__ . '\render',
+		array(
+			'render_callback' => __NAMESPACE__ . '\render',
 		)
 	);
 }
@@ -41,7 +41,7 @@ function render() {
 
 	$output = '<section ' . $wrapper_attributes . '>';
 	$output .= wporg_developer_code_reference_source_render();
-	$output .= "</section>";
+	$output .= '</section>';
 	return $output;
 }
 
@@ -62,7 +62,6 @@ function wporg_developer_code_reference_source_render() {
 				esc_url( get_source_file_archive_link( $source_file ) ),
 				__( 'View all references', 'wporg' )
 			) . '</p>';
-
 
 		if ( ! empty( $source_code ) ) {
 			$output .= do_blocks(

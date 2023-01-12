@@ -16,8 +16,8 @@ add_action( 'init', __NAMESPACE__ . '\init' );
 function init() {
 	register_block_type(
 		dirname( dirname( __DIR__ ) ) . '/build/code-parameters',
-			array(
-				'render_callback' => __NAMESPACE__ . '\render',
+		array(
+			'render_callback' => __NAMESPACE__ . '\render',
 		)
 	);
 }
@@ -37,7 +37,7 @@ function render() {
 
 	$output = '<section ' . $wrapper_attributes . '>';
 	$output .= wporg_developer_code_reference_build_params( $params );
-	$output .= "</section>";
+	$output .= '</section>';
 
 	return $output;
 }
@@ -68,7 +68,7 @@ function wporg_developer_code_reference_build_params( $params ) {
 			if ( $extra = get_param_reference( $param ) ) {
 				$output .= '<span class="description">' . wp_kses_post( $param['content'] ) . '</span>';
 				$output .= '<details class="extended-description">';
-				$output .= '<summary>' . esc_html( sprintf( __( 'More Arguments from %s( ... %s )', 'wporg' ), $extra[ 'parent' ], $extra['parent_var'] ) ) . '</summary>';
+				$output .= '<summary>' . esc_html( sprintf( __( 'More Arguments from %1$s( ... %2$s )', 'wporg' ), $extra['parent'], $extra['parent_var'] ) ) . '</summary>';
 				$output .= '<span class="description">' . wp_kses_post( $extra['content'] ) . '</span>';
 				$output .= '</details>';
 			} else {

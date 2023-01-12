@@ -16,8 +16,8 @@ add_action( 'init', __NAMESPACE__ . '\init' );
 function init() {
 	register_block_type(
 		dirname( dirname( __DIR__ ) ) . '/build/code-description',
-			array(
-				'render_callback' => __NAMESPACE__ . '\render',
+		array(
+			'render_callback' => __NAMESPACE__ . '\render',
 		)
 	);
 }
@@ -34,7 +34,7 @@ function init() {
 function render() {
 	$content = wporg_developer_code_reference_description_render();
 
-	if( empty( $content ) ) {
+	if ( empty( $content ) ) {
 		return '';
 	}
 
