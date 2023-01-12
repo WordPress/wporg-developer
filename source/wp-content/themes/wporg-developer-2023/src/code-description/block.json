@@ -13,7 +13,7 @@
 			"fontSize": true
 		}
 	},
-	"textdomain": "wporg-developer-code-reference-description",
+	"textdomain": "wporg",
 	"editorScript": "file:./index.js",
 	"style": "file:./style-index.css"
 }
