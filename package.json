@@ -19,6 +19,8 @@
 		"update:tools": "composer update && TEXTDOMAIN=wporg composer exec update-configs && composer --working-dir=./source/wp-content/plugins/phpdoc-parser update",
 		"wp-env": "wp-env",
 		"build": "yarn workspaces run build",
+		"build:theme": "yarn workspace wporg-developer-2023 build",
+		"start:theme": "yarn workspace wporg-developer-2023 start",
 		"lint:css": "wp-scripts lint-style"
 	},
 	"workspaces": [

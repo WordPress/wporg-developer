@@ -76,7 +76,7 @@ These must be run in the project's root folder, _not_ in theme/plugin subfolders
 * Watch for SCSS changes and rebuild the CSS as needed.
 
     ```bash
-    yarn build watch
+    yarn start:theme
     ```
 
 * Parse the code reference again. This is run as part of the project setup.
@@ -87,5 +87,5 @@ These must be run in the project's root folder, _not_ in theme/plugin subfolders
 
 ### Asset management
 
-* Build assets once: `yarn workspace wporg-developer build`
-* Watch assets and build on changes: `yarn workspace wporg-developer start`
+* Build assets once: `yarn build:theme`
+* Watch assets and build on changes: `yarn start:theme`
