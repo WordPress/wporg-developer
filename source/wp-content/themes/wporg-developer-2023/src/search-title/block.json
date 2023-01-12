@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "wporg/search-title",
+	"title": "Search Title",
+	"category": "layout",
+	"description": "The post title for search results.",
+	"keywords": [ "post" ],
+	"textdomain": "wporg",
+	"attributes": {},
+	"supports": {
+		"html": false,
+		"color": {
+			"text": true,
+			"background": true,
+			"link": true
+		},
+		"spacing": {
+			"margin": true,
+			"padding": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true
+		}
+	},
+	"usesContext": [ "postId" ],
+	"editorScript": "file:./index.js",
+	"style": "file:./style-index.css"
+}

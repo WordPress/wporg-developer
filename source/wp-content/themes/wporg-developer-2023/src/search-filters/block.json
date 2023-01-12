@@ -1,0 +1,16 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "wporg/search-filters",
+	"title": "Search Filters",
+	"category": "layout",
+	"description": "List of filters for searching.",
+	"keywords": [ "search" ],
+	"textdomain": "wporg",
+	"attributes": {},
+	"supports": {
+		"html": false
+	},
+	"editorScript": "file:./index.js",
+	"style": "file:./style-index.css"
+}

@@ -24,4 +24,4 @@ phpcs.xml.dist
 
 # ...except the actual source of this project.
 !/source/wp-content/themes
-!/source/wp-content/themes/wporg-developer
+!/source/wp-content/themes/wporg-developer-2023
