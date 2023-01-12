@@ -33,13 +33,24 @@ function init() {
  * @return string Returns the block markup.
  */
 function render() {
+	$content = wporg_developer_code_reference_description_render();
+
+	if( empty( $content ) ) {
+		return '';
+	}
+
+	$title_block = sprintf(
+		'<!-- wp:wporg/code-reference-section-title {"title":"%s"} /-->',
+		__( 'Description', 'wporg' )
+	);
+
 	$wrapper_attributes = get_block_wrapper_attributes();
-
-	$output = '<section ' . $wrapper_attributes . '>';
-	$output .= wporg_developer_code_reference_description_render();
-	$output .= "</section>";
-
-	return $output;
+	return sprintf(
+		'<section %s>%s %s</section>',
+		$wrapper_attributes,
+		do_blocks( $title_block ),
+		$content
+	);
 }
 
 function wporg_developer_code_reference_description_render() {

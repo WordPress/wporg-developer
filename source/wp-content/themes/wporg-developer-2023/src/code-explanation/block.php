@@ -32,13 +32,22 @@ function init() {
  * @return string Returns the block markup.
  */
 function render() {
-	$wrapper_attributes = get_block_wrapper_attributes();
-
 	$explanation = get_explanation_content( get_the_ID() );
 
-	$output = '<section ' . $wrapper_attributes . '>';
-	$output .= $explanation;
-	$output .= "</section>";
+	if( empty( $explanation ) )	 {
+		return '';
+	}
 
-	return $output;
+	$title_block = sprintf(
+		'<!-- wp:wporg/code-reference-section-title {"title":"%s"} /-->',
+		__( 'More Information', 'wporg' )
+	);
+
+	$wrapper_attributes = get_block_wrapper_attributes();
+	return sprintf(
+		'<section %s>%s %s</section>',
+		$wrapper_attributes,
+		do_blocks( $title_block ),
+		$explanation
+	);
 }
