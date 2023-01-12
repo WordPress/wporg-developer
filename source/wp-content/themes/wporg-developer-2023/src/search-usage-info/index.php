@@ -36,7 +36,6 @@ function init() {
 /**
  * Render the block content.
  *
-
  * @return string Returns the block markup.
  */
 function render( $attributes, $content, $block ) {

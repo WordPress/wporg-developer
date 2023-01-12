@@ -25,11 +25,16 @@ function init() {
  * @return string Returns the block markup.
  */
 function render() {
+	$title_block = sprintf(
+		'<!-- wp:wporg/code-reference-section-title {"title":"%s"} /-->',
+		__( 'Related', 'wporg' )
+	);
+
 	$wrapper_attributes = get_block_wrapper_attributes();
-
-	$output = '<section ' . $wrapper_attributes . '>';
-	$output .= 'wporg:code-related: Not implemented';
-	$output .= '</section>';
-
-	return $output;
+	return sprintf(
+		'<section %s>%s %s</section>',
+		$wrapper_attributes,
+		do_blocks( $title_block ),
+		'Not Implemented'
+	);
 }
