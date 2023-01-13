@@ -1,0 +1,19 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "wporg/code-reference-deprecated",
+	"version": "0.1.0",
+	"title": "Code Reference: Deprecated",
+	"category": "widgets",
+	"icon": "smiley",
+	"description": "Show the deprecated message for a function, class, or method.",
+	"supports": {
+		"html": false,
+		"typography": {
+			"fontSize": true
+		}
+	},
+	"textdomain": "wporg",
+	"editorScript": "file:./index.js",
+	"style": "file:./style-index.css"
+}

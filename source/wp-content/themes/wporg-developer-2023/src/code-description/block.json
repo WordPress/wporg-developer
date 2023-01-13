@@ -1,0 +1,19 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "wporg/code-reference-description",
+	"version": "0.1.0",
+	"title": "Code Reference: Description",
+	"category": "widgets",
+	"icon": "smiley",
+	"description": "Show the description for a function, class, or method.",
+	"supports": {
+		"html": false,
+		"typography": {
+			"fontSize": true
+		}
+	},
+	"textdomain": "wporg",
+	"editorScript": "file:./index.js",
+	"style": "file:./style-index.css"
+}

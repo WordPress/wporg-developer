@@ -165,7 +165,7 @@ class DevHub_User_Submitted_Content {
 		if ( is_singular() ) {
 			wp_enqueue_script(
 				'wporg-developer-function-reference',
-				get_template_directory_uri() . '/js/function-reference.js',
+				get_stylesheet_directory_uri() . '/js/function-reference.js',
 				array( 'jquery', 'wp-a11y' ),
 				filemtime( dirname( __DIR__ ) . '/js/function-reference.js' ),
 				true
@@ -183,7 +183,7 @@ class DevHub_User_Submitted_Content {
 
 			wp_enqueue_script(
 				'wporg-developer-user-notes',
-				get_template_directory_uri() . '/js/user-notes.js',
+				get_stylesheet_directory_uri() . '/js/user-notes.js',
 				array( 'jquery', 'quicktags' ),
 				filemtime( dirname( __DIR__ ) . '/js/user-notes.js' ),
 				true
@@ -191,7 +191,7 @@ class DevHub_User_Submitted_Content {
 
 			wp_enqueue_script(
 				'wporg-developer-user-notes-feedback',
-				get_template_directory_uri() . '/js/user-notes-feedback.js',
+				get_stylesheet_directory_uri() . '/js/user-notes-feedback.js',
 				array( 'jquery', 'quicktags' ),
 				filemtime( dirname( __DIR__ ) . '/js/user-notes-feedback.js' ),
 				true

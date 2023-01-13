@@ -37,7 +37,7 @@ class DevHub_Note_Preview {
 		if ( is_singular() ) {
 			wp_enqueue_script(
 				'wporg-developer-tabs',
-				get_template_directory_uri() . '/js/tabs.js',
+				get_stylesheet_directory_uri() . '/js/tabs.js',
 				array( 'jquery' ),
 				filemtime( dirname( __DIR__ ) . '/js/tabs.js' ),
 				true
@@ -45,7 +45,7 @@ class DevHub_Note_Preview {
 
 			wp_enqueue_script(
 				'wporg-developer-preview',
-				get_template_directory_uri() . '/js/user-notes-preview.js',
+				get_stylesheet_directory_uri() . '/js/user-notes-preview.js',
 				array( 'jquery', 'wporg-developer-function-reference', 'wporg-developer-tabs' ),
 				filemtime( dirname( __DIR__ ) . '/js/user-notes-preview.js' ),
 				true

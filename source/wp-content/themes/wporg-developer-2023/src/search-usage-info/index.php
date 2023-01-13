@@ -27,8 +27,8 @@ add_action( 'init', __NAMESPACE__ . '\init' );
 function init() {
 	register_block_type(
 		dirname( dirname( __DIR__ ) ) . '/build/search-usage-info',
-			array(
-				'render_callback' => __NAMESPACE__ . '\render',
+		array(
+			'render_callback' => __NAMESPACE__ . '\render',
 		)
 	);
 }
@@ -36,20 +36,16 @@ function init() {
 /**
  * Render the block content.
  *
- * @param array    $attributes Block attributes.
- * @param string   $content    Block default content.
- * @param WP_Block $block      Block instance.
- *
  * @return string Returns the block markup.
  */
 function render( $attributes, $content, $block ) {
 
-	if( ! show_usage_info() ) {
+	if ( ! show_usage_info() ) {
 		return '';
 	}
 
 	$used_by = ( $q = get_used_by() ) ? $q->post_count : 0;
-	$uses    = ( $q = get_uses()    ) ? $q->post_count : 0;
+	$uses    = ( $q = get_uses() ) ? $q->post_count : 0;
 
 	$used_by_html = sprintf(
 		/* translators: 1: permalink, 2: number of functions */
@@ -65,7 +61,7 @@ function render( $attributes, $content, $block ) {
 		$uses
 	);
 
-	$source_html = __( 'Source:', 'wporg' ) . ' <a class="wp-block-wporg-search-usage-info__source external-link" href="'. get_github_source_file_link() .'">' . get_source_file() . ':' . get_line_number() .'</a>';
+	$source_html = __( 'Source:', 'wporg' ) . ' <a class="wp-block-wporg-search-usage-info__source external-link" href="' . get_github_source_file_link() . '">' . get_source_file() . ':' . get_line_number() . '</a>';
 
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(
