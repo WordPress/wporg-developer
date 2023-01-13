@@ -21,7 +21,7 @@
 
 <!-- wp:group {"backgroundColor":"blueberry-4","style":{"spacing":{"padding":{"top":"var:preset|spacing|10","bottom":"var:preset|spacing|10"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group has-blueberry-4-background-color has-background" style="padding-top:var(--wp--preset--spacing--10);padding-bottom:var(--wp--preset--spacing--10)"><!-- wp:paragraph {"align":"center","fontSize":"extra-small"}  -->
-<p class="has-text-align-center has-extra-small-font-size">See <a href="[wordpress_version_link]">what has changed</a>	in the WordPress [wordpress_version] api.</p>
+<p class="has-text-align-center has-extra-small-font-size">See <a href="[wordpress_version_link]">what has changed</a>	in the WordPress [wordpress_version] API.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
@@ -55,4 +55,28 @@
 <!-- /wp:group --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns --></div>
+<!-- /wp:group -->
+
+
+<!-- wp:group {"backgroundColor":"blueberry-1","layout":{"type":"default"}} -->
+<div class="wp-block-group has-blueberry-1-background-color has-background"><!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}},"layout":{"type":"constrained","justifyContent":"center"}} -->
+<div class="wp-block-group alignwide" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:columns {"align":"wide"} -->
+<div class="wp-block-columns alignwide"><!-- wp:column {"width":"55%"} -->
+<div class="wp-block-column" style="flex-basis:55%"><!-- wp:heading {"level":3,"style":{"spacing":{"margin":{"bottom":"var:preset|spacing|50"}}},"textColor":"white"} -->
+<h3 class="wp-block-heading has-white-color has-text-color" style="margin-bottom:var(--wp--preset--spacing--50)">Are you passionate about web development? Join the WordPress community and help shape the future of the web
+</h3>
+<!-- /wp:heading -->
+
+<!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button {"className":"is-style-fill-on-dark"} -->
+<div class="wp-block-button is-style-fill-on-dark"><a class="wp-block-button__link wp-element-button">Contribute</a></div>
+<!-- /wp:button -->
+
+<!-- wp:button {"className":"is-style-outline-on-dark external-link"} -->
+<div class="wp-block-button is-style-outline-on-dark external-link"><a class="wp-block-button__link wp-element-button" href="https://make.wordpress.org/core/handbook/">Check Out Contributor Handbook ↗</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns --></div>
+<!-- /wp:group --></div>
 <!-- /wp:group -->
