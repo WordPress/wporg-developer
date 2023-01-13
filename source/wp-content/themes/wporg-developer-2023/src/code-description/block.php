@@ -35,7 +35,7 @@ function render() {
 	}
 
 	$title_block = sprintf(
-		'<!-- wp:wporg/code-reference-section-title {"title":"%s"} /-->',
+		'<h2 class="wp-block-heading">%s</h2>',
 		__( 'Description', 'wporg' )
 	);
 
@@ -43,7 +43,7 @@ function render() {
 	return sprintf(
 		'<section %s>%s %s</section>',
 		$wrapper_attributes,
-		do_blocks( $title_block ),
+		$title_block,
 		$content
 	);
 }

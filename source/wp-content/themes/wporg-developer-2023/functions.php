@@ -146,7 +146,6 @@ require_once __DIR__ . '/src/code-parameters/block.php';
 require_once __DIR__ . '/src/code-private-access/block.php';
 require_once __DIR__ . '/src/code-related/block.php';
 require_once __DIR__ . '/src/code-return-value/block.php';
-require_once __DIR__ . '/src/code-section-title/block.php';
 require_once __DIR__ . '/src/code-source/block.php';
 require_once __DIR__ . '/src/code-summary/block.php';
 require_once __DIR__ . '/src/code-title/block.php';
