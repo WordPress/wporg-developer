@@ -10,7 +10,7 @@
 <!-- wp:group {"className":"has-white-color has-charcoal-2-background-color has-text-color has-background has-link-color","layout":{"type":"constrained"}} -->
 <div class="wp-block-group has-white-color has-charcoal-2-background-color has-text-color has-background has-link-color"><!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}},"layout":{"type":"constrained","contentSize":"1344px"}} -->
 <div class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:image {"align":"wide","id":7564,"sizeSlug":"full","linkDestination":"none","className":"wporg-hero-graphic"} -->
-<figure class="wp-block-image alignwide size-full wporg-hero-graphic"><img src="http://localhost:8888/wp-content/uploads/2023/01/developers.svg" alt="<?php esc_attr_e( 'WordPress Developer Resources', 'wporg' ); ?>" class="wp-image-7564"/></figure>
+<figure class="wp-block-image alignwide size-full wporg-hero-graphic"><img src="https://s.w.org/wp-content/themes/wporg-deverlop-2023/images/developers.svg?v=20221212" alt="<?php esc_attr_e( 'WordPress Developer Resources', 'wporg' ); ?>" class="wp-image-7564"/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:group -->
 
