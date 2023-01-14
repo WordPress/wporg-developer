@@ -71,7 +71,7 @@
 }
 
 .wporg-front-page-breadcrumb {
-	position: unset;
+	position: unset; // We don't want it to be sticky on the front page, but removing is-sticky breaks the layout.
 }
 
 @media (min-width: 599px) {
