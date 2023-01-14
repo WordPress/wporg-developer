@@ -10,20 +10,26 @@
 <!-- wp:group {"className":"has-white-color has-charcoal-2-background-color has-text-color has-background has-link-color","layout":{"type":"constrained"}} -->
 <div class="wp-block-group has-white-color has-charcoal-2-background-color has-text-color has-background has-link-color"><!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}},"layout":{"type":"constrained","contentSize":"1344px"}} -->
 <div class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:image {"align":"wide","id":7564,"sizeSlug":"full","linkDestination":"none","className":"wporg-hero-graphic"} -->
-<figure class="wp-block-image alignwide size-full wporg-hero-graphic"><img src="http://localhost:8888/wp-content/uploads/2023/01/developers.svg" alt="WordPress Developer Resources" class="wp-image-7564"/></figure>
+<figure class="wp-block-image alignwide size-full wporg-hero-graphic"><img src="http://localhost:8888/wp-content/uploads/2023/01/developers.svg" alt="<?php esc_attr_e( 'WordPress Developer Resources', 'wporg' ); ?>" class="wp-image-7564"/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:group -->
 
 <!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"bottom":"var:preset|spacing|60"}}},"layout":{"type":"default"}} -->
 <div class="wp-block-group alignwide" style="padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"right":"var:preset|spacing|edge-space","bottom":"var:preset|spacing|edge-space","left":"var:preset|spacing|edge-space"}}},"layout":{"type":"default"}} -->
-<div class="wp-block-group alignwide" style="padding-right:var(--wp--preset--spacing--edge-space);padding-bottom:var(--wp--preset--spacing--edge-space);padding-left:var(--wp--preset--spacing--edge-space)"><!-- wp:search {"label":"Search","showLabel":false,"placeholder":"Search in the code reference...","width":432,"widthUnit":"px","buttonText":"Search","buttonPosition":"button-inside","buttonUseIcon":true} /--></div>
+<div class="wp-block-group alignwide" style="padding-right:var(--wp--preset--spacing--edge-space);padding-bottom:var(--wp--preset--spacing--edge-space);padding-left:var(--wp--preset--spacing--edge-space)"><!-- wp:search {"label":"<?php esc_attr_e( 'Search', 'wporg' ); ?>","showLabel":false,"placeholder":"<?php esc_attr_e( 'Search in the code reference...', 'wporg' ); ?>","width":432,"widthUnit":"px","buttonText":"Search","buttonPosition":"button-inside","buttonUseIcon":true} /--></div>
 <!-- /wp:group --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 
 <!-- wp:group {"backgroundColor":"blueberry-4","style":{"spacing":{"padding":{"top":"var:preset|spacing|10","bottom":"var:preset|spacing|10"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group has-blueberry-4-background-color has-background" style="padding-top:var(--wp--preset--spacing--10);padding-bottom:var(--wp--preset--spacing--10)"><!-- wp:paragraph {"align":"center","fontSize":"extra-small"}  -->
-<p class="has-text-align-center has-extra-small-font-size">See <a href="[wordpress_version_link]">what has changed</a>	in the WordPress [wordpress_version] API.</p>
+<p class="has-text-align-center has-extra-small-font-size">
+<?php printf(
+	/* translators: %s: WordPress version number link. %s WordPress version number  */
+	__( 'See <a href="%s">what has changed</a> in the WordPress %s API.'),
+	do_shortcode( 'wordpress_version_link' ),
+	do_shortcode( 'wordpress_version') ); ?>
+</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
@@ -34,7 +40,7 @@
 <div class="wp-block-columns alignwide is-style-default" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:column {"verticalAlignment":"top","width":"33%","className":"is-left-column","layout":{"inherit":false}} -->
 <div class="wp-block-column is-vertically-aligned-top is-left-column" style="flex-basis:33%"><!-- wp:group {"style":{"spacing":{"padding":{"right":"80px"}}},"layout":{"type":"default"}} -->
 <div class="wp-block-group" style="padding-right:80px"><!-- wp:heading {"fontSize":"heading-2"} -->
-<h2 class="wp-block-heading has-heading-2-font-size">Latest Posts</h2>
+<h2 class="wp-block-heading has-heading-2-font-size"><?php esc_attr_e( 'Latest Posts', 'wporg' ); ?></h2>
 <!-- /wp:heading -->
 
 <!-- wp:spacer {"height":"20px"} -->
@@ -52,7 +58,7 @@
 <!-- /wp:spacer -->
 
 <!-- wp:paragraph -->
-<p><a href="https://developer.wordpress.org/news/">View all</a></p>
+<p><a href="https://developer.wordpress.org/news/"><?php esc_attr_e( 'View all', 'wporg' ); ?></a></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:column --></div>
@@ -65,17 +71,17 @@
 <div class="wp-block-group alignwide" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:columns {"align":"wide"} -->
 <div class="wp-block-columns alignwide"><!-- wp:column {"width":"55%"} -->
 <div class="wp-block-column" style="flex-basis:55%"><!-- wp:heading {"level":3,"style":{"spacing":{"margin":{"bottom":"var:preset|spacing|50"}}},"textColor":"white"} -->
-<h3 class="wp-block-heading has-white-color has-text-color" style="margin-bottom:var(--wp--preset--spacing--50)">Are you passionate about web development? Join the WordPress community and help shape the future of the web
+<h3 class="wp-block-heading has-white-color has-text-color" style="margin-bottom:var(--wp--preset--spacing--50)"><?php esc_attr_e( 'Are you passionate about web development? Join the WordPress community and help shape the future of the web', 'wporg' ); ?>
 </h3>
 <!-- /wp:heading -->
 
 <!-- wp:buttons -->
 <div class="wp-block-buttons"><!-- wp:button {"className":"is-style-fill-on-dark"} -->
-<div class="wp-block-button is-style-fill-on-dark"><a href="https://wordpress.org/support/article/contributing-to-wordpress/" class="wp-block-button__link wp-element-button">Contribute</a></div>
+<div class="wp-block-button is-style-fill-on-dark"><a href="https://wordpress.org/support/article/contributing-to-wordpress/" class="wp-block-button__link wp-element-button"><?php esc_attr_e( 'Contribute', 'wporg' ); ?></a></div>
 <!-- /wp:button -->
 
 <!-- wp:button {"className":"is-style-outline-on-dark external-link"} -->
-<div class="wp-block-button is-style-outline-on-dark external-link"><a class="wp-block-button__link wp-element-button" href="https://make.wordpress.org/core/handbook/">Check Out Contributor Handbook ↗</a></div>
+<div class="wp-block-button is-style-outline-on-dark external-link"><a class="wp-block-button__link wp-element-button" href="https://make.wordpress.org/core/handbook/"><?php esc_attr_e( 'Check Out Contributor Handbook ↗', 'wporg' ); ?></a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div>
 <!-- /wp:column --></div>
