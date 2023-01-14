@@ -7,14 +7,16 @@
 
 ?>
 
-<!-- wp:group {"className":"alignfull has-white-color has-charcoal-2-background-color has-text-color has-background has-link-color","layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull has-white-color has-charcoal-2-background-color has-text-color has-background has-link-color"><!-- wp:image {"align":"full","id":7564,"sizeSlug":"full","linkDestination":"none","className":"wporg-hero-graphic"} -->
-<figure class="wp-block-image alignfull size-full wporg-hero-graphic"><img src="http://localhost:8888/wp-content/uploads/2023/01/developers.svg" alt="WordPress showcase" class="wp-image-7564"/></figure>
-<!-- /wp:image -->
+<!-- wp:group {"className":"has-white-color has-charcoal-2-background-color has-text-color has-background has-link-color","layout":{"type":"constrained"}} -->
+<div class="wp-block-group has-white-color has-charcoal-2-background-color has-text-color has-background has-link-color"><!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}},"layout":{"type":"constrained","contentSize":"1344px"}} -->
+<div class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:image {"align":"wide","id":7564,"sizeSlug":"full","linkDestination":"none","className":"wporg-hero-graphic"} -->
+<figure class="wp-block-image alignwide size-full wporg-hero-graphic"><img src="http://localhost:8888/wp-content/uploads/2023/01/developers.svg" alt="WordPress Developer Resources" class="wp-image-7564"/></figure>
+<!-- /wp:image --></div>
+<!-- /wp:group -->
 
-<!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}},"layout":{"type":"default"}} -->
-<div class="wp-block-group alignwide" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"top":"var:preset|spacing|edge-space","bottom":"var:preset|spacing|edge-space"}}},"layout":{"type":"default"}} -->
-<div class="wp-block-group alignwide" style="padding-top:var(--wp--preset--spacing--edge-space);padding-bottom:var(--wp--preset--spacing--edge-space)"><!-- wp:search {"label":"Search","showLabel":false,"placeholder":"Search in the code reference...","width":432,"widthUnit":"px","buttonText":"Search","buttonPosition":"button-inside","buttonUseIcon":true} /--></div>
+<!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"bottom":"var:preset|spacing|60"}}},"layout":{"type":"default"}} -->
+<div class="wp-block-group alignwide" style="padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"right":"var:preset|spacing|edge-space","bottom":"var:preset|spacing|edge-space","left":"var:preset|spacing|edge-space"}}},"layout":{"type":"default"}} -->
+<div class="wp-block-group alignwide" style="padding-right:var(--wp--preset--spacing--edge-space);padding-bottom:var(--wp--preset--spacing--edge-space);padding-left:var(--wp--preset--spacing--edge-space)"><!-- wp:search {"label":"Search","showLabel":false,"placeholder":"Search in the code reference...","width":432,"widthUnit":"px","buttonText":"Search","buttonPosition":"button-inside","buttonUseIcon":true} /--></div>
 <!-- /wp:group --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
@@ -28,8 +30,8 @@
 <!-- wp:post-content {"style":{"spacing":{"blockGap":"0px"}},"layout":{"inherit":true}} /-->
 
 <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"right":"var:preset|spacing|edge-space","left":"var:preset|spacing|edge-space"}}},"backgroundColor":"blueberry-4","layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull has-blueberry-4-background-color has-background" id="news" style="padding-right:var(--wp--preset--spacing--edge-space);padding-left:var(--wp--preset--spacing--edge-space)"><!-- wp:columns {"align":"wide","style":{"spacing":{"padding":{"top":"5rem","bottom":"5rem"},"blockGap":"0px"}},"className":"is-style-default"} -->
-<div class="wp-block-columns alignwide is-style-default" style="padding-top:5rem;padding-bottom:5rem"><!-- wp:column {"verticalAlignment":"top","width":"33%","className":"is-left-column","layout":{"inherit":false}} -->
+<div class="wp-block-group alignfull has-blueberry-4-background-color has-background" id="news" style="padding-right:var(--wp--preset--spacing--edge-space);padding-left:var(--wp--preset--spacing--edge-space)"><!-- wp:columns {"align":"wide","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"},"blockGap":"0px"}},"className":"is-style-default"} -->
+<div class="wp-block-columns alignwide is-style-default" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:column {"verticalAlignment":"top","width":"33%","className":"is-left-column","layout":{"inherit":false}} -->
 <div class="wp-block-column is-vertically-aligned-top is-left-column" style="flex-basis:33%"><!-- wp:group {"style":{"spacing":{"padding":{"right":"80px"}}},"layout":{"type":"default"}} -->
 <div class="wp-block-group" style="padding-right:80px"><!-- wp:heading {"fontSize":"heading-2"} -->
 <h2 class="wp-block-heading has-heading-2-font-size">Latest Posts</h2>
@@ -58,8 +60,8 @@
 <!-- /wp:group -->
 
 
-<!-- wp:group {"backgroundColor":"blueberry-1","layout":{"type":"default"}} -->
-<div class="wp-block-group has-blueberry-1-background-color has-background"><!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}},"layout":{"type":"constrained","justifyContent":"center"}} -->
+<!-- wp:group {"backgroundColor":"blueberry-1","style":{"spacing":{"padding":{"left":"var:preset|spacing|edge-space","right":"var:preset|spacing|edge-space"}}},"layout":{"type":"default"}} -->
+<div class="wp-block-group has-blueberry-1-background-color has-background"style="padding-left:var(--wp--preset--spacing--edge-space);padding-right:var(--wp--preset--spacing--edge-space)"><!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}},"layout":{"type":"constrained","justifyContent":"center"}} -->
 <div class="wp-block-group alignwide" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:columns {"align":"wide"} -->
 <div class="wp-block-columns alignwide"><!-- wp:column {"width":"55%"} -->
 <div class="wp-block-column" style="flex-basis:55%"><!-- wp:heading {"level":3,"style":{"spacing":{"margin":{"bottom":"var:preset|spacing|50"}}},"textColor":"white"} -->
@@ -69,7 +71,7 @@
 
 <!-- wp:buttons -->
 <div class="wp-block-buttons"><!-- wp:button {"className":"is-style-fill-on-dark"} -->
-<div class="wp-block-button is-style-fill-on-dark"><a class="wp-block-button__link wp-element-button">Contribute</a></div>
+<div class="wp-block-button is-style-fill-on-dark"><a href="https://wordpress.org/support/article/contributing-to-wordpress/" class="wp-block-button__link wp-element-button">Contribute</a></div>
 <!-- /wp:button -->
 
 <!-- wp:button {"className":"is-style-outline-on-dark external-link"} -->
