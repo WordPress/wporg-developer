@@ -128,7 +128,7 @@ class Breadcrumb_Trail {
 			$this->items = array_unique( $this->items );
 
 			/* Open the breadcrumb trail containers. */
-			$breadcrumb = "\n\t\t" . '<' . tag_escape( $this->args['container'] ) . ' class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb">';
+			$breadcrumb = "\n\t\t" . '<' . tag_escape( $this->args['container'] ) . ' class="breadcrumb-trail breadcrumbs breadcrumb-count-' . count( $this->items ) . '" itemprop="breadcrumb">';
 
 			/* If $before was set, wrap it in a container. */
 			$breadcrumb .= ( !empty( $this->args['before'] ) ? "\n\t\t\t" . '<' . tag_escape( $this->args['item_container'] ) . ' class="trail-before">' . $this->args['before'] . '</' . tag_escape( $this->args['item_container'] ) . '> ' . "\n\t\t\t" : '' );
