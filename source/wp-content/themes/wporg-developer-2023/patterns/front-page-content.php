@@ -10,13 +10,13 @@
 <!-- wp:group {"className":"has-white-color has-charcoal-2-background-color has-text-color has-background has-link-color","layout":{"type":"constrained"}} -->
 <div class="wp-block-group has-white-color has-charcoal-2-background-color has-text-color has-background has-link-color"><!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}},"layout":{"type":"constrained","contentSize":"1344px"}} -->
 <div class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:image {"align":"wide","id":7564,"sizeSlug":"full","linkDestination":"none","className":"wporg-hero-graphic"} -->
-<figure class="wp-block-image alignwide size-full wporg-hero-graphic"><img src="https://s.w.org/wp-content/themes/wporg-deverlop-2023/images/developers.svg?v=20221212" alt="<?php esc_attr_e( 'WordPress Developer Resources', 'wporg' ); ?>" class="wp-image-7564"/></figure>
+<figure class="wp-block-image alignwide size-full wporg-hero-graphic"><img src="https://user-images.githubusercontent.com/1657336/212520185-d9840a21-b149-49c6-b4f2-c043eaf969ea.svg?v=20221212" alt="<?php esc_attr_e( 'WordPress Developer Resources', 'wporg' ); ?>" class="wp-image-7564"/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:group -->
 
-<!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"bottom":"var:preset|spacing|60"}}},"layout":{"type":"default"}} -->
-<div class="wp-block-group alignwide" style="padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"right":"var:preset|spacing|edge-space","bottom":"var:preset|spacing|edge-space","left":"var:preset|spacing|edge-space"}}},"layout":{"type":"default"}} -->
-<div class="wp-block-group alignwide" style="padding-right:var(--wp--preset--spacing--edge-space);padding-bottom:var(--wp--preset--spacing--edge-space);padding-left:var(--wp--preset--spacing--edge-space)"><!-- wp:search {"label":"<?php esc_attr_e( 'Search', 'wporg' ); ?>","showLabel":false,"placeholder":"<?php esc_attr_e( 'Search in the code reference...', 'wporg' ); ?>","width":432,"widthUnit":"px","buttonText":"Search","buttonPosition":"button-inside","buttonUseIcon":true} /--></div>
+<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"bottom":"var:preset|spacing|60","right":"var:preset|spacing|edge-space","left":"var:preset|spacing|edge-space"}}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull" style="padding-right:var(--wp--preset--spacing--edge-space);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--edge-space)"><!-- wp:group {"align":"wide","layout":{"type":"default"}} -->
+<div class="wp-block-group alignwide"><!-- wp:search {"label":"Search","showLabel":false,"placeholder":"Search in the code reference...","width":432,"widthUnit":"px","buttonText":"Search","buttonPosition":"button-inside","buttonUseIcon":true} /--></div>
 <!-- /wp:group --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
