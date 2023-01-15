@@ -38,7 +38,7 @@ function breadcrumb_trail( $args = array() ) {
 	else
 		$breadcrumb = new Breadcrumb_Trail( $args );
 
-	$breadcrumb->trail();
+	return $breadcrumb->trail();
 }
 
 /**
@@ -89,8 +89,8 @@ class Breadcrumb_Trail {
 			'network'         => false,
 			//'show_edit_link'  => false,
 			'show_title'      => true,
-			'show_browse'     => true,
-			'echo'            => true,
+			'show_browse'     => false,
+			'echo'            => false,
 
 			/* Post taxonomy (examples follow). */
 			'post_taxonomy' => array(
@@ -187,8 +187,8 @@ class Breadcrumb_Trail {
 
 		$labels = array(
 			'browse'              => __( 'Browse:',                 'breadcrumb-trail' ),
-			'home'                => __( 'Home',                    'breadcrumb-trail' ),
-			'search'              => __( 'Search results for "%s"', 'breadcrumb-trail' ),
+			'home'                => __( 'Developer',               'breadcrumb-trail' ),
+			'search'              => __( 'Result',                 'breadcrumb-trail' ),
 			'error_404'           => __( '404 Not Found',           'breadcrumb-trail' ),
 			'paged'               => __( 'Page %d',                 'breadcrumb-trail' ),
 			'archives'            => __( 'Archives',                'breadcrumb-trail' ),

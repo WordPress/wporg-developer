@@ -137,6 +137,7 @@ if ( is_admin() ) {
 require __DIR__ . '/inc/block-hooks.php';
 
 // Block files
+require_once __DIR__ . '/src/breadcrumbs/index.php';
 require_once __DIR__ . '/src/code-changelog/block.php';
 require_once __DIR__ . '/src/code-deprecated/block.php';
 require_once __DIR__ . '/src/code-description/block.php';
@@ -177,6 +178,7 @@ function init() {
 
 	// Modify default breadcrumbs.
 	add_filter( 'breadcrumb_trail_items', __NAMESPACE__ . '\\breadcrumb_trail_items_for_hooks', 10, 2 );
+	add_filter( 'breadcrumb_trail_items', __NAMESPACE__ . '\\breadcrumb_trail_items_remove_reference', 11, 2 );
 	add_filter( 'breadcrumb_trail_items', __NAMESPACE__ . '\\breadcrumb_trail_items_for_handbook_root', 10, 2 );
 
 	add_filter( 'mkaz_code_syntax_force_loading', '__return_true' );
@@ -212,6 +214,29 @@ function breadcrumb_trail_items_for_hooks( $items, $args ) {
 	unset( $items[4] );
 
 	return $items;
+}
+
+/**
+ * Remove the 'Reference' part of the breadcrumb trail.
+ *
+ * @param  array $items The breadcrumb trail items.
+ * @param  array $args  Original args.
+ * @return array
+ */
+function breadcrumb_trail_items_remove_reference( $items, $args ) {
+	if ( ! is_singular() && ! is_single() && ! is_post_type_archive() ) {
+		return $items;
+	}
+
+	return array_filter(
+		$items,
+		function( $item ) {
+			// Remove the 'reference' parent based on the presence of its URL.
+			// We can't use the label because of internationalization.
+			$result = (bool) preg_match( '/href=".*\/reference\/"/', $item, $matches );
+			return ( false === $result );
+		}
+	);
 }
 
 /**
