@@ -50,8 +50,8 @@
 	}
 
 	.wp-block-column[style*="border-right-"][style*="padding-right"] {
-		margin-left: calc(var(--wp--preset--spacing--edge-space) *- 1) !important;
-		margin-right: calc(var(--wp--preset--spacing--edge-space) *- 1) !important;
+		margin-left: calc(-1 * var(--wp--preset--spacing--edge-space)) !important;
+		margin-right: calc(-1 * var(--wp--preset--spacing--edge-space)) !important;
 		padding-left: var(--wp--preset--spacing--edge-space) !important;
 		padding-right: var(--wp--preset--spacing--edge-space) !important;
 	}
