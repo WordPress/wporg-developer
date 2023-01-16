@@ -23,13 +23,7 @@
 
 <!-- wp:group {"backgroundColor":"blueberry-4","style":{"spacing":{"padding":{"top":"var:preset|spacing|10","bottom":"var:preset|spacing|10"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group has-blueberry-4-background-color has-background" style="padding-top:var(--wp--preset--spacing--10);padding-bottom:var(--wp--preset--spacing--10)"><!-- wp:paragraph {"align":"center","fontSize":"extra-small"}  -->
-<p class="has-text-align-center has-extra-small-font-size">
-<?php printf(
-	/* translators: %s: WordPress version number link. %s WordPress version number  */
-	__( 'See <a href="%s">what has changed</a> in the WordPress %s API.'),
-	do_shortcode( 'wordpress_version_link' ),
-	do_shortcode( 'wordpress_version') ); ?>
-</p>
+<p class="has-text-align-center has-extra-small-font-size"><?php echo wp_kses_post( 'See <a href="[wordpress_version_link]">what has changed</a> in the WordPress [wordpress_version] API.' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
