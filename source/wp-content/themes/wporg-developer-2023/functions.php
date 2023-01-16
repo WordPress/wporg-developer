@@ -156,7 +156,6 @@ require_once __DIR__ . '/src/search-title/index.php';
 require_once __DIR__ . '/src/search-usage-info/index.php';
 
 add_action( 'init', __NAMESPACE__ . '\\init' );
-add_action( 'widgets_init', __NAMESPACE__ . '\\widgets_init' );
 
 /**
  * Set up the theme.
@@ -237,61 +236,6 @@ function breadcrumb_trail_items_for_handbook_root( $items, $args ) {
 	unset( $items[1] );
 
 	return $items;
-}
-
-/**
- * Register widget areas.
- *
- * @access public
- * @return void
- */
-function widgets_init() {
-	register_sidebar(
-		array(
-			'name'          => __( 'Sidebar', 'wporg' ),
-			'id'            => 'sidebar-1',
-			'before_widget' => '<aside id="%1$s" class="box gray widget %2$s">',
-			'after_widget'  => '</div></aside>',
-			'before_title'  => '<h1 class="widget-title">',
-			'after_title'   => '</h1><div class="widget-content">',
-		)
-	);
-
-	register_sidebar(
-		array(
-			'name'          => __( 'Landing Page Footer - Left', 'wporg' ),
-			'id'            => 'landing-footer-1',
-			'description'   => __( 'Appears in footer of the primary landing page', 'wporg' ),
-			'before_widget' => '<div id="%1$s" class="widget box %2$s">',
-			'after_widget'  => '</div>',
-			'before_title'  => '<h4 class="widget-title">',
-			'after_title'   => '</h4>',
-		)
-	);
-
-	register_sidebar(
-		array(
-			'name'          => __( 'Landing Page Footer - Center', 'wporg' ),
-			'id'            => 'landing-footer-2',
-			'description'   => __( 'Appears in footer of the primary landing page', 'wporg' ),
-			'before_widget' => '<div id="%1$s" class="widget box %2$s">',
-			'after_widget'  => '</div>',
-			'before_title'  => '<h4 class="widget-title">',
-			'after_title'   => '</h4>',
-		)
-	);
-
-	register_sidebar(
-		array(
-			'name'          => __( 'Landing Page Footer - Right', 'wporg' ),
-			'id'            => 'landing-footer-3',
-			'description'   => __( 'Appears in footer of the primary landing page', 'wporg' ),
-			'before_widget' => '<div id="%1$s" class="widget box %2$s">',
-			'after_widget'  => '</div>',
-			'before_title'  => '<h4 class="widget-title">',
-			'after_title'   => '</h4>',
-		)
-	);
 }
 
 /**
