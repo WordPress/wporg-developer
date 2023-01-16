@@ -3,21 +3,21 @@
 
 	@media (max-width: 1100px) {
 		&.breadcrumb-count-5 span:nth-child(3),
-		&.breadcrumb-count-5 span:nth-child(4) {
+		&.breadcrumb-count-5 span:nth-child(4) { // Separator
 			display: none;
 		}
 	}
 
 	@media (max-width: 1000px) {
 		&.breadcrumb-count-5 span:nth-child(3),
-		&.breadcrumb-count-5 span:nth-child(4),
+		&.breadcrumb-count-5 span:nth-child(4), // Separator
 		&.breadcrumb-count-5 span:nth-child(5),
-		&.breadcrumb-count-5 span:nth-child(6) {
+		&.breadcrumb-count-5 span:nth-child(6) { // Separator
 			display: none;
 		}
 
 		&.breadcrumb-count-4 span:nth-child(3),
-		&.breadcrumb-count-4 span:nth-child(4)  {
+		&.breadcrumb-count-4 span:nth-child(4)  { // Separator
 			display: none;
 		}
 	}
