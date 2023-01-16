@@ -36,7 +36,7 @@ function render() {
 	}
 
 	$title_block = sprintf(
-		'<h2 class="wp-block-heading">%</h2>',
+		'<h2 class="wp-block-heading">%s</h2>',
 		__( 'Hooks', 'wporg' )
 	);
 
