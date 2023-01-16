@@ -1,4 +1,4 @@
-.breadcrumb-trail  {
+.breadcrumb-trail {
 	font-size: var(--wp--preset--font-size--small);
 
 	@media (max-width: 1100px) {
@@ -17,7 +17,7 @@
 		}
 
 		&.breadcrumb-count-4 span:nth-child(3),
-		&.breadcrumb-count-4 span:nth-child(4)  { // Separator
+		&.breadcrumb-count-4 span:nth-child(4) { // Separator
 			display: none;
 		}
 	}
@@ -36,7 +36,7 @@
 		}
 	}
 
-	span:last-child{
+	span:last-child {
 		font-weight: 700;
 	}
 }
