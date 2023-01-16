@@ -35,7 +35,7 @@ function render() {
 
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(
-		'<section %s>%s</section>',
+		'<div %s>%s</div>',
 		$wrapper_attributes,
 		$deprecated_html
 	);
