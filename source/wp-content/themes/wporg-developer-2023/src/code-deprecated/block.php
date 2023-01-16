@@ -1,6 +1,8 @@
 <?php
 namespace WordPressdotorg\Theme\Developer_2023\Dynamic_Code_Deprecated;
 
+use function DevHub\get_deprecated;
+
 add_action( 'init', __NAMESPACE__ . '\init' );
 
 /**
@@ -25,11 +27,16 @@ function init() {
  * @return string Returns the block markup.
  */
 function render() {
+	$deprecated_html = get_deprecated();
+
+	if ( empty( $deprecated_html ) ) {
+		return '';
+	}
+
 	$wrapper_attributes = get_block_wrapper_attributes();
-
-	$output = '<section ' . $wrapper_attributes . '>';
-	$output .= 'wporg:code-deprecated: Not implemented';
-	$output .= '</section>';
-
-	return $output;
+	return sprintf(
+		'<section %s>%s</section>',
+		$wrapper_attributes,
+		$deprecated_html
+	);
 }
