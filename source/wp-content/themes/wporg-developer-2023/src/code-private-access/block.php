@@ -1,6 +1,8 @@
 <?php
 namespace WordPressdotorg\Theme\Developer_2023\Dynamic_Code_Private_Access;
 
+use function DevHub\get_private_access_message;
+
 add_action( 'init', __NAMESPACE__ . '\init' );
 
 /**
@@ -25,11 +27,16 @@ function init() {
  * @return string Returns the block markup.
  */
 function render() {
+	$html = get_private_access_message();
+
+	if ( empty( $html ) ) {
+		return '';
+	}
+
 	$wrapper_attributes = get_block_wrapper_attributes();
-
-	$output = '<section ' . $wrapper_attributes . '>';
-	$output .= 'wporg:code-private-access: Not implemented';
-	$output .= '</section>';
-
-	return $output;
+	return sprintf(
+		'<div %s>%s</div>',
+		$wrapper_attributes,
+		$html
+	);
 }
