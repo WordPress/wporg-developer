@@ -36,7 +36,7 @@ if ( ! function_exists( 'loop_pagination' ) ) {
 	require __DIR__ . '/inc/loop-pagination.php';
 }
 
-if ( ! function_exists( 'breadcrumb_trail' ) ) {
+if ( ! function_exists( 'get_breadcrumbs' ) ) {
 	require __DIR__ . '/inc/breadcrumb-trail.php';
 }
 
@@ -137,7 +137,6 @@ if ( is_admin() ) {
 require __DIR__ . '/inc/block-hooks.php';
 
 // Block files
-require_once __DIR__ . '/src/breadcrumbs/index.php';
 require_once __DIR__ . '/src/code-changelog/block.php';
 require_once __DIR__ . '/src/code-deprecated/block.php';
 require_once __DIR__ . '/src/code-description/block.php';
@@ -157,6 +156,7 @@ require_once __DIR__ . '/src/search-title/index.php';
 require_once __DIR__ . '/src/search-usage-info/index.php';
 
 add_action( 'init', __NAMESPACE__ . '\\init' );
+add_filter( 'wporg_block_site_breadcrumbs', __NAMESPACE__ . '\set_site_breadcrumbs' );
 
 /**
  * Set up the theme.
@@ -376,4 +376,25 @@ function rename_comments_meta_box( $post_type, $post ) {
  */
 function update_prism_css_path( $path ) {
 	return '/stylesheets/prism.css';
+}
+
+/**
+ * Filters breadcrumb items for the site-breadcrumb block.
+ *
+ * @return array
+ */
+function set_site_breadcrumbs() {
+	$breadcrumbs = array();
+
+	foreach ( get_breadcrumbs()->items as $crumb ) {
+		// Get the link and title from the breadcrumb.
+		// 4 capture groups to handle variation in the markup.
+		preg_match( '/<a(.*?)href="([^"]+)"(.*?)>(.*?)<\/a>/', $crumb, $matches );
+		$breadcrumbs[] = array(
+			'url' => isset( $matches[2] ) ? $matches[2] : '',
+			'title' => isset( $matches[4] ) ? $matches[4] : $crumb,
+		);
+	}
+
+	return $breadcrumbs;
 }
