@@ -82,7 +82,7 @@
 
 <!-- wp:buttons -->
 <div class="wp-block-buttons"><!-- wp:button {"className":"is-style-fill-on-dark"} -->
-<div class="wp-block-button is-style-fill-on-dark"><a href="https://wordpress.org/support/article/contributing-to-wordpress/" class="wp-block-button__link wp-element-button"><?php esc_attr_e( 'Contribute', 'wporg' ); ?></a></div>
+<div class="wp-block-button is-style-fill-on-dark"><a href="https://make.wordpress.org" class="wp-block-button__link wp-element-button"><?php esc_attr_e( 'Contribute', 'wporg' ); ?></a></div>
 <!-- /wp:button -->
 
 <!-- wp:button {"className":"is-style-outline-on-dark external-link"} -->
