@@ -382,7 +382,6 @@ function rename_comments_meta_box( $post_type, $post ) {
 function update_prism_css_path( $path ) {
 	return '/stylesheets/prism.css';
 }
-<<<<<<< HEAD
 
 /**
  * Filters breadcrumb items for the site-breadcrumb block.
@@ -404,5 +403,3 @@ function set_site_breadcrumbs() {
 
 	return $breadcrumbs;
 }
-=======
->>>>>>> da9af4a (reverse out code to allow svg uploads.)
