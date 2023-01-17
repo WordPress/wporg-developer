@@ -21,6 +21,10 @@ jobs:
               with:
                   node-version-file: '.nvmrc'
                   cache: yarn
+            - name: Setup PHP with PECL extension
+              uses: shivammathur/setup-php@v2
+              with:
+                php-version: '7.4'
 
             - name: Install dependencies & setup configs
               run: |
