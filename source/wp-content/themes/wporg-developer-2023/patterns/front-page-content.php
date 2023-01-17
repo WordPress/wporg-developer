@@ -11,7 +11,9 @@
 <div class="wp-block-group has-white-color has-charcoal-2-background-color has-text-color has-background has-link-color"><!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}},"layout":{"type":"constrained","contentSize":"1344px"}} -->
 <div class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:image {"align":"wide","id":7564,"sizeSlug":"full","linkDestination":"none","className":"wporg-hero-graphic"} -->
 <figure class="wp-block-image alignwide size-full wporg-hero-graphic"><img src="https://s.w.org/wp-content/themes/wporg-developer-2023/images/developers.svg?v=20230116" alt="<?php esc_attr_e( 'WordPress Developer Resources', 'wporg' ); ?>" class="wp-image-7564"/></figure>
-<!-- /wp:image --></div>
+<!-- /wp:image --><!-- wp:heading {"level":1,"className":"screen-reader-text"} -->
+<h1 class="wp-block-heading screen-reader-text"><?php esc_attr_e( 'Developer Resources', 'wporg' ); ?></h1>
+<!-- /wp:heading --></div>
 <!-- /wp:group -->
 
 <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"bottom":"var:preset|spacing|60","right":"var:preset|spacing|edge-space","left":"var:preset|spacing|edge-space"}}},"layout":{"type":"constrained"}} -->
@@ -23,7 +25,16 @@
 
 <!-- wp:group {"backgroundColor":"blueberry-4","style":{"spacing":{"padding":{"top":"var:preset|spacing|10","bottom":"var:preset|spacing|10"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group has-blueberry-4-background-color has-background" style="padding-top:var(--wp--preset--spacing--10);padding-bottom:var(--wp--preset--spacing--10)"><!-- wp:paragraph {"align":"center","fontSize":"extra-small"}  -->
-<p class="has-text-align-center has-extra-small-font-size"><?php echo wp_kses_post( 'See <a href="[wordpress_version_link]">what has changed</a> in the WordPress [wordpress_version] API.' ); ?></p>
+<p class="has-text-align-center has-extra-small-font-size">
+<?php echo wp_kses_post(
+	sprintf(
+	/* translators: %1$s: version link, %2$s: version number */
+		__( 'See <a href="%1$s">what has changed</a> in the WordPress %2$s API.', 'wporg' ),
+		'[wordpress_version_link]',
+		'[wordpress_version]'
+	)
+); ?>
+</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
