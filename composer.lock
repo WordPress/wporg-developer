@@ -2512,15 +2512,15 @@
         },
         {
             "name": "wpackagist-plugin/jetpack",
-            "version": "11.8-a.3",
+            "version": "11.8-a.5",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/jetpack/",
-                "reference": "tags/11.8-a.3"
+                "reference": "tags/11.8-a.5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/jetpack.11.8-a.3.zip"
+                "url": "https://downloads.wordpress.org/plugin/jetpack.11.8-a.5.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
