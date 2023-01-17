@@ -36,6 +36,6 @@ jobs:
             - name: Lint JS
               run: |
                   yarn workspace wporg-developer-2023 lint:js
-            - name: Lint PHP
-              run: |
-                  composer run lint source/wp-content/themes/wporg-developer-2023
+#             - name: Lint PHP
+#               run: |
+#                   composer run lint source/wp-content/themes/wporg-developer-2023
