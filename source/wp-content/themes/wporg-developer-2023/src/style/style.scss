@@ -3,6 +3,11 @@
  * templates or theme.json settings.
  */
 
+body[class] {
+	// Height of the local header (breadcrumbs & subnav).
+	--wp-local-header-offset: 57px;
+}
+
 .search-results .wp-block-post-excerpt {
 	margin: var(--wp--preset--spacing--10) 0 var(--wp--preset--spacing--10);
 }
@@ -13,6 +18,40 @@
 
 .wporg-filtered-search-form {
 	display: block;
+}
+
+.sidebar-container .is-link-to-top {
+	display: none;
+}
+
+// Slot the search & table of contents into a floating sidebar on large screens.
+@media (min-width: 1200px) {
+	.sidebar-container {
+		// Size of remaining space in the wide center column.
+		--local--size-diff: calc(var(--wp--style--global--wide-size) - var(--wp--style--global--content-size));
+		// This is a little bit of a magic number, the max space between content & sidebar.
+		--local--content-gap: 145px;
+
+		position: absolute;
+		top: calc(var(--wp-global-header-offset, 0px) + var(--wp-local-header-offset, 0px));
+		// Right offset should be "edge spacing" at minimum, otherwise calculate it to be centered.
+		right: max(var(--wp--preset--spacing--edge-space), calc((100% - var(--wp--style--global--wide-size)) / 2));
+		width: calc(var(--local--size-diff) - var(--local--content-gap));
+		margin-top: var(--wp--preset--spacing--edge-space) !important;
+
+		&.is-fixed-sidebar {
+			position: fixed;
+		}
+
+		&.is-bottom-sidebar {
+			position: absolute;
+		}
+
+		&.is-fixed-sidebar .is-link-to-top,
+		&.is-bottom-sidebar .is-link-to-top {
+			display: block;
+		}
+	}
 }
 
 .wp-block-search.wp-block-search__button-inside .wp-block-search__inside-wrapper {
@@ -41,6 +80,14 @@
 			fill: inherit;
 		}
 	}
+}
+
+.wp-block-search.is-style-secondary-search-control {
+	// Update border color in secondary search style, this site uses a light grey.
+	--local--border-color: var(--wp--preset--color--light-grey-1);
+	// Add offset spacing above the search box to optically align with title.
+	// See https://github.com/WordPress/wporg-documentation-2022/issues/36.
+	margin-top: 16px;
 }
 
 @media (max-width: 781px) {
