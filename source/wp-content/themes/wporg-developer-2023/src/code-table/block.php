@@ -59,11 +59,11 @@ function render( $attributes ) {
 
 
 /**
- * Render a table heading row.
+ * Render a table heading cell.
  *
- * @param string[] $heading A list of table headings.
+ * @param string[] $heading Cell content.
  *
- * @return string Returns the row markup.
+ * @return string Returns the table header markup.
  */
 function render_table_heading_row( $heading ) {
 	return '<th scope="col">' . wp_kses_post( $heading ) . '</th>';
@@ -72,7 +72,7 @@ function render_table_heading_row( $heading ) {
 /**
  * Render a table row.
  *
- * @param string[] $data A list of table data.
+ * @param string[] $data A list of table row data.
  *
  * @return string Returns the row markup.
  */
