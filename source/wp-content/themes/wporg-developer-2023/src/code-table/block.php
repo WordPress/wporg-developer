@@ -105,7 +105,7 @@ function render_toggle( $remaining ) {
 
 	$show_less = sprintf(
 		'<a class="wp-block-wporg-code-table-show-less" href="#">%s</a>',
-		__( 'Hide more uses', 'wporg' )
+		__( 'Show less', 'wporg' )
 	);
 
 	return $show_more . $show_less;
