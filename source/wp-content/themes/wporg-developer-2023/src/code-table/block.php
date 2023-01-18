@@ -37,7 +37,7 @@ function render( $attributes ) {
 	$table .= '</thead>';
 	$table .= '<tbody>';
 	foreach ( $attributes['rows'] as $key => $value ) {
-		$class_name = $key >= $attributes['itemsToShow'] ? 'hidden' : '';
+		$class_name = $key >= $attributes['itemsToShow'] ? 'wporg-hidden' : '';
 		$table .= render_table_row( $value, $class_name );
 	}
 	$table .= '</tbody></table>';
