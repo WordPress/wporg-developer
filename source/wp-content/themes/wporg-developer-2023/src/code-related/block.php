@@ -78,11 +78,14 @@ function get_row_data( $posts ) {
 
 	while ( $posts->have_posts() ) {
 		$posts->the_post();
+		$is_function = ! in_array( get_post_type(), array( 'wp-parser-class', 'wp-parser-hook' ) );
+
 		$rows[] = array(
 			sprintf(
-				'<a href="%s">%s</a><div>%s</div></a>',
+				'<a href="%s">%s%s</a><code>%s</code></a>',
 				get_permalink(),
 				get_the_title(),
+				$is_function ? '()' : '',
 				esc_attr( get_source_file() )
 			),
 			get_summary(),
