@@ -19,6 +19,10 @@
 		"rows": {
 			"type": "array",
 			"default": []
+		},
+		"itemsToShow": {
+			"type": "integer",
+			"default": 5
 		}
 	},
 	"supports": {
@@ -29,5 +33,6 @@
 	},
 	"textdomain": "wporg",
 	"editorScript": "file:./index.js",
-	"style": "file:./style-index.css"
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js"
 }

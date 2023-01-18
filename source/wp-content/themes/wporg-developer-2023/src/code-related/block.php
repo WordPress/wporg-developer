@@ -33,61 +33,92 @@ function init() {
  * @return string Returns the block markup.
  */
 function render() {
+	$uses        = null;
+	$used_by     = null;
+	$has_uses    = false;
+	$has_used_by = false;
 
+	if ( post_type_has_uses_info() ) {
+		$uses     = get_uses();
+		$has_uses = $uses->have_posts();
+	}
 
-	$has_uses    = ( post_type_has_uses_info()  && ( $uses    = get_uses()    ) && $uses->have_posts()    );
-	$has_used_by = ( post_type_has_usage_info() && ( $used_by = get_used_by() ) && $used_by->have_posts() );
-
-	$uses_to_show     = 5;
-	$min_uses_to_show = 2;
-	$used_by_to_show  = 5;
-
-	if ( $has_uses ) {
-		$uses_to_show = min( $uses_to_show, max( split_uses_by_frequent_funcs( $uses->posts ), $min_uses_to_show ) );
+	if ( post_type_has_usage_info() ) {
+		$used_by     = get_used_by();
+		$has_used_by = $used_by->have_posts();
 	}
 
 	if ( ! $has_uses && ! $has_used_by ) {
 		return '';
 	}
 
-	$headings = array();
-	$headings[] = esc_html( 'Uses', 'wporg' );
-	$headings[] = esc_html( 'Description', 'wporg' );
-
-	$rows = array();
-
-	while( $uses->have_posts() ) {
-		$uses->the_post();
-		$columns = array();
-
-		$columns[] = sprintf(
-			'<a href="%s">%s</a>%s',
-			get_permalink(),
-			get_the_title(),
-			esc_attr( get_source_file() )
-		);
-		$columns[] = get_summary();
-		$rows[] = $columns;
-		wp_reset_postdata();
-	}
-
-
 	$title_block = sprintf(
 		'<h2 class="wp-block-heading">%s</h2>',
 		__( 'Related', 'wporg' )
 	);
 
-	$uses_table = sprintf(
-		'<!-- wp:wporg/code-table {"className": "super-table","headings":%s,"rows":%s } /--> ',
-		json_encode( $headings ),
-		json_encode( $rows )
-	);
-
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(
-		'<section %s>%s %s</section>',
+		'<section %s>%s %s %s</section>',
 		$wrapper_attributes,
 		$title_block,
-		do_blocks( $uses_table )
+		$has_uses ? do_blocks( get_uses_table( $uses ) ) : '',
+		$has_used_by ? do_blocks( get_used_by_table( $used_by ) ) : '',
 	);
 }
+
+/**
+ * Returns list of rows for the table.
+ *
+ * @param WP_Post[] $posts
+ * @return array[]
+ */
+function get_row_data( $posts ) {
+	$rows = array();
+
+	while ( $posts->have_posts() ) {
+		$posts->the_post();
+		$rows[] = array(
+			sprintf(
+				'<a href="%s">%s</a><div>%s</div></a>',
+				get_permalink(),
+				get_the_title(),
+				esc_attr( get_source_file() )
+			),
+			get_summary(),
+		);
+		wp_reset_postdata();
+	}
+
+	return $rows;
+}
+
+/**
+ * Returns a table for uses.
+ */
+function get_uses_table( $uses ) {
+	$uses_to_show     = 5;
+	$min_uses_to_show = 2;
+	$uses_to_show = min( $uses_to_show, max( split_uses_by_frequent_funcs( $uses->posts ), $min_uses_to_show ) );
+	$headings     = array( __( 'Uses', 'wporg' ), __( 'Description', 'wporg' ) );
+
+	return sprintf(
+		'<!-- wp:wporg/code-table {"id":"use","itemsToShow":%s,"headings": %s,"rows":%s } /--> ',
+		esc_attr( $uses_to_show ),
+		json_encode( $headings ),
+		json_encode( get_row_data( $uses ) )
+	);
+}
+
+/**
+ * Returns a table for used by.
+ */
+function get_used_by_table( $used_by ) {
+	$headings = array( __( 'Used by', 'wporg' ), __( 'Description', 'wporg' ) );
+	return sprintf(
+		'<!-- wp:wporg/code-table {"id":"used_by","itemsToShow":2,"headings":%s,"rows":%s } /--> ',
+		json_encode( $headings ),
+		json_encode( get_row_data( $used_by ) )
+	);
+}
+

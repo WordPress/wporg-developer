@@ -26,71 +26,87 @@ function init() {
  */
 function render( $attributes ) {
 
-	$title_block = sprintf(
-		'<h2 class="wp-block-heading">%s</h2>',
-		__( 'Related', 'wporg' )
-	);
-
-	$wrapper_attributes = get_block_wrapper_attributes();
-	return sprintf(
-		'<section %s>%s %s</section>',
-		$wrapper_attributes,
-		$title_block,
-		do_blocks( render_table( $attributes["headings"],  $attributes["rows"], $attributes["className"]) )
-	);
-}
-
-
-/**
- * Render a table.
- *
- * @param array $releases A list of release versions.
- *
- * @return string Returns the table markup.
- */
-function render_table( $headings, $rows, $className ) {
-	$table = '<!-- wp:table {"className":"'. $className .'","style":{"spacing":{"margin":{"top":"var:preset|spacing|20"}}}} --><figure class="wp-block-table" style="margin-top:var(--wp--preset--spacing--20)">';
+	$table = '<!-- wp:table {"className":"' . $attributes['className'] . '","style":{"spacing":{"margin":{"top":"var:preset|spacing|20"}}}} --><figure class="wp-block-table" style="margin-top:var(--wp--preset--spacing--20)">';
 	$table .= '<table>';
 	$table .= '<thead>';
 	$table .= '<tr>';
-	foreach ( $headings as $heading ) {
+	foreach ( $attributes['headings'] as $heading ) {
 		$table .= render_table_heading_row( $heading );
 	}
 	$table .= '</tr>';
 	$table .= '</thead>';
 	$table .= '<tbody>';
-	foreach ( $rows as $row ) {
-		$table .= render_table_row( $row );
+	foreach ( $attributes['rows'] as $key => $value ) {
+		$class_name = $key >= $attributes['itemsToShow'] ? 'hidden' : '';
+		$table .= render_table_row( $value, $class_name );
 	}
 	$table .= '</tbody></table>';
 	$table .= '</figure><!-- /wp:table -->';
-	return $table;
+
+	$row_count = count( $attributes['rows'] );
+
+	if ( $row_count > $attributes['itemsToShow'] ) {
+		$table .= render_toggle( $row_count - $attributes['itemsToShow'] );
+	}
+
+	$wrapper_attributes = get_block_wrapper_attributes();
+	return sprintf(
+		'<section %s>%s</section>',
+		$wrapper_attributes,
+		do_blocks( $table )
+	);
 }
 
+
 /**
- * Render a release row.
+ * Render a table heading row.
  *
- * @param array $version A list of links and data about a given release version.
+ * @param string[] $heading A list of table headings.
  *
  * @return string Returns the row markup.
  */
 function render_table_heading_row( $heading ) {
-	return '<th scope="col">' . $heading . '</th>';
+	return '<th scope="col">' . wp_kses_post( $heading ) . '</th>';
 }
 
 /**
- * Render a release row.
+ * Render a table row.
  *
- * @param array $version A list of links and data about a given release version.
+ * @param string[] $data A list of table data.
  *
  * @return string Returns the row markup.
  */
-function render_table_row( $data ) {
-	$row = '<tr>';
+function render_table_row( $data, $class_name ) {
+	$row = '<tr class="' . esc_attr( $class_name ) . '">';
+
 	foreach ( $data as $col ) {
-		$row .= '<td>' . $col . '</td>';
+		$row .= '<td>' . wp_kses_post( $col ) . '</td>';
 	}
 	$row .= '</tr>';
 
 	return $row;
+}
+
+/**
+ * Render the expand/collapse toggle.
+ *
+ * @param number $remaining The number of remaining items to show.
+ * @return string
+ */
+function render_toggle( $remaining ) {
+	$show_more = sprintf(
+		'<a class="wp-block-wporg-code-table-show-more" href="#">%s</a>',
+		sprintf(
+			/* translators: %s: Number of remaining items. */
+			_n( 'Show %s more use', 'Show %s more uses', $remaining, 'wporg' ),
+			number_format_i18n( $remaining )
+		)
+	);
+
+	$show_less = sprintf(
+		'<a class="wp-block-wporg-code-table-show-less" href="#">%s</a>',
+		__( 'Hide more uses', 'wporg' )
+	);
+
+	return $show_more . $show_less;
 }

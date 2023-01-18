@@ -1,0 +1,19 @@
+.wp-block-wporg-code-table .hidden  {
+	display: none;
+}
+
+.wp-block-wporg-code-table.expanded .hidden {
+	display: table-row;
+}
+
+.wp-block-wporg-code-table .wp-block-wporg-code-table-show-less {
+	display: none;
+}
+
+.wp-block-wporg-code-table.expanded  .wp-block-wporg-code-table-show-less {
+	display: block;
+}
+
+.wp-block-wporg-code-table.expanded  .wp-block-wporg-code-table-show-more {
+	display: none;
+}
