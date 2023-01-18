@@ -10,7 +10,7 @@
 <!-- wp:group {"tagName":"main","style":{"spacing":{"blockGap":"0px","padding":{"top":"var:preset|spacing|50"}}},"className":"entry-content","layout":{"type":"constrained"}} -->
 <main class="wp-block-group entry-content" style="padding-top:var(--wp--preset--spacing--50);">
 
-
+<!-- wp:wporg/code-reference-deprecated /-->
 <!-- wp:wporg/code-reference-private-access /-->
 <!-- wp:wporg/code-reference-title /-->
 <!-- wp:wporg/code-reference-summary /-->
