@@ -1,7 +1,3 @@
-/**
- * WordPress dependencies
- */
-
 const init = () => {
 	const tables = document.querySelectorAll( '.wp-block-wporg-code-table' );
 	if ( tables ) {
