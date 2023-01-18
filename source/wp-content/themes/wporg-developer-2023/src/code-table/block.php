@@ -98,7 +98,7 @@ function render_toggle( $remaining ) {
 		'<a class="wp-block-wporg-code-table-show-more" href="#">%s</a>',
 		sprintf(
 			/* translators: %s: Number of remaining items. */
-			_n( 'Show %s more use', 'Show %s more uses', $remaining, 'wporg' ),
+			__( 'Show %s more', 'wporg' ),
 			number_format_i18n( $remaining )
 		)
 	);
