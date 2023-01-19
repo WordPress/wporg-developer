@@ -31,14 +31,14 @@
  * @param  array $args Arguments to pass to Breadcrumb_Trail.
  * @return void
  */
-function breadcrumb_trail( $args = array() ) {
+function get_breadcrumbs( $args = array() ) {
 
 	if ( function_exists( 'is_bbpress' ) && is_bbpress() )
 		$breadcrumb = new bbPress_Breadcrumb_Trail( $args );
 	else
 		$breadcrumb = new Breadcrumb_Trail( $args );
 
-	$breadcrumb->trail();
+	return $breadcrumb;
 }
 
 /**
@@ -89,8 +89,8 @@ class Breadcrumb_Trail {
 			'network'         => false,
 			//'show_edit_link'  => false,
 			'show_title'      => true,
-			'show_browse'     => true,
-			'echo'            => true,
+			'show_browse'     => false,
+			'echo'            => false,
 
 			/* Post taxonomy (examples follow). */
 			'post_taxonomy' => array(
@@ -111,72 +111,6 @@ class Breadcrumb_Trail {
 	}
 
 	/**
-	 * Formats and outputs the breadcrumb trail.
-	 *
-	 * @since  0.6.0
-	 * @access public
-	 * @return string
-	 */
-	public function trail() {
-
-		$breadcrumb = '';
-
-		/* Connect the breadcrumb trail if there are items in the trail. */
-		if ( !empty( $this->items ) && is_array( $this->items ) ) {
-
-			/* Make sure we have a unique array of items. */
-			$this->items = array_unique( $this->items );
-
-			/* Open the breadcrumb trail containers. */
-			$breadcrumb = "\n\t\t" . '<' . tag_escape( $this->args['container'] ) . ' class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb">';
-
-			/* If $before was set, wrap it in a container. */
-			$breadcrumb .= ( !empty( $this->args['before'] ) ? "\n\t\t\t" . '<' . tag_escape( $this->args['item_container'] ) . ' class="trail-before">' . $this->args['before'] . '</' . tag_escape( $this->args['item_container'] ) . '> ' . "\n\t\t\t" : '' );
-
-			/* Add 'browse' label if it should be shown. */
-			if ( true === $this->args['show_browse'] )
-				$breadcrumb .= "\n\t\t\t" . '<' . tag_escape( $this->args['item_container'] ) . ' class="trail-browse">' . $this->args['labels']['browse'] . '</' . tag_escape( $this->args['item_container'] ) . '> ';
-
-			/* Format the separator. */
-			$separator = false === $this->args['separator'] ?
-				'' :
-				' <' . tag_escape( $this->args['item_container'] ) . ' class="sep">' . ( ! empty( $this->args['separator'] ) ?  $this->args['separator'] : '/' ) . '</' . tag_escape( $this->args['item_container'] ) . '> ';
-
-			/* Adds the 'trail-begin' class around first item if there's more than one item. */
-			if ( 1 < count( $this->items ) ) {
-				$breadcrumb .= "\n\t\t\t" . '<' . tag_escape( $this->args['item_container'] ) . ' class="trail-begin">' . array_shift( $this->items ) . '</' . tag_escape( $this->args['item_container'] ) . '>';
-				$breadcrumb .= $separator;
-			}
-
-			/* Adds the 'trail-end' class around last item. */
-			$last = '<' . tag_escape( $this->args['item_container'] ) . ' class="trail-end">' . array_pop( $this->items ) . '</' . tag_escape( $this->args['item_container'] ) . '>';
-
-			/* Join the individual trail items. */
-			foreach ( $this->items as $item ) {
-				$breadcrumb .= "\n\t\t\t" . '<' . tag_escape( $this->args['item_container'] ) . ' class="trail-inner">' . $item . '</' . tag_escape( $this->args['item_container'] ) . '>';
-				$breadcrumb .= $separator;
-			}
-
-			/* Append the last item. */
-			$breadcrumb .= $last;
-
-			/* If $after was set, wrap it in a container. */
-			$breadcrumb .= ( !empty( $this->args['after'] ) ? "\n\t\t\t" . ' <' . tag_escape( $this->args['item_container'] ) . ' class="trail-after">' . $this->args['after'] . '</' . tag_escape( $this->args['item_container'] ) . '>' : '' );
-
-			/* Close the breadcrumb trail containers. */
-			$breadcrumb .= "\n\t\t" . '</' . tag_escape( $this->args['container'] ) . '>';
-		}
-
-		/* Allow developers to filter the breadcrumb trail HTML. */
-		$breadcrumb = apply_filters( 'breadcrumb_trail', $breadcrumb, $this->args );
-
-		if ( true === $this->args['echo'] )
-			echo $breadcrumb;
-		else
-			return $breadcrumb;
-	}
-
-	/**
 	 * Returns an array of the default labels.
 	 *
 	 * @since  0.6.0
@@ -187,8 +121,8 @@ class Breadcrumb_Trail {
 
 		$labels = array(
 			'browse'              => __( 'Browse:',                 'breadcrumb-trail' ),
-			'home'                => __( 'Home',                    'breadcrumb-trail' ),
-			'search'              => __( 'Search results for "%s"', 'breadcrumb-trail' ),
+			'home'                => __( 'Developer',               'breadcrumb-trail' ),
+			'search'              => __( 'Result',                 'breadcrumb-trail' ),
 			'error_404'           => __( '404 Not Found',           'breadcrumb-trail' ),
 			'paged'               => __( 'Page %d',                 'breadcrumb-trail' ),
 			'archives'            => __( 'Archives',                'breadcrumb-trail' ),

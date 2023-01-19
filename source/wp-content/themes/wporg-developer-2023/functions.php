@@ -36,7 +36,7 @@ if ( ! function_exists( 'loop_pagination' ) ) {
 	require __DIR__ . '/inc/loop-pagination.php';
 }
 
-if ( ! function_exists( 'breadcrumb_trail' ) ) {
+if ( ! function_exists( 'get_breadcrumbs' ) ) {
 	require __DIR__ . '/inc/breadcrumb-trail.php';
 }
 
@@ -156,6 +156,7 @@ require_once __DIR__ . '/src/search-title/index.php';
 require_once __DIR__ . '/src/search-usage-info/index.php';
 
 add_action( 'init', __NAMESPACE__ . '\\init' );
+add_filter( 'wporg_block_site_breadcrumbs', __NAMESPACE__ . '\set_site_breadcrumbs' );
 
 /**
  * Set up the theme.
@@ -177,6 +178,7 @@ function init() {
 
 	// Modify default breadcrumbs.
 	add_filter( 'breadcrumb_trail_items', __NAMESPACE__ . '\\breadcrumb_trail_items_for_hooks', 10, 2 );
+	add_filter( 'breadcrumb_trail_items', __NAMESPACE__ . '\\breadcrumb_trail_items_remove_reference', 11, 2 );
 	add_filter( 'breadcrumb_trail_items', __NAMESPACE__ . '\\breadcrumb_trail_items_for_handbook_root', 10, 2 );
 
 	add_filter( 'mkaz_code_syntax_force_loading', '__return_true' );
@@ -212,6 +214,29 @@ function breadcrumb_trail_items_for_hooks( $items, $args ) {
 	unset( $items[4] );
 
 	return $items;
+}
+
+/**
+ * Remove the 'Reference' part of the breadcrumb trail.
+ *
+ * @param  array $items The breadcrumb trail items.
+ * @param  array $args  Original args.
+ * @return array
+ */
+function breadcrumb_trail_items_remove_reference( $items, $args ) {
+	if ( ! is_singular() && ! is_single() && ! is_post_type_archive() && ! is_archive() ) {
+		return $items;
+	}
+
+	return array_filter(
+		$items,
+		function( $item ) {
+			// Remove the 'reference' parent based on the presence of its URL.
+			// We can't use the label because of internationalization.
+			$result = (bool) preg_match( '!href="[^"]+/reference/"!', $item );
+			return ( false === $result );
+		}
+	);
 }
 
 /**
@@ -351,4 +376,25 @@ function rename_comments_meta_box( $post_type, $post ) {
  */
 function update_prism_css_path( $path ) {
 	return '/stylesheets/prism.css';
+}
+
+/**
+ * Filters breadcrumb items for the site-breadcrumb block.
+ *
+ * @return array
+ */
+function set_site_breadcrumbs() {
+	$breadcrumbs = array();
+
+	foreach ( get_breadcrumbs()->items as $crumb ) {
+		// Get the link and title from the breadcrumb.
+		preg_match( '!<a[^>]+href="(?P<href>[^"]+)"[^>]*>(?P<title>.+)</a>!', $crumb, $matches );
+
+		$breadcrumbs[] = array(
+			'url'   => $matches['href'] ?? '',
+			'title' => $matches['title'] ?? $crumb,
+		);
+	}
+
+	return $breadcrumbs;
 }

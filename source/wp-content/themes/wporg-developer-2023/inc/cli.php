@@ -21,7 +21,6 @@ class DevHub_CLI {
 		add_action( 'pre_get_posts', array( __CLASS__, 'action_pre_get_posts' ) );
 		add_action( 'devhub_cli_manifest_import', array( __CLASS__, 'action_devhub_cli_manifest_import' ) );
 		add_action( 'devhub_cli_markdown_import', array( __CLASS__, 'action_devhub_cli_markdown_import' ) );
-		add_filter( 'breadcrumb_trail', array( __CLASS__, 'filter_breadcrumb_trail' ) );
 		add_filter( 'the_content', array( __CLASS__, 'filter_the_content' ) );
 	}
 
@@ -275,29 +274,6 @@ class DevHub_CLI {
 		}
 
 		return $markdown_source;
-	}
-
-	/**
-	 * Filter the breadcrumb trail to include quick links
-	 */
-	public static function filter_breadcrumb_trail( $breadcrumbs ) {
-		if ( 'command' !== get_post_type() || ! is_singular() ) {
-			return $breadcrumbs;
-		}
-
-		$content = get_queried_object()->post_content;
-		$content = self::prepend_installation( $content );
-		$content = self::append_subcommands( $content );
-		$items = self::get_tags( 'h([1-4])', $content );
-		if ( count( $items ) > 1 ) {
-			$quick_links = '<span class="quick-links">(';
-			foreach( $items as $item ) {
-				$quick_links .= '<a href="#' . sanitize_title_with_dashes( $item[3] )  . '">' . strtolower( $item[3] ) . '</a>|';
-			}
-			$quick_links = rtrim( $quick_links, '|' ) . ')</span>';
-			$breadcrumbs = str_replace( '</div>', $quick_links . '</div>', $breadcrumbs );
-		}
-		return $breadcrumbs;
 	}
 
 	/**
