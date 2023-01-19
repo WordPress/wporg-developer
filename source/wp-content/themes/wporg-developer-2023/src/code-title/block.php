@@ -28,10 +28,9 @@ function init() {
  */
 function render() {
 	$wrapper_attributes = get_block_wrapper_attributes();
-
-	$output = '<h1 ' . $wrapper_attributes . '>';
-	$output .= get_signature();
-	$output .= '</h1>';
-
-	return $output;
+	return sprintf(
+		'<div %1$s><h1>%2$s</h1></div>',
+		$wrapper_attributes,
+		get_signature(),
+	);
 }

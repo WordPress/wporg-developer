@@ -1,1 +1,39 @@
 /* css styles */
+.wp-block-wporg-code-reference-title {
+	h1 {
+		font-size: var(--wp--preset--font-size--extra-large);
+		line-height: 42px;
+		color: #008a20;
+		font-family: var(--wp--preset--font-family--monospace);
+		font-weight: 400;
+	}
+
+	.hook-func,
+	.keyword {
+		color: #646970;
+	}
+
+	.arg-type {
+		color: #d63638;
+		font-style: italic;
+		font-size: 0.9em;
+	}
+
+	.arg-name {
+		color: #135e96;
+	}
+
+	.arg-default {
+		color: #000;
+	}
+
+	a {
+		text-decoration: none;
+		color: inherit;
+	}
+
+	h1 a:hover {
+		border-bottom: 1px dotted #2271b1;
+	}
+}
+
