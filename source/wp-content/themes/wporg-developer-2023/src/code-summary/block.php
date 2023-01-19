@@ -28,10 +28,9 @@ function init() {
  */
 function render() {
 	$wrapper_attributes = get_block_wrapper_attributes();
-
-	$output = '<section ' . $wrapper_attributes . '>';
-	$output .= get_summary();
-	$output .= '</section>';
-
-	return $output;
+	return sprintf(
+		'<section $1$s>%2$s</section>',
+		$wrapper_attributes,
+		get_summary()
+	);
 }
