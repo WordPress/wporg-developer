@@ -233,7 +233,7 @@ function breadcrumb_trail_items_remove_reference( $items, $args ) {
 		function( $item ) {
 			// Remove the 'reference' parent based on the presence of its URL.
 			// We can't use the label because of internationalization.
-			$result = (bool) preg_match( '/href=".*\/reference\/"/', $item, $matches );
+			$result = (bool) preg_match( '!href="[^"]+/reference/"!', $item );
 			return ( false === $result );
 		}
 	);
