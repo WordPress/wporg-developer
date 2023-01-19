@@ -388,11 +388,10 @@ function set_site_breadcrumbs() {
 
 	foreach ( get_breadcrumbs()->items as $crumb ) {
 		// Get the link and title from the breadcrumb.
-		// 4 capture groups to handle variation in the markup.
-		// This code assumes that an <a> tag or a string is returned from the breadcrumb.
-		preg_match( '!<a[^>]+href="(?P<href>[^"]+)"[^>]+>(?P<title>.+)</a>!', $crumb, $matches );
+		preg_match( '!<a[^>]+href="(?P<href>[^"]+)"[^>]*>(?P<title>.+)</a>!', $crumb, $matches );
+
 		$breadcrumbs[] = array(
-			'url'   => $marches['href'] ?? '',
+			'url'   => $matches['href'] ?? '',
 			'title' => $matches['title'] ?? $crumb,
 		);
 	}
