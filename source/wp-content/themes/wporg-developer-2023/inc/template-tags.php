@@ -1078,11 +1078,10 @@ namespace DevHub {
 	 * Retrieve deprecated notice.
 	 *
 	 * @param int  $post_id   Optional. Post ID. Default is the ID of the global `$post`.
-	 * @param bool $formatted Optional. Whether to format the deprecation message. Default true.
 	 * @return string Deprecated notice. If `$formatted` is true, will be output in markup
 	 *                for a callout box.
 	 */
-	function get_deprecated( $post_id = null, $formatted = true ) {
+	function get_deprecated( $post_id = null ) {
 		if ( ! $post_id ) {
 			$post_id = get_the_ID();
 		}
@@ -1136,22 +1135,7 @@ namespace DevHub {
 			$deprecation_info
 		);
 
-		if ( true === $formatted ) {
-			// Use the 'warning' callout box if it's available. Otherwise, fall back to a theme-supported div class.
-			if ( class_exists( 'WPorg_Handbook_Callout_Boxes' ) ) {
-				$callout = new \WPorg_Handbook_Callout_Boxes();
-				$message = $callout->warning_shortcode( array(), $contents );
-			} else {
-				$message  = '<div class="deprecated">';
-				/** This filter is documented in wp-includes/post-template.php */
-				$message .= apply_filters( 'the_content', $contents );
-				$message .= '</div>';
-			}
-		} else {
-			$message = $contents;
-		}
-
-		return $message;
+		return $contents;
 	}
 
 	/**
