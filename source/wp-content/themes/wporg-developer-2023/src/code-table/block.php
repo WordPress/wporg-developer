@@ -25,7 +25,6 @@ function init() {
  * @return string Returns the block markup.
  */
 function render( $attributes ) {
-
 	$table = '<!-- wp:table {"className":"' . $attributes['className'] . '","style":{"spacing":{"margin":{"top":"var:preset|spacing|20"}}}} --><figure class="wp-block-table" style="margin-top:var(--wp--preset--spacing--20)">';
 	$table .= '<table>';
 	$table .= '<thead>';
