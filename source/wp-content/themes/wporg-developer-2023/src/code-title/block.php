@@ -26,11 +26,12 @@ function init() {
  *
  * @return string Returns the block markup.
  */
-function render() {
+function render( $attributes ) {
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(
-		'<div %1$s><h1>%2$s</h1></div>',
+		'<div %1$s><%2$s>%3$s</%2$s></div>',
 		$wrapper_attributes,
-		get_signature(),
+		$attributes['tagName'],
+		get_signature()
 	);
 }

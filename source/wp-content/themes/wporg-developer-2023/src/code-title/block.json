@@ -7,6 +7,12 @@
 	"category": "widgets",
 	"icon": "smiley",
 	"description": "Show the code signature for a function, class, or method.",
+	"attributes": {
+		"tagName":{
+			"type": "string",
+			"default": "h1"
+		}
+	},
 	"supports": {
 		"html": false,
 		"typography": {
