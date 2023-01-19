@@ -31,7 +31,7 @@ function render( $attributes ) {
 	return sprintf(
 		'<div %1$s><%2$s>%3$s</%2$s></div>',
 		$wrapper_attributes,
-		$attributes['tagName'],
+		esc_attr( $attributes['tagName'] ),
 		get_signature()
 	);
 }
