@@ -132,6 +132,11 @@ if ( is_admin() ) {
 }
 
 /**
+ * Shortcodes.
+ */
+require __DIR__ . '/inc/shortcodes.php';
+
+/**
  * Block Hooks.
  */
 require __DIR__ . '/inc/block-hooks.php';

@@ -14,3 +14,80 @@
 .wporg-filtered-search-form {
 	display: block;
 }
+
+.wp-block-search.wp-block-search__button-inside .wp-block-search__inside-wrapper {
+	--wp--custom--button--hover--color--text: var(--wp--preset--color--charcoal-1);
+	--wp--custom--button--hover--color--background: var(--wp--preset--color--light-grey-2);
+	padding: 0;
+	border: none;
+	border-radius: var(--wp--custom--button--border--radius);
+	background: var(--wp--preset--color--white);
+	color: var(--wp--preset--color--charcoal-1);
+
+	.wp-block-search__input {
+		padding-right: 0;
+		border: none;
+	}
+
+	.wp-block-search__button {
+		padding-top: calc(var(--wp--preset--spacing--20) * 0.5);
+		padding-right: calc(var(--wp--preset--spacing--20) * 0.75);
+		padding-bottom: calc(var(--wp--preset--spacing--20) * 0.5);
+		padding-left: calc(var(--wp--preset--spacing--20) * 0.75);
+
+		background: transparent;
+
+		svg {
+			fill: inherit;
+		}
+	}
+}
+
+@media (max-width: 781px) {
+	.wp-block-column[style*="border-right-"] {
+		border-bottom: 1px solid var(--wp--preset--color--light-grey-1);
+		border-right: none !important;
+	}
+
+	.wp-block-column[style*="border-right-"][style*="padding-right"] {
+		margin-left: calc(-1 * var(--wp--preset--spacing--edge-space)) !important;
+		margin-right: calc(-1 * var(--wp--preset--spacing--edge-space)) !important;
+		padding-left: var(--wp--preset--spacing--edge-space) !important;
+		padding-right: var(--wp--preset--spacing--edge-space) !important;
+	}
+
+	.wp-block-column[style*="border-right-"] + .wp-block-column[style*="padding-left"] {
+		padding-left: 0 !important;
+	}
+}
+
+.wporg-hero-graphic {
+	overflow: hidden;
+}
+
+@media (max-width: 1320px) {
+	.wp-block-image.wporg-hero-graphic img {
+		margin-left: -1%;
+		margin-right: -1%;
+		max-width: 102%;
+		width: 102%;
+	}
+}
+
+.wporg-front-page-breadcrumb {
+	position: unset; // We don't want it to be sticky on the front page, but removing is-sticky breaks the layout.
+}
+
+@media (min-width: 599px) {
+	.wporg-front-page-breadcrumb h2 {
+		display: none;
+	}
+}
+
+.home .entry-content {
+	--wp--preset--spacing--60: clamp(40px, 5.55556vw, 80px);
+
+	a {
+		text-decoration: underline;
+	}
+}
