@@ -33,10 +33,18 @@ function render() {
 		return '';
 	}
 
+	$block_markup = <<<EOT
+	<!-- wp:wporg/notice {"type":"alert"} -->
+	<div class="wp-block-wporg-notice is-alert-notice">
+	<div class="wp-block-wporg-notice__icon"></div>
+	<div class="wp-block-wporg-notice__content"><p>$html</p></div></div>
+	<!-- /wp:wporg/notice -->
+	EOT;
+
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(
 		'<div %s>%s</div>',
 		$wrapper_attributes,
-		$html
+		do_blocks( $block_markup )
 	);
 }
