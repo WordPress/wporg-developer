@@ -57,7 +57,6 @@ function render( $attributes ) {
 	);
 }
 
-
 /**
  * Render a table heading cell.
  *
