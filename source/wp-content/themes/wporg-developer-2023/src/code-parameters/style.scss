@@ -4,11 +4,7 @@
 		align-items: center;
 		gap: var(--wp--preset--spacing--10);
 
-		.int,
-		.string,
-		.array,
-		.callable,
-		span[class="string[]"] {
+		.type span {
 			font-family: var(--wp--preset--font-family--monospace);
 			font-size: var(--wp--preset--font-size--small);
 		}
