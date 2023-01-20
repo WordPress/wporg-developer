@@ -3,23 +3,23 @@
 	line-height: 1.73;
 	font-family: var(--wp--preset--font-family--monospace);
 	font-weight: 400;
-	color: #008a20;
+	color: var(--wp--preset--color--syntax-green);
 
 	.hook-func,
 	.keyword {
-		color: #646970;
+		color: var(--wp--preset--color--syntax-grey);
 	}
 
 	.arg-type {
-		color: #d63638;
+		color: var(--wp--preset--color--syntax-red);
 	}
 
 	.arg-name {
-		color: #135e96;
+		color: var(--wp--preset--color--syntax-blue);
 	}
 
 	.arg-default {
-		color: #000;
+		color: var(--wp--preset--color--syntax-black);
 	}
 
 	a {
@@ -30,6 +30,6 @@
 	a:hover,
 	a:focus {
 		text-decoration: none;
-		border-bottom: 1px dotted #2271b1;
+		border-bottom: 1px dotted var(--wp--preset--color--blueberry-1);
 	}
 }
