@@ -9,11 +9,11 @@
 	"description": "Show the code signature for a function, class, or method.",
 	"usesContext": [ "postId" ],
 	"attributes": {
-		"isLink":{
+		"isLink": {
 			"type": "boolean",
 			"default": false
 		},
-		"tagName":{
+		"tagName": {
 			"type": "string",
 			"default": "h1"
 		}

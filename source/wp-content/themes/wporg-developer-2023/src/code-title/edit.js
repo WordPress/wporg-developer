@@ -3,13 +3,22 @@
  */
 import { InspectorControls } from '@wordpress/block-editor';
 import ServerSideRender from '@wordpress/server-side-render';
-import { SelectControl } from '@wordpress/components';
+import { PanelBody, SelectControl, ToggleControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 export default function Edit( { attributes, setAttributes, name } ) {
-	const { tagName } = attributes;
+	const { isLink, tagName } = attributes;
 	return (
 		<>
+			<InspectorControls>
+				<PanelBody title={ __( 'Settings', 'wporg' ) }>
+					<ToggleControl
+						label={ __( 'Make title a link', 'wporg' ) }
+						checked={ isLink }
+						onChange={ () => setAttributes( { isLink: ! isLink } ) }
+					/>
+				</PanelBody>
+			</InspectorControls>
 			<InspectorControls __experimentalGroup="advanced">
 				<SelectControl
 					label={ __( 'HTML element', 'wporg' ) }
