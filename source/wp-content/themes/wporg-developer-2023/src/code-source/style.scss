@@ -6,7 +6,7 @@ $border_radius: 2px;
 	.wp-code-block-button-container {
 		background-color: var(--wp--preset--color--light-grey-2);
 		border-radius: $border_radius $border_radius 0 0;
-		padding: $half_padding $half_padding $half_padding var(--wp--preset--spacing--10);
+		padding: var(--wp--preset--spacing--10);
 		align-items: center;
 		justify-content: space-between;
 		flex-direction: column;
@@ -24,7 +24,7 @@ $border_radius: 2px;
 
 		> span:last-child {
 			display: flex;
-			gap: $half_padding;
+			gap: 8px;
 		}
 	}
 
