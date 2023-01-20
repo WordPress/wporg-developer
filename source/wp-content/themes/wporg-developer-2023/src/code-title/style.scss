@@ -1,7 +1,6 @@
-/* css styles */
 .wp-block-wporg-code-reference-title {
 	font-size: var(--wp--preset--font-size--extra-large);
-	line-height: var(--wp--preset--line-height--extra-large);
+	line-height: 1.73;
 	font-family: var(--wp--preset--font-family--monospace);
 	font-weight: 400;
 	color: #008a20;
@@ -13,8 +12,6 @@
 
 	.arg-type {
 		color: #d63638;
-		font-style: italic;
-		font-size: 0.9em;
 	}
 
 	.arg-name {
