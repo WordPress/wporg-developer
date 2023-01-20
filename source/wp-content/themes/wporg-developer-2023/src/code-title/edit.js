@@ -1,5 +1,5 @@
 /**
- * Wordpress dependencies
+ * WordPress dependencies
  */
 import { InspectorControls } from '@wordpress/block-editor';
 import ServerSideRender from '@wordpress/server-side-render';
