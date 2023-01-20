@@ -34,8 +34,8 @@ function render() {
 	}
 
 	$block_markup = <<<EOT
-	<!-- wp:wporg/notice {"type":"alert"} -->
-	<div class="wp-block-wporg-notice is-alert-notice">
+	<!-- wp:wporg/notice {"type":"warning"} -->
+	<div class="wp-block-wporg-notice is-warning-notice">
 	<div class="wp-block-wporg-notice__icon"></div>
 	<div class="wp-block-wporg-notice__content"><p>$deprecated_html</p></div></div>
 	<!-- /wp:wporg/notice -->
