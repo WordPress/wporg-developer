@@ -174,6 +174,7 @@ class DevHub_User_Submitted_Content {
 				'wporg-developer-function-reference',
 				'wporgFunctionReferenceI18n',
 				array(
+					'sourceFile'   => DevHub\get_source_file(),
 					'copy'   => __( 'Copy', 'wporg' ),
 					'copied' => __( 'Code copied', 'wporg' ),
 					'expand'   => __( 'Expand code', 'wporg' ),

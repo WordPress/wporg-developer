@@ -64,17 +64,23 @@ function wporg_developer_code_reference_source_render() {
 	if ( ! empty( $source_file ) ) {
 		$source_code = post_type_has_source_code() ? get_source_code() : '';
 
-		$output .= '<p>' .
-			sprintf(
-				/* translators: %s: Source file name. */
-				__( 'File: %s.', 'wporg' ),
-				'<code>' . esc_html( $source_file ) . '</code>'
-			) .
-			sprintf(
-				'<a href="%s">%s</a>',
-				esc_url( get_source_file_archive_link( $source_file ) ),
-				__( 'View all references', 'wporg' )
-			) . '</p>';
+		$view_reference_button = sprintf(
+			'<a href="%s">%s</a>',
+			esc_url( get_source_file_archive_link( $source_file ) ),
+			__( 'View all references', 'wporg' )
+		);
+
+		$view_trac_button = sprintf(
+			'<a href="%s">%s</a>',
+			esc_url( get_source_file_link() ),
+			__( 'View on Trac', 'wporg' )
+		);
+
+		$view_github_button = sprintf(
+			'<a href="%s">%s</a>',
+			esc_url( get_github_source_file_link() ),
+			__( 'View on GitHub', 'wporg' ) 
+		);
 
 		if ( ! empty( $source_code ) ) {
 			$output .= do_blocks(
@@ -86,12 +92,9 @@ function wporg_developer_code_reference_source_render() {
 				)
 			);
 
-			$output .= '<p class="source-code-links">
-				<span><a href="' . esc_attr( get_source_file_link() ) . '">' . __( 'View on Trac', 'wporg' ) . '</a></span>
-				<span><a href="' . esc_attr( get_github_source_file_link() ) . '">' . __( 'View on GitHub', 'wporg' ) . '</a></span>
-			</p>';
+			$output .= sprintf('<p class="wporg-developer-code-block-source-links">%s</p>', implode(' ', array($view_reference_button, $view_trac_button, $view_github_button)));
 		} else {
-			$output .= '<p><a href="' . esc_attr( get_source_file_link() ) . '">' . __( 'View on Trac', 'wporg' ) . '</a></p>';
+			$output .= sprintf('<p class="wporg-developer-code-block-source-links">%s</p>', implode(' ', array($view_reference_button, $view_trac_button)));
 		}
 	}
 
