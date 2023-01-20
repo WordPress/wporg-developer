@@ -79,7 +79,7 @@ function wporg_developer_code_reference_source_render() {
 		$view_github_button = sprintf(
 			'<a href="%s">%s</a>',
 			esc_url( get_github_source_file_link() ),
-			__( 'View on GitHub', 'wporg' ) 
+			__( 'View on GitHub', 'wporg' )
 		);
 
 		if ( ! empty( $source_code ) ) {
@@ -92,9 +92,9 @@ function wporg_developer_code_reference_source_render() {
 				)
 			);
 
-			$output .= sprintf('<p class="wporg-developer-code-block-source-links">%s</p>', implode(' ', array($view_reference_button, $view_trac_button, $view_github_button)));
+			$output .= sprintf( '<p class="wporg-developer-code-block-source-links">%s</p>', implode( ' ', array( $view_reference_button, $view_trac_button, $view_github_button ) ) );
 		} else {
-			$output .= sprintf('<p class="wporg-developer-code-block-source-links">%s</p>', implode(' ', array($view_reference_button, $view_trac_button)));
+			$output .= sprintf( '<p class="wporg-developer-code-block-source-links">%s</p>', implode( ' ', array( $view_reference_button, $view_trac_button ) ) );
 		}
 	}
 
