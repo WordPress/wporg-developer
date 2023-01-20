@@ -48,9 +48,9 @@ function render( $attributes, $content, $block ) {
 
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(
-		'<div %1$s><%2$s>%3$s</%2$s></div>',
-		$wrapper_attributes,
+		'<%1$s %2$s>%3$s</%1$s>',
 		esc_attr( $attributes['tagName'] ),
+		$wrapper_attributes,
 		$content
 	);
 }
