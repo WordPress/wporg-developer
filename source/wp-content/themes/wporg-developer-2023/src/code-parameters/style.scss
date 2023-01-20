@@ -13,14 +13,15 @@
 		}
 	}
 
+	dt > code,
+	li > code { // Nested parameters.
+		font-weight: 500;
+		color: var(--wp--preset--color--charcoal-1);
+	}
+
 	dd {
 		margin: 0;
 		padding-bottom: var(--wp--preset--spacing--20);
-	}
-
-	code {
-		font-weight: 500;
-		color: var(--wp--preset--color--charcoal-1);
 	}
 
 	.required {
@@ -28,6 +29,7 @@
 		font-size: var(--wp--preset--font-size--small);
 	}
 
+	// Nested parameter list.
 	.param-hash {
 		padding-left: var(--wp--preset--spacing--10);
 		border-left: 1px solid var(--wp--preset--color--light-grey-1);
@@ -38,6 +40,7 @@
 		}
 	}
 
+	// Default values.
 	.default {
 		margin-bottom: 0;
 	}
@@ -58,6 +61,7 @@
 		margin-left: 5px;
 	}
 
+	// Visible when parameters are imported from reference.
 	summary {
 		color: var(--wp--preset--color--blueberry-1);
 		cursor: pointer;
