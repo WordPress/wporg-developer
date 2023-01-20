@@ -1,14 +1,4 @@
 .wp-block-wporg-code-reference-parameters {
-	code {
-		font-weight: 500;
-		color: var(--wp--preset--color--charcoal-1);
-	}
-
-	.required {
-		color: var(--wp--preset--color--charcoal-4);
-		font-size: var(--wp--preset--font-size--small);
-	}
-
 	dt {
 		display: flex;
 		align-items: center;
@@ -21,12 +11,21 @@
 			font-family: var(--wp--preset--font-family--monospace);
 			font-size: var(--wp--preset--font-size--small);
 		}
-
 	}
 
 	dd {
 		margin: 0;
 		padding-bottom: var(--wp--preset--spacing--20);
+	}
+
+	code {
+		font-weight: 500;
+		color: var(--wp--preset--color--charcoal-1);
+	}
+
+	.required {
+		color: var(--wp--preset--color--charcoal-4);
+		font-size: var(--wp--preset--font-size--small);
 	}
 
 	.param-hash {
