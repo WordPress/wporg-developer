@@ -1,1 +1,68 @@
-/* css styles */
+.wp-block-wporg-code-reference-parameters {
+	code {
+		font-weight: 500;
+		color: var(--wp--preset--color--charcoal-1);
+	}
+
+	.required {
+		color: var(--wp--preset--color--charcoal-4);
+		font-size: var(--wp--preset--font-size--small);
+	}
+
+	dt {
+		display: flex;
+		align-items: center;
+		gap: var(--wp--preset--spacing--10);
+
+		.string,
+		.array,
+		.callable,
+		span[class="string[]"] {
+			font-family: var(--wp--preset--font-family--monospace);
+			font-size: var(--wp--preset--font-size--small);
+		}
+
+	}
+
+	dd {
+		margin: 0;
+		padding-bottom: var(--wp--preset--spacing--20);
+	}
+
+	.param-hash {
+		padding-left: var(--wp--preset--spacing--10);
+		border-left: 1px solid var(--wp--preset--color--light-grey-1);
+		list-style: none;
+
+		li:not(:last-child) {
+			padding-bottom: var(--wp--preset--spacing--20);
+		}
+	}
+
+	.default {
+		margin-bottom: 0;
+	}
+
+	// This needs to be a direct descendant or properties of nested objects will also get this style.
+	.description > code,
+	.default > code,
+	.desc > code,
+	.param-hash .type {
+		padding: 4px 6px;
+		background-color: var(--wp--preset--color--light-grey-2);
+		font-size: var(--wp--preset--font-size--small);
+		border-radius: 2px;
+	}
+
+	.default > code,
+	.param-hash .type {
+		margin-left: 5px;
+	}
+
+	summary {
+		color: var(--wp--preset--color--blueberry-1);
+		cursor: pointer;
+		list-style: none;
+		text-decoration: underline;
+	}
+}
