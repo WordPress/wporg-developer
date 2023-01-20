@@ -1929,18 +1929,7 @@ namespace DevHub {
 			$alternative_string
 		);
 
-		// Use the 'alert' callout box if it's available. Otherwise, fall back to a theme-supported div class.
-		if ( class_exists( 'WPorg_Handbook_Callout_Boxes' ) ) {
-			$callout = new \WPorg_Handbook_Callout_Boxes();
-			$message = $callout->alert_shortcode( array(), $contents );
-		} else {
-			$message  = '<div class="private-access">';
-			/** This filter is documented in wp-includes/post-template.php */
-			$message .= apply_filters( 'the_content', $contents );
-			$message .= '</div>';
-		}
-
-		return $message;
+		return $contents;
 	}
 
 	/**
