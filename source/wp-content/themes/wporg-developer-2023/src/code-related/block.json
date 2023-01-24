@@ -9,8 +9,16 @@
 	"description": "Show related code.",
 	"supports": {
 		"html": false,
+		"spacing": {
+			"margin": [
+				"top",
+				"bottom"
+			],
+			"padding": true
+		},
 		"typography": {
-			"fontSize": true
+			"fontSize": true,
+			"lineHeight": true
 		}
 	},
 	"textdomain": "wporg",

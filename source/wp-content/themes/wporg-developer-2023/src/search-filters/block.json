@@ -9,7 +9,18 @@
 	"textdomain": "wporg",
 	"attributes": {},
 	"supports": {
-		"html": false
+		"html": false,
+		"spacing": {
+			"margin": [
+				"top",
+				"bottom"
+			],
+			"padding": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true
+		}
 	},
 	"editorScript": "file:./index.js",
 	"style": "file:./style-index.css"

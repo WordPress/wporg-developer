@@ -16,7 +16,10 @@
 			"link": true
 		},
 		"spacing": {
-			"margin": true,
+			"margin": [
+				"top",
+				"bottom"
+			],
 			"padding": true
 		},
 		"typography": {
