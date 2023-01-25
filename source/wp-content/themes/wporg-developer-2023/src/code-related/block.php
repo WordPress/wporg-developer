@@ -108,8 +108,8 @@ function get_uses_table( $uses ) {
 	return sprintf(
 		'<!-- wp:wporg/code-table {"itemsToShow":%s,"headings": %s,"rows":%s } /--> ',
 		esc_attr( $uses_to_show ),
-		json_encode( $headings ),
-		json_encode( get_row_data( $uses ) )
+		wp_json_encode( $headings ),
+		wp_json_encode( get_row_data( $uses ) )
 	);
 }
 
@@ -120,8 +120,8 @@ function get_used_by_table( $used_by ) {
 	$headings = array( __( 'Used by', 'wporg' ), __( 'Description', 'wporg' ) );
 	return sprintf(
 		'<!-- wp:wporg/code-table {"itemsToShow":5,"headings":%s,"rows":%s } /--> ',
-		json_encode( $headings ),
-		json_encode( get_row_data( $used_by ) )
+		wp_json_encode( $headings ),
+		wp_json_encode( get_row_data( $used_by ) )
 	);
 }
 
