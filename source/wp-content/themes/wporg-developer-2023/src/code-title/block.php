@@ -24,14 +24,33 @@ function init() {
 /**
  * Render the block content.
  *
+ * @param array    $attributes Block attributes.
+ * @param string   $content    Block default content.
+ * @param WP_Block $block      Block instance.
+ *
  * @return string Returns the block markup.
  */
-function render() {
+function render( $attributes, $content, $block ) {
+	if ( ! isset( $block->context['postId'] ) ) {
+		return '';
+	}
+
+	$post_ID = $block->context['postId'];
+	$content = get_signature( $post_ID );
+
+	if ( isset( $attributes['isLink'] ) && $attributes['isLink'] ) {
+		$content = sprintf(
+			'<a href="%1$s">%2$s</a>',
+			get_the_permalink( $post_ID ),
+			$content
+		);
+	}
+
 	$wrapper_attributes = get_block_wrapper_attributes();
-
-	$output = '<h1 ' . $wrapper_attributes . '>';
-	$output .= get_signature();
-	$output .= '</h1>';
-
-	return $output;
+	return sprintf(
+		'<%1$s %2$s>%3$s</%1$s>',
+		esc_attr( $attributes['tagName'] ),
+		$wrapper_attributes,
+		$content
+	);
 }

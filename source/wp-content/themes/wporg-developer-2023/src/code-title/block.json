@@ -7,10 +7,26 @@
 	"category": "widgets",
 	"icon": "smiley",
 	"description": "Show the code signature for a function, class, or method.",
+	"usesContext": [ "postId" ],
+	"attributes": {
+		"isLink": {
+			"type": "boolean",
+			"default": false
+		},
+		"tagName": {
+			"type": "string",
+			"default": "h1"
+		}
+	},
 	"supports": {
 		"html": false,
+		"spacing": {
+			"margin": [ "top", "bottom" ],
+			"padding": true
+		},
 		"typography": {
-			"fontSize": true
+			"fontSize": true,
+			"lineHeight": true
 		}
 	},
 	"textdomain": "wporg",
