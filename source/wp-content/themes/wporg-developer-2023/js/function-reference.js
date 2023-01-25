@@ -34,9 +34,13 @@ jQuery( function ( $ ) {
 
 		$element.wrap( '<div class="wporg-developer-code-block"></div>' );
 
-		const $copyButton = $( document.createElement( 'button' ) );
+		const $copyButtonContainer = $( '<div class="wp-block-button is-style-outline"></div>' );
+		const $copyButton = $( '<a href="#" class="wp-block-button__link wp-element-button"></a>' );
+		$copyButtonContainer.append( $copyButton );
+
 		$copyButton.text( wporgFunctionReferenceI18n.copy );
-		$copyButton.on( 'click', function () {
+		$copyButton.on( 'click', function ( event ) {
+			event.preventDefault();
 			clearTimeout( timeoutId );
 			const code = $element.find( 'code' ).text();
 			if ( ! code ) {
@@ -60,7 +64,9 @@ jQuery( function ( $ ) {
 		const $container = $( document.createElement( 'div' ) );
 		$container.addClass( 'wp-code-block-button-container' );
 
-		$container.append( $copyButton );
+		$container.append( '<code>' + wporgFunctionReferenceI18n.sourceFile + '</code>' );
+
+		const $btnContainer = $( document.createElement( 'span' ) );
 
 		// Check code block height, and if it's larger, add in the collapse
 		// button, and set it to be collapsed differently.
@@ -68,8 +74,12 @@ jQuery( function ( $ ) {
 		if ( originalHeight > MIN_HEIGHT ) {
 			$element.data( 'height', originalHeight );
 
-			const $expandButton = $( document.createElement( 'button' ) );
-			$expandButton.on( 'click', function () {
+			const $expandButtonContainer = $( '<div class="wp-block-button is-style-outline"></div>' );
+			const $expandButton = $(
+				'<a href="#" class="wp-block-button__link wp-element-button" aria-controls="wporg-source-code"></a>'
+			);
+			$expandButton.on( 'click', function ( event ) {
+				event.preventDefault();
 				if ( 'true' === $expandButton.attr( 'aria-expanded' ) ) {
 					collapseCodeBlock( $element, $expandButton );
 				} else {
@@ -78,8 +88,12 @@ jQuery( function ( $ ) {
 			} );
 
 			collapseCodeBlock( $element, $expandButton );
-			$container.append( $expandButton );
+			$expandButtonContainer.append( $expandButton );
+			$btnContainer.append( $expandButtonContainer );
 		}
+
+		$btnContainer.append( $copyButtonContainer );
+		$container.append( $btnContainer );
 
 		$element.before( $container );
 	} );
