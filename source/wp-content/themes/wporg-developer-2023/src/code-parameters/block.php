@@ -68,7 +68,7 @@ function wporg_developer_code_reference_build_params( $params ) {
 			}
 
 			if ( ! empty( $param['required'] ) && 'wp-parser-hook' !== get_post_type() ) {
-				$output .= '<span class="required">' . esc_html( $param['required'] ) . '</span>';
+				$output .= '<span class="required">' . esc_html( strtolower( $param['required'] ) ) . '</span>';
 			}
 
 			$output .= '</dt>';
