@@ -85,7 +85,7 @@ function wporg_developer_code_reference_source_render() {
 		if ( ! empty( $source_code ) ) {
 			$output .= do_blocks(
 				sprintf(
-					'<!-- wp:code {"lineNumbers":true} --><pre class="wp-block-code" data-start="%1$s" aria-label="%2$s"><code lang="php" class="language-php line-numbers">%3$s</code></pre><!-- /wp:code -->',
+					'<!-- wp:code {"lineNumbers":true} --><pre class="wp-block-code" data-start="%1$s" aria-label="%2$s"><code id="wporg-source-code" lang="php" class="language-php line-numbers">%3$s</code></pre><!-- /wp:code -->',
 					esc_attr( get_post_meta( get_the_ID(), '_wp-parser_line_num', true ) ),
 					__( 'Function source code', 'wporg' ),
 					htmlentities( $source_code )

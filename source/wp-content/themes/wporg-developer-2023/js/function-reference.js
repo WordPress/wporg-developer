@@ -75,7 +75,9 @@ jQuery( function ( $ ) {
 			$element.data( 'height', originalHeight );
 
 			const $expandButtonContainer = $( '<div class="wp-block-button is-style-outline"></div>' );
-			const $expandButton = $( '<a href="#" class="wp-block-button__link wp-element-button"></a>' );
+			const $expandButton = $(
+				'<a href="#" class="wp-block-button__link wp-element-button" aria-controls="wporg-source-code"></a>'
+			);
 			$expandButton.on( 'click', function ( event ) {
 				event.preventDefault();
 				if ( 'true' === $expandButton.attr( 'aria-expanded' ) ) {
