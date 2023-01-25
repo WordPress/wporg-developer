@@ -9,8 +9,16 @@
 	"description": "Code summary for a function, method, or class.",
 	"supports": {
 		"html": false,
+		"spacing": {
+			"margin": [
+				"top",
+				"bottom"
+			],
+			"padding": true
+		},
 		"typography": {
-			"fontSize": true
+			"fontSize": true,
+			"lineHeight": true
 		}
 	},
 	"textdomain": "wporg",

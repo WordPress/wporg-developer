@@ -9,8 +9,16 @@
 	"description": "Show the description for a function, class, or method.",
 	"supports": {
 		"html": false,
+		"spacing": {
+			"margin": [
+				"top",
+				"bottom"
+			],
+			"padding": true
+		},
 		"typography": {
-			"fontSize": true
+			"fontSize": true,
+			"lineHeight": true
 		}
 	},
 	"textdomain": "wporg",
