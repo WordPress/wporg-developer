@@ -26,6 +26,7 @@
 		}
 	},
 	"supports": {
+		"inserter": false,
 		"html": false,
 		"typography": {
 			"fontSize": true
