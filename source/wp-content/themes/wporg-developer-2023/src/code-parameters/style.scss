@@ -33,7 +33,7 @@
 		border-left: 1px solid var(--wp--preset--color--light-grey-1);
 		list-style: none;
 
-		li:not(:last-child) {
+		> li:not(:last-child) {
 			padding-bottom: var(--wp--preset--spacing--20);
 		}
 	}
