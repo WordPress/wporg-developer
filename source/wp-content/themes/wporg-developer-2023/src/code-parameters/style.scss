@@ -61,6 +61,7 @@
 
 	// Visible when parameters are imported from reference.
 	summary {
+		margin-top: var(--wp--preset--spacing--10);
 		color: var(--wp--preset--color--blueberry-1);
 		cursor: pointer;
 		list-style: none;
