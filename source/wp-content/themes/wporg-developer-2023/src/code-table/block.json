@@ -12,7 +12,7 @@
 			"type": "string",
 			"default": ""
 		},
-		"columns": {
+		"headings": {
 			"type": "array",
 			"default": []
 		},

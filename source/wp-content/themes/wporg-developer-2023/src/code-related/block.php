@@ -106,7 +106,7 @@ function get_uses_table( $uses ) {
 	$headings     = array( __( 'Uses', 'wporg' ), __( 'Description', 'wporg' ) );
 
 	return sprintf(
-		'<!-- wp:wporg/code-table {"id":"use","itemsToShow":%s,"headings": %s,"rows":%s } /--> ',
+		'<!-- wp:wporg/code-table {"itemsToShow":%s,"headings": %s,"rows":%s } /--> ',
 		esc_attr( $uses_to_show ),
 		json_encode( $headings ),
 		json_encode( get_row_data( $uses ) )
@@ -119,7 +119,7 @@ function get_uses_table( $uses ) {
 function get_used_by_table( $used_by ) {
 	$headings = array( __( 'Used by', 'wporg' ), __( 'Description', 'wporg' ) );
 	return sprintf(
-		'<!-- wp:wporg/code-table {"id":"used_by","itemsToShow":5,"headings":%s,"rows":%s } /--> ',
+		'<!-- wp:wporg/code-table {"itemsToShow":5,"headings":%s,"rows":%s } /--> ',
 		json_encode( $headings ),
 		json_encode( get_row_data( $used_by ) )
 	);
