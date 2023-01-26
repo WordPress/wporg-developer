@@ -163,6 +163,9 @@ require_once __DIR__ . '/src/search-usage-info/index.php';
 add_action( 'init', __NAMESPACE__ . '\\init' );
 add_filter( 'wporg_block_site_breadcrumbs', __NAMESPACE__ . '\set_site_breadcrumbs' );
 
+// Remove table of contents.
+add_filter( 'wporg_handbook_toc_should_add_toc', '__return_false' );
+
 /**
  * Set up the theme.
  */
