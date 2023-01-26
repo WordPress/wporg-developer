@@ -29,10 +29,21 @@ function init() {
  * @return string Returns the block markup.
  */
 function render() {
-	$has_hooks   = ( post_type_has_hooks_info() && ( $hooks   = get_hooks() ) && $hooks->have_posts() );
-
-	if ( ! $has_hooks ) {
+	if ( ! post_type_has_hooks_info() ) {
 		return '';
+	}
+
+	$hooks = get_hooks();
+
+	if ( ! $hooks->have_posts() ) {
+		return '';
+	}
+
+	$content = array();
+	while ( $hooks->have_posts() ) {
+		$hooks->the_post();
+		$content[] = do_blocks( '<!-- wp:wporg/code-reference-title {"isLink":true,"tagName":"h2","fontSize":"normal"} /-->' );
+		wp_reset_postdata();
 	}
 
 	$title_block = sprintf(
@@ -45,6 +56,6 @@ function render() {
 		'<section %s>%s %s</section>',
 		$wrapper_attributes,
 		do_blocks( $title_block ),
-		'Not Implemented'
+		join( '', $content )
 	);
 }
