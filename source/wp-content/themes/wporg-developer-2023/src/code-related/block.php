@@ -59,7 +59,7 @@ function render() {
 
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(
-		'<section %s>%s %s %s</section>',
+		'<section %1$s>%2$s %3$s %4$s</section>',
 		$wrapper_attributes,
 		$title_block,
 		$has_uses ? do_blocks( get_uses_table( $uses ) ) : '',
