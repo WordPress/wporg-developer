@@ -153,6 +153,7 @@ require_once __DIR__ . '/src/code-related/block.php';
 require_once __DIR__ . '/src/code-return-value/block.php';
 require_once __DIR__ . '/src/code-source/block.php';
 require_once __DIR__ . '/src/code-summary/block.php';
+require_once __DIR__ . '/src/code-table/block.php';
 require_once __DIR__ . '/src/code-title/block.php';
 require_once __DIR__ . '/src/code-user-notes/block.php';
 require_once __DIR__ . '/src/search-filters/index.php';

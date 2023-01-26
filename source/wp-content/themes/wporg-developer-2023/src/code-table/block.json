@@ -1,0 +1,47 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "wporg/code-table",
+	"version": "0.1.0",
+	"title": "Code Reference: Table",
+	"category": "widgets",
+	"icon": "smiley",
+	"description": "Renders a table",
+	"attributes": {
+		"className": {
+			"type": "string",
+			"default": ""
+		},
+		"headings": {
+			"type": "array",
+			"default": []
+		},
+		"rows": {
+			"type": "array",
+			"default": []
+		},
+		"itemsToShow": {
+			"type": "integer",
+			"default": 5
+		}
+	},
+	"supports": {
+		"inserter": false,
+		"html": false,
+		"spacing": {
+			"margin": [
+				"top",
+				"bottom"
+			],
+			"padding": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true
+		}
+	},
+	"textdomain": "wporg",
+	"editorScript": "file:./index.js",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js"
+}
