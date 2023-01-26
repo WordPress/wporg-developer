@@ -25,10 +25,18 @@ function init() {
 /**
  * Render the block content.
  *
+ * @param array    $attributes Block attributes.
+ * @param string   $content    Block default content.
+ * @param WP_Block $block      Block instance.
+ *
  * @return string Returns the block markup.
  */
-function render() {
-	$content = wporg_developer_code_reference_description_render();
+function render( $attributes, $content, $block ) {
+	if ( ! isset( $block->context['postId'] ) ) {
+		return '';
+	}
+
+	$content = get_description_content( $block->context['postId'] );
 
 	if ( empty( $content ) ) {
 		return '';
@@ -53,10 +61,11 @@ function render() {
  *
  * @return string
  */
-function wporg_developer_code_reference_description_render() {
+function get_description_content( $post_id ) {
 	$output = '';
-	$description = get_description();
-	$see_tags    = get_see_tags();
+
+	$description = get_description( $post_id );
+	$see_tags    = get_see_tags( $post_id );
 
 	if ( ! $description && ! $see_tags ) {
 		return '';

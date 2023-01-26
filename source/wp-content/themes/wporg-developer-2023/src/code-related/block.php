@@ -30,21 +30,32 @@ function init() {
 /**
  * Render the block content.
  *
+ * @param array    $attributes Block attributes.
+ * @param string   $content    Block default content.
+ * @param WP_Block $block      Block instance.
+ *
  * @return string Returns the block markup.
  */
-function render() {
+function render( $attributes, $content, $block ) {
+	if ( ! isset( $block->context['postId'] ) ) {
+		return '';
+	}
+
 	$uses        = null;
 	$used_by     = null;
 	$has_uses    = false;
 	$has_used_by = false;
 
-	if ( post_type_has_uses_info() ) {
-		$uses     = get_uses();
+	$post_id   = $block->context['postId'];
+	$post_type = get_post_type( $post_id );
+
+	if ( post_type_has_uses_info( $post_type ) ) {
+		$uses     = get_uses( $post_id );
 		$has_uses = $uses->have_posts();
 	}
 
-	if ( post_type_has_usage_info() ) {
-		$used_by     = get_used_by();
+	if ( post_type_has_usage_info( $post_type ) ) {
+		$used_by     = get_used_by( $post_id );
 		$has_used_by = $used_by->have_posts();
 	}
 

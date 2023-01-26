@@ -29,10 +29,18 @@ function init() {
 /**
  * Render the block content.
  *
+ * @param array    $attributes Block attributes.
+ * @param string   $content    Block default content.
+ * @param WP_Block $block      Block instance.
+ *
  * @return string Returns the block markup.
  */
-function render() {
-	$content = wporg_developer_code_reference_source_render();
+function render( $attributes, $content, $block ) {
+	if ( ! isset( $block->context['postId'] ) ) {
+		return '';
+	}
+
+	$content = get_source_content( $block->context['postId'] );
 
 	if ( empty( $content ) ) {
 		return '';
@@ -55,14 +63,17 @@ function render() {
 /**
  * Returns code sample html.
  *
+ * @param int $post_id
+ *
  * @return string
  */
-function wporg_developer_code_reference_source_render() {
-	$source_file = get_source_file();
-	$output = '';
+function get_source_content( $post_id ) {
+	$post_type   = get_post_type( $post_id );
+	$source_file = get_source_file( $post_id );
+	$output      = '';
 
 	if ( ! empty( $source_file ) ) {
-		$source_code = post_type_has_source_code() ? get_source_code() : '';
+		$source_code = post_type_has_source_code( $post_type ) ? get_source_code( $post_id ) : '';
 
 		$view_reference_button = sprintf(
 			'<a href="%s">%s</a>',
@@ -72,13 +83,13 @@ function wporg_developer_code_reference_source_render() {
 
 		$view_trac_button = sprintf(
 			'<a href="%s">%s</a>',
-			esc_url( get_source_file_link() ),
+			esc_url( get_source_file_link( $post_id ) ),
 			__( 'View on Trac', 'wporg' )
 		);
 
 		$view_github_button = sprintf(
 			'<a href="%s">%s</a>',
-			esc_url( get_github_source_file_link() ),
+			esc_url( get_github_source_file_link( $post_id ) ),
 			__( 'View on GitHub', 'wporg' )
 		);
 
