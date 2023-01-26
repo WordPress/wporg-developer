@@ -42,7 +42,7 @@ function render() {
 	$content = array();
 	while ( $hooks->have_posts() ) {
 		$hooks->the_post();
-		$content[] = do_blocks( '<!-- wp:wporg/code-reference-title {"isLink":true,"tagName":"h2","fontSize":"normal"} /-->' );
+		$content[] = do_blocks( '<!-- wp:wporg/code-reference-title {"isLink":true,"tagName":"h3","fontSize":"normal"} /-->' );
 		wp_reset_postdata();
 	}
 
