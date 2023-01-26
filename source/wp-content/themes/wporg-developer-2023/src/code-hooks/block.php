@@ -4,6 +4,7 @@ namespace WordPressdotorg\Theme\Developer_2023\Dynamic_Code_Hooks;
 use function DevHub\get_hooks;
 use function DevHub\post_type_has_hooks_info;
 use function DevHub\get_signature;
+use function DevHub\get_summary;
 
 add_action( 'init', __NAMESPACE__ . '\init' );
 
@@ -42,7 +43,9 @@ function render() {
 	$content = array();
 	while ( $hooks->have_posts() ) {
 		$hooks->the_post();
-		$content[] = do_blocks( '<!-- wp:wporg/code-reference-title {"isLink":true,"tagName":"div","fontSize":"normal", "style":{"spacing":{"margin":{"top":"var:preset|spacing|20","bottom":"var:preset|spacing|20"}}}} /-->' );
+
+		$content[] = do_blocks( '<!-- wp:wporg/code-reference-title {"isLink":true,"tagName":"dt","fontSize":"normal"} /-->' );
+		$content[] = '<dd>' . get_summary() . '</dd>';
 	}
 	wp_reset_postdata();
 
@@ -53,7 +56,7 @@ function render() {
 
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(
-		'<section %s>%s %s</section>',
+		'<section %s>%s <dl>%s</dl></section>',
 		$wrapper_attributes,
 		do_blocks( $title_block ),
 		join( '', $content )
