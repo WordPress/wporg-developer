@@ -50,7 +50,7 @@ function render( $attributes ) {
 
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(
-		'<section %s>%s</section>',
+		'<section %1$s>%2$s</section>',
 		$wrapper_attributes,
 		do_blocks( $table )
 	);
