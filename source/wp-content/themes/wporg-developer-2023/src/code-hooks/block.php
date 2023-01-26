@@ -43,8 +43,8 @@ function render() {
 	while ( $hooks->have_posts() ) {
 		$hooks->the_post();
 		$content[] = do_blocks( '<!-- wp:wporg/code-reference-title {"isLink":true,"tagName":"div","fontSize":"normal", "style":{"spacing":{"margin":{"top":"var:preset|spacing|20","bottom":"var:preset|spacing|20"}}}} /-->' );
-		wp_reset_postdata();
 	}
+	wp_reset_postdata();
 
 	$title_block = sprintf(
 		'<h2 class="wp-block-heading">%s</h2>',
