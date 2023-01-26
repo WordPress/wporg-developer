@@ -38,7 +38,7 @@ function render() {
 		__( 'More Information', 'wporg' )
 	);
 
-	$wrapper_attributes = get_block_wrapper_attributes();
+	$wrapper_attributes = get_block_wrapper_attributes( array( 'class' => 'wporg-has-embedded-code' ) );
 	return sprintf(
 		'<section %s>%s %s</section>',
 		$wrapper_attributes,

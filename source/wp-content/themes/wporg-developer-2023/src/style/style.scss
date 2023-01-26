@@ -91,3 +91,10 @@
 		text-decoration: underline;
 	}
 }
+
+.wporg-has-embedded-code code {
+	padding: 4px 6px;
+	background-color: var(--wp--preset--color--light-grey-2);
+	font-size: var(--wp--preset--font-size--small);
+	border-radius: 2px;
+}
