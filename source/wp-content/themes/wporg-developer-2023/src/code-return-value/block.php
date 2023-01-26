@@ -27,8 +27,6 @@ function init() {
  * @return string Returns the block markup.
  */
 function render() {
-	$wrapper_attributes = get_block_wrapper_attributes();
-
 	$content = get_return();
 
 	if ( empty( $content ) ) {
@@ -40,7 +38,7 @@ function render() {
 		__( 'Return', 'wporg' )
 	);
 
-	$wrapper_attributes = get_block_wrapper_attributes();
+	$wrapper_attributes = get_block_wrapper_attributes( array( 'class' => 'wporg-has-embedded-code' ) );
 	return sprintf(
 		'<section %s>%s %s</section>',
 		$wrapper_attributes,
