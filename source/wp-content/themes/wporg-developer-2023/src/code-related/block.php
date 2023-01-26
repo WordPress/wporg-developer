@@ -82,7 +82,7 @@ function get_row_data( $posts ) {
 
 		$rows[] = array(
 			sprintf(
-				'<a href="%s">%s%s</a><code>%s</code></a>',
+				'<a href="%1$s">%2$s%3$s</a><code>%4$s</code></a>',
 				get_permalink(),
 				get_the_title(),
 				$is_function ? '()' : '',
