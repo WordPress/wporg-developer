@@ -29,7 +29,7 @@ function init() {
 function render() {
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(
-		'<section $1$s>%2$s</section>',
+		'<section %1$s>%2$s</section>',
 		$wrapper_attributes,
 		get_summary()
 	);

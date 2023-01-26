@@ -796,7 +796,7 @@ class DevHub_Formatting {
 
 		return do_blocks(
 			sprintf(
-				'<!-- wp:code {"lineNumbers":$3$s} --><pre class="wp-block-code"><code lang="%1$s" class="language-%1$s %4$s">%2$s</code></pre><!-- /wp:code -->',
+				'<!-- wp:code {"lineNumbers":%3$s} --><pre class="wp-block-code"><code lang="%1$s" class="language-%1$s %4$s">%2$s</code></pre><!-- /wp:code -->',
 				$lang,
 				$content,
 				$show_line_numbers ? 'true' : 'false',
