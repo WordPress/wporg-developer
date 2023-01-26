@@ -11,10 +11,6 @@
 			padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--10) var(--wp--preset--spacing--10) 0;
 			font-size: var(--wp--preset--font-size--normal);
 			width: 50%;
-
-			&:first-child {
-				max-width: 340px; // 340 is half of the theme's content width.
-			}
 		}
 
 		th {
