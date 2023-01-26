@@ -169,7 +169,7 @@ class WPORG_Edit_Parsed_Content {
 		if ( in_array( get_current_screen()->id, $this->post_types ) ) {
 			wp_enqueue_script(
 				'wporg-parsed-content',
-				get_template_directory_uri() . '/js/parsed-content.js',
+				get_stylesheet_directory_uri() . '/js/parsed-content.js',
 				array( 'jquery', 'utils' ),
 				filemtime( dirname( __DIR__ ) . '/js/parsed-content.js' ),
 				true

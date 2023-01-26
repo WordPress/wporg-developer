@@ -66,7 +66,7 @@ class DevHub_User_Contributed_Notes_Voting {
 		if ( self::user_can_vote() && is_singular() && '0' != get_comments_number() ) {
 			wp_register_script(
 				'wporg-developer-user-notes-voting',
-				get_template_directory_uri() . '/js/user-notes-voting.js',
+				get_stylesheet_directory_uri() . '/js/user-notes-voting.js',
 				array( 'wp-a11y' ),
 				filemtime( dirname( __DIR__ ) . '/js/user-notes-voting.js' ),
 				true

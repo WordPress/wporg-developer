@@ -68,7 +68,7 @@ class DevHub_Admin {
 		if ( (bool) apply_filters( 'devhub-admin_enqueue_scripts', in_array( get_current_screen()->id, $screen_ids ) ) ) {
 			wp_enqueue_style(
 				'wporg-admin',
-				get_template_directory_uri() . '/stylesheets/admin.css',
+				get_stylesheet_directory_uri() . '/stylesheets/admin.css',
 				[],
 				filemtime( dirname( __DIR__ ) . '/stylesheets/admin.css' ),
 			);

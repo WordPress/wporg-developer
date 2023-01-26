@@ -524,7 +524,7 @@ class WPORG_Explanations {
 		) ) {
 			wp_enqueue_script(
 				'wporg-explanations',
-				get_template_directory_uri() . '/js/explanations.js',
+				get_stylesheet_directory_uri() . '/js/explanations.js',
 				array( 'jquery', 'wp-util' ),
 				filemtime( dirname( __DIR__ ) . '/js/explanations.js' ),
 				true
