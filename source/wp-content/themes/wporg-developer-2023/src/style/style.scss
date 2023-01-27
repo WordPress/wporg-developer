@@ -140,7 +140,7 @@ body[class] {
 }
 
 // Style code tags but not ones inside of the code block.
-.wporg-has-embedded-code *:not(.wp-block-code) > code {
+.wporg-has-embedded-code *:not(.wp-block-code):not(.wp-code-block-button-container) > code {
 	padding: 4px 6px;
 	background-color: var(--wp--preset--color--light-grey-2);
 	font-size: var(--wp--preset--font-size--small);
