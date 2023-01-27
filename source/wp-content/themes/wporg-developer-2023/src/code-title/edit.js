@@ -6,8 +6,9 @@ import ServerSideRender from '@wordpress/server-side-render';
 import { PanelBody, SelectControl, ToggleControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
-export default function Edit( { attributes, setAttributes, name } ) {
+export default function Edit( { attributes, setAttributes, name, context } ) {
 	const { isLink, tagName } = attributes;
+	const { postId } = context;
 	const blockProps = useBlockProps();
 	return (
 		<div { ...blockProps }>
@@ -37,7 +38,12 @@ export default function Edit( { attributes, setAttributes, name } ) {
 					onChange={ ( val ) => setAttributes( { tagName: val } ) }
 				/>
 			</InspectorControls>
-			<ServerSideRender block={ name } skipBlockSupportAttributes attributes={ attributes } />
+			<ServerSideRender
+				block={ name }
+				attributes={ attributes }
+				skipBlockSupportAttributes
+				urlQueryArgs={ { post_id: postId } }
+			/>
 		</div>
 	);
 }
