@@ -27,16 +27,13 @@ body[class] {
 // Slot the search & table of contents into a floating sidebar on large screens.
 @media (min-width: 1200px) {
 	.sidebar-container {
-		// Size of remaining space in the wide center column.
-		--local--size-diff: calc(var(--wp--style--global--wide-size) - var(--wp--style--global--content-size));
-		// This is a little bit of a magic number, the max space between content & sidebar.
-		--local--content-gap: 145px;
+		--local--sidebar-width: 340px;
 
 		position: absolute;
 		top: calc(var(--wp-global-header-offset, 0px) + var(--wp-local-header-offset, 0px));
 		// Right offset should be "edge spacing" at minimum, otherwise calculate it to be centered.
 		right: max(var(--wp--preset--spacing--edge-space), calc((100% - var(--wp--style--global--wide-size)) / 2));
-		width: calc(var(--local--size-diff) - var(--local--content-gap));
+		width: var(--local--sidebar-width);
 		margin-top: var(--wp--preset--spacing--edge-space) !important;
 
 		&.is-fixed-sidebar {
@@ -51,6 +48,19 @@ body[class] {
 		&.is-bottom-sidebar .is-link-to-top {
 			display: block;
 		}
+	}
+}
+
+@media (min-width: 1440px) {
+	.has-three-columns .sidebar-container {
+		--local--sidebar-width: 300px;
+		--wp--style--global--wide-size: 1280px;
+	}
+
+	.has-three-columns {
+		display: grid;
+		grid-template-columns: 260px 1fr;
+		gap: 20px;
 	}
 }
 
