@@ -13,17 +13,17 @@
 	<!-- wp:group {"className":"has-three-columns","layout":{"type":"constrained","justifyContent":"left"},"align":"wide","style":{"spacing":{"margin":{"top":"var:preset|spacing|edge-space"}}}} -->
 	<div class="wp-block-group alignwide has-three-columns" style="margin-top:var(--wp--preset--spacing--edge-space)">
 
-		<!-- wp:wporg/chapter-list /-->
+		<!-- wp:wporg/chapter-list {"style":{"spacing":{"margin":{"bottom":"var:preset|spacing|edge-space"}}}} /-->
 
-		<!-- wp:group {"tagName":"article"} -->
-		<article class="wp-block-group">
+		<!-- wp:group {"tagName":"article","style":{"spacing":{"margin":{"top":"0px"}}}} -->
+		<article class="wp-block-group" style="margin-top:0px">
 			<!-- wp:post-title {"level":1,"style":{"spacing":{"margin":{"bottom":"var:preset|spacing|40"}}}} /-->
 
 			<!-- wp:group {"tagName":"aside","className":"sidebar-container"} -->
 			<aside class="wp-block-group sidebar-container">
 				<!-- wp:search {"label":"<?php esc_attr_e( 'Search', 'wporg' ); ?>","showLabel":false,"widthUnit":"px","buttonText":"<?php esc_attr_e( 'Search', 'wporg' ); ?>","buttonPosition":"button-inside","buttonUseIcon":true,"className":"is-style-secondary-search-control","borderColor":"light-grey-1","placeholder":"<?php esc_attr_e( 'Search in the documentation', 'wporg' ); ?>"} /-->
 
-				<!-- wp:wporg/table-of-contents {"style":{"elements":{"link":{"color":{"text":"var:preset|color|blueberry-1"}}},"spacing":{"padding":{"top":"var:preset|spacing|20","right":"var:preset|spacing|20","bottom":"var:preset|spacing|20","left":"var:preset|spacing|20"}}},"backgroundColor":"blueberry-4","textColor":"blueberry-1"} /-->
+				<!-- wp:wporg/table-of-contents {"style":{"spacing":{"padding":{"top":"var:preset|spacing|20","right":"var:preset|spacing|20","bottom":"var:preset|spacing|20","left":"var:preset|spacing|20"}}}} /-->
 
 				<!-- wp:paragraph {"fontSize":"small","className":"is-link-to-top"} -->
 				<p class="has-small-font-size is-link-to-top"><a href="#wp--skip-link--target"><?php esc_html_e( '↑ Back to top', 'wporg' ); ?></a></p>
