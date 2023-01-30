@@ -24,10 +24,18 @@ function init() {
 /**
  * Render the block content.
  *
+ * @param array    $attributes Block attributes.
+ * @param string   $content    Block default content.
+ * @param WP_Block $block      Block instance.
+ *
  * @return string Returns the block markup.
  */
-function render() {
-	$explanation = get_explanation_content( get_the_ID() );
+function render( $attributes, $content, $block ) {
+	if ( ! isset( $block->context['postId'] ) ) {
+		return '';
+	}
+
+	$explanation = get_explanation_content( $block->context['postId'] );
 
 	if ( empty( $explanation ) ) {
 		return '';

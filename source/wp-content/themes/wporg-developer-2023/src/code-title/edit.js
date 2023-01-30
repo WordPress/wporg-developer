@@ -1,16 +1,21 @@
 /**
  * WordPress dependencies
  */
-import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
-import ServerSideRender from '@wordpress/server-side-render';
+import { InspectorControls } from '@wordpress/block-editor';
 import { PanelBody, SelectControl, ToggleControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
-export default function Edit( { attributes, setAttributes, name } ) {
+/**
+ * Internal dependencies
+ */
+import DynamicEdit from '../shared/dynamic-edit';
+import './edit.scss';
+
+export default function Edit( { ...props } ) {
+	const { attributes, setAttributes } = props;
 	const { isLink, tagName } = attributes;
-	const blockProps = useBlockProps();
 	return (
-		<div { ...blockProps }>
+		<>
 			<InspectorControls>
 				<PanelBody title={ __( 'Settings', 'wporg' ) }>
 					<ToggleControl
@@ -37,7 +42,7 @@ export default function Edit( { attributes, setAttributes, name } ) {
 					onChange={ ( val ) => setAttributes( { tagName: val } ) }
 				/>
 			</InspectorControls>
-			<ServerSideRender block={ name } skipBlockSupportAttributes attributes={ attributes } />
-		</div>
+			<DynamicEdit { ...props } />
+		</>
 	);
 }

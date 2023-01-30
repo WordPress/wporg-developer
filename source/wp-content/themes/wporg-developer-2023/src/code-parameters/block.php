@@ -25,11 +25,18 @@ function init() {
 /**
  * Render the block content.
  *
+ * @param array    $attributes Block attributes.
+ * @param string   $content    Block default content.
+ * @param WP_Block $block      Block instance.
+ *
  * @return string Returns the block markup.
  */
-function render() {
-	$wrapper_attributes = get_block_wrapper_attributes();
-	$params = get_params();
+function render( $attributes, $content, $block ) {
+	if ( ! isset( $block->context['postId'] ) ) {
+		return '';
+	}
+
+	$params = get_params( $block->context['postId'] );
 
 	if ( empty( $params ) ) {
 		return '';
@@ -45,7 +52,7 @@ function render() {
 		'<section %s>%s %s</section>',
 		$wrapper_attributes,
 		$title_block,
-		wporg_developer_code_reference_build_params( $params )
+		get_param_content( $params )
 	);
 }
 
@@ -55,7 +62,7 @@ function render() {
  * @param [type] $params
  * @return string
  */
-function wporg_developer_code_reference_build_params( $params ) {
+function get_param_content( $params ) {
 	$output = '<dl>';
 
 	foreach ( $params as $param ) {
@@ -83,6 +90,7 @@ function wporg_developer_code_reference_build_params( $params ) {
 			if ( $extra ) {
 				$output .= '<span class="description">' . wp_kses_post( $param['content'] ) . '</span>';
 				$output .= '<details class="extended-description">';
+				/* translators: 1: function name, 2: variable name */
 				$output .= '<summary>' . esc_html( sprintf( __( 'More Arguments from %1$s( ... %2$s )', 'wporg' ), $extra['parent'], $extra['parent_var'] ) ) . '</summary>';
 				$output .= '<span class="description">' . wp_kses_post( $extra['content'] ) . '</span>';
 				$output .= '</details>';

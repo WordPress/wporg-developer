@@ -24,10 +24,18 @@ function init() {
 /**
  * Render the block content.
  *
+ * @param array    $attributes Block attributes.
+ * @param string   $content    Block default content.
+ * @param WP_Block $block      Block instance.
+ *
  * @return string Returns the block markup.
  */
-function render() {
-	$deprecated_html = get_deprecated();
+function render( $attributes, $content, $block ) {
+	if ( ! isset( $block->context['postId'] ) ) {
+		return '';
+	}
+
+	$deprecated_html = get_deprecated( $block->context['postId'] );
 
 	if ( empty( $deprecated_html ) ) {
 		return '';

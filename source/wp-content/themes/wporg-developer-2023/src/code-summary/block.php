@@ -24,13 +24,21 @@ function init() {
 /**
  * Render the block content.
  *
+ * @param array    $attributes Block attributes.
+ * @param string   $content    Block default content.
+ * @param WP_Block $block      Block instance.
+ *
  * @return string Returns the block markup.
  */
-function render() {
+function render( $attributes, $content, $block ) {
+	if ( ! isset( $block->context['postId'] ) ) {
+		return '';
+	}
+
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(
 		'<section %1$s>%2$s</section>',
 		$wrapper_attributes,
-		get_summary()
+		get_summary( $block->context['postId'] )
 	);
 }

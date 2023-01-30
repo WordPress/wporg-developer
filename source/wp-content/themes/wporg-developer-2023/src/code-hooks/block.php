@@ -27,14 +27,24 @@ function init() {
 /**
  * Render the block content.
  *
+ * @param array    $attributes Block attributes.
+ * @param string   $content    Block default content.
+ * @param WP_Block $block      Block instance.
+ *
  * @return string Returns the block markup.
  */
-function render() {
-	if ( ! post_type_has_hooks_info() ) {
+function render( $attributes, $content, $block ) {
+	if ( ! isset( $block->context['postId'] ) ) {
 		return '';
 	}
 
-	$hooks = get_hooks();
+	$post_id = $block->context['postId'];
+
+	if ( ! post_type_has_hooks_info( get_post_type( $post_id ) ) ) {
+		return '';
+	}
+
+	$hooks = get_hooks( $post_id );
 
 	if ( ! $hooks->have_posts() ) {
 		return '';
