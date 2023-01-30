@@ -1,18 +1,101 @@
 .wp-block-wporg-chapter-list {
-	> ul {
-		padding-left: 0;
+	--local--line-height: var(--wp--custom--body--small--typography--line-height);
+	line-height: var(--local--line-height);
+
+	h2 {
+		margin-top: 16px;
+		margin-bottom: var(--wp--preset--spacing--20);
+	}
+
+	ul {
+		margin-top: 0;
+		margin-bottom: 0;
 		list-style-type: none;
 	}
 
-	li li {
-		display: none;
+	ul ul {
+		margin-left: 0.4em;
+		padding-left: calc(var(--wp--preset--spacing--20) / 2);
+		border-left: 1px solid var(--wp--preset--color--light-grey-1);
 	}
 
-	li:nth-child(2) li {
-		display: revert;
+	li {
+		margin-block: calc(var(--wp--preset--spacing--20) / 4);
+	}
 
-		li {
-			display: none;
+	> ul {
+		padding-left: 0;
+
+		> li {
+			margin-block: calc(var(--wp--preset--spacing--20) / 2);
 		}
+	}
+
+	&.has-js-control ul ul {
+		display: none;
+
+		&.is-open {
+			display: revert;
+		}
+	}
+
+	// Style the dash & chevron, most of the styles can be shared.
+	&.has-js-control li:not(.page_item_has_children),
+	.wporg-chapter-list--button-group {
+		display: flex;
+		align-items: flex-start;
+	}
+
+	&.has-js-control li:not(.page_item_has_children)::before,
+	.wporg-chapter-list--button-group > button {
+		// Optically center the icon with the first line of text.
+		margin-block-start: calc(var(--local--line-height) * 0.5em - 0.5em);
+		// Add space between button & link.
+		margin-inline-end: 0.25em;
+		font-size: inherit;
+		height: 1em;
+		width: 1em;
+	}
+
+	&.has-js-control li:not(.page_item_has_children)::before,
+	.wporg-chapter-list--button-group > button::before {
+		content: "";
+		display: inline-block;
+		mask-image: url(../../images/line.svg);
+		mask-repeat: no-repeat;
+		mask-size: 0.8em 0.2em;
+		mask-position: center;
+		background-color: var(--wp--preset--color--blueberry-1);
+	}
+
+	.wporg-chapter-list--button-group > button {
+		background-color: transparent;
+		border: none;
+		padding: 0;
+
+		&::before {
+			height: 1em;
+			width: 1em;
+			mask-image: url(../../images/chevron.svg);
+			mask-size: 0.8em 0.4em;
+			transform: rotate(180deg);
+		}
+
+		&[aria-expanded="true"]::before {
+			transform: revert;
+		}
+
+		&:focus-visible {
+			outline: 1px dashed var(--wp--preset--color--blueberry-1);
+			outline-offset: 2px;
+		}
+	}
+
+	// Descendent is `span` if there are children, or `a` if not.
+	.current_page_ancestor > span,
+	.current_page_ancestor > a,
+	.current_page_item > span,
+	.current_page_item > a {
+		font-weight: 600;
 	}
 }

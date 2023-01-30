@@ -1,6 +1,8 @@
 <?php
 namespace WordPressdotorg\Theme\Developer_2023\Chapter_List;
 
+require_once __DIR__ . '/class-chapter-walker.php';
+
 add_action( 'init', __NAMESPACE__ . '\init' );
 
 /**
@@ -41,6 +43,10 @@ function render( $attributes, $content, $block ) {
 		'echo'        => 0,
 		'sort_column' => 'menu_order',
 		'post_type'   => $post_type,
+
+		// Use custom walker that excludes display of orphaned pages. (An ancestor
+		// of such a page is likely not published and thus this is not accessible.)
+		'walker'      => new Chapter_Walker(),
 	);
 
 	$post_type_obj = get_post_type_object( $post_type );
@@ -49,29 +55,15 @@ function render( $attributes, $content, $block ) {
 		$args['post_status'] = array( 'publish', 'private' );
 	}
 
-	// Exclude root handbook page from the table of contents.
-	$page = get_page_by_path( $post_type, OBJECT, $post_type );
-	if ( ! $page ) {
-		$slug = str_replace( '-handbook', '', $post_type );
-		$page = get_page_by_path( $slug, OBJECT, $post_type );
-	}
-	if ( $page && ! $instance['show_home'] ) {
-		$args['exclude'] = rtrim( $page->ID . ',' . $args['exclude'], ',' );
-	}
-
-	// Use custom walker that excludes display of orphaned pages. (An ancestor
-	// of such a page is likely not published and thus this is not accessible.)
-	$args['walker'] = new \WPorg_Handbook_Walker;
-
 	$content = wp_list_pages( $args );
 
 	$title = do_blocks(
-		'<!-- wp:heading {"fontSize":"normal","fontFamily":"inter"} -->
-		<h2 class="wp-block-heading has-inter-font-family has-normal-font-size">' . __( 'Chapters', 'wporg' ) . '</h2>
+		'<!-- wp:heading {"fontFamily":"inter"} -->
+		<h2 class="wp-block-heading has-inter-font-family">' . __( 'Chapters', 'wporg' ) . '</h2>
 		<!-- /wp:heading -->'
 	);
 
-	$wrapper_attributes = get_block_wrapper_attributes([ 'class' => 'menu-table-of-contents-container' ]);
+	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(
 		'<nav %1$s>%2$s<ul>%3$s</ul></nav>',
 		$wrapper_attributes,
