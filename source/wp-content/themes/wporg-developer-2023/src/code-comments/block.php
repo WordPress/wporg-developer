@@ -33,27 +33,19 @@ function render( $attributes, $content, $block ) {
 		return;
 	}
 
-	// Not sure why, figure out later
-	if ( ! comments_open() || (int) get_comments_number() < 1 ) {
+	if ( ! comments_open() ) {
 		return '';
 	}
 
 	ob_start(); // Capture all output
 
-	/*
-	 Loop through and list the comments. Use wporg_developer_list_notes() to format the comments.
-	* If you want to override this in a child theme, then you can
-	* define wporg_developer_list_notes() and that will be used instead.
-	* See wporg_developer_list_notes() in inc/template-tags.php for more.
-	*/
-	if ( is_singular( 'post' ) ) {
-		wp_list_comments();
-	} else {
-		$ordered_comments = wporg_developer_get_ordered_notes();
-		if ( $ordered_comments ) {
-			wporg_developer_list_notes( $ordered_comments, array() );
-		}
+	$ordered_comments = wporg_developer_get_ordered_notes();
+
+	if ( empty( $ordered_comments ) ) {
+		return '';
 	}
+
+	wporg_developer_list_notes( $ordered_comments, array() );
 
 	$output = ob_get_clean();
 
