@@ -41,7 +41,7 @@ function render( $attributes, $content, $block ) {
 	$args = array(
 		'title_li'    => '',
 		'echo'        => 0,
-		'sort_column' => 'menu_order',
+		'sort_column' => 'menu_order, title',
 		'post_type'   => $post_type,
 
 		// Use custom walker that excludes display of orphaned pages. (An ancestor
