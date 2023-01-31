@@ -1,5 +1,6 @@
 .wp-block-wporg-chapter-list {
 	--local--line-height: var(--wp--custom--body--small--typography--line-height);
+	--local--button-size: calc(var(--local--line-height) * 1em);
 	line-height: var(--local--line-height);
 
 	h2 {
@@ -13,8 +14,8 @@
 	}
 
 	ul ul {
-		margin-left: 0.46em;
-		padding-left: calc(var(--wp--preset--spacing--20) / 2);
+		margin-left: calc(var(--local--button-size) / 2);
+		padding-left: calc(var(--wp--preset--spacing--20) / 4);
 		border-left: 1px solid var(--wp--preset--color--light-grey-1);
 	}
 
@@ -48,17 +49,14 @@
 	&:not(.has-js-control) li::before,
 	&.has-js-control li:not(.page_item_has_children)::before,
 	.wporg-chapter-list--button-group > button {
-		// Optically center the icon with the first line of text.
-		margin-block-start: calc(var(--local--line-height) * 0.5em - 0.5em);
 		// Add space between button & link.
 		margin-inline-end: 0.25em;
 		font-size: inherit;
-		height: 1em;
-		width: 1em;
+		height: var(--local--button-size);
+		width: var(--local--button-size);
 	}
 
 	&:not(.has-js-control) li::before {
-		margin-block-start: 0;
 		height: 0.8em;
 	}
 
@@ -78,10 +76,11 @@
 		background-color: transparent;
 		border: none;
 		padding: 0;
+		cursor: pointer;
 
 		&::before {
-			height: 1em;
-			width: 1em;
+			height: var(--local--button-size);
+			width: var(--local--button-size);
 			mask-image: url(../../images/chevron.svg);
 			mask-size: 0.8em 0.4em;
 			transform: rotate(180deg);
@@ -93,7 +92,6 @@
 
 		&:focus-visible {
 			outline: 1px dashed var(--wp--preset--color--blueberry-1);
-			outline-offset: 2px;
 		}
 	}
 
