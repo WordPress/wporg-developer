@@ -1,3 +1,8 @@
+/**
+ * WordPress dependencies
+ */
+import { __, sprintf } from '@wordpress/i18n';
+
 const init = () => {
 	const container = document.querySelector( '.wp-block-wporg-chapter-list > ul' );
 	if ( container ) {
@@ -15,12 +20,26 @@ const init = () => {
 			// Create the toggle button.
 			const button = document.createElement( 'button' );
 			button.setAttribute( 'aria-expanded', false );
-			// button.setAttribute( 'aria-label', '' );
+			// translators: %s link title.
+			button.setAttribute( 'aria-label', sprintf( __( 'Open %s submenu', 'wporg' ), link.innerText ) );
 			button.onclick = () => {
 				submenu.classList.toggle( 'is-open' );
 				// This attribute returns a string.
 				const isOpen = button.getAttribute( 'aria-expanded' );
 				button.setAttribute( 'aria-expanded', isOpen === 'false' );
+				if ( isOpen === 'false' ) {
+					button.setAttribute(
+						'aria-label',
+						// translators: %s link title.
+						sprintf( __( 'Close %s submenu', 'wporg' ), link.innerText )
+					);
+				} else {
+					button.setAttribute(
+						'aria-label',
+						// translators: %s link title.
+						sprintf( __( 'Open %s submenu', 'wporg' ), link.innerText )
+					);
+				}
 			};
 
 			const buttonGroup = document.createElement( 'span' );
@@ -36,6 +55,11 @@ const init = () => {
 			) {
 				submenu.classList.toggle( 'is-open' );
 				button.setAttribute( 'aria-expanded', true );
+				button.setAttribute(
+					'aria-label',
+					// translators: %s link title.
+					sprintf( __( 'Close %s submenu', 'wporg' ), link.innerText )
+				);
 			}
 		} );
 	}
