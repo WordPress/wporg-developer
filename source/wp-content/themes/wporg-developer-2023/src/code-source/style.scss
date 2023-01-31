@@ -52,21 +52,3 @@ $border_radius: 2px;
 		padding-left: var(--wp--preset--spacing--10);
 	}
 }
-
-
-.wporg-developer-code-block-source-links a {
-	position: relative;
-	text-decoration: underline;
-	padding-right: var(--wp--preset--spacing--10);
-
-	&::after {
-		content: "\b7\a0";
-		position: absolute;
-		right: -4px;
-	}
-
-	&:last-child::after {
-		display: none;
-	}
-}
-

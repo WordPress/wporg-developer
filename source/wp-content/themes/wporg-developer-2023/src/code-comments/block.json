@@ -1,12 +1,12 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "wporg/code-reference-user-notes",
+	"name": "wporg/code-reference-comments",
 	"version": "0.1.0",
-	"title": "Code Reference: User Notes",
+	"title": "Code Reference: Comments",
 	"category": "widgets",
 	"icon": "smiley",
-	"description": "Show the code signature for a function, class, or method.",
+	"description": "Shows the comments.",
 	"usesContext": [ "postId" ],
 	"supports": {
 		"html": false,

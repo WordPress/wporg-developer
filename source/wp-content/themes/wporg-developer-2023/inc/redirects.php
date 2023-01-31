@@ -27,6 +27,7 @@ class DevHub_Redirects {
 		add_action( 'template_redirect', array( __CLASS__, 'redirect_singularized_handbooks' ), 1 );
 		add_action( 'template_redirect', array( __CLASS__, 'redirect_pluralized_reference_post_types' ), 1 );
 		add_action( 'template_redirect', array( __CLASS__, 'paginated_home_page_404' ) );
+		add_action( 'template_redirect', array( __CLASS__, 'user_note_edit' ) );
 	}
 
 	/**
@@ -125,6 +126,37 @@ class DevHub_Redirects {
 		if ( is_front_page() && is_paged() ) {
 			include( get_template_directory() . '/404.php' );
 			exit;
+		}
+	}
+
+	/**
+	 * Loads the appropriate template for editing user notes.
+	 */
+	public static function user_note_edit() {
+		$path = trailingslashit( $_SERVER['REQUEST_URI'] );
+
+		if ( strpos( $path, '/reference/comment/edit' ) !== false ) {
+			$comment_id = get_query_var( 'edit_user_note' );
+			$can_user_edit = \DevHub\can_user_edit_note( $comment_id );
+
+			if ( $can_user_edit ) {
+				$template_slug = 'comment-edit';
+
+				// This is returned by locate_block_template if no block template is found
+				$fallback = locate_template( dirname( __FILE__ ) . "/templates/$template_slug.html" );
+
+				// This internally sets the $template_slug to be the active template.
+				$template = locate_block_template( $fallback, $template_slug, array() );
+
+				if ( ! empty( $template ) ) {
+					load_template( $template );
+					exit;
+				}
+			} else {
+				// TODO: improve this error handling
+				wp_redirect( home_url() );
+				exit();
+			}
 		}
 	}
 

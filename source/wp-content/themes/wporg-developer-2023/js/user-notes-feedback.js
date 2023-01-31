@@ -4,10 +4,14 @@
 		return;
 	}
 
-	var wpAdminBar     = 0;
+	function appendCount( str, count ) {
+		return `${ str } (${ count })`;
+	}
+
+	var headerOffset     = 0;
 	var options        = wporg_note_feedback;
 	var comments       = $( '.comment' );
-	var feedbackToggle = $( '<a role="button" class="feedback-toggle" href="#">' + options.show + '</a>' );
+	var feedbackToggle = $( '<a role="button" class="feedback-toggle" href="#"></a>' );
 	var commentID      = window.location.hash;
 
 	// Check if the fragment identifier is a comment ID (e.g. #comment-63)
@@ -44,7 +48,9 @@
 
 			// Set text to 'Hide Feedback' if feedback is displayed
 			if ( !feedback.hasClass( 'hide-if-js' ) ) {
-				toggle.text( options.hide );
+				toggle.text( appendCount( options.hide, feedback.attr( 'data-comment-count' ) ) );
+			} else {
+				toggle.text( appendCount( options.show,  feedback.attr( 'data-comment-count' ) ) )
 			}
 
 			// Display hidden add feedback link and add aria
@@ -53,13 +59,13 @@
 				'aria-controls': 'feedback-editor-' + feedback_id
 			} );
 
-			feedbackLinks.append( toggle );
+			feedbackLinks.prepend( toggle );
 		}
 
 		if ( feedbackLinks.length ) {
 			// Move the feedback links before the feedback section.
 			var clonedElements = feedbackLinks.clone().children();
-			var feedbackLinksTop = $( '<div class="feedback-links"></div>' ).append( clonedElements );
+			var feedbackLinksTop = $( '<div class="feedback-links wporg-dot-link-list"></div>' ).append( clonedElements );
 			$( this ).find( '.feedback' ).first().before( feedbackLinksTop );
 
 			// Hide the bottom feedback links.
@@ -85,7 +91,16 @@
 	// Show hidden child comments if the fragment identifier is a comment ID (e.g. #comment-63).  
 	$( document ).ready( function() {
 		// Set wpAdminBar
-		wpAdminBar = $('#wpadminbar').length ? 32 : 0;
+		headerOffset = $( '#wpadminbar' ).length ? 32 + 10 : 0;
+
+		// Calculate the header height
+		$( '.global-header' )
+			.parent()
+			.children()
+			.each( function () {
+				headerOffset += $( this ).outerHeight();
+			} );
+
 		var childComments = comments.find( 'ul.children' );
 
 		if ( ! ( commentID.length && childComments.length ) ) {
@@ -107,7 +122,7 @@
 		// Scroll to child comment and adjust for admin bar
 		var pos = childComment.offset();
 		$( 'html,body' ).animate( {
-			scrollTop: pos.top - wpAdminBar
+			scrollTop: pos.top - headerOffset
 		}, 1 );
 
 	} );
@@ -124,31 +139,27 @@
 		resetComment( parent );
 		var feedback = parent.find( '.feedback' );
 		var toggleLinks = parent.find( '.feedback-toggle' );
+		var children = parent.find( 'ul.children > li' );
 
 		if ( feedback.hasClass( 'hide-if-js' ) ) {
 			// Feedback is hidden.
 
 			// Show feedback.
-			toggleLinks.text( options.hide );
+			toggleLinks.text( appendCount( options.hide, children.length ) );
 			feedback.removeClass( 'hide-if-js' );
 			toggleLinks.attr( 'aria-expanded', 'true' );
 
 			// Go to the clicked feedback toggle link.
-			var pos = $( this ).offset();
-			$( 'html,body' ).animate( {
-				scrollTop: pos.top - wpAdminBar
-			}, 1000 );
-
-			// Show feedback links at the bottom if there are over 3 feedback notes.
-			var children = parent.find( 'ul.children > li' );
-			if ( 3 < children.length ) {
-				var feedbackLinks = parent.find( '.feedback-links.bottom' );
-				feedbackLinks.removeClass( 'hide-if-js' );
-			}
-
+			let pos = $( this ).offset();
+			$( 'html,body' ).animate(
+				{
+					scrollTop: pos.top - headerOffset,
+				},
+				1000
+			);
 		} else {
 			// Hide feedback.
-			toggleLinks.text( options.show );
+			toggleLinks.text( appendCount( options.show, children.length ) );
 			feedback.addClass( 'hide-if-js' );
 			toggleLinks.attr( 'aria-expanded', 'false' );
 
@@ -156,7 +167,9 @@
 			var editor = feedback.find( '.feedback-editor' );
 			editor.addClass( 'hide-if-js' );
 
-			parent.find( '.feedback-add' ).attr( 'aria-expanded', 'false' );
+			$feedbackAdd = parent.find( '.feedback-add' );
+			$feedbackAdd.attr( 'aria-expanded', 'false' );
+			$feedbackAdd.text( options.add_feedback );
 		}
 	} );
 
@@ -165,49 +178,52 @@
 		e.preventDefault();
 
 		var parent = $( this ).closest( '.comment.depth-1' );
-		if ( !parent.length ) {
+		if ( ! parent.length ) {
 			return;
 		}
 
-		resetComment( parent );
-
 		var feedback = parent.find( '.feedback' );
-		var children = parent.find( 'ul.children' );
-		var feedbackLinks = parent.find( '.feedback-add' );
-
-		// Show feedback.
-		feedback.removeClass( 'hide-if-js' );
-		feedbackLinks.attr( 'aria-expanded', 'true' );
-
-		// Show the feedback editor.
 		var editor = feedback.find( '.feedback-editor' );
-		editor.removeClass( 'hide-if-js' );
 
-		// Change the toggle link text to 'Hide Feedback'.
-		var toggleLinks = parent.find( '.feedback-toggle' );
-		if ( toggleLinks.length ) {
-			toggleLinks.attr( 'aria-expanded', 'true' );
-			toggleLinks.text( options.hide );
-		}
+		var $button = $( e.target );
+		if ( $button.text() === options.hide_feedback ) {
+			$button.text( options.add_feedback );
 
-		// If there are no child comments add a 'Hide Feedback' link.
-		if ( !children.length ) {
-			var hide = feedbackToggle.clone();
-			hide.text( options.hide );
-			hide.attr( {
-				'aria-expanded': 'true',
-				'aria-controls': 'feedback-' + getCommentID( parent )
-			} );
-			parent.find( '.feedback-links' ).append( hide );
-		}
+			// Hide the editor
+			editor.addClass( 'hide-if-js' );
+		} else {
+			resetComment( parent );
 
-		// Go to the feedback editor and give it focus.
-		var pos = editor.offset();
-		$( 'html,body' ).animate( {
-			scrollTop: pos.top - wpAdminBar
-		}, 1000, function() {
+			var children = parent.find( 'ul.children' );
+			var feedbackLinks = parent.find( '.feedback-add' );
+
+			// Show feedback.
+			feedback.removeClass( 'hide-if-js' );
+			feedbackLinks.attr( 'aria-expanded', 'true' );
+
+			// Show the feedback editor.
+			editor.removeClass( 'hide-if-js' );
+
+			// Change the toggle link text to 'Hide Feedback'.
+			var toggleLinks = parent.find( '.feedback-toggle' );
+			if ( toggleLinks.length ) {
+				toggleLinks.attr( 'aria-expanded', 'true' );
+				toggleLinks.text( appendCount( options.hide, feedback.attr( 'data-comment-count' ) ) );
+			}
+
+			// Go to the feedback editor and give it focus.
+			var pos = editor.offset();
+			$( 'html,body' ).animate(
+				{
+					scrollTop: pos.top - headerOffset,
+				},
+				1000,
+				function () {
+					editor.find( 'textarea' ).focus();
+				}
+			);
 			editor.find( 'textarea' ).focus();
-		} );
+			$button.text( options.hide_feedback );
+		}
 	} );
-
 } )( jQuery );

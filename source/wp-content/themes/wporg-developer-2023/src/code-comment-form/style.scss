@@ -1,0 +1,18 @@
+.wp-block-wporg-code-reference-comment-form-content {
+	display: flex;
+	flex-direction: column;
+
+	@media screen and (min-width: 750px) {
+		flex-direction: row;
+		gap: var(--wp--preset--spacing--40);
+
+		> div {
+			width: 50%;
+		}
+
+		> div:last-child {
+			padding-top: var(--wp--preset--spacing--30);
+		}
+	}
+}
+
