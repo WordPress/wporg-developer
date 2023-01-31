@@ -13,7 +13,7 @@
 	<!-- wp:group {"className":"has-three-columns","layout":{"type":"constrained","justifyContent":"left"},"align":"wide","style":{"spacing":{"margin":{"top":"var:preset|spacing|edge-space"}}}} -->
 	<div class="wp-block-group alignwide has-three-columns" style="margin-top:var(--wp--preset--spacing--edge-space)">
 
-		<!-- wp:wporg/chapter-list {"style":{"spacing":{"margin":{"bottom":"var:preset|spacing|edge-space"}}}} /-->
+		<!-- wp:wporg/chapter-list {"style":{"spacing":{"margin":{"bottom":"80px"}}}} /-->
 
 		<!-- wp:group {"tagName":"article","style":{"spacing":{"margin":{"top":"0px"}}}} -->
 		<article class="wp-block-group" style="margin-top:0px">

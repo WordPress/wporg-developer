@@ -27,13 +27,13 @@ body[class] {
 // Slot the search & table of contents into a floating sidebar on large screens.
 @media (min-width: 1200px) {
 	.sidebar-container {
-		--local--sidebar-width: 340px;
+		--local--block-end-sidebar--width: 340px;
 
 		position: absolute;
 		top: calc(var(--wp-global-header-offset, 0px) + var(--wp-local-header-offset, 0px));
 		// Right offset should be "edge spacing" at minimum, otherwise calculate it to be centered.
 		right: max(var(--wp--preset--spacing--edge-space), calc((100% - var(--wp--style--global--wide-size)) / 2));
-		width: var(--local--sidebar-width);
+		width: var(--local--block-end-sidebar--width);
 		margin-top: var(--wp--preset--spacing--edge-space) !important;
 
 		&.is-fixed-sidebar {
@@ -53,14 +53,15 @@ body[class] {
 
 @media (min-width: 1440px) {
 	.has-three-columns .sidebar-container {
-		--local--sidebar-width: 300px;
+		--local--block-end-sidebar--width: 300px;
 		--wp--style--global--wide-size: 1280px;
 	}
 
 	.has-three-columns {
+		--local--block-start-sidebar--width: 260px;
 		display: grid;
-		grid-template-columns: 260px 1fr;
-		gap: 20px;
+		grid-template-columns: var(--local--block-start-sidebar--width) 1fr;
+		gap: var(--wp--preset--spacing--20);
 	}
 }
 
@@ -95,6 +96,10 @@ body[class] {
 .wp-block-search.is-style-secondary-search-control {
 	// Update border color in secondary search style, this site uses a light grey.
 	--local--border-color: var(--wp--preset--color--light-grey-1);
+}
+
+.wp-block-search.is-style-secondary-search-control,
+.wp-block-wporg-chapter-list h2 {
 	// Add offset spacing above the search box to optically align with title.
 	// See https://github.com/WordPress/wporg-documentation-2022/issues/36.
 	margin-top: 16px;

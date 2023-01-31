@@ -3,7 +3,6 @@
 	line-height: var(--local--line-height);
 
 	h2 {
-		margin-top: 16px;
 		margin-bottom: var(--wp--preset--spacing--20);
 	}
 
@@ -14,7 +13,7 @@
 	}
 
 	ul ul {
-		margin-left: 0.4em;
+		margin-left: 0.46em;
 		padding-left: calc(var(--wp--preset--spacing--20) / 2);
 		border-left: 1px solid var(--wp--preset--color--light-grey-1);
 	}
@@ -46,6 +45,7 @@
 		align-items: flex-start;
 	}
 
+	&:not(.has-js-control) li::before,
 	&.has-js-control li:not(.page_item_has_children)::before,
 	.wporg-chapter-list--button-group > button {
 		// Optically center the icon with the first line of text.
@@ -57,6 +57,12 @@
 		width: 1em;
 	}
 
+	&:not(.has-js-control) li::before {
+		margin-block-start: 0;
+		height: 0.8em;
+	}
+
+	&:not(.has-js-control) li::before,
 	&.has-js-control li:not(.page_item_has_children)::before,
 	.wporg-chapter-list--button-group > button::before {
 		content: "";

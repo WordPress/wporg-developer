@@ -50,15 +50,15 @@
 					},
 					"link": {
 						"color": {
-							"text": "var:preset|color|blueberry-1"
+							"text": "var(--wp--preset--color--blueberry-1)"
 						}
 					}
 				}
 			},
 			"wporg/table-of-contents": {
 				"color": {
-					"background": "var:preset|color|blueberry-4",
-					"text": "var:preset|color|blueberry-1"
+					"background": "var(--wp--preset--color--blueberry-4)",
+					"text": "var(--wp--preset--color--blueberry-1)"
 				},
 				"typography": {
 					"fontSize": "var(--wp--preset--font-size--small)"
