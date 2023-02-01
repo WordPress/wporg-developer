@@ -26,12 +26,12 @@ jobs:
 
             - name: Trim the repo down to just the theme
               run: |
-                  rm -rf source/wp-content/themes/wporg-developer/node_modules
-                  rm -rf source/wp-content/themes/wporg-developer/scss
-                  mv source/wp-content/themes/wporg-developer $RUNNER_TEMP
+                  rm -rf source/wp-content/themes/wporg-developer-2023/node_modules
+                  rm -rf source/wp-content/themes/wporg-developer-2023/scss
+                  mv source/wp-content/themes/wporg-developer-2023 $RUNNER_TEMP
                   git rm -rfq .
                   rm -rf *
-                  mv $RUNNER_TEMP/wporg-developer/* .
+                  mv $RUNNER_TEMP/wporg-developer-2023/* .
             - name: Add all the theme files
               run: |
                   git add * --force
