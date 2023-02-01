@@ -146,3 +146,8 @@ body[class] {
 	font-size: var(--wp--preset--font-size--small);
 	border-radius: 2px;
 }
+
+.single .entry-content section > h2 {
+	margin-top: var(--wp--preset--spacing--40);
+	font-size: var(--wp--preset--font-size--huge);
+}
