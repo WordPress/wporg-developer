@@ -69,7 +69,7 @@
 		mask-repeat: no-repeat;
 		mask-size: 0.8em 0.2em;
 		mask-position: center;
-		background-color: var(--wp--preset--color--blueberry-1);
+		background-color: var(--wp--preset--color--light-grey-1);
 	}
 
 	.wporg-chapter-list--button-group > button {
@@ -84,6 +84,7 @@
 			mask-image: url(../../images/chevron.svg);
 			mask-size: 0.8em 0.4em;
 			transform: rotate(180deg);
+			background-color: var(--wp--preset--color--blueberry-1);
 		}
 
 		&[aria-expanded="true"]::before {
