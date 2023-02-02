@@ -69,6 +69,8 @@ function render( $attributes, $content, $block ) {
  */
 function get_row_data( $changelog_data ) {
 	$rows = array();
+	$count = count( $changelog_data );
+	$i = 0;
 
 	foreach ( $changelog_data as $version => $data ) {
 		// Add "Introduced." for the initial version description, last since the array is reversed.
