@@ -184,6 +184,7 @@ namespace {
 			foreach ( $comments as $comment ) {
 
 				$comment_id = $comment->comment_ID;
+				$comment_count = count( $comment->child_notes );
 
 				// Display parent comment.
 				wporg_developer_user_note( $comment, $args, 1 );
@@ -191,12 +192,10 @@ namespace {
 				/* Use hide-if-js class to hide the feedback section if Javascript is enabled.
 				 * Users can display the section with Javascript.
 				 */
-				echo "<section id='feedback-{$comment_id}' class='feedback hide-if-js'>\n";
+				echo "<section id='feedback-{$comment_id}' class='wporg-has-embedded-code feedback hide-if-js' data-comment-count='{$comment_count}'>\n";
 
 				// Display child comments.
 				if ( ! empty( $comment->child_notes ) ) {
-
-					echo "<h4 class='feedback-title'>" . __( 'Feedback', 'wporg' ) . "</h4>\n";
 					echo "<ul class='children'>\n";
 					foreach ( $comment->child_notes as $child_note ) {
 						wporg_developer_user_note( $child_note, $args, 2, $comment->show_editor );
@@ -215,7 +214,7 @@ namespace {
 				echo "</section><!-- .feedback -->\n";
 
 				// Feedback links to log in, add feedback or show feedback.
-				echo "<footer class='feedback-links' >\n";
+				echo "<footer class='feedback-links wporg-dot-link-list' >\n";
 				if ( $can_user_post_note ) {
 					$feedback_link = trailingslashit( get_permalink() ) . "?replytocom={$comment_id}#feedback-editor-{$comment_id}";
 					$display       = '';
@@ -225,7 +224,7 @@ namespace {
 						$feedback_link = 'https://login.wordpress.org/?redirect_to=' . urlencode( $feedback_link );
 					} else {
 						$class         ='add';
-						$feedback_text = __( 'Add feedback to this note', 'wporg' );
+						$feedback_text = __( 'Add feedback', 'wporg' );
 
 						/* Hide the feedback link if the current user is logged in and the
 						 * feedback editor is displayed (because Javascript is disabled).
@@ -294,24 +293,10 @@ namespace {
 			<?php if ( $is_parent ) : ?>
 				<a href="#comment-content-<?php echo $comment->comment_ID; ?>" class="screen-reader-text"><?php printf( __( 'Skip to note %d content', 'wporg' ), ++ $note_number ); ?></a>
 				<header class="comment-meta">
-
-				<?php
-				if ( $is_voting ) {
-					DevHub_User_Contributed_Notes_Voting::show_voting();
-				}
-				?>
 					<div class="comment-author vcard">
 						<span class="comment-author-attribution">
-						<?php
-						if ( 0 != $args['avatar_size'] ) {
-							echo get_avatar( $comment, $args['avatar_size'] );
-						}
-
-						printf( __( 'Contributed by %s', 'wporg' ), sprintf( '<cite class="fn">%s</cite>', $note_author ) );
-						?>
-
+						<?php echo wp_kses_post( $note_author ); ?>
 						</span>
-						&mdash;
 						<a class="comment-date" href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>">
 							<time datetime="<?php comment_time( 'c' ); ?>">
 							<?php echo $date; ?>
@@ -334,17 +319,22 @@ namespace {
 							&mdash; <span class="comment-awaiting-moderation"><?php _e( 'awaiting moderation', 'wporg' ); ?></span>
 						<?php endif; ?>
 					</div>
+					<?php
+						if ( $is_voting ) {
+							DevHub_User_Contributed_Notes_Voting::show_voting();
+						}
+					?>
 				</header>
 				<!-- .comment-metadata -->
 			<?php endif; ?>
 
-				<div class="comment-content" id="comment-content-<?php echo $comment->comment_ID; ?>">
+				<div class="wporg-has-embedded-code comment-content" id="comment-content-<?php echo $comment->comment_ID; ?>">
 				<?php
 				if ( $is_parent ) {
 					comment_text();
 				} else {
-					$text = get_comment_text()  . ' &mdash; ';
-					$text .= sprintf( __( 'By %s', 'wporg' ), sprintf( '<cite class="fn">%s</cite>', $note_author ) ) . ' &mdash; ';
+					$text = '<div>' . get_comment_text() . '</div><div>';
+					$text .= $note_author;
 					$text .= ' <a class="comment-date" href="'. esc_url( get_comment_link( $comment->comment_ID ) ) . '">';
 					$text .= '<time datetime="' . get_comment_time( 'c' ) . '">' . $date . '</time></a>';
 
@@ -365,6 +355,8 @@ namespace {
 					if ( ! $approved ) {
 						$text .= ' &mdash; <span class="comment-awaiting-moderation">' . __( 'awaiting moderation', 'wporg' ) . '</span>';
 					}
+
+					$text .= '</div>';
 
 					echo apply_filters( 'comment_text', $text );
 				}

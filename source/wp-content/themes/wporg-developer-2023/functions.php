@@ -156,7 +156,9 @@ require_once __DIR__ . '/src/code-source/block.php';
 require_once __DIR__ . '/src/code-summary/block.php';
 require_once __DIR__ . '/src/code-table/block.php';
 require_once __DIR__ . '/src/code-title/block.php';
-require_once __DIR__ . '/src/code-user-notes/block.php';
+require_once __DIR__ . '/src/code-comments/block.php';
+require_once __DIR__ . '/src/code-comment-edit/block.php';
+require_once __DIR__ . '/src/code-comment-form/block.php';
 require_once __DIR__ . '/src/search-filters/index.php';
 require_once __DIR__ . '/src/search-results-context/index.php';
 require_once __DIR__ . '/src/search-title/index.php';
@@ -190,6 +192,7 @@ function init() {
 	add_filter( 'breadcrumb_trail_items', __NAMESPACE__ . '\\breadcrumb_trail_items_for_hooks', 10, 2 );
 	add_filter( 'breadcrumb_trail_items', __NAMESPACE__ . '\\breadcrumb_trail_items_remove_reference', 11, 2 );
 	add_filter( 'breadcrumb_trail_items', __NAMESPACE__ . '\\breadcrumb_trail_items_for_handbook_root', 10, 2 );
+	add_filter( 'breadcrumb_trail_items', __NAMESPACE__ . '\\breadcrumb_trail_for_note_edit', 10, 2 );
 
 	add_filter( 'mkaz_code_syntax_force_loading', '__return_true' );
 	add_filter( 'mkaz_prism_css_path', __NAMESPACE__ . '\\update_prism_css_path' );
@@ -270,6 +273,43 @@ function breadcrumb_trail_items_for_handbook_root( $items, $args ) {
 	unset( $items[1] );
 
 	return $items;
+}
+
+/**
+ * Fix the breadcrumb trail for the edit note page.
+ *
+ * @param array $items
+ * @return array
+ */
+function breadcrumb_trail_for_note_edit( $items ) {
+	if ( empty( get_query_var( 'edit_user_note' ) ) || ! is_single() ) {
+		return $items;
+	}
+
+	$comment_id  = get_query_var( 'edit_user_note' );
+	$comment  = get_comment( $comment_id );
+	$post        = get_queried_object();
+	$post_id     = get_queried_object_id();
+	$post_url    = get_permalink( $post_id );
+	$post_title  = single_post_title( '', false );
+	$post_types  = \DevHub\get_parsed_post_types( 'labels' );
+	$type_single = get_post_type_object( $post->post_type )->labels->singular_name;
+	$type_url    = get_post_type_archive_link( $post->post_type );
+	$type_label  = $post_types[ $post->post_type ];
+
+	$breadcrumbs   = array( $items[0] ); // Ie: Home
+	$breadcrumbs[] = sprintf( '<a href="%s">%s</a>', esc_url( $type_url ), $type_label );
+	$breadcrumbs[] = sprintf( '<a href="%s">%s</a>', esc_url( $post_url ), $post_title );
+	$breadcrumbs[] = sprintf(
+		'<a href="%s">%s</a>',
+		esc_url( $post_url . '#comment-' . $comment_id ),
+		sprintf(  /* translators: %d: comment ID */
+			$comment->comment_parent ? __( 'feedback %d', 'wporg' ) : __( 'note %d', 'wporg' ),
+			$comment_id
+		)
+	);
+	$breadcrumbs[] = __( 'Edit', 'wporg' );
+	return $breadcrumbs;
 }
 
 /**

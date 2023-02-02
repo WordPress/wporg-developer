@@ -201,8 +201,10 @@ class DevHub_User_Submitted_Content {
 				'wporg-developer-user-notes-feedback',
 				'wporg_note_feedback',
 				array(
-					'show' => __( 'Show Feedback', 'wporg' ),
-					'hide' => __( 'Hide Feedback', 'wporg' ),
+					'show' => __( 'Show feedback', 'wporg' ),
+					'hide' => __( 'Hide feedback', 'wporg' ),
+					'hide_feedback' => __( 'Hide feedback form', 'wporg' ),
+					'add_feedback' => __( 'Add feedback', 'wporg' ),
 				)
 			);
 		}
@@ -247,54 +249,16 @@ class DevHub_User_Submitted_Content {
 	 * @return array Array with comment form arguments.
 	 */
 	public static function comment_form_args( $comment = false, $context = '' ) {
-		$label = _x( 'Add Note or Feedback', 'noun', 'wporg' );
-		if ( 'edit' === $context ) {
-			$label = _x( 'Edit Note', 'noun', 'wporg' );
-		}
-
-		$user_identity = wp_get_current_user();
-
 		$args = array(
-			'logged_in_as'        => '<p class="logged-in-as">'
-			. sprintf(
-				/* translators: 1: user profile link, 2: accessibility text, 3: user name, 4: logout URL */
-				__( '<a href="%1$s" aria-label="%2$s">Logged in as %3$s</a>. <a href="%4$s">Log out?</a>' ),
-				'https://profiles.wordpress.org/' . esc_attr( $user_identity->user_nicename ) . '/',
-				/* translators: %s: user name */
-				esc_attr( sprintf( __( 'Logged in as %s. Edit your profile.' ), $user_identity->display_name ) ),
-				$user_identity->display_name,
-				wp_logout_url( apply_filters( 'the_permalink', get_permalink() ) )
-			)
-			. '</p><p><ul><li>'
-			. __( 'Notes should supplement code reference entries, for example examples, tips, explanations, use-cases, and best practices.', 'wporg' )
-			. '</li><li>'
-			. __( 'Feedback can be to report errors or omissions with the documentation on this page. Such feedback will not be publicly posted.', 'wporg' )
-			. '</li><li>'
-			/* translators: 1: php button, 2: js button, 3: inline code button */
-			. sprintf(
-				__( 'You can enter text and code. Use the %1$s, %2$s, or %3$s buttons to wrap code snippets.', 'wporg' ),
-				'<span class="text-button">php</span>',
-				'<span class="text-button">js</span>',
-				'<span class="text-button">' . __( 'inline code', 'wporg' ) . '</span>'
-			)
-			. '</li></ul></p>',
-			'comment_notes_after' => '<p>' . __( 'Submission Notes:', 'wporg' ) . '</p>' . self::get_editor_rules(),
-			'label_submit'        => $label,
-			'cancel_reply_link'   => '',
-			'must_log_in'         => '<p>' . sprintf(
-				__( 'You must <a href="%s">log in</a> before being able to contribute a note or feedback.', 'wporg' ),
-				'https://login.wordpress.org/?redirect_to=' . urlencode( get_comments_link() )
-			) . '</p>',
+			'logged_in_as'        => '',
+			'label_submit'        => __( 'Submit', 'wporg' ),
 			'title_reply'         => '', //'Add Example'
 			'title_reply_to'      => '',
+			'title_reply_before'  => '',
+			'title_reply_after'  => '',
 		);
 
-		if ( class_exists( 'DevHub_Note_Preview' ) ) {
-			$args['comment_notes_after'] = DevHub_Note_Preview::comment_preview() . $args['comment_notes_after'];
-			$args['class_form']          = "comment-form tab-container";
-		}
-
-		$args['comment_field'] = self::wp_editor_comments( $label, $comment );
+		$args['comment_field'] = self::wp_editor_comments( $comment );
 
 		// Args for adding hidden links after the comment form submit field.
 		$args['context']      = $context;
@@ -307,6 +271,10 @@ class DevHub_User_Submitted_Content {
 			$args['action'] = get_permalink( $post_id ) . '#comment-' . $comment_id;
 		}
 
+		if ( class_exists( 'DevHub_Note_Preview' ) ) {
+			$args['class_form'] = "comment-form tab-container";
+		}
+
 		return $args;
 	}
 
@@ -315,18 +283,16 @@ class DevHub_User_Submitted_Content {
 	 *
 	 * Uses output buffering to capture the editor instance for use with the {@see comments_form()}.
 	 *
-	 * @param string           $label   Label used for the editor.
 	 * @param WP_Comment|false $comment Comment object or false. Default false.
 	 * @return string HTML output for the wp_editor-ized comment form.
 	 */
-	public static function wp_editor_comments( $label, $comment = false ) {
+	public static function wp_editor_comments( $comment = false ) {
 		$content = isset( $comment->comment_content ) ? trim( $comment->comment_content ) : '';
 
 		// wp_kses() converts htmlspecialchars in source code.
 		$content = $content ? htmlspecialchars_decode( $content ) : '';
 
 		ob_start();
-		echo '<h3><label for="comment">' . $label . '</label></h3>';
 
 		if ( class_exists( 'DevHub_Note_Preview' ) ) {
 			echo "<ul class='tablist' style='display: none;'>";
@@ -347,6 +313,11 @@ class DevHub_User_Submitted_Content {
 				'tinymce'       => false,
 			) );
 		echo '</div>';
+
+		if ( class_exists( 'DevHub_Note_Preview' ) ) {
+			echo DevHub_Note_Preview::comment_preview();
+		}
+
 		return ob_get_clean();
 	}
 
@@ -374,8 +345,7 @@ class DevHub_User_Submitted_Content {
 		$display       = ( 'hide' === $display ) ? ' style="display: none;"' : '';
 		$parent        = $comment_id;
 		$action        = site_url( '/wp-comments-post.php' );
-		$title         = __( 'Add feedback to this note', 'wporg' );
-		$button_text   = __( 'Add Feedback', 'wporg' );
+		$button_text   = __( 'Submit feedback', 'wporg' );
 		$post_id       = isset( $comment->comment_post_ID ) ? $comment->comment_post_ID : get_the_ID();
 		$content       = '';
 		$form_type     = '';
@@ -409,12 +379,7 @@ class DevHub_User_Submitted_Content {
 
 		ob_start();
 		echo "<div id='feedback-editor-{$comment_id}' class='feedback-editor{$class}'{$display}>\n";
-		if ( ! $edit ) {
-			echo "<p class='feedback-editor-title'>{$title}</p>\n";
-		}
-
 		echo "<form id='feedback-form-{$instance}{$form_type}' class='feedback-form' method='post' action='{$action}' name='feedback-form-{$instance}'>\n";
-		echo self::get_editor_rules( 'feedback', $note_link );
 		wp_editor( $content, 'feedback-comment-' . $instance, array(
 				'media_buttons' => false,
 				'textarea_name' => 'comment',
@@ -426,10 +391,11 @@ class DevHub_User_Submitted_Content {
 				'teeny'         => true,
 				'tinymce'       => false,
 			) );
-
-		echo '<p><strong>' . __( 'Note', 'wporg' ) . '</strong>: ' . __( 'No newlines allowed', 'wporg' ) . '. ';
-		printf( __( 'Allowed tags: %s', 'wporg' ), trim( $allowed_tags, ', ' ) ) . "</p>\n";
-		echo "<p><input id='submit-{$instance}' class='submit' type='submit' value='{$button_text}' name='submit-{$instance}'>\n";
+		echo '<p class="wp-block-wporg-code-reference-comments-small"><strong>' . __( 'Note', 'wporg' ) . '</strong>: ' . __( 'No newlines allowed', 'wporg' ) . '. ';
+		printf( __( 'Allowed tags: %s', 'wporg' ), trim( $allowed_tags, ', ' ) );
+		echo '</p>';
+		echo "<div class='wp-block-button'><input id='submit-{$instance}' class='submit wp-block-button__link wp-element-button' type='submit' value='{$button_text}' name='submit-{$instance}'></div>";
+		echo self::get_editor_rules( 'feedback', $note_link );
 		echo "<input type='hidden' name='comment_post_ID' value='{$post_id}' id='comment_post_ID-{$instance}' />\n";
 		echo "<input type='hidden' name='comment_parent' id='comment_parent-{$instance}' value='{$parent}' />\n";
 
@@ -449,43 +415,35 @@ class DevHub_User_Submitted_Content {
 	 * @return string Editor rules.
 	 */
 	public static function get_editor_rules( $context = '', $note_link = '' ) {
-		$license_rule = sprintf(
+		$license_rule = '<div class="wp-block-wporg-code-reference-comments-small">' . sprintf(
 			/* translators: 1: GFDL link */
-			__( '<strong>NOTE:</strong> All contributions are licensed under %s and are moderated before appearing on the site.', 'wporg' ),
+			__( 'Any notes not meeting these requirements will be removed by the moderation team. All contributions are licensed under %s and are moderated before appearing on the site.', 'wporg' ),
 			'<a href="https://gnu.org/licenses/fdl.html">GFDL</a>'
-		);
+		) . '</div>';
+
+		$rules = array();
 
 		if ( 'feedback' === $context ) {
-			$feedback_rule = __( 'Use this form to report errors or to add additional information to this note.', 'wporg' );
 			if ( $note_link ) {
-				$feedback_rule = sprintf( __( 'Use this form to report errors or to add additional information to %s.', 'wporg' ), $note_link );
+				$rules[] = sprintf( __( 'Use this form to report errors or to add additional information to %s.', 'wporg' ), $note_link );
+			} else {
+				$rules[] = __( '<b>Feedback</b> is part of documentation. Use this form to report errors or to add additional information to this note', 'wporg' );
 			}
 
-			return '<ul><li>'
-				. __( 'Feedback is part of the documentation.', 'wporg' ) . ' '
-				. $feedback_rule
-				. '</li><li>'
-				. __( 'Notes and feedback must be written in English.', 'wporg' )
-				. '</li><li>'
-				. __( 'This form is not for support requests, spam, bug reports, complaints, or self-promotion.', 'wporg' )
-				. '</li><li>'
-				. __( 'Any feedback not meeting these requirements will be removed by the moderation team.', 'wporg' )
-				. '</li><li class="user-notes-are-gpl">'
-				. $license_rule
-				. '</li></ul>';
+		} else {
+			$rules[] = __( '<b>Notes</b> should supplement code reference entries, for example examples, tips, explanations, use-cases, and best practices. ', 'wporg' );
+			$rules[] = __( '<b>Feedback</b> can be to report errors or omissions with the documentation on this page. Feedback will not be publicly posted.', 'wporg' );
 		}
 
-		return '<ul><li>'
-			. __( 'Notes and feedback must be written in English.', 'wporg' )
-			. '</li><li>'
-			. __( 'This form is not for support requests, discussions, spam, bug reports, complaints, or self-promotion.', 'wporg' )
-			. '</li><li>'
-			. __( 'Any notes not meeting these requirements will be removed by the moderation team.', 'wporg' )
-			. '</li><li>'
-			. __( '<strong>TIP:</strong> In the editing area the <kbd>Tab</kbd> key enters a tab character. To move below this area by pressing <kbd>Tab</kbd>, press the <kbd>Esc</kbd> key followed by the <kbd>Tab</kbd> key. In some cases the <kbd>Esc</kbd> key will need to be pressed twice before the <kbd>Tab</kbd> key will allow you to continue.', 'wporg' )
-			. '</li><li class="user-notes-are-gpl">'
-			. $license_rule
-			. '</li></ul>';
+		$rules[] = __( 'Please, send your message in English', 'wporg' );
+		$rules[] = __( 'Don\'t use this form for requests, discussions, spam, bug reports, complaints, or self-promotion.', 'wporg' );
+
+		return sprintf( '<ul class="wp-block-wporg-code-reference-comments-rules">%1$s</ul>%2$s',
+			implode( '', array_map( function( $rule ) {
+				return "<li>{$rule}</li>";
+			}, $rules ) ),
+			$license_rule
+		);
 	}
 
 	/**

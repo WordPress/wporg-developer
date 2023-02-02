@@ -1,0 +1,28 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "wporg/code-reference-comment-edit",
+	"version": "0.1.0",
+	"title": "Code Reference: Editing a comment",
+	"category": "widgets",
+	"icon": "smiley",
+	"description": "Shows the comment form for editing a comment.",
+	"usesContext": [ "postId" ],
+	"supports": {
+		"html": false,
+		"spacing": {
+			"margin": [
+				"top",
+				"bottom"
+			],
+			"padding": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true
+		}
+	},
+	"textdomain": "wporg",
+	"editorScript": "file:./index.js",
+	"style": "file:./style-index.css"
+}

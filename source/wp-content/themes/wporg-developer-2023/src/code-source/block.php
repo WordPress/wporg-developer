@@ -103,9 +103,9 @@ function get_source_content( $post_id ) {
 				)
 			);
 
-			$output .= sprintf( '<p class="wporg-developer-code-block-source-links">%s</p>', implode( ' ', array( $view_reference_button, $view_trac_button, $view_github_button ) ) );
+			$output .= sprintf( '<p class="wporg-dot-link-list">%s</p>', implode( ' ', array( $view_reference_button, $view_trac_button, $view_github_button ) ) );
 		} else {
-			$output .= sprintf( '<p class="wporg-developer-code-block-source-links">%s</p>', implode( ' ', array( $view_reference_button, $view_trac_button ) ) );
+			$output .= sprintf( '<p class="wporg-dot-link-list">%s</p>', implode( ' ', array( $view_reference_button, $view_trac_button ) ) );
 		}
 	}
 

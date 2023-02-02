@@ -318,7 +318,7 @@ class DevHub_User_Contributed_Notes_Voting {
 			$disabled_str = __( 'Voting for your own note is disabled', 'wporg' );
 		}
 
-		echo '<div class="user-note-voting" data-nonce="' . esc_attr( $nonce ) . '">';
+		echo '<div class="user-note-voting" data-nonce="' . esc_attr( $nonce ) . '" data-can-vote="' . ( $can_vote ? 'true' : 'false' ) . '">';
 
 		// Up vote link
 		$user_upvoted = self::has_user_upvoted_comment( $comment_id );
@@ -351,7 +351,6 @@ class DevHub_User_Contributed_Notes_Voting {
 			echo '" href="' . esc_url( $up_url );
 		}
 		echo '">';
-		echo '<span class="dashicons dashicons-arrow-up" aria-hidden="true"></span>';
 		echo '<span class="screen-reader-text">' . $title . '</span>';
 		echo "</{$tag}>";
 
@@ -399,7 +398,6 @@ class DevHub_User_Contributed_Notes_Voting {
 			echo '" href="' . esc_url( $down_url );
 		}
 		echo '">';
-		echo '<span class="dashicons dashicons-arrow-down" aria-hidden="true"></span>';
 		echo '<span class="screen-reader-text">' . $title . '</span>';
 		echo "</{$tag}>";
 

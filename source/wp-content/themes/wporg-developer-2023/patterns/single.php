@@ -22,6 +22,12 @@
 <!-- wp:wporg/code-reference-hooks /-->
 <!-- wp:wporg/code-reference-related /-->
 <!-- wp:wporg/code-reference-changelog /-->
-<!-- wp:wporg/code-reference-user-notes /--></main>
+<!-- wp:wporg/code-reference-comments /--></main>
+
+<!-- wp:group {"tagName":"div","style":{"spacing":{"padding":{"top":"var:preset|spacing|40","bottom":"var:preset|spacing|40", "left":"var:preset|spacing|edge-space","right":"var:preset|spacing|edge-space"}}}} -->
+<div class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--edge-space);padding-right:var(--wp--preset--spacing--edge-space)">
+	<!-- wp:wporg/code-reference-comment-form /-->
+</div>
+<!-- /wp:group -->
 <!-- /wp:group -->
 
