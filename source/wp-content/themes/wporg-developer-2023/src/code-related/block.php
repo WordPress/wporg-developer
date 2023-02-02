@@ -51,12 +51,12 @@ function render( $attributes, $content, $block ) {
 
 	if ( post_type_has_uses_info( $post_type ) ) {
 		$uses     = get_uses( $post_id );
-		$has_uses = $uses->have_posts();
+		$has_uses = $uses ? $uses->have_posts() : false;
 	}
 
 	if ( post_type_has_usage_info( $post_type ) ) {
 		$used_by     = get_used_by( $post_id );
-		$has_used_by = $used_by->have_posts();
+		$has_used_by = $used_by ? $used_by->have_posts() : false;
 	}
 
 	if ( ! $has_uses && ! $has_used_by ) {
