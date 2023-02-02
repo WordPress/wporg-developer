@@ -2621,12 +2621,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/WordPress/wporg-parent-2021.git",
-                "reference": "ba21744ca3df4012841fe4b780bea441bcb37eba"
+                "reference": "a01d0444ee39cee2de8d70113ee0bc16bdf5e787"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WordPress/wporg-parent-2021/zipball/ba21744ca3df4012841fe4b780bea441bcb37eba",
-                "reference": "ba21744ca3df4012841fe4b780bea441bcb37eba",
+                "url": "https://api.github.com/repos/WordPress/wporg-parent-2021/zipball/a01d0444ee39cee2de8d70113ee0bc16bdf5e787",
+                "reference": "a01d0444ee39cee2de8d70113ee0bc16bdf5e787",
                 "shasum": ""
             },
             "type": "wordpress-theme",
@@ -2634,7 +2634,7 @@
                 "source": "https://github.com/WordPress/wporg-parent-2021/tree/build",
                 "issues": "https://github.com/WordPress/wporg-parent-2021/issues"
             },
-            "time": "2023-01-18T18:26:04+00:00"
+            "time": "2023-02-02T20:37:20+00:00"
         },
         {
             "name": "wporg/wporg-repo-tools",
@@ -2744,5 +2744,5 @@
     "platform-overrides": {
         "php": "7.2"
     },
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
