@@ -518,10 +518,12 @@ function filter_code_content( $content ) {
  * @return string Updated link tag.
  */
 function get_adjacent_handbook_post_link( $output, $format, $link, $post, $adjacent ) {
-	$post_id   = get_the_ID();
-	$parent    = get_post_parent( $post_id );
-	$parent_id = $parent ? $parent->ID : 0;
-	$pages     = get_pages(
+	if ( wporg_is_handbook() ) {
+		return $output;
+	}
+
+	$post_id = get_the_ID();
+	$pages   = get_pages(
 		array(
 			'sort_column' => 'menu_order, title',
 			'post_type'   => get_post_type( $post_id ),
