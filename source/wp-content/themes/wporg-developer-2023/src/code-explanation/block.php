@@ -37,7 +37,7 @@ function render( $attributes, $content, $block ) {
 
 	$explanation = get_explanation_content( $block->context['postId'] );
 
-	if ( empty( $explanation ) ) {
+	if ( empty( trim( $explanation ) ) ) {
 		return '';
 	}
 
