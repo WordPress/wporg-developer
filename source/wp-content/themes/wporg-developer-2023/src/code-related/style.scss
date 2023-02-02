@@ -1,0 +1,13 @@
+.wp-block-wporg-code-reference-related {
+	tr th:last-child,
+	tr td:last-child {
+		display: none;
+	}
+
+	@media (min-width: 600px) {
+		tr th:last-child,
+		tr td:last-child {
+			display: revert;
+		}
+	}
+}

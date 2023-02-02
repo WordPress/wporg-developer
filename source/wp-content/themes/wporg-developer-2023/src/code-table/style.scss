@@ -28,18 +28,6 @@
 			word-break: break-all;
 		}
 
-		tr th:last-child,
-		tr td:last-child {
-			display: none;
-		}
-
-		@media (min-width: 600px) {
-			tr th:last-child,
-			tr td:last-child {
-				display: revert;
-			}
-		}
-
 		code {
 			display: block;
 			color: var(--wp--preset--color--charcoal-4);

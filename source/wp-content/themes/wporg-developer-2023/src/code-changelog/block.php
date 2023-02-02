@@ -1,6 +1,8 @@
 <?php
 namespace WordPressdotorg\Theme\Developer_2023\Dynamic_Code_Changelog;
 
+use function DevHub\get_changelog_data;
+
 add_action( 'init', __NAMESPACE__ . '\init' );
 
 /**
@@ -29,7 +31,13 @@ function init() {
  * @return string Returns the block markup.
  */
 function render( $attributes, $content, $block ) {
-	if ( empty( $content ) ) {
+	if ( ! isset( $block->context['postId'] ) ) {
+		return '';
+	}
+
+	$changelog_data = get_changelog_data();
+
+	if ( empty( $changelog_data ) ) {
 		return '';
 	}
 
@@ -38,11 +46,45 @@ function render( $attributes, $content, $block ) {
 		__( 'Changelog', 'wporg' )
 	);
 
+	$table_block = sprintf(
+		'<!-- wp:wporg/code-table {"itemsToShow":5,"headings":%s,"rows":%s,"style":{"spacing":{"margin":{"top":"var:preset|spacing|20"}}}} /--> ',
+		wp_json_encode( array( __( 'Version', 'wporg' ), __( 'Description', 'wporg' ) ) ),
+		wp_json_encode( get_row_data( $changelog_data ) )
+	);
+
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(
-		'<section %s>%s %s</section>',
+		'<section %1$s>%2$s %3$s</section>',
 		$wrapper_attributes,
 		do_blocks( $title_block ),
-		'Not Implemented'
+		do_blocks( $table_block )
 	);
+}
+
+/**
+ * Get the changelog data for the current post.
+ *
+ * @param array $changelog_data
+ * @return array
+ */
+function get_row_data( $changelog_data ) {
+	$rows = array();
+
+	foreach ( $changelog_data as $version => $data ) {
+		// Add "Introduced." for the initial version description, last since the array is reversed.
+		$data['description'] = ( ( $count - 1 ) == $i ) ? __( 'Introduced.', 'wporg' ) : $data['description'];
+
+		$version_link = sprintf(
+			'<a href="%1$s" alt="%2$s">%3$s</a>',
+			esc_url( $data['since_url'] ),
+			esc_attr( "WordPress {$version}" ),
+			esc_html( $version )
+		);
+
+		$i++;
+
+		$rows[] = array( $version_link, $data['description'] );
+	}
+
+	return $rows;
 }
