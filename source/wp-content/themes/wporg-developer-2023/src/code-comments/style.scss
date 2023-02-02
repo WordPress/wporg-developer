@@ -123,6 +123,17 @@ a):not(.wporg-developer-code-block a) {
 	.hide-if-js {
 		display: none !important;
 	}
+
+	// Hide the file name in comments.
+	.wporg-developer-code-block {
+		.wp-code-block-button-container {
+			justify-content: end;
+
+			code {
+				display: none;
+			}
+		}
+	}
 }
 
 .wp-block-wporg-code-reference-comments-rules {
