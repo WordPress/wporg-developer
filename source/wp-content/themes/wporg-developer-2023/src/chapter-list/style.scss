@@ -1,0 +1,105 @@
+.wp-block-wporg-chapter-list {
+	--local--line-height: var(--wp--custom--body--small--typography--line-height);
+	--local--button-size: calc(var(--local--line-height) * 1em);
+	line-height: var(--local--line-height);
+
+	h2 {
+		margin-bottom: var(--wp--preset--spacing--20);
+	}
+
+	ul {
+		margin-top: 0;
+		margin-bottom: 0;
+		list-style-type: none;
+	}
+
+	ul ul {
+		margin-left: calc(var(--local--button-size) / 2);
+		padding-left: calc(var(--wp--preset--spacing--20) / 4);
+		border-left: 1px solid var(--wp--preset--color--light-grey-1);
+	}
+
+	li {
+		margin-block: calc(var(--wp--preset--spacing--20) / 4);
+	}
+
+	> ul {
+		padding-left: 0;
+
+		> li {
+			margin-block: calc(var(--wp--preset--spacing--20) / 2);
+		}
+	}
+
+	&.has-js-control ul ul {
+		display: none;
+
+		&.is-open {
+			display: revert;
+		}
+	}
+
+	// Style the dash & chevron, most of the styles can be shared.
+	&.has-js-control li:not(.page_item_has_children),
+	.wporg-chapter-list--button-group {
+		display: flex;
+		align-items: flex-start;
+	}
+
+	&:not(.has-js-control) li::before,
+	&.has-js-control li:not(.page_item_has_children)::before,
+	.wporg-chapter-list--button-group > button {
+		// Add space between button & link.
+		margin-inline-end: 0.25em;
+		font-size: inherit;
+		height: var(--local--button-size);
+		width: var(--local--button-size);
+	}
+
+	&:not(.has-js-control) li::before {
+		height: 0.8em;
+	}
+
+	&:not(.has-js-control) li::before,
+	&.has-js-control li:not(.page_item_has_children)::before,
+	.wporg-chapter-list--button-group > button::before {
+		content: "";
+		display: inline-block;
+		mask-image: url(../../images/line.svg);
+		mask-repeat: no-repeat;
+		mask-position: center;
+		background-color: var(--wp--preset--color--light-grey-1);
+	}
+
+	.wporg-chapter-list--button-group > button {
+		background-color: transparent;
+		border: none;
+		padding: 0;
+		cursor: pointer;
+
+		&::before {
+			height: var(--local--button-size);
+			width: var(--local--button-size);
+			mask-image: url(../../images/chevron.svg);
+			mask-size: 0.8em 0.4em;
+			transform: rotate(180deg);
+			background-color: var(--wp--preset--color--blueberry-1);
+		}
+
+		&[aria-expanded="true"]::before {
+			transform: revert;
+		}
+
+		&:focus-visible {
+			outline: 1px dashed var(--wp--preset--color--blueberry-1);
+		}
+	}
+
+	// Descendent is `span` if there are children, or `a` if not.
+	.current_page_ancestor > span,
+	.current_page_ancestor > a,
+	.current_page_item > span,
+	.current_page_item > a {
+		font-weight: 600;
+	}
+}

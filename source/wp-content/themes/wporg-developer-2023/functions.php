@@ -142,6 +142,7 @@ require __DIR__ . '/inc/shortcodes.php';
 require __DIR__ . '/inc/block-hooks.php';
 
 // Block files
+require_once __DIR__ . '/src/chapter-list/block.php';
 require_once __DIR__ . '/src/code-changelog/block.php';
 require_once __DIR__ . '/src/code-deprecated/block.php';
 require_once __DIR__ . '/src/code-description/block.php';
