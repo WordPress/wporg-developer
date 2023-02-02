@@ -23,13 +23,18 @@
 		}
 
 		td a {
-			display: block;
 			text-decoration: underline;
 			word-break: break-all;
 		}
 
+		tr td:first-child {
+			a,
+			code {
+				display: block;
+			}
+		}
+
 		code {
-			display: block;
 			color: var(--wp--preset--color--charcoal-4);
 			word-break: break-all;
 		}
