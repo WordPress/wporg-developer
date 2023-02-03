@@ -22,11 +22,11 @@ function filter_search_block( $block_content, $block ) {
 		$block_content = str_replace( '</form>', do_blocks( '<!-- wp:wporg/search-filters /-->' ) . '</form>', $block_content );
 	}
 
-	$search_url = get_query_var( 'current_handbook_home_url' );
-	if ( $search_url ) {
+	if ( wporg_is_handbook() ) {
+
 		$block_content = str_replace(
 			'action="' . esc_url( home_url( '/' ) ) . '"',
-			'action="' . esc_url( $search_url ) . '"',
+			'action="' . esc_url( get_query_var( 'current_handbook_home_url' ) ) . '"',
 			$block_content
 		);
 	}
