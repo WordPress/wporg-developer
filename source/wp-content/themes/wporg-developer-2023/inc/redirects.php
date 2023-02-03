@@ -58,7 +58,6 @@ class DevHub_Redirects {
 		}
 	}
 
-
 	/**
 	 * Redirects a naked /resource/ request to dashicons page.
 	 *
