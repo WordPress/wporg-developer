@@ -36,7 +36,7 @@
 		<!-- /wp:paragraph -->
 
 		<!-- wp:paragraph {"className":"external-link"} -->
-		<p class="external-link"><a href="#"><?php esc_html_e( 'Improve it on GitHub', 'wporg' ); ?></a></p>
+		<p class="external-link"><a href="[article_edit_link]"><?php esc_html_e( 'Improve it on GitHub', 'wporg' ); ?></a></p>
 		<!-- /wp:paragraph -->
 	</div>
 	<!-- /wp:group -->
@@ -48,7 +48,7 @@
 		<!-- /wp:paragraph -->
 
 		<!-- wp:paragraph {"className":"external-link"} -->
-		<p class="external-link"><a href="#"><?php esc_html_e( 'See list of changes', 'wporg' ); ?></a></p>
+		<p class="external-link"><a href="[article_changelog_link]"><?php esc_html_e( 'See list of changes', 'wporg' ); ?></a></p>
 		<!-- /wp:paragraph -->
 	</div>
 	<!-- /wp:group -->
