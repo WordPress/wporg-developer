@@ -60,7 +60,7 @@ function render( $attributes, $content, $block ) {
 	wp_reset_postdata();
 
 	$title_block = sprintf(
-		'<h2 class="wp-block-heading">%s</h2>',
+		'<!-- wp:heading {"fontSize":"heading-5"} --><h2 class="wp-block-heading has-heading-5-font-size">%s</h2><!-- /wp:heading -->',
 		__( 'Hooks', 'wporg' )
 	);
 

@@ -42,7 +42,7 @@ function render( $attributes, $content, $block ) {
 	}
 
 	$title_block = sprintf(
-		'<h2 class="wp-block-heading">%s</h2>',
+		'<!-- wp:heading {"fontSize":"heading-5"} --><h2 class="wp-block-heading has-heading-5-font-size">%s</h2><!-- /wp:heading -->',
 		__( 'Changelog', 'wporg' )
 	);
 
@@ -71,7 +71,6 @@ function get_row_data( $changelog_data ) {
 	$rows = array();
 	$count = count( $changelog_data );
 	$i = 0;
-
 	foreach ( $changelog_data as $version => $data ) {
 		// Add "Introduced." for the initial version description, last since the array is reversed.
 		$data['description'] = ( ( $count - 1 ) == $i ) ? __( 'Introduced.', 'wporg' ) : $data['description'];

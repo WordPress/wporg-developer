@@ -32,29 +32,29 @@ function render( $attributes, $content, $block ) {
 	$comment_id    = get_query_var( 'edit_user_note' );
 	$comment       = get_comment( $comment_id );
 	$can_user_edit = \DevHub\can_user_edit_note( $comment_id );
-	
+
 	// Move this to the redirect
 	if ( ! ( $comment && $can_user_edit ) ) {
 		return '';
 	}
-	
+
 	$has_parent  = $comment->comment_parent ? true : false;
 	$parent      = $has_parent ? get_comment( $comment->comment_parent ) : false;
 
-	ob_start(); 
+	ob_start();
 
 	if ( $has_parent ) {
 		echo \DevHub_User_Submitted_Content::wp_editor_feedback( $comment, 'show', true );
 	} else {
-		$args = \DevHub_User_Submitted_Content::comment_form_args( $comment, 'edit');
+		$args = \DevHub_User_Submitted_Content::comment_form_args( $comment, 'edit' );
 		comment_form( $args );
 	}
 	$form = ob_get_clean();
- 
+
 	$title_block = sprintf(
 		'<h2 class="wp-block-heading">%s %d</h2>',
-		$has_parent ?  __( 'Edit Feedback', 'wporg' ) : __( 'Edit Note', 'wporg' ),
-		$comment_id 
+		$has_parent ? __( 'Edit Feedback', 'wporg' ) : __( 'Edit Note', 'wporg' ),
+		$comment_id
 	);
 
 	$wrapper_attributes = get_block_wrapper_attributes();

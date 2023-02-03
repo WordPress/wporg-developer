@@ -49,12 +49,12 @@ function render( $attributes, $content, $block ) {
 		$output = '<p>' . sprintf(
 			/* translators: %s: login URL */
 			__( 'You must <a href="%s">log in</a> before being able to contribute a note or feedback.', 'wporg' ),
-			esc_url('https://login.wordpress.org/?redirect_to=' . urlencode( get_permalink() ) )
+			esc_url( 'https://login.wordpress.org/?redirect_to=' . urlencode( get_permalink() ) )
 		) . '</p>';
 	}
 
 	$title_block = sprintf(
-		'<h2 class="wp-block-heading">%s</h2>',
+		'<!-- wp:heading {"fontSize":"heading-4"} --><h2 class="wp-block-heading has-heading-4-font-size">%s</h2><!-- /wp:heading -->',
 		__( 'User Contributed Notes', 'wporg' )
 	);
 
