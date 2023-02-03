@@ -17,10 +17,8 @@ function filter_search_block( $block_content, $block ) {
 		return $block_content;
 	}
 
-	$is_handbook = $GLOBALS['wp_query']->is_handbook ?? false;
-
 	// Inject filters if search bar has our class and isn't a handbook search
-	if ( ! $is_handbook && isset( $block['attrs']['className'] ) && strpos( $block['attrs']['className'], 'wporg-filtered-search-form' ) ) {
+	if ( ! wporg_is_handbook() && isset( $block['attrs']['className'] ) && strpos( $block['attrs']['className'], 'wporg-filtered-search-form' ) ) {
 		$block_content = str_replace( '</form>', do_blocks( '<!-- wp:wporg/search-filters /-->' ) . '</form>', $block_content );
 	}
 
