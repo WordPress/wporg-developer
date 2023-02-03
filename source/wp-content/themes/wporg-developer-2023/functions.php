@@ -166,6 +166,7 @@ require_once __DIR__ . '/src/search-usage-info/index.php';
 
 add_action( 'init', __NAMESPACE__ . '\\init' );
 add_filter( 'wporg_block_site_breadcrumbs', __NAMESPACE__ . '\set_site_breadcrumbs' );
+add_filter( 'single_template_hierarchy', __NAMESPACE__ . '\add_handbook_templates' );
 
 // Remove table of contents.
 add_filter( 'wporg_handbook_toc_should_add_toc', '__return_false' );
@@ -447,4 +448,22 @@ function set_site_breadcrumbs() {
 	}
 
 	return $breadcrumbs;
+}
+
+/**
+ * Filter the template heiarchy to add in a general handbook & github handbook template.
+ *
+ * @param string[] $templates A list of template candidates, in descending order of priority.
+ * @return string[] Updated list of templates.
+ */
+function add_handbook_templates( $templates ) {
+	$is_handbook      = wporg_is_handbook();
+	$is_github_source = ! empty( get_post_meta( get_the_ID(), 'wporg_markdown_source', true ) );
+	if ( $is_handbook ) {
+		array_unshift( $templates, 'single-handbook.php' );
+	}
+	if ( $is_github_source ) {
+		array_unshift( $templates, 'single-handbook-github.php' );
+	}
+	return $templates;
 }
