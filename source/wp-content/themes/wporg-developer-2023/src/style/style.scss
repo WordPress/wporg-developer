@@ -152,11 +152,17 @@ body[class] {
 	}
 }
 
-.home .entry-content {
-	--wp--preset--spacing--60: clamp(40px, 5.55556vw, 80px);
+.home {
+	.search-wrap div.awesomplete > ul {
+		top: 46px;
+	}
 
-	a {
-		text-decoration: underline;
+	.entry-content {
+		--wp--preset--spacing--60: clamp(40px, 5.55556vw, 80px);
+
+		a {
+			text-decoration: underline;
+		}
 	}
 }
 
