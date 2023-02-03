@@ -122,7 +122,7 @@ class Breadcrumb_Trail {
 		$labels = array(
 			'browse'              => __( 'Browse:',                 'breadcrumb-trail' ),
 			'home'                => __( 'Developer',               'breadcrumb-trail' ),
-			'search'              => __( 'Result',                 'breadcrumb-trail' ),
+			'search'              => __( 'Result',                  'breadcrumb-trail' ),
 			'error_404'           => __( '404 Not Found',           'breadcrumb-trail' ),
 			'paged'               => __( 'Page %d',                 'breadcrumb-trail' ),
 			'archives'            => __( 'Archives',                'breadcrumb-trail' ),
@@ -171,6 +171,11 @@ class Breadcrumb_Trail {
 				$this->do_singular_items();
 			}
 
+			/* If viewing a search results page. */
+			elseif ( is_search() ) {
+				$this->do_search_items( wporg_is_handbook() );
+			}
+
 			/* If viewing an archive page. */
 			elseif ( is_archive() ) {
 
@@ -206,11 +211,6 @@ class Breadcrumb_Trail {
 
 				else
 					$this->do_default_archive_items();
-			}
-
-			/* If viewing a search results page. */
-			elseif ( is_search() ) {
-				$this->do_search_items();
 			}
 
 			/* If viewing the 404 page. */
@@ -824,13 +824,17 @@ class Breadcrumb_Trail {
 	 * @access public
 	 * @return void
 	 */
-	public function do_search_items() {
+	public function do_search_items( $is_handbook = false ) {
+		if( $is_handbook ) {
+			$post_type = get_post_type_object( get_post_type() );
+			$this->items[] = '<a href="' . wporg_get_current_handbook_home_url() . '" title="' . esc_attr( sprintf( $this->args['labels']['search'], get_search_query() ) ) . '">' . $post_type->label . '</a>';
+		}
 
-		if ( is_paged() )
+		if ( is_paged() ) {
 			$this->items[] = '<a href="' . get_search_link() . '" title="' . esc_attr( sprintf( $this->args['labels']['search'], get_search_query() ) ) . '">' . sprintf( $this->args['labels']['search'], get_search_query() ) . '</a>';
-
-		elseif ( true === $this->args['show_title'] )
+		} elseif ( true === $this->args['show_title'] ) {
 			$this->items[] = sprintf( $this->args['labels']['search'], get_search_query() );
+		}
 	}
 
 	/**
