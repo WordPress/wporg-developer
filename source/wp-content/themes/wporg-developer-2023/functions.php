@@ -518,7 +518,7 @@ function filter_code_content( $content ) {
  * @return string Updated link tag.
  */
 function get_adjacent_handbook_post_link( $output, $format, $link, $post, $adjacent ) {
-	if ( wporg_is_handbook() ) {
+	if ( ! wporg_is_handbook() ) {
 		return $output;
 	}
 
