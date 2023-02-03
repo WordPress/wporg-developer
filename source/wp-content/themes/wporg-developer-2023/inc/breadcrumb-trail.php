@@ -827,7 +827,7 @@ class Breadcrumb_Trail {
 	public function do_search_items( $is_handbook = false ) {
 		if( $is_handbook ) {
 			$post_type = get_post_type_object( get_post_type() );
-			$this->items[] = '<a href="' . wporg_get_current_handbook_home_url() . '">' . $post_type->label . '</a>';
+			$this->items[] = '<a href="' . wporg_get_current_handbook_home_url() . '">' . get_queried_object()->label . '</a>';
 		}
 
 		if ( is_paged() ) {
