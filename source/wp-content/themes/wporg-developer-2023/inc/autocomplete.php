@@ -20,7 +20,6 @@ class DevHub_Search_Form_Autocomplete {
 	 * @access public
 	 */
 	public function init() {
-
 		add_action( 'wp_ajax_autocomplete', array( $this, 'autocomplete_data_update' ) );
 		add_action( 'wp_ajax_nopriv_autocomplete', array( $this, 'autocomplete_data_update' ) );
 
@@ -28,13 +27,17 @@ class DevHub_Search_Form_Autocomplete {
 		add_action( 'wp_enqueue_scripts', array( $this, 'scripts_and_styles' ), 11 );
 	}
 
-
 	/**
 	 * Enqueues scripts and styles.
 	 *
 	 * @access public
 	 */
 	public function scripts_and_styles() {
+
+		// Handbook searches don't have autocomplete.
+		if ( wporg_is_handbook() ) {
+			return;
+		}
 
 		wp_enqueue_style(
 			'awesomplete-css',
