@@ -15,6 +15,12 @@
 .wp-block-wporg-search-title a {
 	display: block;
 	font-size: var(--wp--preset--font-size--extra-large);
+}
+
+.wp-block-wporg-search-title.function a,
+.wp-block-wporg-search-title.class a,
+.wp-block-wporg-search-title.method a,
+.wp-block-wporg-search-title.hook a {
 	font-family: var(--wp--preset--font-family--monospace);
 	word-break: break-all;
 }
