@@ -60,10 +60,18 @@ function render( $attributes, $content, $block ) {
 		$content .= '</div>';
 	}
 
+	$submit_button = sprintf(
+		'<div class="wp-block-buttons"><div class="wp-block-button has-custom-font-size is-style-outline has-extra-small-font-size">
+	<button class="wp-block-button__link wp-element-button">%s</button>
+	</div></div>',
+		__( 'Apply', 'wporg' )
+	);
+
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(
-		'<div %1$s>%2$s</div>',
+		'<div %1$s>%2$s %3$s</div>',
 		$wrapper_attributes,
 		$content,
+		$submit_button
 	);
 }

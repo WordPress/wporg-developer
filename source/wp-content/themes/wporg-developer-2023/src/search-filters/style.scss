@@ -1,6 +1,6 @@
 .wp-block-wporg-search-filters {
 	display: grid;
-	margin-top: var(--wp--preset--spacing--10);
+	margin-top: var(--wp--preset--spacing--20);
 	font-size: var(--wp--preset--font-size--small);
 	grid-template-columns: 1fr 1fr;
 	gap: var(--wp--preset--spacing--10);
@@ -24,4 +24,11 @@
 		display: flex;
 		align-items: center;
 	}
+}
+
+.wp-block-wporg-search-filters button {
+	padding-top: calc(var(--wp--preset--spacing--10) / 2) !important;
+	padding-right: var(--wp--preset--spacing--10) !important;
+	padding-bottom: calc(var(--wp--preset--spacing--10) / 2) !important;
+	padding-left: var(--wp--preset--spacing--10) !important;
 }
