@@ -122,7 +122,7 @@ class Breadcrumb_Trail {
 		$labels = array(
 			'browse'              => __( 'Browse:',                 'breadcrumb-trail' ),
 			'home'                => __( 'Developer',               'breadcrumb-trail' ),
-			'search'              => __( 'Result',                  'breadcrumb-trail' ),
+			'search'              => __( 'Result',                 'breadcrumb-trail' ),
 			'error_404'           => __( '404 Not Found',           'breadcrumb-trail' ),
 			'paged'               => __( 'Page %d',                 'breadcrumb-trail' ),
 			'archives'            => __( 'Archives',                'breadcrumb-trail' ),
@@ -173,7 +173,11 @@ class Breadcrumb_Trail {
 
 			/* If viewing a search results page. */
 			elseif ( is_search() ) {
-				$this->do_search_items( wporg_is_handbook() );
+				if ( wporg_is_handbook() ) {
+					$this->do_handbook_search_items();
+				} else {
+					$this->do_search_items();
+				}
 			}
 
 			/* If viewing an archive page. */
@@ -824,16 +828,29 @@ class Breadcrumb_Trail {
 	 * @access public
 	 * @return void
 	 */
-	public function do_search_items( $is_handbook = false ) {
-		if( $is_handbook ) {
-			$post_type = get_post_type_object( get_post_type() );
-			$this->items[] = '<a href="' . wporg_get_current_handbook_home_url() . '">' . get_queried_object()->label . '</a>';
-		}
+	public function do_search_items() {
+		if ( is_paged() )
+			$this->items[] = '<a href="' . get_search_link() . '" title="' . esc_attr( sprintf( $this->args['labels']['search'], get_search_query() ) ) . '">' . sprintf( $this->args['labels']['search'], get_search_query() ) . '</a>';
+
+		elseif ( true === $this->args['show_title'] )
+			$this->items[] = sprintf( $this->args['labels']['search'], get_search_query() );
+	}
+
+	/**
+	 * Adds the items to the trail items array for handbook search results.
+	 *
+	 * @since  0.6.0
+	 * @access public
+	 * @return void
+	 */
+	public function do_handbook_search_items() {
+		$this->items[] = '<a href="' . wporg_get_current_handbook_home_url() . '">' . get_queried_object()->label . '</a>';
 
 		if ( is_paged() ) {
-			$this->items[] = '<a href="' . get_search_link() . '" title="' . esc_attr( sprintf( $this->args['labels']['search'], get_search_query() ) ) . '">' . sprintf( $this->args['labels']['search'], get_search_query() ) . '</a>';
+			$search_url = sprintf( '%s?s=%s', wporg_get_current_handbook_home_url(), get_search_query() );
+			$this->items[] = '<a href="' . esc_attr( $search_url ) . '">' . esc_html( $this->args['labels']['search'] ) . '</a>';
 		} elseif ( true === $this->args['show_title'] ) {
-			$this->items[] = sprintf( $this->args['labels']['search'], get_search_query() );
+			$this->items[] = $this->args['labels']['search'];
 		}
 	}
 
