@@ -1,12 +1,12 @@
 <?php
 /**
- * Block Name: Search Title
+ * Block Name: Post Title
  * Description: A dynamic list of code references.
  *
  * @package wporg
  */
 
-namespace WordPressdotorg\Theme\Developer_2023\Dynamic_Search_Title;
+namespace WordPressdotorg\Theme\Developer_2023\Dynamic_Post_Title;
 
 use function DevHub\is_parsed_post_type;
 
@@ -21,7 +21,7 @@ add_action( 'init', __NAMESPACE__ . '\init' );
  */
 function init() {
 	register_block_type(
-		dirname( dirname( __DIR__ ) ) . '/build/search-title',
+		dirname( dirname( __DIR__ ) ) . '/build/post-title',
 		array(
 			'render_callback' => __NAMESPACE__ . '\render',
 		)
@@ -49,7 +49,7 @@ function render( $attributes, $content, $block ) {
 	$content_html = '';
 	if ( is_parsed_post_type( $post_type ) ) {
 		$content_html .= sprintf(
-			'<span class="wp-block-wporg-search-title__type">%1$s</span>',
+			'<span class="wp-block-wporg-post-title__type">%1$s</span>',
 			$type
 		);
 	}

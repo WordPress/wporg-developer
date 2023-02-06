@@ -11,7 +11,7 @@ import metadata from './block.json';
 import './style.scss';
 
 function Edit() {
-	return <div { ...useBlockProps() }>Search Title</div>;
+	return <div { ...useBlockProps() }>Post Title</div>;
 }
 
 registerBlockType( metadata.name, {

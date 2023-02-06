@@ -1,12 +1,12 @@
 <?php
 /**
- * Block Name: Search Usage Info
- * Description: A dynamic list of code references.
+ * Block Name: Post Type Usage Info
+ * Description: Information about post type reference.
  *
  * @package wporg
  */
 
-namespace WordPressdotorg\Theme\Developer_2023\Dynamic_Search_Usage_Info;
+namespace WordPressdotorg\Theme\Developer_2023\Dynamic_Post_Type_Usage_Info;
 
 use function DevHub\get_source_file;
 use function DevHub\get_line_number;
@@ -26,7 +26,7 @@ add_action( 'init', __NAMESPACE__ . '\init' );
  */
 function init() {
 	register_block_type(
-		dirname( dirname( __DIR__ ) ) . '/build/search-usage-info',
+		dirname( dirname( __DIR__ ) ) . '/build/post-type-usage-info',
 		array(
 			'render_callback' => __NAMESPACE__ . '\render',
 		)
@@ -61,7 +61,7 @@ function render( $attributes, $content, $block ) {
 		$uses
 	);
 
-	$source_html = __( 'Source:', 'wporg' ) . ' <a class="wp-block-wporg-search-usage-info__source external-link" href="' . get_github_source_file_link() . '">' . get_source_file() . ':' . get_line_number() . '</a>';
+	$source_html = __( 'Source:', 'wporg' ) . ' <a class="wp-block-wporg-post-type-usage-info__source external-link" href="' . get_github_source_file_link() . '">' . get_source_file() . ':' . get_line_number() . '</a>';
 
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(

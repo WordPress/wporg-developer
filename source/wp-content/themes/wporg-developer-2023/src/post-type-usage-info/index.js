@@ -11,7 +11,7 @@ import metadata from './block.json';
 import './style.scss';
 
 function Edit() {
-	return <div { ...useBlockProps() }>Search Usage Info</div>;
+	return <div { ...useBlockProps() }>Post Type Usage Info</div>;
 }
 
 registerBlockType( metadata.name, {

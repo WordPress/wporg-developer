@@ -166,8 +166,8 @@ require_once __DIR__ . '/src/code-comment-edit/block.php';
 require_once __DIR__ . '/src/code-comment-form/block.php';
 require_once __DIR__ . '/src/search-filters/index.php';
 require_once __DIR__ . '/src/search-results-context/index.php';
-require_once __DIR__ . '/src/search-title/index.php';
-require_once __DIR__ . '/src/search-usage-info/index.php';
+require_once __DIR__ . '/src/post-title/index.php';
+require_once __DIR__ . '/src/post-type-usage-info/index.php';
 require_once __DIR__ . '/src/version-select/index.php';
 
 add_action( 'init', __NAMESPACE__ . '\\init' );
