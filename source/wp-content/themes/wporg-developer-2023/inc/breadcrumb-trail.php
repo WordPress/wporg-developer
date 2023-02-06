@@ -171,6 +171,15 @@ class Breadcrumb_Trail {
 				$this->do_singular_items();
 			}
 
+			/* If viewing a search results page. */
+			elseif ( is_search() ) {
+				if ( wporg_is_handbook() ) {
+					$this->do_handbook_search_items();
+				} else {
+					$this->do_search_items();
+				}
+			}
+
 			/* If viewing an archive page. */
 			elseif ( is_archive() ) {
 
@@ -206,11 +215,6 @@ class Breadcrumb_Trail {
 
 				else
 					$this->do_default_archive_items();
-			}
-
-			/* If viewing a search results page. */
-			elseif ( is_search() ) {
-				$this->do_search_items();
 			}
 
 			/* If viewing the 404 page. */
@@ -831,6 +835,24 @@ class Breadcrumb_Trail {
 
 		elseif ( true === $this->args['show_title'] )
 			$this->items[] = sprintf( $this->args['labels']['search'], get_search_query() );
+	}
+
+	/**
+	 * Adds the items to the trail items array for handbook search results.
+	 *
+	 * @since  0.6.0
+	 * @access public
+	 * @return void
+	 */
+	public function do_handbook_search_items() {
+		$this->items[] = '<a href="' . wporg_get_current_handbook_home_url() . '">' . get_queried_object()->label . '</a>';
+
+		if ( is_paged() ) {
+			$search_url    = add_query_arg( 's', get_search_query(), wporg_get_current_handbook_home_url() );
+			$this->items[] = '<a href="' . esc_url( $search_url ) . '">' . esc_html( $this->args['labels']['search'] ) . '</a>';
+		} elseif ( true === $this->args['show_title'] ) {
+			$this->items[] = $this->args['labels']['search'];
+		}
 	}
 
 	/**

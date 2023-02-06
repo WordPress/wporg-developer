@@ -36,6 +36,11 @@ class DevHub_Search_Form_Autocomplete {
 	 */
 	public function scripts_and_styles() {
 
+		// Handbook searches don't have autocomplete.
+		if ( wporg_is_handbook() ) {
+			return;
+		}
+
 		wp_enqueue_style(
 			'awesomplete-css',
 			get_stylesheet_directory_uri() . '/stylesheets/awesomplete.css',

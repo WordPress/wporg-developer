@@ -8,6 +8,8 @@
 
 namespace WordPressdotorg\Theme\Developer_2023\Dynamic_Search_Title;
 
+use function DevHub\is_parsed_post_type;
+
 add_action( 'init', __NAMESPACE__ . '\init' );
 
 /**
@@ -41,11 +43,21 @@ function render( $attributes, $content, $block ) {
 	}
 
 	$content = get_the_title( $block->context['postId'] );
-	$type = strtolower( get_post_type_object( get_post_type( $block->context['postId'] ) )->labels->singular_name );
+	$post_type = get_post_type( $block->context['postId'] );
+	$type = strtolower( get_post_type_object( $post_type )->labels->singular_name );
 
-	$type_html = sprintf(
-		'<span class="wp-block-wporg-search-title__type">%1$s</span>',
-		$type
+	$content_html = '';
+	if ( is_parsed_post_type( $post_type ) ) {
+		$content_html .= sprintf(
+			'<span class="wp-block-wporg-search-title__type">%1$s</span>',
+			$type
+		);
+	}
+
+	$content_html .= sprintf(
+		'<a href="%1$s">%2$s</a>',
+		esc_url( get_permalink( $block->context['postId'] ) ),
+		$content
 	);
 
 	$wrapper_attributes = get_block_wrapper_attributes(
@@ -53,12 +65,9 @@ function render( $attributes, $content, $block ) {
 			'class' => $type,
 		)
 	);
-
 	return sprintf(
-		'<div %1$s>%2$s <a href="%3$s">%4$s</a></div>',
+		'<div %1$s>%2$s</div>',
 		$wrapper_attributes,
-		$type_html,
-		esc_url( get_permalink( $block->context['postId'] ) ),
-		$content,
+		$content_html,
 	);
 }

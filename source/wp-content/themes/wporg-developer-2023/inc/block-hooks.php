@@ -9,7 +9,7 @@
  * Filters the search block and conditionally inserts search filters.
  *
  * @param string $block_content
- * @param array $block
+ * @param array  $block
  * @return string
  */
 function filter_search_block( $block_content, $block ) {
@@ -17,9 +17,17 @@ function filter_search_block( $block_content, $block ) {
 		return $block_content;
 	}
 
-	// Inject filters if search bar has our class.
-	if ( isset( $block['attrs']['className'] ) && strpos( $block['attrs']['className'], 'wporg-filtered-search-form' ) ) {
-		return str_replace( '</form>', do_blocks( '<!-- wp:wporg/search-filters /-->' ) . '</form>', $block_content );
+	if ( ! wporg_is_handbook() ) {
+		// Inject filters if search bar has our class
+		if ( isset( $block['attrs']['className'] ) && strpos( $block['attrs']['className'], 'wporg-filtered-search-form' ) ) {
+			$block_content = str_replace( '</form>', do_blocks( '<!-- wp:wporg/search-filters /-->' ) . '</form>', $block_content );
+		}
+	} else {
+		$block_content = str_replace(
+			'action="' . esc_url( home_url( '/' ) ) . '"',
+			'action="' . esc_url( get_query_var( 'current_handbook_home_url' ) ) . '"',
+			$block_content
+		);
 	}
 
 	return $block_content;
