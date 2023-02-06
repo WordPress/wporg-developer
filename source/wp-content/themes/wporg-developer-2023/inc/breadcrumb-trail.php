@@ -829,6 +829,7 @@ class Breadcrumb_Trail {
 	 * @return void
 	 */
 	public function do_search_items() {
+
 		if ( is_paged() )
 			$this->items[] = '<a href="' . get_search_link() . '" title="' . esc_attr( sprintf( $this->args['labels']['search'], get_search_query() ) ) . '">' . sprintf( $this->args['labels']['search'], get_search_query() ) . '</a>';
 
