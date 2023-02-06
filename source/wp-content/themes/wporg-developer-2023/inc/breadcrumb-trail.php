@@ -848,7 +848,7 @@ class Breadcrumb_Trail {
 		$this->items[] = '<a href="' . wporg_get_current_handbook_home_url() . '">' . get_queried_object()->label . '</a>';
 
 		if ( is_paged() ) {
-			$search_url = sprintf( '%s?s=%s', wporg_get_current_handbook_home_url(), get_search_query() );
+			$search_url    = add_query_arg( 's', get_search_query(), wporg_get_current_handbook_home_url() );
 			$this->items[] = '<a href="' . esc_url( $search_url ) . '">' . esc_html( $this->args['labels']['search'] ) . '</a>';
 		} elseif ( true === $this->args['show_title'] ) {
 			$this->items[] = $this->args['labels']['search'];
