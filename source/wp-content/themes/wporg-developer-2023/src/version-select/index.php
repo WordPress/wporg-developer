@@ -1,7 +1,7 @@
 <?php
 /**
  * Block Name: Version Select
- * Description: Displays version in a select element.
+ * Description: Displays WordPress versions in a select element.
  *
  * @package wporg
  */
@@ -66,10 +66,13 @@ function render( $attributes, $content, $block ) {
 	}
 
 	$wrapper_attributes = get_block_wrapper_attributes();
-
 	return sprintf(
-		'<div %1$s><select name="version-select" id="version-select">%2$s</select></dov>',
+		'<div %1$s>
+			<label class="screen-reader-text" for="version-select">%2$s</label>
+			<select name="version-select" id="version-select">%3$s</select>
+		</div>',
 		$wrapper_attributes,
+		esc_html( __( 'Select version', 'wporg' ) ),
 		$options,
 	);
 }
