@@ -12,19 +12,16 @@
 		"html": false,
 		"color": {
 			"text": true,
-			"background": true,
-			"link": true
+			"background": true
 		},
 		"spacing": {
 			"margin": [
 				"top",
 				"bottom"
-			],
-			"padding": true
+			]
 		},
 		"typography": {
-			"fontSize": true,
-			"lineHeight": true
+			"fontSize": true
 		}
 	},
 	"usesContext": [ "postId" ],
