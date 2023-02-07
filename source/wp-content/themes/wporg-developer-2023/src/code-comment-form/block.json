@@ -9,6 +9,7 @@
 	"description": "Shows the comment form.",
 	"usesContext": [ "postId" ],
 	"supports": {
+		"align": true,
 		"html": false,
 		"spacing": {
 			"margin": [
