@@ -1,7 +1,7 @@
 <?php
 /**
  * Block Name: Post Title
- * Description: A dynamic list of code references.
+ * Description: The post title for archive and search results.
  *
  * @package wporg
  */
