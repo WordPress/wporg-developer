@@ -11,14 +11,20 @@
   box-sizing: border-box;
 }
 
+.dashicons-page main {
+  margin-top: 32px;
+}
+
 .dashicons-page .details {
   position: relative;
+  padding-bottom: 24px;
+}
+
+.dashicons-page .wp-block-wporg-notice a {
+  text-decoration: underline;
 }
 
 .dashicons-page .icon-filter {
-  position: absolute;
-  left: 0;
-  bottom: 50px;
   padding: 0 2.5em;
   width: 50%;
 }
@@ -51,6 +57,7 @@
 }
 
 .dashicons-page #glyph .dashicons {
+  margin-top: 24px;
   font-size: 240px;
   width: 240px;
   height: 240px;
@@ -110,6 +117,7 @@
 
 .dashicons-page #iconlist ul {
   margin: 0;
+  padding: 0;
 }
 
 .dashicons-page #iconlist .dashicons {
