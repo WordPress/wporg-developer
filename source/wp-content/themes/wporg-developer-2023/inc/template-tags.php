@@ -807,7 +807,10 @@ namespace DevHub {
 					$params[ $tag['variable'] ]['types'] = implode( '|', $types );
 					if ( strtolower( substr( $tag['content'], 0, 8 ) ) == "optional" ) {
 						$params[ $tag['variable'] ]['required'] = 'Optional';
-						$params[ $tag['variable'] ]['content'] = substr( $tag['content'], 9 );
+						// Only trim 'Optional' as prefix if not part of sentence.
+						if ( false !== strpos( '.,', $tag['content'][8] ) ) {
+							$params[ $tag['variable'] ]['content'] = ucfirst( trim( substr( $tag['content'], 9 ) ) );
+						}
 						$encountered_optional = true;
 					} elseif ( strtolower( substr( $tag['content'], 2, 9 ) ) == "optional." ) { // Hash notation param
 						$params[ $tag['variable'] ]['required'] = 'Optional';
