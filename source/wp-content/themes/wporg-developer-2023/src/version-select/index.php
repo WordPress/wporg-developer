@@ -68,7 +68,7 @@ function render( $attributes, $content, $block ) {
 	$wrapper_attributes = get_block_wrapper_attributes();
 
 	return sprintf(
-		'<select name="version-select" id="version-select" %1$s>%2$s</select>',
+		'<div %1$s><select name="version-select" id="version-select">%2$s</select></dov>',
 		$wrapper_attributes,
 		$options,
 	);
