@@ -23,6 +23,7 @@ class DevHub_Redirects {
 	public static function do_init() {
 		add_action( 'template_redirect', array( __CLASS__, 'redirect_single_search_match' ) );
 		add_action( 'template_redirect', array( __CLASS__, 'redirect_handbook' ) );
+		add_action( 'template_redirect', array( __CLASS__, 'redirect_reference_home' ) );
 		add_action( 'template_redirect', array( __CLASS__, 'redirect_resources' ) );
 		add_action( 'template_redirect', array( __CLASS__, 'redirect_singularized_handbooks' ), 1 );
 		add_action( 'template_redirect', array( __CLASS__, 'redirect_pluralized_reference_post_types' ), 1 );
@@ -65,6 +66,16 @@ class DevHub_Redirects {
 	public static function redirect_resources() {
 		if ( is_page( 'resource' ) ) {
 			wp_redirect( get_permalink( get_page_by_title( 'dashicons' ) ) );
+			exit();
+		}
+	}
+
+	/**
+	 * Redirects /reference/ to the home url.
+	 */
+	public static function redirect_reference_home() {
+		if ( isset( $_SERVER['REQUEST_URI'] ) && '/reference/' === esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ) ) {
+			wp_safe_redirect( home_url( '/' ), 301 );
 			exit();
 		}
 	}
