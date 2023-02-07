@@ -4,7 +4,7 @@
 	"name": "wporg/post-type-usage-info",
 	"title": "Post Type Usage Info",
 	"category": "layout",
-	"description": "Information about post type reference.",
+	"description": "Displays information about post type references.",
 	"keywords": [ "post" ],
 	"textdomain": "wporg",
 	"attributes": {},

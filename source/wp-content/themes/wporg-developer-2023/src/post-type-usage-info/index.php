@@ -1,7 +1,7 @@
 <?php
 /**
  * Block Name: Post Type Usage Info
- * Description: Information about post type reference.
+ * Description: Displays information about post type references.
  *
  * @package wporg
  */
