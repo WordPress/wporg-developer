@@ -81,6 +81,7 @@
 .dashicons-page pre {
   background: #eee;
   padding: 1.6em;
+  overflow: auto;
 }
 
 .dashicons-page #glyph span {
