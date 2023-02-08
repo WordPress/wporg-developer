@@ -50,6 +50,10 @@
   width: 50%;
 }
 
+.dashicons-page .site-main {
+  padding-bottom: 40px;
+}
+
 .dashicons-page #glyph {
   float: left;
   padding: 1.5em 25px;
@@ -72,6 +76,11 @@
 
 .dashicons-page #glyph .info .charCode code {
   color: #888;
+}
+
+.dashicons-page pre {
+  background: #eee;
+  padding: 1.6em;
 }
 
 .dashicons-page #glyph span {
