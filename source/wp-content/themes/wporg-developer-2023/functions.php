@@ -30,7 +30,7 @@ require __DIR__ . '/inc/jetpack.php';
 /**
  * Class for editing parsed content on the Function, Class, Hook, and Method screens.
  */
-require_once( __DIR__ . '/inc/parsed-content.php' );
+require_once __DIR__ . '/inc/parsed-content.php';
 
 if ( ! function_exists( 'loop_pagination' ) ) {
 	require __DIR__ . '/inc/loop-pagination.php';
@@ -85,7 +85,7 @@ if ( class_exists( '\\WordPressdotorg\\Markdown\\Importer' ) ) {
 /**
  * Explanations for functions. hooks, classes, and methods.
  */
-require( __DIR__ . '/inc/explanations.php' );
+require __DIR__ . '/inc/explanations.php';
 
 /**
  * Handbooks.
@@ -167,6 +167,8 @@ require_once __DIR__ . '/src/search-usage-info/index.php';
 add_action( 'init', __NAMESPACE__ . '\\init' );
 add_filter( 'wporg_block_site_breadcrumbs', __NAMESPACE__ . '\set_site_breadcrumbs' );
 add_filter( 'single_template_hierarchy', __NAMESPACE__ . '\add_handbook_templates' );
+add_filter( 'next_post_link', __NAMESPACE__ . '\get_adjacent_handbook_post_link', 10, 5 );
+add_filter( 'previous_post_link', __NAMESPACE__ . '\get_adjacent_handbook_post_link', 10, 5 );
 
 // Priority must be lower than 5 to precede table of contents filter.
 // See: https://github.com/WordPress/wporg-mu-plugins/blob/trunk/mu-plugins/blocks/table-of-contents/index.php#L70
@@ -292,7 +294,7 @@ function breadcrumb_trail_for_note_edit( $items ) {
 	}
 
 	$comment_id  = get_query_var( 'edit_user_note' );
-	$comment  = get_comment( $comment_id );
+	$comment     = get_comment( $comment_id );
 	$post        = get_queried_object();
 	$post_id     = get_queried_object_id();
 	$post_url    = get_permalink( $post_id );
@@ -342,8 +344,8 @@ function pre_get_posts( $query ) {
 function register_nav_menus() {
 	\register_nav_menus(
 		array(
-			'devhub-menu' => __( 'Developer Resources Menu', 'wporg' ),
-			'devhub-cli-menu' => __( 'WP-CLI Commands Menu', 'wporg' ),
+			'devhub-menu'        => __( 'Developer Resources Menu', 'wporg' ),
+			'devhub-cli-menu'    => __( 'WP-CLI Commands Menu', 'wporg' ),
 			'reference-home-api' => __( 'Reference API Menu', 'wporg' ),
 		)
 	);
@@ -502,4 +504,56 @@ function filter_code_content( $content ) {
 		<!-- wp:wporg/code-reference-comments /-->
 	'
 	);
+}
+
+/**
+ * Switch out the destination for next/prev links to mirror the Chapter List order.
+ *
+ * @param string  $output   The adjacent post link.
+ * @param string  $format   Link anchor format.
+ * @param string  $link     Link permalink format.
+ * @param WP_Post $post     The adjacent post.
+ * @param string  $adjacent Whether the post is previous or next.
+ *
+ * @return string Updated link tag.
+ */
+function get_adjacent_handbook_post_link( $output, $format, $link, $post, $adjacent ) {
+	if ( ! wporg_is_handbook() ) {
+		return $output;
+	}
+
+	$post_id = get_the_ID();
+	$pages   = get_pages(
+		array(
+			'sort_column' => 'menu_order, title',
+			'post_type'   => get_post_type( $post_id ),
+		)
+	);
+
+	foreach ( $pages as $i => $page ) {
+		if ( $page->ID === $post_id ) {
+			$adj_index = 'previous' === $adjacent ? $i - 1 : $i + 1;
+			break;
+		}
+	}
+
+	if ( $adj_index < count( $pages ) && $adj_index > 0 ) {
+		$post = $pages[ $adj_index ];
+	} else {
+		return '';
+	}
+
+	$title = apply_filters( 'the_title', $post->post_title, $post->ID );
+	$url   = get_permalink( $post );
+
+	$inlink = sprintf(
+		'<a href="%1$s" rel="%2$s">%3$s</a>',
+		$url,
+		'previous' === $adjacent ? 'prev' : 'next',
+		str_replace( '%title', $title, $link )
+	);
+
+	$output = str_replace( '%link', $inlink, $format );
+
+	return $output;
 }
