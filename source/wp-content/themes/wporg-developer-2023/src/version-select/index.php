@@ -36,10 +36,6 @@ function init() {
  * @return string Returns the block markup.
  */
 function render( $attributes, $content, $block ) {
-	if ( ! isset( $block->context['postId'] ) ) {
-		return '';
-	}
-
 	$versions = get_terms( 'wp-parser-since', array( 'order' => 'DESC' ) );
 
 	if ( is_wp_error( $versions ) || empty( $versions ) ) {
@@ -68,11 +64,22 @@ function render( $attributes, $content, $block ) {
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(
 		'<div %1$s>
-			<label class="screen-reader-text" for="version-select">%2$s</label>
-			<select name="version-select" id="version-select">%3$s</select>
+			<label class="screen-reader-text" for="%2$s">%3$s</label>
+			<select name="%2$s" id="%2$s">%4$s</select>
 		</div>',
 		$wrapper_attributes,
+		esc_attr( generate_id( $block->parsed_block ) ),
 		esc_html( __( 'Select version', 'wporg' ) ),
 		$options,
 	);
+}
+
+/**
+ * Generates a unique identifier.
+ *
+ * @param array $block Block object.
+ * @return string      The unique identifier.
+ */
+function generate_id( $block ) {
+	return 'wporg-version-select-' . md5( serialize( $block ) );
 }
