@@ -4,7 +4,8 @@ namespace WordPressdotorg\Theme\Developer_2023;
 require_once __DIR__ . '/dashicons.php';
 
 /**
- * Returns what used to be a php template. Since dashicons have been deprecated, this is now a shortcode.
+ * Returns what used to be a php template.
+ * Since dashicons have been deprecated, this shortcode renders content in a block template.
  */
 add_shortcode(
 	'dashicons_page',
