@@ -24,7 +24,6 @@
 			"fontSize": true
 		}
 	},
-	"usesContext": [ "postId" ],
 	"editorScript": "file:./index.js",
 	"style": "file:./style-index.css"
 }
