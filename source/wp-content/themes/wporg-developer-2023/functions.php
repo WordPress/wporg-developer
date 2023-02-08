@@ -168,6 +168,10 @@ add_action( 'init', __NAMESPACE__ . '\\init' );
 add_filter( 'wporg_block_site_breadcrumbs', __NAMESPACE__ . '\set_site_breadcrumbs' );
 add_filter( 'single_template_hierarchy', __NAMESPACE__ . '\add_handbook_templates' );
 
+// Priority must be lower than 5 to precede table of contents filter.
+// See: https://github.com/WordPress/wporg-mu-plugins/blob/trunk/mu-plugins/blocks/table-of-contents/index.php#L70
+add_filter( 'the_content', __NAMESPACE__ . '\filter_code_content', 4 );
+
 // Remove table of contents.
 add_filter( 'wporg_handbook_toc_should_add_toc', '__return_false' );
 
@@ -466,4 +470,33 @@ function add_handbook_templates( $templates ) {
 		array_unshift( $templates, 'single-handbook-github.php' );
 	}
 	return $templates;
+}
+
+/**
+ * Filters content for the code reference blocks so Table of Contents can be added.
+ *
+ * @param string $content
+ * @return string
+ */
+function filter_code_content( $content ) {
+	$post = get_post();
+
+	if ( ! is_single() && ! is_parsed_post_type( $post->post_type ) ) {
+		return $content;
+	}
+
+	return do_blocks(
+		'
+		<!-- wp:wporg/code-reference-summary /-->
+		<!-- wp:wporg/code-reference-description /-->
+		<!-- wp:wporg/code-reference-parameters /-->
+		<!-- wp:wporg/code-reference-return-value /-->
+		<!-- wp:wporg/code-reference-explanation /-->
+		<!-- wp:wporg/code-reference-source /-->
+		<!-- wp:wporg/code-reference-hooks /-->
+		<!-- wp:wporg/code-reference-related /-->
+		<!-- wp:wporg/code-reference-changelog /-->
+		<!-- wp:wporg/code-reference-comments /-->
+	'
+	);
 }
