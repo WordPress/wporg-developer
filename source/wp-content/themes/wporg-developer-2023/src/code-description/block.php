@@ -90,7 +90,15 @@ function get_description_content( $post_id ) {
 			}
 			// Process text for auto-linking, etc.
 			remove_filter( 'the_content', 'wpautop' );
+
+			// Remove the filter that adds the code reference block to the content.
+			remove_filter( 'the_content', 'DevHub\filter_code_content', 4 );
+
 			$see_ref = apply_filters( 'the_content', apply_filters( 'get_the_content', $see_ref ) );
+
+			// Re-add the filter that adds this block to the content.
+			add_filter( 'the_content', 'DevHub\filter_code_content', 4 );
+
 			add_filter( 'the_content', 'wpautop' );
 
 			$output .= '<li>' . $see_ref . "</li>\n";

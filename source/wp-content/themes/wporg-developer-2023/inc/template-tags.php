@@ -1720,7 +1720,13 @@ namespace DevHub {
 		$description = str_replace( '</code></pre>', '[/code]', $description );
 
 		if ( $description ) {
+			// Remove the filter that adds the code reference block to the content.
+			remove_filter( 'the_content', 'DevHub\filter_code_content', 4 );
+
 			$description = apply_filters( 'the_content', apply_filters( 'get_the_content' , $description ) );
+
+			// Re-add the filter that adds this block to the content.
+			add_filter( 'the_content', 'DevHub\filter_code_content', 4 );
 		}
 
 		return $description;

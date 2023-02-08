@@ -475,6 +475,9 @@ function add_handbook_templates( $templates ) {
 /**
  * Filters content for the code reference blocks so Table of Contents can be added.
  *
+ * Note: This filter is added and removed in src/code-description/block.php to prevent infinite loops.
+ * Any update to the function name should be reflected there.
+ *
  * @param string $content
  * @return string
  */
