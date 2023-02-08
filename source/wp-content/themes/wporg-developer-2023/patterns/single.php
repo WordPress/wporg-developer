@@ -5,7 +5,7 @@
  * Inserter: no
  */
 
- // This content in filtered by `filter_code_content` in functions.php to add the post content.
+ // This content is filtered by `filter_code_content` in functions.php to add the post content.
  // See: https://github.com/WordPress/wporg-developer/pull/194
 ?>
 
