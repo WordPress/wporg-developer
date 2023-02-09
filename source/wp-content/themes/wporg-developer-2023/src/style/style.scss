@@ -312,8 +312,32 @@ body[class] {
 		font-size: var(--wp--preset--font-size--heading-3);
 	}
 
+	dt {
+		font-weight: 700;
+	}
+
+	code {
+		background: #f7f7f7;
+		border-radius: 2px;
+		padding: 5px 6px;
+		white-space: pre-wrap;
+	}
+
+	pre {
+		padding: 20px;
+		background: #f7f7f7;
+		border: 1px solid var(--wp--preset--color--light-grey-1);
+		border-radius: 2px;
+	}
+
 	table {
 		border-collapse: collapse;
+
+		code {
+			background: revert;
+			padding: revert;
+			border-radius: revert;
+		}
 
 		tr {
 			vertical-align: top;
