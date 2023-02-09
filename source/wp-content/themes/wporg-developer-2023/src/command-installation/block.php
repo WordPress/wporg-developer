@@ -42,27 +42,23 @@ function render( $attributes, $content, $block ) {
 	}
 	$repo_slug = str_replace( 'https://github.com/', '', $repo_url );
 	$command = get_the_title();
-	$content = sprintf(
+	$installing_instructions = sprintf(
 		'
-		<p>Use the <code>%1$s</code> command by installing the command\'s package:</p>
-		<pre><code>wp package install %2$s</code></pre>
-		<p>Once the package is successfully installed, the <code>%3$s</code> command will appear in the list of available commands.</p>
+		<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">%1$s</h3><!-- /wp:heading -->
+		<p>Use the <code>%2$s</code> command by installing the command\'s package:</p>
+		<pre><code>wp package install %3$s</code></pre>
+		<p>Once the package is successfully installed, the <code>%4$s</code> command will appear in the list of available commands.</p>
 		',
+		__( 'Installing', 'wporg' ),
 		$command,
 		esc_html( $repo_slug ),
 		$command
 	);
 
-	$title_block = sprintf(
-		'<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">%s</h3><!-- /wp:heading -->',
-		__( 'Installing', 'wporg' )
-	);
-
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(
-		'<section %1$s>%2$s %3$s</section>',
+		'<section %1$s>%2$s</section>',
 		$wrapper_attributes,
-		do_blocks( $title_block ),
-		$content
+		do_blocks( $installing_instructions ),
 	);
 }
