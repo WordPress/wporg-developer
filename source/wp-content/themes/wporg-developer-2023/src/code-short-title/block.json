@@ -1,10 +1,10 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "wporg/post-title",
-	"title": "Post Title",
+	"name": "wporg/code-short-title",
+	"title": "Code Short Title",
 	"category": "layout",
-	"description": "The post title for archive and search results.",
+	"description": "The code short title for archive and search results.",
 	"keywords": [ "post" ],
 	"textdomain": "wporg",
 	"attributes": {},
