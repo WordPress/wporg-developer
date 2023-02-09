@@ -163,6 +163,7 @@ require_once __DIR__ . '/src/search-filters/index.php';
 require_once __DIR__ . '/src/search-results-context/index.php';
 require_once __DIR__ . '/src/search-title/index.php';
 require_once __DIR__ . '/src/search-usage-info/index.php';
+require_once __DIR__ . '/src/version-select/index.php';
 
 add_action( 'init', __NAMESPACE__ . '\\init' );
 add_filter( 'wporg_block_site_breadcrumbs', __NAMESPACE__ . '\set_site_breadcrumbs' );

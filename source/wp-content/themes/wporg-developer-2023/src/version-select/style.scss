@@ -1,0 +1,39 @@
+.wp-block-wporg-version-select {
+	position: relative;
+	min-width: 4em;
+
+	select {
+		appearance: none;
+		border: 1px solid var(--wp--preset--color--charcoal-4);
+		display: block;
+		font-family: inherit;
+		font-size: inherit;
+		max-width: none;
+		cursor: pointer;
+		color: inherit;
+		background: inherit;
+		overflow: hidden;
+		white-space: nowrap;
+		width: 100%;
+		text-overflow: ellipsis;
+		padding: 1em 1.25em 1em 1em;
+		border-radius: 2px;
+	}
+
+	&::after {
+		content: "";
+		display: block;
+		position: absolute;
+		right: 1em;
+		top: 0;
+		height: 100%;
+		width: 0.8em;
+		mask-image: url(../../images/chevron.svg);
+		mask-repeat: no-repeat;
+		mask-position: center;
+		mask-size: contain;
+		transform: rotate(180deg);
+		background-color: var(--wp--preset--color--charcoal-1);
+		pointer-events: none; // Allows clicking on the select element.
+	}
+}
