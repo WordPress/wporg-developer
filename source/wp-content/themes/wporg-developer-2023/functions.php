@@ -137,6 +137,11 @@ if ( is_admin() ) {
 require __DIR__ . '/inc/shortcodes.php';
 
 /**
+ * Shortcode: Dashicons.
+ */
+require __DIR__ . '/inc/shortcode-dashicons.php';
+
+/**
  * Block Hooks.
  */
 require __DIR__ . '/inc/block-hooks.php';

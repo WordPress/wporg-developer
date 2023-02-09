@@ -81,7 +81,8 @@
 			cssClass = jQuery( this ).attr( 'class' );
 
 			dashicons.display( attr, cssClass );
-			$(window).scrollTop( $("#glyph").offset().top );
+			var headerWidth = 160; // Rough approximation of the header height.
+			$(window).scrollTop( $("#glyph").offset().top - headerWidth );
 
 		});
 
