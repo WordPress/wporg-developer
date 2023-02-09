@@ -44,8 +44,18 @@ function render( $attributes, $content, $block ) {
 		return '';
 	}
 
-	$used_by = ( $q = get_used_by() ) ? $q->post_count : 0;
-	$uses    = ( $q = get_uses() ) ? $q->post_count : 0;
+	$used_by_posts = get_used_by();
+	$uses_posts    = get_uses();
+	$used_by       = 0;
+	$uses          = 0;
+
+	if ( $used_by_posts ) {
+		$used_by = $used_by_posts->post_count;
+	}
+
+	if ( $uses_posts ) {
+		$uses = $uses_posts->post_count;
+	}
 
 	$used_by_html = sprintf(
 		/* translators: 1: permalink, 2: number of functions */
