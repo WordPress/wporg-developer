@@ -1,10 +1,10 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "wporg/post-type-usage-info",
-	"title": "Post Type Usage Info",
+	"name": "wporg/code-type-usage-info",
+	"title": "Code Type Usage Info",
 	"category": "layout",
-	"description": "Displays information about post type references.",
+	"description": "Displays information about code type references.",
 	"keywords": [ "post" ],
 	"textdomain": "wporg",
 	"attributes": {},
