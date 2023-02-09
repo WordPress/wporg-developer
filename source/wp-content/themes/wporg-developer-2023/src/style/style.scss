@@ -347,3 +347,24 @@ body[class] {
 		margin-top: 0;
 	}
 }
+
+.single-command {
+	h3 {
+		font-family: var(--wp--preset--font-family--eb-garamond);
+		font-size: var(--wp--preset--font-size--heading-3);
+	}
+
+	table {
+		border-collapse: collapse;
+
+		tr {
+			vertical-align: top;
+			border-bottom: 1px solid var(--wp--preset--color--light-grey-1);
+		}
+
+		th,
+		td {
+			padding: 10px;
+		}
+	}
+}
