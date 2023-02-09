@@ -167,6 +167,7 @@ require_once __DIR__ . '/src/code-type-usage-info/index.php';
 require_once __DIR__ . '/src/code-comments/block.php';
 require_once __DIR__ . '/src/code-comment-edit/block.php';
 require_once __DIR__ . '/src/code-comment-form/block.php';
+require_once __DIR__ . '/src/command-installation/block.php';
 require_once __DIR__ . '/src/search-filters/index.php';
 require_once __DIR__ . '/src/search-results-context/index.php';
 require_once __DIR__ . '/src/version-select/index.php';

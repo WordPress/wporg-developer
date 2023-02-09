@@ -1,0 +1,19 @@
+.wp-block-wporg-command-installation {
+	h3 {
+		margin-bottom: var(--wp--preset--spacing--20);
+	}
+
+	code {
+		background: #f7f7f7;
+		border-radius: 2px;
+		padding: 5px 6px;
+		white-space: pre-wrap;
+	}
+
+	pre {
+		padding: 20px;
+		background: #f7f7f7;
+		border: 1px solid var(--wp--preset--color--light-grey-1);
+		border-radius: 2px;
+	}
+}
