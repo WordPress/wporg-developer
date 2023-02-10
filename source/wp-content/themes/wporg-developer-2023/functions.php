@@ -179,6 +179,7 @@ add_filter( 'previous_post_link', __NAMESPACE__ . '\get_adjacent_handbook_post_l
 // Priority must be lower than 5 to precede table of contents filter.
 // See: https://github.com/WordPress/wporg-mu-plugins/blob/trunk/mu-plugins/blocks/table-of-contents/index.php#L70
 add_filter( 'the_content', __NAMESPACE__ . '\filter_code_content', 4 );
+add_filter( 'wporg_table_of_contents_post_content', __NAMESPACE__ . '\filter_code_content' );
 
 // Remove table of contents.
 add_filter( 'wporg_handbook_toc_should_add_toc', '__return_false' );
