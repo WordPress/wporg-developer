@@ -22,7 +22,9 @@
 
 <!-- wp:paragraph -->
 <p>Looking to learn more about the internal API of WP-CLI or to contribute to its development? Check out the WP-CLI team’s <a href="https://make.wordpress.org/cli/handbook/">handbook</a> and the <a href="https://make.wordpress.org/cli/">WP-CLI Blog</a>.</p>
-<!-- /wp:paragraph --></div>
+<!-- /wp:paragraph -->
+
+<!-- wp:wporg/cli-command-table /--></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns --></div>
 <!-- /wp:group -->
