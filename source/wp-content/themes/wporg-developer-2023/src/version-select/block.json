@@ -7,7 +7,6 @@
 	"description": "Displays version in a select element.",
 	"keywords": [ "post" ],
 	"textdomain": "wporg",
-	"usesContext": [ "postId" ],
 	"attributes": {
 		"hideLabelFromVision": {
 			"type": "boolean",
