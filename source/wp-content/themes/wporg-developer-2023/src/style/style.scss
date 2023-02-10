@@ -308,8 +308,7 @@ body[class] {
 
 .single-command {
 	h3 {
-		font-family: var(--wp--preset--font-family--eb-garamond);
-		font-size: var(--wp--preset--font-size--heading-3);
+		margin-bottom: var(--wp--preset--spacing--20);
 	}
 
 	dt {
@@ -347,6 +346,12 @@ body[class] {
 		th,
 		td {
 			padding: 10px;
+		}
+	}
+
+	@media (min-width: 720px) {
+		code {
+			white-space: revert;
 		}
 	}
 }
