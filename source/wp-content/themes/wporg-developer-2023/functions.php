@@ -167,6 +167,7 @@ require_once __DIR__ . '/src/code-type-usage-info/index.php';
 require_once __DIR__ . '/src/code-comments/block.php';
 require_once __DIR__ . '/src/code-comment-edit/block.php';
 require_once __DIR__ . '/src/code-comment-form/block.php';
+require_once __DIR__ . '/src/form-wrapper/block.php';
 require_once __DIR__ . '/src/search-filters/index.php';
 require_once __DIR__ . '/src/search-results-context/index.php';
 require_once __DIR__ . '/src/version-select/index.php';
@@ -333,6 +334,8 @@ function breadcrumb_trail_for_note_edit( $items ) {
  * @param \WP_Query $query
  */
 function pre_get_posts( $query ) {
+
+	//dump( $query );
 
 	if ( $query->is_main_query() && $query->is_post_type_archive() ) {
 		$query->set( 'orderby', 'title' );
