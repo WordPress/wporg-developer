@@ -8,7 +8,6 @@ import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
  * Internal dependencies
  */
 import metadata from './block.json';
-import './style.scss';
 
 registerBlockType( metadata.name, {
 	/**
