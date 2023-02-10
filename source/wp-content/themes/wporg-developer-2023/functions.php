@@ -158,16 +158,16 @@ require_once __DIR__ . '/src/code-private-access/block.php';
 require_once __DIR__ . '/src/code-related/block.php';
 require_once __DIR__ . '/src/code-return-value/block.php';
 require_once __DIR__ . '/src/code-source/block.php';
+require_once __DIR__ . '/src/code-short-title/index.php';
 require_once __DIR__ . '/src/code-summary/block.php';
 require_once __DIR__ . '/src/code-table/block.php';
 require_once __DIR__ . '/src/code-title/block.php';
+require_once __DIR__ . '/src/code-type-usage-info/index.php';
 require_once __DIR__ . '/src/code-comments/block.php';
 require_once __DIR__ . '/src/code-comment-edit/block.php';
 require_once __DIR__ . '/src/code-comment-form/block.php';
 require_once __DIR__ . '/src/search-filters/index.php';
 require_once __DIR__ . '/src/search-results-context/index.php';
-require_once __DIR__ . '/src/search-title/index.php';
-require_once __DIR__ . '/src/search-usage-info/index.php';
 require_once __DIR__ . '/src/version-select/index.php';
 
 add_action( 'init', __NAMESPACE__ . '\\init' );

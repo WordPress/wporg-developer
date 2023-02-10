@@ -1,12 +1,12 @@
 <?php
 /**
- * Block Name: Search Usage Info
- * Description: A dynamic list of code references.
+ * Block Name: Code Type Usage Info
+ * Description: Displays information about code type references.
  *
  * @package wporg
  */
 
-namespace WordPressdotorg\Theme\Developer_2023\Dynamic_Search_Usage_Info;
+namespace WordPressdotorg\Theme\Developer_2023\Dynamic_Code_Type_Usage_Info;
 
 use function DevHub\get_source_file;
 use function DevHub\get_line_number;
@@ -26,7 +26,7 @@ add_action( 'init', __NAMESPACE__ . '\init' );
  */
 function init() {
 	register_block_type(
-		dirname( dirname( __DIR__ ) ) . '/build/search-usage-info',
+		dirname( dirname( __DIR__ ) ) . '/build/code-type-usage-info',
 		array(
 			'render_callback' => __NAMESPACE__ . '\render',
 		)
@@ -44,8 +44,18 @@ function render( $attributes, $content, $block ) {
 		return '';
 	}
 
-	$used_by = ( $q = get_used_by() ) ? $q->post_count : 0;
-	$uses    = ( $q = get_uses() ) ? $q->post_count : 0;
+	$used_by_posts = get_used_by();
+	$uses_posts    = get_uses();
+	$used_by       = 0;
+	$uses          = 0;
+
+	if ( $used_by_posts ) {
+		$used_by = $used_by_posts->post_count;
+	}
+
+	if ( $uses_posts ) {
+		$uses = $uses_posts->post_count;
+	}
 
 	$used_by_html = sprintf(
 		/* translators: 1: permalink, 2: number of functions */
@@ -61,7 +71,7 @@ function render( $attributes, $content, $block ) {
 		$uses
 	);
 
-	$source_html = __( 'Source:', 'wporg' ) . ' <a class="wp-block-wporg-search-usage-info__source external-link" href="' . get_github_source_file_link() . '">' . get_source_file() . ':' . get_line_number() . '</a>';
+	$source_html = __( 'Source:', 'wporg' ) . ' <a class="wp-block-wporg-code-type-usage-info__source external-link" href="' . get_github_source_file_link() . '">' . get_source_file() . ':' . get_line_number() . '</a>';
 
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(

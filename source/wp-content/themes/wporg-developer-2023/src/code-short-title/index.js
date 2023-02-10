@@ -2,17 +2,13 @@
  * WordPress dependencies
  */
 import { registerBlockType } from '@wordpress/blocks';
-import { useBlockProps } from '@wordpress/block-editor';
 
 /**
  * Internal dependencies
  */
+import Edit from '../shared/dynamic-edit';
 import metadata from './block.json';
 import './style.scss';
-
-function Edit() {
-	return <div { ...useBlockProps() }>Search Usage Info</div>;
-}
 
 registerBlockType( metadata.name, {
 	edit: Edit,

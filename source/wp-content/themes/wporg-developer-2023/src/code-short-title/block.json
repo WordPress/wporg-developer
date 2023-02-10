@@ -1,10 +1,10 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "wporg/search-usage-info",
-	"title": "Search Usage Info",
+	"name": "wporg/code-short-title",
+	"title": "Code Short Title",
 	"category": "layout",
-	"description": "A dynamic list of code references.",
+	"description": "The code short title for archive and search results.",
 	"keywords": [ "post" ],
 	"textdomain": "wporg",
 	"attributes": {},
@@ -16,7 +16,10 @@
 			"link": true
 		},
 		"spacing": {
-			"margin": true,
+			"margin": [
+				"top",
+				"bottom"
+			],
 			"padding": true
 		},
 		"typography": {
@@ -24,6 +27,7 @@
 			"lineHeight": true
 		}
 	},
+	"usesContext": [ "postId" ],
 	"editorScript": "file:./index.js",
 	"style": "file:./style-index.css"
 }

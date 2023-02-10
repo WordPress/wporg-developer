@@ -1,10 +1,10 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "wporg/search-title",
-	"title": "Search Title",
+	"name": "wporg/code-type-usage-info",
+	"title": "Code Type Usage Info",
 	"category": "layout",
-	"description": "The post title for search results.",
+	"description": "Displays information about code type references.",
 	"keywords": [ "post" ],
 	"textdomain": "wporg",
 	"attributes": {},
@@ -16,10 +16,7 @@
 			"link": true
 		},
 		"spacing": {
-			"margin": [
-				"top",
-				"bottom"
-			],
+			"margin": true,
 			"padding": true
 		},
 		"typography": {
@@ -27,7 +24,6 @@
 			"lineHeight": true
 		}
 	},
-	"usesContext": [ "postId" ],
 	"editorScript": "file:./index.js",
 	"style": "file:./style-index.css"
 }
