@@ -74,7 +74,7 @@ function get_description_content( $post_id ) {
 	$output .= $description;
 
 	if ( $see_tags ) {
-		$output .= '<h3>' . __( 'See also', 'wporg' ) . '</h3>';
+		$output .= '<h3 class="has-heading-5-font-size">' . __( 'See also', 'wporg' ) . '</h3>';
 
 		$output .= '<ul>';
 		foreach ( $see_tags as $tag ) {
