@@ -29,10 +29,6 @@ function init() {
  * @return string Returns the block markup.
  */
 function render( $attributes, $content, $block ) {
-	if ( ! isset( $block->context['postId'] ) ) {
-		return '';
-	}
-
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(
 		'<section %1$s><form>%2$s <button>Submit</button></form></section>',
