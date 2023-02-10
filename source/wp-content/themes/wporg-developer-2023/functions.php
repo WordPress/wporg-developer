@@ -335,8 +335,6 @@ function breadcrumb_trail_for_note_edit( $items ) {
  */
 function pre_get_posts( $query ) {
 
-	//dump( $query );
-
 	if ( $query->is_main_query() && $query->is_post_type_archive() ) {
 		$query->set( 'orderby', 'title' );
 		$query->set( 'order', 'ASC' );
