@@ -1,5 +1,5 @@
 <?php
-namespace WordPressdotorg\Theme\Developer_2023\Dynamic_Command_Installation;
+namespace WordPressdotorg\Theme\Developer_2023\Dynamic_Command_Content;
 
 add_action( 'init', __NAMESPACE__ . '\init' );
 
@@ -12,7 +12,7 @@ add_action( 'init', __NAMESPACE__ . '\init' );
  */
 function init() {
 	register_block_type(
-		dirname( dirname( __DIR__ ) ) . '/build/command-installation',
+		dirname( dirname( __DIR__ ) ) . '/build/command-content',
 		array(
 			'render_callback' => __NAMESPACE__ . '\render',
 		)
@@ -26,6 +26,10 @@ function init() {
  */
 function render( $attributes, $content, $block ) {
 
+	$content = get_the_content();
+
+	$wrapper_attributes = get_block_wrapper_attributes();
+
 	$non_bundled_commands = array(
 		'https://github.com/wp-cli/admin-command',
 		'https://github.com/wp-cli/dist-archive-command',
@@ -38,7 +42,11 @@ function render( $attributes, $content, $block ) {
 	$repo_url = get_post_meta( get_the_ID(), 'repo_url', true );
 	// Only non-bundled commands
 	if ( ! in_array( $repo_url, $non_bundled_commands, true ) ) {
-		return '';
+		return sprintf(
+			'<section %1$s>%2$s</section>',
+			$wrapper_attributes,
+			do_blocks( $content ),
+		);
 	}
 	$repo_slug = str_replace( 'https://github.com/', '', $repo_url );
 	$command = get_the_title();
@@ -55,10 +63,18 @@ function render( $attributes, $content, $block ) {
 		$command
 	);
 
-	$wrapper_attributes = get_block_wrapper_attributes();
+	// Insert before OPTIONS but after description if OPTIONS exists
+	$options_match = '#<h3>Options<\/h3>|<h3>OPTIONS<\/h3>#';
+	if ( preg_match( $options_match, $content ) ) {
+		$content = preg_replace( $options_match, $installing_instructions . '$0', $content );
+	} else {
+		// Otherwise, appending to description is fine.
+		$content .= $installing_instructions;
+	}
+
 	return sprintf(
 		'<section %1$s>%2$s</section>',
 		$wrapper_attributes,
-		do_blocks( $installing_instructions ),
+		do_blocks( $content ),
 	);
 }

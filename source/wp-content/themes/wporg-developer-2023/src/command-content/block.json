@@ -1,11 +1,11 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "wporg/command-installation",
+	"name": "wporg/command-content",
 	"version": "0.1.0",
-	"title": "Command Installation",
+	"title": "Command Content",
 	"category": "widgets",
-	"description": "Installation guide for a command",
+	"description": "Command Content",
 	"usesContext": [ "postId" ],
 	"supports": {
 		"html": false,
