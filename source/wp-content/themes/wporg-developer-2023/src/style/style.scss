@@ -129,6 +129,24 @@ body[class] {
 	}
 }
 
+// Wrap meta on smaller screens. Double class needed to override core style.
+.entry-meta.entry-meta {
+
+	@media (max-width: 781px) {
+		flex-wrap: wrap;
+
+		> * {
+			min-width: calc(50% - var(--wp--preset--spacing--20) / 2);
+		}
+	}
+
+	@media (max-width: 479px) {
+		> * {
+			min-width: 100%;
+		}
+	}
+}
+
 .wporg-hero-graphic {
 	overflow: hidden;
 }
