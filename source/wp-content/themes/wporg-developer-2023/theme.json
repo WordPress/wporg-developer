@@ -41,6 +41,12 @@
 					"slug": "aquamarine",
 					"color": "#6ec9ae",
 					"name": "Aquamarine"
+				},
+				{
+					"slug": "linen",
+					"color": "#fbfaf7",
+					"name": "Linen"
+
 				}
 			]
 		},
