@@ -131,7 +131,7 @@
 <div class="wp-block-columns"><!-- wp:column -->
 <div class="wp-block-column"><!-- wp:group {"style":{"spacing":{"blockGap":"0"}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"left"}} -->
 <div class="wp-block-group"><!-- wp:paragraph {"className":"is-style-short-text"} -->
-<p class="is-style-short-text"><a href="https://learn.wordpress.org"><?php esc_attr_e( 'Learn Wordpress', 'wporg' ); ?></a></p>
+<p class="is-style-short-text"><a href="https://learn.wordpress.org"><?php esc_attr_e( 'Learn WordPress', 'wporg' ); ?></a></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
