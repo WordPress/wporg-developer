@@ -1,5 +1,6 @@
-@media screen and (max-width: 500px) {
-	.wp-block-wporg-cli-command-table {
+.wp-block-wporg-cli-command-table {
+
+	@media screen and (max-width: 500px) {
 		thead {
 			display: none;
 		}
@@ -22,5 +23,10 @@
 				width: 100%;
 			}
 		}
+	}
+
+	.wp-block-table th:first-child,
+	.wp-block-table td:first-child {
+		width: 40%;
 	}
 }
