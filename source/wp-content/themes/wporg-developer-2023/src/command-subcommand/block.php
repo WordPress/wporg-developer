@@ -45,41 +45,39 @@ function render( $attributes, $content, $block ) {
 		__( 'Subcommands', 'wporg' )
 	);
 
-	$content =
-	'
-	<table>
-		<thead>
-		<tr>
-			<th>Name</th>
-			<th>Description</th>
-		</tr>
-	<tbody>
-	';
-
-	foreach ( $children as $child ) {
-		$content .= '<tr>';
-		$content .= '<td>';
-		$content .= '<a href="' . apply_filters( 'the_permalink', get_permalink( $child->ID ) ) . '">';
-		$content .= apply_filters( 'the_title', $child->post_title );
-		$content .= '</a>';
-		$content .= '</td>';
-		$content .= '<td>';
-		$content .= apply_filters( 'the_excerpt', $child->post_excerpt );
-		$content .= '</td>';
-		$content .= '</tr>';
-	}
-
-	$content .=
-	'
-	</tbody>
-	</table>
-	';
+	$table_block = sprintf(
+		'<!-- wp:wporg/code-table {"className":"is-responsive","itemsToShow":50,"headings":%s,"rows":%s,"style":{"spacing":{"margin":{"top":"var:preset|spacing|20"}}}} /--> ',
+		wp_json_encode( array( __( 'Name', 'wporg' ), __( 'Description', 'wporg' ) ) ),
+		wp_json_encode( get_row_data( $children ) )
+	);
 
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(
 		'<section %1$s>%2$s %3$s</section>',
 		$wrapper_attributes,
 		do_blocks( $title_block ),
-		$content,
+		do_blocks( $table_block ),
 	);
+}
+
+/**
+ * Get the changelog data for the current post.
+ *
+ * @param WP_Post[] $posts The posts to get the data from.
+ * @return array
+ */
+function get_row_data( $posts ) {
+	$rows = array();
+
+	foreach ( $posts as $post ) {
+		$title_link = sprintf(
+			'<a href="%1$s">%2$s</a>',
+			esc_url( apply_filters( 'the_permalink', get_permalink( $post->ID ) ) ),
+			esc_html( apply_filters( 'the_title', $post->post_title ) ),
+		);
+
+		$rows[] = array( $title_link, apply_filters( 'the_excerpt', $post->post_excerpt ) );
+	}
+
+	return $rows;
 }

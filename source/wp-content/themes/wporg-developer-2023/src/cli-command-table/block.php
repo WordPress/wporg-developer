@@ -39,7 +39,7 @@ function render() {
 	}
 
 	$table_block = sprintf(
-		'<!-- wp:wporg/code-table {"itemsToShow":50,"headings":%s,"rows":%s,"style":{"spacing":{"margin":{"top":"var:preset|spacing|20"}}}} /--> ',
+		'<!-- wp:wporg/code-table {"className":"is-responsive","itemsToShow":50,"headings":%s,"rows":%s,"style":{"spacing":{"margin":{"top":"var:preset|spacing|20"}}}} /--> ',
 		wp_json_encode( array( __( 'Command', 'wporg' ), __( 'Description', 'wporg' ) ) ),
 		wp_json_encode( get_row_data( $posts ) )
 	);
