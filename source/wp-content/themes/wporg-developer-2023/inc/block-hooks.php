@@ -41,7 +41,7 @@ add_filter( 'render_block', __NAMESPACE__ . '\\filter_search_block', 10, 2 );
  * Filters the search block and updates the placeholder.
  *
  * @param string $parsed_block
- * @return string
+ * @return array
  */
 function render_block_data( $parsed_block ) {
 	if ( 'core/search' !== $parsed_block['blockName'] ) {
