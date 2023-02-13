@@ -2,6 +2,7 @@
 	align-items: flex-start;
 	display: flex;
 	flex-direction: column;
+	font-family: var(--wp--preset--font-family--monospace);
 }
 
 @media (min-width: 350px) {
@@ -21,7 +22,6 @@
 .wp-block-wporg-code-short-title.class a,
 .wp-block-wporg-code-short-title.method a,
 .wp-block-wporg-code-short-title.hook a {
-	font-family: var(--wp--preset--font-family--monospace);
 	word-break: break-all;
 }
 

@@ -131,7 +131,7 @@
 <div class="wp-block-columns"><!-- wp:column -->
 <div class="wp-block-column"><!-- wp:group {"style":{"spacing":{"blockGap":"0"}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"left"}} -->
 <div class="wp-block-group"><!-- wp:paragraph {"className":"is-style-short-text"} -->
-<p class="is-style-short-text"><a href="https://learn.wordpress.org"><?php esc_attr_e( 'Learn Wordpress', 'wporg' ); ?></a></p>
+<p class="is-style-short-text"><a href="https://learn.wordpress.org"><?php esc_attr_e( 'Learn WordPress', 'wporg' ); ?></a></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
@@ -193,8 +193,8 @@
 <!-- /wp:column -->
 
 <!-- wp:column {"width":"66%","layout":{"inherit":false}} -->
-<div class="wp-block-column" style="flex-basis:66%"><!-- wp:group {"style":{"spacing":{"margin":{"top":"15px"}}}} -->
-<div class="wp-block-group" style="margin-top:15px"><!-- wp:wporg/latest-news {"blogId":719} /-->
+<div class="wp-block-column" style="flex-basis:66%"><!-- wp:group {"style":{"spacing":{"margin":{"top":"8px"}}}} -->
+<div class="wp-block-group" style="margin-top:8px"><!-- wp:wporg/latest-news {"blogId":719} /-->
 
 <!-- wp:spacer {"height":"20px"} -->
 <div style="height:20px" aria-hidden="true" class="wp-block-spacer"></div>
