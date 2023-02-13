@@ -558,14 +558,14 @@ function filter_code_content( $content ) {
 function filter_command_content( $content ) {
 	$post_type = get_post_type();
 
-	if ( ! is_single() || ! 'command' == $post_type ) {
+	if ( ! is_single() || ! ( 'command' == $post_type ) ) {
 		return $content;
 	}
 
 	return do_blocks(
 		'
-		<!-- wp:wporg/command-github /-->		
-		<!-- wp:wporg/command-content /-->	
+		<!-- wp:wporg/command-github /-->
+		<!-- wp:wporg/command-content /-->
 		<!-- wp:wporg/command-subcommand /-->
 		'
 	);
