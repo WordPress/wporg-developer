@@ -170,6 +170,7 @@ require_once __DIR__ . '/src/code-comment-form/block.php';
 require_once __DIR__ . '/src/form-wrapper/block.php';
 require_once __DIR__ . '/src/command-installation/block.php';
 require_once __DIR__ . '/src/command-content/block.php';
+require_once __DIR__ . '/src/command-github/block.php';
 require_once __DIR__ . '/src/command-subcommand/block.php';
 require_once __DIR__ . '/src/search-filters/index.php';
 require_once __DIR__ . '/src/search-results-context/index.php';
@@ -563,6 +564,7 @@ function filter_command_content( $content ) {
 
 	return do_blocks(
 		'
+		<!-- wp:wporg/command-github /-->		
 		<!-- wp:wporg/command-content /-->	
 		<!-- wp:wporg/command-subcommand /-->
 		'
