@@ -329,7 +329,7 @@ body[class] {
 	.wp-block-wporg-form-wrapper {
 		display: flex;
 		align-items: center;
-		gap: 10px;
+		gap: var(--wp--preset--spacing--20);
 	}
 
 	.wp-block-wporg-version-select {

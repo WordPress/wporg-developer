@@ -25,3 +25,12 @@
 		align-items: center;
 	}
 }
+
+.wp-block-wporg-search-filters button {
+	background-color: transparent;
+	border: 1px solid var(--wp--preset--color--blueberry-1);
+	padding: 6px 8px;
+	color: var(--wp--preset--color--blueberry-1);
+	border-radius: 2px;
+
+}

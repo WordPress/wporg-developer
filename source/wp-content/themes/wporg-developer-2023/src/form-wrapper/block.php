@@ -31,7 +31,7 @@ function init() {
 function render( $attributes, $content, $block ) {
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(
-		'<section %1$s><form>%2$s <button>Submit</button></form></section>',
+		'<section %1$s><form>%2$s</form></section>',
 		$wrapper_attributes,
 		$content
 	);
