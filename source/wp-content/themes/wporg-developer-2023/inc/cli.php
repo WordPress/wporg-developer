@@ -6,14 +6,6 @@ class DevHub_CLI {
 	private static $meta_key = 'wporg_cli_markdown_source';
 	private static $supported_post_types = array( 'command' );
 	private static $posts_per_page = -1;
-	private static $non_bundled_commands = array(
-		'https://github.com/wp-cli/admin-command',
-		'https://github.com/wp-cli/dist-archive-command',
-		'https://github.com/wp-cli/doctor-command',
-		'https://github.com/wp-cli/find-command',
-		'https://github.com/wp-cli/profile-command',
-		'https://github.com/wp-cli/scaffold-package-command',
-	);
 
 	public static function init() {
 		add_action( 'init', array( __CLASS__, 'action_init_register_cron_jobs' ) );
@@ -292,9 +284,6 @@ class DevHub_CLI {
 		// Transform HTML entity artifacts back to their original
 		$content = str_replace( '&amp;#039;', '\'', $content );
 
-		$content = self::prepend_installation( $content );
-		$content = self::append_subcommands( $content );
-
 		$repo_url = get_post_meta( get_the_ID(), 'repo_url', true );
 		$cmd_slug = str_replace( 'wp ', '', get_the_title() );
 		$open_issues = 'https://github.com/login?return_to=%2Fissues%3Fq%3Dlabel%3A' . urlencode( 'command:' . str_replace( ' ', '-', $cmd_slug ) ) . '+sort%3Aupdated-desc+org%3Awp-cli+is%3Aopen';
@@ -348,8 +337,6 @@ class DevHub_CLI {
 				$content = self::add_ids_and_jumpto_links( "h$i", $content );
 			}
 		}
-
-		$content .= '<p><em>Command documentation is regenerated at every release. To add or update an example, please submit a pull request against the corresponding part of the codebase.</em></p>';
 
 		add_filter( 'the_content', array( __CLASS__, 'filter_the_content' ) );
 
