@@ -29,19 +29,9 @@ function render( $attributes, $content, $block ) {
 	$content = get_the_content();
 
 	$wrapper_attributes = get_block_wrapper_attributes();
-
-	$non_bundled_commands = array(
-		'https://github.com/wp-cli/admin-command',
-		'https://github.com/wp-cli/dist-archive-command',
-		'https://github.com/wp-cli/doctor-command',
-		'https://github.com/wp-cli/find-command',
-		'https://github.com/wp-cli/profile-command',
-		'https://github.com/wp-cli/scaffold-package-command',
-	);
-
 	$repo_url = get_post_meta( get_the_ID(), 'repo_url', true );
-	// Only non-bundled commands
-	if ( ! in_array( $repo_url, $non_bundled_commands, true ) ) {
+
+	if ( is_bundled_commands( $repo_url ) ) {
 		return sprintf(
 			'<section %1$s>%2$s</section>',
 			$wrapper_attributes,
@@ -77,4 +67,26 @@ function render( $attributes, $content, $block ) {
 		$wrapper_attributes,
 		do_blocks( $content ),
 	);
+}
+
+/**
+ * Get repo url
+ *
+ * @return string Returns the repo url.
+ */
+function is_bundled_commands( $repo_url ) {
+	$non_bundled_commands = array(
+		'https://github.com/wp-cli/admin-command',
+		'https://github.com/wp-cli/dist-archive-command',
+		'https://github.com/wp-cli/doctor-command',
+		'https://github.com/wp-cli/find-command',
+		'https://github.com/wp-cli/profile-command',
+		'https://github.com/wp-cli/scaffold-package-command',
+	);
+
+	if ( in_array( $repo_url, $non_bundled_commands, true ) ) {
+		return false;
+	}
+
+	return true;
 }
