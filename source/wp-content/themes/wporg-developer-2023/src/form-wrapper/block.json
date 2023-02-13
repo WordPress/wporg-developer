@@ -10,15 +10,8 @@
 	"supports": {
 		"html": false,
 		"spacing": {
-			"margin": [
-				"top",
-				"bottom"
-			],
+			"margin": true,
 			"padding": true
-		},
-		"typography": {
-			"fontSize": true,
-			"lineHeight": true
 		}
 	},
 	"textdomain": "wporg",
