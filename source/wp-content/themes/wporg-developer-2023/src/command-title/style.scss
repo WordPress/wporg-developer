@@ -1,0 +1,21 @@
+.wp-block-wporg-command-title {
+	font-size: var(--wp--preset--font-size--extra-large);
+	line-height: 1.73;
+	font-family: var(--wp--preset--font-family--monospace);
+	font-weight: 400;
+	color: var(--wp--preset--color--syntax-green);
+
+	a {
+		text-decoration-line: none !important;
+		color: inherit;
+
+		&:hover,
+		&:focus {
+			opacity: 0.8;
+		}
+	}
+
+	span {
+		color: var(--wp--preset--color--syntax-grey);
+	}
+}

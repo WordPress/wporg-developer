@@ -2,39 +2,6 @@
 	"$schema": "https://schemas.wp.org/trunk/theme.json",
 	"version": 2,
 	"settings": {
-		"blocks": {
-			"wporg/code-reference-title": {
-				"color": {
-					"palette": [
-						{
-							"slug": "syntax-black",
-							"color": "#000000",
-							"name": "Black"
-						},
-						{
-							"slug": "syntax-red",
-							"color": "#d63638",
-							"name": "Red"
-						},
-						{
-							"slug": "syntax-green",
-							"color": "#008a20",
-							"name": "Green"
-						},
-						{
-							"slug": "syntax-blue",
-							"color": "#135e96",
-							"name": "Blue"
-						},
-						{
-							"slug": "syntax-grey",
-							"color": "#646970",
-							"name": "Grey"
-						}
-					]
-				}
-			}
-		},
 		"color": {
 			"palette": [
 				{
@@ -47,6 +14,31 @@
 					"color": "#fbfaf7",
 					"name": "Linen"
 
+				},
+				{
+					"slug": "syntax-black",
+					"color": "#000000",
+					"name": "Black"
+				},
+				{
+					"slug": "syntax-red",
+					"color": "#d63638",
+					"name": "Red"
+				},
+				{
+					"slug": "syntax-green",
+					"color": "#008a20",
+					"name": "Green"
+				},
+				{
+					"slug": "syntax-blue",
+					"color": "#135e96",
+					"name": "Blue"
+				},
+				{
+					"slug": "syntax-grey",
+					"color": "#646970",
+					"name": "Grey"
 				}
 			]
 		},
