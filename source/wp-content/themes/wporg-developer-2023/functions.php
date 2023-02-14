@@ -188,6 +188,7 @@ add_filter( 'previous_post_link', __NAMESPACE__ . '\get_adjacent_handbook_post_l
 add_filter( 'the_content', __NAMESPACE__ . '\filter_code_content', 4 );
 add_filter( 'wporg_table_of_contents_post_content', __NAMESPACE__ . '\filter_code_content' );
 add_filter( 'the_content', __NAMESPACE__ . '\filter_command_content', 4 );
+add_filter( 'wporg_table_of_contents_post_content', __NAMESPACE__ . '\filter_command_content' );
 
 
 // Remove table of contents.
