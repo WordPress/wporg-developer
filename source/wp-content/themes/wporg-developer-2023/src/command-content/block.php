@@ -43,7 +43,7 @@ function render( $attributes, $content, $block ) {
 	$command = get_the_title();
 	$installing_instructions = sprintf(
 		'
-		<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">%1$s</h3><!-- /wp:heading -->
+		<!-- wp:heading {"fontSize":"heading-3"} --><h3 class="wp-block-heading has-heading-3-font-size">%1$s</h3><!-- /wp:heading -->
 		<p>Use the <code>%2$s</code> command by installing the command\'s package:</p>
 		<pre><code>wp package install %3$s</code></pre>
 		<p>Once the package is successfully installed, the <code>%4$s</code> command will appear in the list of available commands.</p>
