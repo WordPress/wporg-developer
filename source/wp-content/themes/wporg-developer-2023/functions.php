@@ -510,6 +510,7 @@ function filter_code_content( $content ) {
 		<!-- wp:wporg/code-reference-related /-->
 		<!-- wp:wporg/code-reference-changelog /-->
 		<!-- wp:wporg/code-reference-comments /-->
+		<!-- wp:pattern {"slug":"wporg-developer-2023/article-meta"} /-->
 	'
 	);
 }
