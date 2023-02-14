@@ -55,6 +55,11 @@ function render( $attributes, $content, $block ) {
 
 	$content .= '</a>';
 
+	$excerpt = get_the_excerpt();
+	if ( $excerpt ) {
+		$content .= '<p class="excerpt">' . $excerpt . '</p>';
+	}
+
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(
 		'<section %1$s>%2$s</section>',

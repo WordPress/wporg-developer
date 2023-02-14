@@ -104,11 +104,5 @@ function filter_the_content( $content ) {
 	// Transform HTML entity artifacts back to their original
 	$content = str_replace( '&amp;#039;', '\'', $content );
 
-	// Include the excerpt in the main content well
-	$excerpt = get_the_excerpt();
-	if ( $excerpt ) {
-		$content = '<p class="excerpt">' . $excerpt . '</p>' . PHP_EOL . $content;
-	}
-
 	return $content;
 }
