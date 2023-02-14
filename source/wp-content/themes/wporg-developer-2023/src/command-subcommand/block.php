@@ -25,9 +25,13 @@ function init() {
  * @return string Returns the block markup.
  */
 function render( $attributes, $content, $block ) {
+	if ( ! isset( $block->context['postId'] ) ) {
+		return '';
+	}
+
 	$children = get_children(
 		array(
-			'post_parent'    => get_the_ID(),
+			'post_parent'    => $block->context['postId'],
 			'post_type'      => 'command',
 			'posts_per_page' => 250,
 			'orderby'        => 'title',

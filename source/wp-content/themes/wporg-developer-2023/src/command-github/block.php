@@ -25,8 +25,15 @@ function init() {
  * @return string Returns the block markup.
  */
 function render( $attributes, $content, $block ) {
-	$repo_url = get_post_meta( get_the_ID(), 'repo_url', true );
-	$cmd_slug = str_replace( 'wp ', '', get_the_title() );
+
+	$post_ID = $block->context['postId'];
+
+	if ( ! isset( $post_ID ) ) {
+		return '';
+	}
+
+	$repo_url = get_post_meta( $post_ID, 'repo_url', true );
+	$cmd_slug = str_replace( 'wp ', '', get_the_title( $post_ID ) );
 	$open_issues = 'https://github.com/login?return_to=%2Fissues%3Fq%3Dlabel%3A' . urlencode( 'command:' . str_replace( ' ', '-', $cmd_slug ) ) . '+sort%3Aupdated-desc+org%3Awp-cli+is%3Aopen';
 	$closed_issues = 'https://github.com/login?return_to=%2Fissues%3Fq%3Dlabel%3A' . urlencode( 'command:' . str_replace( ' ', '-', $cmd_slug ) ) . '+sort%3Aupdated-desc+org%3Awp-cli+is%3Aclosed';
 	$issue_count = get_issue_count( $cmd_slug );

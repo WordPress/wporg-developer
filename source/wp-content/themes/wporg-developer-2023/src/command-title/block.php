@@ -25,11 +25,12 @@ function init() {
  * @return string Returns the block markup.
  */
 function render( $attributes, $content, $block ) {
-	if ( ! isset( $block->context['postId'] ) ) {
-		return '';
-	}
 
 	$post_ID = $block->context['postId'];
+
+	if ( ! isset( $post_ID ) ) {
+		return '';
+	}
 
 	$children = get_children(
 		array(
@@ -59,7 +60,7 @@ function render( $attributes, $content, $block ) {
 	$content .= '</a>';
 	$content .= '</h1>';
 
-	$excerpt = get_the_excerpt();
+	$excerpt = get_the_excerpt( $post_ID );
 	if ( $excerpt ) {
 		$content .= '<p class="excerpt">' . $excerpt . '</p>';
 	}

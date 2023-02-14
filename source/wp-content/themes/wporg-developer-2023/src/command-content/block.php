@@ -26,10 +26,16 @@ function init() {
  */
 function render( $attributes, $content, $block ) {
 
-	$content = get_the_content();
+	$post_ID = $block->context['postId'];
+
+	if ( ! isset( $post_ID ) ) {
+		return '';
+	}
+
+	$content = get_the_content( null, false, $post_ID );
 
 	$wrapper_attributes = get_block_wrapper_attributes();
-	$repo_url = get_post_meta( get_the_ID(), 'repo_url', true );
+	$repo_url = get_post_meta( $post_ID, 'repo_url', true );
 
 	if ( is_bundled_commands( $repo_url ) ) {
 		return sprintf(
@@ -40,7 +46,7 @@ function render( $attributes, $content, $block ) {
 	}
 
 	$repo_slug = str_replace( 'https://github.com/', '', $repo_url );
-	$command = get_the_title();
+	$command = get_the_title( $post_ID );
 	$installing_instructions = sprintf(
 		'
 		<!-- wp:heading {"fontSize":"heading-3"} --><h3 class="wp-block-heading has-heading-3-font-size">%1$s</h3><!-- /wp:heading -->
