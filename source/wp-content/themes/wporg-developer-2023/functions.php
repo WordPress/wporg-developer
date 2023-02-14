@@ -526,9 +526,9 @@ function add_handbook_templates( $templates ) {
  * @return string
  */
 function filter_code_content( $content ) {
-	$post_type = get_post_type();
+	$post = get_post();
 
-	if ( ! is_single() || ! is_parsed_post_type( $post_type ) ) {
+	if ( ! is_single() || ! is_parsed_post_type( $post->post_type ) ) {
 		return $content;
 	}
 
