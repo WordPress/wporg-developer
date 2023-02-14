@@ -26,7 +26,7 @@ function init() {
  */
 function render( $attributes, $content, $block ) {
 
-	$content = filter_the_content( get_the_content() );
+	$content = get_the_content();
 
 	$wrapper_attributes = get_block_wrapper_attributes();
 	$repo_url = get_post_meta( get_the_ID(), 'repo_url', true );
@@ -88,21 +88,4 @@ function is_bundled_commands( $repo_url ) {
 	}
 
 	return true;
-}
-
-/**
- * Filter the content of command pages
- */
-function filter_the_content( $content ) {
-	if ( 'command' !== get_post_type() || ! is_singular() ) {
-		return $content;
-	}
-
-	// Transform emdash back to triple-dashes
-	$content = str_replace( '&#045;&#8211;', '&#045;&#045;&#045;', $content );
-
-	// Transform HTML entity artifacts back to their original
-	$content = str_replace( '&amp;#039;', '\'', $content );
-
-	return $content;
 }
