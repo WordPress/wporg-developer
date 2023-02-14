@@ -7,15 +7,15 @@
 
 ?>
 
-<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"16px","right":"var:preset|spacing|edge-space","bottom":"16px","left":"var:preset|spacing|edge-space"}},"elements":{"link":{"color":{"text":"var:preset|color|white"}}}},"backgroundColor":"charcoal-2","textColor":"white","className":"is-sticky wporg-front-page-breadcrumb","layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull is-sticky wporg-front-page-breadcrumb has-white-color has-charcoal-2-background-color has-text-color has-background has-link-color" style="padding-top:16px;padding-right:var(--wp--preset--spacing--edge-space);padding-bottom:16px;padding-left:var(--wp--preset--spacing--edge-space)"><!-- wp:group {"align":"full","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"}} -->
-<div class="wp-block-group alignfull"><!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap"}} -->
-<div class="wp-block-group"><!-- wp:heading {"className":"is-style-default","fontSize":"small","fontFamily":"inter"} -->
+<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"16px","right":"var:preset|spacing|edge-space","bottom":"16px","left":"var:preset|spacing|edge-space"}},"elements":{"link":{"color":{"text":"var:preset|color|white"}}},"border":{"bottom":{"color":"#63b59d","width":"1px"}}},"backgroundColor":"aquamarine","textColor":"white","className":"is-sticky wporg-front-page-breadcrumb","layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull is-sticky wporg-front-page-breadcrumb has-white-color has-aquamarine-background-color has-text-color has-background has-link-color" style="border-bottom-color:#63b59d;border-bottom-width:1px;padding-top:16px;padding-right:var(--wp--preset--spacing--edge-space);padding-bottom:16px;padding-left:var(--wp--preset--spacing--edge-space)"><!-- wp:group {"align":"full","textColor":"charcoal-1","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"}} -->
+<div class="wp-block-group alignfull has-charcoal-1-color has-text-color"><!-- wp:group {"textColor":"charcoal-1","layout":{"type":"flex","flexWrap":"nowrap"}} -->
+<div class="wp-block-group has-charcoal-1-color has-text-color"><!-- wp:heading {"className":"is-style-default","fontSize":"small","fontFamily":"inter"} -->
 <h2 class="wp-block-heading is-style-default has-inter-font-family has-small-font-size"><?php esc_attr_e( 'Developers', 'wporg' ); ?></h2>
 <!-- /wp:heading --></div>
 <!-- /wp:group -->
 
-<!-- wp:navigation {"textColor":"white","backgroundColor":"charcoal-2","className":"is-style-dropdown-on-mobile","style":{"spacing":{"blockGap":"24px"}},"fontSize":"small"} -->
+<!-- wp:navigation {"textColor":"charcoal-1","backgroundColor":"aquamarine","className":"is-style-dropdown-on-mobile","style":{"spacing":{"blockGap":"24px"}},"fontSize":"small"} -->
 <!-- wp:navigation-link {"label":"<?php esc_attr_e( 'Blog', 'wporg' ); ?>","url":"https://developer.wordpress.org/news/","kind":"custom","isTopLevelLink":true} /-->
 <!-- wp:navigation-link {"label":"<?php esc_attr_e( 'Forums', 'wporg' ); ?>","url":"https://wordpress.org/support/forums/","kind":"custom","isTopLevelLink":true} /-->
 <!-- wp:navigation-link {"label":"<?php esc_attr_e( 'Documentation', 'wporg' ); ?>","type":"custom","url":"https://wordpress.org/support/","kind":"custom","isTopLevelLink":true} /-->
@@ -25,8 +25,8 @@
 <!-- /wp:group -->
 
 <!-- wp:group {"style":{"spacing":{"padding":{"right":"var:preset|spacing|edge-space","left":"var:preset|spacing|edge-space"}}},"backgroundColor":"aquamarine","className":"has-white-color has-charcoal-2-background-color has-text-color has-background has-link-color","layout":{"type":"constrained"}} -->
-<div class="wp-block-group has-white-color has-charcoal-2-background-color has-text-color has-background has-link-color has-aquamarine-background-color" style="padding-right:var(--wp--preset--spacing--edge-space);padding-left:var(--wp--preset--spacing--edge-space)"><!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}},"layout":{"type":"default"}} -->
-<div class="wp-block-group alignwide" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:heading {"level":1,"textColor":"charcoal-1"} -->
+<div class="wp-block-group has-white-color has-charcoal-2-background-color has-text-color has-background has-link-color has-aquamarine-background-color" style="padding-right:var(--wp--preset--spacing--edge-space);padding-left:var(--wp--preset--spacing--edge-space)"><!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"top":"var:preset|spacing|20","bottom":"var:preset|spacing|60"}}},"layout":{"type":"default"}} -->
+<div class="wp-block-group alignwide" style="padding-top:var(--wp--preset--spacing--20);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:heading {"level":1,"textColor":"charcoal-1"} -->
 <h1 class="wp-block-heading has-charcoal-1-color has-text-color"><?php echo wp_kses_post( '<strong>Dev Resources</strong>/The freedom to build', 'wporg' ); ?></h1>
 <!-- /wp:heading -->
 
