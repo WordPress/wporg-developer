@@ -1,0 +1,25 @@
+@media screen and (max-width: 599px) {
+	.wp-block-wporg-command-content {
+		table {
+			margin-top: 28px;
+
+			thead {
+				display: none;
+			}
+
+			tbody > tr {
+				display: flex;
+				flex-direction: column;
+
+				td:first-child {
+					padding-bottom: 0;
+					margin-bottom: 4px;
+				}
+
+				td:last-child {
+					padding-top: 0;
+				}
+			}
+		}
+	}
+}
