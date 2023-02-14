@@ -50,7 +50,10 @@ function render( $attributes, $content, $block ) {
 	);
 
 	if ( $children ) {
-		$content .= '<span>&#60;command&#62;</span>';
+		$content .= sprintf(
+			'<span>&#60;%s&#62;</span>',
+			__( 'command', 'wporg' ),
+		);
 	}
 
 	$content .= '</a>';
