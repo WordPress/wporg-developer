@@ -36,11 +36,11 @@
 				}
 
 				.green {
-					color: #46b450;
+					color: var(--wp--preset--color--syntax-green);
 				}
 
 				.red {
-					color: #dc3232;
+					color: var(--wp--preset--color--syntax-red);
 				}
 
 				&:first-child {
