@@ -23,11 +23,13 @@ a):not(.wporg-developer-code-block a) {
 	.comment-author-attribution a {
 		color: var(--wp--preset--color--charcoal-1);
 		font-weight: 700;
+		text-decoration: none;
 	}
 
 	.comment-date {
 		margin-left: $half_padding;
 		color: var(--wp--preset--color--charcoal-4);
+		text-decoration: none;
 	}
 
 	.comment-meta {
