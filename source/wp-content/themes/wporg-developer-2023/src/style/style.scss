@@ -357,18 +357,12 @@ body[class] {
 		font-weight: 700;
 	}
 
-	code {
-		background: #f7f7f7;
-		border-radius: 2px;
-		padding: 5px 6px;
-		white-space: pre-wrap;
-	}
-
 	pre {
 		padding: 20px;
 		background: #f7f7f7;
 		border: 1px solid var(--wp--preset--color--light-grey-1);
 		border-radius: 2px;
+		overflow: scroll;
 	}
 
 	table {
@@ -393,12 +387,6 @@ body[class] {
 
 		td > p {
 			margin: 0;
-		}
-	}
-
-	@media (min-width: 720px) {
-		code {
-			white-space: revert;
 		}
 	}
 }
