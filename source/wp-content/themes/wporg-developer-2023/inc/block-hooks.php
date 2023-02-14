@@ -5,6 +5,8 @@
  * @package wporg-developer-2023
  */
 
+use function DevHub\is_parsed_post_type;
+
 /**
  * Filters the search block and conditionally inserts search filters.
  *
@@ -34,3 +36,23 @@ function filter_search_block( $block_content, $block ) {
 }
 
 add_filter( 'render_block', __NAMESPACE__ . '\\filter_search_block', 10, 2 );
+
+/**
+ * Filters the search block and updates the placeholder.
+ *
+ * @param string $parsed_block
+ * @return array
+ */
+function render_block_data( $parsed_block ) {
+	if ( 'core/search' !== $parsed_block['blockName'] ) {
+		return $parsed_block;
+	}
+
+	if ( is_parsed_post_type() || 'command' === get_post_type() ) {
+		$parsed_block['attrs']['placeholder'] = __( 'Search in the reference...', 'wporg' );
+	}
+
+	return $parsed_block;
+}
+
+add_filter( 'render_block_data', __NAMESPACE__ . '\render_block_data', 10, 2 );
