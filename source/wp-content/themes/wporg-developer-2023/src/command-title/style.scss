@@ -1,4 +1,8 @@
 .wp-block-wporg-command-title {
+	h1 {
+		margin-bottom: 32px;
+	}
+
 	a {
 		font-size: var(--wp--preset--font-size--extra-large);
 		line-height: 1.73;
@@ -6,7 +10,6 @@
 		font-weight: 400;
 		color: var(--wp--preset--color--syntax-green);
 		text-decoration-line: none !important;
-		margin-bottom: 32px;
 		display: block;
 
 		&:hover,

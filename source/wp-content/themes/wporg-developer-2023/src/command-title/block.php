@@ -43,7 +43,7 @@ function render( $attributes, $content, $block ) {
 
 	$content = sprintf(
 		'
-		<a href="%1$s" rel="bookmark">%2$s
+		<h1><a href="%1$s" rel="bookmark">%2$s
 		',
 		get_the_permalink( $post_ID ),
 		get_the_title( $post_ID ),
@@ -57,6 +57,7 @@ function render( $attributes, $content, $block ) {
 	}
 
 	$content .= '</a>';
+	$content .= '</h1>';
 
 	$excerpt = get_the_excerpt();
 	if ( $excerpt ) {
