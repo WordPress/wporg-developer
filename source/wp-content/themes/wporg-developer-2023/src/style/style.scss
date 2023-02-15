@@ -335,7 +335,7 @@ body[class] {
 	.wp-block-wporg-version-select {
 		display: flex;
 		align-items: center;
-		gap: 10px;
+		gap: var(--wp--preset--spacing--10);
 
 		select {
 			font-size: 13px;
