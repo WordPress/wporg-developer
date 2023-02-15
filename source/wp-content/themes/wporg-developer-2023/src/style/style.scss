@@ -312,3 +312,8 @@ body[class] {
 .wp-block-wporg-site-breadcrumbs a {
 	color: var(--wp--preset--color--charcoal-1);
 }
+
+.wp-block-wporg-code-reference-changelog + .entry-meta {
+	padding-top: 0 !important;
+	border-top: none;
+}
