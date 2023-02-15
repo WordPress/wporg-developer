@@ -63,7 +63,7 @@ function render( $attributes, $content, $block ) {
 		$options .= sprintf(
 			'<option value="%1$s" %2$s>%3$s</option>',
 			esc_attr( $version->slug ),
-			esc_attr( isset( $current_version ) && $version->name === $current_version ? 'selected' : '' ),
+			esc_attr( selected( $current_version, $version->name, false ) ),
 			esc_html( $version->name )
 		);
 	}
