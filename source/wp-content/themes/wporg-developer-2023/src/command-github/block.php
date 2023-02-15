@@ -62,10 +62,10 @@ function render( $attributes, $content, $block ) {
 		',
 		esc_url( $open_issues ),
 		__( 'View Open Issues', 'wporg' ),
-		false !== $issue_count['open'] ? '(' . (int) $issue_count['open'] . ')' : '',
+		false !== $issue_count['open'] ? '(' . number_format_i18n( (int) $issue_count['open'] ) . ')' : '',
 		esc_url( $closed_issues ),
 		__( 'View Closed Issues', 'wporg' ),
-		false !== $issue_count['open'] ? '(' . (int) $issue_count['closed'] . ')' : '',
+		false !== $issue_count['open'] ? '(' . number_format_i18n( (int) $issue_count['closed'] ) . ')' : '',
 	);
 
 	if ( $repo_url ) {
