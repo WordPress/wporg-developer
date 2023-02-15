@@ -32,7 +32,7 @@ function render( $attributes, $content, $block ) {
 		return '';
 	}
 
-	$content = get_the_content( null, false, $post_ID );
+	$content = camalize_heading( get_the_content( null, false, $post_ID ) );
 
 	$wrapper_attributes = get_block_wrapper_attributes();
 	$repo_url = get_post_meta( $post_ID, 'repo_url', true );
@@ -94,4 +94,22 @@ function is_bundled_commands( $repo_url ) {
 	}
 
 	return true;
+}
+
+/**
+ * Convert the heading of post content to camel case.
+ *
+ * @param string $content
+ * @return string Converted content.
+ */
+function camalize_heading( $content ) {
+	$tag = 'h(?P<level>[1-6])';
+
+	return preg_replace_callback(
+		"/(?P<opening_tag><{$tag}>)(?P<title>.*?)(?P<closing_tag><\/{$tag}>)/J",
+		function ( $matches ) {
+			return $matches['opening_tag'] . ucwords( strtolower( $matches['title'] ) ) . $matches['closing_tag'];
+		},
+		$content
+	);
 }
