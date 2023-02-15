@@ -53,47 +53,24 @@ function render( $attributes, $content, $block ) {
 	$content .= sprintf(
 		'
 		<div class="btn-group">
-			<a href="%1$s" class="button">%2$s
+			<a href="%1$s" class="button">
+				%2$s <span class="green">%3$s</span>
+			</a>
+			<a href="%4$s"class="button">
+				%5$s <span class="red">%6$s</span>
+			</a>
 		',
 		esc_url( $open_issues ),
 		__( 'View Open Issues', 'wporg' ),
-	);
-
-	if ( false !== $issue_count['open'] ) {
-		$content .= sprintf(
-			'
-			<span class="green">(%s)</span>
-			',
-			(int) $issue_count['open']
-		);
-	}
-
-	$content .= '</a>';
-
-	$content .= sprintf(
-		'
-		<a href="%1$s"class="button">%2$s
-		',
+		false !== $issue_count['open'] ? '(' . (int) $issue_count['open'] . ')' : '',
 		esc_url( $closed_issues ),
 		__( 'View Closed Issues', 'wporg' ),
+		false !== $issue_count['open'] ? '(' . (int) $issue_count['closed'] . ')' : '',
 	);
-
-	if ( false !== $issue_count['closed'] ) {
-		$content .= sprintf(
-			'
-			<span class="red">(%s)</span>
-			',
-			(int) $issue_count['closed']
-		);
-	}
-
-	$content .= '</a>';
 
 	if ( $repo_url ) {
 		$content .= sprintf(
-			'
-			<a href="%1$s" class="button">%2$s</a>
-			',
+			'<a href="%1$s" class="button">%2$s</a>',
 			esc_url( rtrim( $repo_url, '/' ) . '/issues/new' ),
 			__( 'Create New Issue', 'wporg' ),
 		);
