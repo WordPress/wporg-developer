@@ -62,7 +62,7 @@ function render( $attributes, $content, $block ) {
 
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(
-		'<div %1$s>%2$s <button>%3$s</button></div>',
+		'<div %1$s>%2$s <button type="submit">%3$s</button></div>',
 		$wrapper_attributes,
 		$content,
 		esc_attr( __( 'Apply', 'wporg' ) )
