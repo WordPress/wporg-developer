@@ -57,19 +57,27 @@ function render( $attributes, $content, $block ) {
 	);
 
 	$options = '';
+	$current_version = get_query_var( 'wp-parser-since' );
 	foreach ( array_merge( $versions, $mu_versions ) as $version ) {
-		$options .= '<option value="' . $version->name . '">' . $version->name . '</option>';
+
+		$options .= sprintf(
+			'<option value="%1$s" %2$s>%3$s</option>',
+			esc_attr( $version->slug ),
+			esc_attr( selected( $current_version, $version->name, false ) ),
+			esc_html( $version->name )
+		);
 	}
 
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(
 		'<div %1$s>
-			<label class="screen-reader-text" for="%2$s">%3$s</label>
-			<select name="%2$s" id="%2$s">%4$s</select>
+			<label class="%2$s" for="%3$s">%4$s</label>
+			<select name="wp-parser-since" id="%3$s">%5$s</select>
 		</div>',
 		$wrapper_attributes,
+		esc_attr( isset( $attributes['hideLabelFromVision'] ) && true === $attributes['hideLabelFromVision'] ? 'screen-reader-text' : '' ),
 		esc_attr( generate_id( $block->parsed_block ) ),
-		esc_html( __( 'Select version', 'wporg' ) ),
+		esc_html( $attributes['label'] ),
 		$options,
 	);
 }

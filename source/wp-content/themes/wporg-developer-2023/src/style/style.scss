@@ -317,3 +317,33 @@ body[class] {
 	padding-top: 0 !important;
 	border-top: none;
 }
+
+.wporg-version-filters {
+	font-size: var(--wp--preset--font-size--small);
+
+	form {
+		display: flex;
+		align-items: center;
+	}
+
+	.wp-block-wporg-form-wrapper {
+		display: flex;
+		align-items: center;
+		gap: var(--wp--preset--spacing--20);
+	}
+
+	.wp-block-wporg-version-select {
+		display: flex;
+		align-items: center;
+		gap: var(--wp--preset--spacing--10);
+
+		select {
+			font-size: 13px;
+			max-width: 80px;
+		}
+	}
+
+	.wp-block-wporg-search-filters {
+		margin-top: 0;
+	}
+}

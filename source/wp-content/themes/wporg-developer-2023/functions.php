@@ -167,6 +167,7 @@ require_once __DIR__ . '/src/code-type-usage-info/index.php';
 require_once __DIR__ . '/src/code-comments/block.php';
 require_once __DIR__ . '/src/code-comment-edit/block.php';
 require_once __DIR__ . '/src/code-comment-form/block.php';
+require_once __DIR__ . '/src/form-wrapper/block.php';
 require_once __DIR__ . '/src/search-filters/index.php';
 require_once __DIR__ . '/src/search-results-context/index.php';
 require_once __DIR__ . '/src/version-select/index.php';
@@ -208,6 +209,7 @@ function init() {
 	add_filter( 'breadcrumb_trail_items', __NAMESPACE__ . '\\breadcrumb_trail_items_remove_reference', 11, 2 );
 	add_filter( 'breadcrumb_trail_items', __NAMESPACE__ . '\\breadcrumb_trail_items_for_handbook_root', 10, 2 );
 	add_filter( 'breadcrumb_trail_items', __NAMESPACE__ . '\\breadcrumb_trail_for_note_edit', 10, 2 );
+	add_filter( 'breadcrumb_trail_items', __NAMESPACE__ . '\\breadcrumb_trail_for_since_view', 10, 2 );
 
 	add_filter( 'mkaz_code_syntax_force_loading', '__return_true' );
 	add_filter( 'mkaz_prism_css_path', __NAMESPACE__ . '\\update_prism_css_path' );
@@ -325,6 +327,31 @@ function breadcrumb_trail_for_note_edit( $items ) {
 	);
 	$breadcrumbs[] = __( 'Edit', 'wporg' );
 	return $breadcrumbs;
+}
+
+/**
+ * Fix breadcrumb for wp-parser-since archive.
+ *
+ * @param  array $items The breadcrumb trail items.
+ * @param  array $args  Original args.
+ * @return array
+ */
+function breadcrumb_trail_for_since_view( $items, $args ) {
+
+	if ( ! is_archive() || ! get_query_var( 'wp-parser-since' ) ) {
+		return $items;
+	}
+
+	// Remove the last item
+	unset( $items[ count( $items ) - 1 ] );
+
+	$items[] = sprintf(
+		/* translators: %s: WordPress version  */
+		__( 'New and updated in %s', 'wporg' ),
+		get_query_var( 'wp-parser-since' )
+	);
+
+	return $items;
 }
 
 /**

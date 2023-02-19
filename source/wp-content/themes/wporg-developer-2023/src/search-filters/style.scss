@@ -25,3 +25,19 @@
 		align-items: center;
 	}
 }
+
+.wp-block-wporg-search-filters button,
+.wp-block-wporg-search-filters button:hover,
+.wp-block-wporg-search-filters button:active {
+	background-color: transparent;
+	border: 1px solid var(--wp--preset--color--blueberry-1);
+	padding: 6px 8px;
+	color: var(--wp--preset--color--blueberry-1);
+	cursor: pointer;
+	border-radius: 2px;
+}
+
+.wp-block-wporg-search-filters button:focus {
+	outline: 1px dashed var(--wp--custom--button--outline--hover--color--background);
+	outline-offset: 1px;
+}
