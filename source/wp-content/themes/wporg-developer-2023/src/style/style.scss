@@ -99,7 +99,7 @@ body[class] {
 		.wp-block-column {
 			padding-left: var(--wp--preset--spacing--edge-space) !important;
 			padding-right: var(--wp--preset--spacing--edge-space) !important;
-			
+
 			&[style*="border-right-"] {
 				border-bottom: 1px solid var(--wp--preset--color--light-grey-1);
 				border-right: none !important;
