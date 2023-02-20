@@ -40,6 +40,20 @@ body[class] {
 	display: none;
 }
 
+[dir="rtl"] {
+	.is-sticky .wp-block-navigation.is-style-dropdown-on-mobile {
+		.wp-block-navigation__responsive-container-open {
+			right: unset;
+			left: 0;
+		}
+
+		.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-close {
+			right: unset;
+			left: var(--wp--preset--spacing--60);
+		}
+	}
+}
+
 // Slot the search & table of contents into a floating sidebar on large screens.
 @media (min-width: 1200px) {
 	.sidebar-container {
