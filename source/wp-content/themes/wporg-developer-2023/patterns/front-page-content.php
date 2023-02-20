@@ -86,6 +86,10 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"0"}}}} -->
+<p style="margin-top:0"><a href="https://developer.wordpress.org/reference" data-type="helphub_article"><?php esc_attr_e( 'Code reference', 'wporg' ); ?></a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"0"}}}} -->
 <p style="margin-top:0"><a href="https://developer.wordpress.org/rest-api/" data-type="helphub_article"><?php esc_attr_e( 'REST API', 'wporg' ); ?></a></p>
 <!-- /wp:paragraph -->
 
