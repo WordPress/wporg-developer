@@ -110,6 +110,9 @@ body[class] {
 
 @media (max-width: 781px) {
 	.home-section-docs-api {
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+
 		.wp-block-column {
 			padding-left: var(--wp--preset--spacing--edge-space) !important;
 			padding-right: var(--wp--preset--spacing--edge-space) !important;
