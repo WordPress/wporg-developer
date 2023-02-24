@@ -1,5 +1,5 @@
 <?php
-namespace WordPressdotorg\Theme\Developer_2023\Dynamic_CLI_Command_Table;
+namespace WordPressdotorg\Theme\Developer_2023\Dynamic_Command_Subcommand;
 
 add_action( 'init', __NAMESPACE__ . '\init' );
 
@@ -12,7 +12,7 @@ add_action( 'init', __NAMESPACE__ . '\init' );
  */
 function init() {
 	register_block_type(
-		dirname( dirname( __DIR__ ) ) . '/build/cli-command-table',
+		dirname( dirname( __DIR__ ) ) . '/build/command-subcommand',
 		array(
 			'render_callback' => __NAMESPACE__ . '\render',
 		)
@@ -24,31 +24,43 @@ function init() {
  *
  * @return string Returns the block markup.
  */
-function render() {
-	$posts = get_posts(
-		array(
-			'post_type'      => 'command',
-			'order'          => 'ASC',
-			'post_parent'    => 0,
-			'nopaging'       => true,
-		)
-	);
-
-	if ( is_wp_error( $posts ) || empty( $posts ) ) {
+function render( $attributes, $content, $block ) {
+	if ( ! isset( $block->context['postId'] ) ) {
 		return '';
 	}
 
+	$children = get_children(
+		array(
+			'post_parent'    => $block->context['postId'],
+			'post_type'      => 'command',
+			'posts_per_page' => 250,
+			'orderby'        => 'title',
+			'order'          => 'ASC',
+		)
+	);
+
+	// Append subcommands if they exist
+	if ( ! $children ) {
+		return '';
+	}
+
+	$title_block = sprintf(
+		'<!-- wp:heading {"fontSize":"heading-3"} --><h3 class="wp-block-heading has-heading-3-font-size">%1$s</h3><!-- /wp:heading -->',
+		__( 'Subcommands', 'wporg' )
+	);
+
 	$table_block = sprintf(
 		'<!-- wp:wporg/code-table {"className":"is-responsive","itemsToShow":50,"headings":%s,"rows":%s,"style":{"spacing":{"margin":{"top":"var:preset|spacing|20"}}}} /--> ',
-		wp_json_encode( array( __( 'Command', 'wporg' ), __( 'Description', 'wporg' ) ) ),
-		wp_json_encode( get_row_data( $posts ) )
+		wp_json_encode( array( __( 'Name', 'wporg' ), __( 'Description', 'wporg' ) ) ),
+		wp_json_encode( get_row_data( $children ) )
 	);
 
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(
-		'<section %1$s>%2$s</section>',
+		'<section %1$s>%2$s %3$s</section>',
 		$wrapper_attributes,
-		do_blocks( $table_block )
+		do_blocks( $title_block ),
+		do_blocks( $table_block ),
 	);
 }
 
@@ -64,11 +76,11 @@ function get_row_data( $posts ) {
 	foreach ( $posts as $post ) {
 		$title_link = sprintf(
 			'<a href="%1$s">%2$s</a>',
-			esc_url( get_the_permalink( $post ) ),
-			esc_html( $post->post_title ),
+			esc_url( apply_filters( 'the_permalink', get_permalink( $post->ID ) ) ),
+			esc_html( apply_filters( 'the_title', $post->post_title ) ),
 		);
 
-		$rows[] = array( $title_link, get_the_excerpt( $post ) );
+		$rows[] = array( $title_link, apply_filters( 'the_excerpt', $post->post_excerpt ) );
 	}
 
 	return $rows;

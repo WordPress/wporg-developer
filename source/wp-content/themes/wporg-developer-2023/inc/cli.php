@@ -6,14 +6,6 @@ class DevHub_CLI {
 	private static $meta_key = 'wporg_cli_markdown_source';
 	private static $supported_post_types = array( 'command' );
 	private static $posts_per_page = -1;
-	private static $non_bundled_commands = array(
-		'https://github.com/wp-cli/admin-command',
-		'https://github.com/wp-cli/dist-archive-command',
-		'https://github.com/wp-cli/doctor-command',
-		'https://github.com/wp-cli/find-command',
-		'https://github.com/wp-cli/profile-command',
-		'https://github.com/wp-cli/scaffold-package-command',
-	);
 
 	public static function init() {
 		add_action( 'init', array( __CLASS__, 'action_init_register_cron_jobs' ) );
@@ -21,7 +13,6 @@ class DevHub_CLI {
 		add_action( 'pre_get_posts', array( __CLASS__, 'action_pre_get_posts' ) );
 		add_action( 'devhub_cli_manifest_import', array( __CLASS__, 'action_devhub_cli_manifest_import' ) );
 		add_action( 'devhub_cli_markdown_import', array( __CLASS__, 'action_devhub_cli_markdown_import' ) );
-		add_filter( 'the_content', array( __CLASS__, 'filter_the_content' ) );
 	}
 
 	public static function action_init_register_cron_jobs() {
@@ -274,185 +265,6 @@ class DevHub_CLI {
 		}
 
 		return $markdown_source;
-	}
-
-	/**
-	 * Filter the content of command pages
-	 */
-	public static function filter_the_content( $content ) {
-		if ( 'command' !== get_post_type() || ! is_singular() ) {
-			return $content;
-		}
-
-		remove_filter( 'the_content', array( __CLASS__, 'filter_the_content' ) );
-
-		// Transform emdash back to triple-dashes
-		$content = str_replace( '&#045;&#8211;', '&#045;&#045;&#045;', $content );
-
-		// Transform HTML entity artifacts back to their original
-		$content = str_replace( '&amp;#039;', '\'', $content );
-
-		$content = self::prepend_installation( $content );
-		$content = self::append_subcommands( $content );
-
-		$repo_url = get_post_meta( get_the_ID(), 'repo_url', true );
-		$cmd_slug = str_replace( 'wp ', '', get_the_title() );
-		$open_issues = 'https://github.com/login?return_to=%2Fissues%3Fq%3Dlabel%3A' . urlencode( 'command:' . str_replace( ' ', '-', $cmd_slug ) ) . '+sort%3Aupdated-desc+org%3Awp-cli+is%3Aopen';
-		$closed_issues = 'https://github.com/login?return_to=%2Fissues%3Fq%3Dlabel%3A' . urlencode( 'command:' . str_replace( ' ', '-', $cmd_slug ) ) . '+sort%3Aupdated-desc+org%3Awp-cli+is%3Aclosed';
-		$issue_count = array( 'open' => false, 'closed' => false );
-		foreach( $issue_count as $type => $value ) {
-			$cache_key = 'wpcli_issue_count_' . md5( $cmd_slug . $type );
-			$value = get_transient( $cache_key );
-			if ( false === $value ) {
-				$request_url = 'https://api.github.com/search/issues?q=' . rawurlencode( 'label:command:' . str_replace( ' ', '-', $cmd_slug ) . ' org:wp-cli state:' . $type );
-				$response = wp_remote_get( $request_url );
-				$ttl = 2 * MINUTE_IN_SECONDS;
-				if ( 200 === wp_remote_retrieve_response_code( $response ) ) {
-					$data = json_decode( wp_remote_retrieve_body( $response ), true );
-					if ( isset( $data['total_count'] ) ) {
-						$value = $data['total_count'];
-						$ttl = 2 * HOUR_IN_SECONDS;
-					}
-				}
-				set_transient( $cache_key, $value, $ttl );
-			}
-			$issue_count[ $type ] = $value;
-		}
-		ob_start();
-		?>
-		<div class="github-tracker">
-			<?php if ( $repo_url ) : ?>
-				<a href="<?php echo esc_url( $repo_url ); ?>"><img src="https://make.wordpress.org/cli/wp-content/plugins/wporg-cli/assets/images/github-mark.svg" class="icon-github" /></a>
-			<?php endif; ?>
-			<div class="btn-group">
-				<a href="<?php echo esc_url( $open_issues ); ?>" class="button">View Open Issues<?php if ( false !== $issue_count['open'] ) { ?> <span class="green">(<?php echo (int) $issue_count['open']; ?>)</span><?php } ?></a>
-				<a href="<?php echo esc_url( $closed_issues ); ?>" class="button">View Closed Issues<?php if ( false !== $issue_count['closed'] ) { ?> <span class="red">(<?php echo (int) $issue_count['closed']; ?>)</span><?php } ?></a>
-			</div>
-			<?php if ( $repo_url ) : ?>
-				<a href="<?php echo esc_url( rtrim( $repo_url, '/' ) . '/issues/new' ); ?>" class="button">Create New Issue</a>
-			<?php endif; ?>
-		</div>
-		<?php
-		$issues = ob_get_clean();
-		$content = $issues . PHP_EOL . PHP_EOL . $content;
-
-		// Include the excerpt in the main content well
-		$excerpt = get_the_excerpt();
-		if ( $excerpt ) {
-			$content = '<p class="excerpt">' . $excerpt . '</p>' . PHP_EOL . $content;
-		}
-
-		$items = self::get_tags( 'h([1-4])', $content );
-		if ( count( $items ) > 1 ) {
-			for ( $i = 1; $i <= 4; $i++ ) {
-				$content = self::add_ids_and_jumpto_links( "h$i", $content );
-			}
-		}
-
-		$content .= '<p><em>Command documentation is regenerated at every release. To add or update an example, please submit a pull request against the corresponding part of the codebase.</em></p>';
-
-		add_filter( 'the_content', array( __CLASS__, 'filter_the_content' ) );
-
-		return $content;
-	}
-
-	protected static function prepend_installation( $content ) {
-		$repo_url = get_post_meta( get_the_ID(), 'repo_url', true );
-
-		// Only non-bundled commands
-		if ( ! in_array( $repo_url, self::$non_bundled_commands, true ) ) {
-			return $content;
-		}
-		$repo_slug = str_replace( 'https://github.com/', '', $repo_url );
-		ob_start(); ?>
-		<h3>INSTALLING</h3>
-
-		<p>Use the <code><?php the_title(); ?></code> command by installing the command's package:</p>
-
-		<pre><code>wp package install <?php echo esc_html( $repo_slug ); ?></code></pre>
-
-		<p>Once the package is successfully installed, the <code><?php the_title(); ?></code> command will appear in the list of available commands.</p>
-		<?php
-		$installing_instructions = ob_get_clean();
-		// Insert before OPTIONS but after description if OPTIONS exists
-		$options_match = '#<h3>OPTIONS<\/h3>#';
-		if ( preg_match( $options_match, $content ) ) {
-			$content = preg_replace( $options_match, $installing_instructions . '$0', $content );
-		} else {
-			// Otherwise, appending to description is fine.
-			$content .= $installing_instructions;
-		}
-		return $content;
-	}
-
-	protected static function append_subcommands( $content ) {
-		$children = get_children( array(
-			'post_parent'    => get_the_ID(),
-			'post_type'      => 'command',
-			'posts_per_page' => 250,
-			'orderby'        => 'title',
-			'order'          => 'ASC',
-		) );
-		// Append subcommands if they exist
-		if ( $children ) {
-			ob_start();
-			?>
-			<h3>SUBCOMMANDS</h3>
-			<table>
-				<thead>
-				<tr>
-					<th>Name</th>
-					<th>Description</th>
-				</tr>
-				</thead>
-				<tbody>
-					<?php foreach( $children as $child ) : ?>
-						<tr>
-							<td><a href="<?php echo apply_filters( 'the_permalink', get_permalink( $child->ID ) ); ?>"><?php echo apply_filters( 'the_title', $child->post_title ); ?></a></td>
-							<td><?php echo apply_filters( 'the_excerpt', $child->post_excerpt ); ?></td>
-						</tr>
-					<?php endforeach; ?>
-				</tbody>
-			</table>
-		<?php
-			$subcommands = ob_get_clean();
-			$content .= PHP_EOL . $subcommands;
-		}
-		return $content;
-	}
-
-	protected static function add_ids_and_jumpto_links( $tag, $content ) {
-		$items = self::get_tags( $tag, $content );
-		$first = true;
-		$matches = array();
-		$replacements = array();
-
-		foreach ( $items as $item ) {
-			$replacement = '';
-			$matches[] = $item[0];
-			$id = sanitize_title_with_dashes($item[2]);
-
-			if ( ! $first ) {
-				$replacement .= '<p class="toc-jump"><a href="#top">' . __( 'Top &uarr;', 'wporg' ) . '</a></p>';
-			} else {
-				$first = false;
-			}
-			$a11y_text      = sprintf( '<span class="screen-reader-text">%s</span>', $item[2] );
-			$anchor         = sprintf( '<a href="#%1$s" class="anchor"><span aria-hidden="true">#</span>%2$s</a>', $id, $a11y_text );
-			$replacement   .= sprintf( '<%1$s class="toc-heading" id="%2$s" tabindex="-1">%3$s %4$s</%1$s>', $tag, $id, $item[2], $anchor );
-			$replacements[] = $replacement;
-		}
-
-		if ( $replacements ) {
-			$content = str_replace( $matches, $replacements, $content );
-		}
-
-		return $content;
-	}
-
-	private static function get_tags( $tag, $content ) {
-		preg_match_all( "/(<{$tag}>)(.*)(<\/{$tag}>)/", $content, $matches, PREG_SET_ORDER );
-		return $matches;
 	}
 
 	/**

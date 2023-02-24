@@ -168,6 +168,10 @@ require_once __DIR__ . '/src/code-comments/block.php';
 require_once __DIR__ . '/src/code-comment-edit/block.php';
 require_once __DIR__ . '/src/code-comment-form/block.php';
 require_once __DIR__ . '/src/form-wrapper/block.php';
+require_once __DIR__ . '/src/command-content/block.php';
+require_once __DIR__ . '/src/command-github/block.php';
+require_once __DIR__ . '/src/command-title/block.php';
+require_once __DIR__ . '/src/command-subcommand/block.php';
 require_once __DIR__ . '/src/search-filters/index.php';
 require_once __DIR__ . '/src/search-results-context/index.php';
 require_once __DIR__ . '/src/version-select/index.php';
@@ -182,6 +186,9 @@ add_filter( 'previous_post_link', __NAMESPACE__ . '\get_adjacent_handbook_post_l
 // See: https://github.com/WordPress/wporg-mu-plugins/blob/trunk/mu-plugins/blocks/table-of-contents/index.php#L70
 add_filter( 'the_content', __NAMESPACE__ . '\filter_code_content', 4 );
 add_filter( 'wporg_table_of_contents_post_content', __NAMESPACE__ . '\filter_code_content' );
+add_filter( 'the_content', __NAMESPACE__ . '\filter_command_content', 4 );
+add_filter( 'wporg_table_of_contents_post_content', __NAMESPACE__ . '\filter_command_content' );
+
 
 // Remove table of contents.
 add_filter( 'wporg_handbook_toc_should_add_toc', '__return_false' );
@@ -519,9 +526,9 @@ function add_handbook_templates( $templates ) {
  * @return string
  */
 function filter_code_content( $content ) {
-	$post_type = get_post_type();
+	$post = get_post();
 
-	if ( ! is_single() || ! is_parsed_post_type( $post_type ) ) {
+	if ( ! is_single() || ! is_parsed_post_type( $post->post_type ) ) {
 		return $content;
 	}
 
@@ -539,6 +546,30 @@ function filter_code_content( $content ) {
 		<!-- wp:wporg/code-reference-comments /-->
 		<!-- wp:pattern {"slug":"wporg-developer-2023/article-meta"} /-->
 	'
+	);
+}
+
+
+/**
+ * Filters content for the command content blocks so Table of Contents can be added.
+ *
+ * @param string $content
+ * @return string
+ */
+function filter_command_content( $content ) {
+	$post_type = get_post_type();
+
+	if ( ! is_single() || ! ( 'command' == $post_type ) ) {
+		return $content;
+	}
+
+	return do_blocks(
+		'
+		<!-- wp:wporg/command-title /-->
+		<!-- wp:wporg/command-github /-->
+		<!-- wp:wporg/command-content /-->
+		<!-- wp:wporg/command-subcommand /-->
+		'
 	);
 }
 

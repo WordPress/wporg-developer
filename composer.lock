@@ -2168,12 +2168,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "add95a74551c3ba8fc99ef7651ad05f553b3fbbf"
+                "reference": "ed8e00df0a83aa96acf703f8c2979ff33341f879"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/add95a74551c3ba8fc99ef7651ad05f553b3fbbf",
-                "reference": "add95a74551c3ba8fc99ef7651ad05f553b3fbbf",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/ed8e00df0a83aa96acf703f8c2979ff33341f879",
+                "reference": "ed8e00df0a83aa96acf703f8c2979ff33341f879",
                 "shasum": ""
             },
             "require": {
@@ -2218,7 +2218,7 @@
                 "source": "https://github.com/squizlabs/PHP_CodeSniffer",
                 "wiki": "https://github.com/squizlabs/PHP_CodeSniffer/wiki"
             },
-            "time": "2022-12-22T21:46:41+00:00"
+            "time": "2023-02-22T23:07:41+00:00"
         },
         {
             "name": "theseer/tokenizer",
@@ -2494,15 +2494,15 @@
         },
         {
             "name": "wpackagist-plugin/gutenberg",
-            "version": "15.1.0",
+            "version": "15.2.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/gutenberg/",
-                "reference": "tags/15.1.0"
+                "reference": "tags/15.2.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/gutenberg.15.1.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/gutenberg.15.2.0.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -2512,15 +2512,15 @@
         },
         {
             "name": "wpackagist-plugin/jetpack",
-            "version": "11.9-a.1",
+            "version": "11.9-a.5",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/jetpack/",
-                "reference": "tags/11.9-a.1"
+                "reference": "tags/11.9-a.5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/jetpack.11.9-a.1.zip"
+                "url": "https://downloads.wordpress.org/plugin/jetpack.11.9-a.5.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -2570,12 +2570,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/WordPress/wporg-mu-plugins.git",
-                "reference": "c6254d6e42a6f458417077a40fb73221915a1148"
+                "reference": "70648ad73b6baca1fd1acbc92cde22613a53a529"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WordPress/wporg-mu-plugins/zipball/c6254d6e42a6f458417077a40fb73221915a1148",
-                "reference": "c6254d6e42a6f458417077a40fb73221915a1148",
+                "url": "https://api.github.com/repos/WordPress/wporg-mu-plugins/zipball/70648ad73b6baca1fd1acbc92cde22613a53a529",
+                "reference": "70648ad73b6baca1fd1acbc92cde22613a53a529",
                 "shasum": ""
             },
             "require-dev": {
@@ -2613,7 +2613,7 @@
                 "source": "https://github.com/WordPress/wporg-mu-plugins/tree/build",
                 "issues": "https://github.com/WordPress/wporg-mu-plugins/issues"
             },
-            "time": "2023-02-14T20:33:27+00:00"
+            "time": "2023-02-24T04:26:19+00:00"
         },
         {
             "name": "wporg/wporg-parent-2021",

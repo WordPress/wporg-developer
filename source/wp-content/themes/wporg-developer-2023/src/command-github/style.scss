@@ -1,0 +1,56 @@
+.wp-block-wporg-command-github {
+	.github-tracker {
+		margin-bottom: 40px;
+	}
+
+	img {
+		width: 23px;
+		position: relative;
+		top: 7px;
+		margin-right: 10px;
+	}
+
+	.btn-group {
+		display: inline;
+	}
+
+	a {
+		text-decoration: none !important;
+
+		&.button {
+			display: inline-block;
+			margin: 4px 0;
+			border: 1px solid;
+			border-color: #ccc;
+			border-radius: 3px;
+			background: #f7f7f7;
+			color: rgba(0, 0, 0, 0.8);
+			appearance: none;
+			padding: 8px 12px;
+			font-size: var(--wp--preset--font-size--extra-small);
+			box-shadow: 0 1px 0 #ccc;
+			line-height: 1;
+
+			&:hover {
+				border-color: #ccc #bbb #aaa #bbb;
+				background: #eee;
+			}
+
+			.green {
+				color: var(--wp--preset--color--syntax-green);
+			}
+
+			.red {
+				color: var(--wp--preset--color--syntax-red);
+			}
+
+			&:first-child {
+				margin-right: -6px;
+			}
+
+			&:last-child {
+				margin-left: 5px;
+			}
+		}
+	}
+}

@@ -347,3 +347,46 @@ body[class] {
 		margin-top: 0;
 	}
 }
+
+.single-command {
+	h3 {
+		margin-bottom: var(--wp--preset--spacing--20);
+	}
+
+	dt {
+		font-weight: 700;
+	}
+
+	pre {
+		padding: 20px;
+		background: #f7f7f7;
+		border: 1px solid var(--wp--preset--color--light-grey-1);
+		border-radius: 2px;
+		overflow: scroll;
+	}
+
+	table {
+		border-collapse: collapse;
+
+		code {
+			background: revert;
+			padding: revert;
+			border-radius: revert;
+		}
+
+		tr {
+			vertical-align: top;
+			border-bottom: 1px solid var(--wp--preset--color--light-grey-1);
+		}
+
+		th,
+		td {
+			text-align: start;
+			padding: 10px;
+		}
+
+		td > p {
+			margin: 0;
+		}
+	}
+}
