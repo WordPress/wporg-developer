@@ -48,13 +48,18 @@ function render( $attributes, $content, $block ) {
 	$repo_slug = str_replace( 'https://github.com/', '', $repo_url );
 	$command = get_the_title( $post_ID );
 	$installing_instructions = sprintf(
-		'
-		<!-- wp:heading {"fontSize":"heading-3"} --><h3 class="wp-block-heading has-heading-3-font-size">%1$s</h3><!-- /wp:heading -->
-		<p>Use the <code>%2$s</code> command by installing the command\'s package:</p>
-		<pre><code>wp package install %3$s</code></pre>
-		<p>Once the package is successfully installed, the <code>%4$s</code> command will appear in the list of available commands.</p>
-		',
-		__( 'Installing', 'wporg' ),
+		'<!-- wp:heading {"fontSize":"heading-3"} --><h3 class="wp-block-heading has-heading-3-font-size">%1$s</h3><!-- /wp:heading -->',
+		__( 'Installing', 'wporg' )
+	) . sprintf(
+		/* translators: 1: command to be used, 2: package repo slug 3: command to be used */
+		__(
+			'
+			<p>Use the <code>%1$s</code> command by installing the command\'s package:</p>
+			<pre><code>wp package install %2$s</code></pre>
+			<p>Once the package is successfully installed, the <code>%3$s</code> command will appear in the list of available commands.</p>
+			',
+			'wporg'
+		),
 		$command,
 		esc_html( $repo_slug ),
 		$command
