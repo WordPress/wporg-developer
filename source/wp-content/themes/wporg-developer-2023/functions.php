@@ -168,7 +168,6 @@ require_once __DIR__ . '/src/code-comments/block.php';
 require_once __DIR__ . '/src/code-comment-edit/block.php';
 require_once __DIR__ . '/src/code-comment-form/block.php';
 require_once __DIR__ . '/src/form-wrapper/block.php';
-require_once __DIR__ . '/src/command-installation/block.php';
 require_once __DIR__ . '/src/command-content/block.php';
 require_once __DIR__ . '/src/command-github/block.php';
 require_once __DIR__ . '/src/command-title/block.php';
