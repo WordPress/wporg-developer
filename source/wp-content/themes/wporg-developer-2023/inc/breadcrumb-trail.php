@@ -175,6 +175,8 @@ class Breadcrumb_Trail {
 			elseif ( is_search() ) {
 				if ( wporg_is_handbook() ) {
 					$this->do_handbook_search_items();
+				} elseif ( 'command' === get_post_type() ) {
+					$this->do_cli_commands_search_items();
 				} else {
 					$this->do_search_items();
 				}
@@ -849,6 +851,24 @@ class Breadcrumb_Trail {
 
 		if ( is_paged() ) {
 			$search_url    = add_query_arg( 's', get_search_query(), wporg_get_current_handbook_home_url() );
+			$this->items[] = '<a href="' . esc_url( $search_url ) . '">' . esc_html( $this->args['labels']['search'] ) . '</a>';
+		} elseif ( true === $this->args['show_title'] ) {
+			$this->items[] = $this->args['labels']['search'];
+		}
+	}
+
+	/**
+	 * Adds the items to the trail items array for wp-cli commands search results.
+	 *
+	 * @since  0.6.0
+	 * @access public
+	 * @return void
+	 */
+	public function do_cli_commands_search_items() {
+		$this->items[] = '<a href="' . esc_url( home_url( 'cli/commands/' ) ) . '">' . get_queried_object()->label . '</a>';
+
+		if ( is_paged() ) {
+			$search_url    = add_query_arg( 's', get_search_query(), esc_url( home_url( 'cli/commands/' ) ) );
 			$this->items[] = '<a href="' . esc_url( $search_url ) . '">' . esc_html( $this->args['labels']['search'] ) . '</a>';
 		} elseif ( true === $this->args['show_title'] ) {
 			$this->items[] = $this->args['labels']['search'];
