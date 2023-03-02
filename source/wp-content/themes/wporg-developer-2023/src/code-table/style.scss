@@ -87,18 +87,18 @@
 			}
 		}
 	}
+}
 
-	.expanded.wp-block-wporg-code-table {
-		.wporg-hidden {
-			display: table-row;
-		}
+.expanded.wp-block-wporg-code-table {
+	.wporg-hidden {
+		display: table-row;
+	}
 
-		.wp-block-wporg-code-table-show-more {
-			display: none;
-		}
+	.wp-block-wporg-code-table-show-more {
+		display: none;
+	}
 
-		.wp-block-wporg-code-table-show-less {
-			display: block;
-		}
+	.wp-block-wporg-code-table-show-less {
+		display: block;
 	}
 }
