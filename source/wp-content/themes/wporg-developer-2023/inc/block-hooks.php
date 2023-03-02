@@ -24,6 +24,13 @@ function filter_search_block( $block_content, $block ) {
 		if ( isset( $block['attrs']['className'] ) && strpos( $block['attrs']['className'], 'wporg-filtered-search-form' ) ) {
 			$block_content = str_replace( '</form>', do_blocks( '<!-- wp:wporg/search-filters /-->' ) . '</form>', $block_content );
 		}
+		if ( is_singular( 'command' ) ) {
+			$block_content = str_replace(
+				'action="' . esc_url( home_url( '/' ) ) . '"',
+				'action="' . esc_url( home_url( 'cli/commands/' ) ) . '"',
+				$block_content
+			);
+		}
 	} else {
 		$block_content = str_replace(
 			'action="' . esc_url( home_url( '/' ) ) . '"',
