@@ -303,7 +303,6 @@ class DevHub_User_Submitted_Content {
 		echo '<div class="comment-form-comment tab-section" id="comment-form-comment">';
 		wp_editor( $content, 'comment', array(
 				'media_buttons' => false,
-				'editor_css'    => self::get_editor_style(),
 				'textarea_name' => 'comment',
 				'textarea_rows' => 8,
 				'quicktags'     => array(
@@ -387,7 +386,6 @@ class DevHub_User_Submitted_Content {
 				'quicktags'     => array(
 					'buttons' => 'strong,em,link'
 				),
-				'editor_css'    => self::get_editor_style(),
 				'teeny'         => true,
 				'tinymce'       => false,
 			) );
@@ -444,20 +442,6 @@ class DevHub_User_Submitted_Content {
 			}, $rules ) ),
 			$license_rule
 		);
-	}
-
-	/**
-	 * Get the editor styles.
-	 *
-	 * @return string Editor styles.
-	 */
-	public static function get_editor_style() {
-		$style = '<style type="text/css">';
-		ob_start();
-		include get_template_directory() . '/stylesheets/editor-style.css';
-		$style .= ob_get_clean();
-		$style .= ' </style>';
-		return $style;
 	}
 
 	/**
