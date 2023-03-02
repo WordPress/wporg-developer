@@ -356,6 +356,7 @@ body[class] {
 .single-command {
 	h3 {
 		margin-bottom: var(--wp--preset--spacing--20);
+		font-size: var(--wp--preset--font-size--heading-3) !important;
 	}
 
 	dt {
