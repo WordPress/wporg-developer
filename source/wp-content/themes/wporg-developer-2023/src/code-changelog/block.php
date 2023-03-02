@@ -71,6 +71,8 @@ function get_row_data( $changelog_data ) {
 	$rows = array();
 	$count = count( $changelog_data );
 	$i = 0;
+	$changelog_data = array_reverse( $changelog_data );
+
 	foreach ( $changelog_data as $version => $data ) {
 		// Add "Introduced." for the initial version description, last since the array is reversed.
 		$data['description'] = ( ( $count - 1 ) == $i ) ? __( 'Introduced.', 'wporg' ) : $data['description'];
