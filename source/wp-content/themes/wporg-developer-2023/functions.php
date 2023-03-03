@@ -261,7 +261,7 @@ function breadcrumb_trail_items_for_hooks( $items, $args ) {
  * @return array
  */
 function breadcrumb_trail_items_remove_reference( $items, $args ) {
-	if ( ! is_singular() && ! is_single() && ! is_post_type_archive() && ! is_archive() ) {
+	if ( ! is_parsed_post_type() ) {
 		return $items;
 	}
 
