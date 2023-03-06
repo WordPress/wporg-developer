@@ -56,7 +56,7 @@ function render_block_data( $parsed_block ) {
 	}
 
 	if ( is_parsed_post_type() || 'command' === get_post_type() ) {
-		$parsed_block['attrs']['placeholder'] = __( 'Search in the reference...', 'wporg' );
+		$parsed_block['attrs']['placeholder'] = __( 'Search for commands...', 'wporg' );
 	}
 
 	return $parsed_block;
