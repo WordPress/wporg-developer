@@ -20,17 +20,9 @@ function filter_search_block( $block_content, $block ) {
 	}
 
 	if ( 'command' === get_post_type() ) {
-		$block_content = str_replace(
-			'action="' . esc_url( home_url( '/' ) ) . '"',
-			'action="' . esc_url( home_url( 'cli/commands/' ) ) . '"',
-			$block_content
-		);
+		$block_content = get_block_content_by_home_url( $block_content, home_url( 'cli/commands/' ) );
 	} elseif ( wporg_is_handbook() ) {
-		$block_content = str_replace(
-			'action="' . esc_url( home_url( '/' ) ) . '"',
-			'action="' . esc_url( get_query_var( 'current_handbook_home_url' ) ) . '"',
-			$block_content
-		);
+		$block_content = get_block_content_by_home_url( $block_content, get_query_var( 'current_handbook_home_url' ) );
 	} else {
 		if ( isset( $block['attrs']['className'] ) && strpos( $block['attrs']['className'], 'wporg-filtered-search-form' ) ) {
 			$block_content = str_replace( '</form>', do_blocks( '<!-- wp:wporg/search-filters /-->' ) . '</form>', $block_content );
@@ -61,3 +53,22 @@ function render_block_data( $parsed_block ) {
 }
 
 add_filter( 'render_block_data', __NAMESPACE__ . '\render_block_data', 10, 2 );
+
+/**
+ * Replaces the action URL in a block content string with a given URL path.
+ *
+ * @param string $block_content The block content string to modify.
+ * @param string $replacement_home_url Replceament string for the action attribute. Defaults to an empty string.
+ * @return string The modified block content string.
+ */
+function get_block_content_by_home_url( $block_content, $replacement_home_url = '' ) {
+	if ( ! $replacement_home_url ) {
+		return $block_content;
+	}
+
+	return str_replace(
+		'action="' . esc_url( home_url( '/' ) ) . '"',
+		'action="' . esc_url( $replacement_home_url ) . '"',
+		$block_content
+	);
+}
