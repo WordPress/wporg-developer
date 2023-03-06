@@ -15,7 +15,7 @@ body[class] {
 		max-width: 100%;
 	}
 
-	pre:not(.line-numbers) {
+	pre:not(.wp-block-code) {
 		padding: 20px;
 		background-color: #f7f7f7;
 		border: 1px solid var(--wp--preset--color--light-grey-1);
