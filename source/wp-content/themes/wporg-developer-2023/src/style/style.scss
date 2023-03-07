@@ -8,10 +8,20 @@ body[class] {
 	--wp-local-header-offset: 57px;
 }
 
-// Parsed handbook content doesn't use image blocks, so large images are
-// missing the max-width and break out of the page container.
-.entry-content p > img {
-	max-width: 100%;
+.entry-content {
+	// Parsed handbook content doesn't use image blocks, so large images are
+	// missing the max-width and break out of the page container.
+	p > img {
+		max-width: 100%;
+	}
+
+	pre:not(.wp-block-code) {
+		padding: 20px;
+		background-color: #f7f7f7;
+		border: 1px solid var(--wp--preset--color--light-grey-1);
+		border-radius: 2px;
+		overflow: scroll;
+	}
 }
 
 .search-results .wp-block-post-excerpt {
@@ -360,14 +370,6 @@ body[class] {
 
 	dt {
 		font-weight: 700;
-	}
-
-	pre {
-		padding: 20px;
-		background: #f7f7f7;
-		border: 1px solid var(--wp--preset--color--light-grey-1);
-		border-radius: 2px;
-		overflow: scroll;
 	}
 
 	table {
