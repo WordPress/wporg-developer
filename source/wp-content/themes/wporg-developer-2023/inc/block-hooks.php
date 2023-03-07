@@ -58,7 +58,7 @@ add_filter( 'render_block_data', __NAMESPACE__ . '\render_block_data', 10, 2 );
  * Replaces the action URL in a block content string with a given URL path.
  *
  * @param string $block_content The block content string to modify.
- * @param string $replacement_home_url Replceament string for the action attribute. Defaults to an empty string.
+ * @param string $replacement_home_url Replacement string for the action attribute. Defaults to an empty string.
  * @return string The modified block content string.
  */
 function get_block_content_by_home_url( $block_content, $replacement_home_url = '' ) {
