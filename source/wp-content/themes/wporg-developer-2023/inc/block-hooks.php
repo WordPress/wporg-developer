@@ -62,10 +62,6 @@ add_filter( 'render_block_data', __NAMESPACE__ . '\render_block_data', 10, 2 );
  * @return string The modified block content string.
  */
 function get_block_content_by_home_url( $block_content, $replacement_home_url = '' ) {
-	if ( ! $replacement_home_url ) {
-		return $block_content;
-	}
-
 	return str_replace(
 		'action="' . esc_url( home_url( '/' ) ) . '"',
 		'action="' . esc_url( $replacement_home_url ) . '"',
