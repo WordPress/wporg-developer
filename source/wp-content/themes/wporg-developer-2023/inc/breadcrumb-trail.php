@@ -174,7 +174,9 @@ class Breadcrumb_Trail {
 			/* If viewing a search results page. */
 			elseif ( is_search() ) {
 				if ( wporg_is_handbook() ) {
-					$this->do_handbook_search_items();
+					$this->do_search_items_by_home_url( wporg_get_current_handbook_home_url() );
+				} elseif ( 'command' === get_post_type() ) {
+					$this->do_search_items_by_home_url( esc_url( home_url( 'cli/commands/' ) ) );
 				} else {
 					$this->do_search_items();
 				}
@@ -838,17 +840,18 @@ class Breadcrumb_Trail {
 	}
 
 	/**
-	 * Adds the items to the trail items array for handbook search results.
+	 * Adds the items to the trail items array accroding to the home_url.
 	 *
 	 * @since  0.6.0
 	 * @access public
+	 * @param  string $home_url The home url of the search item.
 	 * @return void
 	 */
-	public function do_handbook_search_items() {
-		$this->items[] = '<a href="' . wporg_get_current_handbook_home_url() . '">' . get_queried_object()->label . '</a>';
+	public function do_search_items_by_home_url( $home_url ) {
+		$this->items[] = '<a href="' . $home_url . '">' . get_queried_object()->label . '</a>';
 
 		if ( is_paged() ) {
-			$search_url    = add_query_arg( 's', get_search_query(), wporg_get_current_handbook_home_url() );
+			$search_url    = add_query_arg( 's', get_search_query(), $home_url );
 			$this->items[] = '<a href="' . esc_url( $search_url ) . '">' . esc_html( $this->args['labels']['search'] ) . '</a>';
 		} elseif ( true === $this->args['show_title'] ) {
 			$this->items[] = $this->args['labels']['search'];
