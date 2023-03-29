@@ -81,44 +81,9 @@ body[class] {
 	}
 }
 
-.wp-block-search.wp-block-search__button-inside .wp-block-search__inside-wrapper {
-	--wp--custom--button--hover--color--text: var(--wp--preset--color--charcoal-1);
-	--wp--custom--button--hover--color--background: var(--wp--preset--color--light-grey-2);
-	padding: 0;
-	border: none;
-	border-radius: var(--wp--custom--button--border--radius);
-	background: var(--wp--preset--color--white);
-	color: var(--wp--preset--color--charcoal-1);
-
-	.wp-block-search__input {
-		padding-right: 0;
-		border: none;
-	}
-
-	.wp-block-search__button {
-		padding-top: calc(var(--wp--preset--spacing--20) * 0.5);
-		padding-right: calc(var(--wp--preset--spacing--20) * 0.75);
-		padding-bottom: calc(var(--wp--preset--spacing--20) * 0.5);
-		padding-left: calc(var(--wp--preset--spacing--20) * 0.75);
-
-		background: transparent;
-
-		svg {
-			fill: inherit;
-		}
-	}
-}
-
 .wp-block-search.is-style-secondary-search-control {
 	// Update border color in secondary search style, this site uses a light grey.
 	--local--border-color: var(--wp--preset--color--light-grey-1);
-}
-
-.wp-block-search.is-style-secondary-search-control,
-.wp-block-wporg-chapter-list h2 {
-	// Add offset spacing above the search box to optically align with title.
-	// See https://github.com/WordPress/wporg-documentation-2022/issues/36.
-	margin-top: 16px;
 }
 
 .is-toc-heading a::after {
