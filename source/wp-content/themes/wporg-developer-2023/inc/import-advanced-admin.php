@@ -6,7 +6,7 @@ class DevHub_Advanced_Admin extends DevHub_Docs_Importer {
 	 */
 	public function init() {
 		parent::do_init(
-			'adv-admin',
+			'adv-admin', // 'advanced-administration' makes for too long of a post type slug when appended with '-handbook'
 			'advanced-administration',
 			'https://raw.githubusercontent.com/WordPress/Advanced-administration-handbook/main/bin/handbook-manifest.json'
 		);
