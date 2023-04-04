@@ -19,7 +19,7 @@ jobs:
 
             - name: Install all dependencies
               run: |
-                  composer install || composer update wporg/wporg-mu-plugins
+                  composer install || composer update wporg/*
                   yarn
             - name: Build
               run: yarn workspaces run build

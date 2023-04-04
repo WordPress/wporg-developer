@@ -29,6 +29,7 @@ jobs:
 
             - name: Install dependencies & setup configs
               run: |
+                  composer install || composer update wporg/*
                   yarn setup:tools
             - name: Lint CSS
               run: |
