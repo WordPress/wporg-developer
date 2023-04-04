@@ -17,10 +17,18 @@ jobs:
                   node-version-file: '.nvmrc'
                   cache: 'yarn'
 
+            - name: Setup PHP with PECL extension
+              uses: shivammathur/setup-php@1a18b2267f80291a81ca1d33e7c851fe09e7dfc4 # v2.22.0
+              with:
+                php-version: '7.4'
+              env:
+                COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
             - name: Install all dependencies
               run: |
-                  composer install || composer update wporg/wporg-mu-plugins
+                  composer install || composer update wporg/*
                   yarn
+
             - name: Build
               run: yarn workspaces run build
 
@@ -32,9 +40,11 @@ jobs:
                   git rm -rfq .
                   rm -rf *
                   mv $RUNNER_TEMP/wporg-developer-2023/* .
+
             - name: Add all the theme files
               run: |
                   git add * --force
+
             - name: Commit and push
               uses: actions-js/push@a52398fac807b0c1e5f1492c969b477c8560a0ba # 1.3
               with:
