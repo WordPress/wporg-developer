@@ -63,6 +63,11 @@ get_header(); ?>
 					<a href="<?php echo esc_url( get_post_type_archive_link( 'command' ) ); ?>" class="go"><?php _e( 'Run Commands ', 'wporg' ); ?></a>
 				</div>
 
+				<div class="box box-adv-admin">
+					<h3><a href="<?php echo esc_url( get_post_type_archive_link( 'adv-admin-handbook' ) ); ?>" class="widget-title"><div class="dashicons dashicons-admin-page"></div><?php _e( 'Advanced Administration', 'wporg' ); ?></a></h3>
+					<p class="widget-description"><?php _e( 'Ready to dive into WordPress management?', 'wporg' ); ?></p>
+					<a href="<?php echo esc_url( get_post_type_archive_link( 'adv-admin-handbook' ) ); ?>" class="go"><?php _e( 'Manage WordPress', 'wporg' ); ?></a>
+				</div>
 			</div>
 
 			<div class="search-guide inner-wrap section">
