@@ -220,6 +220,10 @@ function init() {
 
 	add_filter( 'mkaz_code_syntax_force_loading', '__return_true' );
 	add_filter( 'mkaz_prism_css_path', __NAMESPACE__ . '\\update_prism_css_path' );
+
+	// Until launch, any sites running this theme on WordPress.org should be noindexed and lack a canonical tag.
+	add_filter( 'wporg_noindex_request', '__return_true' );
+	add_filter( 'wporg_canonical_url', '__return_false' );
 }
 
 /**
