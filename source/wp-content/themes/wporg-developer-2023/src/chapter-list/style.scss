@@ -14,9 +14,14 @@
 	}
 
 	ul ul {
+		display: none;
 		margin-left: calc(var(--local--button-size) / 2);
 		padding-left: calc(var(--wp--preset--spacing--20) / 4);
 		border-left: 1px solid var(--wp--preset--color--light-grey-1);
+
+		&.is-open {
+			display: revert;
+		}
 	}
 
 	li {
@@ -31,23 +36,15 @@
 		}
 	}
 
-	&.has-js-control ul ul {
-		display: none;
-
-		&.is-open {
-			display: revert;
-		}
-	}
-
 	// Style the dash & chevron, most of the styles can be shared.
-	&.has-js-control li:not(.page_item_has_children),
+	li:not(.page_item_has_children),
 	.wporg-chapter-list--button-group {
 		display: flex;
 		align-items: flex-start;
 	}
 
 	&:not(.has-js-control) li::before,
-	&.has-js-control li:not(.page_item_has_children)::before,
+	li:not(.page_item_has_children)::before,
 	.wporg-chapter-list--button-group > button {
 		// Add space between button & link.
 		margin-inline-end: 0.25em;
@@ -56,12 +53,8 @@
 		width: var(--local--button-size);
 	}
 
-	&:not(.has-js-control) li::before {
-		height: 0.8em;
-	}
-
 	&:not(.has-js-control) li::before,
-	&.has-js-control li:not(.page_item_has_children)::before,
+	li:not(.page_item_has_children)::before,
 	.wporg-chapter-list--button-group > button::before {
 		content: "";
 		display: inline-block;
@@ -101,5 +94,15 @@
 	.current_page_item > span,
 	.current_page_item > a {
 		font-weight: 600;
+	}
+}
+
+html.no-js .wp-block-wporg-chapter-list {
+	 ul ul {
+		display: block;
+	}
+
+	li::before {
+		height: 0.8em;
 	}
 }
