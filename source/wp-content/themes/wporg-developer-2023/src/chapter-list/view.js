@@ -6,8 +6,6 @@ import { __, sprintf } from '@wordpress/i18n';
 const init = () => {
 	const container = document.querySelector( '.wp-block-wporg-chapter-list > ul' );
 	if ( container ) {
-		container.parentNode.classList.toggle( 'has-js-control' );
-
 		const parents = container.querySelectorAll( '.page_item_has_children' );
 		parents.forEach( ( item ) => {
 			// Get link, remove (will re-ad later).
