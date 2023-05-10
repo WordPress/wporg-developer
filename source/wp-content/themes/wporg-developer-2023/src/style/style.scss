@@ -36,10 +36,6 @@ body[class] {
 	display: block;
 }
 
-.sidebar-container .is-link-to-top {
-	display: none;
-}
-
 [dir="rtl"] {
 	.is-sticky .wp-block-navigation.is-style-dropdown-on-mobile {
 		.wp-block-navigation__responsive-container-open {
@@ -54,35 +50,8 @@ body[class] {
 	}
 }
 
-// Slot the search & table of contents into a floating sidebar on large screens.
-@media (min-width: 1200px) {
-	.sidebar-container {
-		--local--block-end-sidebar--width: 340px;
-
-		position: absolute;
-		top: calc(var(--wp-global-header-offset, 0px) + var(--wp-local-header-offset, 0px));
-		// Right offset should be "edge spacing" at minimum, otherwise calculate it to be centered.
-		right: max(var(--wp--preset--spacing--edge-space), calc((100% - var(--wp--style--global--wide-size)) / 2));
-		width: var(--local--block-end-sidebar--width);
-		margin-top: var(--wp--preset--spacing--edge-space) !important;
-
-		&.is-fixed-sidebar {
-			position: fixed;
-		}
-
-		&.is-bottom-sidebar {
-			position: absolute;
-		}
-
-		&.is-fixed-sidebar .is-link-to-top,
-		&.is-bottom-sidebar .is-link-to-top {
-			display: block;
-		}
-	}
-}
-
 @media (min-width: 1440px) {
-	.has-three-columns .sidebar-container {
+	.has-three-columns .wp-block-wporg-sidebar-container {
 		--local--block-end-sidebar--width: 300px;
 		--wp--style--global--wide-size: 1280px;
 	}
