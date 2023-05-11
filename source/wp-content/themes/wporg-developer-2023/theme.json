@@ -189,27 +189,6 @@
 						}
 					}
 				}
-			},
-			"wporg/table-of-contents": {
-				"color": {
-					"background": "var(--wp--preset--color--blueberry-4)",
-					"text": "var(--wp--preset--color--blueberry-1)"
-				},
-				"typography": {
-					"fontSize": "var(--wp--preset--font-size--small)"
-				},
-				"elements": {
-					"heading": {
-						"typography": {
-							"fontSize": "var(--wp--preset--font-size--normal) !important"
-						}
-					},
-					"link": {
-						"color": {
-							"text": "inherit"
-						}
-					}
-				}
 			}
 		}
 	}
