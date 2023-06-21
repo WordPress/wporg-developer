@@ -68,6 +68,12 @@ get_header(); ?>
 					<p class="widget-description"><?php _e( 'Ready to dive into WordPress management?', 'wporg' ); ?></p>
 					<a href="<?php echo esc_url( get_post_type_archive_link( 'adv-admin-handbook' ) ); ?>" class="go"><?php _e( 'Manage WordPress', 'wporg' ); ?></a>
 				</div>
+
+				<div class="box box-playground">
+					<h3><a href="<?php echo esc_url( 'https://developer.wordpress.org/playground/' ); ?>" class="widget-title"><div class="dashicons dashicons-block-default"></div><?php _e( 'WordPress Playground', 'wporg' ); ?></a></h3>
+					<p class="widget-description"><?php _e( 'WordPress that runs entirely in your browser.', 'wporg' ); ?></p>
+					<a href="<?php echo esc_url( 'https://developer.wordpress.org/playground/' ); ?>" class="go"><?php _e( 'Documentation', 'wporg' ); ?></a>
+				</div>
 			</div>
 
 			<div class="search-guide inner-wrap section">
