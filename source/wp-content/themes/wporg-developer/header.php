@@ -32,24 +32,22 @@ $show_masthead = is_front_page() || is_page( 'reference' );
 		<p class="site-description"><?php _e( 'The freedom to build.', 'wporg' ); ?></p>
 		<?php endif; ?>
 
-		<div>
-			<?php if ( $show_search ) : ?>
-				<?php get_search_form(); ?>
-			<?php endif; ?>
+		<?php if ( $show_search ) : ?>
+			<?php get_search_form(); ?>
+		<?php endif; ?>
 
-			<?php if ( ! $show_masthead ) : ?>
-			<nav id="site-navigation" class="main-navigation" role="navigation">
-				<button class="menu-toggle dashicons dashicons-arrow-down-alt2" aria-controls="primary-menu" aria-expanded="false" aria-label="<?php esc_attr_e( 'Primary Menu', 'wporg' ); ?>"></button>
-				<?php
-				$active_menu = is_post_type_archive( 'command' ) || is_singular( 'command' ) ? 'devhub-cli-menu' : 'devhub-menu';
-				wp_nav_menu( array(
-					'theme_location'  => $active_menu,
-					'container_class' => 'menu-container',
-					'container_id'    => 'primary-menu',
-				) ); ?>
-			</nav>
-			<?php endif; ?>
-		</div>
+		<?php if ( ! $show_masthead ) : ?>
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle dashicons dashicons-arrow-down-alt2" aria-controls="primary-menu" aria-expanded="false" aria-label="<?php esc_attr_e( 'Primary Menu', 'wporg' ); ?>"></button>
+			<?php
+			$active_menu = is_post_type_archive( 'command' ) || is_singular( 'command' ) ? 'devhub-cli-menu' : 'devhub-menu';
+			wp_nav_menu( array(
+				'theme_location'  => $active_menu,
+				'container_class' => 'menu-container',
+				'container_id'    => 'primary-menu',
+			) ); ?>
+		</nav>
+		<?php endif; ?>
 	</div>
 </header><!-- #masthead -->
 
