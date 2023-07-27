@@ -485,7 +485,17 @@ class DevHub_Formatting {
 						}
 
 						// Only link actually parsed classes.
-						if ( $post = get_page_by_title( $matches[0], OBJECT, 'wp-parser-class' ) ) {
+						$args = array(
+							'post_type' => 'wp-parser-class',
+							'name' => $matches[0],
+							'posts_per_page' => 1,
+						);
+						
+						$query = new WP_Query( $args );
+						
+						if ( $query->have_posts() ) {
+							$post = $query->posts[0];
+
 							return sprintf(
 								'<a href="%s" rel="class">%s</a>',
 								get_permalink( $post->ID ),
