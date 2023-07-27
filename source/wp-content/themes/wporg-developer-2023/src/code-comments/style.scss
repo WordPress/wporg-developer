@@ -1,6 +1,8 @@
 $half_padding: calc(var(--wp--preset--spacing--10) / 2);
 
 .wp-block-wporg-code-reference-comments {
+	margin-top: var(--wp--preset--spacing--50);
+
 	a:not(.comment-date):not(.comment-author-attribution .url):not(.user-note-voting
 a):not(.wporg-developer-code-block a) {
 		text-decoration: underline;
