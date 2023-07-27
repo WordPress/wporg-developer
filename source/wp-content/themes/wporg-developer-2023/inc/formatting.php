@@ -433,7 +433,17 @@ class DevHub_Formatting {
 							// Reference to a function.
 							} else {
 								// Only link actually parsed functions.
-								if ( $post = get_page_by_title( $name, OBJECT, 'wp-parser-function' ) ) {
+								$args = array(
+									'post_type' => 'wp-parser-function',
+									'name' => $name,
+									'posts_per_page' => 1,
+								);
+								
+								$query = new WP_Query( $args );
+								
+								if ( $query->have_posts() ) {
+									$post = $query->posts[0];
+
 									return sprintf(
 										'<a href="%s" rel="function">%s</a>' . $after,
 										get_permalink( $post->ID ),
