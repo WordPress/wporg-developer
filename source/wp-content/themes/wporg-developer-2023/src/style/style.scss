@@ -274,12 +274,6 @@ body[class] {
 	color: var(--wp--preset--color--charcoal-1);
 }
 
-section[class*="wp-block-wporg-code-reference"] {
-	&:not(.wp-block-wporg-code-reference-summary):not(.wp-block-wporg-code-reference-comments) {
-		margin-top: var(--wp--preset--spacing--40);
-	}
-}
-
 .wp-block-wporg-code-reference-changelog + .entry-meta {
 	padding-top: 0 !important;
 	border-top: none;

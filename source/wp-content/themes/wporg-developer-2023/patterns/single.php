@@ -9,4 +9,4 @@
  // See: https://github.com/WordPress/wporg-developer/pull/194
 ?>
 
-<!-- wp:post-content {"layout":{"inherit":true}} /-->
+<!-- wp:post-content {"layout":{"inherit":true},"style":{"spacing":{"blockGap":"var:preset|spacing|40"}}} /-->
