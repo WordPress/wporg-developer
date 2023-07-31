@@ -54,7 +54,7 @@ function render( $attributes, $content, $block ) {
 	}
 
 	$title_block = sprintf(
-		'<!-- wp:heading {"fontSize":"heading-4"} --><h2 class="wp-block-heading has-heading-4-font-size">%s</h2><!-- /wp:heading -->',
+		'<!-- wp:heading {"fontSize":"heading-3"} --><h2 class="wp-block-heading has-heading-3-font-size">%s</h2><!-- /wp:heading -->',
 		__( 'User Contributed Notes', 'wporg' )
 	);
 
