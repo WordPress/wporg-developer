@@ -53,7 +53,7 @@ class DevHub_Block_Editor_Importer extends DevHub_Docs_Importer {
 			'reference-guides/block-api/versions' => 'reference-guides/block-api/block-api-versions',
 			'how-to-guides/block-theme' => 'how-to-guides/themes/create-block-theme',
 			'how-to-guides/block-based-theme' => 'how-to-guides/themes/block-theme-overview',
-			'how-to-guides/platform/custom-block-editor/tutorial' => 'how-to-guides/platform/custom-block-editor'
+			'how-to-guides/platform/custom-block-editor/tutorial' => 'how-to-guides/platform/custom-block-editor',
 
 			// After handbook restructuring, March 2021.
 			'handbook/versions-in-wordpress/' => 'contributors/versions-in-wordpress',
