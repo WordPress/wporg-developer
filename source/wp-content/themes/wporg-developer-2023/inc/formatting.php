@@ -412,7 +412,17 @@ class DevHub_Formatting {
 								$name = str_replace( array( '->', '-&gt;' ), '::', $name );
 
 								// Only link actually parsed methods.
-								if ( $post = get_page_by_title( $name, OBJECT, 'wp-parser-method' ) ) {
+								$args = array(
+									'post_type' => 'wp-parser-method',
+									'name' => $name,
+									'posts_per_page' => 1,
+								);
+								
+								$query = new WP_Query( $args );
+								
+								if ( $query->have_posts() ) {
+									$post = $query->posts[0];
+
 									return sprintf(
 										'<a href="%s" rel="method">%s</a>' . $after,
 										get_permalink( $post->ID ),
@@ -423,7 +433,17 @@ class DevHub_Formatting {
 							// Reference to a function.
 							} else {
 								// Only link actually parsed functions.
-								if ( $post = get_page_by_title( $name, OBJECT, 'wp-parser-function' ) ) {
+								$args = array(
+									'post_type' => 'wp-parser-function',
+									'name' => $name,
+									'posts_per_page' => 1,
+								);
+								
+								$query = new WP_Query( $args );
+								
+								if ( $query->have_posts() ) {
+									$post = $query->posts[0];
+
 									return sprintf(
 										'<a href="%s" rel="function">%s</a>' . $after,
 										get_permalink( $post->ID ),
@@ -465,7 +485,17 @@ class DevHub_Formatting {
 						}
 
 						// Only link actually parsed classes.
-						if ( $post = get_page_by_title( $matches[0], OBJECT, 'wp-parser-class' ) ) {
+						$args = array(
+							'post_type' => 'wp-parser-class',
+							'name' => $matches[0],
+							'posts_per_page' => 1,
+						);
+						
+						$query = new WP_Query( $args );
+						
+						if ( $query->have_posts() ) {
+							$post = $query->posts[0];
+
 							return sprintf(
 								'<a href="%s" rel="class">%s</a>',
 								get_permalink( $post->ID ),

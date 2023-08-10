@@ -879,7 +879,17 @@ namespace DevHub {
 	function get_param_reference( $param, $recursion_limit = 3 ) {
 		if ( $recursion_limit > 0 && preg_match_all( '#rel="(function|method)">([^<>()]+)[(][)]</a>#', $param[ 'content' ], $matches, PREG_SET_ORDER ) ) {
 			foreach ( $matches as $match ) {
-				if ( $_post = get_page_by_title( $match[2], OBJECT, 'wp-parser-' . $match[1] ) ) {
+				$args = array(
+					'post_type' => 'wp-parser-' . $match[1],
+					'name' => $match[2],
+					'posts_per_page' => 1,
+				);
+			
+				$query = new WP_Query( $args );
+			
+				if ( $query->have_posts() ) {
+					$_post = $query->posts[0];
+
 					if ( $_params = get_params( $_post->ID ) ) {
 
 						$arg_names_to_try = array_unique([

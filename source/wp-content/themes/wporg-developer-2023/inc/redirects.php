@@ -65,8 +65,19 @@ class DevHub_Redirects {
 	 */
 	public static function redirect_resources() {
 		if ( is_page( 'resource' ) ) {
-			wp_redirect( get_permalink( get_page_by_title( 'dashicons' ) ) );
-			exit();
+			$args = array(
+				'post_type' => 'page',
+				'name' => 'dashicons',
+				'posts_per_page' => 1,
+			);
+		
+			$query = new WP_Query( $args );
+		
+			if ( $query->have_posts() ) {
+				$post = $query->posts[0];
+				wp_redirect( get_permalink( $post->ID ) );
+				exit();
+			}
 		}
 	}
 
