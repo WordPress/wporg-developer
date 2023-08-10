@@ -885,7 +885,7 @@ namespace DevHub {
 					'posts_per_page' => 1,
 				);
 			
-				$query = new WP_Query( $args );
+				$query = new \WP_Query( $args );
 			
 				if ( $query->have_posts() ) {
 					$_post = $query->posts[0];
