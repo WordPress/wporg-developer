@@ -26,7 +26,10 @@
 
 	dd {
 		margin: 0;
-		padding-bottom: var(--wp--preset--spacing--20);
+
+		&:not(:last-child) {
+			padding-bottom: var(--wp--preset--spacing--20);
+		}
 	}
 
 	.required {
