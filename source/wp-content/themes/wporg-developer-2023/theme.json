@@ -128,6 +128,11 @@
 					}
 				}
 			},
+			"code-reference-section": {
+				"title": {
+					"fontWeight": 500
+				}
+			},
 			"latest-news": {
 				"title": {
 					"fontFamily": "var(--wp--preset--font-family--monospace)",

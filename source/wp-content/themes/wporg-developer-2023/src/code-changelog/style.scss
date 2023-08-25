@@ -1,6 +1,12 @@
-.wp-block-wporg-code-reference-changelog .wp-block-table {
-	th:first-child,
-	td:first-child {
-		max-width: 8%;
+.wp-block-wporg-code-reference-changelog {
+	h2 {
+		font-weight: var(--wp--custom--code-reference-section--title--font-weight);
+	}
+
+	.wp-block-table {
+		th:first-child,
+		td:first-child {
+			max-width: 8%;
+		}
 	}
 }

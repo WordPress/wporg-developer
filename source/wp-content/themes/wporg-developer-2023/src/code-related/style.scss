@@ -1,4 +1,8 @@
 .wp-block-wporg-code-reference-related {
+	h2 {
+		font-weight: var(--wp--custom--code-reference-section--title--font-weight);
+	}
+
 	tr th:last-child,
 	tr td:last-child {
 		display: none;
