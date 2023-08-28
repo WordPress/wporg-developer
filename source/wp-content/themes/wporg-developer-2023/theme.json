@@ -190,13 +190,6 @@
 					}
 				}
 			}
-		},
-		"elements": {
-			"paragraph": {
-			  "spacing": {
-				"margin": "20px"
-			  }
-			}
-		  }
+		}
 	}
 }

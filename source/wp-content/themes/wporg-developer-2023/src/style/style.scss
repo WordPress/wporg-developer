@@ -8,6 +8,12 @@ body[class] {
 	--wp-local-header-offset: 57px;
 }
 
+p,
+ul {
+	margin-block-start: var(--wp--preset--spacing--20);
+	margin-block-end: var(--wp--preset--spacing--20);
+}
+
 .entry-content {
 	// Parsed handbook content doesn't use image blocks, so large images are
 	// missing the max-width and break out of the page container.
