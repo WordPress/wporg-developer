@@ -1,5 +1,3 @@
-$half_padding: calc(var(--wp--preset--spacing--10) / 2);
-
 .wp-block-wporg-code-reference-comments {
 	margin-block-start: var(--wp--preset--spacing--50) !important;
 
@@ -17,6 +15,10 @@ a):not(.wporg-developer-code-block a) {
 		margin: 0;
 		padding: 0;
 
+		> li {
+			border: 1px solid var(--wp--preset--color--light-grey-1);
+		}
+
 		> li:not(:last-child) {
 			margin-bottom: var(--wp--preset--spacing--40);
 		}
@@ -29,16 +31,25 @@ a):not(.wporg-developer-code-block a) {
 	}
 
 	.comment-date {
-		margin-left: $half_padding;
+		margin-left: var(--wp--preset--spacing--10);
 		color: var(--wp--preset--color--charcoal-4);
 		text-decoration: none;
 	}
 
+	.comment-body {
+		padding-bottom: var(--wp--preset--spacing--20);
+
+		> *:not(.comment-meta) {
+			padding-left: var(--wp--preset--spacing--20);
+			padding-right: var(--wp--preset--spacing--20);
+		}
+	}
+
 	.comment-meta {
 		display: flex;
-		padding: $half_padding var(--wp--preset--spacing--10);
+		padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--20);
 		background-color: var(--wp--preset--color--light-grey-2);
-		border: 1px solid var(--wp--preset--color--light-grey-1);
+		border-bottom: 1px solid var(--wp--preset--color--light-grey-1);
 		align-items: center;
 		justify-content: space-between;
 	}

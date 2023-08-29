@@ -251,7 +251,7 @@ class DevHub_User_Submitted_Content {
 	public static function comment_form_args( $comment = false, $context = '' ) {
 		$args = array(
 			'logged_in_as'        => '',
-			'label_submit'        => __( 'Submit', 'wporg' ),
+			'label_submit'        => __( 'Submit feedback', 'wporg' ),
 			'title_reply'         => '', //'Add Example'
 			'title_reply_to'      => '',
 			'title_reply_before'  => '',
