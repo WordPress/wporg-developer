@@ -53,8 +53,8 @@ function render( $attributes, $content, $block ) {
 		) . '</p>';
 	}
 
+	// If there are comments the heading will be displayed at the top of that block, and won't be required again here
 	$ordered_comments = wporg_developer_get_ordered_notes();
-
 	$title_block = empty( $ordered_comments ) ? sprintf(
 		'<!-- wp:heading --><h2 class="wp-block-heading">%s</h2><!-- /wp:heading -->',
 		__( 'User Contributed Notes', 'wporg' )
