@@ -9,10 +9,10 @@
 
 <!-- wp:wporg/sidebar-container -->
 
-	<!-- wp:group {"tagName":"article","style":{"spacing":{"padding":{"top":"var:preset|spacing|20"}}}} -->
-	<div class="wp-block-group" style="padding-top:var(--wp--preset--spacing--20)">
+	<!-- wp:group {"tagName":"article"} -->
+	<div class="wp-block-group">
 
-		<!-- wp:wporg/table-of-contents /-->
+		<!-- wp:wporg/table-of-contents {"style":{"spacing":{"margin":{"top":"var:preset|spacing|edge-space"}}}} /-->
 
 	</div>
 	<!-- /wp:group -->

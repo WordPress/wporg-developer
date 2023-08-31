@@ -50,6 +50,12 @@ body[class] {
 	}
 }
 
+@media (max-width: 1199px) {
+	.wp-block-wporg-sidebar-container .wp-block-wporg-table-of-contents {
+		margin-top: 0 !important;
+	}
+}
+
 @media (min-width: 1440px) {
 	.has-three-columns .wp-block-wporg-sidebar-container {
 		--local--block-end-sidebar--width: 300px;
