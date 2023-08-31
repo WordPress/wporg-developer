@@ -1,6 +1,11 @@
 .wp-block-wporg-code-reference-comments {
 	margin-block-start: var(--wp--preset--spacing--50) !important;
 
+	p {
+		margin-block-start: var(--wp--style--block-gap);
+		margin-block-end: var(--wp--style--block-gap);
+	}
+
 	a:not(.comment-date):not(.comment-author-attribution .url):not(.user-note-voting
 a):not(.wporg-developer-code-block a) {
 		text-decoration: underline;
@@ -156,7 +161,7 @@ a):not(.wporg-developer-code-block a) {
 }
 
 .wp-block-wporg-code-reference-comments-rules {
-	margin: var(--wp--preset--spacing--20) 0;
+	margin: var(--wp--style--block-gap) 0;
 	padding-left: var(--wp--preset--spacing--20);
 	list-style: disc;
 }

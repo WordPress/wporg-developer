@@ -190,6 +190,16 @@
 					}
 				}
 			}
+		},
+		"elements": {
+			"h2": {
+				"spacing": {
+					"margin": {
+						"top": "0",
+						"bottom": "var(--wp--style--block-gap)"
+					}
+				}
+			}
 		}
 	}
 }

@@ -8,12 +8,6 @@ body[class] {
 	--wp-local-header-offset: 57px;
 }
 
-p,
-ul {
-	margin-block-start: var(--wp--preset--spacing--20);
-	margin-block-end: var(--wp--preset--spacing--20);
-}
-
 .entry-content {
 	// Parsed handbook content doesn't use image blocks, so large images are
 	// missing the max-width and break out of the page container.
@@ -163,20 +157,24 @@ ul {
 	border-radius: 2px;
 }
 
-.wporg-dot-link-list a {
-	position: relative;
-	text-decoration: underline;
-	margin-right: var(--wp--preset--spacing--10);
-	padding-right: var(--wp--preset--spacing--10);
+.wporg-dot-link-list {
+	margin: var(--wp--style--block-gap) 0;
 
-	&::after {
-		content: "\b7";
-		position: absolute;
-		right: -3px;
-	}
+	a {
+		position: relative;
+		text-decoration: underline;
+		margin-right: var(--wp--preset--spacing--10);
+		padding-right: var(--wp--preset--spacing--10);
 
-	&:last-child::after {
-		display: none;
+		&::after {
+			content: "\b7";
+			position: absolute;
+			right: -3px;
+		}
+
+		&:last-child::after {
+			display: none;
+		}
 	}
 }
 

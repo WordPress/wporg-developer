@@ -1,3 +1,8 @@
+.wp-block-wporg-code-reference-comment-form p {
+	margin-block-start: var(--wp--style--block-gap);
+	margin-block-end: var(--wp--style--block-gap);
+}
+
 .wp-block-wporg-code-reference-comment-form-content {
 	display: flex;
 	flex-direction: column;
