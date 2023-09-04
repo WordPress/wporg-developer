@@ -1,4 +1,8 @@
 .wp-block-wporg-code-reference-parameters {
+	dl {
+		margin: 0;
+	}
+
 	dt {
 		display: flex;
 		align-items: center;
@@ -18,7 +22,10 @@
 
 	dd {
 		margin: 0;
-		padding-bottom: var(--wp--preset--spacing--20);
+
+		&:not(:last-child) {
+			padding-bottom: var(--wp--preset--spacing--20);
+		}
 	}
 
 	.required {

@@ -8,7 +8,13 @@
 ?>
 
 <!-- wp:wporg/sidebar-container -->
-	<!-- wp:search {"label":"<?php esc_attr_e( 'Search', 'wporg' ); ?>","showLabel":false,"width":100,"widthUnit":"%","buttonText":"<?php esc_attr_e( 'Search', 'wporg' ); ?>","buttonPosition":"button-inside","buttonUseIcon":true,"className":"is-style-secondary-search-control","borderColor":"light-grey-1","placeholder":"<?php esc_attr_e( 'Search in the documentation', 'wporg' ); ?>"} /-->
 
-	<!-- wp:wporg/table-of-contents /-->
+	<!-- wp:group {"tagName":"article","style":{"spacing":{"padding":{"top":"var:preset|spacing|20"}}}} -->
+	<div class="wp-block-group" style="padding-top:var(--wp--preset--spacing--20)">
+
+		<!-- wp:wporg/table-of-contents /-->
+
+	</div>
+	<!-- /wp:group -->
+
 <!-- /wp:wporg/sidebar-container -->

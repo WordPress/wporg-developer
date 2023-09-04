@@ -46,7 +46,7 @@
 			"heading": {
 				"typography": {
 					"fontFamily": "var(--wp--preset--font-family--monospace)",
-					"fontWeight": 400,
+					"fontWeight": 500,
 					"lineHeight": 1.2
 				},
 				"level-1": {
@@ -187,6 +187,16 @@
 						"color": {
 							"text": "var(--wp--preset--color--blueberry-1)"
 						}
+					}
+				}
+			}
+		},
+		"elements": {
+			"h2": {
+				"spacing": {
+					"margin": {
+						"top": "0",
+						"bottom": "var(--wp--style--block-gap)"
 					}
 				}
 			}

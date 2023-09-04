@@ -43,7 +43,7 @@ function render( $attributes, $content, $block ) {
 		$form = ob_get_clean(); // End capture
 
 		$editor_rules = \DevHub_User_Submitted_Content::get_editor_rules();
-		$output = "<div class='wp-block-wporg-code-reference-comment-form-content'>{$form}<div>{$editor_rules}</div></div>";
+		$output = "<div class='wp-block-wporg-code-reference-comment-form-content'>{$form}<div class='comment-rules'>{$editor_rules}</div></div>";
 
 	} else {
 		$output = '<p>' . sprintf(
@@ -53,10 +53,12 @@ function render( $attributes, $content, $block ) {
 		) . '</p>';
 	}
 
-	$title_block = sprintf(
-		'<!-- wp:heading {"fontSize":"heading-4"} --><h2 class="wp-block-heading has-heading-4-font-size">%s</h2><!-- /wp:heading -->',
+	// If there are comments the heading will be displayed at the top of that block, and won't be required again here
+	$ordered_comments = wporg_developer_get_ordered_notes();
+	$title_block = empty( $ordered_comments ) ? sprintf(
+		'<!-- wp:heading --><h2 class="wp-block-heading">%s</h2><!-- /wp:heading -->',
 		__( 'User Contributed Notes', 'wporg' )
-	);
+	) : '';
 
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(
