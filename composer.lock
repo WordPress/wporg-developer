@@ -8,6 +8,63 @@
     "packages": [],
     "packages-dev": [
         {
+            "name": "adhocore/jwt",
+            "version": "1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/adhocore/php-jwt.git",
+                "reference": "6c434af7170090bb7a8880d2bc220a2254ba7899"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/adhocore/php-jwt/zipball/6c434af7170090bb7a8880d2bc220a2254ba7899",
+                "reference": "6c434af7170090bb7a8880d2bc220a2254ba7899",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0 || ^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.5 || ^7.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ahc\\Jwt\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jitendra Adhikari",
+                    "email": "jiten.adhikary@gmail.com"
+                }
+            ],
+            "description": "Ultra lightweight JSON web token (JWT) library for PHP5.5+.",
+            "keywords": [
+                "auth",
+                "json-web-token",
+                "jwt",
+                "jwt-auth",
+                "jwt-php",
+                "token"
+            ],
+            "support": {
+                "issues": "https://github.com/adhocore/php-jwt/issues",
+                "source": "https://github.com/adhocore/php-jwt/tree/1.1.2"
+            },
+            "funding": [
+                {
+                    "url": "https://paypal.me/ji10",
+                    "type": "custom"
+                }
+            ],
+            "time": "2021-02-20T09:56:44+00:00"
+        },
+        {
             "name": "composer/installers",
             "version": "1.x-dev",
             "source": {
@@ -2570,13 +2627,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/WordPress/wporg-mu-plugins.git",
-                "reference": "422a594dea072b1ac642e6af18dc985f2745b0f9"
+                "reference": "33287d387426337d8d06320841a66b9a528e89a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WordPress/wporg-mu-plugins/zipball/422a594dea072b1ac642e6af18dc985f2745b0f9",
-                "reference": "422a594dea072b1ac642e6af18dc985f2745b0f9",
+                "url": "https://api.github.com/repos/WordPress/wporg-mu-plugins/zipball/33287d387426337d8d06320841a66b9a528e89a7",
+                "reference": "33287d387426337d8d06320841a66b9a528e89a7",
                 "shasum": ""
+            },
+            "require": {
+                "adhocore/jwt": "^1.0"
             },
             "require-dev": {
                 "composer/installers": "~1.0",
@@ -2586,7 +2646,7 @@
                 "wp-coding-standards/wpcs": "2.*",
                 "wp-phpunit/wp-phpunit": "~6.0",
                 "wporg/wporg-repo-tools": "dev-trunk",
-                "yoast/phpunit-polyfills": "^1.0"
+                "yoast/phpunit-polyfills": "^1.1"
             },
             "type": "wordpress-muplugin",
             "extra": {
@@ -2613,7 +2673,7 @@
                 "source": "https://github.com/WordPress/wporg-mu-plugins/tree/build",
                 "issues": "https://github.com/WordPress/wporg-mu-plugins/issues"
             },
-            "time": "2023-05-04T04:18:58+00:00"
+            "time": "2023-09-04T00:08:53+00:00"
         },
         {
             "name": "wporg/wporg-parent-2021",
