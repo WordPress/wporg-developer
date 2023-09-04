@@ -2551,15 +2551,15 @@
         },
         {
             "name": "wpackagist-plugin/gutenberg",
-            "version": "15.7.0",
+            "version": "16.5.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/gutenberg/",
-                "reference": "tags/15.7.0"
+                "reference": "tags/16.5.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/gutenberg.15.7.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/gutenberg.16.5.1.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
