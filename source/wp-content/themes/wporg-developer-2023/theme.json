@@ -39,11 +39,6 @@
 					"slug": "syntax-grey",
 					"color": "#646970",
 					"name": "Grey"
-				},
-				{
-					"slug": "opacities-white-10",
-					"color": "rgba(255, 255, 255, 0.1)",
-					"name": "White 10%"
 				}
 			]
 		},
