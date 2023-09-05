@@ -16,7 +16,12 @@
 		<p class="has-small-font-size"><?php esc_html_e( 'Developer Resources', 'wporg' ); ?></p>
 		<!-- /wp:paragraph -->
 		
-		<!-- wp:navigation {"ref":144496,"textColor":"white","backgroundColor":"charcoal-2","className":"is-style-dropdown-on-mobile","style":{"spacing":{"blockGap":"24px"}},"fontSize":"small"} /-->
+		<!-- wp:navigation {"fontSize":"small"} -->
+
+			<!-- wp:navigation-link {"label":"Code Reference","url":"https://developer.wordpress.org/reference","kind":"custom","isTopLevelLink":true} /-->
+			<!-- wp:navigation-link {"label":"WP-CLI Commands","type":"custom","url":"https://developer.wordpress.org/cli/commands","kind":"custom","isTopLevelLink":true} /-->
+
+		<!-- /wp:navigation -->
 
 	</div>
 	<!-- /wp:group -->
