@@ -181,6 +181,7 @@ require_once __DIR__ . '/src/version-select/index.php';
 
 add_action( 'init', __NAMESPACE__ . '\\init' );
 add_filter( 'wporg_block_site_breadcrumbs', __NAMESPACE__ . '\set_site_breadcrumbs' );
+add_filter( 'wporg_block_navigation_menus', __NAMESPACE__ . '\add_site_navigation_menus' );
 add_filter( 'single_template_hierarchy', __NAMESPACE__ . '\add_handbook_templates' );
 add_filter( 'next_post_link', __NAMESPACE__ . '\get_adjacent_handbook_post_link', 10, 5 );
 add_filter( 'previous_post_link', __NAMESPACE__ . '\get_adjacent_handbook_post_link', 10, 5 );
@@ -503,6 +504,24 @@ function set_site_breadcrumbs() {
 	}
 
 	return $breadcrumbs;
+}
+
+/**
+ * Provide a list of local navigation menus.
+ */
+function add_site_navigation_menus( $menus ) {
+	return array(
+		'developer' => array(
+			array(
+				'label' => __( 'Code Reference', 'wporg' ),
+				'url' => '/reference/',
+			),
+			array(
+				'label' => __( 'WP-CLI Commands', 'wporg' ),
+				'url' => '/cli/commands/',
+			),
+		),
+	);
 }
 
 /**
