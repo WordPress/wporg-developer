@@ -50,10 +50,12 @@ class DevHub_Block_Editor_Importer extends DevHub_Docs_Importer {
 		// Any handbook pages where the slug changes should be listed here.
 		$redirects = [
 			'components/server-side-render' => 'packages/packages-server-side-render',
-			'reference-guides/block-api/versions' => 'reference-guides/block-api/block-api-versions',
+			'explanations/faq' => 'getting-started/faq',
+			'explanations/glossary' => 'getting-started/glossary',
 			'how-to-guides/block-theme' => 'how-to-guides/themes/create-block-theme',
 			'how-to-guides/block-based-theme' => 'how-to-guides/themes/block-theme-overview',
 			'how-to-guides/platform/custom-block-editor/tutorial' => 'how-to-guides/platform/custom-block-editor',
+			'reference-guides/block-api/versions' => 'reference-guides/block-api/block-api-versions',
 
 			// After handbook restructuring, March 2021.
 			'handbook/versions-in-wordpress/' => 'contributors/versions-in-wordpress',
