@@ -5,7 +5,7 @@
 
 body[class] {
 	// Height of the local header (breadcrumbs & subnav).
-	--wp-local-header-offset: 57px;
+	--wp-local-header-offset: 61px;
 }
 
 .entry-content {
@@ -47,12 +47,6 @@ body[class] {
 			right: unset;
 			left: var(--wp--preset--spacing--60);
 		}
-	}
-}
-
-@media (max-width: 1199px) {
-	.wp-block-wporg-sidebar-container .wp-block-wporg-table-of-contents {
-		margin-top: 0 !important;
 	}
 }
 
