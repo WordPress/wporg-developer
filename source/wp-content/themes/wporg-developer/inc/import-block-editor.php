@@ -92,10 +92,20 @@ class DevHub_Block_Editor_Importer extends DevHub_Docs_Importer {
 			'tutorials/' => 'how-to-guides/',
 		];
 
+		// Redirects away from the block editor handbook.
+		$handbook_redirects = [
+			// 'some-block-editor-path' => '/new-path-relative-to-developer-root/',
+			'how-to-guides/themes/block-theme-overview' => '/themes/block-themes/',
+		];
+
 		$new_handbook_path = '';
+		$is_handbook_redirect = false;
 		if ( ! empty( $redirects[ untrailingslashit( $handbook_path ) ] ) ) {
 			$new_handbook_path = $redirects[ untrailingslashit( $handbook_path ) ];
-		} else {
+		} else if ( ! empty( $handbook_redirects[ untrailingslashit( $handbook_path ) ] ) ) {
+			$new_handbook_path = $handbook_redirects[ untrailingslashit( $handbook_path ) ];
+			$is_handbook_redirect = true;
+		}  else {
 			foreach ( $path_redirects as $old_path => $new_path ) {
 				if ( 0 === strpos( $handbook_path, $old_path ) ) {
 					$new_handbook_path = str_replace( $old_path, $new_path, $handbook_path );
@@ -105,7 +115,11 @@ class DevHub_Block_Editor_Importer extends DevHub_Docs_Importer {
 		}
 
 		if ( $new_handbook_path ) {
-			$redirect_to = get_post_type_archive_link( $this->get_post_type() ) . $new_handbook_path;
+			if ( $is_handbook_redirect ) {
+				$redirect_to = get_site_url() . $new_handbook_path;
+			} else {
+				$redirect_to = get_post_type_archive_link( $this->get_post_type() ) . $new_handbook_path;
+			}
 
 			wp_safe_redirect( $redirect_to, 301 );
 			exit;
