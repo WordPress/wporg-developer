@@ -60,10 +60,11 @@ function render( $attributes, $content, $block ) {
 	$content .= '</a>';
 	$content .= '</h1>';
 
-	$excerpt = get_the_excerpt( $post_ID );
-	if ( $excerpt ) {
-		$content .= '<p class="excerpt">' . $excerpt . '</p>';
-	}
+	// TODO: Reinstate excerpt. This is causing an infinite loop, see https://github.com/WordPress/wporg-developer/issues/277
+	// $excerpt = get_the_excerpt( $post_ID );
+	// if ( $excerpt ) {
+	// 	$content .= '<p class="excerpt">' . $excerpt . '</p>';
+	// }
 
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(
