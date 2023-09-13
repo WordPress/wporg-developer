@@ -7,50 +7,6 @@
 
 ?>
 
-<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"16px","right":"var:preset|spacing|edge-space","bottom":"16px","left":"var:preset|spacing|edge-space"}},"elements":{"link":{"color":{"text":"var:preset|color|white"}}},"border":{"bottom":{"color":"#63b59d","width":"1px"}}},"backgroundColor":"aquamarine","textColor":"white","className":"is-sticky wporg-front-page-breadcrumb","layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull is-sticky wporg-front-page-breadcrumb has-white-color has-aquamarine-background-color has-text-color has-background has-link-color" style="border-bottom-color:#63b59d;border-bottom-width:1px;padding-top:16px;padding-right:var(--wp--preset--spacing--edge-space);padding-bottom:16px;padding-left:var(--wp--preset--spacing--edge-space)"><!-- wp:group {"align":"full","textColor":"charcoal-1","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"}} -->
-<div class="wp-block-group alignfull has-charcoal-1-color has-text-color"><!-- wp:group {"textColor":"charcoal-1","layout":{"type":"flex","flexWrap":"nowrap"}} -->
-<div class="wp-block-group has-charcoal-1-color has-text-color"><!-- wp:heading {"className":"is-style-default","fontSize":"small","fontFamily":"inter"} -->
-<h2 class="wp-block-heading is-style-default has-inter-font-family has-small-font-size"><?php esc_attr_e( 'Developers', 'wporg' ); ?></h2>
-<!-- /wp:heading --></div>
-<!-- /wp:group -->
-
-<!-- wp:navigation {"textColor":"charcoal-1","backgroundColor":"aquamarine","className":"is-style-dropdown-on-mobile","style":{"spacing":{"blockGap":"24px"}},"fontSize":"small"} -->
-<!-- wp:navigation-link {"label":"<?php esc_attr_e( 'Blog', 'wporg' ); ?>","url":"https://developer.wordpress.org/news/","kind":"custom","isTopLevelLink":true} /-->
-<!-- wp:navigation-link {"label":"<?php esc_attr_e( 'Forums', 'wporg' ); ?>","url":"https://wordpress.org/support/forums/","kind":"custom","isTopLevelLink":true} /-->
-<!-- wp:navigation-link {"label":"<?php esc_attr_e( 'Documentation', 'wporg' ); ?>","type":"custom","url":"https://wordpress.org/support/","kind":"custom","isTopLevelLink":true} /-->
-<!-- wp:navigation-link {"label":"<?php esc_attr_e( 'Get Involved', 'wporg' ); ?>","type":"custom","url":"https://make.wordpress.org/support/handbook/","kind":"custom","isTopLevelLink":true} /-->
-<!-- /wp:navigation --></div>
-<!-- /wp:group --></div>
-<!-- /wp:group -->
-
-<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"right":"var:preset|spacing|edge-space","left":"var:preset|spacing|edge-space"}}},"backgroundColor":"aquamarine","className":"has-white-color has-charcoal-2-background-color has-text-color has-background has-link-color","layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull has-white-color has-charcoal-2-background-color has-text-color has-background has-link-color has-aquamarine-background-color" style="padding-right:var(--wp--preset--spacing--edge-space);padding-left:var(--wp--preset--spacing--edge-space)"><!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"top":"var:preset|spacing|20","bottom":"var:preset|spacing|60"}}},"layout":{"type":"default"}} -->
-<div class="wp-block-group alignwide" style="padding-top:var(--wp--preset--spacing--20);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:heading {"level":1,"textColor":"charcoal-1"} -->
-<h1 class="wp-block-heading has-charcoal-1-color has-text-color"><?php echo wp_kses_post( '<strong>Dev Resources</strong>/The freedom to build', 'wporg' ); ?></h1>
-<!-- /wp:heading -->
-
-<!-- wp:group {"className":"awesomeplete-form-wrap search-wrap"} -->
-<div class="wp-block-group awesomeplete-form-wrap search-wrap"><!-- wp:search {"label":"<?php esc_attr_e( 'Search', 'wporg' ); ?>","showLabel":false,"placeholder":"<?php esc_attr_e( 'Search in the code reference...', 'wporg' ); ?>","width":300,"widthUnit":"px","buttonText":"<?php esc_attr_e( 'Search', 'wporg' ); ?>","buttonPosition":"button-inside","buttonUseIcon":true} /--></div>
-<!-- /wp:group --></div>
-<!-- /wp:group --></div>
-<!-- /wp:group -->
-
-<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|10","bottom":"var:preset|spacing|10"}}},"backgroundColor":"blueberry-4","layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull has-blueberry-4-background-color has-background" style="padding-top:var(--wp--preset--spacing--10);padding-bottom:var(--wp--preset--spacing--10)"><!-- wp:paragraph {"align":"center","fontSize":"extra-small"} -->
-<p class="has-text-align-center has-extra-small-font-size">
-<?php echo wp_kses_post(
-	sprintf(
-	/* translators: %1$s: version link, %2$s: version number */
-		__( 'See <a href="%1$s">what has changed</a> in the WordPress %2$s API.', 'wporg' ),
-		'[wordpress_version_link]',
-		'[wordpress_version]'
-	)
-); ?>
-</p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group -->
-
 <!-- wp:group {"align":"full","className":"entry-content"} -->
 <div class="wp-block-group alignfull entry-content"><!-- wp:group {"align":"full","style":{"spacing":{"padding":{"right":"var:preset|spacing|edge-space","left":"var:preset|spacing|edge-space"}}},"className":"home-section-docs-api has-linen-background-color has-background","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull home-section-docs-api has-linen-background-color has-background" style="padding-right:var(--wp--preset--spacing--edge-space);padding-left:var(--wp--preset--spacing--edge-space)"><!-- wp:columns {"align":"wide","style":{"spacing":{"blockGap":{"top":"0","left":"0"}}}} -->

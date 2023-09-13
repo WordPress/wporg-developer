@@ -5,7 +5,7 @@
 
 body[class] {
 	// Height of the local header (breadcrumbs & subnav).
-	--wp-local-header-offset: 57px;
+	--wp-local-header-offset: 61px;
 }
 
 .entry-content {
@@ -267,10 +267,6 @@ body[class] {
 			text-decoration: underline;
 		}
 	}
-}
-
-.wp-block-wporg-site-breadcrumbs a {
-	color: var(--wp--preset--color--charcoal-1);
 }
 
 .wp-block-wporg-code-reference-changelog + .entry-meta {
