@@ -72,22 +72,6 @@ body[class] {
 	margin-top: -0.15em;
 }
 
-@media (max-width: 781px) {
-	.home-section-docs-api {
-		padding-left: 0 !important;
-		padding-right: 0 !important;
-
-		.wp-block-column {
-			padding-left: var(--wp--preset--spacing--edge-space) !important;
-			padding-right: var(--wp--preset--spacing--edge-space) !important;
-
-			&:first-child {
-				border-bottom: 1px solid var(--wp--preset--color--light-grey-1);
-			}
-		}
-	}
-}
-
 // Wrap meta on smaller screens. Double class needed to override core style.
 .entry-meta.entry-meta {
 
@@ -126,6 +110,12 @@ body[class] {
 @media (min-width: 599px) {
 	.wporg-front-page-breadcrumb h2 {
 		display: none;
+	}
+}
+
+.wporg-front-page-footer {
+	.wp-block-heading a {
+		text-decoration: none;
 	}
 }
 
