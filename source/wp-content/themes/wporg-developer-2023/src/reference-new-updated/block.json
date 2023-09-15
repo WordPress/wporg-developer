@@ -1,0 +1,14 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "wporg/reference-new-updated",
+	"version": "0.1.0",
+	"title": "Reference: New and updated",
+	"category": "widgets",
+	"icon": "smiley",
+	"description": "Show a list of the things that are new or updated for a release",
+	"supports": {},
+	"textdomain": "wporg",
+	"editorScript": "file:./index.js",
+	"style": "file:./style-index.css"
+}
