@@ -28,11 +28,11 @@
 			<div class="wp-block-group">
 				
 				<!-- wp:heading {"style":{"typography":{"fontStyle":"normal","fontWeight":"700"}},"fontSize":"normal","fontFamily":"inter"} -->
-				<h2 class="wp-block-heading has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:700">API reference</h2>
+				<h2 class="wp-block-heading has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:700"><?php esc_html_e( 'API reference', 'wporg' ); ?></h2>
 				<!-- /wp:heading -->
 
 				<!-- wp:paragraph -->
-				<p><a href="https://developer.wordpress.org/apis/">View all</a></p>
+				<p><a href="https://developer.wordpress.org/apis/"><?php esc_html_e( 'View all', 'wporg' ); ?></a></p>
 				<!-- /wp:paragraph -->
 			
 			</div>
