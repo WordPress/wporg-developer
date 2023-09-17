@@ -38,78 +38,10 @@
 			</div>
 			<!-- /wp:group -->
 
-			<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|10","bottom":"var:preset|spacing|10","left":"var:preset|spacing|20","right":"var:preset|spacing|20"},"margin":{"top":"var:preset|spacing|20"}},"border":{"width":"1px"}},"borderColor":"light-grey-1","layout":{"type":"constrained"}} -->
-			<div class="wp-block-group has-border-color has-light-grey-1-border-color" style="border-width:1px;margin-top:var(--wp--preset--spacing--20);padding-top:var(--wp--preset--spacing--10);padding-right:var(--wp--preset--spacing--20);padding-bottom:var(--wp--preset--spacing--10);padding-left:var(--wp--preset--spacing--20)">
+			<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|20","bottom":"var:preset|spacing|20","left":"var:preset|spacing|20","right":"var:preset|spacing|20"},"margin":{"top":"var:preset|spacing|20"}},"border":{"width":"1px"}},"borderColor":"light-grey-1","layout":{"type":"constrained"}} -->
+			<div class="wp-block-group has-border-color has-light-grey-1-border-color" style="border-width:1px;margin-top:var(--wp--preset--spacing--20);padding-top:var(--wp--preset--spacing--20);padding-right:var(--wp--preset--spacing--20);padding-bottom:var(--wp--preset--spacing--20);padding-left:var(--wp--preset--spacing--20)">
 			
-				<!-- wp:list {"style":{"typography":{"lineHeight":"3"},"spacing":{"padding":{"left":"0"}}},"className":"wporg-reference-list","fontSize":"small"} -->
-				<ul class="wporg-reference-list has-small-font-size" style="padding-left:0;line-height:3">
-				
-				<!-- wp:list-item -->
-				<li><a href="https://developer.wordpress.org/apis/handbook/dashboard-widgets/">Dashboard widgets</a></li>
-				<!-- /wp:list-item -->
-
-				<!-- wp:list-item -->
-				<li><a href="https://developer.wordpress.org/apis/handbook/database/">Database</a></li>
-				<!-- /wp:list-item -->
-
-				<!-- wp:list-item -->
-				<li><a href="https://developer.wordpress.org/apis/handbook/making-http-requests/">HTTP API</a></li>
-				<!-- /wp:list-item -->
-
-				<!-- wp:list-item -->
-				<li><a href="https://developer.wordpress.org/apis/handbook/filesystem/">Filesystem</a></li>
-				<!-- /wp:list-item -->
-
-				<!-- wp:list-item -->
-				<li><a href="https://developer.wordpress.org/apis/handbook/global-variables/">Global Variables</a></li>
-				<!-- /wp:list-item -->
-
-				<!-- wp:list-item -->
-				<li><a href="https://developer.wordpress.org/apis/handbook/metadata/">Metadata</a></li>
-				<!-- /wp:list-item -->
-
-				<!-- wp:list-item -->
-				<li><a href="https://developer.wordpress.org/apis/handbook/options/">Options</a></li>
-				<!-- /wp:list-item -->
-
-				<!-- wp:list-item -->
-				<li><a href="https://developer.wordpress.org/plugins/">Plugins</a></li>
-				<!-- /wp:list-item -->
-
-				<!-- wp:list-item -->
-				<li><a href="https://developer.wordpress.org/apis/handbook/quicktags/">Quicktags</a></li>
-				<!-- /wp:list-item -->
-
-				<!-- wp:list-item -->
-				<li><a href="https://developer.wordpress.org/rest-api/">REST API</a></li>
-				<!-- /wp:list-item -->
-
-				<!-- wp:list-item -->
-				<li><a href="https://developer.wordpress.org/apis/handbook/rewrite/">Rewrite</a></li>
-				<!-- /wp:list-item -->
-
-				<!-- wp:list-item -->
-				<li><a href="https://developer.wordpress.org/apis/handbook/settings/">Settings</a></li>
-				<!-- /wp:list-item -->
-
-				<!-- wp:list-item -->
-				<li><a href="https://developer.wordpress.org/apis/handbook/shortcode/">Shortcode</a></li>
-				<!-- /wp:list-item -->
-
-				<!-- wp:list-item -->
-				<li><a href="https://developer.wordpress.org/themes/">Theme Modification</a></li>
-				<!-- /wp:list-item -->
-
-				<!-- wp:list-item -->
-				<li><a href="https://developer.wordpress.org/apis/handbook/transients/">Transients</a></li>
-				<!-- /wp:list-item -->
-
-				<!-- wp:list-item -->
-				<li><a href="https://developer.wordpress.org/apis/handbook/xml-rpc/">XML-RPC</a></li>
-				<!-- /wp:list-item -->
-			
-			</ul>
-			<!-- /wp:list -->
+				<!-- wp:navigation {"ref":144716,"overlayMenu":"never","className":"wporg-reference-list","layout":{"type":"flex","orientation":"vertical"},"style":{"spacing":{"blockGap":"0"}},"fontSize":"small"} /-->
 		
 		</div>
 		<!-- /wp:group -->

@@ -50,11 +50,11 @@ function render( $attributes, $content, $block ) {
 		) ),
 	) );
 
-	$content = '<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|10","bottom":"var:preset|spacing|10","left":"var:preset|spacing|20","right":"var:preset|spacing|20"},"margin":{"top":"var:preset|spacing|20"}},"border":{"width":"1px"}},"borderColor":"light-grey-1","layout":{"type":"constrained"}} -->
-	<div class="wp-block-group has-border-color has-light-grey-1-border-color" style="border-width:1px;margin-top:var(--wp--preset--spacing--20);padding-top:var(--wp--preset--spacing--10);padding-right:var(--wp--preset--spacing--20);padding-bottom:var(--wp--preset--spacing--10);padding-left:var(--wp--preset--spacing--20)">
+	$content = '<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|20","bottom":"var:preset|spacing|20","left":"var:preset|spacing|20","right":"var:preset|spacing|20"},"margin":{"top":"var:preset|spacing|20"}},"border":{"width":"1px"}},"borderColor":"light-grey-1","layout":{"type":"constrained"}} -->
+	<div class="wp-block-group has-border-color has-light-grey-1-border-color" style="border-width:1px;margin-top:var(--wp--preset--spacing--20);padding-top:var(--wp--preset--spacing--20);padding-right:var(--wp--preset--spacing--20);padding-bottom:var(--wp--preset--spacing--20);padding-left:var(--wp--preset--spacing--20)">
 
-		<!-- wp:list {"style":{"typography":{"lineHeight":"3"},"spacing":{"padding":{"left":"0"}}},"className":"wporg-reference-list","fontSize":"small"} -->
-		<ul class="wporg-reference-list has-small-font-size" style="padding-left:0;line-height:3">';
+		<!-- wp:list {"style":{"spacing":{"padding":{"left":"0"}}},"className":"wporg-reference-list","fontSize":"small"} -->
+		<ul class="wporg-reference-list has-small-font-size" style="padding-left:0">';
 	
 	while ( $list->have_posts() ) : $list->the_post();
 

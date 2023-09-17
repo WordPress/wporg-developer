@@ -304,8 +304,22 @@ body[class] {
 	}
 }
 
-.wporg-reference-list {
+.wporg-reference-list,
+.wp-block-navigation .wporg-reference-list {
 	list-style: none;
+
+	> li,
+	.wp-block-navigation-item {
+		&:not(:last-child) {
+			margin-bottom: var(--wp--preset--spacing--20);
+		}
+	}
+
+	> a,
+	.wp-block-navigation-item__content {
+		color: var(--wp--custom--link--color--text);
+		text-decoration: underline;
+	}
 }
 
 .single-command {
