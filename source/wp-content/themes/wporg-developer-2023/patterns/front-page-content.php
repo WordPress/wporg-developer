@@ -14,31 +14,31 @@
 <h2 class="wp-block-heading is-style-short-text has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:700;line-height:1.6"><?php esc_html_e( 'Documentation', 'wporg' ); ?></h2>
 <!-- /wp:heading -->
 
-<!-- wp:list {"className":"is-style-cards-3-col","fontSize":"small"} -->
-<ul class="is-style-cards-3-col has-small-font-size"><!-- wp:list-item -->
-<li><a href="https://developer.wordpress.org/block-editor"><strong><?php esc_html_e( 'Block Editor', 'wporg' ); ?></strong><br><?php esc_html_e( 'Creating the building blocks of WordPress?', 'wporg' ); ?></a></li>
-<!-- /wp:list-item -->
+<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|10"}},"className":"is-style-cards-grid","layout":{"type":"grid","minimumColumnWidth":"32.3%"},"fontSize":"small"} -->
+<div class="wp-block-group is-style-cards-grid has-small-font-size"><!-- wp:heading {"level":3,"fontSize":"small","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-small-font-size"><a href="https://developer.wordpress.org/block-editor"><strong><?php esc_html_e( 'Block Editor', 'wporg' ); ?></strong><?php esc_html_e( 'Creating the building blocks of WordPress?', 'wporg' ); ?></a></h3>
+<!-- /wp:heading -->
 
-<!-- wp:list-item -->
-<li><a href="https://developer.wordpress.org/themes"><strong><?php esc_html_e( 'Themes', 'wporg' ); ?></strong><br><?php esc_html_e( 'Want to learn how to start theming WordPress?', 'wporg' ); ?></a></li>
-<!-- /wp:list-item -->
+<!-- wp:heading {"level":3,"fontSize":"small","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-small-font-size"><a href="https://developer.wordpress.org/themes"><strong><?php esc_html_e( 'Themes', 'wporg' ); ?></strong><?php esc_html_e( 'Want to learn how to start theming WordPress?', 'wporg' ); ?></a></h3>
+<!-- /wp:heading -->
 
-<!-- wp:list-item -->
-<li><a href="https://developer.wordpress.org/plugins"><strong><?php esc_html_e( 'Plugins', 'wporg' ); ?></strong><br><?php esc_html_e( 'Ready to dive into the world of plugin authoring?', 'wporg' ); ?></a></li>
-<!-- /wp:list-item -->
+<!-- wp:heading {"level":3,"fontSize":"small","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-small-font-size"><a href="https://developer.wordpress.org/plugins"><strong><?php esc_html_e( 'Plugins', 'wporg' ); ?></strong><?php esc_html_e( 'Ready to dive into the world of plugin authoring?', 'wporg' ); ?></a></h3>
+<!-- /wp:heading -->
 
-<!-- wp:list-item -->
-<li><a href="https://developer.wordpress.org/apis"><strong><?php esc_html_e( 'Common APIs', 'wporg' ); ?></strong><br><?php esc_html_e( 'Interested in interacting with various APIs?', 'wporg' ); ?></a></li>
-<!-- /wp:list-item -->
+<!-- wp:heading {"level":3,"fontSize":"small","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-small-font-size"><a href="https://developer.wordpress.org/apis"><strong><?php esc_html_e( 'Common APIs', 'wporg' ); ?></strong><?php esc_html_e( 'Interested in interacting with various APIs?', 'wporg' ); ?></a></h3>
+<!-- /wp:heading -->
 
-<!-- wp:list-item -->
-<li><a href="https://developer.wordpress.org/advanced-administration"><strong><?php esc_html_e( 'Advanced Administration', 'wporg' ); ?></strong><br><?php esc_html_e( 'Ready to dive into WordPress management?', 'wporg' ); ?></a></li>
-<!-- /wp:list-item -->
+<!-- wp:heading {"level":3,"fontSize":"small","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-small-font-size"><a href="https://developer.wordpress.org/advanced-administration"><strong><?php esc_html_e( 'Advanced Administration', 'wporg' ); ?></strong><?php esc_html_e( 'Ready to dive into WordPress management?', 'wporg' ); ?></a></h3>
+<!-- /wp:heading -->
 
-<!-- wp:list-item -->
-<li><a href="https://developer.wordpress.org/playground/"><strong><?php esc_html_e( 'WordPress Playground', 'wporg' ); ?></strong><br><?php esc_html_e( 'WordPress that runs entirely in your browser.', 'wporg' ); ?></a></li>
-<!-- /wp:list-item --></ul>
-<!-- /wp:list --></div>
+<!-- wp:heading {"level":3,"fontSize":"small","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-small-font-size"><a href="https://developer.wordpress.org/playground/"><strong><?php esc_html_e( 'WordPress Playground', 'wporg' ); ?></strong><?php esc_html_e( 'WordPress that runs entirely in your browser.', 'wporg' ); ?></a></h3>
+<!-- /wp:heading --></div>
+<!-- /wp:group --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 
@@ -48,23 +48,23 @@
 <h2 class="wp-block-heading is-style-short-text has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:700;line-height:1.6"><?php esc_html_e( 'API Reference', 'wporg' ); ?></h2>
 <!-- /wp:heading -->
 
-<!-- wp:list {"className":"is-style-cards-2-col","fontSize":"small"} -->
-<ul class="is-style-cards-2-col has-small-font-size"><!-- wp:list-item -->
-<li><a href="https://developer.wordpress.org/reference" data-type="helphub_article"><strong><?php esc_html_e( 'Code reference', 'wporg' ); ?></strong><br><?php esc_html_e( 'Looking for documentation for the codebase?', 'wporg' ); ?></a></li>
-<!-- /wp:list-item -->
+<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|10"}},"className":"is-style-cards-grid","layout":{"type":"grid","minimumColumnWidth":"49%"}} -->
+<div class="wp-block-group is-style-cards-grid"><!-- wp:heading {"level":3,"fontSize":"small","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-small-font-size"><a href="https://developer.wordpress.org/reference"><strong><?php esc_html_e( 'Code reference', 'wporg' ); ?></strong><?php esc_html_e( 'Looking for documentation for the codebase?', 'wporg' ); ?></a></h3>
+<!-- /wp:heading -->
 
-<!-- wp:list-item -->
-<li><a href="https://developer.wordpress.org/rest-api/"><strong><?php esc_html_e( 'REST API', 'wporg' ); ?></strong><br><?php esc_html_e( 'Getting started on making WordPress applications?', 'wporg' ); ?></a></li>
-<!-- /wp:list-item -->
+<!-- wp:heading {"level":3,"fontSize":"small","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-small-font-size"><a href="https://developer.wordpress.org/rest-api/"><strong><?php esc_html_e( 'REST API', 'wporg' ); ?></strong><?php esc_html_e( 'Getting started on making WordPress applications?', 'wporg' ); ?></a></h3>
+<!-- /wp:heading -->
 
-<!-- wp:list-item -->
-<li><a href="https://developer.wordpress.org/cli/commands"><strong><?php esc_html_e( 'Run WP-CLI Commands', 'wporg' ); ?></strong><br><?php esc_html_e( 'Accelerate your workflow managing WP.', 'wporg' ); ?></a></li>
-<!-- /wp:list-item -->
+<!-- wp:heading {"level":3,"fontSize":"small","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-small-font-size"><a href="https://developer.wordpress.org/cli/commands"><strong><?php esc_html_e( 'Run WP-CLI Commands', 'wporg' ); ?></strong><?php esc_html_e( 'Accelerate your workflow managing WP.', 'wporg' ); ?></a></h3>
+<!-- /wp:heading -->
 
-<!-- wp:list-item -->
-<li><a href="https://developer.wordpress.org/coding-standards/"><strong><?php esc_html_e( 'Coding Standards', 'wporg' ); ?></strong><br><?php esc_html_e( 'Want to ensure your code meets the standards?', 'wporg' ); ?></a></li>
-<!-- /wp:list-item --></ul>
-<!-- /wp:list --></div>
+<!-- wp:heading {"level":3,"fontSize":"small","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-small-font-size"><a href="https://developer.wordpress.org/coding-standards/"><strong><?php esc_html_e( 'Coding Standards', 'wporg' ); ?></strong><?php esc_html_e( 'Want to ensure your code meets the standards?', 'wporg' ); ?></a></h3>
+<!-- /wp:heading --></div>
+<!-- /wp:group --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 
@@ -84,7 +84,7 @@
 ); ?></p>
 <!-- /wp:paragraph -->
 
-<!-- wp:wporg/latest-news {"blogId":719,"className":"is-style-cards"} /--></div>
+<!-- wp:wporg/latest-news {"blogId":719} /--></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 
@@ -98,15 +98,15 @@
 <p class="has-charcoal-4-color has-text-color has-link-color has-small-font-size"><?php esc_html_e( 'Start your journey to contribute to WordPress.', 'wporg' ); ?></p>
 <!-- /wp:paragraph -->
 
-<!-- wp:list {"className":"is-style-cards-2-col","fontSize":"small"} -->
-<ul class="is-style-cards-2-col has-small-font-size"><!-- wp:list-item -->
-<li><a href="https://make.wordpress.org/docs/handbook/"><strong><?php esc_html_e( 'Documentation Contributor Handbook', 'wporg' ); ?></strong><br><?php esc_html_e( 'Help document WordPress.', 'wporg' ); ?></a></li>
-<!-- /wp:list-item -->
+<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|10"}},"className":"is-style-cards-grid","layout":{"type":"grid","minimumColumnWidth":"49%"}} -->
+<div class="wp-block-group is-style-cards-grid"><!-- wp:heading {"level":3,"fontSize":"small","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-small-font-size"><a href="https://make.wordpress.org/docs/handbook/"><strong><?php esc_html_e( 'Documentation Contributor Handbook', 'wporg' ); ?></strong><?php esc_html_e( 'Help document WordPress.', 'wporg' ); ?></a></h3>
+<!-- /wp:heading -->
 
-<!-- wp:list-item -->
-<li><a href="https://make.wordpress.org/core/handbook/"><strong><?php esc_html_e( 'Contribute to WordPress', 'wporg' ); ?></strong><br><?php esc_html_e( 'Start contributing to core.', 'wporg' ); ?></a></li>
-<!-- /wp:list-item --></ul>
-<!-- /wp:list --></div>
+<!-- wp:heading {"level":3,"fontSize":"small","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-small-font-size"><a href="https://make.wordpress.org/core/handbook/"><strong><?php esc_html_e( 'Contribute to WordPress', 'wporg' ); ?></strong><?php esc_html_e( 'Start contributing to core.', 'wporg' ); ?></a></h3>
+<!-- /wp:heading --></div>
+<!-- /wp:group --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
