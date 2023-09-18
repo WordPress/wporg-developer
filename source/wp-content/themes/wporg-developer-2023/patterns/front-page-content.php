@@ -7,166 +7,166 @@
 
 ?>
 
-<!-- wp:group {"align":"full","className":"entry-content"} -->
-<div class="wp-block-group alignfull entry-content"><!-- wp:group {"align":"full","style":{"spacing":{"padding":{"right":"var:preset|spacing|edge-space","left":"var:preset|spacing|edge-space"}}},"className":"home-section-docs-api has-linen-background-color has-background","layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull home-section-docs-api has-linen-background-color has-background" style="padding-right:var(--wp--preset--spacing--edge-space);padding-left:var(--wp--preset--spacing--edge-space)"><!-- wp:columns {"align":"wide","style":{"spacing":{"blockGap":{"top":"0","left":"0"}}}} -->
-<div class="wp-block-columns alignwide"><!-- wp:column {"style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}}} -->
-<div class="wp-block-column" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:heading {"style":{"elements":{"link":{"color":{"text":"var:preset|color|charcoal-1"}}},"spacing":{"margin":{"bottom":"var:preset|spacing|20"}}},"className":"wp-block-heading is-style-default"} -->
-<h2 class="wp-block-heading is-style-default has-link-color" style="margin-bottom:var(--wp--preset--spacing--20)"><?php esc_attr_e( 'Documentation', 'wporg' ); ?></h2>
+<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"},"blockGap":"var:preset|spacing|50"}},"className":"entry-content"} -->
+<div class="wp-block-group alignfull entry-content" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:group {"align":"full","style":{"spacing":{"padding":{"right":"var:preset|spacing|edge-space","left":"var:preset|spacing|edge-space"}}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull" style="padding-right:var(--wp--preset--spacing--edge-space);padding-left:var(--wp--preset--spacing--edge-space)"><!-- wp:group {"align":"wide","layout":{"type":"default"}} -->
+<div class="wp-block-group alignwide"><!-- wp:heading {"style":{"typography":{"fontStyle":"normal","fontWeight":"700","lineHeight":1.6}},"className":"is-style-short-text","fontSize":"normal","fontFamily":"inter"} -->
+<h2 class="wp-block-heading is-style-short-text has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:700;line-height:1.6"><?php esc_html_e( 'Documentation', 'wporg' ); ?></h2>
 <!-- /wp:heading -->
 
-<!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"0"}}}} -->
-<p style="margin-top:0"><a href="https://developer.wordpress.org/block-editor" data-type="helphub_article"><?php esc_attr_e( 'Block Editor', 'wporg' ); ?></a></p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"0"}}}} -->
-<p style="margin-top:0"><a href="https://developer.wordpress.org/themes" data-type="helphub_article"><?php esc_attr_e( 'Themes', 'wporg' ); ?></a></p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"0"}}}} -->
-<p style="margin-top:0"><a href="https://developer.wordpress.org/plugins"><?php esc_attr_e( 'Plugins', 'wporg' ); ?></a></p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"0"}}}} -->
-<p style="margin-top:0"><a href="https://developer.wordpress.org/apis" data-type="URL" data-id="https://developers.wordpress.org/apis"><?php esc_attr_e( 'Common APIs', 'wporg' ); ?></a></p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"0"}}}} -->
-<p style="margin-top:0"><a href="https://developer.wordpress.org/advanced-administration"><?php esc_attr_e( 'Advanced Administration', 'wporg' ); ?></a></p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:column -->
-
-<!-- wp:column {"style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}}} -->
-<div class="wp-block-column" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:heading {"style":{"elements":{"link":{"color":{"text":"var:preset|color|charcoal-1"}}},"spacing":{"margin":{"bottom":"var:preset|spacing|20"}}}} -->
-<h2 class="wp-block-heading has-link-color" style="margin-bottom:var(--wp--preset--spacing--20)"><?php esc_attr_e( 'API Reference', 'wporg' ); ?></h2>
+<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|10"}},"className":"is-style-cards-grid","layout":{"type":"grid","minimumColumnWidth":"32.3%"},"fontSize":"small"} -->
+<div class="wp-block-group is-style-cards-grid has-small-font-size"><!-- wp:heading {"level":3,"fontSize":"small","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-small-font-size"><a href="https://developer.wordpress.org/block-editor"><strong><?php esc_html_e( 'Block Editor', 'wporg' ); ?></strong><?php esc_html_e( 'Creating the building blocks of WordPress?', 'wporg' ); ?></a></h3>
 <!-- /wp:heading -->
 
-<!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"0"}}}} -->
-<p style="margin-top:0"><a href="https://developer.wordpress.org/reference" data-type="helphub_article"><?php esc_attr_e( 'Code reference', 'wporg' ); ?></a></p>
-<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3,"fontSize":"small","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-small-font-size"><a href="https://developer.wordpress.org/themes"><strong><?php esc_html_e( 'Themes', 'wporg' ); ?></strong><?php esc_html_e( 'Want to learn how to start theming WordPress?', 'wporg' ); ?></a></h3>
+<!-- /wp:heading -->
 
-<!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"0"}}}} -->
-<p style="margin-top:0"><a href="https://developer.wordpress.org/rest-api/" data-type="helphub_article"><?php esc_attr_e( 'REST API', 'wporg' ); ?></a></p>
-<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3,"fontSize":"small","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-small-font-size"><a href="https://developer.wordpress.org/plugins"><strong><?php esc_html_e( 'Plugins', 'wporg' ); ?></strong><?php esc_html_e( 'Ready to dive into the world of plugin authoring?', 'wporg' ); ?></a></h3>
+<!-- /wp:heading -->
 
-<!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"0"}}}} -->
-<p style="margin-top:0"><a href="https://developer.wordpress.org/apis/making-http-requests/" data-type="helphub_article"><?php esc_attr_e( 'HTTP API', 'wporg' ); ?></a></p>
-<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3,"fontSize":"small","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-small-font-size"><a href="https://developer.wordpress.org/apis"><strong><?php esc_html_e( 'Common APIs', 'wporg' ); ?></strong><?php esc_html_e( 'Interested in interacting with various APIs?', 'wporg' ); ?></a></h3>
+<!-- /wp:heading -->
 
-<!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"0"}}}} -->
-<p style="margin-top:0"><a href="https://developer.wordpress.org/cli/commands" data-type="URL" data-id="https://developers.wordpress.org/cli/commands"><?php esc_attr_e( 'WP-CLI', 'wporg' ); ?></a></p>
-<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3,"fontSize":"small","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-small-font-size"><a href="https://developer.wordpress.org/advanced-administration"><strong><?php esc_html_e( 'Advanced Administration', 'wporg' ); ?></strong><?php esc_html_e( 'Ready to dive into WordPress management?', 'wporg' ); ?></a></h3>
+<!-- /wp:heading -->
 
-<!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"0"}}}} -->
-<p style="margin-top:0"><a href="https://developer.wordpress.org/coding-standards/" data-type="URL" data-id="https://developers.wordpress.org/coding-standards/"><?php esc_attr_e( 'Coding Standards', 'wporg' ); ?></a></p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:column --></div>
-<!-- /wp:columns --></div>
-<!-- /wp:group -->
-
-<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"right":"var:preset|spacing|edge-space","left":"var:preset|spacing|edge-space"}},"border":{"bottom":{"width":"1px","style":"solid","color":"var:preset|color|light-grey-1"}}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull" style="border-bottom-color:var(--wp--preset--color--light-grey-1);border-bottom-style:solid;border-bottom-width:1px;padding-right:var(--wp--preset--spacing--edge-space);padding-left:var(--wp--preset--spacing--edge-space)"><!-- wp:columns {"align":"wide","style":{"spacing":{"blockGap":"0px","padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}},"className":"is-style-default"} -->
-<div class="wp-block-columns alignwide is-style-default" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:column {"verticalAlignment":"top","width":"33%","className":"is-left-column","layout":{"inherit":false}} -->
-<div class="wp-block-column is-vertically-aligned-top is-left-column" style="flex-basis:33%"><!-- wp:group {"layout":{"type":"default"}} -->
-<div class="wp-block-group"><!-- wp:heading {"style":{"spacing":{"margin":{"bottom":"var:preset|spacing|20"}}},"className":"has-heading-2-font-size"} -->
-<h2 class="wp-block-heading has-heading-2-font-size" style="margin-bottom:var(--wp--preset--spacing--20)"><?php esc_attr_e( 'More Resources', 'wporg' ); ?></h2>
+<!-- wp:heading {"level":3,"fontSize":"small","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-small-font-size"><a href="https://developer.wordpress.org/playground/"><strong><?php esc_html_e( 'WordPress Playground', 'wporg' ); ?></strong><?php esc_html_e( 'WordPress that runs entirely in your browser.', 'wporg' ); ?></a></h3>
 <!-- /wp:heading --></div>
 <!-- /wp:group --></div>
-<!-- /wp:column -->
-
-
-
-<!-- wp:column {"width":"66%","layout":{"inherit":false}} -->
-<div class="wp-block-column" style="flex-basis:66%"><!-- wp:group {"style":{"spacing":{"margin":{"top":"5px"}}}} -->
-<div class="wp-block-group" style="margin-top:5px"><!-- wp:columns -->
-<div class="wp-block-columns"><!-- wp:column -->
-<div class="wp-block-column"><!-- wp:group {"style":{"spacing":{"blockGap":"0"}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"left"}} -->
-<div class="wp-block-group"><!-- wp:paragraph {"className":"is-style-short-text"} -->
-<p class="is-style-short-text"><a href="https://learn.wordpress.org"><?php esc_attr_e( 'Learn WordPress', 'wporg' ); ?></a></p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p><?php esc_attr_e( 'Access to hundreds of tutorials and lessons', 'wporg' ); ?></p>
-<!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
 <!-- /wp:group -->
 
-<!-- wp:group {"style":{"spacing":{"blockGap":"0"}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"left"}} -->
-<div class="wp-block-group"><!-- wp:paragraph {"className":"is-style-short-text"} -->
-<p class="is-style-short-text"><a href="https://wordpress.org/support/"><?php esc_attr_e( 'Documentation', 'wporg' ); ?></a></p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph {"className":"is-style-short-text"} -->
-<p class="is-style-short-text"><?php esc_attr_e( 'End-user documentation to help you get the most out of WordPress', 'wporg' ); ?></p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group --></div>
-<!-- /wp:column -->
-
-<!-- wp:column -->
-<div class="wp-block-column"><!-- wp:group {"style":{"spacing":{"blockGap":"0"}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"left"}} -->
-<div class="wp-block-group"><!-- wp:paragraph {"className":"is-style-short-text"} -->
-<p class="is-style-short-text"><a href="https://wordpress.tv/"><?php esc_attr_e( 'WordPress.tv', 'wporg' ); ?></a></p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p><?php esc_attr_e( 'Watch videos curated by the community', 'wporg' ); ?></p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group -->
-
-<!-- wp:group {"style":{"spacing":{"blockGap":"0"}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"left"}} -->
-<div class="wp-block-group"><!-- wp:paragraph {"className":"is-style-short-text"} -->
-<p class="is-style-short-text"><a href="https://wordpress.org/support/forums/"><?php esc_attr_e( 'Support Forums', 'wporg' ); ?></a></p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p><?php esc_attr_e( 'Learn, share, and troubleshoot with the community', 'wporg' ); ?></p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group --></div>
-<!-- /wp:column --></div>
-<!-- /wp:columns --></div>
-<!-- /wp:group --></div>
-<!-- /wp:column --></div>
-<!-- /wp:columns --></div>
-<!-- /wp:group -->
-
-<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"right":"var:preset|spacing|edge-space","left":"var:preset|spacing|edge-space"}}},"backgroundColor":"white","layout":{"type":"constrained"},"anchor":"news"} -->
-<div class="wp-block-group alignfull has-white-background-color has-background" id="news" style="padding-right:var(--wp--preset--spacing--edge-space);padding-left:var(--wp--preset--spacing--edge-space)"><!-- wp:columns {"align":"wide","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"},"blockGap":"0px"}},"className":"is-style-default"} -->
-<div class="wp-block-columns alignwide is-style-default" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:column {"verticalAlignment":"top","width":"33%","className":"is-left-column","layout":{"inherit":false}} -->
-<div class="wp-block-column is-vertically-aligned-top is-left-column" style="flex-basis:33%"><!-- wp:heading {"style":{"spacing":{"margin":{"bottom":"var:preset|spacing|20"}}},"fontSize":"heading-2"} -->
-<h2 class="wp-block-heading has-heading-2-font-size" style="margin-bottom:var(--wp--preset--spacing--20)"><?php esc_attr_e( 'Latest Posts', 'wporg' ); ?></h2>
-<!-- /wp:heading --></div>
-<!-- /wp:column -->
-
-<!-- wp:column {"width":"66%","layout":{"inherit":false}} -->
-<div class="wp-block-column" style="flex-basis:66%"><!-- wp:group {"style":{"spacing":{"margin":{"top":"8px"}}}} -->
-<div class="wp-block-group" style="margin-top:8px"><!-- wp:wporg/latest-news {"blogId":719} /-->
-
-<!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"var:preset|spacing|50"}}}} -->
-<p style="margin-top:var(--wp--preset--spacing--50)"><a href="https://developer.wordpress.org/news/"><?php esc_attr_e( 'View all', 'wporg' ); ?></a></p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group --></div>
-<!-- /wp:column --></div>
-<!-- /wp:columns --></div>
-<!-- /wp:group -->
-
-<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"left":"var:preset|spacing|edge-space","right":"var:preset|spacing|edge-space"}}},"backgroundColor":"aquamarine","layout":{"type":"default"}} -->
-<div class="wp-block-group alignfull has-aquamarine-background-color has-background" style="padding-right:var(--wp--preset--spacing--edge-space);padding-left:var(--wp--preset--spacing--edge-space)"><!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}},"layout":{"type":"constrained","justifyContent":"center"}} -->
-<div class="wp-block-group alignwide" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:columns {"align":"wide"} -->
-<div class="wp-block-columns alignwide"><!-- wp:column {"width":"70%"} -->
-<div class="wp-block-column" style="flex-basis:70%"><!-- wp:heading {"style":{"spacing":{"margin":{"bottom":"var:preset|spacing|50"}}},"textColor":"charcoal-1"} -->
-<h2 class="wp-block-heading has-charcoal-1-color has-text-color" style="margin-bottom:var(--wp--preset--spacing--50)"><?php esc_attr_e( 'Are you passionate about web development? Join the WordPress community and help shape the future of the web', 'wporg' ); ?></h2>
+<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"right":"var:preset|spacing|edge-space","left":"var:preset|spacing|edge-space"}}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull" style="padding-right:var(--wp--preset--spacing--edge-space);padding-left:var(--wp--preset--spacing--edge-space)"><!-- wp:group {"align":"wide","layout":{"type":"default"}} -->
+<div class="wp-block-group alignwide"><!-- wp:heading {"style":{"typography":{"fontStyle":"normal","fontWeight":"700","lineHeight":1.6}},"className":"is-style-short-text","fontSize":"normal","fontFamily":"inter"} -->
+<h2 class="wp-block-heading is-style-short-text has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:700;line-height:1.6"><?php esc_html_e( 'API Reference', 'wporg' ); ?></h2>
 <!-- /wp:heading -->
 
-<!-- wp:buttons -->
-<div class="wp-block-buttons"><!-- wp:button {"backgroundColor":"charcoal-2","textColor":"white","className":"is-style-fill"} -->
-<div class="wp-block-button is-style-fill"><a class="wp-block-button__link has-white-color has-charcoal-2-background-color has-text-color has-background wp-element-button" href="https://make.wordpress.org"><?php esc_attr_e( 'Contribute', 'wporg' ); ?></a></div>
-<!-- /wp:button -->
+<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|10"}},"className":"is-style-cards-grid","layout":{"type":"grid","minimumColumnWidth":"49%"}} -->
+<div class="wp-block-group is-style-cards-grid"><!-- wp:heading {"level":3,"fontSize":"small","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-small-font-size"><a href="https://developer.wordpress.org/reference"><strong><?php esc_html_e( 'Code reference', 'wporg' ); ?></strong><?php esc_html_e( 'Looking for documentation for the codebase?', 'wporg' ); ?></a></h3>
+<!-- /wp:heading -->
 
-<!-- wp:button {"backgroundColor":"aquamarine","textColor":"charcoal-2","className":"external-link is-style-outline"} -->
-<div class="wp-block-button external-link is-style-outline"><a class="wp-block-button__link has-charcoal-2-color has-aquamarine-background-color has-text-color has-background wp-element-button" href="https://make.wordpress.org/core/handbook/"><?php esc_attr_e( 'Check Out Contributor Handbook ↗', 'wporg' ); ?></a></div>
-<!-- /wp:button --></div>
-<!-- /wp:buttons --></div>
+<!-- wp:heading {"level":3,"fontSize":"small","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-small-font-size"><a href="https://developer.wordpress.org/rest-api/"><strong><?php esc_html_e( 'REST API', 'wporg' ); ?></strong><?php esc_html_e( 'Getting started on making WordPress applications?', 'wporg' ); ?></a></h3>
+<!-- /wp:heading -->
+
+<!-- wp:heading {"level":3,"fontSize":"small","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-small-font-size"><a href="https://developer.wordpress.org/cli/commands"><strong><?php esc_html_e( 'Run WP-CLI Commands', 'wporg' ); ?></strong><?php esc_html_e( 'Accelerate your workflow managing WP.', 'wporg' ); ?></a></h3>
+<!-- /wp:heading -->
+
+<!-- wp:heading {"level":3,"fontSize":"small","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-small-font-size"><a href="https://developer.wordpress.org/coding-standards/"><strong><?php esc_html_e( 'Coding Standards', 'wporg' ); ?></strong><?php esc_html_e( 'Want to ensure your code meets the standards?', 'wporg' ); ?></a></h3>
+<!-- /wp:heading --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"right":"var:preset|spacing|edge-space","left":"var:preset|spacing|edge-space"}}},"backgroundColor":"white","layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull has-white-background-color has-background" style="padding-right:var(--wp--preset--spacing--edge-space);padding-left:var(--wp--preset--spacing--edge-space)"><!-- wp:group {"align":"wide","layout":{"type":"default"}} -->
+<div class="wp-block-group alignwide"><!-- wp:heading {"style":{"typography":{"fontStyle":"normal","fontWeight":"700"}},"fontSize":"normal","fontFamily":"inter"} -->
+<h2 class="wp-block-heading has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:700"><?php esc_html_e( 'Developer Blog', 'wporg' ); ?></h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"style":{"spacing":{"margin":{"bottom":"var:preset|spacing|30"}}},"textColor":"charcoal-4","fontSize":"small"} -->
+<p class="has-charcoal-4-color has-text-color has-small-font-size" style="margin-bottom:var(--wp--preset--spacing--30)"><?php echo wp_kses_post(
+	sprintf(
+	/* translators: %s: url for the developer blog */
+		__( 'Catch up on the latest news from the <a href="%s">Developer Blog</a>.', 'wporg' ),
+		'https://developer.wordpress.org/news/'
+	)
+); ?></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:wporg/latest-news {"blogId":719} /--></div>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"left":"var:preset|spacing|edge-space","right":"var:preset|spacing|edge-space"}}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull" style="padding-right:var(--wp--preset--spacing--edge-space);padding-left:var(--wp--preset--spacing--edge-space)"><!-- wp:group {"align":"wide","layout":{"type":"default"}} -->
+<div class="wp-block-group alignwide"><!-- wp:heading {"style":{"typography":{"fontStyle":"normal","fontWeight":"700"}},"textColor":"charcoal-1","fontSize":"normal","fontFamily":"inter"} -->
+<h2 class="wp-block-heading has-charcoal-1-color has-text-color has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:700"><?php esc_html_e( 'Get Involved', 'wporg' ); ?></h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"style":{"elements":{"link":{"color":{"text":"var:preset|color|charcoal-4"}}}},"textColor":"charcoal-4","fontSize":"small"} -->
+<p class="has-charcoal-4-color has-text-color has-link-color has-small-font-size"><?php esc_html_e( 'Start your journey to contribute to WordPress.', 'wporg' ); ?></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|10"}},"className":"is-style-cards-grid","layout":{"type":"grid","minimumColumnWidth":"49%"}} -->
+<div class="wp-block-group is-style-cards-grid"><!-- wp:heading {"level":3,"fontSize":"small","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-small-font-size"><a href="https://make.wordpress.org/docs/handbook/"><strong><?php esc_html_e( 'Documentation Contributor Handbook', 'wporg' ); ?></strong><?php esc_html_e( 'Help document WordPress.', 'wporg' ); ?></a></h3>
+<!-- /wp:heading -->
+
+<!-- wp:heading {"level":3,"fontSize":"small","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-small-font-size"><a href="https://make.wordpress.org/core/handbook/"><strong><?php esc_html_e( 'Contribute to WordPress', 'wporg' ); ?></strong><?php esc_html_e( 'Start contributing to core.', 'wporg' ); ?></a></h3>
+<!-- /wp:heading --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"right":"var:preset|spacing|edge-space","left":"var:preset|spacing|edge-space","top":"var:preset|spacing|40","bottom":"var:preset|spacing|40"}},"border":{"bottom":{"color":"var:preset|color|white-opacity-15","style":"solid","width":"1px"}},"elements":{"link":{"color":{"text":"var:preset|color|white"}}}},"backgroundColor":"charcoal-2","textColor":"white","className":"wporg-front-page-footer","layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull wporg-front-page-footer has-white-color has-charcoal-2-background-color has-text-color has-background has-link-color" style="border-bottom-color:var(--wp--preset--color--white-opacity-15);border-bottom-style:solid;border-bottom-width:1px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--edge-space);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--edge-space)"><!-- wp:columns {"align":"wide","style":{"spacing":{"blockGap":{"top":"var:preset|spacing|20"}}},"className":"is-style-default"} -->
+<div class="wp-block-columns alignwide is-style-default"><!-- wp:column {"verticalAlignment":"top","width":"50%","className":"is-left-column","layout":{"inherit":false}} -->
+<div class="wp-block-column is-vertically-aligned-top is-left-column" style="flex-basis:50%"><!-- wp:heading {"style":{"typography":{"fontStyle":"normal","fontWeight":"400","lineHeight":"1.3"}},"fontSize":"large","fontFamily":"eb-garamond"} -->
+<h2 class="wp-block-heading has-eb-garamond-font-family has-large-font-size" style="font-style:normal;font-weight:400;line-height:1.3"><?php esc_html_e( 'More resources', 'wporg' ); ?></h2>
+<!-- /wp:heading -->
+
+<!-- wp:columns {"style":{"spacing":{"blockGap":{"left":"var:preset|spacing|50"}}}} -->
+<div class="wp-block-columns"><!-- wp:column {"style":{"spacing":{"blockGap":"var:preset|spacing|10"}}} -->
+<div class="wp-block-column"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"700","lineHeight":1.6},"elements":{"link":{"color":{"text":"var:preset|color|blueberry-2"}}}},"textColor":"blueberry-2","className":"is-style-short-text","fontSize":"normal","fontFamily":"inter"} -->
+<h3 class="wp-block-heading is-style-short-text has-blueberry-2-color has-text-color has-link-color has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:700;line-height:1.6"><a href="https://learn.wordpress.org"><?php esc_html_e( 'Documentation', 'wporg' ); ?><br><?php esc_html_e( 'Contributor Handbook', 'wporg' ); ?></a></h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Help document.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column -->
+
+<!-- wp:column {"style":{"spacing":{"blockGap":"var:preset|spacing|10"}}} -->
+<div class="wp-block-column"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"700","lineHeight":1.6},"elements":{"link":{"color":{"text":"var:preset|color|blueberry-2"}}}},"textColor":"blueberry-2","className":"is-style-short-text","fontSize":"normal","fontFamily":"inter"} -->
+<h3 class="wp-block-heading is-style-short-text has-blueberry-2-color has-text-color has-link-color has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:700;line-height:1.6"><a href="https://learn.wordpress.org"><?php esc_html_e( 'Core Contributor', 'wporg' ); ?><br><?php esc_html_e( 'Handbook', 'wporg' ); ?></a></h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><?php esc_html_e( 'Start contributing.', 'wporg' ); ?></p>
+<!-- /wp:paragraph --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns --></div>
-<!-- /wp:group --></div>
-<!-- /wp:group --></div>
+<!-- /wp:column -->
+
+<!-- wp:column {"width":"50%","layout":{"inherit":false}} -->
+<div class="wp-block-column" style="flex-basis:50%"><!-- wp:heading {"style":{"typography":{"fontStyle":"normal","fontWeight":"400","lineHeight":"1.3"}},"fontSize":"large","fontFamily":"eb-garamond"} -->
+<h2 class="wp-block-heading has-eb-garamond-font-family has-large-font-size" style="font-style:normal;font-weight:400;line-height:1.3"><?php esc_html_e( 'Related', 'wporg' ); ?></h2>
+<!-- /wp:heading -->
+
+<!-- wp:columns {"style":{"spacing":{"blockGap":{"left":"var:preset|spacing|50"}}}} -->
+<div class="wp-block-columns"><!-- wp:column {"style":{"spacing":{"blockGap":"var:preset|spacing|10"}}} -->
+<div class="wp-block-column"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"700","lineHeight":1.6},"elements":{"link":{"color":{"text":"var:preset|color|blueberry-2"}}}},"textColor":"blueberry-2","className":"is-style-short-text","fontSize":"normal","fontFamily":"inter"} -->
+<h3 class="wp-block-heading is-style-short-text has-blueberry-2-color has-text-color has-link-color has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:700;line-height:1.6"><a href="https://learn.wordpress.org"><?php esc_html_e( 'Intro to WordPress', 'wporg' ); ?><br><?php esc_html_e( 'Core Development', 'wporg' ); ?></a></h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><?php esc_html_e( 'Crash course.', 'wporg' ); ?></p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column -->
+
+<!-- wp:column {"style":{"spacing":{"blockGap":"var:preset|spacing|10"}}} -->
+<div class="wp-block-column"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"700","lineHeight":1.6},"elements":{"link":{"color":{"text":"var:preset|color|blueberry-2"}}}},"textColor":"blueberry-2","className":"is-style-short-text","fontSize":"normal","fontFamily":"inter"} -->
+<h3 class="wp-block-heading is-style-short-text has-blueberry-2-color has-text-color has-link-color has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:700;line-height:1.6"><a href="https://learn.wordpress.org"><?php esc_html_e( 'Local Development Environment', 'wporg' ); ?></a></h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><?php esc_html_e( 'Local development.', 'wporg' ); ?></p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns --></div>
 <!-- /wp:group -->
