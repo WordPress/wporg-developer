@@ -1,7 +1,6 @@
 .wp-block-wporg-command-github {
-	.github-tracker {
-		margin-bottom: 40px;
-	}
+	// override standard block gap between sections in the content
+	margin-block-start: 0 !important;
 
 	img {
 		width: 23px;
