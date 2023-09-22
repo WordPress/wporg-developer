@@ -583,6 +583,18 @@ function filter_code_content( $content ) {
 function filter_command_content( $content ) {
 	$post_type = get_post_type();
 
+	// Feed the static content from the CLI archive template into the ToC
+	if ( is_archive() && '/cli/commands/' === $_SERVER['REQUEST_URI'] ) {
+		// Stop infinite loop
+		remove_filter( 'the_content', 'DevHub\filter_command_content', 4 );
+
+		$content = do_blocks('<!-- wp:pattern {"slug":"wporg-developer-2023/cli-commands-content"} /-->');
+		
+		add_filter( 'the_content', 'DevHub\filter_command_content', 4 );
+
+		return $content;
+	}
+
 	if ( ! is_single() || ! ( 'command' == $post_type ) ) {
 		return $content;
 	}
