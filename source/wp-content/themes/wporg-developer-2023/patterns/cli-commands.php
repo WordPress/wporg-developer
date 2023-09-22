@@ -24,21 +24,11 @@
 		<!-- wp:group {"tagName":"article","style":{"spacing":{"blockGap":"var:preset|spacing|40","margin":{"top":"0px"}}}} -->
 		<article class="wp-block-group" style="margin-top:0px">
 		
-			<!-- wp:wporg/sidebar-container -->
-
-				<!-- wp:group -->
-				<div class="wp-block-group">
-					
-					<!-- wp:wporg/table-of-contents /-->
-
-				</div>
-				<!-- /wp:group -->
-
-			<!-- /wp:wporg/sidebar-container -->
+		<!-- wp:pattern {"slug":"wporg-developer-2023/article-sidebar"} /-->
 
 		<!-- wp:group {"align":"wide","layout":{"type":"constrained"}} -->
 		<div class="wp-block-group alignwide">
-			
+
 			<!-- wp:heading {"level":1,"fontSize":"heading-2"} -->
 			<h1 class="wp-block-heading has-heading-2-font-size"><?php esc_html_e( 'WP-CLI Commands', 'wporg' ); ?></h1>
 			<!-- /wp:heading -->
