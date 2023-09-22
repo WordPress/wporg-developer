@@ -583,7 +583,8 @@ function filter_code_content( $content ) {
 function filter_command_content( $content ) {
 	$post_type = get_post_type();
 
-	// Feed the static content from the CLI archive template into the ToC
+	// Feed the static content from the CLI archive template to generate the ToC
+	// Note: ids must be added to the cli-commands-content pattern manually
 	if ( is_archive() && '/cli/commands/' === $_SERVER['REQUEST_URI'] ) {
 		// Stop infinite loop
 		remove_filter( 'the_content', 'DevHub\filter_command_content', 4 );
