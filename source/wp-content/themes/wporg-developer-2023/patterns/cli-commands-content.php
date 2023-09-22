@@ -24,8 +24,8 @@
 
 <!-- wp:wporg/cli-command-table {"style":{"spacing":{"margin":{"top":"var:preset|spacing|20"}}}} /-->
 
-<!-- wp:heading -->
-<h2 class="wp-block-heading" id="other-developer-resources"><?php esc_html_e( 'Other Developer Resources', 'wporg' ); ?></h2>
+<!-- wp:heading {"className":"is-toc-heading"} -->
+<h2 class="wp-block-heading is-toc-heading" id="other-developer-resources"><a href="#other-developer-resources"><?php esc_html_e( 'Other Developer Resources', 'wporg' ); ?></a></h2>
 <!-- /wp:heading -->
 
 <!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|10"}},"className":"is-style-cards-grid","layout":{"type":"grid","minimumColumnWidth":"49%"}} -->
