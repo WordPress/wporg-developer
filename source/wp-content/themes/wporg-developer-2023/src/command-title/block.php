@@ -60,11 +60,16 @@ function render( $attributes, $content, $block ) {
 	$content .= '</a>';
 	$content .= '</h1>';
 
-	// TODO: Reinstate excerpt. This is causing an infinite loop, see https://github.com/WordPress/wporg-developer/issues/277
-	// $excerpt = get_the_excerpt( $post_ID );
-	// if ( $excerpt ) {
-	// 	$content .= '<p class="excerpt">' . $excerpt . '</p>';
-	// }
+	// Remove the filter that adds the code reference block to the content.
+	remove_filter( 'the_content', 'DevHub\filter_command_content', 4 );
+
+	$excerpt = get_the_excerpt( $post_ID );
+	if ( $excerpt ) {
+		$content .= '<p class="excerpt">' . $excerpt . '</p>';
+	}
+
+	// Re-add the filter that adds this block to the content.
+	add_filter( 'the_content', 'DevHub\filter_command_content', 4 );
 
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(

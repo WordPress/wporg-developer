@@ -188,7 +188,7 @@ add_filter( 'next_post_link', __NAMESPACE__ . '\get_adjacent_handbook_post_link'
 add_filter( 'previous_post_link', __NAMESPACE__ . '\get_adjacent_handbook_post_link', 10, 5 );
 
 // Priority must be lower than 5 to precede table of contents filter.
-// See: https://github.com/WordPress/wporg-mu-plugins/blob/trunk/mu-plugins/blocks/table-of-contents/index.php#L70
+// See: https://github.com/WordPress/wporg-mu-plugins/blob/3867a4ff6fa81de5f1e2e7b1ed4b123e4b4915b3/mu-plugins/blocks/table-of-contents/index.php#L94
 add_filter( 'the_content', __NAMESPACE__ . '\filter_code_content', 4 );
 add_filter( 'wporg_table_of_contents_post_content', __NAMESPACE__ . '\filter_code_content' );
 add_filter( 'the_content', __NAMESPACE__ . '\filter_command_content', 4 );
@@ -586,6 +586,19 @@ function filter_code_content( $content ) {
  */
 function filter_command_content( $content ) {
 	$post_type = get_post_type();
+
+	// Feed the static content from the CLI archive template to generate the ToC
+	// Note: ids must be added to the cli-commands-content pattern manually
+	if ( is_archive() && '/cli/commands/' === $_SERVER['REQUEST_URI'] ) {
+		// Stop infinite loop
+		remove_filter( 'the_content', 'DevHub\filter_command_content', 4 );
+
+		$content = do_blocks('<!-- wp:pattern {"slug":"wporg-developer-2023/cli-commands-content"} /-->');
+		
+		add_filter( 'the_content', 'DevHub\filter_command_content', 4 );
+
+		return $content;
+	}
 
 	if ( ! is_single() || ! ( 'command' == $post_type ) ) {
 		return $content;

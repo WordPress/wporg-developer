@@ -1,6 +1,7 @@
 .wp-block-wporg-command-title {
 	h1 {
-		margin-bottom: 32px;
+		margin-top: var(--wp--preset--spacing--30);
+		margin-bottom: var(--wp--preset--spacing--30);
 	}
 
 	a {
