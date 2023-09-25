@@ -514,6 +514,10 @@ function add_site_navigation_menus( $menus ) {
 	return array(
 		'developer' => array(
 			array(
+				'label' => __( 'Developer Blog', 'wporg' ),
+				'url' => 'https://developer.wordpress.org/news/',
+			),
+			array(
 				'label' => __( 'Code Reference', 'wporg' ),
 				'url' => '/reference/',
 			),
