@@ -186,6 +186,7 @@ add_filter( 'wporg_block_navigation_menus', __NAMESPACE__ . '\add_site_navigatio
 add_filter( 'single_template_hierarchy', __NAMESPACE__ . '\add_handbook_templates' );
 add_filter( 'next_post_link', __NAMESPACE__ . '\get_adjacent_handbook_post_link', 10, 5 );
 add_filter( 'previous_post_link', __NAMESPACE__ . '\get_adjacent_handbook_post_link', 10, 5 );
+add_filter( 'get_the_archive_title_prefix', __NAMESPACE__ . '\get_reference_since_title_prefix' );
 
 // Priority must be lower than 5 to precede table of contents filter.
 // See: https://github.com/WordPress/wporg-mu-plugins/blob/3867a4ff6fa81de5f1e2e7b1ed4b123e4b4915b3/mu-plugins/blocks/table-of-contents/index.php#L94
@@ -229,6 +230,19 @@ function init() {
 	// Until launch, any sites running this theme on WordPress.org should be noindexed and lack a canonical tag.
 	add_filter( 'wporg_noindex_request', '__return_true' );
 	add_filter( 'wporg_canonical_url', '__return_false' );
+}
+
+/**
+ * Change the prefix of the query title on the `reference/since/x.x.x` page
+ */
+function get_reference_since_title_prefix( $prefix ) {
+	$queried_object = get_queried_object();
+
+	if ( is_archive() && $queried_object && 'wp-parser-since' === $queried_object->taxonomy ) {
+		$prefix = __( 'New and updated in', 'wporg' );
+	}
+
+	return $prefix;
 }
 
 /**
