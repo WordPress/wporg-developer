@@ -30,9 +30,10 @@
 		cursor: pointer;
 		margin-left: 0;
 
-		&:focus {
+		&:focus-visible {
 			border-color: var(--wp--preset--color--white);
 			outline-color: var(--wp--preset--color--blueberry-1);
+			outline-offset: 2px;
 		}
 	}
 
