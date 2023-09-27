@@ -72,7 +72,9 @@ function render( $attributes, $content, $block ) {
 	return sprintf(
 		'<div %1$s>
 			<label class="%2$s" for="%3$s">%4$s</label>
-			<select name="wp-parser-since" id="%3$s">%5$s</select>
+			<div class="wporg-version-select-container">
+				<select name="wp-parser-since" id="%3$s">%5$s</select>
+			</div>
 			<button type="submit">%6$s</button>
 		</div>',
 		$wrapper_attributes,

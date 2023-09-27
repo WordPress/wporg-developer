@@ -1,13 +1,51 @@
 .wp-block-wporg-version-select {
-	position: relative;
-	min-width: 4em;
+	$border-width: 1px;
+	$arrow-icon-width: 0.8em;
+	$padding-horizontal: 12px;
+
+	select,
+	button {
+		$height: 40px;
+		$text-height: calc(var(--wp--preset--font-size--small) * var(--wp--custom--body--typography--line-height));
+		$padding-vertical: calc(( $height - $text-height - $border-width * 2) / 2);
+
+		display: block;
+		font-size: var(--wp--preset--font-size--small);
+		line-height: var(--wp--custom--body--typography--line-height);
+		padding: $padding-vertical $padding-horizontal;
+
+		&:focus-visible {
+			border-color: var(--wp--preset--color--white);
+			outline-color: var(--wp--preset--color--blueberry-1);
+			outline-offset: 2px;
+		}
+	}
+
+	.wporg-version-select-container {
+		position: relative;
+
+		&::after {
+			content: "";
+			display: block;
+			position: absolute;
+			right: 1em;
+			top: 0;
+			height: 100%;
+			width: $arrow-icon-width;
+			mask-image: url(../../images/chevron.svg);
+			mask-repeat: no-repeat;
+			mask-position: center;
+			mask-size: contain;
+			transform: rotate(180deg);
+			background-color: var(--wp--preset--color--charcoal-1);
+			pointer-events: none; // Allows clicking on the select element.
+		}
+	}
 
 	select {
 		appearance: none;
-		border: 1px solid var(--wp--preset--color--charcoal-4);
-		display: block;
+		border: 1px solid transparent;
 		font-family: inherit;
-		font-size: inherit;
 		max-width: none;
 		cursor: pointer;
 		color: inherit;
@@ -16,24 +54,29 @@
 		white-space: nowrap;
 		width: 100%;
 		text-overflow: ellipsis;
-		padding: 0.8em 1.25em 0.8em 1em;
-		border-radius: 2px;
+		padding-right: calc($arrow-icon-width + $padding-horizontal);
+
+		&:focus-visible {
+			outline-color: var(--wp--preset--color--blueberry-1);
+		}
 	}
 
-	&::after {
-		content: "";
-		display: block;
-		position: absolute;
-		right: 1em;
-		top: 0;
-		height: 100%;
-		width: 0.8em;
-		mask-image: url(../../images/chevron.svg);
-		mask-repeat: no-repeat;
-		mask-position: center;
-		mask-size: contain;
-		transform: rotate(180deg);
-		background-color: var(--wp--preset--color--charcoal-1);
-		pointer-events: none; // Allows clicking on the select element.
+	button {
+		border: $border-width solid var(--wp--preset--color--blueberry-1);
+		border-radius: 2px;
+		background-color: var(--wp--preset--color--blueberry-1);
+		cursor: pointer;
+		margin-left: 0;
+		color: var(--wp--preset--color--white);
+		font-weight: var(--wp--custom--button--typography--font-weight);
+
+		&:hover {
+			background-color: var(--wp--preset--color--dark-blueberry);
+			border-color: var(--wp--preset--color--dark-blueberry);
+		}
+
+		&:active {
+			background-color: var(--wp--preset--color--black);
+		}
 	}
 }
