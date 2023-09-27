@@ -43,7 +43,7 @@ function render( $attributes, $content, $block ) {
 		'wp-parser-method'   => __( 'Methods', 'wporg' ),
 	);
 	$qv_post_type = array_filter( (array) get_query_var( 'post_type' ) );
-	$no_filters   = empty( $qv_post_type );
+	$no_filters   = true === $GLOBALS['wp_query']->is_empty_post_type_search;
 	if ( in_array( 'any', $qv_post_type ) || $no_filters ) {
 		// No filters used.
 		$qv_post_type = array();
@@ -52,7 +52,7 @@ function render( $attributes, $content, $block ) {
 	$content = '<div>';
 	$content .= sprintf(
 		'<button id="wp-block-wporg-search-filters-all" aria-pressed="%1$s">%2$s</button>',
-		$no_filters ? 'true' : 'false',
+		empty( $qv_post_type ) ? 'true' : 'false',
 		__( 'All', 'wporg' ),
 	);
 	$content .= '</div>';
