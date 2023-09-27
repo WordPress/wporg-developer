@@ -10,7 +10,7 @@ const init = () => {
 
 	const hasFilterChecked = () => [ ...inputs ].some( ( input ) => input.checked );
 
-	const updateButtonState = () => {
+	const updateAllButtonState = () => {
 		allButton.setAttribute( 'aria-pressed', ! hasFilterChecked() );
 	};
 
@@ -19,14 +19,23 @@ const init = () => {
 		inputs.forEach( ( input ) => {
 			input.checked = false;
 		} );
-		updateButtonState();
+		updateAllButtonState();
 	} );
 
 	container.addEventListener( 'change', () => {
-		updateButtonState();
+		updateAllButtonState();
 	} );
 
-	updateButtonState();
+	container.addEventListener( 'keydown', ( event ) => {
+		// If target is a label and the key is space, toggle the checkbox.
+		if ( event.target.tagName === 'LABEL' && event.key === ' ' ) {
+			event.preventDefault();
+			event.target.previousElementSibling.checked = ! event.target.previousElementSibling.checked;
+		}
+		updateAllButtonState();
+	} );
+
+	updateAllButtonState();
 };
 
 window.addEventListener( 'load', init );
