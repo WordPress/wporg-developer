@@ -73,12 +73,14 @@ function render( $attributes, $content, $block ) {
 		'<div %1$s>
 			<label class="%2$s" for="%3$s">%4$s</label>
 			<select name="wp-parser-since" id="%3$s">%5$s</select>
+			<button type="submit">%6$s</button>
 		</div>',
 		$wrapper_attributes,
 		esc_attr( isset( $attributes['hideLabelFromVision'] ) && true === $attributes['hideLabelFromVision'] ? 'screen-reader-text' : '' ),
 		esc_attr( generate_id( $block->parsed_block ) ),
 		esc_html( $attributes['label'] ),
 		$options,
+		esc_attr( __( 'Filter', 'wporg' ) )
 	);
 }
 

@@ -43,13 +43,19 @@ function render( $attributes, $content, $block ) {
 		'wp-parser-method'   => __( 'Methods', 'wporg' ),
 	);
 	$qv_post_type = array_filter( (array) get_query_var( 'post_type' ) );
-	$no_filters   = $GLOBALS['wp_query']->is_empty_post_type_search;
+	$no_filters   = empty( $qv_post_type );
 	if ( in_array( 'any', $qv_post_type ) || $no_filters ) {
 		// No filters used.
 		$qv_post_type = array();
 	}
 
-	$content = sprintf( '<span> %s</span>', __( 'Filter by type:', 'wporg' ) );
+	$content = '<div>';
+	$content .= sprintf(
+		'<button id="wp-block-wporg-search-filters-all" aria-pressed="%1$s">%2$s</button>',
+		$no_filters ? 'true' : 'false',
+		__( 'All', 'wporg' ),
+	);
+	$content .= '</div>';
 
 	foreach ( $search_post_types as $post_type => $label ) {
 		$input_id = esc_attr( $post_type );
