@@ -39,6 +39,7 @@
 
 	// Selected
 	input[type="checkbox"]:checked + label,
+	input[type="checkbox"] + label:active,
 	button[aria-pressed="true"] {
 		background-color: var(--wp--preset--color--charcoal-0);
 		border-color: var(--wp--preset--color--charcoal-0);
@@ -59,6 +60,10 @@
 
 		&:hover {
 			border-color: var(--wp--preset--color--blueberry-1);
+		}
+
+		&:active {
+			font-weight: var(--wp--custom--button--typography--font-weight);
 		}
 	}
 }
