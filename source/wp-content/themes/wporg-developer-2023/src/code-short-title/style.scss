@@ -16,6 +16,8 @@
 .wp-block-wporg-code-short-title a {
 	display: block;
 	font-size: var(--wp--preset--font-size--extra-large);
+	line-height: var(--wp--custom--body--large--typography--line-height);
+	text-decoration: none;
 }
 
 .wp-block-wporg-code-short-title.function a,
@@ -76,5 +78,6 @@
 	padding: 2px 8px;
 	font-family: var(--wp--preset--font-family--monospace);
 	font-size: var(--wp--preset--font-size--small);
+	font-weight: 500;
 	word-break: keep-all;
 }
