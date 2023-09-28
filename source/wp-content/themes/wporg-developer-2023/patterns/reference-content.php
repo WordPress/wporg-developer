@@ -7,11 +7,13 @@
 
 ?>
 
-<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60","left":"var:preset|spacing|edge-space","right":"var:preset|spacing|edge-space"}}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--60);padding-right:var(--wp--preset--spacing--edge-space);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--edge-space)">
+<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"bottom":"var:preset|spacing|60","left":"var:preset|spacing|edge-space","right":"var:preset|spacing|edge-space"}}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull" style="padding-right:var(--wp--preset--spacing--edge-space);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--edge-space)">
 
-	<!-- wp:columns {"align":"wide","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|20"}}}} -->
-	<div class="wp-block-columns alignwide">
+	<!-- wp:pattern {"slug":"wporg-developer-2023/search-field"} /-->
+
+	<!-- wp:columns {"align":"wide","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|20"},"margin":{"top":"var:preset|spacing|40"}}}} -->
+	<div class="wp-block-columns alignwide" style="margin-top:var(--wp--preset--spacing--40)">
 		
 		<!-- wp:column {"style":{"spacing":{"blockGap":"0"}}} -->
 		<div class="wp-block-column">
@@ -27,8 +29,8 @@
 			<!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between"}} -->
 			<div class="wp-block-group">
 				
-				<!-- wp:heading {"style":{"typography":{"fontStyle":"normal","fontWeight":"700"}},"fontSize":"normal","fontFamily":"inter"} -->
-				<h2 class="wp-block-heading has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:700"><?php esc_html_e( 'API reference', 'wporg' ); ?></h2>
+				<!-- wp:heading {"style":{"typography":{"fontStyle":"normal","fontWeight":"700"}},"fontSize":"large","fontFamily":"inter"} -->
+				<h2 class="wp-block-heading has-inter-font-family has-large-font-size" style="font-style:normal;font-weight:700"><?php esc_html_e( 'API reference', 'wporg' ); ?></h2>
 				<!-- /wp:heading -->
 
 				<!-- wp:paragraph -->
