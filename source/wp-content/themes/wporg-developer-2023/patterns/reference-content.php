@@ -7,8 +7,8 @@
 
 ?>
 
-<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"bottom":"var:preset|spacing|60","left":"var:preset|spacing|edge-space","right":"var:preset|spacing|edge-space"}}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull" style="padding-right:var(--wp--preset--spacing--edge-space);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--edge-space)">
+<!-- wp:group {"tagName":"main","style":{"spacing":{"padding":{"left":"var:preset|spacing|edge-space","right":"var:preset|spacing|edge-space","bottom":"var:preset|spacing|60"}}},"className":"alignfull","layout":{"type":"constrained","wideSize":"1280px","contentSize":"680px"}} -->
+<main class="wp-block-group alignfull" style="padding-right:var(--wp--preset--spacing--edge-space);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--edge-space)">
 
 	<!-- wp:pattern {"slug":"wporg-developer-2023/search-field"} /-->
 
