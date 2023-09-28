@@ -85,6 +85,9 @@ class DevHub_Search {
 		$query->set( 'orderby', 'title' );
 		$query->set( 'order', 'ASC' );
 
+		// Set the default number of posts per page.
+		$query->set( 'posts_per_page', 25 );
+
 		// Separates searches for handbook pages from non-handbook pages depending on
 		// whether the search was performed within context of a handbook page or not.
 		if ( $query->is_handbook ) {
