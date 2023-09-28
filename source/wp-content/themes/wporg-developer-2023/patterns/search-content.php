@@ -25,11 +25,11 @@
 
 		<!-- wp:post-template -->
 			<?php
-			$is_command_search = strpos( $_SERVER['REQUEST_URI'], 'cli/commands' );
-			if ( $is_command_search ) { ?>
-				<!-- wp:pattern {"slug":"wporg-developer-2023/search-content-post-command"} /-->
-			<?php } else { ?>
+			// Code reference search results at the root are styled differently.
+			if ( preg_match('#^/\?s=#', $_SERVER['REQUEST_URI']) ) { ?>
 				<!-- wp:pattern {"slug":"wporg-developer-2023/search-content-post-reference"} /-->
+			<?php } else { ?>
+				<!-- wp:pattern {"slug":"wporg-developer-2023/search-content-post"} /-->
 			<?php } ?>
 
 		<!-- /wp:post-template -->

@@ -1,7 +1,7 @@
 <?php
 /**
  * Title: Search Content
- * Slug: wporg-developer-2023/search-content-post-command
+ * Slug: wporg-developer-2023/search-content-post
  * Inserter: no
  */
 
