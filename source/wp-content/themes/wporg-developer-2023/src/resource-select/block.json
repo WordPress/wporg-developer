@@ -1,10 +1,10 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "wporg/search-select",
-	"title": "Search Select",
+	"name": "wporg/resource-select",
+	"title": "Resource Select",
 	"category": "layout",
-	"description": "Displays a selector to choose which content to search.",
+	"description": "Displays a selector to choose which resource to search.",
 	"keywords": [ "post" ],
 	"textdomain": "wporg",
 	"attributes": {

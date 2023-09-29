@@ -18,7 +18,7 @@
 		
 			<!-- wp:search {"label":"<?php esc_attr_e( 'Search', 'wporg' ); ?>","showLabel":false,"placeholder":"<?php esc_attr_e( 'Search resources', 'wporg' ); ?>","width":260,"widthUnit":"px","buttonText":"<?php esc_attr_e( 'Search', 'wporg' ); ?>","buttonPosition":"button-inside","buttonUseIcon":true,"className":"is-style-secondary-search-control wporg-filtered-search-form"} /-->
 
-			<!-- wp:wporg/search-select {"label":"<?php esc_attr_e( 'Select resource to search', 'wporg' ); ?>","hideLabelFromVision":true} /-->
+			<!-- wp:wporg/resource-select {"label":"<?php esc_attr_e( 'Select resource to search', 'wporg' ); ?>","hideLabelFromVision":true} /-->
 
 		</div>
 		<!-- /wp:group -->

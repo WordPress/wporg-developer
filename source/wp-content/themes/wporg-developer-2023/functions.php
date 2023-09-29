@@ -176,9 +176,9 @@ require_once __DIR__ . '/src/command-github/block.php';
 require_once __DIR__ . '/src/command-title/block.php';
 require_once __DIR__ . '/src/command-subcommand/block.php';
 require_once __DIR__ . '/src/reference-new-updated/block.php';
+require_once __DIR__ . '/src/resource-select/index.php';
 require_once __DIR__ . '/src/search-filters/index.php';
 require_once __DIR__ . '/src/search-results-context/index.php';
-require_once __DIR__ . '/src/search-select/index.php';
 require_once __DIR__ . '/src/version-select/index.php';
 
 add_action( 'init', __NAMESPACE__ . '\\init' );

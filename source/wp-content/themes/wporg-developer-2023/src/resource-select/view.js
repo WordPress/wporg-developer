@@ -1,5 +1,5 @@
 const init = () => {
-	const selector = document.querySelector( '#wp-block-wporg-search-select' );
+	const selector = document.querySelector( '#wp-block-wporg-resource-select' );
 
 	if ( ! selector ) {
 		return;

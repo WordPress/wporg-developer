@@ -1,12 +1,12 @@
 <?php
 /**
- * Block Name: Search Select
- * Description: Displays a selector to choose which content to search.
+ * Block Name: Resource Select
+ * Description: Displays a selector to choose which resource to search.
  *
  * @package wporg
  */
 
-namespace WordPressdotorg\Theme\Developer_2023\Search_Select;
+namespace WordPressdotorg\Theme\Developer_2023\Resource_Select;
 
 add_action( 'init', __NAMESPACE__ . '\init' );
 
@@ -19,7 +19,7 @@ add_action( 'init', __NAMESPACE__ . '\init' );
  */
 function init() {
 	register_block_type(
-		dirname( dirname( __DIR__ ) ) . '/build/search-select',
+		dirname( dirname( __DIR__ ) ) . '/build/resource-select',
 		array(
 			'render_callback' => __NAMESPACE__ . '\render',
 		)
@@ -55,7 +55,6 @@ function render( $attributes, $content, $block ) {
 	);
 
 	$options = '';
-	$current_version = '';
 	foreach ( $sources as $source ) {
 		$selected = false;
 	
@@ -76,13 +75,13 @@ function render( $attributes, $content, $block ) {
 	return sprintf(
 		'<div %1$s>
 			<label class="%2$s" for="%3$s">%4$s</label>
-			<div class="wporg-search-select-container">
+			<div class="wporg-resource-select-container">
 				<select name="search-source" id="%3$s">%5$s</select>
 			</div>
 		</div>',
 		$wrapper_attributes,
 		esc_attr( isset( $attributes['hideLabelFromVision'] ) && true === $attributes['hideLabelFromVision'] ? 'screen-reader-text' : '' ),
-		esc_attr( 'wp-block-wporg-search-select' ),
+		esc_attr( 'wp-block-wporg-resource-select' ),
 		esc_html( $attributes['label'] ),
 		$options,
 	);

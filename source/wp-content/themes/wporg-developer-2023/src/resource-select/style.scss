@@ -1,0 +1,58 @@
+.wp-block-wporg-resource-select {
+	--arrow-icon-width: 0.8em;
+	--arrow-icon-position: 1em;
+
+	select {
+		--text-height: calc(var(--wp--preset--font-size--small) * var(--wp--custom--body--typography--line-height));
+		--padding-vertical: calc(( 40px - var(--text-height)) / 2);
+		--padding-horizontal: 12px;
+		--padding-right: calc(var(--padding-horizontal) + var(--arrow-icon-width) + var(--arrow-icon-position));
+
+		display: block;
+		appearance: none;
+		padding: var(--padding-vertical) var(--padding-right) var(--padding-vertical) var(--padding-horizontal);
+		font-size: var(--wp--preset--font-size--small);
+		line-height: var(--wp--custom--body--typography--line-height);
+		border-radius: var(--wp--custom--button--border--radius);
+		border: 0 solid transparent;
+		font-family: inherit;
+		max-width: none;
+		cursor: pointer;
+		color: inherit;
+		background: inherit;
+		overflow: hidden;
+		white-space: nowrap;
+		width: 100%;
+		text-overflow: ellipsis;
+
+		&:focus {
+			outline: 1.5px solid var(--wp--preset--color--blueberry-1);
+			outline-offset: -1.5px;
+		}
+	}
+
+	.hideLabelFromVision {
+		visibility: hidden;
+	}
+
+	.wporg-resource-select-container {
+		position: relative;
+
+		&::after {
+			content: "";
+			display: block;
+			position: absolute;
+			right: var(--arrow-icon-position);
+			top: 0;
+			height: 100%;
+			width: var(--arrow-icon-width);
+			mask-image: url(../../images/chevron.svg);
+			mask-repeat: no-repeat;
+			mask-position: center;
+			mask-size: contain;
+			transform: rotate(180deg);
+			background-color: var(--wp--preset--color--charcoal-1);
+			pointer-events: none; // Allows clicking on the select element.
+		}
+	}
+}
