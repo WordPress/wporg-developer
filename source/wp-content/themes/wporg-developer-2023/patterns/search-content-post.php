@@ -1,6 +1,6 @@
 <?php
 /**
- * Title: Search Content
+ * Title: Search Content Post Template
  * Slug: wporg-developer-2023/search-content-post
  * Inserter: no
  */
