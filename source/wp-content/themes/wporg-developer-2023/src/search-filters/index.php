@@ -49,9 +49,12 @@ function render( $attributes, $content, $block ) {
 		$qv_post_type = array();
 	}
 
+	$toggle_button_classes = 'wp-block-button__link is-style-small is-style-toggle';
+
 	$content = '<div>';
 	$content .= sprintf(
-		'<button id="wp-block-wporg-search-filters-all" aria-pressed="%1$s">%2$s</button>',
+		'<button id="wp-block-wporg-search-filters-all" class="%1$s" aria-pressed="%2$s">%3$s</button>',
+		$toggle_button_classes,
 		empty( $qv_post_type ) ? 'true' : 'false',
 		__( 'All', 'wporg' ),
 	);
@@ -62,13 +65,13 @@ function render( $attributes, $content, $block ) {
 		$checked = checked( in_array( $post_type, $qv_post_type ), true, false );
 		$content .= '<div>';
 		$content .= sprintf( '<input id="%1$s" type="checkbox" name="post_type[]" value="%1$s" %2$s />', $input_id, $checked );
-		$content .= sprintf( '<label for="%s">%s</label>', $input_id, $label );
+		$content .= sprintf( '<label for="%1$s" class="%2$s">%3$s</label>', $input_id, $toggle_button_classes, $label );
 		$content .= '</div>';
 	}
 
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(
-		'<div %1$s>%2$s <button type="submit">%3$s</button></div>',
+		'<div %1$s>%2$s <button class="wp-block-button__link is-style-small is-style-tertiary" type="submit">%3$s</button></div>',
 		$wrapper_attributes,
 		$content,
 		esc_attr( __( 'Apply', 'wporg' ) )

@@ -1,22 +1,31 @@
 .wp-block-wporg-version-select {
-	$border-width: 1.5px;
 	$arrow-icon-width: 0.8em;
 	$padding-horizontal: 12px;
 
-	select,
-	button {
+	select {
 		$height: 40px;
 		$text-height: calc(var(--wp--preset--font-size--small) * var(--wp--custom--body--typography--line-height));
-		$padding-vertical: calc(( $height - $text-height - $border-width * 2) / 2);
+		$padding-vertical: calc(( $height - $text-height) / 2);
 
 		display: block;
 		font-size: var(--wp--preset--font-size--small);
 		line-height: var(--wp--custom--body--typography--line-height);
 		padding: $padding-vertical $padding-horizontal;
 		border-radius: 2px;
+		appearance: none;
+		border: 1px solid transparent;
+		font-family: inherit;
+		max-width: none;
+		cursor: pointer;
+		color: inherit;
+		background: inherit;
+		overflow: hidden;
+		white-space: nowrap;
+		width: 100%;
+		text-overflow: ellipsis;
+		padding-right: calc($arrow-icon-width + $padding-horizontal);
 
 		&:focus-visible {
-			border-color: var(--wp--preset--color--white);
 			outline: 1.5px solid var(--wp--preset--color--blueberry-1);
 		}
 	}
@@ -39,39 +48,6 @@
 			transform: rotate(180deg);
 			background-color: var(--wp--preset--color--charcoal-1);
 			pointer-events: none; // Allows clicking on the select element.
-		}
-	}
-
-	select {
-		appearance: none;
-		border: 1px solid transparent;
-		font-family: inherit;
-		max-width: none;
-		cursor: pointer;
-		color: inherit;
-		background: inherit;
-		overflow: hidden;
-		white-space: nowrap;
-		width: 100%;
-		text-overflow: ellipsis;
-		padding-right: calc($arrow-icon-width + $padding-horizontal);
-	}
-
-	button {
-		border: $border-width solid var(--wp--preset--color--blueberry-1);
-		background-color: var(--wp--preset--color--blueberry-1);
-		cursor: pointer;
-		margin-left: 0;
-		color: var(--wp--preset--color--white);
-		font-weight: var(--wp--custom--button--typography--font-weight);
-
-		&:hover {
-			background-color: var(--wp--preset--color--dark-blueberry);
-			border-color: var(--wp--preset--color--dark-blueberry);
-		}
-
-		&:active {
-			background-color: var(--wp--preset--color--black);
 		}
 	}
 }
