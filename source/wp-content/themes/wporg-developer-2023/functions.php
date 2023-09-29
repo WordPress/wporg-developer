@@ -236,9 +236,7 @@ function init() {
  * Change the prefix of the query title on the `reference/since/x.x.x` page
  */
 function get_reference_since_title_prefix( $prefix ) {
-	$queried_object = get_queried_object();
-
-	if ( is_archive() && $queried_object && 'wp-parser-since' === $queried_object->taxonomy ) {
+	if ( is_tax( 'wp-parser-since' ) ) {
 		$prefix = __( 'New and updated in', 'wporg' );
 	}
 
