@@ -26,15 +26,6 @@ const init = () => {
 		updateAllButtonState();
 	} );
 
-	container.addEventListener( 'keydown', ( event ) => {
-		// If target is a label and the key is space, toggle the checkbox.
-		if ( event.target.tagName === 'LABEL' && event.key === ' ' ) {
-			event.preventDefault();
-			event.target.previousElementSibling.checked = ! event.target.previousElementSibling.checked;
-		}
-		updateAllButtonState();
-	} );
-
 	updateAllButtonState();
 };
 

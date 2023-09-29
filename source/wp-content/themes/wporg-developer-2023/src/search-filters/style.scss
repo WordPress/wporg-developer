@@ -6,17 +6,24 @@
 	margin-top: var(--wp--preset--spacing--20);
 
 	input[type="checkbox"] {
-		position: absolute;
-		visibility: hidden;
-		width: 0;
-		height: 0;
+		border: 0;
+		clip: rect(1px, 1px, 1px, 1px);
+		clip-path: inset(50%);
+		height: 1px;
+		margin: -1px;
 		overflow: hidden;
+		padding: 0;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 1px;
+		word-wrap: normal !important;
 	}
 
 	input[type="checkbox"] + label,
 	button {
 		$height: 40px;
-		$border-width: 1px;
+		$border-width: 1.5px;
 		$text-height: calc(var(--wp--preset--font-size--small) * var(--wp--custom--body--typography--line-height));
 		$padding-vertical: calc(( $height - $text-height - $border-width * 2) / 2);
 
@@ -29,12 +36,13 @@
 		background-color: var(--wp--preset--color--white);
 		cursor: pointer;
 		margin-left: 0;
+	}
 
-		&:focus-visible {
-			border-color: var(--wp--preset--color--white);
-			outline-color: var(--wp--preset--color--blueberry-1);
-			outline-offset: 2px;
-		}
+	button:focus-visible,
+	input[type="checkbox"]:focus-visible + label {
+		border-color: var(--wp--preset--color--white);
+		outline: 1.5px solid var(--wp--preset--color--blueberry-1);
+		outline-offset: 1.5px;
 	}
 
 	// Selected
@@ -58,7 +66,7 @@
 		border-color: transparent;
 		color: var(--wp--preset--color--blueberry-1);
 
-		&:hover {
+		&:hover:not(:focus-visible) {
 			border-color: var(--wp--preset--color--blueberry-1);
 		}
 

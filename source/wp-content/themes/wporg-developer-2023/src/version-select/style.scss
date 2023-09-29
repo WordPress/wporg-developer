@@ -1,5 +1,5 @@
 .wp-block-wporg-version-select {
-	$border-width: 1px;
+	$border-width: 1.5px;
 	$arrow-icon-width: 0.8em;
 	$padding-horizontal: 12px;
 
@@ -13,11 +13,11 @@
 		font-size: var(--wp--preset--font-size--small);
 		line-height: var(--wp--custom--body--typography--line-height);
 		padding: $padding-vertical $padding-horizontal;
+		border-radius: 2px;
 
 		&:focus-visible {
 			border-color: var(--wp--preset--color--white);
-			outline-color: var(--wp--preset--color--blueberry-1);
-			outline-offset: 2px;
+			outline: 1.5px solid var(--wp--preset--color--blueberry-1);
 		}
 	}
 
@@ -55,15 +55,10 @@
 		width: 100%;
 		text-overflow: ellipsis;
 		padding-right: calc($arrow-icon-width + $padding-horizontal);
-
-		&:focus-visible {
-			outline-color: var(--wp--preset--color--blueberry-1);
-		}
 	}
 
 	button {
 		border: $border-width solid var(--wp--preset--color--blueberry-1);
-		border-radius: 2px;
 		background-color: var(--wp--preset--color--blueberry-1);
 		cursor: pointer;
 		margin-left: 0;

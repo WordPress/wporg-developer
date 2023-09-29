@@ -62,7 +62,7 @@ function render( $attributes, $content, $block ) {
 		$checked = checked( in_array( $post_type, $qv_post_type ), true, false );
 		$content .= '<div>';
 		$content .= sprintf( '<input id="%1$s" type="checkbox" name="post_type[]" value="%1$s" %2$s />', $input_id, $checked );
-		$content .= sprintf( '<label for="%s" tabindex="0">%s</label>', $input_id, $label );
+		$content .= sprintf( '<label for="%s">%s</label>', $input_id, $label );
 		$content .= '</div>';
 	}
 
