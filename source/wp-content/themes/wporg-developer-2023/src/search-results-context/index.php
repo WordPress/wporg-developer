@@ -32,7 +32,7 @@ function render( $attributes ) {
 	$content = sprintf(
 		/* translators: %1$s number of results; %2$s keyword, %3$s number of first displayed result, %4$s number of last displayed result. */
 		_n(
-			'%1$s result found for "%2$s". Showing results %3$s to %4$s.',
+			'%1$s result found for "%2$s".',
 			'%1$s results found for "%2$s". Showing results %3$s to %4$s.',
 			$results_count,
 			'wporg'
