@@ -24,6 +24,7 @@
 		white-space: nowrap;
 		width: 100%;
 		text-overflow: ellipsis;
+		text-align: end;
 
 		&:focus {
 			outline: 1.5px solid var(--wp--preset--color--blueberry-1);
