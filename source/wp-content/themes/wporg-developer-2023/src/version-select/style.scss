@@ -1,19 +1,20 @@
 .wp-block-wporg-version-select {
-	$arrow-icon-width: 0.8em;
-	$padding-horizontal: 12px;
+	--arrow-icon-width: 0.8em;
+	--arrow-icon-position: 1em;
 
 	select {
-		$height: 40px;
-		$text-height: calc(var(--wp--preset--font-size--small) * var(--wp--custom--body--typography--line-height));
-		$padding-vertical: calc(( $height - $text-height) / 2);
+		--text-height: calc(var(--wp--preset--font-size--small) * var(--wp--custom--body--typography--line-height));
+		--padding-vertical: calc(( 40px - var(--text-height)) / 2);
+		--padding-horizontal: 12px;
+		--padding-right: calc(var(--padding-horizontal) + var(--arrow-icon-width) + var(--arrow-icon-position));
 
 		display: block;
+		appearance: none;
+		padding: var(--padding-vertical) var(--padding-right) var(--padding-vertical) var(--padding-horizontal);
 		font-size: var(--wp--preset--font-size--small);
 		line-height: var(--wp--custom--body--typography--line-height);
-		padding: $padding-vertical $padding-horizontal;
-		border-radius: 2px;
-		appearance: none;
-		border: 1px solid transparent;
+		border-radius: var(--wp--custom--button--border--radius);
+		border: 0 solid transparent;
 		font-family: inherit;
 		max-width: none;
 		cursor: pointer;
@@ -23,10 +24,10 @@
 		white-space: nowrap;
 		width: 100%;
 		text-overflow: ellipsis;
-		padding-right: calc($arrow-icon-width + $padding-horizontal);
 
-		&:focus-visible {
+		&:focus {
 			outline: 1.5px solid var(--wp--preset--color--blueberry-1);
+			outline-offset: -1.5px;
 		}
 	}
 
@@ -37,10 +38,10 @@
 			content: "";
 			display: block;
 			position: absolute;
-			right: 1em;
+			right: var(--arrow-icon-position);
 			top: 0;
 			height: 100%;
-			width: $arrow-icon-width;
+			width: var(--arrow-icon-width);
 			mask-image: url(../../images/chevron.svg);
 			mask-repeat: no-repeat;
 			mask-position: center;
