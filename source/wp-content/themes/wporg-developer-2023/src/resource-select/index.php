@@ -45,12 +45,28 @@ function render( $attributes, $content, $block ) {
 			'label' => __( 'Code Reference', 'wporg' ),
 		),
 		array(
+			'url' => '/cli/commands/',
+			'label' => __( 'CLI Commands', 'wporg' ),
+		),
+		array(
+			'url' => '/block-editor/',
+			'label' => __( 'Block Editor', 'wporg' ),
+		),
+		array(
+			'url' => '/themes/',
+			'label' => __( 'Themes', 'wporg' ),
+		),
+		array(
+			'url' => '/plugins/',
+			'label' => __( 'Plugins', 'wporg' ),
+		),
+		array(
 			'url' => '/apis/',
 			'label' => __( 'Common APIs', 'wporg' ),
 		),
 		array(
-			'url' => '/cli/commands/',
-			'label' => __( 'CLI Commands', 'wporg' ),
+			'url' => '/advanced-administration/',
+			'label' => __( 'Advanced Administration', 'wporg' ),
 		),
 	);
 
