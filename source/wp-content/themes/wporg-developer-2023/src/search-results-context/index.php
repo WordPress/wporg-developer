@@ -25,31 +25,38 @@ function render( $attributes ) {
 	$posts_per_page = get_query_var( 'posts_per_page' );
 	$results_count = $wp_query->found_posts;
 	$current_page = get_query_var( 'paged' ) ?: 1;
-
 	$first_result = ($current_page - 1) * $posts_per_page + 1;
 	$last_result = min($current_page * $posts_per_page, $results_count);
 
 	$content = sprintf(
-		/* translators: %1$s number of results; %2$s keyword, %3$s number of first displayed result, %4$s number of last displayed result. */
+		/* translators: %1$s number of results; %2$s keyword. */
 		_n(
 			'%1$s result found for "%2$s".',
-			'%1$s results found for "%2$s". Showing results %3$s to %4$s.',
+			'%1$s results found for "%2$s".',
 			$results_count,
 			'wporg'
 		),
 		number_format_i18n( $results_count ),
 		esc_html( $wp_query->query['s'] ),
-		number_format_i18n( $first_result ),
-		number_format_i18n( $last_result )
 	);
+
+	$showing = $results_count > 0
+		? sprintf(
+			/* translators: %1$s number of first displayed result, %2$s number of last displayed result. */
+			'Showing results %1$s to %2$s.',
+			number_format_i18n( $first_result ),
+			number_format_i18n( $last_result ),
+		)
+		: '';
 
 	$wrapper_attributes = get_block_wrapper_attributes();
 
 	return sprintf(
-		'<%1$s %2$s>%3$s</%1$s>',
+		'<%1$s %2$s>%3$s %4$s</%1$s>',
 		esc_attr( $attributes['tagName'] ),
 		$wrapper_attributes,
-		$content
+		$content,
+		$showing,
 	);
 }
 
