@@ -282,10 +282,6 @@ body[class] {
 		display: flex;
 		align-items: center;
 		gap: var(--wp--preset--spacing--10);
-
-		select {
-			max-width: 100px;
-		}
 	}
 
 	.wp-block-wporg-search-filters {

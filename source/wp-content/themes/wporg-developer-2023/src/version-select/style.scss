@@ -16,7 +16,7 @@
 		border-radius: var(--wp--custom--button--border--radius);
 		border: 0 solid transparent;
 		font-family: inherit;
-		max-width: none;
+		max-width: 100px;
 		cursor: pointer;
 		color: inherit;
 		background: inherit;
@@ -24,6 +24,7 @@
 		white-space: nowrap;
 		width: 100%;
 		text-overflow: ellipsis;
+		text-align: end;
 
 		&:focus {
 			outline: 1.5px solid var(--wp--preset--color--blueberry-1);
