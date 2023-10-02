@@ -75,7 +75,9 @@ function render( $attributes, $content, $block ) {
 			<div class="wporg-version-select-container">
 				<select name="wp-parser-since" id="%3$s">%5$s</select>
 			</div>
-			<button type="submit" class="wp-block-button__link is-style-small">%6$s</button>
+			<div class="wp-block-button is-style-small">
+				<button type="submit" class="wp-block-button__link wp-element-button">%6$s</button>
+			</div>
 		</div>',
 		$wrapper_attributes,
 		esc_attr( isset( $attributes['hideLabelFromVision'] ) && true === $attributes['hideLabelFromVision'] ? 'screen-reader-text' : '' ),
