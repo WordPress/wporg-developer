@@ -75,7 +75,7 @@ function render( $attributes, $content, $block ) {
 			<div class="wporg-version-select-container">
 				<select name="wp-parser-since" id="%3$s">%5$s</select>
 			</div>
-			<div class="wp-block-button is-style-small">
+			<div class="wp-block-button is-small">
 				<button type="submit" class="wp-block-button__link wp-element-button">%6$s</button>
 			</div>
 		</div>',

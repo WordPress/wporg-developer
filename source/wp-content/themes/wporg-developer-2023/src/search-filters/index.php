@@ -49,7 +49,7 @@ function render( $attributes, $content, $block ) {
 		$qv_post_type = array();
 	}
 
-	$content = '<div class="wp-block-button is-style-toggle">';
+	$content = '<div class="wp-block-button is-style-toggle is-small">';
 	$content .= sprintf(
 		'<button id="wp-block-wporg-search-filters-all" class="wp-block-button__link wp-element-button" aria-pressed="%1$s">%2$s</button>',
 		empty( $qv_post_type ) ? 'true' : 'false',
@@ -60,7 +60,7 @@ function render( $attributes, $content, $block ) {
 	foreach ( $search_post_types as $post_type => $label ) {
 		$input_id = esc_attr( $post_type );
 		$checked = checked( in_array( $post_type, $qv_post_type ), true, false );
-		$content .= '<div class="wp-block-button is-style-toggle">';
+		$content .= '<div class="wp-block-button is-style-toggle is-small">';
 		$content .= sprintf( '<input id="%1$s" type="checkbox" name="post_type[]" value="%1$s" %2$s />', $input_id, $checked );
 		$content .= sprintf( '<label for="%1$s" class="wp-block-button__link wp-element-button">%2$s</label>', $input_id, $label );
 		$content .= '</div>';
@@ -70,7 +70,7 @@ function render( $attributes, $content, $block ) {
 	return sprintf(
 		'<div %1$s>
 			%2$s 
-			<div class="wp-block-button is-style-tertiary">
+			<div class="wp-block-button is-style-text is-small">
 				<button class="wp-block-button__link wp-element-button" type="submit">%3$s</button>
 			</div>
 		</div>',
