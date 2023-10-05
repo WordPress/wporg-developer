@@ -122,7 +122,7 @@ class Breadcrumb_Trail {
 		$labels = array(
 			'browse'              => __( 'Browse:',                 'breadcrumb-trail' ),
 			'home'                => __( 'Home',                    'breadcrumb-trail' ),
-			'search'              => __( 'Result',                  'breadcrumb-trail' ),
+			'search'              => __( 'Search results',          'breadcrumb-trail' ),
 			'error_404'           => __( '404 Not Found',           'breadcrumb-trail' ),
 			'paged'               => __( 'Page %d',                 'breadcrumb-trail' ),
 			'archives'            => __( 'Archives',                'breadcrumb-trail' ),
