@@ -19,6 +19,7 @@ class DevHub_Parser {
 		'wp-content/',
 		'wp-includes/ID3/',
 		'wp-includes/PHPMailer/',
+		'wp-includes/Requests/',
 		'wp-includes/SimplePie/',
 		'wp-includes/Text/',
 		'wp-includes/blocks/',
