@@ -39,7 +39,7 @@ function render( $attributes, $content, $block ) {
 	global $wp_query;
 	$search_query = $wp_query->query_vars['s'];
 
-	$sources = array(
+	$resources = array(
 		array(
 			'url' => '/',
 			'label' => __( 'Code Reference', 'wporg' ),
@@ -71,19 +71,19 @@ function render( $attributes, $content, $block ) {
 	);
 
 	$options = '';
-	foreach ( $sources as $source ) {
+	foreach ( $resources as $resource ) {
 		$selected = false;
 	
 		// Compare the source url with the uri minus query vars.
-		if ( $source['url'] === strtok( $_SERVER['REQUEST_URI'], '?' ) ) {
+		if ( $resource['url'] === strtok( $_SERVER['REQUEST_URI'], '?' ) ) {
 			$selected = true;
 		}
 
 		$options .= sprintf(
 			'<option value="%1$s" %2$s>%3$s</option>',
-			esc_attr( $source['url'] . '?s=' . $search_query ),
+			esc_attr( $resource['url'] . '?s=' . $search_query ),
 			esc_attr( selected( $selected, true, false ) ),
-			esc_html( $source['label'] )
+			esc_html( $resource['label'] )
 		);
 	}
 
