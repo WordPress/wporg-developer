@@ -56,15 +56,19 @@ function render( $attributes, $content, $block ) {
 	}
 
 	$content_html .= sprintf(
-		'<a href="%1$s" class="%2$s">%3$s</a>',
+		'<a href="%1$s">%2$s</a>',
 		esc_url( get_permalink( $block->context['postId'] ) ),
-		$is_parsed_post_type ? esc_attr( 'wp-block-wporg-code-short-title__parsed') : '',
 		$title
+	);
+
+	$classes = array(
+		$type,
+		$is_parsed_post_type ? 'wp-block-wporg-code-short-title-parsed' : '',
 	);
 
 	$wrapper_attributes = get_block_wrapper_attributes(
 		array(
-			'class' => $type,
+			'class' => implode( ' ', $classes ),
 		)
 	);
 	return sprintf(

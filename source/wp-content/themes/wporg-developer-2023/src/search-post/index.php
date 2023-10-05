@@ -79,7 +79,11 @@ function render( $attributes, $content, $block ) {
 	
 	$content_html = $is_parsed_type ? renderCodeReferencePost() : renderPost();
 
-	$wrapper_attributes = get_block_wrapper_attributes();
+	$wrapper_attributes = get_block_wrapper_attributes(
+		array(
+			'class' => $is_parsed_type ? 'wp-block-wporg-search-post-parsed' : '',
+		)
+	);
 
 	return sprintf(
 		'<div %1$s>%2$s</div>',

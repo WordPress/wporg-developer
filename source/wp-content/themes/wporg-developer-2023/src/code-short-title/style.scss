@@ -5,6 +5,14 @@
 	font-family: var(--wp--preset--font-family--inter);
 	font-weight: 700;
 	font-size: var(--wp--preset--font-size--small);
+	line-height: var(--wp--custom--body--small--typography--line-height);
+
+	&.wp-block-wporg-code-short-title-parsed a {
+		font-family: var(--wp--preset--font-family--monospace);
+		font-size: var(--wp--preset--font-size--extra-large);
+		line-height: var(--wp--custom--body--large--typography--line-height);
+		font-weight: 400;
+	}
 }
 
 @media (min-width: 350px) {
@@ -15,18 +23,8 @@
 	}
 }
 
-.wp-block-wporg-code-short-title__type,
-.wp-block-wporg-code-short-title__parsed {
-	font-family: var(--wp--preset--font-family--monospace);
-	font-weight: 400;
-}
-
-.wp-block-wporg-code-short-title__parsed {
-	font-size: var(--wp--preset--font-size--extra-large);
-	line-height: var(--wp--custom--body--large--typography--line-height);
-}
-
 .wp-block-wporg-code-short-title__type {
+	font-family: var(--wp--preset--font-family--monospace);
 	background: var(--wp--preset--color--light-grey-2);
 	border-radius: 2px;
 	margin-right: 8px;

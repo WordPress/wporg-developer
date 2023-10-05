@@ -55,11 +55,11 @@
 	<!-- /wp:group -->
 
 	<!-- wp:query-pagination {"layout":{"type":"flex","justifyContent":"center"}} -->
-		<!-- wp:query-pagination-previous /-->
+		<!-- wp:query-pagination-previous {"label":"Previous"} /-->
 
 		<!-- wp:query-pagination-numbers /-->
 
-		<!-- wp:query-pagination-next /-->
+		<!-- wp:query-pagination-next {"label":"Next"} /-->
 	<!-- /wp:query-pagination -->
 
 </div>
