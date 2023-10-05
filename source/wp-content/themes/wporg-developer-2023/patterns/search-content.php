@@ -35,16 +35,11 @@
 		</div>
 		<!-- /wp:columns -->
 
-		<!-- wp:wporg/search-results-context {"style":{"spacing":{"padding":{"top":"var:preset|spacing|20","bottom":"var:preset|spacing|20"}}}} /-->
+		<!-- wp:wporg/search-results-context {"style":{"spacing":{"padding":{"top":"var:preset|spacing|20","bottom":"var:preset|spacing|20"}},"elements":{"link":{"color":{"text":"var:preset|color|charcoal-4"}}}},"textColor":"charcoal-4","fontSize":"small"} /-->
 
-		<!-- wp:post-template -->
-			<?php
-			// Code reference search results at the root are styled differently.
-			if ( preg_match('#^/\?s=#', $_SERVER['REQUEST_URI']) ) { ?>
-				<!-- wp:pattern {"slug":"wporg-developer-2023/search-content-post-reference"} /-->
-			<?php } else { ?>
-				<!-- wp:pattern {"slug":"wporg-developer-2023/search-content-post"} /-->
-			<?php } ?>
+		<!-- wp:post-template {"align":"wide"} -->
+
+			<!-- wp:wporg/search-post /-->
 
 		<!-- /wp:post-template -->
 
