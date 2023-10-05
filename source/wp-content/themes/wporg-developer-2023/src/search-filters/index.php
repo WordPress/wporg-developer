@@ -43,26 +43,37 @@ function render( $attributes, $content, $block ) {
 		'wp-parser-method'   => __( 'Methods', 'wporg' ),
 	);
 	$qv_post_type = array_filter( (array) get_query_var( 'post_type' ) );
-	$no_filters   = $GLOBALS['wp_query']->is_empty_post_type_search;
+	$no_filters   = true === $GLOBALS['wp_query']->is_empty_post_type_search;
 	if ( in_array( 'any', $qv_post_type ) || $no_filters ) {
 		// No filters used.
 		$qv_post_type = array();
 	}
 
-	$content = sprintf( '<span> %s</span>', __( 'Filter by type:', 'wporg' ) );
+	$content = '<div class="wp-block-button is-style-toggle is-small">';
+	$content .= sprintf(
+		'<button id="wp-block-wporg-search-filters-all" class="wp-block-button__link wp-element-button" aria-pressed="%1$s">%2$s</button>',
+		empty( $qv_post_type ) ? 'true' : 'false',
+		__( 'All', 'wporg' ),
+	);
+	$content .= '</div>';
 
 	foreach ( $search_post_types as $post_type => $label ) {
 		$input_id = esc_attr( $post_type );
 		$checked = checked( in_array( $post_type, $qv_post_type ), true, false );
-		$content .= '<div>';
+		$content .= '<div class="wp-block-button is-style-toggle is-small">';
 		$content .= sprintf( '<input id="%1$s" type="checkbox" name="post_type[]" value="%1$s" %2$s />', $input_id, $checked );
-		$content .= sprintf( '<label for="%s">%s</label>', $input_id, $label );
+		$content .= sprintf( '<label for="%1$s" class="wp-block-button__link wp-element-button">%2$s</label>', $input_id, $label );
 		$content .= '</div>';
 	}
 
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(
-		'<div %1$s>%2$s <button type="submit">%3$s</button></div>',
+		'<div %1$s>
+			%2$s 
+			<div class="wp-block-button is-style-text is-small">
+				<button class="wp-block-button__link wp-element-button" type="submit">%3$s</button>
+			</div>
+		</div>',
 		$wrapper_attributes,
 		$content,
 		esc_attr( __( 'Apply', 'wporg' ) )

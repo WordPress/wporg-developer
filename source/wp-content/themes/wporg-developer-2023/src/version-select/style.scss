@@ -1,14 +1,22 @@
 .wp-block-wporg-version-select {
-	position: relative;
-	min-width: 4em;
+	--arrow-icon-width: 0.8em;
+	--arrow-icon-position: 1em;
 
 	select {
-		appearance: none;
-		border: 1px solid var(--wp--preset--color--charcoal-4);
+		--text-height: calc(var(--wp--preset--font-size--small) * var(--wp--custom--body--typography--line-height));
+		--padding-vertical: calc(( 40px - var(--text-height)) / 2);
+		--padding-horizontal: 12px;
+		--padding-right: calc(var(--padding-horizontal) + var(--arrow-icon-width) + var(--arrow-icon-position));
+
 		display: block;
+		appearance: none;
+		padding: var(--padding-vertical) var(--padding-right) var(--padding-vertical) var(--padding-horizontal);
+		font-size: var(--wp--preset--font-size--small);
+		line-height: var(--wp--custom--body--typography--line-height);
+		border-radius: var(--wp--custom--button--border--radius);
+		border: 0 solid transparent;
 		font-family: inherit;
-		font-size: inherit;
-		max-width: none;
+		max-width: 100px;
 		cursor: pointer;
 		color: inherit;
 		background: inherit;
@@ -16,24 +24,32 @@
 		white-space: nowrap;
 		width: 100%;
 		text-overflow: ellipsis;
-		padding: 0.8em 1.25em 0.8em 1em;
-		border-radius: 2px;
+		text-align: end;
+
+		&:focus {
+			outline: 1.5px solid var(--wp--preset--color--blueberry-1);
+			outline-offset: -1.5px;
+		}
 	}
 
-	&::after {
-		content: "";
-		display: block;
-		position: absolute;
-		right: 1em;
-		top: 0;
-		height: 100%;
-		width: 0.8em;
-		mask-image: url(../../images/chevron.svg);
-		mask-repeat: no-repeat;
-		mask-position: center;
-		mask-size: contain;
-		transform: rotate(180deg);
-		background-color: var(--wp--preset--color--charcoal-1);
-		pointer-events: none; // Allows clicking on the select element.
+	.wporg-version-select-container {
+		position: relative;
+
+		&::after {
+			content: "";
+			display: block;
+			position: absolute;
+			right: var(--arrow-icon-position);
+			top: 0;
+			height: 100%;
+			width: var(--arrow-icon-width);
+			mask-image: url(../../images/chevron.svg);
+			mask-repeat: no-repeat;
+			mask-position: center;
+			mask-size: contain;
+			transform: rotate(180deg);
+			background-color: var(--wp--preset--color--charcoal-1);
+			pointer-events: none; // Allows clicking on the select element.
+		}
 	}
 }
