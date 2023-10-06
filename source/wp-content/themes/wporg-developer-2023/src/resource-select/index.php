@@ -45,12 +45,16 @@ function render( $attributes, $content, $block ) {
 			'label' => __( 'Code Reference', 'wporg' ),
 		),
 		array(
-			'url' => '/cli/commands/',
-			'label' => __( 'CLI Commands', 'wporg' ),
+			'url' => '/coding-standards/',
+			'label' => __( 'Coding Standards', 'wporg' ),
 		),
 		array(
 			'url' => '/block-editor/',
 			'label' => __( 'Block Editor', 'wporg' ),
+		),
+		array(
+			'url' => '/apis/',
+			'label' => __( 'Common APIs', 'wporg' ),
 		),
 		array(
 			'url' => '/themes/',
@@ -61,8 +65,12 @@ function render( $attributes, $content, $block ) {
 			'label' => __( 'Plugins', 'wporg' ),
 		),
 		array(
-			'url' => '/apis/',
-			'label' => __( 'Common APIs', 'wporg' ),
+			'url' => '/rest-api/',
+			'label' => __( 'REST API', 'wporg' ),
+		),
+		array(
+			'url' => '/cli/commands/',
+			'label' => __( 'CLI Commands', 'wporg' ),
 		),
 		array(
 			'url' => '/advanced-administration/',
