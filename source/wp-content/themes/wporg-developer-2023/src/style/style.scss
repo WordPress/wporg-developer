@@ -291,6 +291,7 @@ body[class] {
 		background-size: var(--wp--custom--select--icon-size);
 		background-repeat: no-repeat;
 		background-position: right var(--wp--custom--select--icon-position) center;
+		background-color: transparent;
 		padding-top: var(--wp--custom--select--padding-vertical);
 		padding-right: calc(var(--wp--custom--select--icon-position) + var(--wp--custom--select--icon-size));
 		padding-bottom: var(--wp--custom--select--padding-vertical);
