@@ -189,6 +189,7 @@ add_filter( 'single_template_hierarchy', __NAMESPACE__ . '\add_handbook_template
 add_filter( 'next_post_link', __NAMESPACE__ . '\get_adjacent_handbook_post_link', 10, 5 );
 add_filter( 'previous_post_link', __NAMESPACE__ . '\get_adjacent_handbook_post_link', 10, 5 );
 add_filter( 'get_the_archive_title_prefix', __NAMESPACE__ . '\get_reference_since_title_prefix' );
+add_filter( 'the_content', __NAMESPACE__ . '\filter_standards_content' );
 
 // Priority must be lower than 5 to precede table of contents filter.
 // See: https://github.com/WordPress/wporg-mu-plugins/blob/3867a4ff6fa81de5f1e2e7b1ed4b123e4b4915b3/mu-plugins/blocks/table-of-contents/index.php#L94
@@ -589,6 +590,32 @@ function filter_code_content( $content ) {
 		<!-- wp:wporg/code-reference-comments /-->
 	'
 	);
+}
+
+/**
+ * Filters content for the github handbooks to wrap tables with block markup for styles.
+ *
+ * @param string $content
+ * @return string
+ */
+function filter_standards_content( $content ) {
+	$post_type = get_post_type();
+	$handbooks  = array('blocks-handbook', 'wpcs-handbook');
+
+	if ( ! in_array( $post_type, $handbooks ) ) {
+		return $content;
+	}
+
+	// Find table elements in the content and wrap with figure.wp-block-table
+	$content = preg_replace_callback(
+		'!<table.*?</table>!is',
+		function( $matches ) {
+			return '<figure class="wp-block-table is-style-stripes">' . $matches[0] . '</figure>';
+		},
+		$content
+	);
+
+	return $content;
 }
 
 
