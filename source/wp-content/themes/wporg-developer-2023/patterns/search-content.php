@@ -13,27 +13,15 @@
 	<!-- wp:group {"className":"align-left","layout":{"type":"constrained","contentSize":"","justifyContent":"left"},"style":{"spacing":{"margin":{"bottom":"var:preset|spacing|40"}}}} -->
 	<div class="wp-block-group align-left" style="margin-bottom:var(--wp--preset--spacing--40)">
 
-		<!-- wp:columns {"align":"wide","className":"awesomeplete-form-wrap search-wrap"} -->
-		<div class="wp-block-columns alignwide awesomeplete-form-wrap search-wrap">
-			
-			<!-- wp:column {"width":"70%"} -->
-			<div class="wp-block-column" style="flex-basis:70%">
-				
-				<!-- wp:search {"label":"<?php esc_attr_e( 'Search', 'wporg' ); ?>","showLabel":false,"placeholder":"<?php esc_attr_e( 'Search resources', 'wporg' ); ?>","width":260,"widthUnit":"px","buttonText":"<?php esc_attr_e( 'Search', 'wporg' ); ?>","buttonPosition":"button-inside","buttonUseIcon":true,"className":"is-style-secondary-search-control wporg-filtered-search-form"} /-->
+		<!-- wp:group {"align":"wide","className":"wporg-search-controls","layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between","verticalAlignment":"top"}} -->
+		<div class="wp-block-group alignwide wporg-search-controls">
+	
+			<!-- wp:search {"label":"<?php esc_attr_e( 'Search', 'wporg' ); ?>","showLabel":false,"placeholder":"<?php esc_attr_e( 'Search resources', 'wporg' ); ?>","width":260,"widthUnit":"px","buttonText":"<?php esc_attr_e( 'Search', 'wporg' ); ?>","buttonPosition":"button-inside","buttonUseIcon":true,"className":"is-style-secondary-search-control wporg-filtered-search-form"} /-->
 
-			</div>
-			<!-- /wp:column -->
-		
-			<!-- wp:column {"width":"30%"} -->
-			<div class="wp-block-column" style="flex-basis:30%">
-				
-				<!-- wp:wporg/resource-select {"label":"<?php esc_attr_e( 'Select resource to search', 'wporg' ); ?>","hideLabelFromVision":true} /-->
-
-			</div>
-			<!-- /wp:column -->
+			<!-- wp:wporg/resource-select {"label":"<?php esc_attr_e( 'Select resource to search', 'wporg' ); ?>","hideLabelFromVision":true} /-->
 		
 		</div>
-		<!-- /wp:columns -->
+		<!-- /wp:group -->
 
 		<!-- wp:wporg/search-results-context {"style":{"spacing":{"padding":{"top":"var:preset|spacing|20","bottom":"var:preset|spacing|20"}},"elements":{"link":{"color":{"text":"var:preset|color|charcoal-4"}}}},"textColor":"charcoal-4","fontSize":"small"} /-->
 

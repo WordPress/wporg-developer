@@ -134,6 +134,16 @@
 					"fontSize": "var(--wp--preset--font-size--heading-4)",
 					"lineHeight": "var(--wp--custom--heading--level-4--typography--line-height)"
 				}
+			},
+			"select": {
+				"height": "40px",
+				"iconSize": "24px",
+				"iconPosition": "8px",
+				"paddingLeft": "12px",
+				"fontSize": "var(--wp--preset--font-size--small)",
+				"lineHeight": "var(--wp--custom--body--typography--line-height)",
+				"paddingVertical": "calc(( var(--wp--custom--select--height) - (var(--wp--custom--select--font-size) * var(--wp--custom--select--line-height))) / 2)",
+				"borderRadius": "var(--wp--custom--button--border--radius)"
 			}
 		},
 		"typography": {
