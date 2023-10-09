@@ -42,12 +42,13 @@ function render( $attributes, $content, $block ) {
 		return '';
 	}
 
-	$content = get_the_title( $block->context['postId'] );
+	$title = get_the_title( $block->context['postId'] );
 	$post_type = get_post_type( $block->context['postId'] );
 	$type = strtolower( get_post_type_object( $post_type )->labels->singular_name );
+	$is_parsed_post_type = is_parsed_post_type( $post_type );
 
 	$content_html = '';
-	if ( is_parsed_post_type( $post_type ) ) {
+	if ( $is_parsed_post_type ) {
 		$content_html .= sprintf(
 			'<span class="wp-block-wporg-code-short-title__type">%1$s</span>',
 			$type
@@ -57,12 +58,17 @@ function render( $attributes, $content, $block ) {
 	$content_html .= sprintf(
 		'<a href="%1$s">%2$s</a>',
 		esc_url( get_permalink( $block->context['postId'] ) ),
-		$content
+		$title
+	);
+
+	$classes = array(
+		$type,
+		$is_parsed_post_type ? 'wp-block-wporg-code-short-title-parsed' : '',
 	);
 
 	$wrapper_attributes = get_block_wrapper_attributes(
 		array(
-			'class' => $type,
+			'class' => implode( ' ', $classes ),
 		)
 	);
 	return sprintf(

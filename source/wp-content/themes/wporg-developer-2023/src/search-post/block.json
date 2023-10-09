@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "wporg/search-post",
+	"title": "Search Post",
+	"category": "layout",
+	"description": "The post template for search results.",
+	"keywords": [ "post" ],
+	"textdomain": "wporg",
+	"attributes": {},
+	"supports": {
+		"html": false,
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	},
+	"usesContext": [ "postId" ],
+	"editorScript": "file:./index.js",
+	"style": "file:./style-index.css"
+}
