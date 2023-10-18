@@ -600,7 +600,16 @@ function filter_code_content( $content ) {
  */
 function filter_standards_content( $content ) {
 	$post_type = get_post_type();
-	$handbooks  = array('blocks-handbook', 'wpcs-handbook');
+	$handbooks  = array(
+		'wpcs-handbook',
+		'blocks-handbook',
+		'apis-handbook',
+		'theme-handbook',
+		'plugin-handbook',
+		'rest-api-handbook',
+		'cli-handbook',
+		'adv-admin-handbook',
+	);
 
 	if ( ! in_array( $post_type, $handbooks ) ) {
 		return $content;
