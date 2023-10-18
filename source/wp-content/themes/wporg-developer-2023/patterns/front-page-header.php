@@ -13,7 +13,7 @@
 <div style="height:calc(var(--wp--custom--body--small--typography--line-height) * var(--wp--preset--font-size--small));" aria-hidden="true"></div>
 <!-- /wp:html -->
 
-<!-- wp:navigation {"hasIcon":false,"overlayBackgroundColor":"charcoal-2","overlayTextColor":"white","layout":{"type":"flex","orientation":"horizontal"},"fontSize":"small","menuSlug":"developer"} /-->
+<!-- wp:navigation {"icon":"menu","overlayBackgroundColor":"charcoal-2","overlayTextColor":"white","layout":{"type":"flex","orientation":"horizontal"},"fontSize":"small","menuSlug":"developer"} /-->
 <!-- /wp:wporg/local-navigation-bar --></div>
 <!-- /wp:group -->
 
