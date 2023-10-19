@@ -12,7 +12,7 @@
 	<!-- wp:group {"tagName":"article"} -->
 	<div class="wp-block-group">
 
-		<!-- wp:wporg/table-of-contents {"style":{"spacing":{"margin":{"top":"var:preset|spacing|edge-space"}}}} /-->
+		<!-- wp:wporg/table-of-contents /-->
 
 	</div>
 	<!-- /wp:group -->
