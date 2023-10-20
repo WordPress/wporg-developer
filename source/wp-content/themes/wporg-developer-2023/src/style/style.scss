@@ -22,6 +22,15 @@ body[class] {
 		border-radius: 2px;
 		overflow: scroll;
 	}
+
+	code {
+		display: inline-block;
+		line-height: var(--wp--custom--body--extra-small--typography--line-height);
+		background: var(--wp--preset--color--light-grey-2);
+		border-radius: 2px;
+		padding-left: 3px;
+		padding-right: 3px;
+	}
 }
 
 .wporg-filtered-search-form {
@@ -375,4 +384,8 @@ body[class] {
 			margin: 0;
 		}
 	}
+}
+
+.wp-block-table code {
+	background-color: unset;
 }
