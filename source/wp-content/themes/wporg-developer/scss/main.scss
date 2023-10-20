@@ -2243,6 +2243,12 @@ div[class*="-table-of-contents-container"] {
 		margin: 0 auto;
 		display: flex;
 		padding: 0 #{"max( 20px, 2% )"};
+
+		@media (max-width: 876px) {
+			background-color: #fff;
+			margin-left: 0;
+			width: 100%;
+		}
 	}
 
 	header {

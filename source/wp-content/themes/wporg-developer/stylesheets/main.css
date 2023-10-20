@@ -2922,6 +2922,14 @@ div[class*="-table-of-contents-container"] .sub-menu {
   padding: 0 max( 20px, 2% );
 }
 
+@media (max-width: 876px) {
+  .single-handbook #content {
+    background-color: #fff;
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
 .single-handbook header {
   margin: 0;
 }
