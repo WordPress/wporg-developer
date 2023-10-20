@@ -2999,7 +2999,7 @@ body.responsive-show #secondary {
   z-index: 500;
 }
 
-body.responsive-show #secondary-toggle {
+body.responsive-show #page #secondary-toggle {
   height: 32px;
   margin-left: 8px;
   width: 100%;
