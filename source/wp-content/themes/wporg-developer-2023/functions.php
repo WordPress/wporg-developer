@@ -619,7 +619,7 @@ function filter_standards_content( $content ) {
 	$content = preg_replace_callback(
 		'!<table.*?</table>!is',
 		function( $matches ) {
-			return '<figure class="wp-block-table is-style-stripes">' . $matches[0] . '</figure>';
+			return '<figure class="wp-block-table is-style-borderless">' . $matches[0] . '</figure>';
 		},
 		$content
 	);
