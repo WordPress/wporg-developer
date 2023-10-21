@@ -531,6 +531,10 @@
 
 		&.search-guide {
 			border-top: 2px solid #efefef;
+
+			.widget-title {
+				margin-bottom: 1.5rem;
+			}
 		}
 
 		@media ( max-width: 974px ) {

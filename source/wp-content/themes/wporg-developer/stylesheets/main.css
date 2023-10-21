@@ -843,6 +843,10 @@ img {
   border-top: 2px solid #efefef;
 }
 
+.devhub-wrap .home-landing .section.search-guide .widget-title {
+  margin-bottom: 1.5rem;
+}
+
 @media (max-width: 974px) {
   .devhub-wrap .home-landing .section {
     width: 640px;
