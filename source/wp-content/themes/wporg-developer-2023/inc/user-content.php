@@ -413,34 +413,32 @@ class DevHub_User_Submitted_Content {
 	 * @return string Editor rules.
 	 */
 	public static function get_editor_rules( $context = '', $note_link = '' ) {
-		$license_rule = '<div class="wp-block-wporg-code-reference-comments-small">' . sprintf(
-			/* translators: 1: GFDL link */
-			__( 'Any notes not meeting these requirements will be removed by the moderation team. All contributions are licensed under %s and are moderated before appearing on the site.', 'wporg' ),
-			'<a href="https://gnu.org/licenses/fdl.html">GFDL</a>'
-		) . '</div>';
-
-		$rules = array();
-
 		if ( 'feedback' === $context ) {
 			if ( $note_link ) {
 				$rules[] = sprintf( __( 'Use this form to report errors or to add additional information to %s.', 'wporg' ), $note_link );
 			} else {
-				$rules[] = __( '<b>Feedback</b> is part of documentation. Use this form to report errors or to add additional information to this note', 'wporg' );
+				$rules[] = __( 'Feedback is part of documentation. Use this form to report errors or to add additional information to this note', 'wporg' );
 			}
-
 		} else {
-			$rules[] = __( '<b>Notes</b> should supplement code reference entries, for example examples, tips, explanations, use-cases, and best practices. ', 'wporg' );
-			$rules[] = __( '<b>Feedback</b> can be to report errors or omissions with the documentation on this page. Feedback will not be publicly posted.', 'wporg' );
+			$rules[] = __( 'Notes should supplement code reference entries, for example examples, tips, explanations, use-cases, and best practices.', 'wporg' );
+			$rules[] = __( 'Feedback can be to report errors or omissions with the documentation on this page. Feedback will not be publicly posted.', 'wporg' );
 		}
 
-		$rules[] = __( 'Please, send your message in English', 'wporg' );
-		$rules[] = __( 'Don\'t use this form for requests, discussions, spam, bug reports, complaints, or self-promotion.', 'wporg' );
+		$rules[] = __( 'Notes and feedback must be written in English.', 'wporg' );
+		$rules[] = __( 'This form is not for support requests, discussions, spam, bug reports, complaints, or self-promotion.', 'wporg' );
+		$rules[] = __('Any notes not meeting these requirements will be removed by the moderation team.', 'wporg' );
+		$rules[] = __('In the editing area the Tab key indents text. To move below this area by pressing Tab, press the Esc key followed by the Tab key. In some cases the Esc key will need to be pressed twice before the Tab key will allow you to continue.', 'wporg');
 
-		return sprintf( '<ul class="wp-block-wporg-code-reference-comments-rules">%1$s</ul>%2$s',
+		$rules[] = sprintf(
+			/* translators: 1: GFDL link */
+			__( 'Any notes not meeting these requirements will be removed by the moderation team. All contributions are licensed under %s and are moderated before appearing on the site.', 'wporg' ),
+			'<a href="https://gnu.org/licenses/fdl.html">GFDL</a>'
+		);
+
+		return sprintf( '<ul class="wp-block-wporg-code-reference-comments-rules">%s</ul>',
 			implode( '', array_map( function( $rule ) {
 				return "<li>{$rule}</li>";
-			}, $rules ) ),
-			$license_rule
+			}, $rules ) )
 		);
 	}
 
