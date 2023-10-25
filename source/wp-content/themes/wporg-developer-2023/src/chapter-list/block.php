@@ -58,8 +58,8 @@ function render( $attributes, $content, $block ) {
 	$content = wp_list_pages( $args );
 
 	$title = do_blocks(
-		'<!-- wp:heading {"style":{"spacing":{"margin":{"top":"0","bottom":"var:preset|spacing|20"}}},"fontFamily":"inter"} -->
-			<h2 class="wp-block-heading has-inter-font-family" style="margin-top:0;margin-bottom:var(--wp--preset--spacing--20)">' . __( 'Chapters', 'wporg' ) . '</h2>
+		'<!-- wp:heading {"style":{"typography":{"fontStyle":"normal","fontWeight":"400"}},"fontSize":"small","fontFamily":"inter"} -->
+		<h2 class="wp-block-heading has-inter-font-family has-small-font-size" style="font-style:normal;font-weight:400">' . __( 'Chapters', 'wporg' ) . '</h2>
 		<!-- /wp:heading -->'
 	);
 

@@ -10,13 +10,18 @@
 	}
 
 	ul ul {
-		margin-left: calc(var(--local--button-size) / 2);
-		padding-left: calc(var(--wp--preset--spacing--20) / 4);
-		border-left: 1px solid var(--wp--preset--color--light-grey-1);
+		padding-left: var(--wp--preset--spacing--30);
+		list-style-type: disc;
+	}
+
+	// Remove list item style from items with children, as they have the caret.
+	.page_item_has_children {
+		display: block;
 	}
 
 	li {
 		margin-block: calc(var(--wp--preset--spacing--20) / 4);
+		color: var(--wp--preset--color--charcoal-4);
 	}
 
 	> ul {
@@ -27,6 +32,10 @@
 		}
 	}
 
+	a {
+		text-decoration: none;
+	}
+
 	&.has-js-control ul ul {
 		display: none;
 
@@ -35,8 +44,6 @@
 		}
 	}
 
-	// Style the dash & chevron, most of the styles can be shared.
-	&.has-js-control li:not(.page_item_has_children),
 	.wporg-chapter-list--button-group {
 		display: flex;
 		align-items: flex-start;
@@ -56,17 +63,6 @@
 		height: 0.8em;
 	}
 
-	&:not(.has-js-control) li::before,
-	&.has-js-control li:not(.page_item_has_children)::before,
-	.wporg-chapter-list--button-group > button::before {
-		content: "";
-		display: inline-block;
-		mask-image: url(../../images/line.svg);
-		mask-repeat: no-repeat;
-		mask-position: center;
-		background-color: var(--wp--preset--color--light-grey-1);
-	}
-
 	.wporg-chapter-list--button-group > button {
 		background-color: transparent;
 		border: none;
@@ -74,12 +70,15 @@
 		cursor: pointer;
 
 		&::before {
+			content: "";
+			display: inline-block;
 			height: var(--local--button-size);
 			width: var(--local--button-size);
 			mask-image: url(../../images/chevron.svg);
-			mask-size: 0.8em 0.4em;
+			mask-repeat: no-repeat;
+			mask-position: center;
 			transform: rotate(180deg);
-			background-color: var(--wp--preset--color--blueberry-1);
+			background-color: var(--wp--preset--color--charcoal-4);
 		}
 
 		&[aria-expanded="true"]::before {
@@ -92,10 +91,18 @@
 	}
 
 	// Descendent is `span` if there are children, or `a` if not.
-	.current_page_ancestor > span,
-	.current_page_ancestor > a,
-	.current_page_item > span,
+	.current_page_item,
+	.current_page_item > span a,
 	.current_page_item > a {
-		font-weight: 600;
+		color: var(--wp--preset--color--charcoal-1);
+	}
+
+	.current_page_item > span a,
+	.current_page_item > a {
+		font-weight: 700;
+	}
+
+	.current_page_item > span button::before {
+		background-color: var(--wp--preset--color--charcoal-1);
 	}
 }
