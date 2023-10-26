@@ -144,7 +144,7 @@
 ); ?></p>
 <!-- /wp:paragraph -->
 
-<!-- wp:wporg/latest-news {"blogId":719} /--></div>
+<!-- wp:wporg/latest-news {"blogId":719,"showCategories":true,"className":"is-style-cards"} /--></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 
