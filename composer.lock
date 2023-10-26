@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a0a9c7399b3a1f2d9316f05da879787f",
+    "content-hash": "b4882090d797516700f701a8cabbbe38",
     "packages": [],
     "packages-dev": [
         {
@@ -2329,7 +2329,7 @@
         },
         {
             "name": "wordpress-meta/handbook",
-            "version": "1",
+            "version": "2",
             "source": {
                 "type": "svn",
                 "url": "https://meta.svn.wordpress.org/sites/",
