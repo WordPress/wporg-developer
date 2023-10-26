@@ -103,6 +103,11 @@ body[class] {
 			min-width: 100%;
 		}
 	}
+
+	time,
+	.external-link {
+		white-space: nowrap;
+	}
 }
 
 .wporg-hero-graphic {
