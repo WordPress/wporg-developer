@@ -1,6 +1,6 @@
 .wp-block-wporg-chapter-list {
 	--local--line-height: var(--wp--custom--body--small--typography--line-height);
-	--local--button-size: calc(var(--local--line-height) * 1em);
+	--local--icon-size: calc(var(--local--line-height) * 1em);
 	line-height: var(--local--line-height);
 
 	ul {
@@ -10,13 +10,25 @@
 	}
 
 	ul ul {
-		padding-left: var(--wp--preset--spacing--30);
-		list-style-type: disc;
-	}
+		padding-left: 0;
 
-	// Remove list item style from items with children, as they have the caret.
-	.page_item_has_children {
-		display: block;
+		li {
+			padding-left: var(--local--icon-size);
+			position: relative;
+
+			&::before {
+				content: "";
+				display: inline-block;
+				position: absolute;
+				left: 0;
+				width: var(--local--icon-size);
+				height: var(--local--icon-size);
+				mask-image: url(../../images/dot.svg);
+				mask-repeat: no-repeat;
+				mask-position: center;
+				background-color: var(--wp--preset--color--charcoal-4);
+			}
+		}
 	}
 
 	li {
@@ -38,6 +50,15 @@
 
 	&.has-js-control ul ul {
 		display: none;
+		padding-left: 18px;
+
+		.page_item_has_children {
+			padding-left: 0;
+
+			&::before {
+				display: none;
+			}
+		}
 
 		&.is-open {
 			display: revert;
@@ -49,21 +70,10 @@
 		align-items: flex-start;
 	}
 
-	&:not(.has-js-control) li::before,
-	&.has-js-control li:not(.page_item_has_children)::before,
 	.wporg-chapter-list--button-group > button {
 		// Add space between button & link.
 		margin-inline-end: 0.25em;
 		font-size: inherit;
-		height: var(--local--button-size);
-		width: var(--local--button-size);
-	}
-
-	&:not(.has-js-control) li::before {
-		height: 0.8em;
-	}
-
-	.wporg-chapter-list--button-group > button {
 		background-color: transparent;
 		border: none;
 		padding: 0;
@@ -72,12 +82,12 @@
 		&::before {
 			content: "";
 			display: inline-block;
-			height: var(--local--button-size);
-			width: var(--local--button-size);
-			mask-image: url(../../images/chevron.svg);
+			height: var(--local--icon-size);
+			width: var(--local--icon-size);
+			mask-image: url(../../images/chevron-small.svg);
 			mask-repeat: no-repeat;
 			mask-position: center;
-			transform: rotate(180deg);
+			transform: rotate(-90deg);
 			background-color: var(--wp--preset--color--charcoal-4);
 		}
 
