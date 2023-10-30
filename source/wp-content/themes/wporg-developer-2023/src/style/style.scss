@@ -51,30 +51,34 @@ body[class] {
 	}
 }
 
-@media (min-width: 1320px) {
-	.has-three-columns {
+
+.has-three-columns {
+	--local--sidebar--width: 232px;
+	--local--column-gap: 40px;
+
+	@media (min-width: 768px) {
 		--wp--style--global--wide-size: 1760px;
 
-		--local--block-start-sidebar--width: 300px;
-
 		display: grid;
-		grid-template-columns: var(--local--block-start-sidebar--width) 1fr;
+		grid-template-columns: var(--local--sidebar--width) 1fr;
 		grid-template-rows: auto auto;
-		column-gap: 40px;
+		column-gap: var(--local--column-gap);
 
 		.wp-block-wporg-sidebar-container {
-			--local--block-end-sidebar--width: 300px;
-		}
-
-		article {
-			--wp--style--global--content-size: 1080px;
-
-			width: clamp(30rem, -52.5rem + 100vw, 67.5rem);
+			--local--block-end-sidebar--width: var(--local--sidebar--width);
 		}
 
 		.has-three-columns__pagination {
 			grid-row-start: 2;
 			grid-column-start: 2;
+		}
+	}
+
+	@media (min-width: 1200px) {
+		article {
+			// Width must be caluclated to fit absolute positioned ToC.
+			// Scales between 496px at 1200px wide and 1216px at 1920px wide, based on sidebar and gap dimensions above.
+			width: clamp(31rem, -44rem + 100vw, 76rem);
 		}
 	}
 }
