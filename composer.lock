@@ -2587,15 +2587,15 @@
         },
         {
             "name": "wpackagist-plugin/posts-to-posts",
-            "version": "1.7",
+            "version": "1.7.2",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/posts-to-posts/",
-                "reference": "tags/1.7"
+                "reference": "tags/1.7.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/posts-to-posts.1.7.zip"
+                "url": "https://downloads.wordpress.org/plugin/posts-to-posts.1.7.2.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -2681,12 +2681,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/WordPress/wporg-parent-2021.git",
-                "reference": "270e7f7f2b53e4b9ce068d7537e3687531e39ad0"
+                "reference": "9d1d42db67c810a3baab2fec10bc1d5f8e49f59d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WordPress/wporg-parent-2021/zipball/270e7f7f2b53e4b9ce068d7537e3687531e39ad0",
-                "reference": "270e7f7f2b53e4b9ce068d7537e3687531e39ad0",
+                "url": "https://api.github.com/repos/WordPress/wporg-parent-2021/zipball/9d1d42db67c810a3baab2fec10bc1d5f8e49f59d",
+                "reference": "9d1d42db67c810a3baab2fec10bc1d5f8e49f59d",
                 "shasum": ""
             },
             "type": "wordpress-theme",
@@ -2694,7 +2694,7 @@
                 "source": "https://github.com/WordPress/wporg-parent-2021/tree/build",
                 "issues": "https://github.com/WordPress/wporg-parent-2021/issues"
             },
-            "time": "2023-09-04T15:30:39+00:00"
+            "time": "2023-10-23T21:11:27+00:00"
         },
         {
             "name": "wporg/wporg-repo-tools",
