@@ -1,6 +1,6 @@
 .wp-block-wporg-chapter-list {
 	--local--line-height: var(--wp--custom--body--small--typography--line-height);
-	--local--button-size: calc(var(--local--line-height) * 1em);
+	--local--icon-size: calc(var(--local--line-height) * 1em);
 	line-height: var(--local--line-height);
 
 	ul {
@@ -10,13 +10,30 @@
 	}
 
 	ul ul {
-		margin-left: calc(var(--local--button-size) / 2);
-		padding-left: calc(var(--wp--preset--spacing--20) / 4);
-		border-left: 1px solid var(--wp--preset--color--light-grey-1);
+		padding-left: 0;
+
+		li {
+			padding-left: var(--local--icon-size);
+			position: relative;
+
+			&::before {
+				content: "";
+				display: inline-block;
+				position: absolute;
+				left: 0;
+				width: var(--local--icon-size);
+				height: var(--local--icon-size);
+				mask-image: url(../../images/dot.svg);
+				mask-repeat: no-repeat;
+				mask-position: center;
+				background-color: var(--wp--preset--color--charcoal-4);
+			}
+		}
 	}
 
 	li {
 		margin-block: calc(var(--wp--preset--spacing--20) / 4);
+		color: var(--wp--preset--color--charcoal-4);
 	}
 
 	> ul {
@@ -27,59 +44,49 @@
 		}
 	}
 
+	a {
+		text-decoration: none;
+	}
+
 	&.has-js-control ul ul {
 		display: none;
+		padding-left: 14px;
+
+		.page_item_has_children {
+			padding-left: 0;
+
+			&::before {
+				display: none;
+			}
+		}
 
 		&.is-open {
 			display: revert;
 		}
 	}
 
-	// Style the dash & chevron, most of the styles can be shared.
-	&.has-js-control li:not(.page_item_has_children),
 	.wporg-chapter-list--button-group {
 		display: flex;
 		align-items: flex-start;
 	}
 
-	&:not(.has-js-control) li::before,
-	&.has-js-control li:not(.page_item_has_children)::before,
 	.wporg-chapter-list--button-group > button {
-		// Add space between button & link.
-		margin-inline-end: 0.25em;
 		font-size: inherit;
-		height: var(--local--button-size);
-		width: var(--local--button-size);
-	}
-
-	&:not(.has-js-control) li::before {
-		height: 0.8em;
-	}
-
-	&:not(.has-js-control) li::before,
-	&.has-js-control li:not(.page_item_has_children)::before,
-	.wporg-chapter-list--button-group > button::before {
-		content: "";
-		display: inline-block;
-		mask-image: url(../../images/line.svg);
-		mask-repeat: no-repeat;
-		mask-position: center;
-		background-color: var(--wp--preset--color--light-grey-1);
-	}
-
-	.wporg-chapter-list--button-group > button {
 		background-color: transparent;
 		border: none;
 		padding: 0;
 		cursor: pointer;
 
 		&::before {
-			height: var(--local--button-size);
-			width: var(--local--button-size);
-			mask-image: url(../../images/chevron.svg);
-			mask-size: 0.8em 0.4em;
-			transform: rotate(180deg);
-			background-color: var(--wp--preset--color--blueberry-1);
+			content: "";
+			display: inline-block;
+			height: var(--local--icon-size);
+			width: var(--local--icon-size);
+			mask-image: url(../../images/chevron-small.svg);
+			mask-repeat: no-repeat;
+			mask-position: center;
+			transform: rotate(-90deg);
+			background-color: var(--wp--preset--color--charcoal-4);
 		}
 
 		&[aria-expanded="true"]::before {
@@ -92,10 +99,18 @@
 	}
 
 	// Descendent is `span` if there are children, or `a` if not.
-	.current_page_ancestor > span,
-	.current_page_ancestor > a,
-	.current_page_item > span,
+	.current_page_item,
+	.current_page_item > span a,
 	.current_page_item > a {
-		font-weight: 600;
+		color: var(--wp--preset--color--charcoal-1);
+	}
+
+	.current_page_item > span a,
+	.current_page_item > a {
+		font-weight: 700;
+	}
+
+	.current_page_item > span button::before {
+		background-color: var(--wp--preset--color--charcoal-1);
 	}
 }
