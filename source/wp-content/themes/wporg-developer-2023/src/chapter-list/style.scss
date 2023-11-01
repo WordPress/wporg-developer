@@ -50,7 +50,7 @@
 
 	&.has-js-control ul ul {
 		display: none;
-		padding-left: 18px;
+		padding-left: 14px;
 
 		.page_item_has_children {
 			padding-left: 0;
@@ -71,8 +71,6 @@
 	}
 
 	.wporg-chapter-list--button-group > button {
-		// Add space between button & link.
-		margin-inline-end: 0.25em;
 		font-size: inherit;
 		background-color: transparent;
 		border: none;
