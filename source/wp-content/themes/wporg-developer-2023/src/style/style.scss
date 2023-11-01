@@ -60,7 +60,8 @@ body[class] {
 		--wp--style--global--wide-size: 1760px;
 
 		display: grid;
-		grid-template-columns: var(--local--sidebar--width) 1fr;
+		/* stylelint-disable-next-line max-line-length */
+		grid-template-columns: var(--local--sidebar--width) calc(100% - var(--local--sidebar--width) - var(--local--column-gap));
 		grid-template-rows: auto auto;
 		column-gap: var(--local--column-gap);
 
@@ -76,7 +77,7 @@ body[class] {
 
 	@media (min-width: 1200px) {
 		article {
-			// Width must be caluclated to fit absolute positioned ToC.
+			// Width must be calculated to fit absolute positioned ToC.
 			// Scales between 496px at 1200px wide and 1216px at 1920px wide, based on sidebar and gap dimensions above.
 			width: clamp(31rem, -44rem + 100vw, 76rem);
 		}
