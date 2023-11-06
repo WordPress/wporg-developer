@@ -7,15 +7,13 @@
 
 ?>
 
-<!-- wp:group {"align":"full","style":{"spacing":{"blockGap":"0"}},"backgroundColor":"charcoal-2","className":"is-sticky","layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull is-sticky has-charcoal-2-background-color has-background"><!-- wp:wporg/local-navigation-bar {"backgroundColor":"charcoal-2","style":{"spacing":{"padding":{"right":"var:preset|spacing|60","left":"var:preset|spacing|60","top":"18px","bottom":"18px"}},"position":{"type":"sticky"},"border":{"top":{"color":"var:preset|color|white-opacity-15","width":"1px"}}}} -->
+<!-- wp:wporg/local-navigation-bar {"backgroundColor":"charcoal-2","style":{"position":{"type":"sticky"},"elements":{"link":{"color":{"text":"var:preset|color|white"},":hover":{"color":{"text":"var:preset|color|white"}}}}},"textColor":"white","fontSize":"small"} -->
 <!-- wp:html -->
 <div style="height:calc(var(--wp--custom--body--small--typography--line-height) * var(--wp--preset--font-size--small));" aria-hidden="true"></div>
 <!-- /wp:html -->
 
 <!-- wp:navigation {"icon":"menu","overlayBackgroundColor":"charcoal-2","overlayTextColor":"white","layout":{"type":"flex","orientation":"horizontal"},"fontSize":"small","menuSlug":"developer"} /-->
-<!-- /wp:wporg/local-navigation-bar --></div>
-<!-- /wp:group -->
+<!-- /wp:wporg/local-navigation-bar -->
 
 <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"right":"var:preset|spacing|edge-space","left":"var:preset|spacing|edge-space"}}},"backgroundColor":"charcoal-2","className":"has-white-color has-charcoal-2-background-color has-text-color has-background has-link-color","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull has-white-color has-charcoal-2-background-color has-text-color has-background has-link-color" style="padding-right:var(--wp--preset--spacing--edge-space);padding-left:var(--wp--preset--spacing--edge-space)"><!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"top":"var:preset|spacing|40","bottom":"var:preset|spacing|40"},"blockGap":"var:preset|spacing|30"}},"layout":{"type":"flex","flexWrap":"wrap","verticalAlignment":"bottom"}} -->
