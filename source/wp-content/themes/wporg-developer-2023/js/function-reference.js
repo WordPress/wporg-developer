@@ -34,7 +34,7 @@ jQuery( function ( $ ) {
 
 		$element.wrap( '<div class="wporg-developer-code-block"></div>' );
 
-		const $copyButtonContainer = $( '<div class="wp-block-button is-style-outline"></div>' );
+		const $copyButtonContainer = $( '<div class="wp-block-button is-style-outline is-small"></div>' );
 		const $copyButton = $( '<a href="#" class="wp-block-button__link wp-element-button"></a>' );
 		$copyButtonContainer.append( $copyButton );
 
@@ -74,7 +74,7 @@ jQuery( function ( $ ) {
 		if ( originalHeight > MIN_HEIGHT ) {
 			$element.data( 'height', originalHeight );
 
-			const $expandButtonContainer = $( '<div class="wp-block-button is-style-outline"></div>' );
+			const $expandButtonContainer = $( '<div class="wp-block-button is-style-outline is-small"></div>' );
 			const $expandButton = $(
 				'<a href="#" class="wp-block-button__link wp-element-button" aria-controls="wporg-source-code"></a>'
 			);
