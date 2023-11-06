@@ -26,7 +26,13 @@ function init() {
  */
 function render( $attributes ) {
 	$table  = '<!-- wp:table {"className":"' . $attributes['className'] . '"} --><figure class="wp-block-table ' . $attributes['className'] . '">';
-	$table .= '<table>';
+
+	if ( isset( $attributes['id'] ) ) {
+		$table .= '<table id="' . esc_html( $attributes['id'] ) . '">';
+	} else {
+		$table .= '<table>';
+	}
+
 	$table .= '<thead>';
 	$table .= '<tr>';
 	foreach ( $attributes['headings'] as $heading ) {
