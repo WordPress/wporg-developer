@@ -207,12 +207,14 @@ class DevHub_CLI {
 		if ( is_wp_error( $markdown_source ) ) {
 			return $markdown_source;
 		}
-		
-		if ( ! class_exists( 'WPCom_GHF_Markdown_Parser' ) && defined( 'JETPACK__PLUGIN_DIR' ) ) {
-			include JETPACK__PLUGIN_DIR . '/_inc/lib/markdown.php';
-		}
+
+		// Load Jetpack Markdown if it's not already loaded, for transforming markdown to HTML.
 		if ( ! class_exists( 'WPCom_GHF_Markdown_Parser' ) ) {
-			return new WP_Error( 'missing-jetpack-markdown', 'Jetpack Markdown is missing on system.' );
+			if ( defined( 'JETPACK__PLUGIN_DIR' ) ) {
+				require_once JETPACK__PLUGIN_DIR . '/_inc/lib/markdown.php';
+			} else {
+				return new WP_Error( 'missing-jetpack-markdown', 'Jetpack Markdown is missing on system.' );
+			}
 		}
 
 		// Transform GitHub repo HTML pages into their raw equivalents
@@ -244,7 +246,6 @@ class DevHub_CLI {
 		}
 
 		// Transform to HTML and save the post
-		require_once JETPACK__PLUGIN_DIR . '_inc/lib/markdown.php';
 		$parser = new \WPCom_GHF_Markdown_Parser;
 		$html = $parser->transform( $markdown );
 		$post_data = array(
