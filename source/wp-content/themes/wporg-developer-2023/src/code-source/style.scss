@@ -13,12 +13,7 @@ $border_radius: 2px;
 		gap: var(--wp--preset--spacing--10);
 
 		.wp-block-button a {
-			padding: var(--wp--preset--spacing--10);
-			background-color: var(--wp--preset--color--white) !important;
-			border-color: var(--wp--preset--color--blueberry-1) !important;
-			color: var(--wp--preset--color--blueberry-1) !important;
-			font-weight: 400;
-			font-size: 13px;
+			background-color: var(--wp--preset--color--white);
 		}
 
 		> span:last-child {
