@@ -2654,6 +2654,7 @@ aside[id^="nav_menu"] .widget-title {
 .single-handbook .site-main ul {
   font-size: 1.05em;
   color: #555;
+  overflow-wrap: break-word;
 }
 
 .single-handbook .site-title {
