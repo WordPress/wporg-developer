@@ -2138,6 +2138,7 @@ img {
 .devhub-wrap .single-wp-parser-hook .comment-content li,
 .devhub-wrap .single-wp-parser-class .comment-content li {
   border: none;
+  margin-top: 0;
   padding: 0;
 }
 
