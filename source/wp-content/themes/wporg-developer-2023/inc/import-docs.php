@@ -102,6 +102,7 @@ class DevHub_Docs_Importer extends Importer {
 		add_action( "devhub_{$this->post_type}_import_all_markdown", array( $this, 'import_all_markdown' ) );
 
 		$editor = new Editor( $this );
+		$GLOBALS[ "devhub_handbook_editors" ][ $this->post_type ] = $editor;
 		$editor->init();
 	}
 

@@ -198,9 +198,14 @@ add_filter( 'wporg_table_of_contents_post_content', __NAMESPACE__ . '\filter_cod
 add_filter( 'the_content', __NAMESPACE__ . '\filter_command_content', 4 );
 add_filter( 'wporg_table_of_contents_post_content', __NAMESPACE__ . '\filter_command_content' );
 
-
 // Remove table of contents.
 add_filter( 'wporg_handbook_toc_should_add_toc', '__return_false' );
+
+// Remove GitHub edit links from handbooks
+global $devhub_handbook_editors;
+foreach ($devhub_handbook_editors as $editor) {
+	remove_filter( 'the_title', array( $editor, 'filter_the_title_edit_link' ), 10);
+}
 
 /**
  * Set up the theme.
