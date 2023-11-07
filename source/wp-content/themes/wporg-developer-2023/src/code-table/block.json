@@ -16,6 +16,9 @@
 			"type": "array",
 			"default": []
 		},
+		"id": {
+			"type": "string"
+		},
 		"rows": {
 			"type": "array",
 			"default": []

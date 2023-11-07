@@ -1,4 +1,9 @@
 .wp-block-wporg-code-table {
+	&#uses,
+	&#used-by {
+		scroll-margin-top: var(--wp-local-header-offset, 0);
+	}
+
 	.wp-block-table {
 		thead {
 			border-bottom: none;

@@ -49,6 +49,10 @@ function render( $attributes ) {
 	}
 
 	$wrapper_attributes = get_block_wrapper_attributes();
+	if ( isset( $attributes['id'] ) ) {
+		$wrapper_attributes .= ' id="' . esc_attr( $attributes['id'] ) . '"';
+	}
+
 	return sprintf(
 		'<section %1$s>%2$s</section>',
 		$wrapper_attributes,
