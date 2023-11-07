@@ -782,6 +782,7 @@ img {
 
 .devhub-wrap .breadcrumb-trail {
   margin-bottom: 2rem;
+  overflow-wrap: break-word;
 }
 
 .devhub-wrap .breadcrumb-trail a {
