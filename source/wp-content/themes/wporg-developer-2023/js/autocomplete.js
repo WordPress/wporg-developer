@@ -11,7 +11,7 @@
 		return;
 	}
 
-	var form = $( '.awesomeplete-form-wrap > form' );
+	var form = $( 'main form.wp-block-search' );
 	if ( ! form.length ) {
 		return;
 	}
