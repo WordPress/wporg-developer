@@ -7,51 +7,39 @@
 		margin-top: 0;
 		margin-bottom: 0;
 		list-style-type: none;
-	}
-
-	ul ul {
 		padding-left: 0;
-
-		li {
-			padding-left: var(--local--icon-size);
-			position: relative;
-
-			&::before {
-				content: "";
-				display: inline-block;
-				position: absolute;
-				left: 0;
-				width: var(--local--icon-size);
-				height: var(--local--icon-size);
-				mask-image: url(../../images/dot.svg);
-				mask-repeat: no-repeat;
-				mask-position: center;
-				background-color: var(--wp--preset--color--charcoal-4);
-			}
-		}
 	}
 
 	li {
 		margin-block: calc(var(--wp--preset--spacing--20) / 4);
 		color: var(--wp--preset--color--charcoal-4);
+		padding-left: var(--local--icon-size);
+		position: relative;
+
+		&::before {
+			content: "";
+			display: inline-block;
+			position: absolute;
+			left: 0;
+			width: var(--local--icon-size);
+			height: var(--local--icon-size);
+			mask-image: url(../../images/dot.svg);
+			mask-repeat: no-repeat;
+			mask-position: center;
+			background-color: var(--wp--preset--color--charcoal-4);
+		}
 	}
 
-	> ul {
-		padding-left: 0;
-
-		> li {
-			margin-block: calc(var(--wp--preset--spacing--20) / 2);
-		}
+	.children {
+		// Shift the children to the left by half the icon size allowing for the chevron width of 8px.
+		margin-left: calc((var(--local--icon-size) - 8px) * -0.5);
 	}
 
 	a {
 		text-decoration: none;
 	}
 
-	&.has-js-control ul ul {
-		display: none;
-		padding-left: 14px;
-
+	&.has-js-control {
 		.page_item_has_children {
 			padding-left: 0;
 
@@ -60,8 +48,13 @@
 			}
 		}
 
-		&.is-open {
-			display: revert;
+		.children {
+			display: none;
+			padding-left: var(--local--icon-size);
+
+			&.is-open {
+				display: revert;
+			}
 		}
 	}
 
@@ -76,6 +69,7 @@
 		border: none;
 		padding: 0;
 		cursor: pointer;
+		height: var(--local--icon-size);
 
 		&::before {
 			content: "";
