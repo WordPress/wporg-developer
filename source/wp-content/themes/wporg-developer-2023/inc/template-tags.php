@@ -1765,7 +1765,8 @@ namespace DevHub {
 		$post_types = get_parsed_post_types();
 		$taxonomies = array( 'wp-parser-since', 'wp-parser-package', 'wp-parser-source-file' );
 
-		return ! ( is_search() || is_404() ) && ( is_singular( $post_types ) || is_post_type_archive( $post_types ) || is_tax( $taxonomies ) || is_page( 'reference' ) );
+		return ! ( is_search() || is_404() ) &&
+			( is_singular( $post_types ) || is_post_type_archive( $post_types ) || is_tax( $taxonomies ) || is_page( 'reference' ) || is_front_page() );
 	}
 
 	/**
