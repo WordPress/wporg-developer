@@ -31,8 +31,8 @@
 	}
 
 	.children {
-		// Shift the children to the left by half the icon size allowing for the chevron width of 8px.
-		margin-left: calc((var(--local--icon-size) - 8px) * -0.5);
+		// Shift the children to the left by half the icon size, allowing for the dot width of 4px.
+		margin-left: calc((var(--local--icon-size) - 4px) * -0.5);
 	}
 
 	a {
