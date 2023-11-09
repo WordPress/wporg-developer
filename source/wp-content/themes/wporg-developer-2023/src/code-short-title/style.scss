@@ -37,6 +37,10 @@
 .wp-block-wporg-code-short-title a {
 	display: block;
 	text-decoration: none;
+
+	&:hover {
+		text-decoration: underline;
+	}
 }
 
 .wp-block-wporg-code-short-title.function a,
