@@ -21,7 +21,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"fontSize":"small"} -->
-<p class="has-small-font-size"><?php esc_html_e( 'Creating the building blocks of WordPress?', 'wporg' ); ?></p>
+<p class="has-small-font-size"><?php esc_html_e( 'Create the building blocks of WordPress.', 'wporg' ); ?></p>
 <!-- /wp:paragraph --></a>
 <!-- /wp:wporg/link-wrapper -->
 
@@ -31,7 +31,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p><?php esc_html_e( 'Want to learn how to start theming WordPress?', 'wporg' ); ?></p>
+<p><?php esc_html_e( 'Learn how to build your own themes.', 'wporg' ); ?></p>
 <!-- /wp:paragraph --></a>
 <!-- /wp:wporg/link-wrapper -->
 
@@ -41,7 +41,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p><?php esc_html_e( 'Ready to dive into the world of plugin authoring?', 'wporg' ); ?></p>
+<p><?php esc_html_e( 'Dive into the world of plugin authoring.', 'wporg' ); ?></p>
 <!-- /wp:paragraph --></a>
 <!-- /wp:wporg/link-wrapper -->
 
@@ -51,7 +51,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p><?php esc_html_e( 'Interested in interacting with various APIs?', 'wporg' ); ?></p>
+<p><?php esc_html_e( 'Explore APIs in the software and the ecosystem.', 'wporg' ); ?></p>
 <!-- /wp:paragraph --></a>
 <!-- /wp:wporg/link-wrapper -->
 
@@ -61,7 +61,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p><?php esc_html_e( 'Ready to dive into WordPress management?', 'wporg' ); ?></p>
+<p><?php esc_html_e( 'Dig into the technical side of site management.', 'wporg' ); ?></p>
 <!-- /wp:paragraph --></a>
 <!-- /wp:wporg/link-wrapper -->
 
@@ -71,7 +71,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p><?php esc_html_e( 'WordPress that runs entirely in your browser.', 'wporg' ); ?></p>
+<p><?php esc_html_e( 'Run WordPress entirely in your browser.', 'wporg' ); ?></p>
 <!-- /wp:paragraph --></a>
 <!-- /wp:wporg/link-wrapper --></div>
 <!-- /wp:group --></div>
@@ -91,7 +91,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p><?php esc_html_e( 'Looking for documentation for the codebase?', 'wporg' ); ?></p>
+<p><?php esc_html_e( 'Read through the codebase documentation.', 'wporg' ); ?></p>
 <!-- /wp:paragraph --></a>
 <!-- /wp:wporg/link-wrapper -->
 
@@ -101,7 +101,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p><?php esc_html_e( 'Getting started on making WordPress applications?', 'wporg' ); ?></p>
+<p><?php esc_html_e( 'Start creating your own apps with WordPress.', 'wporg' ); ?></p>
 <!-- /wp:paragraph --></a>
 <!-- /wp:wporg/link-wrapper -->
 
@@ -111,7 +111,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p><?php esc_html_e( 'Accelerate your workflow managing WP.', 'wporg' ); ?></p>
+<p><?php esc_html_e( 'Accelerate your workflow managing WordPress.', 'wporg' ); ?></p>
 <!-- /wp:paragraph --></a>
 <!-- /wp:wporg/link-wrapper -->
 
@@ -121,7 +121,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p><?php esc_html_e( 'Want to ensure your code meets the standards?', 'wporg' ); ?></p>
+<p><?php esc_html_e( 'Ensure your code is up to date.', 'wporg' ); ?></p>
 <!-- /wp:paragraph --></a>
 <!-- /wp:wporg/link-wrapper --></div>
 <!-- /wp:group --></div>
