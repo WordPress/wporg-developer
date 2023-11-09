@@ -140,6 +140,10 @@ body[class] {
 .wporg-front-page-footer {
 	.wp-block-heading a {
 		text-decoration: none;
+
+		&:hover {
+			text-decoration-line: underline;
+		}
 	}
 }
 
