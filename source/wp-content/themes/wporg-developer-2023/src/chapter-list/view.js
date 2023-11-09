@@ -4,9 +4,24 @@
 import { __, sprintf } from '@wordpress/i18n';
 
 const init = () => {
-	const container = document.querySelector( '.wp-block-wporg-chapter-list > ul' );
+	const container = document.querySelector( '.wp-block-wporg-chapter-list' );
+	const toggleButton = container?.querySelector( '.wporg-chapter-list__toggle' );
+	const list = container?.querySelector( '.wporg-chapter-list__list' );
+
+	if ( toggleButton && list ) {
+		toggleButton.addEventListener( 'click', function () {
+			if ( toggleButton.getAttribute( 'aria-expanded' ) === 'true' ) {
+				toggleButton.setAttribute( 'aria-expanded', false );
+				list.removeAttribute( 'style' );
+			} else {
+				toggleButton.setAttribute( 'aria-expanded', true );
+				list.setAttribute( 'style', 'display:block;' );
+			}
+		} );
+	}
+
 	if ( container ) {
-		container.parentNode.classList.toggle( 'has-js-control' );
+		container.classList.toggle( 'has-js-control' );
 
 		const parents = container.querySelectorAll( '.page_item_has_children' );
 		parents.forEach( ( item ) => {
@@ -43,7 +58,7 @@ const init = () => {
 			};
 
 			const buttonGroup = document.createElement( 'span' );
-			buttonGroup.className = 'wporg-chapter-list--button-group';
+			buttonGroup.className = 'wporg-chapter-list__button-group';
 			buttonGroup.append( button, link );
 
 			item.insertBefore( buttonGroup, submenu );

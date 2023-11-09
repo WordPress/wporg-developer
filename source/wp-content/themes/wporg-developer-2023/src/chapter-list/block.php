@@ -57,17 +57,22 @@ function render( $attributes, $content, $block ) {
 
 	$content = wp_list_pages( $args );
 
-	$title = do_blocks(
+	$header = '<div class="wporg-chapter-list__header">';
+	$header .= do_blocks(
 		'<!-- wp:heading {"style":{"typography":{"fontStyle":"normal","fontWeight":"400"}},"fontSize":"small","fontFamily":"inter"} -->
-		<h2 class="wp-block-heading has-inter-font-family has-small-font-size" style="font-style:normal;font-weight:400">' . __( 'Chapters', 'wporg' ) . '</h2>
+		<h2 class="wp-block-heading has-inter-font-family has-small-font-size" style="font-style:normal;font-weight:400">' . esc_html__( 'Chapters', 'wporg' ) . '</h2>
 		<!-- /wp:heading -->'
 	);
+	$header .= '<button type="button" class="wporg-chapter-list__toggle" aria-expanded="false">';
+	$header .= '<span class="screen-reader-text">' . esc_html__( 'Chapter list', 'wporg' ) . '</span>';
+	$header .= '</button>';
+	$header .= '</div>';
 
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(
-		'<nav %1$s>%2$s<ul>%3$s</ul></nav>',
+		'<nav %1$s>%2$s<ul class="wporg-chapter-list__list">%3$s</ul></nav>',
 		$wrapper_attributes,
-		$title,
+		$header,
 		$content
 	);
 }
