@@ -8,6 +8,16 @@ body[class] {
 	--wp-local-header-offset: 61px;
 }
 
+.wporg-breadcrumbs {
+	// If the breadcrumbs are present, the space after them needs to be reduced.
+	// The next content is typically the search field.
+	margin-bottom: calc(var(--wp--preset--spacing--10) * -1);
+
+	@media (max-width: 767px) {
+		display: none !important;
+	}
+}
+
 .entry-content {
 	// Parsed handbook content doesn't use image blocks, so large images are
 	// missing the max-width and break out of the page container.
