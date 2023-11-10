@@ -7,8 +7,8 @@
 
 ?>
 
-<!-- wp:group {"tagName":"main","style":{"spacing":{"padding":{"left":"var:preset|spacing|edge-space","right":"var:preset|spacing|edge-space","bottom":"var:preset|spacing|60"}}},"className":"alignfull","layout":{"type":"constrained","wideSize":"1280px","contentSize":"680px"}} -->
-<main class="wp-block-group alignfull" style="padding-right:var(--wp--preset--spacing--edge-space);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--edge-space)">
+<!-- wp:group {"tagName":"main","style":{"spacing":{"padding":{"left":"var:preset|spacing|edge-space","right":"var:preset|spacing|edge-space","bottom":"var:preset|spacing|60","top":"var:preset|spacing|10"}}},"className":"alignfull","layout":{"type":"constrained","wideSize":"1280px","contentSize":"680px"}} -->
+<main class="wp-block-group alignfull" style="padding-right:var(--wp--preset--spacing--edge-space);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--edge-space);padding-top:var(--wp--preset--spacing--10)">
 
 	<!-- wp:pattern {"slug":"wporg-developer-2023/search-field"} /-->
 
