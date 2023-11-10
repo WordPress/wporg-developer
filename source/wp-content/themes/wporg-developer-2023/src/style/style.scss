@@ -306,19 +306,12 @@ body[class] {
 		gap: var(--wp--preset--spacing--20);
 	}
 
-	.wp-block-wporg-version-select {
-		display: flex;
-		align-items: center;
-		gap: var(--wp--preset--spacing--10);
-	}
-
 	.wp-block-wporg-search-filters {
 		margin-top: 0;
 	}
 }
 
-.wp-block-wporg-resource-select,
-.wp-block-wporg-version-select {
+.wp-block-wporg-resource-select {
 	select {
 		display: block;
 		appearance: none;
