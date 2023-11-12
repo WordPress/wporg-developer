@@ -8,6 +8,11 @@
 div.awesomplete {
 	display: inline-block;
 	position: relative;
+	flex: 1;
+}
+
+div.awesomplete > .wp-block-search__input {
+	width: 100%;
 }
 
 div.awesomplete > ul {
