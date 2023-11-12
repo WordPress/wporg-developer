@@ -96,6 +96,7 @@
 			action: "autocomplete",
 			data: form.serialize(),
 			nonce: autocomplete.nonce,
+			post_type: autocomplete.post_type
 		};
 
 		$.post( autocomplete.ajaxurl, data )

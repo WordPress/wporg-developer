@@ -68,8 +68,9 @@ class DevHub_Search_Form_Autocomplete {
 			'autocomplete',
 			'autocomplete',
 			array(
-				'ajaxurl' => admin_url( 'admin-ajax.php' ),
-				'nonce'   => wp_create_nonce( 'autocomplete_nonce' ),
+				'ajaxurl'   => admin_url( 'admin-ajax.php' ),
+				'nonce'     => wp_create_nonce( 'autocomplete_nonce' ),
+				'post_type' => get_post_type(),
 			)
 		);
 
@@ -91,7 +92,6 @@ class DevHub_Search_Form_Autocomplete {
 		$parser_post_types = DevHub\get_parsed_post_types();
 		$defaults          = array(
 			's'         => '',
-			'post_type' => $parser_post_types,
 			'posts'     => array(),
 		);
 
@@ -108,13 +108,9 @@ class DevHub_Search_Form_Autocomplete {
 			wp_send_json_error( $defaults );
 		}
 
-		foreach ( $form_data['post_type'] as $key => $post_type ) {
-			if ( ! in_array( $post_type, $parser_post_types ) ) {
-				unset( $form_data['post_type'][ $key ] );
-			}
-		}
-
-		$post_types = ! empty( $form_data['post_type'] ) ? $form_data['post_type'] : $parser_post_types;
+		$post_types = isset( $_POST['post_type'] ) && 'command' === $_POST['post_type'] ?
+			array( 'command' ) :
+			$parser_post_types;
 
 		$args = array(
 			'posts_per_page'       => -1,
