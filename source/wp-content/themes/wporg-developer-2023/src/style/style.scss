@@ -67,8 +67,6 @@ body[class] {
 	--local--column-gap: 40px;
 
 	@media (min-width: 768px) {
-		--wp--style--global--wide-size: 1760px;
-
 		display: grid;
 		/* stylelint-disable-next-line max-line-length */
 		grid-template-columns: var(--local--sidebar--width) calc(100% - var(--local--sidebar--width) - var(--local--column-gap));
@@ -81,10 +79,17 @@ body[class] {
 	}
 
 	@media (min-width: 1200px) {
+		width: calc(100% - var(--local--sidebar--width) - var(--local--column-gap));
+
 		article {
-			// Width must be calculated to fit absolute positioned ToC.
-			// Scales between 496px at 1200px wide and 1216px at 1920px wide, based on sidebar and gap dimensions above.
-			width: clamp(31rem, -44rem + 100vw, 76rem);
+			width: 100%;
+			max-width: 960px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		.wp-block-wporg-sidebar-container {
+			right: var(--wp--preset--spacing--edge-space);
 		}
 	}
 }
