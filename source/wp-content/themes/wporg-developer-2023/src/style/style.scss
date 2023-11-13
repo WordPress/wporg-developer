@@ -78,11 +78,6 @@ body[class] {
 		.wp-block-wporg-sidebar-container {
 			--local--block-end-sidebar--width: var(--local--sidebar--width);
 		}
-
-		.has-three-columns__pagination {
-			grid-row-start: 2;
-			grid-column-start: 2;
-		}
 	}
 
 	@media (min-width: 1200px) {
