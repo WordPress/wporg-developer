@@ -66,7 +66,7 @@
 <!-- /wp:wporg/link-wrapper -->
 
 <!-- wp:wporg/link-wrapper -->
-<a class="wp-block-wporg-link-wrapper" href="<?php echo esc_url( site_url( '/playground/' ) ); ?>"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"700"}},"fontSize":"small","fontFamily":"inter"} -->
+<a class="wp-block-wporg-link-wrapper" href="https://developer.wordpress.org/playground/"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"700"}},"fontSize":"small","fontFamily":"inter"} -->
 <h3 class="wp-block-heading has-inter-font-family has-small-font-size" style="font-style:normal;font-weight:700"><?php esc_html_e( 'WordPress Playground', 'wporg' ); ?></h3>
 <!-- /wp:heading -->
 
