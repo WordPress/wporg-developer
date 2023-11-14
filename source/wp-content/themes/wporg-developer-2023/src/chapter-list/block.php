@@ -59,8 +59,8 @@ function render( $attributes, $content, $block ) {
 
 	$header = '<div class="wporg-chapter-list__header">';
 	$header .= do_blocks(
-		'<!-- wp:heading {"style":{"typography":{"fontStyle":"normal","fontWeight":"400"}},"fontSize":"small","fontFamily":"inter"} -->
-		<h2 class="wp-block-heading has-inter-font-family has-small-font-size" style="font-style:normal;font-weight:400">' . esc_html__( 'Chapters', 'wporg' ) . '</h2>
+		'<!-- wp:heading {"style":{"typography":{"fontStyle":"normal","fontWeight":"400"}},"fontSize":"normal","fontFamily":"inter"} -->
+		<h2 class="wp-block-heading has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:400">' . esc_html__( 'Chapters', 'wporg' ) . '</h2>
 		<!-- /wp:heading -->'
 	);
 	$header .= '<button type="button" class="wporg-chapter-list__toggle" aria-expanded="false">';
