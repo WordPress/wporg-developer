@@ -9,12 +9,6 @@
 
 <!-- wp:wporg/sidebar-container -->
 
-	<!-- wp:group {"tagName":"article"} -->
-	<div class="wp-block-group">
-
-		<!-- wp:wporg/table-of-contents /-->
-
-	</div>
-	<!-- /wp:group -->
+	<!-- wp:wporg/table-of-contents /-->
 
 <!-- /wp:wporg/sidebar-container -->
