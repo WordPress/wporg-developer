@@ -11,7 +11,7 @@
 		return;
 	}
 
-	var form = $( '.awesomeplete-form-wrap > form' );
+	var form = $( 'main form.wp-block-search' );
 	if ( ! form.length ) {
 		return;
 	}
@@ -96,6 +96,7 @@
 			action: "autocomplete",
 			data: form.serialize(),
 			nonce: autocomplete.nonce,
+			post_type: autocomplete.post_type
 		};
 
 		$.post( autocomplete.ajaxurl, data )
