@@ -7,7 +7,7 @@
 
 ?>
 
-<!-- wp:wporg/sidebar-container -->
+<!-- wp:wporg/sidebar-container {"style":{"spacing":{"margin":{"bottom":"40px"}}}} -->
 
 	<!-- wp:wporg/table-of-contents /-->
 
