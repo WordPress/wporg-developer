@@ -2690,6 +2690,7 @@ aside[id^="nav_menu"] .widget-title {
 .site-main .table-of-contents {
   display: flex;
   flex-direction: column;
+  max-width: 25vw;
   min-width: 210px;
   border: 1px solid #eee;
   margin: 30px 0;
@@ -3146,6 +3147,7 @@ body.responsive-show #o2-expand-editor {
     float: none;
     margin-left: 0;
     width: 100%;
+    max-width: 100%;
   }
 }
 
