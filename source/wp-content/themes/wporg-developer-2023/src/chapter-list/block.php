@@ -70,7 +70,7 @@ function render( $attributes, $content, $block ) {
 
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(
-		'<nav %1$s>%2$s<ul class="wporg-chapter-list__list">%3$s</ul></nav>',
+		'<aside %1$s><nav>%2$s<ul class="wporg-chapter-list__list">%3$s</ul></nav></aside>',
 		$wrapper_attributes,
 		$header,
 		$content

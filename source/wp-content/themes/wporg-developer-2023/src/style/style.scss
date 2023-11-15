@@ -67,12 +67,25 @@ body[class] {
 	--local--sidebar--width: 232px;
 	--local--column-gap: 40px;
 
+	> * {
+		width: 100%;
+	}
+
+	main {
+		order: 1;
+	}
+
 	@media (min-width: 768px) {
-		display: grid;
-		/* stylelint-disable-next-line max-line-length */
-		grid-template-columns: var(--local--sidebar--width) calc(100% - var(--local--sidebar--width) - var(--local--column-gap));
-		grid-template-rows: auto auto;
+		flex-direction: row !important;
 		column-gap: var(--local--column-gap);
+
+		aside {
+			width: var(--local--sidebar--width);
+		}
+
+		main {
+			width: calc(100% - var(--local--sidebar--width) - var(--local--column-gap));
+		}
 
 		.wp-block-wporg-sidebar-container {
 			--local--block-end-sidebar--width: var(--local--sidebar--width);
