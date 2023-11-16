@@ -14,7 +14,6 @@
 1. Set up repo dependencies.
 
     ```bash
-    yarn
     yarn setup:tools
     ```
 
