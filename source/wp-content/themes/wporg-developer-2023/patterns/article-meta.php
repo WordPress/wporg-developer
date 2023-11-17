@@ -29,5 +29,7 @@
 		<!-- wp:post-date {"displayType":"modified","fontSize":"normal"} /-->
 	</div>
 	<!-- /wp:group -->
+
+	<!-- wp:wporg/article-meta-github /-->
 </div>
 <!-- /wp:group -->
