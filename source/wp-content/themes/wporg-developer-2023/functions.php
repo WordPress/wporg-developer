@@ -485,7 +485,7 @@ function theme_scripts_styles() {
 		/* translators: Subsets can be any of cyrillic, cyrillic-ext, greek, greek-ext, vietnamese, latin, latin-ext. */
 		$subsets = _x( 'Latin', 'Heading font subsets, comma separated', 'wporg' );
 		// All headings.
-		global_fonts_preload( 'IBM Plex Sans, Inter', $subsets );
+		global_fonts_preload( 'IBM Plex Sans, IBM Plex Sans SemiBold, Inter', $subsets );
 	}
 }
 
