@@ -45,8 +45,8 @@
 		"custom": {
 			"heading": {
 				"typography": {
-					"fontFamily": "var(--wp--preset--font-family--monospace)",
-					"fontWeight": 500,
+					"fontFamily": "var(--wp--preset--font-family--ibm-plex-sans)",
+					"fontWeight": 600,
 					"lineHeight": 1.2
 				},
 				"level-1": {
