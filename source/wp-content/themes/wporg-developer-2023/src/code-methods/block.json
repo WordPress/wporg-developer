@@ -1,0 +1,28 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "wporg/code-reference-methods",
+	"version": "0.1.0",
+	"title": "Code Reference: Methods",
+	"category": "widgets",
+	"icon": "smiley",
+	"description": "Show class methods.",
+	"usesContext": [ "postId" ],
+	"supports": {
+		"html": false,
+		"spacing": {
+			"margin": [
+				"top",
+				"bottom"
+			],
+			"padding": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true
+		}
+	},
+	"textdomain": "wporg",
+	"editorScript": "file:./index.js",
+	"style": "file:./style-index.css"
+}

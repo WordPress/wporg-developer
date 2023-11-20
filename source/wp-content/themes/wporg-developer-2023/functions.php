@@ -155,6 +155,7 @@ require_once __DIR__ . '/src/cli-command-table/block.php';
 require_once __DIR__ . '/src/code-changelog/block.php';
 require_once __DIR__ . '/src/code-deprecated/block.php';
 require_once __DIR__ . '/src/code-description/block.php';
+require_once __DIR__ . '/src/code-methods/block.php';
 require_once __DIR__ . '/src/code-explanation/block.php';
 require_once __DIR__ . '/src/code-hooks/block.php';
 require_once __DIR__ . '/src/code-parameters/block.php';
@@ -577,7 +578,9 @@ function add_handbook_templates( $templates ) {
 /**
  * Filters content for the code reference blocks so Table of Contents can be added.
  *
- * Note: This filter is added and removed in src/code-description/block.php to prevent infinite loops.
+ * Note: This filter is added and removed in the files below to prevent infinite loops.
+ * - src/code-description/block.php
+ * - src/code-methods/block.php
  * Any update to the function name should be reflected there.
  *
  * @param string $content
@@ -592,6 +595,7 @@ function filter_code_content( $content ) {
 		'
 		<!-- wp:wporg/code-reference-summary /-->
 		<!-- wp:wporg/code-reference-description /-->
+		<!-- wp:wporg/code-reference-methods /-->
 		<!-- wp:wporg/code-reference-parameters /-->
 		<!-- wp:wporg/code-reference-return-value /-->
 		<!-- wp:wporg/code-reference-explanation /-->
