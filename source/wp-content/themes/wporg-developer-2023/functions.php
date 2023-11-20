@@ -611,19 +611,7 @@ function filter_code_content( $content ) {
  * @return string
  */
 function filter_standards_content( $content ) {
-	$post_type = get_post_type();
-	$handbooks  = array(
-		'wpcs-handbook',
-		'blocks-handbook',
-		'apis-handbook',
-		'theme-handbook',
-		'plugin-handbook',
-		'rest-api-handbook',
-		'cli-handbook',
-		'adv-admin-handbook',
-	);
-
-	if ( ! in_array( $post_type, $handbooks ) ) {
+	if ( ! wporg_is_handbook() ) {
 		return $content;
 	}
 
