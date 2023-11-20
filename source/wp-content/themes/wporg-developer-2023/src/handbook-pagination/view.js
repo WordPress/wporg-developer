@@ -9,15 +9,21 @@ import { __ } from '@wordpress/i18n';
  *
  */
 const init = () => {
-	const labels = document.querySelectorAll( '.wp-block-wporg-handbook-pagination .post-navigation-link__label' );
+	const links = document.querySelectorAll(
+		'.wp-block-wporg-handbook-pagination .wp-block-post-navigation-link'
+	);
 
-	labels.forEach( ( label ) => {
-		const visualLabel = label.innerHTML;
-		const screenReaderText = label.classList.contains( 'post-navigation-link-previous' )
-			? __( 'Previous chapter: ', 'wporg' )
-			: __( 'Next chapter: ', 'wporg' );
+	links.forEach( ( link ) => {
+		const label = link.querySelector( '.post-navigation-link__label' );
 
-		label.innerHTML = `<span aria-hidden="true">${ visualLabel }</span><span class="screen-reader-text">${ screenReaderText }</span>`;
+		if ( label ) {
+			const visualLabel = label.innerHTML;
+			const screenReaderText = link.classList.contains( 'post-navigation-link-previous' )
+				? __( 'Previous chapter: ', 'wporg' )
+				: __( 'Next chapter: ', 'wporg' );
+
+			label.innerHTML = `<span aria-hidden="true">${ visualLabel }</span><span class="screen-reader-text">${ screenReaderText }</span>`;
+		}
 	} );
 };
 
