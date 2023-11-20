@@ -1,30 +1,48 @@
 const init = () => {
-	const tabs = document.querySelectorAll( '.code-tabs' );
+	const tabLists = document.querySelectorAll( '.code-tabs' );
 
-	if ( ! tabs.length ) {
+	if ( ! tabLists.length ) {
 		return;
 	}
 
-	tabs.forEach( ( tab ) => {
-		const buttons = tab.querySelectorAll( 'button' );
+	tabLists.forEach( ( tabList ) => {
+		const buttons = tabList.querySelectorAll( '.code-tab' );
+		const panels = tabList.querySelectorAll( '.code-tab-block' );
 
 		buttons.forEach( ( button ) => {
-			button.classList.add( 'wp-block-button__link' );
+			const isActive = button.classList.contains( 'is-active' );
+			const buttonId = window.crypto?.randomUUID?.();
+			const panelId = window.crypto?.randomUUID?.();
+			const tabName = button.getAttribute( 'data-language' );
+			const relatedPanel = Array.from( panels ).find( ( panel ) => panel.classList.contains( tabName ) );
 
-			if ( button.classList.contains( 'is-active' ) ) {
-				button.setAttribute( 'aria-pressed', 'true' );
+			button.classList.add( 'wp-block-button__link' );
+			button.setAttribute( 'role', 'tab' );
+			button.setAttribute( 'aria-selected', isActive );
+			button.setAttribute( 'tabindex', isActive ? '0' : '-1' );
+			button.setAttribute( 'id', buttonId );
+
+			if ( buttonId && panelId && relatedPanel ) {
+				button.setAttribute( 'aria-controls', panelId );
+				relatedPanel.setAttribute( 'aria-labelledby', buttonId );
+				relatedPanel.setAttribute( 'id', panelId );
 			}
 		} );
 
-		// Block button styles require a parent with `class*="wp-block"`.
-		tab.classList.add( 'wp-block', 'is-small', 'is-style-toggle' );
+		panels.forEach( ( panel ) => {
+			panel.setAttribute( 'role', 'tabpanel' );
+		} );
 
-		tab.addEventListener( 'click', ( event ) => {
+		tabList.setAttribute( 'role', 'tablist' );
+		// Block button styles require a parent with `class*="wp-block"`.
+		tabList.classList.add( 'wp-block', 'is-small', 'is-style-toggle' );
+
+		tabList.addEventListener( 'click', ( event ) => {
 			event.preventDefault();
 
-			if ( event.target.classList.contains( 'wp-block-button__link' ) ) {
+			if ( Array.from( buttons ).includes( event.target ) ) {
 				const targetButton = event.target;
-				const tabName = targetButton.getAttribute( 'data-language' );
+				const id = targetButton.getAttribute( 'aria-controls' );
 
 				if ( targetButton.classList.contains( 'is-active' ) ) {
 					return;
@@ -33,16 +51,18 @@ const init = () => {
 				// Update button states.
 				buttons.forEach( ( button ) => {
 					button.classList.remove( 'is-active' );
-					button.setAttribute( 'aria-pressed', 'false' );
+					button.setAttribute( 'aria-selected', 'false' );
+					button.setAttribute( 'tabindex', '-1' );
 				} );
 				targetButton.classList.add( 'is-active' );
-				targetButton.setAttribute( 'aria-pressed', 'true' );
+				targetButton.setAttribute( 'aria-selected', 'true' );
+				targetButton.setAttribute( 'tabindex', '0' );
 
 				// Update tab states.
-				tab.querySelectorAll( '.code-tab-block' ).forEach( ( block ) => {
-					block.classList.remove( 'is-active' );
+				panels.forEach( ( panel ) => {
+					panel.classList.remove( 'is-active' );
 				} );
-				tab.querySelector( `.code-tab-block[class*="${ tabName }"]` ).classList.add( 'is-active' );
+				document.getElementById( id )?.classList.add( 'is-active' );
 			}
 		} );
 	} );
