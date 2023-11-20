@@ -595,10 +595,10 @@ function filter_code_content( $content ) {
 		'
 		<!-- wp:wporg/code-reference-summary /-->
 		<!-- wp:wporg/code-reference-description /-->
-		<!-- wp:wporg/code-reference-methods /-->
 		<!-- wp:wporg/code-reference-parameters /-->
 		<!-- wp:wporg/code-reference-return-value /-->
 		<!-- wp:wporg/code-reference-explanation /-->
+		<!-- wp:wporg/code-reference-methods /-->
 		<!-- wp:wporg/code-reference-source /-->
 		<!-- wp:wporg/code-reference-hooks /-->
 		<!-- wp:wporg/code-reference-related /-->
