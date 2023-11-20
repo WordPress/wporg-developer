@@ -15,7 +15,7 @@
 		<p style="font-style:normal;font-weight:700"><?php esc_html_e( 'First published', 'wporg' ); ?></p>
 		<!-- /wp:paragraph -->
 
-		<!-- wp:post-date {"fontSize":"normal"} /-->
+		<!-- wp:post-date /-->
 	</div>
 	<!-- /wp:group -->
 
@@ -25,7 +25,7 @@
 		<p style="font-style:normal;font-weight:700"><?php esc_html_e( 'Last updated', 'wporg' ); ?></p>
 		<!-- /wp:paragraph -->
 
-		<!-- wp:post-date {"displayType":"modified","fontSize":"normal"} /-->
+		<!-- wp:post-date {"displayType":"modified"} /-->
 	</div>
 	<!-- /wp:group -->
 
