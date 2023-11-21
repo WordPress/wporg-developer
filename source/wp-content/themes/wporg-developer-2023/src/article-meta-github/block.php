@@ -50,36 +50,54 @@ function render( $attributes, $content, $block ) {
 
 	$title = get_the_title( $post_id );
 
-	$content = do_blocks( '<!-- wp:group {"style":{"spacing":{"blockGap":"0"}},"layout":{"type":"constrained"}} --><div class="wp-block-group">' );
-	$content .= sprintf(
-		do_blocks( '<!-- wp:paragraph {"style":{"typography":{"fontStyle":"normal","fontWeight":"700"}}} --><p style="font-style:normal;font-weight:700">%s</p><!-- /wp:paragraph -->' ),
-		esc_html__( 'Edit article', 'wporg' )
-	);
-	$content .= sprintf(
-		do_blocks( '<!-- wp:paragraph {"className":"external-link"} --><p class="external-link"><a href="[article_edit_link]">%s</a></p><!-- /wp:paragraph -->' ),
+	$content = sprintf(
+		do_blocks(
+			'<!-- wp:group {"style":{"spacing":{"blockGap":"0"}},"layout":{"type":"constrained"}} -->
+			<div class="wp-block-group">
+
+				<!-- wp:paragraph {"style":{"typography":{"fontStyle":"normal","fontWeight":"700"}}} -->
+				<p style="font-style:normal;font-weight:700">%1$s</p>
+				<!-- /wp:paragraph -->
+
+				<!-- wp:paragraph {"className":"external-link"} -->
+				<p class="external-link"><a href="[article_edit_link]">%2$s</a></p>
+				<!-- /wp:paragraph -->
+
+			</div>
+			<!-- /wp:group -->'
+		),
+		esc_html__( 'Edit article', 'wporg' ),
 		sprintf(
 			/* translators: %s: article title */
 			__( 'Improve it on GitHub<span class="screen-reader-text">: %s</span>', 'wporg' ),
 			esc_html( $title )
 		)
 	);
-	$content .= do_blocks( '</div><!-- /wp:group -->' );
 
 	if ( 'blocks-handbook' !== $post_type ) {
-		$content .= do_blocks( '<!-- wp:group {"style":{"spacing":{"blockGap":"0"}},"layout":{"type":"constrained"}} --><div class="wp-block-group">' );
 		$content .= sprintf(
-			do_blocks( '<!-- wp:paragraph {"style":{"typography":{"fontStyle":"normal","fontWeight":"700"}}} --><p style="font-style:normal;font-weight:700">%s</p><!-- /wp:paragraph -->' ),
-			esc_html__( 'Changelog', 'wporg' )
-		);
-		$content .= sprintf(
-			do_blocks( '<!-- wp:paragraph {"className":"external-link"} --><p class="external-link"><a href="[article_changelog_link]">%s</a></p><!-- /wp:paragraph -->' ),
+			do_blocks(
+				'<!-- wp:group {"style":{"spacing":{"blockGap":"0"}},"layout":{"type":"constrained"}} -->
+				<div class="wp-block-group">
+
+					<!-- wp:paragraph {"style":{"typography":{"fontStyle":"normal","fontWeight":"700"}}} -->
+					<p style="font-style:normal;font-weight:700">%1$s</p>
+					<!-- /wp:paragraph -->
+
+					<!-- wp:paragraph {"className":"external-link"} -->
+					<p class="external-link"><a href="[article_changelog_link]">%2$s</a></p>
+					<!-- /wp:paragraph -->
+					
+				</div>
+				<!-- /wp:group -->'
+			),
+			esc_html__( 'Changelog', 'wporg' ),
 			sprintf(
 				/* translators: %s: article title */
 				__( 'See list of changes<span class="screen-reader-text">: %s</span>', 'wporg' ),
 				esc_html( $title )
 			)
 		);
-		$content .= do_blocks( '</div><!-- /wp:group -->' );
 	}
 
 	return $content;
