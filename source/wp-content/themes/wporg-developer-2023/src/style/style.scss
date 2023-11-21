@@ -21,9 +21,12 @@ body[class] {
 .entry-content {
 	// Parsed handbook content doesn't use image blocks, so large images are
 	// missing the max-width and break out of the page container.
-	p > img,
-	p > a > img {
-		max-width: 100%;
+	p,
+	ol,
+	ul {
+		img {
+			max-width: 100%;
+		}
 	}
 
 	pre:not(.wp-block-code) {
