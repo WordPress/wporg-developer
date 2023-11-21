@@ -177,7 +177,6 @@ require_once __DIR__ . '/src/command-content/block.php';
 require_once __DIR__ . '/src/command-github/block.php';
 require_once __DIR__ . '/src/command-title/block.php';
 require_once __DIR__ . '/src/command-subcommand/block.php';
-require_once __DIR__ . '/src/handbook-pagination/block.php';
 require_once __DIR__ . '/src/reference-new-updated/block.php';
 require_once __DIR__ . '/src/resource-select/index.php';
 require_once __DIR__ . '/src/search-filters/index.php';
@@ -693,10 +692,11 @@ function get_adjacent_handbook_post_link( $output, $format, $link, $post, $adjac
 			'post_type'   => get_post_type( $post_id ),
 		)
 	);
+	$is_previous = 'previous' === $adjacent;
 
 	foreach ( $pages as $i => $page ) {
 		if ( $page->ID === $post_id ) {
-			$adj_index = 'previous' === $adjacent ? $i - 1 : $i + 1;
+			$adj_index = $is_previous ? $i - 1 : $i + 1;
 			break;
 		}
 	}
@@ -710,11 +710,33 @@ function get_adjacent_handbook_post_link( $output, $format, $link, $post, $adjac
 	$title = apply_filters( 'the_title', $post->post_title, $post->ID );
 	$url   = get_permalink( $post );
 
+	$screen_reader_content = sprintf(
+		$is_previous
+			? /* translators: %s: post title */
+			__( 'Previous chapter: %s', 'wporg' )
+			: /* translators: %s: post title */
+			__( 'Next chapter: %s', 'wporg' ),
+		$title
+	);
+
+	$content = str_replace(
+		'%title',
+		sprintf(
+			'<span aria-hidden="true" class="post-navigation-link__label">%1$s</span>
+			<span aria-hidden="true" class="post-navigation-link__title">%2$s</span>
+			<span class="screen-reader-text">%3$s</span>',
+			$is_previous ? __( 'Previous', 'wporg' ) : __( 'Next', 'wporg' ),
+			$title,
+			$screen_reader_content,
+		),
+		$link
+	);
+
 	$inlink = sprintf(
 		'<a href="%1$s" rel="%2$s">%3$s</a>',
 		$url,
-		'previous' === $adjacent ? 'prev' : 'next',
-		str_replace( '%title', $title, $link )
+		$is_previous ? 'prev' : 'next',
+		$content
 	);
 
 	$output = str_replace( '%link', $inlink, $format );
