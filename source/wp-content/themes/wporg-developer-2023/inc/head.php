@@ -33,53 +33,48 @@ class DevHub_Head {
 	 * @return array The document title parts.
 	 */
 	public static function document_title( $parts ) {
-		global $page, $paged;
+		global $wp_query;
 
-		if ( is_feed() ) {
+		$parts['site']  = __( 'Developer.WordPress.org', 'wporg' );
+		$post_type      = get_query_var( 'post_type' );
+		$sep            = '–';
+
+		if ( is_front_page() || is_feed() ) {
+			$parts['title'] = 'WordPress Developer Resources';
 			return $parts;
 		}
 
-		$title = $parts['title'];
-		$sep = '|';
-
-		$post_type = get_query_var( 'post_type' );
-
-		// Omit 'Home' from the home page.
-		if ( 'Home' === $title ) {
-			$title = '';
-		}
-		// Add post type to title if it's a parsed item.
-		elseif ( is_singular() && \DevHub\is_parsed_post_type( $post_type ) ) {
-			if ( $post_type_object = get_post_type_object( $post_type ) ) {
-				$title .= " $sep " . get_post_type_object( $post_type )->labels->singular_name;
+		if ( is_singular() && ( \DevHub\is_parsed_post_type( $post_type ) ) ) {
+			// Add post type to title if it's a parsed item.
+			if ( get_post_type_object( $post_type ) ) {
+				$parts['title'] .= " $sep " . get_post_type_object( $post_type )->labels->singular_name;
 			}
-		}
-		// Add handbook name to title if relevent
-		elseif ( ( is_singular() || is_post_type_archive() ) && false !== strpos( $post_type, 'handbook' ) ) {
-			if ( $post_type_object = get_post_type_object( $post_type ) ) {
+		} elseif ( ( is_singular() || is_post_type_archive() ) && false !== strpos( $post_type, 'handbook' ) ) {
+			// Add handbook name to title if relevant.
+			if ( get_post_type_object( $post_type ) ) {
 				$handbook_label = get_post_type_object( $post_type )->labels->name;
-				$handbook_name  = \WPorg_Handbook::get_name( $post_type ) . " Handbook";
 
-				// Replace title with handbook name if this is landing page for the handbook
-				if ( $title == $handbook_label ) {
-					$title = $handbook_name;
-				// Otherwise, append the handbook name
+				// Replace title with handbook_label(CPT name) if they have too many repeated words. Otherwise, append the handbook_label.
+				if ( strpos( $parts['title'], $handbook_label ) !== false ) {
+					$parts['title'] = $handbook_label;
 				} else {
-					$title .= " $sep " . $handbook_name;
+					$parts['title'] .= " $sep " . $handbook_label;
 				}
 			}
-		}
-		// Add "WP-CLI Command" to individual CLI command pages.
-		elseif ( is_singular( 'command' ) ) {
-			$title .= " $sep WP-CLI Command";
-		}
-
-		// Add a page number if necessary:
-		if ( isset( $parts['page'] ) && $parts['page'] >= 2 ) {
-			$title .= " $sep " . sprintf( __( 'Page %s', 'wporg' ), $parts['page'] );
+		} elseif ( is_singular( 'command' ) ) {
+			// Add "WP-CLI Command" to individual CLI command pages.
+			$parts['title'] .= " $sep WP-CLI Command";
 		}
 
-		$parts['title'] = $title;
+		// If results are paged and the max number of pages is known.
+		if ( is_paged() && $wp_query->max_num_pages ) {
+			$parts['page'] = sprintf(
+				// translators: 1: current page number, 2: total number of pages
+				__( 'Page %1$s of %2$s', 'wporg' ),
+				get_query_var( 'paged' ),
+				$wp_query->max_num_pages
+			);
+		}
 
 		return $parts;
 	}
