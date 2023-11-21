@@ -477,7 +477,7 @@ function theme_scripts_styles() {
 	wp_enqueue_style(
 		'wporg-developer-2023-style',
 		get_stylesheet_directory_uri() . '/build/style/style-index.css',
-		array( 'wporg-parent-2021-style', 'wporg-global-fonts' ),
+		array( 'wporg-parent-2021-style', 'wporg-global-fonts', 'dashicons' ),
 		filemtime( __DIR__ . '/build/style/style-index.css' )
 	);
 
