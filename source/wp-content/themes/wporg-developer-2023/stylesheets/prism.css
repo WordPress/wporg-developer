@@ -255,5 +255,5 @@ pre.line-numbers > code {
 
 .wporg-developer-code-block::after {
   content: "";
-  margin-bottom: -1.63em;
+  margin-bottom: -1.1em;
 }
