@@ -151,6 +151,11 @@
 						"top": "150px"
 					}
 				}
+			},
+			"local-navigation-bar": {
+				"spacing": {
+					"height": "60px"
+				}
 			}
 		},
 		"typography": {
