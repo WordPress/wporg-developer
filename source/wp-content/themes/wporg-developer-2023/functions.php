@@ -713,9 +713,9 @@ function get_adjacent_handbook_post_link( $output, $format, $link, $post, $adjac
 	$screen_reader_content = sprintf(
 		$is_previous
 			? /* translators: %s: post title */
-			__( 'Previous chapter: %s', 'wporg' )
+			__( 'Previous: %s', 'wporg' )
 			: /* translators: %s: post title */
-			__( 'Next chapter: %s', 'wporg' ),
+			__( 'Next: %s', 'wporg' ),
 		$title
 	);
 
