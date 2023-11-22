@@ -734,7 +734,7 @@ namespace DevHub {
 				$signature .= ', ';
 				$signature .= implode( ', ', $hook_args );
 			}
-			$signature .= ' )';
+			$signature .= '&nbsp;)';
 			return $signature;
 		}
 
