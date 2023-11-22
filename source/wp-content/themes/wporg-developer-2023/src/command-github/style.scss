@@ -29,6 +29,7 @@
 			font-size: var(--wp--preset--font-size--extra-small);
 			box-shadow: 0 1px 0 #ccc;
 			line-height: 1;
+			margin-top: var(--wp--preset--spacing--10);
 
 			&:hover {
 				border-color: #ccc #bbb #aaa #bbb;
@@ -43,12 +44,17 @@
 				color: var(--wp--preset--color--syntax-red);
 			}
 
-			&:first-child {
-				margin-right: -6px;
-			}
+			@media screen and (min-width: 380px) {
+				&.wporg-command-github-open {
+					margin-right: -6px;
+					border-top-right-radius: 0;
+					border-bottom-right-radius: 0;
+				}
 
-			&:last-child {
-				margin-left: 5px;
+				&.wporg-command-github-closed {
+					border-top-left-radius: 0;
+					border-bottom-left-radius: 0;
+				}
 			}
 		}
 	}

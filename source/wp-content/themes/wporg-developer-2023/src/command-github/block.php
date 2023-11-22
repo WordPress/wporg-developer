@@ -44,7 +44,7 @@ function render( $attributes, $content, $block ) {
 		$content .= sprintf(
 			'
 			<a href="%s">
-				<img src="https://make.wordpress.org/cli/wp-content/plugins/wporg-cli/assets/images/github-mark.svg" class="icon-github" />
+				<img src="https://make.wordpress.org/cli/wp-content/plugins/wporg-cli/assets/images/github-mark.svg" class="icon-github" alt="GitHub" />
 			</a>
 			',
 			esc_url( $repo_url )
@@ -54,10 +54,10 @@ function render( $attributes, $content, $block ) {
 	$content .= sprintf(
 		'
 		<div class="btn-group">
-			<a href="%1$s" class="button">
+			<a href="%1$s" class="button wporg-command-github-open">
 				%2$s <span class="green">%3$s</span>
 			</a>
-			<a href="%4$s"class="button">
+			<a href="%4$s" class="button wporg-command-github-closed">
 				%5$s <span class="red">%6$s</span>
 			</a>
 		',
@@ -71,7 +71,7 @@ function render( $attributes, $content, $block ) {
 
 	if ( $repo_url ) {
 		$content .= sprintf(
-			'<a href="%1$s" class="button">%2$s</a>',
+			'<a href="%1$s" class="button wporg-command-github-new">%2$s</a>',
 			esc_url( rtrim( $repo_url, '/' ) . '/issues/new' ),
 			__( 'Create New Issue', 'wporg' ),
 		);
