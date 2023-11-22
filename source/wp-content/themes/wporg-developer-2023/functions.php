@@ -654,7 +654,7 @@ function filter_command_content( $content ) {
 
 	// Feed the static content from the CLI archive template to generate the ToC
 	// Note: ids must be added to the cli-commands-content pattern manually
-	if ( is_archive() && '/cli/commands/' === $_SERVER['REQUEST_URI'] ) {
+	if ( is_archive() && isset( $_SERVER['REQUEST_URI'] ) && '/cli/commands/' === $_SERVER['REQUEST_URI'] ) {
 		// Stop infinite loop
 		remove_filter( 'the_content', 'DevHub\filter_command_content', 4 );
 
