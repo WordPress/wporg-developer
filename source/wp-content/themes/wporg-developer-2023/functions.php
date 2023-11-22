@@ -671,7 +671,6 @@ function filter_command_content( $content ) {
 
 	return do_blocks(
 		'
-		<!-- wp:wporg/command-title /-->
 		<!-- wp:wporg/command-github /-->
 		<!-- wp:wporg/command-content /-->
 		<!-- wp:wporg/command-subcommand /-->
