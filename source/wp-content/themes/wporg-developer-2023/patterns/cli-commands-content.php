@@ -7,10 +7,6 @@
 
 ?>
 
-<!-- wp:heading {"level":1,"className":" is-toc-heading","fontSize":"heading-2"} -->
-<h1 class="wp-block-heading is-toc-heading has-heading-2-font-size" id="wp-cli-commands"><a href="#wp-cli-commands"><?php esc_html_e( 'WP-CLI Commands', 'wporg' ); ?></a></h1>
-<!-- /wp:heading -->
-
 <!-- wp:paragraph -->
 <p><?php esc_html_e( 'Below is a listing of all currently available WP-CLI commands with links to documentation on usage and subcommands.', 'wporg' ); ?></p>
 <!-- /wp:paragraph -->

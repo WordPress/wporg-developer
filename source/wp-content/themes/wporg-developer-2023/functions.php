@@ -658,8 +658,8 @@ function filter_command_content( $content ) {
 		// Stop infinite loop
 		remove_filter( 'the_content', 'DevHub\filter_command_content', 4 );
 
-		$content = do_blocks('<!-- wp:pattern {"slug":"wporg-developer-2023/cli-commands-content"} /-->');
-		
+		$content = do_blocks( '<!-- wp:pattern {"slug":"wporg-developer-2023/cli-commands-title"} /--><!-- wp:pattern {"slug":"wporg-developer-2023/cli-commands-content"} /-->' );
+
 		add_filter( 'the_content', 'DevHub\filter_command_content', 4 );
 
 		return $content;

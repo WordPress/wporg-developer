@@ -15,11 +15,13 @@
 	
 		<!-- wp:group {"tagName":"article"} -->
 		<article class="wp-block-group">
-		
-			<!-- wp:pattern {"slug":"wporg-developer-2023/article-sidebar"} /-->
 
 			<!-- wp:group {"align":"wide","layout":{"type":"constrained"}} -->
 			<div class="wp-block-group alignwide">
+
+				<!-- wp:pattern {"slug":"wporg-developer-2023/cli-commands-title"} /-->
+
+				<!-- wp:pattern {"slug":"wporg-developer-2023/article-sidebar"} /-->
 
 				<!-- wp:pattern {"slug":"wporg-developer-2023/cli-commands-content"} /-->
 
