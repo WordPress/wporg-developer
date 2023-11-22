@@ -489,6 +489,16 @@ function theme_scripts_styles() {
 		// All headings.
 		global_fonts_preload( 'IBM Plex Sans, IBM Plex Sans SemiBold, Inter', $subsets );
 	}
+
+	if ( wporg_is_handbook() ) {
+		wp_enqueue_script(
+			'wporg-developer-code-tabs',
+			get_stylesheet_directory_uri() . '/js/code-tabs.js',
+			array(),
+			filemtime( __DIR__ . '/js/code-tabs.js' ),
+			true
+		);
+	}
 }
 
 /**

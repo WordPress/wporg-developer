@@ -495,3 +495,15 @@ body[class] {
 		padding-left: var(--wp--preset--spacing--10);
 	}
 }
+
+.code-tabs {
+	> button {
+		margin-right: var(--wp--preset--spacing--10);
+	}
+
+	.code-tab-block {
+		&:not(.is-active) {
+			display: none;
+		}
+	}
+}
