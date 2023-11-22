@@ -38,13 +38,14 @@ function render( $attributes, $content, $block ) {
 	$closed_issues = 'https://github.com/login?return_to=%2Fissues%3Fq%3Dlabel%3A' . urlencode( 'command:' . str_replace( ' ', '-', $cmd_slug ) ) . '+sort%3Aupdated-desc+org%3Awp-cli+is%3Aclosed';
 	$issue_count = get_issue_count( $cmd_slug );
 
+	$content .= '<div class="github-tracker">';
+
 	if ( $repo_url ) {
 		$content .= sprintf(
 			'
-			<div class="github-tracker">
-				<a href="%s">
-					<img src="https://make.wordpress.org/cli/wp-content/plugins/wporg-cli/assets/images/github-mark.svg" class="icon-github" />
-				</a>
+			<a href="%s">
+				<img src="https://make.wordpress.org/cli/wp-content/plugins/wporg-cli/assets/images/github-mark.svg" class="icon-github" />
+			</a>
 			',
 			esc_url( $repo_url )
 		);
