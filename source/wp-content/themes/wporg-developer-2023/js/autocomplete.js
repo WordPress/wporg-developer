@@ -11,7 +11,7 @@
 		return;
 	}
 
-	var form = $( 'main form.wp-block-search' );
+	var form = $( '#wporg-search .wp-block-search' );
 	if ( ! form.length ) {
 		return;
 	}
