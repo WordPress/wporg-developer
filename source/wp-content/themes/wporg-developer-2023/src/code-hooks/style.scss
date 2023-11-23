@@ -1,5 +1,10 @@
 .wp-block-wporg-code-reference-hooks {
 	dd {
 		margin-inline-start: unset;
+
+		> p {
+			margin-block-start: calc(var(--wp--preset--spacing--10) / 2);
+			margin-block-end: var(--wp--preset--spacing--20);
+		}
 	}
 }
