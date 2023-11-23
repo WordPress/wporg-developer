@@ -650,22 +650,25 @@ function filter_standards_content( $content ) {
  * @return string
  */
 function filter_command_content( $content ) {
-	$post_type = get_post_type();
-
+	global $wp;
 	// Feed the static content from the CLI archive template to generate the ToC
-	// Note: ids must be added to the cli-commands-content pattern manually
-	if ( is_archive() && isset( $_SERVER['REQUEST_URI'] ) && '/cli/commands/' === $_SERVER['REQUEST_URI'] ) {
+	// Note: ids must be added to the cli-commands and cli-commands-content patterns manually
+	if ( is_archive() && isset( $wp->request ) && 'cli/commands' === $wp->request ) {
 		// Stop infinite loop
 		remove_filter( 'the_content', 'DevHub\filter_command_content', 4 );
 
-		$content = do_blocks( '<!-- wp:pattern {"slug":"wporg-developer-2023/cli-commands-title"} /--><!-- wp:pattern {"slug":"wporg-developer-2023/cli-commands-content"} /-->' );
+		$content = sprintf(
+			'<h1>%1$s</h1>%2$s',
+			__( 'WP-CLI Commands', 'wporg' ),
+			do_blocks( '<!-- wp:pattern {"slug":"wporg-developer-2023/cli-commands-content"} /-->' )
+		);
 
 		add_filter( 'the_content', 'DevHub\filter_command_content', 4 );
 
 		return $content;
 	}
 
-	if ( ! is_single() || ! ( 'command' == $post_type ) ) {
+	if ( ! is_single() || ! ( 'command' == get_post_type() ) ) {
 		return $content;
 	}
 
