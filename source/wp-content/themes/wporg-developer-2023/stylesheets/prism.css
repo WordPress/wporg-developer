@@ -198,7 +198,7 @@ pre.line-numbers > code {
 /* Copy button */
 .wp-code-block-button-container {
   position: sticky;
-  top: calc(var(--wp--custom--local-navigation-bar--spacing--height) + var(--wp-admin--admin-bar--height));
+  top: calc(var(--wp--custom--local-navigation-bar--spacing--height) + var(--wp-admin--admin-bar--height, 0px));
   z-index: 1;
   display: flex;
   justify-content: right;
