@@ -197,8 +197,6 @@ pre.line-numbers > code {
 
 /* Copy button */
 .wp-code-block-button-container {
-  position: sticky;
-  top: calc(var(--wp-global-header-height) + var(--wp-admin--admin-bar--height));
   z-index: 1;
   display: flex;
   justify-content: right;
@@ -255,5 +253,5 @@ pre.line-numbers > code {
 
 .wporg-developer-code-block::after {
   content: "";
-  margin-bottom: -1.63em;
+  margin-bottom: -1.1em;
 }
