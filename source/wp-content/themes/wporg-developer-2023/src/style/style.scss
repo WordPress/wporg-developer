@@ -507,3 +507,14 @@ body[class] {
 		}
 	}
 }
+
+#wp-link-wrap {
+	height: 250px !important;
+	margin-top: -125px !important;
+}
+
+#link-selector #search-panel,
+#link-selector #wplink-link-existing-content,
+#link-selector #link-options .link-target {
+	display: none;
+}
