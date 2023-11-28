@@ -549,6 +549,10 @@ body[class] {
 		&:hover {
 			background-color: var(--wp--custom--button--hover--color--background);
 		}
+
+		&:active {
+			background-color: var(--wp--custom--button--active--color--background);
+		}
 	}
 
 	#wp-link-cancel button {
@@ -560,6 +564,18 @@ body[class] {
 			color: var(--wp--custom--button--outline--hover--color--text);
 			border-color: var(--wp--custom--button--outline--hover--border--color);
 			background-color: var(--wp--custom--button--outline--hover--color--background);
+		}
+
+		&:focus {
+			color: var(--wp--custom--button--outline--focus--color--text);
+			border-color: var(--wp--custom--button--outline--focus--border--color);
+			background-color: var(--wp--custom--button--outline--focus--color--background);
+		}
+
+		&:active {
+			color: var(--wp--custom--button--outline--active--color--text);
+			border-color: var(--wp--custom--button--outline--active--border--color);
+			background-color: var(--wp--custom--button--outline--active--color--background);
 		}
 	}
 }
