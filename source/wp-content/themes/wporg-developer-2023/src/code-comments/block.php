@@ -17,6 +17,21 @@ function init() {
 			'render_callback' => __NAMESPACE__ . '\render',
 		)
 	);
+
+	// Ensure editor and dashicons styles are enqueued.
+	// When there are multiple comment forms this is not always the case.
+	// Handles must be different from default for these assets or they won't load.
+	// Don't include the version as we want the WordPress version.
+	wp_enqueue_style( // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
+		'editor-buttons-style',
+		includes_url() . 'css/editor.css',
+		array(),
+	);
+	wp_enqueue_style( // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
+		'dashicons-style',
+		includes_url() . 'css/dashicons.css',
+		array(),
+	);
 }
 
 /**

@@ -508,13 +508,58 @@ body[class] {
 	}
 }
 
+// User notes styles.
 #wp-link-wrap {
-	height: 250px !important;
-	margin-top: -125px !important;
-}
+	height: 320px !important;
+	margin-top: -160px !important;
 
-#link-selector #search-panel,
-#link-selector #wplink-link-existing-content,
-#link-selector #link-options .link-target {
-	display: none;
+	#link-selector {
+		position: unset !important;
+		padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--30) 0 !important;
+
+		#search-panel,
+		#wplink-link-existing-content,
+		#link-options .link-target {
+			display: none;
+		}
+	}
+
+	#link-modal-title {
+		padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--30);
+		border-bottom: 1px solid var(--wp--preset--color--light-grey-1);
+	}
+
+	#wp-link-close {
+		top: var(--wp--preset--spacing--20);
+		right: var(--wp--preset--spacing--20);
+	}
+
+	#wp-link input[type="text"] {
+		border: 1px solid var(--wp--preset--color--light-grey-1);
+	}
+
+	#wp-link .submitbox {
+		padding: var(--wp--preset--spacing--30);
+		border-top: unset;
+	}
+
+	#wp-link-submit {
+		background-color: var(--wp--custom--button--color--background);
+
+		&:hover {
+			background-color: var(--wp--custom--button--hover--color--background);
+		}
+	}
+
+	#wp-link-cancel button {
+		color: var(--wp--custom--button--outline--color--text);
+		border-color: var(--wp--custom--button--outline--border--color);
+		background-color: var(--wp--custom--button--outline--color--background);
+
+		&:hover {
+			color: var(--wp--custom--button--outline--hover--color--text);
+			border-color: var(--wp--custom--button--outline--hover--border--color);
+			background-color: var(--wp--custom--button--outline--hover--color--background);
+		}
+	}
 }
