@@ -1880,6 +1880,9 @@ namespace DevHub {
 		// Restore original global post.
 		$post = $orig;
 
+		// Automatic paragraph and line break formatting in content.
+		add_filter( 'the_content', 'wpautop' );
+
 		// Restore filter.
 		add_filter( 'the_content', array( 'DevHub_Formatting', 'fix_unintended_markdown' ), 1 );
 
