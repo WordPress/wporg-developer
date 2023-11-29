@@ -22,8 +22,13 @@ function render( $attributes ) {
 		return '';
 	}
 
-	$posts_per_page = get_query_var( 'posts_per_page' );
 	$results_count = $wp_query->found_posts;
+
+	if ( 0 === $results_count ) {
+		return;
+	}
+
+	$posts_per_page = get_query_var( 'posts_per_page' );
 	$current_page = get_query_var( 'paged' ) ?: 1;
 	$first_result = ($current_page - 1) * $posts_per_page + 1;
 	$last_result = min($current_page * $posts_per_page, $results_count);
@@ -40,14 +45,12 @@ function render( $attributes ) {
 		esc_html( $wp_query->query['s'] ),
 	);
 
-	$showing = $results_count > 0
-		? sprintf(
-			/* translators: %1$s number of first displayed result, %2$s number of last displayed result. */
-			'Showing results %1$s to %2$s.',
-			number_format_i18n( $first_result ),
-			number_format_i18n( $last_result ),
-		)
-		: '';
+	$showing = sprintf(
+		/* translators: %1$s number of first displayed result, %2$s number of last displayed result. */
+		'Showing results %1$s to %2$s.',
+		number_format_i18n( $first_result ),
+		number_format_i18n( $last_result ),
+	);
 
 	$wrapper_attributes = get_block_wrapper_attributes();
 
