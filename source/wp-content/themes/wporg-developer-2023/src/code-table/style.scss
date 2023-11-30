@@ -1,7 +1,8 @@
 .wp-block-wporg-code-table {
 	&#uses,
 	&#used-by {
-		scroll-margin-top: var(--wp-local-header-offset, 0);
+		/* stylelint-disable-next-line max-line-length */
+		scroll-margin-top: calc(var(--wp--custom--local-navigation-bar--spacing--height, 0) + var(--wp--preset--spacing--20));
 	}
 
 	.wp-block-table {

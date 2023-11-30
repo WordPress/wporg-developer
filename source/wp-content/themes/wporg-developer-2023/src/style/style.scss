@@ -3,11 +3,6 @@
  * templates or theme.json settings.
  */
 
-body[class] {
-	// Height of the local header (breadcrumbs & subnav).
-	--wp-local-header-offset: 61px;
-}
-
 .wporg-breadcrumbs {
 	// If the breadcrumbs are present, the space after them needs to be reduced.
 	// The next content is typically the search field.
