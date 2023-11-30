@@ -7,11 +7,6 @@
 		display: flex;
 		align-items: center;
 		gap: var(--wp--preset--spacing--10);
-
-		.type {
-			font-family: var(--wp--preset--font-family--monospace);
-			font-size: var(--wp--preset--font-size--small);
-		}
 	}
 
 	dt > code,
@@ -57,7 +52,6 @@
 	.param-hash .type {
 		padding: 4px 6px;
 		background-color: var(--wp--preset--color--light-grey-2);
-		font-size: var(--wp--preset--font-size--small);
 		border-radius: 2px;
 	}
 
@@ -77,5 +71,7 @@
 	
 	.type {
 		color: var(--wp--preset--color--syntax-red);
+		font-family: var(--wp--preset--font-family--monospace);
+		font-size: var(--wp--preset--font-size--small);
 	}
 }
