@@ -60,6 +60,12 @@
 		margin-left: 5px;
 	}
 
+	.type {
+		color: var(--wp--preset--color--syntax-red);
+		font-family: var(--wp--preset--font-family--monospace);
+		font-size: var(--wp--preset--font-size--small);
+	}
+
 	// Visible when parameters are imported from reference.
 	summary {
 		margin-top: var(--wp--preset--spacing--10);
@@ -67,11 +73,5 @@
 		cursor: pointer;
 		list-style: none;
 		text-decoration: underline;
-	}
-	
-	.type {
-		color: var(--wp--preset--color--syntax-red);
-		font-family: var(--wp--preset--font-family--monospace);
-		font-size: var(--wp--preset--font-size--small);
 	}
 }
