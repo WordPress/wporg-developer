@@ -30,7 +30,7 @@
 
 		td a {
 			text-decoration: underline;
-			word-break: break-all;
+			word-break: break-word;
 		}
 
 		tr td:first-child {
@@ -42,6 +42,7 @@
 
 		code {
 			color: var(--wp--preset--color--charcoal-4);
+			font-size: var(--wp--preset--font-size--small);
 			word-break: break-all;
 		}
 
