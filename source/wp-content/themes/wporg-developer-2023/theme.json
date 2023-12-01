@@ -144,13 +144,6 @@
 				"lineHeight": "var(--wp--custom--body--typography--line-height)",
 				"paddingVertical": "calc(( var(--wp--custom--select--height) - (var(--wp--custom--select--font-size) * var(--wp--custom--select--line-height))) / 2)",
 				"borderRadius": "var(--wp--custom--button--border--radius)"
-			},
-			"wporg-sidebar-container": {
-				"spacing": {
-					"margin": {
-						"top": "150px"
-					}
-				}
 			}
 		},
 		"typography": {
