@@ -1,10 +1,5 @@
 .wp-block-wporg-code-reference-return-value {
-	.return-type {
-		font-family: var(--wp--preset--font-family--monospace);
-		font-size: var(--wp--preset--font-size--small);
-		color: var(--wp--preset--color--syntax-red);
-	}
-
+	.return-type,
 	.type {
 		font-family: var(--wp--preset--font-family--monospace);
 		font-size: var(--wp--preset--font-size--small);
