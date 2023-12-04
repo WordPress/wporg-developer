@@ -53,3 +53,14 @@ add_shortcode(
 		return '#';
 	}
 );
+
+add_shortcode(
+	'last_updated',
+	function() {
+		global $post;
+		if ( get_the_modified_date( 'Ymdhi', $post->ID ) > get_the_date( 'Ymdhi', $post->ID ) ) {
+			return '<p style="font-style:normal;font-weight:700">' . esc_html__( 'Last updated', 'wporg' ) . '</p>';
+		}
+		return '';
+	}
+);
