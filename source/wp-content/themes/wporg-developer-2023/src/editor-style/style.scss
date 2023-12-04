@@ -1,0 +1,16 @@
+// User notes styles.
+#wp-link-wrap {
+	height: 220px !important;
+	margin-top: -110px !important;
+
+	#link-selector {
+		position: unset;
+		padding-left: 16px;
+
+		#search-panel,
+		#wplink-link-existing-content,
+		#link-options .link-target {
+			display: none;
+		}
+	}
+}
