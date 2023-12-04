@@ -1973,15 +1973,22 @@ img {
 .devhub-wrap .single-wp-parser-class .comment ul.children {
   margin: 0 0 1.5em 0;
   border-bottom: 1px solid #dfdfdf;
+  list-style: none;
 }
 
 .devhub-wrap .single-wp-parser-function .feedback,
 .devhub-wrap .single-wp-parser-method .feedback,
 .devhub-wrap .single-wp-parser-hook .feedback,
 .devhub-wrap .single-wp-parser-class .feedback {
-  width: 90%;
-  float: right;
-  margin-right: 1.5rem;
+  padding: 2rem 2rem 1rem 3.5rem;
+}
+
+.devhub-wrap .single-wp-parser-function .feedback ul.children,
+.devhub-wrap .single-wp-parser-method .feedback ul.children,
+.devhub-wrap .single-wp-parser-hook .feedback ul.children,
+.devhub-wrap .single-wp-parser-class .feedback ul.children {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .devhub-wrap .single-wp-parser-function .feedback-links,

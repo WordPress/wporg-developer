@@ -1363,12 +1363,16 @@
 		.comment ul.children {
 			margin: 0 0 1.5em 0;
 			border-bottom: 1px solid #dfdfdf;
+			list-style: none;
 		}
 
 		.feedback {
-			width: 90%;
-			float: right;
-			margin-right: 1.5rem;
+			padding: 2rem 2rem 1rem 3.5rem;
+
+			ul.children {
+				padding-left: 1rem;
+				padding-right: 1rem;
+			}
 		}
 
 		.feedback-links {
