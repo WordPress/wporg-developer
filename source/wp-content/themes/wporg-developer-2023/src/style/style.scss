@@ -532,6 +532,11 @@ body[class] {
 	#wp-link-close {
 		top: var(--wp--preset--spacing--20);
 		right: var(--wp--preset--spacing--20);
+
+		&:hover,
+		&:focus {
+			color: var(--wp--custom--button--hover--color--background);
+		}
 	}
 
 	#wp-link input[type="text"] {
@@ -541,6 +546,41 @@ body[class] {
 	#wp-link .submitbox {
 		padding: var(--wp--preset--spacing--30);
 		border-top: unset;
+	}
+
+	/* stylelint-disable-next-line max-line-length */
+	// All these button styles match those from wporg-parent-2021 theme. See https://github.com/WordPress/wporg-parent-2021/blob/trunk/source/wp-content/themes/wporg-parent-2021/sass/blocks/_button-mixins.scss
+	#wp-link-submit,
+	#wp-link-cancel button {
+		--wp--custom--button--spacing--padding--top: var(--wp--custom--button--small--spacing--padding--top);
+		--wp--custom--button--spacing--padding--bottom: var(--wp--custom--button--small--spacing--padding--bottom);
+		--wp--custom--button--spacing--padding--left: var(--wp--custom--button--small--spacing--padding--left);
+		--wp--custom--button--spacing--padding--right: var(--wp--custom--button--small--spacing--padding--right);
+
+		min-height: unset;
+		font-size: var(--wp--custom--button--small--typography--font-size);
+		border-radius: var(--wp--custom--button--border--radius);
+		line-height: var(--wp--custom--button--typography--line-height);
+		// Standard button does not have a border, so the padding needs to include border size.
+		// This ensures the outline and filled button are the same height.
+		border-width: 0;
+		padding-top: calc(var(--wp--custom--button--spacing--padding--top) + var(--wp--custom--button--border--width));
+		/* stylelint-disable-next-line max-line-length */
+		padding-bottom: calc(var(--wp--custom--button--spacing--padding--bottom) + var(--wp--custom--button--border--width));
+		padding-left: calc(var(--wp--custom--button--spacing--padding--left) + var(--wp--custom--button--border--width));
+		/* stylelint-disable-next-line max-line-length */
+		padding-right: calc(var(--wp--custom--button--spacing--padding--right) + var(--wp--custom--button--border--width));
+	}
+
+	#wp-link-close,
+	#wp-link-submit,
+	#wp-link-cancel button {
+		&:focus {
+			box-shadow: inset 0 0 0 3px var(--wp--preset--color--white);
+			outline: 1.5px solid var(--wp--custom--button--outline--focus--border--color);
+			outline-offset: -1.5px;
+			border: transparent;
+		}
 	}
 
 	#wp-link-submit {
@@ -556,9 +596,15 @@ body[class] {
 	}
 
 	#wp-link-cancel button {
-		color: var(--wp--custom--button--outline--color--text);
-		border-color: var(--wp--custom--button--outline--border--color);
 		background-color: var(--wp--custom--button--outline--color--background);
+		border: var(--wp--custom--button--border--width) solid var(--wp--custom--button--outline--border--color);
+		color: var(--wp--custom--button--outline--color--text);
+
+		// Padding does not account for border width.
+		padding-top: var(--wp--custom--button--spacing--padding--top);
+		padding-bottom: var(--wp--custom--button--spacing--padding--bottom);
+		padding-left: var(--wp--custom--button--spacing--padding--left);
+		padding-right: var(--wp--custom--button--spacing--padding--right);
 
 		&:hover {
 			color: var(--wp--custom--button--outline--hover--color--text);
@@ -568,7 +614,6 @@ body[class] {
 
 		&:focus {
 			color: var(--wp--custom--button--outline--focus--color--text);
-			border-color: var(--wp--custom--button--outline--focus--border--color);
 			background-color: var(--wp--custom--button--outline--focus--color--background);
 		}
 
