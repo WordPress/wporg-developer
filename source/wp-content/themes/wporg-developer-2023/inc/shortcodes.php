@@ -54,6 +54,9 @@ add_shortcode(
 	}
 );
 
+/**
+ * Only display the 'Last updated' if the modified date is later than the publishing date.
+ */
 add_shortcode(
 	'last_updated',
 	function() {

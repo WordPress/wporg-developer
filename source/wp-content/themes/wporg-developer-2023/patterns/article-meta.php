@@ -25,6 +25,7 @@
 		<!-- wp:shortcode -->
 		[last_updated]
 		<!-- /wp:shortcode -->
+
 		<!-- wp:post-date {"displayType":"modified"} /-->
 	</div>
 	<!-- /wp:group -->
