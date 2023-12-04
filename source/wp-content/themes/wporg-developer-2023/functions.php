@@ -218,6 +218,7 @@ function init() {
 	add_action( 'pre_get_posts', __NAMESPACE__ . '\\pre_get_posts' );
 	add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\theme_scripts_styles' );
 	add_action( 'add_meta_boxes', __NAMESPACE__ . '\\rename_comments_meta_box', 10, 2 );
+	add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\\enqueue_admin_styles' );
 
 	add_filter( 'post_type_link', __NAMESPACE__ . '\\method_permalink', 11, 2 );
 	add_filter( 'term_link', __NAMESPACE__ . '\\taxonomy_permalink', 10, 3 );
@@ -499,6 +500,18 @@ function theme_scripts_styles() {
 			true
 		);
 	}
+}
+
+/**
+ * Enqueue the editor styles.
+ */
+function enqueue_admin_styles() {
+	wp_enqueue_style(
+		'wporg-developer-2023-editor-style',
+		get_stylesheet_directory_uri() . '/build/editor-style/style-index.css',
+		array( 'editor-buttons' ),
+		filemtime( __DIR__ . '/build/editor-style/style-index.css' )
+	);
 }
 
 /**
