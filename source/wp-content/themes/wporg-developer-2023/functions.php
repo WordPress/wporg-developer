@@ -228,6 +228,7 @@ function init() {
 
 	// Modify default breadcrumbs.
 	add_filter( 'breadcrumb_trail_items', __NAMESPACE__ . '\\breadcrumb_trail_items_for_hooks', 10, 2 );
+	add_filter( 'breadcrumb_trail_items', __NAMESPACE__ . '\\breadcrumb_trail_items_remove_resource', 11, 2 );
 	add_filter( 'breadcrumb_trail_items', __NAMESPACE__ . '\\breadcrumb_trail_items_for_handbook_root', 10, 2 );
 	add_filter( 'breadcrumb_trail_items', __NAMESPACE__ . '\\breadcrumb_trail_for_note_edit', 10, 2 );
 	add_filter( 'breadcrumb_trail_items', __NAMESPACE__ . '\\breadcrumb_trail_for_since_view', 10, 2 );
@@ -280,6 +281,29 @@ function breadcrumb_trail_items_for_hooks( $items, $args ) {
 	unset( $items[4] );
 
 	return $items;
+}
+
+/**
+ * Remove the 'Resource' part of the breadcrumb trail.
+ *
+ * @param  array $items The breadcrumb trail items.
+ * @param  array $args  Original args.
+ * @return array
+ */
+function breadcrumb_trail_items_remove_resource( $items, $args ) {
+	if ( ! is_page( 'dashicons' ) ) {
+		return $items;
+	}
+
+	return array_filter(
+		$items,
+		function( $item ) {
+			// Remove the 'resource' parent based on the presence of its URL.
+			// A naked /resource/ request is always redirected to dashicons page.
+			$result = (bool) preg_match( '!href="[^"]+/resource/"!', $item );
+			return ( false === $result );
+		}
+	);
 }
 
 /**
