@@ -38,25 +38,30 @@ function render( $attributes, $content, $block ) {
 		return '';
 	}
 
-	$list = new \WP_Query( array(
-		'posts_per_page' => 15,
-		'post_type'      => get_parsed_post_types(),
-		'orderby'        => 'title',
-		'order'          => 'ASC',
-		'tax_query'      => array( array(
-			'taxonomy' => 'wp-parser-since',
-			'field'    => 'ids',
-			'terms'    => $version->term_id,
-		) ),
-	) );
+	$list = new \WP_Query(
+		array(
+			'posts_per_page' => 15,
+			'post_type'      => get_parsed_post_types(),
+			'orderby'        => 'title',
+			'order'          => 'ASC',
+			'tax_query'      => array(
+				array(
+					'taxonomy' => 'wp-parser-since',
+					'field'    => 'ids',
+					'terms'    => $version->term_id,
+				),
+			),
+		)
+	);
 
 	$content = '<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|20","bottom":"var:preset|spacing|20","left":"var:preset|spacing|20","right":"var:preset|spacing|20"},"margin":{"top":"var:preset|spacing|20"}},"border":{"width":"1px","radius":"2px"}},"borderColor":"light-grey-1","layout":{"type":"constrained"}} -->
 	<div class="wp-block-group has-border-color has-light-grey-1-border-color" style="border-width:1px;border-radius:2px;margin-top:var(--wp--preset--spacing--20);padding-top:var(--wp--preset--spacing--20);padding-right:var(--wp--preset--spacing--20);padding-bottom:var(--wp--preset--spacing--20);padding-left:var(--wp--preset--spacing--20)">
 
 		<!-- wp:list {"style":{"spacing":{"padding":{"left":"0"}}},"className":"wporg-reference-list","fontSize":"small"} -->
 		<ul class="wporg-reference-list has-small-font-size" style="padding-left:0">';
-	
-	while ( $list->have_posts() ) : $list->the_post();
+
+	while ( $list->have_posts() ) :
+		$list->the_post();
 
 		$content .= sprintf(
 			'<!-- wp:list-item --><li><a href="%s">%s</a></li><!-- /wp:list-item -->',
@@ -82,6 +87,7 @@ function render( $attributes, $content, $block ) {
 
 		</div>
 		<!-- /wp:group -->',
+		// translators: %s is the version name
 		sprintf( __( 'New and updated in %s', 'wporg' ), substr( $version->name, 0, -2 ) ),
 		esc_attr( get_term_link( $version, 'wp-parser-since' ) ),
 		__( 'View all', 'wporg' )
