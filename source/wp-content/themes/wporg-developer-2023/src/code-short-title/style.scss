@@ -1,3 +1,4 @@
+/* stylelint-disable scss/no-global-function-names */
 .wp-block-wporg-code-short-title {
 	align-items: flex-start;
 	display: flex;
@@ -29,7 +30,6 @@
 	border-radius: 2px;
 	margin-right: 8px;
 	padding: 2px 8px;
-	font-size: var(--wp--preset--font-size--small);
 	font-weight: 500;
 	word-break: keep-all;
 }
@@ -51,34 +51,43 @@
 }
 
 .function {
+	$color-function: #008a20;
+
 	&.wp-block-wporg-code-short-title,
 	a {
-		color: #008a20;
+		color: $color-function;
 	}
 
 	.wp-block-wporg-code-short-title__type {
-		background: rgba(0, 138, 32, 0.1);
+		color: darken($color-function, 2%);
+		background: rgba(0, 138, 32, 0.05);
 	}
 }
 
 .hook {
+	$color-hook: #d63638;
+
 	&.wp-block-wporg-code-short-title,
 	a {
-		color: #d63638;
+		color: $color-hook;
 	}
 
 	.wp-block-wporg-code-short-title__type {
-		background: rgba(214, 54, 56, 0.1);
+		color: darken($color-hook, 1%);
+		background: rgba(214, 54, 56, 0.05);
 	}
 }
 
 .class {
+	$color-class: #bd8600;
+
 	&.wp-block-wporg-code-short-title,
 	a {
-		color: #bd8600;
+		color: $color-class;
 	}
 
 	.wp-block-wporg-code-short-title__type {
+		color: darken($color-class, 8%);
 		background: rgba(189, 134, 0, 0.05);
 	}
 }
