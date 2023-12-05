@@ -298,6 +298,7 @@ class DevHub_User_Submitted_Content {
 			echo "<ul class='tablist' style='display: none;'>";
 			echo '<li><a href="#comment-form-comment">' . __( 'Write', 'wporg' ) . '</a></li>';
 			echo '<li><a href="#comment-preview">' . __( 'Preview', 'wporg' ) . '</a></li></ul>';
+			echo '<label class="screen-reader-text" for="comment">' . esc_html__( 'Note', 'wporg' ) . '</label>';
 		}
 
 		echo '<div class="comment-form-comment tab-section" id="comment-form-comment">';
@@ -379,6 +380,11 @@ class DevHub_User_Submitted_Content {
 		ob_start();
 		echo "<div id='feedback-editor-{$comment_id}' class='feedback-editor{$class}'{$display}>\n";
 		echo "<form id='feedback-form-{$instance}{$form_type}' class='feedback-form' method='post' action='{$action}' name='feedback-form-{$instance}'>\n";
+		printf(
+			"<label class='screen-reader-text' for='feedback-comment-%s'>%s</label>",
+			esc_attr( $instance ),
+			esc_html__( 'Feedback', 'wporg' ),
+		);
 		wp_editor( $content, 'feedback-comment-' . $instance, array(
 				'media_buttons' => false,
 				'textarea_name' => 'comment',
