@@ -1,4 +1,5 @@
-/* stylelint-disable scss/no-global-function-names */
+@import "../../scss/settings/semantic-colors";
+
 .wp-block-wporg-code-short-title {
 	align-items: flex-start;
 	display: flex;
@@ -51,43 +52,37 @@
 }
 
 .function {
-	$color-function: #008a20;
-
 	&.wp-block-wporg-code-short-title,
 	a {
-		color: $color-function;
+		color: $color-code-title-function;
 	}
 
 	.wp-block-wporg-code-short-title__type {
-		color: darken($color-function, 2%);
+		color: $color-code-title-function-type;
 		background: rgba(0, 138, 32, 0.05);
 	}
 }
 
 .hook {
-	$color-hook: #d63638;
-
 	&.wp-block-wporg-code-short-title,
 	a {
-		color: $color-hook;
+		color: $color-code-title-hook;
 	}
 
 	.wp-block-wporg-code-short-title__type {
-		color: darken($color-hook, 1%);
+		color: $color-code-title-hook-type;
 		background: rgba(214, 54, 56, 0.05);
 	}
 }
 
 .class {
-	$color-class: #bd8600;
-
 	&.wp-block-wporg-code-short-title,
 	a {
-		color: $color-class;
+		color: $color-code-title-class;
 	}
 
 	.wp-block-wporg-code-short-title__type {
-		color: darken($color-class, 8%);
+		color: $color-code-title-class-type;
 		background: rgba(189, 134, 0, 0.05);
 	}
 }
@@ -95,7 +90,7 @@
 .method {
 	&.wp-block-wporg-code-short-title,
 	a {
-		color: #135e96;
+		color: $color-code-title-method;
 	}
 
 	.wp-block-wporg-code-short-title__type {
