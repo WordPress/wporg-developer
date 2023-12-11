@@ -1,5 +1,3 @@
-@import "../../scss/settings/semantic-colors";
-
 .wp-block-wporg-command-github {
 	// override standard block gap between sections in the content
 	margin-block-start: 0 !important;
@@ -39,11 +37,11 @@
 			}
 
 			.green {
-				color: $color-command-github-open;
+				color: var(--wp--custom--wporg-command-github--color--open);
 			}
 
 			.red {
-				color: $color-command-github-closed;
+				color: var(--wp--custom--wporg-command-github--color--closed);
 			}
 
 			@media screen and (min-width: 380px) {

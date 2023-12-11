@@ -1,5 +1,3 @@
-@import "../../scss/settings/semantic-colors";
-
 .wp-block-wporg-code-short-title {
 	align-items: flex-start;
 	display: flex;
@@ -54,11 +52,11 @@
 .function {
 	&.wp-block-wporg-code-short-title,
 	a {
-		color: $color-code-title-function;
+		color: var(--wp--custom--wporg-code-short-title--color--function);
 	}
 
 	.wp-block-wporg-code-short-title__type {
-		color: $color-code-title-function-type;
+		color: var(--wp--custom--wporg-code-short-title--color--function-type);
 		background: rgba(0, 138, 32, 0.05);
 	}
 }
@@ -66,11 +64,11 @@
 .hook {
 	&.wp-block-wporg-code-short-title,
 	a {
-		color: $color-code-title-hook;
+		color: var(--wp--custom--wporg-code-short-title--color--hook);
 	}
 
 	.wp-block-wporg-code-short-title__type {
-		color: $color-code-title-hook-type;
+		color: var(--wp--custom--wporg-code-short-title--color--hook-type);
 		background: rgba(214, 54, 56, 0.05);
 	}
 }
@@ -78,11 +76,11 @@
 .class {
 	&.wp-block-wporg-code-short-title,
 	a {
-		color: $color-code-title-class;
+		color: var(--wp--custom--wporg-code-short-title--color--class);
 	}
 
 	.wp-block-wporg-code-short-title__type {
-		color: $color-code-title-class-type;
+		color: var(--wp--custom--wporg-code-short-title--color--class-type);
 		background: rgba(189, 134, 0, 0.05);
 	}
 }
@@ -90,7 +88,7 @@
 .method {
 	&.wp-block-wporg-code-short-title,
 	a {
-		color: $color-code-title-method;
+		color: var(--wp--custom--wporg-code-short-title--color--method);
 	}
 
 	.wp-block-wporg-code-short-title__type {
