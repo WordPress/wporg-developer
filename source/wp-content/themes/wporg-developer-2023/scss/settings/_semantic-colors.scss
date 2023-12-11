@@ -1,0 +1,12 @@
+@import "colors";
+
+$color-code-title-function: get-color(green-50);
+$color-code-title-function-type: get-color(green-60);
+$color-code-title-hook: get-color(red-50);
+$color-code-title-hook-type: get-color(red-60);
+$color-code-title-class: get-color(yellow-40);
+$color-code-title-class-type: get-color(yellow-50);
+$color-code-title-method: get-color(blue-60);
+
+$color-command-github-open: get-color(green-60);
+$color-command-github-closed: get-color(red-60);
