@@ -49,12 +49,16 @@
 		"custom": {
 			"color": {
 				"blue-60": "#135e96",
+				"blue-60-alpha-10": "#135e9619",
 				"green-50": "#008a20",
+				"green-50-alpha-5": "#008a200C",
 				"green-60": "#007017",
 				"grey-50": "#646970",
 				"red-50": "#d63638",
+				"red-50-alpha-5": "#d636380C",
 				"red-60": "#b32d2e",
 				"yellow-40": "#bd8600",
+				"yellow-40-alpha-5": "#bd86000C",
 				"yellow-50": "#996800"
 			},
 			"heading": {
@@ -181,6 +185,12 @@
 					"hook": "var(--wp--custom--color--red-50)",
 					"hook-type": "var(--wp--custom--color--red-60)",
 					"method": "var(--wp--custom--color--blue-60)"
+				},
+				"background-color": {
+					"class-type": "var(--wp--custom--color--yellow-40-alpha-5)",
+					"function-type": "var(--wp--custom--color--green-50-alpha-5)",
+					"hook-type": "var(--wp--custom--color--red-50-alpha-5)",
+					"method-type": "var(--wp--custom--color--blue-60-alpha-10)"
 				}
 			}
 		},

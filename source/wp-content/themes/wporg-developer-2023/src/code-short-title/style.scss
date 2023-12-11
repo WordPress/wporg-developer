@@ -57,7 +57,7 @@
 
 	.wp-block-wporg-code-short-title__type {
 		color: var(--wp--custom--wporg-code-short-title--color--function-type);
-		background: rgba(0, 138, 32, 0.05);
+		background: var(--wp--custom--wporg-code-short-title--background-color--function-type);
 	}
 }
 
@@ -69,7 +69,7 @@
 
 	.wp-block-wporg-code-short-title__type {
 		color: var(--wp--custom--wporg-code-short-title--color--hook-type);
-		background: rgba(214, 54, 56, 0.05);
+		background: var(--wp--custom--wporg-code-short-title--background-color--hook-type);
 	}
 }
 
@@ -81,7 +81,7 @@
 
 	.wp-block-wporg-code-short-title__type {
 		color: var(--wp--custom--wporg-code-short-title--color--class-type);
-		background: rgba(189, 134, 0, 0.05);
+		background: var(--wp--custom--wporg-code-short-title--background-color--class-type);
 	}
 }
 
@@ -92,6 +92,6 @@
 	}
 
 	.wp-block-wporg-code-short-title__type {
-		background: rgba(19, 94, 150, 0.1);
+		background: var(--wp--custom--wporg-code-short-title--background-color--method-type);
 	}
 }
