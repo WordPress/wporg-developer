@@ -38,11 +38,6 @@
 					"slug": "syntax-grey",
 					"color": "var(--wp--custom--color--grey-50)",
 					"name": "Syntax Grey"
-				},
-				{
-					"slug": "syntax-yellow",
-					"color": "var(--wp--custom--color--yellow-50)",
-					"name": "Syntax Yellow"
 				}
 			]
 		},
