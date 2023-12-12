@@ -67,6 +67,11 @@ pre {
 			left: var(--wp--preset--spacing--60);
 		}
 	}
+
+	.is-content-justification-left > * {
+		margin-left: unset !important;
+		margin-right: 0 !important;
+	}
 }
 
 
