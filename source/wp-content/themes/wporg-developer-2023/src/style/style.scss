@@ -116,6 +116,11 @@ pre {
 
 		.wp-block-wporg-sidebar-container {
 			right: var(--wp--preset--spacing--edge-space);
+
+			[dir="rtl"] & {
+				left: var(--wp--preset--spacing--edge-space);
+				right: unset;
+			}
 		}
 	}
 }
