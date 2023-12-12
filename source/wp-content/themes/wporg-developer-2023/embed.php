@@ -125,7 +125,7 @@ $parameter_display_max = 4; // We truncate the display of params
 		}
 
 		.wp-embed-parameters code {
-			margin-right: 8px;
+			margin-inline-end: 8px;
 		}
 
 		.wp-embed-hook {

@@ -50,18 +50,13 @@
 			content: "";
 			display: inline-block;
 			position: absolute;
-			left: 0;
+			inset-inline-start: 0;
 			width: var(--local--icon-size);
 			height: var(--local--icon-size);
 			mask-image: url(../../images/dot.svg);
 			mask-repeat: no-repeat;
 			mask-position: center;
 			background-color: var(--wp--preset--color--charcoal-4);
-
-			[dir="rtl"] & {
-				left: unset;
-				right: 0;
-			}
 		}
 	}
 
