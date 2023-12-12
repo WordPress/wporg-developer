@@ -6,7 +6,7 @@
 		width: 23px;
 		position: relative;
 		top: 7px;
-		margin-right: 10px;
+		margin-inline-end: 10px;
 	}
 
 	.btn-group {
@@ -46,14 +46,14 @@
 
 			@media screen and (min-width: 380px) {
 				&.wporg-command-github-open {
-					margin-right: -6px;
-					border-top-right-radius: 0;
-					border-bottom-right-radius: 0;
+					margin-inline-end: -6px;
+					border-start-end-radius: 0;
+					border-end-end-radius: 0;
 				}
 
 				&.wporg-command-github-closed {
-					border-top-left-radius: 0;
-					border-bottom-left-radius: 0;
+					border-start-start-radius: 0;
+					border-end-start-radius: 0;
 				}
 			}
 		}
