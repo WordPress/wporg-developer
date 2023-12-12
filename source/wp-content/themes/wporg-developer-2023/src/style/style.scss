@@ -55,25 +55,11 @@ pre {
 	display: block;
 }
 
-[dir="rtl"] {
-	.is-sticky .wp-block-navigation.is-style-dropdown-on-mobile {
-		.wp-block-navigation__responsive-container-open {
-			right: unset;
-			left: 0;
-		}
-
-		.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-close {
-			right: unset;
-			left: var(--wp--preset--spacing--60);
-		}
-	}
-
-	.is-content-justification-left > * {
-		margin-left: unset !important;
-		margin-right: 0 !important;
-	}
+.is-content-justification-left > .wp-block-group {
+	margin-left: unset !important;
+	margin-right: unset !important;
+	margin-inline-start: 0;
 }
-
 
 .has-three-columns {
 	--local--sidebar--width: 232px;
