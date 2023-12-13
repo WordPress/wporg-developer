@@ -636,13 +636,14 @@ pre {
 	background-color: var(--wp--custom--wporg-callout--color--background);
 	border-width: 0;
 	border-radius: 2px;
+	font-size: var(--wp--preset--font-size--small);
 
 	&::before {
 		content: "";
 		height: 24px;
 		width: 24px;
-		top: 0.7em;
-		left: 0.7em;
+		top: 0.65em;
+		left: 0.65em;
 		background-image: url(../../images/tip.svg);
 		background-repeat: no-repeat;
 	}
