@@ -37,11 +37,11 @@
 			}
 
 			.green {
-				color: var(--wp--preset--color--syntax-green);
+				color: var(--wp--custom--wporg-command-github--color--open);
 			}
 
 			.red {
-				color: var(--wp--preset--color--syntax-red);
+				color: var(--wp--custom--wporg-command-github--color--closed);
 			}
 
 			@media screen and (min-width: 380px) {
