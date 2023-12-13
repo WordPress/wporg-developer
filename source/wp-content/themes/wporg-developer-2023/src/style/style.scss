@@ -170,13 +170,14 @@ pre {
 }
 
 .home {
-	.search-wrap div.awesomplete > ul {
-		top: 46px;
-	}
-
 	.entry-content {
 		--wp--preset--spacing--60: clamp(40px, 5.55556vw, 80px);
 	}
+}
+
+.wp-block-search div.awesomplete > ul {
+	left: unset;
+	inset-inline-start: 0;
 }
 
 // Style code tags but not ones inside of the code block.
