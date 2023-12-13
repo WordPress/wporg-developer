@@ -1848,9 +1848,6 @@ namespace DevHub {
 	function get_explanation_content( $_post ) {
 		global $post;
 
-		// Temporarily remove filter.
-		remove_filter( 'the_content', array( 'DevHub_Formatting', 'fix_unintended_markdown' ), 1 );
-
 		// Store original global post.
 		$orig = $post;
 
@@ -1874,17 +1871,14 @@ namespace DevHub {
 			$content = get_explanation_field( 'post_content', $_post );
 		}
 
-		// Pass the content through expected content filters.
-		$content = apply_filters( 'the_content', apply_filters( 'get_the_content', $content ) );
+		// Sanitize message content.
+		$content = wp_kses_post( $content );
+
+		// Remove the {@see} tag, leaving only the function name, so that there'd be no extra a tags being rendered.
+		$content = preg_replace( '/\{@see (.*?)\}/', '$1', $content );
 
 		// Restore original global post.
 		$post = $orig;
-
-		// Automatic paragraph and line break formatting in content.
-		add_filter( 'the_content', 'wpautop' );
-
-		// Restore filter.
-		add_filter( 'the_content', array( 'DevHub_Formatting', 'fix_unintended_markdown' ), 1 );
 
 		return $content;
 	}
