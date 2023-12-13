@@ -200,7 +200,7 @@ pre {
 		&::after {
 			content: "\b7";
 			position: absolute;
-			inset-block-end: -3px;
+			inset-inline-end: -3px;
 		}
 
 		&:last-child::after {
