@@ -46,6 +46,7 @@ a):not(.wporg-developer-code-block a) {
 
 	.comment-date {
 		margin-inline-start: var(--wp--preset--spacing--10);
+		margin-inline-end: calc(var(--wp--preset--spacing--10) / 2);
 		color: var(--wp--preset--color--charcoal-4);
 		text-decoration: none;
 	}
@@ -57,6 +58,10 @@ a):not(.wporg-developer-code-block a) {
 		border-bottom: 1px solid var(--wp--preset--color--light-grey-1);
 		align-items: center;
 		justify-content: space-between;
+	}
+
+	.comment-author.vcard {
+		display: flex;
 	}
 
 	// If the first element is a code block, add space
