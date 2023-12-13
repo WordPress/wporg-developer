@@ -201,6 +201,8 @@ add_filter( 'wporg_table_of_contents_post_content', __NAMESPACE__ . '\filter_com
 
 // Remove table of contents.
 add_filter( 'wporg_handbook_toc_should_add_toc', '__return_false' );
+// Remove Jetpack CSS on frontend
+add_filter( 'jetpack_implode_frontend_css', '__return_false', 99 );
 
 // Remove GitHub edit links from handbooks
 global $devhub_handbook_editors;
