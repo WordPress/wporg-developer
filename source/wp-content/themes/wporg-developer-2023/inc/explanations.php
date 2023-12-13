@@ -106,6 +106,7 @@ class WPORG_Explanations {
 			'supports'          => array( 'editor', 'revisions' ),
 			'rewrite'           => false,
 			'query_var'         => false,
+			'show_in_rest'      => true,
 		) );
 	}
 
