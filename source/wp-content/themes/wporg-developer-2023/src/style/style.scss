@@ -624,3 +624,50 @@ pre {
 .wp-block-group.changelog.has-background {
 	padding: var(--wp--preset--spacing--20);
 }
+
+// Matches notice block styles
+// https://github.com/WordPress/wporg-mu-plugins/blob/trunk/mu-plugins/blocks/notice/postcss/style.pcss
+.callout {
+	--wp--custom--wporg-callout--color--background: var(--wp--preset--color--acid-green-3);
+	--wp--custom--wporg-callout--color--text: var(--wp--preset--color--charcoal-1);
+
+	padding: 1.25em 1.25em 1.25em 3.25em;
+	color: var(--wp--custom--wporg-callout--color--text);
+	background-color: var(--wp--custom--wporg-callout--color--background);
+	border-width: 0;
+	border-radius: 2px;
+
+	&::before {
+		content: "";
+		height: 24px;
+		width: 24px;
+		top: 0.7em;
+		left: 0.7em;
+		background-image: url(../../images/tip.svg);
+		background-repeat: no-repeat;
+	}
+
+	&.callout-info {
+		--wp--custom--wporg-callout--color--background: var(--wp--preset--color--blueberry-4);
+
+		&::before {
+			background-image: url(../../images/info.svg);
+		}
+	}
+
+	&.callout-alert {
+		--wp--custom--wporg-callout--color--background: var(--wp--preset--color--lemon-3);
+
+		&::before {
+			background-image: url(../../images/alert.svg);
+		}
+	}
+
+	&.callout-warning {
+		--wp--custom--wporg-callout--color--background: var(--wp--preset--color--pomegrade-3);
+
+		&::before {
+			background-image: url(../../images/warning.svg);
+		}
+	}
+}
