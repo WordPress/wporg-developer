@@ -7,7 +7,7 @@
 	"category": "widgets",
 	"icon": "smiley",
 	"description": "Shows the comments.",
-	"usesContext": [ "postId" ],
+	"usesContext": [ "postId", "postType" ],
 	"supports": {
 		"html": false,
 		"spacing": {
