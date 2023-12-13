@@ -30,7 +30,7 @@
 
 	// Nested parameter list.
 	.param-hash {
-		padding-left: var(--wp--preset--spacing--10);
+		padding-inline-start: var(--wp--preset--spacing--10);
 		margin-top: var(--wp--preset--spacing--10);
 		border-left: 1px solid var(--wp--preset--color--light-grey-1);
 		list-style: none;
@@ -57,7 +57,7 @@
 
 	.default > code,
 	.param-hash .type {
-		margin-left: 5px;
+		margin-inline-start: 5px;
 	}
 
 	.type {

@@ -37,20 +37,20 @@
 		margin-top: 0;
 		margin-bottom: 0;
 		list-style-type: none;
-		padding-left: 0;
+		padding-inline-start: 0;
 	}
 
 	li {
 		margin-block: calc(var(--wp--preset--spacing--20) / 4);
 		color: var(--wp--preset--color--charcoal-4);
-		padding-left: var(--local--icon-size);
+		padding-inline-start: var(--local--icon-size);
 		position: relative;
 
 		&::before {
 			content: "";
 			display: inline-block;
 			position: absolute;
-			left: 0;
+			inset-inline-start: 0;
 			width: var(--local--icon-size);
 			height: var(--local--icon-size);
 			mask-image: url(../../images/dot.svg);
@@ -62,7 +62,7 @@
 
 	.children {
 		// Shift the children to the left by half the icon size, allowing for the dot width of 4px.
-		margin-left: calc((var(--local--icon-size) - 4px) * -0.5);
+		margin-inline-start: calc((var(--local--icon-size) - 4px) * -0.5);
 	}
 
 	a {
@@ -72,7 +72,7 @@
 
 	&.has-js-control {
 		.page_item_has_children {
-			padding-left: 0;
+			padding-inline-start: 0;
 
 			&::before {
 				display: none;
@@ -81,7 +81,7 @@
 
 		.children {
 			display: none;
-			padding-left: var(--local--icon-size);
+			padding-inline-start: var(--local--icon-size);
 
 			&.is-open {
 				display: revert;

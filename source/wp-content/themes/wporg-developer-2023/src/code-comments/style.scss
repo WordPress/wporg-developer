@@ -27,8 +27,8 @@ a):not(.wporg-developer-code-block a) {
 				padding-bottom: var(--wp--preset--spacing--20);
 
 				> *:not(.comment-meta) {
-					padding-left: var(--wp--preset--spacing--20);
-					padding-right: var(--wp--preset--spacing--20);
+					padding-inline-start: var(--wp--preset--spacing--20);
+					padding-inline-end: var(--wp--preset--spacing--20);
 				}
 			}
 		}
@@ -45,7 +45,8 @@ a):not(.wporg-developer-code-block a) {
 	}
 
 	.comment-date {
-		margin-left: var(--wp--preset--spacing--10);
+		margin-inline-start: var(--wp--preset--spacing--10);
+		margin-inline-end: calc(var(--wp--preset--spacing--10) / 2);
 		color: var(--wp--preset--color--charcoal-4);
 		text-decoration: none;
 	}
@@ -57,6 +58,10 @@ a):not(.wporg-developer-code-block a) {
 		border-bottom: 1px solid var(--wp--preset--color--light-grey-1);
 		align-items: center;
 		justify-content: space-between;
+	}
+
+	.comment-author.vcard {
+		display: flex;
 	}
 
 	// If the first element is a code block, add space
@@ -162,7 +167,7 @@ a):not(.wporg-developer-code-block a) {
 
 .wp-block-wporg-code-reference-comments-rules {
 	margin: var(--wp--style--block-gap) 0;
-	padding-left: var(--wp--preset--spacing--20);
+	padding-inline-start: var(--wp--preset--spacing--20);
 	list-style: disc;
 	font-size: var(--wp--preset--font-size--extra-small);
 }
