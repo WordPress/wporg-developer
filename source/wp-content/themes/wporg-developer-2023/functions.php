@@ -204,8 +204,8 @@ add_filter( 'wporg_handbook_toc_should_add_toc', '__return_false' );
 
 // Remove GitHub edit links from handbooks
 global $devhub_handbook_editors;
-foreach ($devhub_handbook_editors as $editor) {
-	remove_filter( 'the_title', array( $editor, 'filter_the_title_edit_link' ), 10);
+foreach ( $devhub_handbook_editors as $editor ) {
+	remove_filter( 'the_title', array( $editor, 'filter_the_title_edit_link' ), 10 );
 }
 
 /**
