@@ -55,7 +55,7 @@ pre {
 	display: block;
 }
 
-.is-content-justification-left > .wp-block-group {
+.is-content-justification-left > [class*="wp-block-"] {
 	margin-left: unset !important;
 	margin-right: unset !important;
 	margin-inline-start: 0;
