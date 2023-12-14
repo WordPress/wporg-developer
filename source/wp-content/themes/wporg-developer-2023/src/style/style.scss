@@ -446,6 +446,10 @@ pre {
 		flex-direction: column;
 		gap: var(--wp--preset--spacing--10);
 
+		> code {
+			word-break: break-all;
+		}
+
 		.wp-block-button a {
 			background-color: var(--wp--preset--color--white);
 			text-wrap: nowrap;
