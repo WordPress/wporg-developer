@@ -541,7 +541,7 @@ function rename_comments_meta_box( $post_type, $post ) {
  * @return string
  */
 function update_prism_css_path( $path ) {
-	return '/stylesheets/prism.css';
+	return '/build/prism/style-index.css';
 }
 
 /**
