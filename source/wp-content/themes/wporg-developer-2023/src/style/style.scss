@@ -448,6 +448,7 @@ pre {
 
 		.wp-block-button a {
 			background-color: var(--wp--preset--color--white);
+			text-wrap: nowrap;
 		}
 
 		> span:last-child {
@@ -459,7 +460,7 @@ pre {
 	@media screen and (min-width: 600px) {
 		.wp-code-block-button-container {
 			flex-direction: row;
-			gap: 0;
+			align-items: baseline;
 		}
 	}
 
