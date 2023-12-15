@@ -49,24 +49,44 @@ class DevHub_Block_Editor_Importer extends DevHub_Docs_Importer {
 
 		// Any handbook pages where the slug changes should be listed here.
 		$redirects = [
-			'components/server-side-render' => 'packages/packages-server-side-render',
-			'explanations/faq' => 'getting-started/faq',
-			'explanations/glossary' => 'getting-started/glossary',
-			'how-to-guides/block-theme' => 'how-to-guides/themes/create-block-theme',
-			'how-to-guides/block-based-theme' => 'how-to-guides/themes/block-theme-overview',
+			'components/server-side-render'                       => 'packages/packages-server-side-render',
+			'explanations/faq'                                    => 'getting-started/faq',
+			'explanations/glossary'                               => 'getting-started/glossary',
 			'how-to-guides/platform/custom-block-editor/tutorial' => 'how-to-guides/platform/custom-block-editor',
-			'reference-guides/block-api/versions' => 'reference-guides/block-api/block-api-versions',
+			'reference-guides/block-api/versions'                 => 'reference-guides/block-api/block-api-versions',
+
+			// After handbook restructuring, December 2023.
+			'getting-started/create-block/'                                            => 'getting-started/tutorial',
+			'getting-started/create-block/wp-plugin/'                                  => 'getting-started/tutorial',
+			'getting-started/create-block/block-anatomy/'                              => 'getting-started/tutorial',
+			'getting-started/create-block/attributes/'                                 => 'getting-started/tutorial',
+			'getting-started/create-block/block-code/'                                 => 'getting-started/tutorial',
+			'getting-started/create-block/author-experience/'                          => 'getting-started/tutorial',
+			'getting-started/create-block/finishing/'                                  => 'getting-started/tutorial',
+			'getting-started/create-block/submitting-to-block-directory/'              => 'getting-started/tutorial',
+			'how-to-guides/block-tutorial/introducing-attributes-and-editable-fields/' => 'getting-started/fundamentals/block-json',
+			'how-to-guides/block-tutorial/block-supports-in-static-blocks/'            => 'getting-started/fundamentals/block-json',
+			'how-to-guides/block-tutorial/block-supports-in-dynamic-blocks/'           => 'getting-started/fundamentals/block-json',
+			'how-to-guides/javascript'                                                 => 'getting-started/fundamentals/javascript-in-the-block-editor',
+			'how-to-guides/javascript/plugins-background/'                             => 'getting-started/fundamentals/javascript-in-the-block-editor',
+			'how-to-guides/javascript/loading-javascript/'                             => 'getting-started/fundamentals/javascript-in-the-block-editor',
+			'how-to-guides/javascript/extending-the-block-editor/'                     => 'getting-started/fundamentals/javascript-in-the-block-editor',
+			'how-to-guides/javascript/troubleshooting/'                                => 'getting-started/fundamentals/javascript-in-the-block-editor',
+			'how-to-guides/javascript/versions-and-building/'                          => 'getting-started/fundamentals/javascript-in-the-block-editor',
+			'how-to-guides/javascript/scope-your-code/'                                => 'getting-started/fundamentals/javascript-in-the-block-editor',
+			'how-to-guides/javascript/js-build-setup/'                                 => 'getting-started/fundamentals/javascript-in-the-block-editor',
+			'how-to-guides/javascript/esnext-js/'                                      => 'getting-started/fundamentals/javascript-in-the-block-editor',
 
 			// After handbook restructuring, March 2021.
 			'handbook/versions-in-wordpress/' => 'contributors/versions-in-wordpress',
-			'architecture/fse-templates' => 'explanations/architecture/full-site-editing-templates',
+			'architecture/fse-templates'      => 'explanations/architecture/full-site-editing-templates',
 			'developers/internationalization' => 'how-to-guides/internationalization',
-			'developers/richtext' => 'reference-guides/richtext',
-			'developers/accessibility' => 'how-to-guides/accessibility',
-			'developers/feature-flags' => 'how-to-guides/feature-flags',
-			'tutorials/devenv' => 'getting-started/devenv',
-			'tutorials/devenv/docker-ubuntu' => 'getting-started/devenv/docker-ubuntu',
-			'tutorials/block-based-theme' => 'how-to-guides/themes/block-theme-overview',
+			'developers/richtext'             => 'reference-guides/richtext',
+			'developers/accessibility'        => 'how-to-guides/accessibility',
+			'developers/feature-flags'        => 'how-to-guides/feature-flags',
+			'tutorials/devenv'                => 'getting-started/devenv',
+			'tutorials/devenv/docker-ubuntu'  => 'getting-started/devenv/docker-ubuntu',
+			'tutorials/block-based-theme'     => 'how-to-guides/themes/block-theme-overview',
 		];
 
 		// General path redirects. (More specific path first.)
@@ -74,28 +94,30 @@ class DevHub_Block_Editor_Importer extends DevHub_Docs_Importer {
 			// 'some-path/' => 'new-path/',
 
 			// After handbook restructuring, March 2021.
-			'architecture/' => 'explanations/architecture/',
-			'contributors/develop/' => 'contributors/code/',
-			'contributors/document/' => 'contributors/documentation/',
-			'data/' => 'reference-guides/data/',
-			'designers/' => 'how-to-guides/designers/',
+			'architecture/'                      => 'explanations/architecture/',
+			'contributors/develop/'              => 'contributors/code/',
+			'contributors/document/'             => 'contributors/documentation/',
+			'data/'                              => 'reference-guides/data/',
+			'designers/'                         => 'how-to-guides/designers/',
 			'developers/backward-compatibility/' => 'how-to-guides/backward-compatibility/',
-			'developers/block-api/' => 'reference-guides/block-api/',
-			'developers/filters/' => 'reference-guides/filters/',
-			'developers/platform/' => 'how-to-guides/platform/',
-			'developers/slotfills/' => 'reference-guides/slotfills/',
-			'developers/themes/' => 'how-to-guides/themes/',
-			'handbook/tutorials/' => 'getting-started/',
-			'packages/' => 'reference-guides/packages/',
-			'tutorials/create-block/' => 'getting-started/create-block/',
-			'tutorials/plugin-sidebar-0/' => 'how-to-guides/sidebar-tutorial/',
-			'tutorials/' => 'how-to-guides/',
+			'developers/block-api/'              => 'reference-guides/block-api/',
+			'developers/filters/'                => 'reference-guides/filters/',
+			'developers/platform/'               => 'how-to-guides/platform/',
+			'developers/slotfills/'              => 'reference-guides/slotfills/',
+			'developers/themes/'                 => 'how-to-guides/themes/',
+			'handbook/tutorials/'                => 'getting-started/',
+			'packages/'                          => 'reference-guides/packages/',
+			'tutorials/create-block/'            => 'getting-started/create-block/',
+			'tutorials/plugin-sidebar-0/'        => 'how-to-guides/sidebar-tutorial/',
+			'tutorials/'                         => 'how-to-guides/',
 		];
 
 		// Redirects away from the block editor handbook.
 		$handbook_redirects = [
 			// 'some-block-editor-path' => '/new-path-relative-to-developer-root/',
 			'how-to-guides/themes/block-theme-overview' => '/themes/block-themes/',
+			'how-to-guides/block-based-theme'           => '/themes/block-themes/',
+			'how-to-guides/block-theme'                 => '/themes/block-themes/',
 		];
 
 		$new_handbook_path = '';
