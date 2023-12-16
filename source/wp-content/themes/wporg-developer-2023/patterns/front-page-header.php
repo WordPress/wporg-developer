@@ -40,8 +40,8 @@
 <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|10","bottom":"var:preset|spacing|10"}}},"backgroundColor":"lemon-3","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull has-lemon-3-background-color has-background" style="padding-top:var(--wp--preset--spacing--10);padding-bottom:var(--wp--preset--spacing--10)">
 
-	<!-- wp:paragraph {"align":"center","fontSize":"extra-small"} -->
-	<p class="has-text-align-center has-extra-small-font-size"><?php echo wp_kses_post(
+	<!-- wp:paragraph {"align":"center","fontSize":"small"} -->
+	<p class="has-text-align-center has-small-font-size"><?php echo wp_kses_post(
 		sprintf(
 		/* translators: %1$s: version link, %2$s: version number */
 			__( 'See <a href="%1$s">what has changed</a> in the WordPress %2$s API.', 'wporg' ),
