@@ -28,6 +28,13 @@ pre {
 		}
 	}
 
+	blockquote {
+		border-left: 2px solid var(--wp--preset--color--charcoal-1);
+		margin-left: 0;
+		margin-right: 0;
+		padding-left: var(--wp--preset--spacing--20);
+	}
+
 	pre:not(.wp-block-code) {
 		padding: 20px;
 		background-color: #f7f7f7;
