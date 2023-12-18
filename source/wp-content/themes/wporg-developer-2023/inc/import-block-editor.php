@@ -13,23 +13,31 @@ class DevHub_Block_Editor_Importer extends DevHub_Docs_Importer {
 			$manifest
 		);
 
-		add_filter( 'template_redirect',               array( $this, 'redirects' ), 1 );
-		add_filter( 'handbook_label',                  array( $this, 'change_handbook_label' ), 10, 2 );
-		add_filter( 'handbook_display_toc',            array( $this, 'disable_toc' ) );
-		add_filter( 'get_post_metadata',               array( $this, 'fix_markdown_source_meta' ), 10, 4 );
+		add_filter( 'template_redirect', array( $this, 'redirects' ), 1 );
+		add_filter( 'handbook_label', array( $this, 'change_handbook_label' ), 10, 2 );
+		add_filter( 'handbook_display_toc', array( $this, 'disable_toc' ) );
+		add_filter( 'get_post_metadata', array( $this, 'fix_markdown_source_meta' ), 10, 4 );
 		add_filter( 'wporg_markdown_before_transform', array( $this, 'wporg_markdown_before_transform' ),  10, 2 );
-		add_filter( 'wporg_markdown_after_transform',  array( $this, 'wporg_markdown_after_transform' ), 10, 2 );
-		add_filter( 'wporg_markdown_edit_link',        array( $this, 'wporg_markdown_edit_link' ), 10, 2 );
+		add_filter( 'wporg_markdown_after_transform', array( $this, 'wporg_markdown_after_transform' ), 10, 2 );
+		add_filter( 'wporg_markdown_edit_link', array( $this, 'wporg_markdown_edit_link' ), 10, 2 );
 
-		add_action( 'pre_post_update', function( $post_id, $data ) {
-			if ( $this->get_post_type() === $data['post_type'] ) {
-				add_filter( 'wp_kses_allowed_html', array( __CLASS__, 'allow_extra_tags' ), 10, 1 );
+		add_action(
+			'pre_post_update',
+			function( $post_id, $data ) {
+				if ( $this->get_post_type() === $data['post_type'] ) {
+					add_filter( 'wp_kses_allowed_html', array( __CLASS__, 'allow_extra_tags' ), 10, 1 );
+				}
+			},
+			10,
+			2
+		);
+
+		add_action(
+			'edit_post_' . $this->get_post_type(),
+			function( $post_id ) {
+				remove_filter( 'wp_kses_allowed_html', array( __CLASS__, 'allow_extra_tags' ), 10, 1 );
 			}
-		}, 10, 2 );
-
-		add_action( 'edit_post_' . $this->get_post_type(), function( $post_id ) {
-			remove_filter( 'wp_kses_allowed_html', array( __CLASS__, 'allow_extra_tags' ), 10, 1 );
-		} );
+		);
 	}
 
 	/**
@@ -40,8 +48,8 @@ class DevHub_Block_Editor_Importer extends DevHub_Docs_Importer {
 			return;
 		}
 
-	    $handbook_path = explode( '/', trailingslashit( $_SERVER['REQUEST_URI'] ), 3 );
-	    $handbook_path = $handbook_path[2] ?? null;
+		$handbook_path = explode( '/', trailingslashit( $_SERVER['REQUEST_URI'] ), 3 );
+		$handbook_path = $handbook_path[2] ?? null;
 
 		if ( is_null( $handbook_path ) ) {
 			return;
@@ -78,7 +86,7 @@ class DevHub_Block_Editor_Importer extends DevHub_Docs_Importer {
 			'how-to-guides/javascript/esnext-js'                                      => 'getting-started/fundamentals/javascript-in-the-block-editor',
 
 			// After handbook restructuring, March 2021.
-			'handbook/versions-in-wordpress' => 'contributors/versions-in-wordpress',
+			'handbook/versions-in-wordpress'  => 'contributors/versions-in-wordpress',
 			'architecture/fse-templates'      => 'explanations/architecture/full-site-editing-templates',
 			'developers/internationalization' => 'how-to-guides/internationalization',
 			'developers/richtext'             => 'reference-guides/richtext',
@@ -186,7 +194,7 @@ class DevHub_Block_Editor_Importer extends DevHub_Docs_Importer {
 	 *
 	 * @param mixed  $null      A value for the meta if its data retrieval is
 	 *                          overridden, else null.
-	 * @param int	 $object_id Object ID.
+	 * @param int    $object_id Object ID.
 	 * @param string $meta_key  Meta key.
 	 * @param bool   $single    Whether to return only the first value of the specified $meta_key.
 	 * @return mixed
