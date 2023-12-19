@@ -29,6 +29,9 @@ class DevHub_Registrations {
 
 		// Register P2P relationships.
 		add_action( 'p2p_init', array( __CLASS__, 'register_post_relationships' ) );
+
+		// Include them in Sitemaps.
+		add_filter( 'jetpack_sitemap_post_types', array( __CLASS__, 'jetpack_sitemap_post_types' ) );
 	}
 
 	/**
@@ -300,6 +303,21 @@ class DevHub_Registrations {
 			'title'            => array( 'from' => __( 'Used by Methods', 'wporg' ), 'to' => __( 'Uses Hooks', 'wporg' ) ),
 		) );
 
+	}
+
+	/**
+	 * Adds post types to Jetpack sitemaps.
+	 *
+	 * @param array $post_types Post types.
+	 * @return array
+	 */
+	public static function jetpack_sitemap_post_types( $post_types ) {
+		$post_types[] = 'wp-parser-function';
+		$post_types[] = 'wp-parser-class';
+		$post_types[] = 'wp-parser-method';
+		$post_types[] = 'wp-parser-hook';
+
+		return $post_types;
 	}
 
 } // DevHub_Registrations
