@@ -10,6 +10,7 @@ class DevHub_CLI {
 	public static function init() {
 		add_action( 'init', array( __CLASS__, 'action_init_register_cron_jobs' ) );
 		add_action( 'init', array( __CLASS__, 'action_init_register_post_types' ) );
+		add_filter( 'jetpack_sitemap_post_types', array( __CLASS__, 'filter_jetpack_sitemap_post_types' ) );
 		add_action( 'pre_get_posts', array( __CLASS__, 'action_pre_get_posts' ) );
 		add_action( 'devhub_cli_manifest_import', array( __CLASS__, 'action_devhub_cli_manifest_import' ) );
 		add_action( 'devhub_cli_markdown_import', array( __CLASS__, 'action_devhub_cli_markdown_import' ) );
@@ -64,6 +65,12 @@ class DevHub_CLI {
 			),
 			'supports'    => $supports,
 		) );
+	}
+
+	public static function filter_jetpack_sitemap_post_types( $post_types ) {
+		$post_types[] = 'command';
+
+		return $post_types;
 	}
 
 	public static function action_pre_get_posts( $query ) {
