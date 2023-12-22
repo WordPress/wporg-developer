@@ -9,11 +9,15 @@
 	"description": "",
 	"usesContext": [ "postId", "postType" ],
 	"attributes": {
-		"handbooks": {
-			"type": "array",
-			"default": []
+		"linkUrl": {
+			"type": "string",
+			"default": ""
 		},
-		"editLinkURL": {
+		"heading": {
+			"type": "string",
+			"default": ""
+		},
+		"text": {
 			"type": "string",
 			"default": ""
 		}

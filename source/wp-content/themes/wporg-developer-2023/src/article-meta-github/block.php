@@ -35,14 +35,13 @@ function render( $attributes, $content, $block ) {
 	if (
 		! isset( $post_id )
 		|| ! isset( $post_type )
-		|| ! in_array( $post_type, $attributes['handbooks'], true )
 	) {
 		return '';
 	}
 
 	$title = get_the_title( $post_id );
 
-	$content = sprintf(
+	return sprintf(
 		do_blocks(
 			'<!-- wp:group {"style":{"spacing":{"blockGap":"0"}},"layout":{"type":"constrained"}} -->
 			<div class="wp-block-group">
@@ -58,40 +57,13 @@ function render( $attributes, $content, $block ) {
 			</div>
 			<!-- /wp:group -->'
 		),
-		esc_html__( 'Edit article', 'wporg' ),
-		esc_url( $attributes['editLinkURL'] ),
+		esc_html__( $attributes['heading'], 'wporg' ),
+		esc_url( $attributes['linkURL'] ),
 		sprintf(
 			/* translators: %s: article title */
-			__( 'Improve it on GitHub<span class="screen-reader-text">: %s</span>', 'wporg' ),
+			__( '%1$s<span class="screen-reader-text">: %2$s"</span>', 'wporg' ),
+			esc_html( $attributes['text'] ),
 			esc_html( $title )
 		)
 	);
-
-	if ( 'blocks-handbook' !== $post_type ) {
-		$content .= sprintf(
-			do_blocks(
-				'<!-- wp:group {"style":{"spacing":{"blockGap":"0"}},"layout":{"type":"constrained"}} -->
-				<div class="wp-block-group">
-
-					<!-- wp:paragraph {"style":{"typography":{"fontStyle":"normal","fontWeight":"700"}}} -->
-					<p style="font-style:normal;font-weight:700">%1$s</p>
-					<!-- /wp:paragraph -->
-
-					<!-- wp:paragraph {"className":"external-link"} -->
-					<p class="external-link"><a href="[article_changelog_link]">%2$s</a></p>
-					<!-- /wp:paragraph -->
-					
-				</div>
-				<!-- /wp:group -->'
-			),
-			esc_html__( 'Changelog', 'wporg' ),
-			sprintf(
-				/* translators: %s: article title */
-				__( 'See list of changes<span class="screen-reader-text">: %s</span>', 'wporg' ),
-				esc_html( $title )
-			)
-		);
-	}
-
-	return $content;
 }

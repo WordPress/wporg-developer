@@ -30,6 +30,8 @@
 	</div>
 	<!-- /wp:group -->
 
-	<!-- wp:wporg/article-meta-github {"editLinkURL":"[article_edit_link]","handbooks":["wpcs-handbook","blocks-handbook","rest-api-handbook","cli-handbook","adv-admin-handbook"]} /-->
+	<!-- wp:wporg/article-meta-github {"heading":"<?php esc_html_e( 'Edit article', 'wporg' ); ?>","linkURL":"[article_edit_link]","text":"<?php esc_html_e( 'Improve it on GitHub', 'wporg' ); ?>"} /-->
+	<!-- wp:wporg/article-meta-github {"heading":"<?php esc_html_e( 'Changelog', 'wporg' ); ?>","linkURL":"[article_changelog_link]","text":"<?php esc_html_e( 'See list of changes', 'wporg' ); ?>"} /-->
+
 </div>
 <!-- /wp:group -->

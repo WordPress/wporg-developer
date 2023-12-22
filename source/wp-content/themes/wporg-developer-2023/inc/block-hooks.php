@@ -7,6 +7,9 @@
 
 use function DevHub\is_parsed_post_type;
 
+
+add_filter( 'render_block', __NAMESPACE__ . '\filter_article_meta_block', 10, 2 );
+
 /**
  * Filters the search block and conditionally inserts search filters.
  *
@@ -47,4 +50,38 @@ function get_block_content_by_home_url( $block_content, $replacement_home_url = 
 		'action="' . esc_url( $replacement_home_url ) . '"',
 		$block_content
 	);
+}
+
+/**
+ * Filters the article meta block and conditionally removes it.
+ *
+ * @param string $block_content
+ * @param array  $block
+ * @return string
+ */
+function filter_article_meta_block( $block_content, $block ) {
+	if ( 'wporg/article-meta-github' === $block['blockName'] ) {
+		$github_handbooks = array(
+			'wpcs-handbook',
+			'blocks-handbook',
+			'rest-api-handbook',
+			'cli-handbook',
+			'adv-admin-handbook',
+		);
+
+		$post_type = get_post_type();
+
+		// Not all handbooks come from GitHub.
+		if ( ! in_array( $post_type, $github_handbooks, true ) ) {
+			return '';
+		}
+
+		// The block editor handbook doesn't have a changelog.
+		// We only know it's the changelog because of the linkURL attribute.
+		if ( 'blocks-handbook' === $post_type && '[article_changelog_link]' === $block['attrs']['linkURL'] ) {
+			return '';
+		}
+	}
+
+	return $block_content;
 }
