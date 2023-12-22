@@ -21,7 +21,7 @@ function filter_search_block( $block_content, $block ) {
 
 	if ( 'command' === get_post_type() ) {
 		$block_content = get_block_content_by_home_url( $block_content, home_url( 'cli/commands/' ) );
-	} elseif ( wporg_is_handbook() ) {
+	} elseif ( function_exists( 'wporg_is_handbook' ) && wporg_is_handbook() ) {
 		$block_content = get_block_content_by_home_url( $block_content, get_query_var( 'current_handbook_home_url' ) );
 	} else {
 		if ( isset( $block['attrs']['className'] ) && strpos( $block['attrs']['className'], 'wporg-filtered-search-form' ) ) {

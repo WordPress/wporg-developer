@@ -37,7 +37,7 @@ class DevHub_Search_Form_Autocomplete {
 	public function scripts_and_styles() {
 
 		// Handbook searches don't have autocomplete.
-		if ( wporg_is_handbook() ) {
+		if ( function_exists( 'wporg_is_handbook' ) && wporg_is_handbook() ) {
 			return;
 		}
 

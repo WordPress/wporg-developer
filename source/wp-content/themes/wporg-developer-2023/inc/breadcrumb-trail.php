@@ -173,7 +173,7 @@ class Breadcrumb_Trail {
 
 			/* If viewing a search results page. */
 			elseif ( is_search() ) {
-				if ( wporg_is_handbook() ) {
+				if ( function_exists( 'wporg_is_handbook' ) && wporg_is_handbook() ) {
 					$this->do_search_items_by_home_url( wporg_get_current_handbook_home_url() );
 				} elseif ( 'command' === get_post_type() ) {
 					$this->do_search_items_by_home_url( esc_url( home_url( 'cli/commands/' ) ) );
