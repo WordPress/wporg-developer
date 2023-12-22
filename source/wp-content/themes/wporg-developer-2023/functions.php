@@ -206,8 +206,10 @@ add_filter( 'jetpack_implode_frontend_css', '__return_false', 99 );
 
 // Remove GitHub edit links from handbooks
 global $devhub_handbook_editors;
-foreach ( $devhub_handbook_editors as $editor ) {
-	remove_filter( 'the_title', array( $editor, 'filter_the_title_edit_link' ), 10 );
+if ( is_array( $devhub_handbook_editors ) && ! empty( $devhub_handbook_editors ) ) {
+	foreach ( $devhub_handbook_editors as $editor ) {
+		remove_filter( 'the_title', array( $editor, 'filter_the_title_edit_link' ), 10 );
+	}
 }
 
 /**
@@ -490,7 +492,7 @@ function theme_scripts_styles() {
 		global_fonts_preload( 'IBM Plex Sans, IBM Plex Sans SemiBold, Inter', $subsets );
 	}
 
-	if ( wporg_is_handbook() ) {
+	if ( function_exists( 'wporg_is_handbook' ) && wporg_is_handbook() ) {
 		wp_enqueue_script(
 			'wporg-developer-code-tabs',
 			get_stylesheet_directory_uri() . '/js/code-tabs.js',
@@ -591,7 +593,7 @@ function add_site_navigation_menus( $menus ) {
  * @return string[] Updated list of templates.
  */
 function add_handbook_templates( $templates ) {
-	$is_handbook      = wporg_is_handbook();
+	$is_handbook      = function_exists( 'wporg_is_handbook' ) && wporg_is_handbook();
 	$is_github_source = ! empty( get_post_meta( get_the_ID(), 'wporg_markdown_source', true ) );
 	if ( $is_handbook ) {
 		array_unshift( $templates, 'single-handbook.php' );
@@ -642,7 +644,7 @@ function filter_code_content( $content ) {
  * @return string
  */
 function filter_standards_content( $content ) {
-	if ( ! wporg_is_handbook() ) {
+	if ( function_exists( 'wporg_is_handbook' ) && ! wporg_is_handbook() ) {
 		return $content;
 	}
 
@@ -709,7 +711,7 @@ function filter_command_content( $content ) {
  * @return string Updated link tag.
  */
 function get_adjacent_handbook_post_link( $output, $format, $link, $post, $adjacent ) {
-	if ( ! wporg_is_handbook() ) {
+	if ( function_exists( 'wporg_is_handbook' ) && ! wporg_is_handbook() ) {
 		return $output;
 	}
 
