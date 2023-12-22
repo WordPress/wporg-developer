@@ -8,7 +8,16 @@
 	"icon": "smiley",
 	"description": "",
 	"usesContext": [ "postId", "postType" ],
-	"attributes": {},
+	"attributes": {
+		"handbooks": {
+			"type": "array",
+			"default": []
+		},
+		"editLinkURL": {
+			"type": "string",
+			"default": ""
+		}
+	},
 	"supports": {
 		"inserter": false
 	},

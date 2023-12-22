@@ -30,6 +30,6 @@
 	</div>
 	<!-- /wp:group -->
 
-	<!-- wp:wporg/article-meta-github /-->
+	<!-- wp:wporg/article-meta-github {"editLinkURL":"[article_edit_link]","handbooks":["wpcs-handbook","blocks-handbook","rest-api-handbook","cli-handbook","adv-admin-handbook"]} /-->
 </div>
 <!-- /wp:group -->

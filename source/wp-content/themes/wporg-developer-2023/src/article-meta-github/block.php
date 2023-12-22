@@ -29,21 +29,13 @@ function init() {
  * @return string Returns the block markup.
  */
 function render( $attributes, $content, $block ) {
-	$github_handbooks = array(
-		'wpcs-handbook',
-		'blocks-handbook',
-		'rest-api-handbook',
-		'cli-handbook',
-		'adv-admin-handbook',
-	);
-
 	$post_type = $block->context['postType'];
 	$post_id = $block->context['postId'];
 
 	if (
 		! isset( $post_id )
 		|| ! isset( $post_type )
-		|| ! in_array( $post_type, $github_handbooks, true )
+		|| ! in_array( $post_type, $attributes['handbooks'], true )
 	) {
 		return '';
 	}
@@ -60,13 +52,14 @@ function render( $attributes, $content, $block ) {
 				<!-- /wp:paragraph -->
 
 				<!-- wp:paragraph {"className":"external-link"} -->
-				<p class="external-link"><a href="[article_edit_link]">%2$s</a></p>
+				<p class="external-link"><a href="%2$s">%3$s</a></p>
 				<!-- /wp:paragraph -->
 
 			</div>
 			<!-- /wp:group -->'
 		),
 		esc_html__( 'Edit article', 'wporg' ),
+		esc_url( $attributes['editLinkURL'] ),
 		sprintf(
 			/* translators: %s: article title */
 			__( 'Improve it on GitHub<span class="screen-reader-text">: %s</span>', 'wporg' ),
