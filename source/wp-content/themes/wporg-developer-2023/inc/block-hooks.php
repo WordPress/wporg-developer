@@ -7,7 +7,6 @@
 
 use function DevHub\is_parsed_post_type;
 
-
 add_filter( 'render_block', __NAMESPACE__ . '\filter_article_meta_block', 10, 2 );
 
 /**
