@@ -84,6 +84,7 @@ class DevHub_Block_Editor_Importer extends DevHub_Docs_Importer {
 			'how-to-guides/javascript/scope-your-code'                                => 'getting-started/fundamentals/javascript-in-the-block-editor',
 			'how-to-guides/javascript/js-build-setup'                                 => 'getting-started/fundamentals/javascript-in-the-block-editor',
 			'how-to-guides/javascript/esnext-js'                                      => 'getting-started/fundamentals/javascript-in-the-block-editor',
+			'how-to-guides/themes/theme-json'                                         => 'how-to-guides/themes/global-settings-and-styles',
 
 			// After handbook restructuring, March 2021.
 			'handbook/versions-in-wordpress'  => 'contributors/versions-in-wordpress',
