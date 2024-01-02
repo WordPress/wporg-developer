@@ -16,8 +16,8 @@
 
 <!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|10"}},"className":"is-style-cards-grid","layout":{"type":"grid","minimumColumnWidth":"32.3%"},"fontSize":"small"} -->
 <div class="wp-block-group is-style-cards-grid has-small-font-size"><!-- wp:wporg/link-wrapper -->
-<a class="wp-block-wporg-link-wrapper" href="<?php echo esc_url( site_url( '/block-editor/' ) ); ?>"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"700"}},"fontSize":"small","textColor":"blueberry-2","fontFamily":"inter"} -->
-<h3 class="wp-block-heading has-inter-font-family has-small-font-size" style="font-style:normal;font-weight:700"><?php esc_html_e( 'Block Editor', 'wporg' ); ?></h3>
+<a class="wp-block-wporg-link-wrapper" href="<?php echo esc_url( site_url( '/block-editor/' ) ); ?>"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"600"}},"fontSize":"normal","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:600"><?php esc_html_e( 'Block Editor', 'wporg' ); ?></h3>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"fontSize":"small"} -->
@@ -26,8 +26,8 @@
 <!-- /wp:wporg/link-wrapper -->
 
 <!-- wp:wporg/link-wrapper -->
-<a class="wp-block-wporg-link-wrapper" href="<?php echo esc_url( site_url( '/themes/' ) ); ?>"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"700"}},"fontSize":"small","fontFamily":"inter"} -->
-<h3 class="wp-block-heading has-inter-font-family has-small-font-size" style="font-style:normal;font-weight:700"><?php esc_html_e( 'Themes', 'wporg' ); ?></h3>
+<a class="wp-block-wporg-link-wrapper" href="<?php echo esc_url( site_url( '/themes/' ) ); ?>"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"600"}},"fontSize":"normal","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:600"><?php esc_html_e( 'Themes', 'wporg' ); ?></h3>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
@@ -36,8 +36,8 @@
 <!-- /wp:wporg/link-wrapper -->
 
 <!-- wp:wporg/link-wrapper -->
-<a class="wp-block-wporg-link-wrapper" href="<?php echo esc_url( site_url( '/plugins/' ) ); ?>"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"700"}},"fontSize":"small","fontFamily":"inter"} -->
-<h3 class="wp-block-heading has-inter-font-family has-small-font-size" style="font-style:normal;font-weight:700"><?php esc_html_e( 'Plugins', 'wporg' ); ?></h3>
+<a class="wp-block-wporg-link-wrapper" href="<?php echo esc_url( site_url( '/plugins/' ) ); ?>"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"600"}},"fontSize":"normal","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:600"><?php esc_html_e( 'Plugins', 'wporg' ); ?></h3>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
@@ -46,8 +46,8 @@
 <!-- /wp:wporg/link-wrapper -->
 
 <!-- wp:wporg/link-wrapper -->
-<a class="wp-block-wporg-link-wrapper" href="<?php echo esc_url( site_url( '/apis/' ) ); ?>"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"700"}},"fontSize":"small","fontFamily":"inter"} -->
-<h3 class="wp-block-heading has-inter-font-family has-small-font-size" style="font-style:normal;font-weight:700"><?php esc_html_e( 'Common APIs', 'wporg' ); ?></h3>
+<a class="wp-block-wporg-link-wrapper" href="<?php echo esc_url( site_url( '/apis/' ) ); ?>"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"600"}},"fontSize":"normal","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:600"><?php esc_html_e( 'Common APIs', 'wporg' ); ?></h3>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
@@ -56,8 +56,8 @@
 <!-- /wp:wporg/link-wrapper -->
 
 <!-- wp:wporg/link-wrapper -->
-<a class="wp-block-wporg-link-wrapper" href="<?php echo esc_url( site_url( '/advanced-administration/' ) ); ?>"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"700"}},"fontSize":"small","fontFamily":"inter"} -->
-<h3 class="wp-block-heading has-inter-font-family has-small-font-size" style="font-style:normal;font-weight:700"><?php esc_html_e( 'Advanced Administration', 'wporg' ); ?></h3>
+<a class="wp-block-wporg-link-wrapper" href="<?php echo esc_url( site_url( '/advanced-administration/' ) ); ?>"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"600"}},"fontSize":"normal","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:600"><?php esc_html_e( 'Advanced Administration', 'wporg' ); ?></h3>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
@@ -66,8 +66,8 @@
 <!-- /wp:wporg/link-wrapper -->
 
 <!-- wp:wporg/link-wrapper -->
-<a class="wp-block-wporg-link-wrapper" href="https://developer.wordpress.org/playground/"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"700"}},"fontSize":"small","fontFamily":"inter"} -->
-<h3 class="wp-block-heading has-inter-font-family has-small-font-size" style="font-style:normal;font-weight:700"><?php esc_html_e( 'WordPress Playground', 'wporg' ); ?></h3>
+<a class="wp-block-wporg-link-wrapper" href="https://developer.wordpress.org/playground/"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"600"}},"fontSize":"normal","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:600"><?php esc_html_e( 'WordPress Playground', 'wporg' ); ?></h3>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
@@ -86,8 +86,8 @@
 
 <!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|10"}},"className":"is-style-cards-grid","layout":{"type":"grid","minimumColumnWidth":"49%"},"fontSize":"small"} -->
 <div class="wp-block-group is-style-cards-grid has-small-font-size"><!-- wp:wporg/link-wrapper -->
-<a class="wp-block-wporg-link-wrapper" href="<?php echo esc_url( site_url( '/reference/' ) ); ?>"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"700"}},"fontSize":"small","fontFamily":"inter"} -->
-<h3 class="wp-block-heading has-inter-font-family has-small-font-size" style="font-style:normal;font-weight:700"><?php esc_html_e( 'Code reference', 'wporg' ); ?></h3>
+<a class="wp-block-wporg-link-wrapper" href="<?php echo esc_url( site_url( '/reference/' ) ); ?>"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"600"}},"fontSize":"normal","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:600"><?php esc_html_e( 'Code reference', 'wporg' ); ?></h3>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
@@ -96,8 +96,8 @@
 <!-- /wp:wporg/link-wrapper -->
 
 <!-- wp:wporg/link-wrapper -->
-<a class="wp-block-wporg-link-wrapper" href="<?php echo esc_url( site_url( '/rest-api/' ) ); ?>"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"700"}},"fontSize":"small","fontFamily":"inter"} -->
-<h3 class="wp-block-heading has-inter-font-family has-small-font-size" style="font-style:normal;font-weight:700"><?php esc_html_e( 'REST API', 'wporg' ); ?></h3>
+<a class="wp-block-wporg-link-wrapper" href="<?php echo esc_url( site_url( '/rest-api/' ) ); ?>"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"600"}},"fontSize":"normal","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:600"><?php esc_html_e( 'REST API', 'wporg' ); ?></h3>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
@@ -106,8 +106,8 @@
 <!-- /wp:wporg/link-wrapper -->
 
 <!-- wp:wporg/link-wrapper -->
-<a class="wp-block-wporg-link-wrapper" href="<?php echo esc_url( site_url( '/cli/' ) ); ?>commands"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"700"}},"fontSize":"small","fontFamily":"inter"} -->
-<h3 class="wp-block-heading has-inter-font-family has-small-font-size" style="font-style:normal;font-weight:700"><?php esc_html_e( 'Run WP-CLI Commands', 'wporg' ); ?></h3>
+<a class="wp-block-wporg-link-wrapper" href="<?php echo esc_url( site_url( '/cli/' ) ); ?>commands"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"600"}},"fontSize":"normal","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:600"><?php esc_html_e( 'Run WP-CLI Commands', 'wporg' ); ?></h3>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
@@ -116,8 +116,8 @@
 <!-- /wp:wporg/link-wrapper -->
 
 <!-- wp:wporg/link-wrapper -->
-<a class="wp-block-wporg-link-wrapper" href="<?php echo esc_url( site_url( '/coding-standards/' ) ); ?>"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"700"}},"fontSize":"small","fontFamily":"inter"} -->
-<h3 class="wp-block-heading has-inter-font-family has-small-font-size" style="font-style:normal;font-weight:700"><?php esc_html_e( 'Coding Standards', 'wporg' ); ?></h3>
+<a class="wp-block-wporg-link-wrapper" href="<?php echo esc_url( site_url( '/coding-standards/' ) ); ?>"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"600"}},"fontSize":"normal","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:600"><?php esc_html_e( 'Coding Standards', 'wporg' ); ?></h3>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
@@ -161,8 +161,8 @@
 
 <!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|10"}},"className":"is-style-cards-grid","layout":{"type":"grid","minimumColumnWidth":"49%"},"fontSize":"small"} -->
 <div class="wp-block-group is-style-cards-grid has-small-font-size"><!-- wp:wporg/link-wrapper -->
-<a class="wp-block-wporg-link-wrapper" href="https://make.wordpress.org/docs/handbook/"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"700"}},"fontSize":"small","fontFamily":"inter"} -->
-<h3 class="wp-block-heading has-inter-font-family has-small-font-size" style="font-style:normal;font-weight:700"><?php esc_html_e( 'Documentation Contributor Handbook', 'wporg' ); ?></h3>
+<a class="wp-block-wporg-link-wrapper" href="https://make.wordpress.org/docs/handbook/"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"600"}},"fontSize":"normal","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:600"><?php esc_html_e( 'Documentation Contributor Handbook', 'wporg' ); ?></h3>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
@@ -171,8 +171,8 @@
 <!-- /wp:wporg/link-wrapper -->
 
 <!-- wp:wporg/link-wrapper -->
-<a class="wp-block-wporg-link-wrapper" href="https://make.wordpress.org/core/handbook/"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"700"}},"fontSize":"small","fontFamily":"inter"} -->
-<h3 class="wp-block-heading has-inter-font-family has-small-font-size" style="font-style:normal;font-weight:700"><?php esc_html_e( 'Contribute to WordPress', 'wporg' ); ?></h3>
+<a class="wp-block-wporg-link-wrapper" href="https://make.wordpress.org/core/handbook/"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"600"}},"fontSize":"normal","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:600"><?php esc_html_e( 'Contribute to WordPress', 'wporg' ); ?></h3>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
@@ -187,8 +187,8 @@
 <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"right":"var:preset|spacing|edge-space","left":"var:preset|spacing|edge-space","top":"var:preset|spacing|40","bottom":"var:preset|spacing|40"}},"border":{"bottom":{"color":"var:preset|color|white-opacity-15","style":"solid","width":"1px"}},"elements":{"link":{"color":{"text":"var:preset|color|white"}}}},"backgroundColor":"charcoal-2","textColor":"white","className":"wporg-front-page-footer","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull wporg-front-page-footer has-white-color has-charcoal-2-background-color has-text-color has-background has-link-color" style="border-bottom-color:var(--wp--preset--color--white-opacity-15);border-bottom-style:solid;border-bottom-width:1px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--edge-space);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--edge-space)"><!-- wp:columns {"align":"wide","style":{"spacing":{"blockGap":{"top":"var:preset|spacing|20"}}},"className":"is-style-default"} -->
 <div class="wp-block-columns alignwide is-style-default"><!-- wp:column {"verticalAlignment":"top","width":"50%","className":"is-left-column","layout":{"inherit":false}} -->
-<div class="wp-block-column is-vertically-aligned-top is-left-column" style="flex-basis:50%"><!-- wp:heading {"style":{"typography":{"fontStyle":"normal","fontWeight":"400","lineHeight":"1.3"}},"fontSize":"large","fontFamily":"ibm-plex-sans"} -->
-<h2 class="wp-block-heading has-ibm-plex-sans-font-family has-large-font-size" style="font-style:normal;font-weight:400;line-height:1.3"><?php esc_html_e( 'More resources', 'wporg' ); ?></h2>
+<div class="wp-block-column is-vertically-aligned-top is-left-column" style="flex-basis:50%"><!-- wp:heading {"style":{"typography":{"fontStyle":"normal","fontWeight":"600","lineHeight":"1.3"}},"fontSize":"large","fontFamily":"ibm-plex-sans"} -->
+<h2 class="wp-block-heading has-ibm-plex-sans-font-family has-large-font-size" style="font-style:normal;font-weight:600;line-height:1.3"><?php esc_html_e( 'More resources', 'wporg' ); ?></h2>
 <!-- /wp:heading -->
 
 <!-- wp:columns {"style":{"spacing":{"blockGap":{"left":"var:preset|spacing|50"}}}} -->
@@ -197,8 +197,8 @@
 <h3 class="wp-block-heading is-style-short-text has-blueberry-2-color has-text-color has-link-color has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:700;line-height:1.6"><a href="https://make.wordpress.org/docs/handbook/"><?php esc_html_e( 'Documentation', 'wporg' ); ?><br><?php esc_html_e( 'Contributor Handbook', 'wporg' ); ?></a></h3>
 <!-- /wp:heading -->
 
-<!-- wp:paragraph -->
-<p>Help document.</p>
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size"><?php esc_html_e( 'Help document.', 'wporg' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:column -->
 
@@ -207,16 +207,16 @@
 <h3 class="wp-block-heading is-style-short-text has-blueberry-2-color has-text-color has-link-color has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:700;line-height:1.6"><a href="https://make.wordpress.org/core/handbook/"><?php esc_html_e( 'Core Contributor', 'wporg' ); ?><br><?php esc_html_e( 'Handbook', 'wporg' ); ?></a></h3>
 <!-- /wp:heading -->
 
-<!-- wp:paragraph -->
-<p><?php esc_html_e( 'Start contributing.', 'wporg' ); ?></p>
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size"><?php esc_html_e( 'Start contributing.', 'wporg' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns --></div>
 <!-- /wp:column -->
 
 <!-- wp:column {"width":"50%","layout":{"inherit":false}} -->
-<div class="wp-block-column" style="flex-basis:50%"><!-- wp:heading {"style":{"typography":{"fontStyle":"normal","fontWeight":"400","lineHeight":"1.3"}},"fontSize":"large","fontFamily":"ibm-plex-sans"} -->
-<h2 class="wp-block-heading has-ibm-plex-sans-font-family has-large-font-size" style="font-style:normal;font-weight:400;line-height:1.3"><?php esc_html_e( 'Related', 'wporg' ); ?></h2>
+<div class="wp-block-column" style="flex-basis:50%"><!-- wp:heading {"style":{"typography":{"fontStyle":"normal","fontWeight":"600","lineHeight":"1.3"}},"fontSize":"large","fontFamily":"ibm-plex-sans"} -->
+<h2 class="wp-block-heading has-ibm-plex-sans-font-family has-large-font-size" style="font-style:normal;font-weight:600;line-height:1.3"><?php esc_html_e( 'Related', 'wporg' ); ?></h2>
 <!-- /wp:heading -->
 
 <!-- wp:columns {"style":{"spacing":{"blockGap":{"left":"var:preset|spacing|50"}}}} -->
@@ -225,8 +225,8 @@
 <h3 class="wp-block-heading is-style-short-text has-blueberry-2-color has-text-color has-link-color has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:700;line-height:1.6"><a href="https://make.wordpress.org/core/handbook/contribute/codebase/"><?php esc_html_e( 'Intro to WordPress', 'wporg' ); ?><br><?php esc_html_e( 'Core Development', 'wporg' ); ?></a></h3>
 <!-- /wp:heading -->
 
-<!-- wp:paragraph -->
-<p><?php esc_html_e( 'Crash course.', 'wporg' ); ?></p>
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size"><?php esc_html_e( 'Crash course.', 'wporg' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:column -->
 
@@ -235,8 +235,8 @@
 <h3 class="wp-block-heading is-style-short-text has-blueberry-2-color has-text-color has-link-color has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:700;line-height:1.6"><a href="https://make.wordpress.org/core/handbook/tutorials/installing-a-local-server/"><?php esc_html_e( 'Local Development Environment', 'wporg' ); ?></a></h3>
 <!-- /wp:heading -->
 
-<!-- wp:paragraph -->
-<p><?php esc_html_e( 'Local development.', 'wporg' ); ?></p>
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size"><?php esc_html_e( 'Local development.', 'wporg' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns --></div>
