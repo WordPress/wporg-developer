@@ -24,6 +24,10 @@
 </p>
 <!-- /wp:paragraph -->
 
+<!-- wp:heading {"className":"is-toc-heading"} -->
+<h2 class="wp-block-heading is-toc-heading" id="commands"><a href="#commands"><?php esc_html_e( 'Commands', 'wporg' ); ?></a></h2>
+<!-- /wp:heading -->
+
 <!-- wp:wporg/cli-command-table {"style":{"spacing":{"margin":{"top":"var:preset|spacing|20"}}}} /-->
 
 <!-- wp:heading {"className":"is-toc-heading"} -->

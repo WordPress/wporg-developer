@@ -670,16 +670,12 @@ function filter_standards_content( $content ) {
 function filter_command_content( $content ) {
 	global $wp;
 	// Feed the static content from the CLI archive template to generate the ToC
-	// Note: ids must be added to the cli-commands and cli-commands-content patterns manually
+	// Note: ids must be added to the cli-commands-content pattern manually
 	if ( is_archive() && isset( $wp->request ) && 'cli/commands' === $wp->request ) {
 		// Stop infinite loop
 		remove_filter( 'the_content', 'DevHub\filter_command_content', 4 );
 
-		$content = sprintf(
-			'<h1>%1$s</h1>%2$s',
-			__( 'WP-CLI Commands', 'wporg' ),
-			do_blocks( '<!-- wp:pattern {"slug":"wporg-developer-2023/cli-commands-content"} /-->' )
-		);
+		$content = do_blocks( '<!-- wp:pattern {"slug":"wporg-developer-2023/cli-commands-content"} /-->' );
 
 		add_filter( 'the_content', 'DevHub\filter_command_content', 4 );
 
