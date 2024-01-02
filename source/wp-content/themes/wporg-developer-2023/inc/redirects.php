@@ -135,7 +135,17 @@ class DevHub_Redirects {
 	public static function paginated_home_page_404() {
 		// Paginated front page.
 		if ( is_front_page() && is_paged() ) {
-			include( get_template_directory() . '/404.php' );
+			// Add the usual 404 page body class so that styles are applied.
+			add_filter(
+				'body_class',
+				function( $classes ) {
+					$classes[] = 'error404';
+
+					return $classes;
+				}
+			);
+
+			include( get_404_template() );
 			exit;
 		}
 	}
