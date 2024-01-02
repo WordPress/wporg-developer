@@ -9,15 +9,15 @@
 	"description": "",
 	"usesContext": [ "postId", "postType" ],
 	"attributes": {
-		"linkUrl": {
-			"type": "string",
-			"default": ""
-		},
 		"heading": {
 			"type": "string",
 			"default": ""
 		},
-		"text": {
+		"linkText": {
+			"type": "string",
+			"default": ""
+		},
+		"linkUrl": {
 			"type": "string",
 			"default": ""
 		}

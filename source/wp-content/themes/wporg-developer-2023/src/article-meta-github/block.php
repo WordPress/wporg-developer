@@ -33,8 +33,7 @@ function render( $attributes, $content, $block ) {
 	$post_id = $block->context['postId'];
 
 	if (
-		! isset( $post_id )
-		|| ! isset( $post_type )
+		! isset( $post_id ) || ! isset( $post_type )
 	) {
 		return '';
 	}
@@ -57,12 +56,12 @@ function render( $attributes, $content, $block ) {
 			</div>
 			<!-- /wp:group -->'
 		),
-		esc_html__( $attributes['heading'], 'wporg' ),
+		esc_html( $attributes['heading'] ),
 		esc_url( $attributes['linkURL'] ),
 		sprintf(
-			/* translators: %s: article title */
+			/* translators: %1$s: call to action, %2$s: article title */
 			__( '%1$s<span class="screen-reader-text">: %2$s"</span>', 'wporg' ),
-			esc_html( $attributes['text'] ),
+			esc_html( $attributes['linkText'] ),
 			esc_html( $title )
 		)
 	);
