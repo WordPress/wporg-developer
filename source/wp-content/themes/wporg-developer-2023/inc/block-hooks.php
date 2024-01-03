@@ -52,32 +52,37 @@ function get_block_content_by_home_url( $block_content, $replacement_home_url = 
 }
 
 /**
- * Filters the article meta block and conditionally removes it.
+ * Filters an article meta block and conditionally removes it.
  *
  * @param string $block_content
  * @param array  $block
  * @return string
  */
-function filter_article_meta_block( $block_content, $block ) {
-	if ( 'wporg/article-meta-github' === $block['blockName'] ) {
-		$github_handbooks = array(
-			'wpcs-handbook',
-			'blocks-handbook',
-			'rest-api-handbook',
-			'cli-handbook',
-			'adv-admin-handbook',
-		);
+function filter_article_meta_block( $block_content, $block ) {	
+	// Not all handbooks come from GitHub.
+	$local_handbooks = array( 'plugin-handbook', 'theme-handbook' );
 
+	if ( 'wporg/article-meta-github' === $block['blockName'] ) {
 		$post_type = get_post_type();
 
-		// Not all handbooks come from GitHub.
-		if ( ! in_array( $post_type, $github_handbooks, true ) ) {
+		if ( in_array( $post_type, $local_handbooks ) ) {
 			return '';
 		}
 
 		// The block editor handbook doesn't have a changelog.
 		// We only know it's the changelog because of the linkURL attribute.
 		if ( 'blocks-handbook' === $post_type && '[article_changelog_link]' === $block['attrs']['linkURL'] ) {
+			return '';
+		}
+	}
+
+	if ( 'wporg/article-meta-date' === $block['blockName'] ) {
+		$post_type = get_post_type();
+
+		// Last modified date for handbooks from GitHub is the last import date, rather than the edited date.
+		// Don't display until we have the edited date from GitHub.
+		// See https://github.com/WordPress/wporg-developer/issues/456
+		if ( wporg_is_handbook_post_type() && ! in_array( $post_type, $local_handbooks ) && '[last_updated]' === $block['attrs']['heading'] ) {
 			return '';
 		}
 	}
