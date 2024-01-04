@@ -45,7 +45,7 @@ function render( $attributes, $content, $block ) {
 		do_blocks(
 			sprintf(
 				'<!-- wp:post-date {"displayType":"%s"} /-->',
-				$attributes['displayType']
+				esc_js( $attributes['displayType'] ),
 			),
 		),
 	);
