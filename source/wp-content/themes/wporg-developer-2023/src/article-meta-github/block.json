@@ -8,7 +8,20 @@
 	"icon": "smiley",
 	"description": "",
 	"usesContext": [ "postId", "postType" ],
-	"attributes": {},
+	"attributes": {
+		"heading": {
+			"type": "string",
+			"default": ""
+		},
+		"linkText": {
+			"type": "string",
+			"default": ""
+		},
+		"linkUrl": {
+			"type": "string",
+			"default": ""
+		}
+	},
 	"supports": {
 		"inserter": false
 	},

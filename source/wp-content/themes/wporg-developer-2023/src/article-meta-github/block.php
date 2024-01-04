@@ -29,28 +29,18 @@ function init() {
  * @return string Returns the block markup.
  */
 function render( $attributes, $content, $block ) {
-	$github_handbooks = array(
-		'wpcs-handbook',
-		'blocks-handbook',
-		'rest-api-handbook',
-		'cli-handbook',
-		'adv-admin-handbook',
-	);
-
 	$post_type = $block->context['postType'];
 	$post_id = $block->context['postId'];
 
 	if (
-		! isset( $post_id )
-		|| ! isset( $post_type )
-		|| ! in_array( $post_type, $github_handbooks, true )
+		! isset( $post_id ) || ! isset( $post_type )
 	) {
 		return '';
 	}
 
 	$title = get_the_title( $post_id );
 
-	$content = sprintf(
+	return sprintf(
 		do_blocks(
 			'<!-- wp:group {"style":{"spacing":{"blockGap":"0"}},"layout":{"type":"constrained"}} -->
 			<div class="wp-block-group">
@@ -60,45 +50,19 @@ function render( $attributes, $content, $block ) {
 				<!-- /wp:paragraph -->
 
 				<!-- wp:paragraph {"className":"external-link"} -->
-				<p class="external-link"><a href="[article_edit_link]">%2$s</a></p>
+				<p class="external-link"><a href="%2$s">%3$s</a></p>
 				<!-- /wp:paragraph -->
 
 			</div>
 			<!-- /wp:group -->'
 		),
-		esc_html__( 'Edit article', 'wporg' ),
+		esc_html( $attributes['heading'] ),
+		esc_url( $attributes['linkURL'] ),
 		sprintf(
-			/* translators: %s: article title */
-			__( 'Improve it on GitHub<span class="screen-reader-text">: %s</span>', 'wporg' ),
+			/* translators: %1$s: call to action, %2$s: article title */
+			__( '%1$s<span class="screen-reader-text">: %2$s"</span>', 'wporg' ),
+			esc_html( $attributes['linkText'] ),
 			esc_html( $title )
 		)
 	);
-
-	if ( 'blocks-handbook' !== $post_type ) {
-		$content .= sprintf(
-			do_blocks(
-				'<!-- wp:group {"style":{"spacing":{"blockGap":"0"}},"layout":{"type":"constrained"}} -->
-				<div class="wp-block-group">
-
-					<!-- wp:paragraph {"style":{"typography":{"fontStyle":"normal","fontWeight":"700"}}} -->
-					<p style="font-style:normal;font-weight:700">%1$s</p>
-					<!-- /wp:paragraph -->
-
-					<!-- wp:paragraph {"className":"external-link"} -->
-					<p class="external-link"><a href="[article_changelog_link]">%2$s</a></p>
-					<!-- /wp:paragraph -->
-					
-				</div>
-				<!-- /wp:group -->'
-			),
-			esc_html__( 'Changelog', 'wporg' ),
-			sprintf(
-				/* translators: %s: article title */
-				__( 'See list of changes<span class="screen-reader-text">: %s</span>', 'wporg' ),
-				esc_html( $title )
-			)
-		);
-	}
-
-	return $content;
 }
