@@ -61,7 +61,7 @@ function get_block_content_by_home_url( $block_content, $replacement_home_url = 
 function filter_article_meta_block( $block_content, $block ) {	
 	if ( 'wporg/article-meta-github' === $block['blockName'] ) {
 		// Not all handbooks come from GitHub.
-		$local_handbooks = array( 'plugin-handbook', 'theme-handbook' );
+		$local_handbooks = array( 'apis-handbook', 'plugin-handbook', 'theme-handbook' );
 		$post_type = get_post_type();
 
 		if ( in_array( $post_type, $local_handbooks ) ) {
