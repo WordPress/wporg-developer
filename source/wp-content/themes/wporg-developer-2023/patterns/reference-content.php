@@ -32,7 +32,12 @@
 				<!-- /wp:heading -->
 
 				<!-- wp:paragraph -->
-				<p><a href="https://developer.wordpress.org/apis/"><?php esc_html_e( 'View all', 'wporg' ); ?></a></p>
+				<p>
+					<a href="https://developer.wordpress.org/apis/">
+						<span aria-hidden="true"><?php esc_html_e( 'View all', 'wporg' ); ?></span>
+						<span class="screen-reader-text"><?php esc_html_e( 'View all API reference', 'wporg' ); ?></span>
+					</a>
+				</p>
 				<!-- /wp:paragraph -->
 			
 			</div>

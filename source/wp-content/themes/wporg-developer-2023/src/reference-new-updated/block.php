@@ -72,6 +72,7 @@ function render( $attributes, $content, $block ) {
 	endwhile;
 
 	$content .= '</ul><!-- /wp:list --></div><!-- /wp:group -->';
+	$version_name = substr( $version->name, 0, -2 );
 
 	$title_block = sprintf(
 		'<!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between"}} -->
@@ -82,15 +83,17 @@ function render( $attributes, $content, $block ) {
 			<!-- /wp:heading -->
 
 			<!-- wp:paragraph -->
-			<p><a href="%s">%s</a></p>
+			<p><a href="%s"><span aria-hidden="true">%s</span><span class="screen-reader-text">%s</span></a></p>
 			<!-- /wp:paragraph -->
 
 		</div>
 		<!-- /wp:group -->',
 		// translators: %s is the version name
-		sprintf( __( 'New and updated in %s', 'wporg' ), substr( $version->name, 0, -2 ) ),
+		sprintf( __( 'New and updated in %s', 'wporg' ), $version_name ),
 		esc_attr( get_term_link( $version, 'wp-parser-since' ) ),
-		__( 'View all', 'wporg' )
+		__( 'View all', 'wporg' ),
+		// translators: %s is the version name
+		sprintf( __( 'View all new and updated in %s', 'wporg' ), $version_name ),
 	);
 
 	$wrapper_attributes = get_block_wrapper_attributes();
