@@ -11,6 +11,7 @@ namespace WordPressdotorg\Theme\Developer_2023\Dynamic_Search_Post;
 use function DevHub\is_parsed_post_type;
 
 add_action( 'init', __NAMESPACE__ . '\init' );
+add_filter( 'get_the_excerpt', __NAMESPACE__ . '\strip_markdown_in_excerpt' );
 
 /**
  * Registers the block using the metadata loaded from the `block.json` file.
@@ -26,6 +27,24 @@ function init() {
 			'render_callback' => __NAMESPACE__ . '\render',
 		)
 	);
+}
+
+/**
+ * Parse the markdown in a given string, then strip the resulting HTML.
+ *
+ * @param string $excerpt The post excerpt.
+ *
+ * @return string A string without markdown or HTML.
+ */
+function strip_markdown_in_excerpt( $excerpt ) {
+	// Load Jetpack Markdown if it's not already loaded.
+	if ( ! class_exists( 'WPCom_GHF_Markdown_Parser' ) && defined( 'JETPACK__PLUGIN_DIR' ) ) {
+		require_once JETPACK__PLUGIN_DIR . '/_inc/lib/markdown.php';
+	}
+
+	$parser = new \WPCom_GHF_Markdown_Parser();
+	$html = $parser->transform( $excerpt );
+	return wp_strip_all_tags( $html );
 }
 
 /**
