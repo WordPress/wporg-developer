@@ -2,25 +2,3 @@
 	margin-block-start: var(--wp--style--block-gap);
 	margin-block-end: var(--wp--style--block-gap);
 }
-
-.wp-block-wporg-code-reference-comment-form-content {
-	display: flex;
-	flex-direction: column;
-	max-width: var(--wp--style--global--content-size);
-
-	@media screen and (min-width: 1200px) {
-		max-width: unset;
-		flex-direction: row;
-		justify-content: space-between;
-		gap: var(--wp--preset--spacing--40);
-
-		.comment-respond {
-			min-width: var(--wp--style--global--content-size);
-		}
-
-		.comment-rules {
-			padding-top: var(--wp--preset--spacing--30);
-		}
-	}
-}
-
