@@ -353,14 +353,42 @@ class DevHub_Formatting {
 		$r = '';
 		$textarr = preg_split( '/(<[^<>]+>)/', $text, -1, PREG_SPLIT_DELIM_CAPTURE ); // split out HTML tags
 		$nested_code_pre = 0; // Keep track of how many levels link is nested inside <pre> or <code>
+		$nested_in_link = 0; // Keep track of whether this item is already inside a link.
+
 		foreach ( $textarr as $piece ) {
 
-			if ( preg_match( '|^<code[\s>]|i', $piece ) || preg_match( '|^<pre[\s>]|i', $piece ) || preg_match( '|^<script[\s>]|i', $piece ) || preg_match( '|^<style[\s>]|i', $piece ) )
+			if (
+				preg_match( '|^<code[\s>]|i', $piece ) ||
+				preg_match( '|^<pre[\s>]|i', $piece ) ||
+				preg_match( '|^<script[\s>]|i', $piece ) ||
+				preg_match( '|^<style[\s>]|i', $piece )
+			) {
 				$nested_code_pre++;
-			elseif ( $nested_code_pre && ( '</code>' === strtolower( $piece ) || '</pre>' === strtolower( $piece ) || '</script>' === strtolower( $piece ) || '</style>' === strtolower( $piece ) ) )
+			} elseif (
+				$nested_code_pre &&
+				(
+					'</code>' === strtolower( $piece ) ||
+					'</pre>' === strtolower( $piece ) ||
+					'</script>' === strtolower( $piece ) ||
+					'</style>' === strtolower( $piece )
+				)
+			) {
 				$nested_code_pre--;
+			}
 
-			if ( $nested_code_pre || empty( $piece ) || ( $piece[0] === '<' && ! preg_match( '|^<\s*[\w]{1,20}+://|', $piece ) ) ) {
+			// Avoid creating links inside of other links.
+			if ( preg_match( '|^<a[\s>]|i', $piece ) ) {
+				$nested_in_link++;
+			} elseif ( $nested_in_link && ( '</a>' === strtolower( $piece ) ) ) {
+				$nested_in_link--;
+			}
+
+			if (
+				$nested_code_pre ||
+				$nested_in_link ||
+				empty( $piece ) ||
+				( $piece[0] === '<' && ! preg_match( '|^<\s*[\w]{1,20}+://|', $piece ) )
+			) {
 				$r .= $piece;
 				continue;
 			}
