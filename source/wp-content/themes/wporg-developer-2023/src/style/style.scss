@@ -71,6 +71,7 @@ pre {
 .has-three-columns {
 	--local--sidebar--width: 232px;
 	--local--column-gap: 40px;
+	justify-content: flex-end;
 
 	> * {
 		width: 100%;
@@ -84,8 +85,10 @@ pre {
 		flex-direction: row !important;
 		column-gap: var(--local--column-gap);
 
-		aside {
+		/* Left sidebar */
+		> .wp-block-wporg-sidebar-container {
 			width: var(--local--sidebar--width);
+			inset-inline-start: var(--wp--preset--spacing--edge-space);
 		}
 
 		main {
@@ -105,10 +108,11 @@ pre {
 			max-width: 960px;
 			margin-left: auto;
 			margin-right: auto;
-		}
 
-		.wp-block-wporg-sidebar-container {
-			inset-inline-end: var(--wp--preset--spacing--edge-space);
+			/* Right sidebar */
+			.wp-block-wporg-sidebar-container {
+				inset-inline-end: var(--wp--preset--spacing--edge-space);
+			}
 		}
 	}
 }
