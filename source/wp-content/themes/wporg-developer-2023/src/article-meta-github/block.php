@@ -39,7 +39,7 @@ function render( $attributes, $content, $block ) {
 	}
 
 	$title = get_the_title( $post_id );
-	$link_url = $attributes['linkURL'];
+	$link_url = is_user_logged_in() ? $attributes['linkURL'] : wp_login_url( get_permalink() );
 
 	return sprintf(
 		do_blocks(
