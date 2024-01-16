@@ -46,10 +46,10 @@ add_shortcode(
 add_shortcode(
 	'article_changelog_link',
 	function() {
-		// If this is a github page, use the edit URL to generate the
-		// commit history URL
 		global $post;
 		$markdown_source = get_markdown_edit_link( $post->ID );
+		// If this is a github page, use the edit URL to generate the
+		// commit history URL
 		if ( str_contains( $markdown_source, 'github.com' ) ) {
 			return str_replace( '/edit/', '/commits/', $markdown_source );
 		}
