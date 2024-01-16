@@ -230,8 +230,7 @@
 <!-- /wp:paragraph --></div>
 <!-- /wp:column -->
 
-<!-- /wp:column --></div>
-<!-- /wp:columns --></div>
-<!-- /wp:column --></div>
-<!-- /wp:columns --></div>
-<!-- /wp:group -->
+</div><!-- /wp:columns -->
+</div><!-- /wp:column -->
+</div><!-- /wp:columns -->
+</div><!-- /wp:group -->
