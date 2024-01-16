@@ -226,7 +226,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"fontSize":"small"} -->
-<p class="has-small-font-size"><?php esc_html_e( 'WordPress tutorials.', 'wporg' ); ?></p>
+<p class="has-small-font-size"><?php esc_html_e( 'Gain skills.', 'wporg' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:column -->
 
