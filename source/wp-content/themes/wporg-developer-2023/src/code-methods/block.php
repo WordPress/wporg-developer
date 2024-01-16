@@ -111,5 +111,6 @@ function get_row_data( $class_methods ) {
 		);
 		wp_reset_postdata();
 	}
+
 	return $rows;
 }
