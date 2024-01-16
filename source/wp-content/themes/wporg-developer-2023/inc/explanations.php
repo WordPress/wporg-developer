@@ -51,7 +51,7 @@ class WPORG_Explanations {
 
 		// Admin.
 		add_action( 'edit_form_after_title',   array( $this, 'post_to_expl_controls'  )        );
-		add_action( 'edit_form_top',           array( $this, 'expl_to_post_controls'  )        );
+		add_action( 'add_meta_boxes',          array( $this, 'expl_to_post_controls'  )        );
 		add_action( 'admin_bar_menu',          array( $this, 'toolbar_edit_link'      ), 100   );
 		add_action( 'admin_menu',              array( $this, 'admin_menu'             )        );
 		add_action( 'load-post-new.php',       array( $this, 'prevent_direct_creation')        );
@@ -262,28 +262,41 @@ class WPORG_Explanations {
 	 *
 	 * @access public
 	 *
-	 * @param WP_Post $post Current post object.
+	 * @param string $post_type Post type.
 	 */
-	public function expl_to_post_controls( $post ) {
-		if ( $this->exp_post_type !== $post->post_type ) {
+	public function expl_to_post_controls( $post_type = '' ) {
+		if ( $this->exp_post_type !== $post_type ) {
 			return;
 		}
+
+		add_meta_box(
+			'wporg_explanations-associated-with',
+			__( 'Associated with', 'wporg' ),
+			array( $this, 'render_expl_to_post_controls' ),
+			'wporg_explanations',
+			'side'
+		);
+	}
+
+	/**
+	 * Render the Explanation-to-Post meta box.
+	 *
+	 * @access public
+	 *
+	 * @param WP_Post $post Current post object.
+	 */
+	public function render_expl_to_post_controls( $post ) {
+		$parent_post_id = $post->post_parent;
+		$parent_post_type = get_post_type( $parent_post_id );
+
 		?>
-		<div class="postbox-container" style="margin-top:20px;width:100%;">
-			<div class="postbox">
-				<div class="inside" style="padding-bottom:0;">
-					<strong><?php _e( 'Associated with: ', 'wporg' ); ?></strong>
-					<?php
-					printf(
-						'<a href="%1$s">%2$s</a>',
-						esc_url( get_permalink( $post->post_parent ) ),
-						str_replace( 'Explanation: ', '', get_the_title( $post->post_parent ) )
-					);
-					?>
-				</div>
-			</div>
-		</div>
+		<strong><?php echo esc_html( get_post_type_object( $parent_post_type )->labels->singular_name ); ?>: </strong>
 		<?php
+		printf(
+			'<a href="%1$s">%2$s</a>',
+			esc_url( get_permalink( $parent_post_id ) ),
+			esc_html( str_replace( 'Explanation: ', '', get_the_title( $parent_post_id ) ) ),
+		);
 	}
 
 	/**
