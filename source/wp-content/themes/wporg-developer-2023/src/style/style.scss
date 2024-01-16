@@ -85,7 +85,7 @@ pre {
 		flex-direction: row !important;
 		column-gap: var(--local--column-gap);
 
-		/* Left sidebar */
+		/* Left sidebar: Chapter List */
 		> .wp-block-wporg-sidebar-container {
 			width: var(--local--sidebar--width);
 			inset-inline-start: var(--wp--preset--spacing--edge-space);
@@ -109,7 +109,7 @@ pre {
 			margin-left: auto;
 			margin-right: auto;
 
-			/* Right sidebar */
+			/* Right sidebar: ToC */
 			.wp-block-wporg-sidebar-container {
 				inset-inline-end: var(--wp--preset--spacing--edge-space);
 			}
