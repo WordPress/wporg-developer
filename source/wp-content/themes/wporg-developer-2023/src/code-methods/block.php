@@ -48,7 +48,7 @@ function render( $attributes, $content, $block ) {
 
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(
-		'<section %s>%s %s</section>',
+		'<section %1$s>%2$s %3$s</section>',
 		$wrapper_attributes,
 		$title_block,
 		do_blocks( $content )
