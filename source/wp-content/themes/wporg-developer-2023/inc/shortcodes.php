@@ -27,14 +27,16 @@ add_shortcode(
 
 /**
  * Get the link to edit the page.
- *
- * The handbook code automatically swaps out the edit link for the github URL,
- * if this is a github handbook.
  */
 add_shortcode(
 	'article_edit_link',
 	function() {
-		return get_edit_post_link();
+		global $post;
+		$markdown_source = get_markdown_edit_link( $post->ID );
+		if ( $markdown_source ) {
+			return esc_url( $markdown_source );
+		}
+		return is_user_logged_in() ? get_edit_post_link() : wp_login_url( get_permalink() );
 	}
 );
 
@@ -44,11 +46,12 @@ add_shortcode(
 add_shortcode(
 	'article_changelog_link',
 	function() {
+		global $post;
+		$markdown_source = get_markdown_edit_link( $post->ID );
 		// If this is a github page, use the edit URL to generate the
 		// commit history URL
-		$edit_url = get_edit_post_link();
-		if ( str_contains( $edit_url, 'github.com' ) ) {
-			return str_replace( '/edit/', '/commits/', $edit_url );
+		if ( str_contains( $markdown_source, 'github.com' ) ) {
+			return str_replace( '/edit/', '/commits/', $markdown_source );
 		}
 		return '#';
 	}
@@ -67,3 +70,29 @@ add_shortcode(
 		return '';
 	}
 );
+
+/**
+ * Get the markdown link.
+ *
+ * @param int $post_id Post ID.
+ */
+function get_markdown_edit_link( $post_id ) {
+	$markdown_source = get_post_meta( $post_id, 'wporg_markdown_source', true );
+	if ( ! $markdown_source ) {
+		return;
+	}
+
+	if ( 'github.com' !== parse_url( $markdown_source, PHP_URL_HOST ) ) {
+		return $markdown_source;
+	}
+
+	if ( preg_match( '!^https?://github.com/(?P<repo>[^/]+/[^/]+)/(?P<editblob>blob|edit)/(?P<branchfile>.*)$!i', $markdown_source, $m ) ) {
+		if ( 'edit' === $m['editblob'] ) {
+			return $markdown_source;
+		}
+
+		$markdown_source = "https://github.com/{$m['repo']}/edit/{$m['branchfile']}";
+	}
+
+	return $markdown_source;
+}
