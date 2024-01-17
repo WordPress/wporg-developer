@@ -74,7 +74,7 @@ function get_methods_content() {
 			$headings     = array( __( 'Name', 'wporg' ), __( 'Description', 'wporg' ) );
 
 			return sprintf(
-				'<!-- wp:wporg/code-table {"id":"uses","headings":%1$s,"rows":%2$s,"style":{"spacing":{"margin":{"top":"var:preset|spacing|20"}}}} /--> ',
+				'<!-- wp:wporg/code-table {"id":"uses","headings":%1$s,"rows":%2$s,"itemsToShow":100,"style":{"spacing":{"margin":{"top":"var:preset|spacing|20"}}}} /--> ',
 				wp_json_encode( $headings ),
 				wp_json_encode( get_row_data( $class_methods ) )
 			);
