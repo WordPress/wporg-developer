@@ -99,6 +99,7 @@ class DevHub_Head {
 			'og:site_name'   => get_bloginfo( 'name' ),
 			'og:type'        => 'website',
 			'og:url'         => home_url( '/' ),
+			'og:image'       => get_theme_file_uri( 'images/opengraph-image.png' ),
 			'twitter:card'   => 'summary_large_image',
 			'twitter:site'   => '@WordPress',
 		];
