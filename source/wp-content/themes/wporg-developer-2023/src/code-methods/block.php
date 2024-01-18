@@ -35,7 +35,7 @@ function render( $attributes, $content, $block ) {
 		return '';
 	}
 
-	$content = get_methods_content();
+	$content = get_methods_content( $block->context['postId'] );
 
 	if ( empty( $content ) ) {
 		return '';
@@ -58,13 +58,14 @@ function render( $attributes, $content, $block ) {
 /**
  * Return code methods html.
  *
+ * @param int $post_id
  * @return string
  */
-function get_methods_content() {
+function get_methods_content( $post_id ) {
 	if ( 'wp-parser-class' === get_post_type() ) {
 		$class_methods = get_children(
 			array(
-				'post_parent' => get_the_ID(),
+				'post_parent' => $post_id,
 				'post_status' => 'publish',
 			)
 		);
