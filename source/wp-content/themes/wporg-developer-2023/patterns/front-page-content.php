@@ -222,24 +222,15 @@
 <!-- wp:columns {"style":{"spacing":{"blockGap":{"left":"var:preset|spacing|50"}}}} -->
 <div class="wp-block-columns"><!-- wp:column {"style":{"spacing":{"blockGap":"var:preset|spacing|10"}}} -->
 <div class="wp-block-column"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"700","lineHeight":1.6},"elements":{"link":{"color":{"text":"var:preset|color|blueberry-2"}}}},"textColor":"blueberry-2","className":"is-style-short-text","fontSize":"normal","fontFamily":"inter"} -->
-<h3 class="wp-block-heading is-style-short-text has-blueberry-2-color has-text-color has-link-color has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:700;line-height:1.6"><a href="https://make.wordpress.org/core/handbook/contribute/codebase/"><?php esc_html_e( 'Intro to WordPress', 'wporg' ); ?><br><?php esc_html_e( 'Core Development', 'wporg' ); ?></a></h3>
+<h3 class="wp-block-heading is-style-short-text has-blueberry-2-color has-text-color has-link-color has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:700;line-height:1.6"><a href="https://learn.wordpress.org"><?php esc_html_e( 'Learn WordPress', 'wporg' ); ?></a></h3>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"fontSize":"small"} -->
-<p class="has-small-font-size"><?php esc_html_e( 'Crash course.', 'wporg' ); ?></p>
+<p class="has-small-font-size"><?php esc_html_e( 'Gain skills.', 'wporg' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:column -->
 
-<!-- wp:column {"style":{"spacing":{"blockGap":"var:preset|spacing|10"}}} -->
-<div class="wp-block-column"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"700","lineHeight":1.6},"elements":{"link":{"color":{"text":"var:preset|color|blueberry-2"}}}},"textColor":"blueberry-2","className":"is-style-short-text","fontSize":"normal","fontFamily":"inter"} -->
-<h3 class="wp-block-heading is-style-short-text has-blueberry-2-color has-text-color has-link-color has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:700;line-height:1.6"><a href="https://make.wordpress.org/core/handbook/tutorials/installing-a-local-server/"><?php esc_html_e( 'Local Development Environment', 'wporg' ); ?></a></h3>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph {"fontSize":"small"} -->
-<p class="has-small-font-size"><?php esc_html_e( 'Local development.', 'wporg' ); ?></p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:column --></div>
-<!-- /wp:columns --></div>
-<!-- /wp:column --></div>
-<!-- /wp:columns --></div>
-<!-- /wp:group -->
+</div><!-- /wp:columns -->
+</div><!-- /wp:column -->
+</div><!-- /wp:columns -->
+</div><!-- /wp:group -->
