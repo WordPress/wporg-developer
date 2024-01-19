@@ -48,67 +48,70 @@ function render( $attributes, $content, $block ) {
 
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(
-		'<section %s>%s %s</section>',
+		'<section %1$s>%2$s %3$s</section>',
 		$wrapper_attributes,
 		$title_block,
-		$content
+		do_blocks( $content )
 	);
 }
 
 /**
  * Return code methods html.
  *
+ * @param int $post_id
  * @return string
  */
 function get_methods_content( $post_id ) {
-	$output = '';
-
 	if ( 'wp-parser-class' === get_post_type() ) {
 		$class_methods = get_children(
 			array(
-				'post_parent' => get_the_ID(),
+				'post_parent' => $post_id,
 				'post_status' => 'publish',
 			)
 		);
 
 		if ( $class_methods ) {
 			usort( $class_methods, 'DevHub\compare_objects_by_name' );
-			$output .= '<ul>';
-			foreach ( $class_methods as $method ) {
-				$methods_list = '<li>';
+			$headings     = array( __( 'Name', 'wporg' ), __( 'Description', 'wporg' ) );
 
-				$permalink = get_permalink( $method->ID );
-				$methods_list .= "<a href='$permalink'>";
-
-				$title = get_the_title( $method );
-				$last_colon = strrpos( $title, ':' );
-				$pos = ( false !== $last_colon ) ? $last_colon + 1 : 0;
-				$methods_list .= substr( $title, $pos );
-
-				$methods_list .= '</a>';
-
-				// Remove the filter that adds the code reference block to the content to avoid a possible infinite loop.
-				remove_filter( 'the_content', 'DevHub\filter_code_content', 4 );
-
-				$excerpt = apply_filters( 'get_the_excerpt', $method->post_excerpt, $method );
-				if ( $excerpt ) {
-					$methods_list .= ' &mdash; ' . sanitize_text_field( $excerpt );
-				}
-
-				// Re-add the filter that adds this block to the content.
-				add_filter( 'the_content', 'DevHub\filter_code_content', 4 );
-
-				if ( is_deprecated( $method->ID ) ) {
-					$methods_list .= ' &mdash; <span class="deprecated-method">' . __( 'deprecated', 'wporg' ) . '</span>';
-				}
-
-				$methods_list .= '</li>';
-
-				$output .= $methods_list;
-			}
-			$output .= '</ul>';
+			return sprintf(
+				'<!-- wp:wporg/code-table {"id":"uses","headings":%1$s,"rows":%2$s,"itemsToShow":150,"style":{"spacing":{"margin":{"top":"var:preset|spacing|20"}}}} /--> ',
+				wp_json_encode( $headings ),
+				wp_json_encode( get_row_data( $class_methods ) )
+			);
 		}
 	}
+}
 
-	return $output;
+/**
+ * Returns list of rows for the table.
+ *
+ * @param WP_Post[] $class_methods
+ * @return array[]
+ */
+function get_row_data( $class_methods ) {
+	$rows = array();
+
+	foreach ( $class_methods as $method ) {
+		// Remove the filter that adds the code reference block to the content to avoid a possible infinite loop.
+		remove_filter( 'the_content', 'DevHub\filter_code_content', 4 );
+		$excerpt = sanitize_text_field( apply_filters( 'get_the_excerpt', $method->post_excerpt, $method ) );
+		if ( is_deprecated( $method->ID ) ) {
+			$excerpt .= ' &mdash; <span class="deprecated-method">' . __( 'deprecated', 'wporg' ) . '</span>';
+		}
+		// Re-add the filter that adds this block to the content.
+		add_filter( 'the_content', 'DevHub\filter_code_content', 4 );
+
+		$rows[] = array(
+			sprintf(
+				'<a href="%1$s">%2$s</a>',
+				get_permalink( $method->ID ),
+				get_the_title( $method ),
+			),
+			$excerpt ? $excerpt : '-',
+		);
+		wp_reset_postdata();
+	}
+
+	return $rows;
 }
