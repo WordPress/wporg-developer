@@ -99,6 +99,7 @@ class DevHub_Head {
 			'og:site_name'   => get_bloginfo( 'name' ),
 			'og:type'        => 'website',
 			'og:url'         => home_url( '/' ),
+			'og:image'       => get_theme_file_uri( 'images/opengraph-image.png' ),
 			'twitter:card'   => 'summary_large_image',
 			'twitter:site'   => '@WordPress',
 		];
@@ -117,7 +118,20 @@ class DevHub_Head {
 				$post_type_items = get_post_type_object( get_post_type() )->labels->all_items;
 				/* translators: %s: translated label for all items of a post type. */
 				$desc = sprintf( __( 'Code Reference archive for WordPress %s.', 'wporg' ), strtolower( $post_type_items ) );
+			} elseif ( is_archive() ) {
+				$desc = get_the_archive_title();
 			}
+		} elseif ( function_exists( 'wporg_is_handbook' ) && wporg_is_handbook() ) {
+			// Exclude search pages, otherwise the blurb is the first search result.
+			if ( ! is_search() ) {
+				$desc = get_the_excerpt();
+			}
+		} elseif ( is_archive( 'command' ) && ! is_search() ) {
+			// CLI handbook homepage.
+			$desc = __( 'Documentation for all currently available WP-CLI commands, including usage and subcommands.', 'wporg' );
+		} elseif ( is_singular( 'command' ) ) {
+			// Individual command pages.
+			$desc = get_the_excerpt();
 		} elseif ( is_singular() ) {
 			$post = get_queried_object();
 			if ( $post ) {
