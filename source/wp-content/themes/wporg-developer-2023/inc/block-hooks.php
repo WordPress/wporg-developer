@@ -68,8 +68,6 @@ function filter_handbook_meta_link_block( $block_content, $block ) {
 			return '';
 		}
 
-
-
 		// The block editor handbook doesn't have a changelog.
 		// We only know it's the changelog because of the linkURL attribute.
 		if ( 'blocks-handbook' === $post_type && '[article_changelog_link]' === $block['attrs']['linkURL'] ) {
