@@ -59,7 +59,6 @@ function get_block_content_by_home_url( $block_content, $replacement_home_url = 
  * @return string
  */
 function filter_handbook_meta_link_block( $block_content, $block ) {
-
 	if ( 'wporg/handbook-meta-link' === $block['blockName'] ) {
 		// Not all handbooks come from GitHub.
 		$local_handbooks = array( 'apis-handbook', 'plugin-handbook', 'theme-handbook' );
