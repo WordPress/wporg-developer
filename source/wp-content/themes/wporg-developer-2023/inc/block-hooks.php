@@ -7,7 +7,7 @@
 
 use function DevHub\is_parsed_post_type;
 
-add_filter( 'render_block', __NAMESPACE__ . '\filter_article_meta_block', 10, 2 );
+add_filter( 'render_block', __NAMESPACE__ . '\filter_handbook_meta_link_block', 10, 2 );
 
 /**
  * Filters the search block and conditionally inserts search filters.
@@ -58,8 +58,8 @@ function get_block_content_by_home_url( $block_content, $replacement_home_url = 
  * @param array  $block
  * @return string
  */
-function filter_article_meta_block( $block_content, $block ) {	
-	if ( 'wporg/article-meta-github' === $block['blockName'] ) {
+function filter_handbook_meta_link_block( $block_content, $block ) {
+	if ( 'wporg/handbook-meta-link' === $block['blockName'] ) {
 		// Not all handbooks come from GitHub.
 		$local_handbooks = array( 'apis-handbook', 'plugin-handbook', 'theme-handbook' );
 		$post_type = get_post_type();

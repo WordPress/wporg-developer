@@ -14,9 +14,9 @@
 
 	<!-- wp:wporg/article-meta-date {"heading":"[last_updated]","displayType":"modified"} /-->
 
-	<!-- wp:wporg/article-meta-github {"heading":"<?php esc_html_e( 'Edit article', 'wporg' ); ?>","linkURL":"[article_edit_link]","linkText":"<?php esc_html_e( 'Improve it on GitHub', 'wporg' ); ?>"} /-->
+	<!-- wp:wporg/handbook-meta-link {"heading":"<?php esc_html_e( 'Edit article', 'wporg' ); ?>","linkURL":"[article_edit_link]","linkText":"<?php esc_html_e( 'Improve it on GitHub', 'wporg' ); ?>"} /-->
 	
-	<!-- wp:wporg/article-meta-github {"heading":"<?php esc_html_e( 'Changelog', 'wporg' ); ?>","linkURL":"[article_changelog_link]","linkText":"<?php esc_html_e( 'See list of changes', 'wporg' ); ?>"} /-->
+	<!-- wp:wporg/handbook-meta-link {"heading":"<?php esc_html_e( 'Changelog', 'wporg' ); ?>","linkURL":"[article_changelog_link]","linkText":"<?php esc_html_e( 'See list of changes', 'wporg' ); ?>"} /-->
 
 </div>
 <!-- /wp:group -->

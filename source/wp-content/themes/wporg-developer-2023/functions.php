@@ -151,7 +151,6 @@ require __DIR__ . '/inc/block-hooks.php';
 
 // Block files
 require_once __DIR__ . '/src/article-meta-date/block.php';
-require_once __DIR__ . '/src/article-meta-github/block.php';
 require_once __DIR__ . '/src/chapter-list/block.php';
 require_once __DIR__ . '/src/cli-command-table/block.php';
 require_once __DIR__ . '/src/code-changelog/block.php';
