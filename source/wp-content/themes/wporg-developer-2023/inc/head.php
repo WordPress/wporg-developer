@@ -102,6 +102,7 @@ class DevHub_Head {
 			'og:image'       => get_theme_file_uri( 'images/opengraph-image.png' ),
 			'twitter:card'   => 'summary_large_image',
 			'twitter:site'   => '@WordPress',
+			'twitter:image'  => get_theme_file_uri( 'images/opengraph-image.png' ),
 		];
 
 		$desc = '';
