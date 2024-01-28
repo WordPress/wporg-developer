@@ -21,6 +21,7 @@ class DevHub_Redirects {
 	 * Handles adding/removing hooks to perform redirects as needed.
 	 */
 	public static function do_init() {
+		add_action( 'template_redirect', array( __CLASS__, 'redirect_blog' ) );
 		add_action( 'template_redirect', array( __CLASS__, 'redirect_single_search_match' ) );
 		add_action( 'template_redirect', array( __CLASS__, 'redirect_handbook' ) );
 		add_action( 'template_redirect', array( __CLASS__, 'redirect_resources' ) );
@@ -53,6 +54,18 @@ class DevHub_Redirects {
 			( 'handbook' == get_query_var( 'name' ) && ! get_query_var( 'post_type' ) )
 		) {
 			wp_redirect( home_url() );
+			exit();
+		}
+	}
+
+	/**
+	 * Redirects a /blog request to the Developer blog at /news/.
+	 */
+	public static function redirect_blog() {
+		$path = trailingslashit( $_SERVER['REQUEST_URI'] );
+
+		if ( 0 === strpos( $path, '/blog' ) ) {
+			wp_redirect( '/news/', 301 );
 			exit();
 		}
 	}
