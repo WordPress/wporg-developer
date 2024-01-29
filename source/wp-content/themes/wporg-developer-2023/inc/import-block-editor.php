@@ -62,6 +62,11 @@ class DevHub_Block_Editor_Importer extends DevHub_Docs_Importer {
 			'explanations/glossary'                               => 'getting-started/glossary',
 			'how-to-guides/platform/custom-block-editor/tutorial' => 'how-to-guides/platform/custom-block-editor',
 			'reference-guides/block-api/versions'                 => 'reference-guides/block-api/block-api-versions',
+			
+			// After handbook restructuring, January 2023.
+			'how-to-guides/block-tutorial/generate-blocks-with-wp-cli'        => 'getting-started/devenv/get-started-with-create-block',
+			'how-to-guides/block-tutorial/block-controls-toolbar-and-sidebar' => 'getting-started/fundamentals/block-in-the-editor',
+			'how-to-guides/block-tutorial/writing-your-first-block-type'      => 'getting-started/tutorial',
 
 			// After handbook restructuring, December 2023.
 			'getting-started/create-block'                                            => 'getting-started/tutorial',
