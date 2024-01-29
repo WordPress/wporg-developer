@@ -42,7 +42,9 @@ jQuery( function ( $ ) {
 		$copyButton.on( 'click', function ( event ) {
 			event.preventDefault();
 			clearTimeout( timeoutId );
-			const code = $element.find( 'code' ).text();
+			// first() is used here as sometimes there are additional <code> tags in user-generated content,
+			// which causes copying the text twice.
+			const code = $element.find( 'code' ).first().text();
 			if ( ! code ) {
 				return;
 			}
