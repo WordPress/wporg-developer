@@ -69,8 +69,9 @@ pre {
 }
 
 .has-three-columns {
-	--local--sidebar--width: 232px;
+	--local--sidebar--width: 248px;
 	--local--column-gap: 40px;
+	justify-content: flex-end;
 
 	> * {
 		width: 100%;
@@ -80,12 +81,23 @@ pre {
 		order: 1;
 	}
 
+	/* Left sidebar: Chapter List */
+	> .wp-block-wporg-sidebar-container {
+		margin-top: var(--wp--preset--spacing--20);
+	}
+
+	/* Right sidebar: ToC */
+	article .wp-block-wporg-sidebar-container {
+		margin-bottom: var(--wp--preset--spacing--50);
+	}
+
 	@media (min-width: 768px) {
 		flex-direction: row !important;
 		column-gap: var(--local--column-gap);
 
-		aside {
+		> .wp-block-wporg-sidebar-container {
 			width: var(--local--sidebar--width);
+			inset-inline-start: var(--wp--preset--spacing--edge-space);
 		}
 
 		main {
@@ -105,10 +117,10 @@ pre {
 			max-width: 960px;
 			margin-left: auto;
 			margin-right: auto;
-		}
 
-		.wp-block-wporg-sidebar-container {
-			inset-inline-end: var(--wp--preset--spacing--edge-space);
+			.wp-block-wporg-sidebar-container {
+				inset-inline-end: var(--wp--preset--spacing--edge-space);
+			}
 		}
 	}
 }
