@@ -23,8 +23,8 @@
 	<!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"top":"var:preset|spacing|40","bottom":"var:preset|spacing|40"},"blockGap":"var:preset|spacing|30"}},"layout":{"type":"flex","flexWrap":"wrap","verticalAlignment":"bottom"}} -->
 	<div class="wp-block-group alignwide" style="padding-top:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40)">
 	
-		<!-- wp:heading {"level":1,"style":{"typography":{"fontSize":"50px","fontStyle":"normal","fontWeight":"400"}},"fontFamily":"ibm-plex-sans"} -->
-		<h1 class="wp-block-heading has-ibm-plex-sans-font-family" style="font-size:50px;font-style:normal;font-weight:400"><?php esc_html_e( 'Developer Resources', 'wporg' ); ?></h1>
+		<!-- wp:heading {"level":1,"style":{"typography":{"fontSize":"50px","fontStyle":"normal","fontWeight":"400"}},"fontFamily":"eb-garamond"} -->
+		<h1 class="wp-block-heading has-eb-garamond-font-family" style="font-size:50px;font-style:normal;font-weight:400"><?php esc_html_e( 'Developer Resources', 'wporg' ); ?></h1>
 		<!-- /wp:heading -->
 
 		<!-- wp:paragraph {"style":{"typography":{"lineHeight":"2.3"}},"textColor":"white"} -->
@@ -41,7 +41,8 @@
 <div class="wp-block-group alignfull has-lemon-3-background-color has-background" style="padding-top:var(--wp--preset--spacing--10);padding-bottom:var(--wp--preset--spacing--10)">
 
 	<!-- wp:paragraph {"align":"center","fontSize":"small"} -->
-	<p class="has-text-align-center has-small-font-size"><?php echo wp_kses_post(
+	<p class="has-text-align-center has-small-font-size">
+	<?php echo wp_kses_post(
 		sprintf(
 		/* translators: %1$s: version link, %2$s: version number */
 			__( 'See <a href="%1$s">what has changed</a> in the WordPress %2$s API.', 'wporg' ),
