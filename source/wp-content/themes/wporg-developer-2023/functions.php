@@ -177,6 +177,7 @@ require_once __DIR__ . '/src/command-content/block.php';
 require_once __DIR__ . '/src/command-github/block.php';
 require_once __DIR__ . '/src/command-title/block.php';
 require_once __DIR__ . '/src/command-subcommand/block.php';
+require_once __DIR__ . '/src/page-title/index.php';
 require_once __DIR__ . '/src/reference-new-updated/block.php';
 require_once __DIR__ . '/src/resource-select/index.php';
 require_once __DIR__ . '/src/search-filters/index.php';

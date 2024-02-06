@@ -1,0 +1,28 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "wporg/page-title",
+	"version": "0.1.0",
+	"title": "Page Title",
+	"category": "widgets",
+	"description": "Page Title",
+    "attributes": {
+		"level": {
+			"type": "integer",
+			"default": 1
+		}
+	},
+	"supports": {
+		"html": false,
+		"spacing": {
+			"margin": true,
+			"padding": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true
+		}
+	},
+	"textdomain": "wporg",
+	"editorScript": "file:./index.js"
+}
