@@ -82,7 +82,7 @@ pre {
 	}
 
 	article {
-		max-width: 960px;
+		max-width: var(--wp--style--global--content-size);
 	}
 
 	/* Left sidebar: Chapter List */
