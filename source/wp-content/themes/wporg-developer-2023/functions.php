@@ -489,7 +489,7 @@ function theme_scripts_styles() {
 		/* translators: Subsets can be any of cyrillic, cyrillic-ext, greek, greek-ext, vietnamese, latin, latin-ext. */
 		$subsets = _x( 'Latin', 'Heading font subsets, comma separated', 'wporg' );
 		// All headings.
-		global_fonts_preload( 'Inter', $subsets );
+		global_fonts_preload( 'EB Garamond, Inter', $subsets );
 	}
 
 	if ( function_exists( 'wporg_is_handbook' ) && wporg_is_handbook() ) {
