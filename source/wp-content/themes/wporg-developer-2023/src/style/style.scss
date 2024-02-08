@@ -104,6 +104,8 @@ pre {
 			inset-inline-start: var(--wp--preset--spacing--edge-space);
 		}
 
+		// Allow room for the left column.
+		// Only necessary at this width if the left sidebar is present.
 		&:has(> .wp-block-wporg-sidebar-container) main {
 			width: calc(100% - var(--local--sidebar--width) - var(--local--column-gap));
 		}
@@ -114,11 +116,8 @@ pre {
 	}
 
 	@media (min-width: 1300px) {
+		// Allow room for the right column.
 		width: calc(100% - var(--local--sidebar--width) - var(--local--column-gap));
-
-		main {
-			width: calc(100% - var(--local--sidebar--width) - var(--local--column-gap));
-		}
 
 		article {
 			width: 100%;
@@ -128,6 +127,13 @@ pre {
 			.wp-block-wporg-sidebar-container {
 				inset-inline-end: var(--wp--preset--spacing--edge-space);
 			}
+		}
+	}
+
+	@media (min-width: 1400px) {
+		// Allow room for the left column, if not already done at 768px for the chapters list.
+		main {
+			width: calc(100% - var(--local--sidebar--width) - var(--local--column-gap));
 		}
 	}
 }
