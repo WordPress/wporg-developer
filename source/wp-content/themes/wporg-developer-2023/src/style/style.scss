@@ -81,6 +81,10 @@ pre {
 		order: 1;
 	}
 
+	article {
+		max-width: 960px;
+	}
+
 	/* Left sidebar: Chapter List */
 	> .wp-block-wporg-sidebar-container {
 		margin-top: var(--wp--preset--spacing--20);
@@ -100,7 +104,7 @@ pre {
 			inset-inline-start: var(--wp--preset--spacing--edge-space);
 		}
 
-		main {
+		&:has(> .wp-block-wporg-sidebar-container) main {
 			width: calc(100% - var(--local--sidebar--width) - var(--local--column-gap));
 		}
 
@@ -112,9 +116,12 @@ pre {
 	@media (min-width: 1300px) {
 		width: calc(100% - var(--local--sidebar--width) - var(--local--column-gap));
 
+		main {
+			width: calc(100% - var(--local--sidebar--width) - var(--local--column-gap));
+		}
+
 		article {
 			width: 100%;
-			max-width: 960px;
 			margin-left: auto;
 			margin-right: auto;
 
