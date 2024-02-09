@@ -227,6 +227,11 @@ class DevHub_Search {
 	public static function redirect_empty_search( $posts, $query ) {
 		$redirect = '';
 
+		// Skip when in admin context.
+		if ( is_admin() ) {
+			return $posts;
+		}
+		
 		// If request is an empty search.
 		if ( $query->is_main_query() && $query->is_search() && ! trim( get_search_query() ) ) {
 			// If search is filtered.
