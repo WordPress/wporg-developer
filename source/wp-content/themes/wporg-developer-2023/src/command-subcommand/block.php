@@ -45,7 +45,7 @@ function render( $attributes, $content, $block ) {
 	}
 
 	$title_block = sprintf(
-		'<!-- wp:heading {"fontSize":"heading-3"} --><h3 class="wp-block-heading has-heading-3-font-size">%1$s</h3><!-- /wp:heading -->',
+		'<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">%1$s</h3><!-- /wp:heading -->',
 		__( 'Subcommands', 'wporg' )
 	);
 
