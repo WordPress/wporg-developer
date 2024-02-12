@@ -78,8 +78,8 @@ function render( $attributes, $content, $block ) {
 		'<!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between"}} -->
 		<div class="wp-block-group">
 
-			<!-- wp:heading {"style":{"typography":{"fontStyle":"normal","fontWeight":"600"}},"fontSize":"large","fontFamily":"ibm-plex-sans"} -->
-			<h2 class="wp-block-heading has-ibm-plex-sans-font-family has-large-font-size" style="font-style:normal;font-weight:600">%s</h2>
+			<!-- wp:heading {"style":{"typography":{"fontStyle":"normal","fontWeight":"600"}},"fontSize":"heading-5"} -->
+			<h2 class="wp-block-heading has-heading-5-font-size" style="font-style:normal;font-weight:600">%s</h2>
 			<!-- /wp:heading -->
 
 			<!-- wp:paragraph -->

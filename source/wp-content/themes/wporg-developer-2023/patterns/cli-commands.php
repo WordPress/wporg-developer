@@ -19,8 +19,8 @@
 			<!-- wp:group {"align":"wide","layout":{"type":"constrained"}} -->
 			<div class="wp-block-group alignwide">
 
-				<!-- wp:heading {"level":1,"fontSize":"heading-2","style":{"spacing":{"margin":{"bottom":"40px"}}}} -->
-				<h1 class="wp-block-heading has-heading-2-font-size" style="margin-bottom:40px"><?php esc_html_e( 'WP-CLI Commands', 'wporg' ); ?></h1>
+				<!-- wp:heading {"level":1,"style":{"typography":{"fontSize":"36px","fontStyle":"normal","fontWeight":"400"},"spacing":{"margin":{"bottom":"40px"}}},"fontFamily":"eb-garamond"} -->
+				<h1 class="wp-block-heading has-eb-garamond-font-family" style="font-size:36px;font-style:normal;font-weight:400;margin-bottom:40px"><?php esc_html_e( 'WP-CLI Commands', 'wporg' ); ?></h1>
 				<!-- /wp:heading -->
 
 				<!-- wp:pattern {"slug":"wporg-developer-2023/article-sidebar"} /-->
