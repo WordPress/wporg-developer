@@ -158,7 +158,7 @@
 			"wporg-sidebar-container": {
 				"spacing": {
 					"margin": {
-						"top": "150px"
+						"top": "100px"
 					}
 				}
 			},
