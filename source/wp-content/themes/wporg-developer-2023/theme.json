@@ -186,6 +186,9 @@
 				}
 			}
 		},
+		"layout": {
+			"contentSize": "960px"
+		},
 		"typography": {
 			"fontSizes": [
 				{

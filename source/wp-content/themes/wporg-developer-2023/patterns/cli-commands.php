@@ -7,17 +7,17 @@
 
 ?>
 
-<!-- wp:group {"tagName":"main","style":{"spacing":{"padding":{"left":"var:preset|spacing|edge-space","right":"var:preset|spacing|edge-space","bottom":"var:preset|spacing|60"}}},"className":"alignfull","layout":{"type":"constrained","wideSize":"1280px","contentSize":"680px"}} -->
-<main class="wp-block-group alignfull" style="padding-right:var(--wp--preset--spacing--edge-space);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--edge-space)">
-
-	<!-- wp:group {"align":"wide","style":{"spacing":{"margin":{"top":"var:preset|spacing|20"}}},"layout":{"type":"constrained","justifyContent":"left"}} -->
-	<div class="wp-block-group alignwide" style="margin-top:var(--wp--preset--spacing--20)">
+<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"right":"var:preset|spacing|edge-space","left":"var:preset|spacing|edge-space","bottom":"var:preset|spacing|60"}}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull" style="padding-right:var(--wp--preset--spacing--edge-space);padding-left:var(--wp--preset--spacing--edge-space);padding-bottom:var(--wp--preset--spacing--60)">
 	
-		<!-- wp:group {"tagName":"article"} -->
-		<article class="wp-block-group">
+	<!-- wp:group {"align":"full","className":"has-three-columns","layout":{"type":"flex","flexWrap":"wrap","orientation":"vertical"}} -->
+	<div class="wp-block-group alignfull has-three-columns">
+		
+		<!-- wp:group {"tagName":"main","className":"alignwide","style":{"spacing":{"margin":{"top":"var:preset|spacing|20"}}}} -->
+		<main class="wp-block-group alignwide" style="margin-top:var(--wp--preset--spacing--20)">
 
-			<!-- wp:group {"align":"wide","layout":{"type":"constrained"}} -->
-			<div class="wp-block-group alignwide">
+			<!-- wp:group {"tagName":"article","style":{"spacing":{"margin":{"top":"0px"}}}} -->
+			<article class="wp-block-group" style="margin-top:0px">
 
 				<!-- wp:heading {"level":1,"style":{"typography":{"fontSize":"36px","fontStyle":"normal","fontWeight":"400"},"spacing":{"margin":{"bottom":"40px"}}},"fontFamily":"eb-garamond"} -->
 				<h1 class="wp-block-heading has-eb-garamond-font-family" style="font-size:36px;font-style:normal;font-weight:400;margin-bottom:40px"><?php esc_html_e( 'WP-CLI Commands', 'wporg' ); ?></h1>
@@ -61,14 +61,15 @@
 				</div>
 				<!-- /wp:group -->
 
-			</div>
+
+			</article>
 			<!-- /wp:group -->
 
-		</article>
+		</main>
 		<!-- /wp:group -->
 
-	</div>
+		</div>
 	<!-- /wp:group -->
 
-</main>
+</div>
 <!-- /wp:group -->
