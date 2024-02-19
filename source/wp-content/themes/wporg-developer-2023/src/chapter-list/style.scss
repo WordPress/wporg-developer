@@ -3,6 +3,9 @@
 	--local--icon-size: calc(var(--local--line-height) * 1em);
 	line-height: var(--local--line-height);
 
+	display: flex;
+	flex-direction: column-reverse;
+
 	@media (max-width: 767px) {
 		border: 1px solid var(--wp--preset--color--light-grey-1);
 		border-radius: 2px;
