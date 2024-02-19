@@ -195,21 +195,13 @@
 <div class="wp-block-columns"><!-- wp:column {"style":{"spacing":{"blockGap":"var:preset|spacing|10"}}} -->
 <div class="wp-block-column"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"700","lineHeight":1.6},"elements":{"link":{"color":{"text":"var:preset|color|blueberry-2"}}}},"textColor":"blueberry-2","className":"is-style-short-text","fontSize":"normal","fontFamily":"inter"} -->
 <h3 class="wp-block-heading is-style-short-text has-blueberry-2-color has-text-color has-link-color has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:700;line-height:1.6"><a href="https://make.wordpress.org/docs/handbook/"><?php esc_html_e( 'Documentation', 'wporg' ); ?><br><?php esc_html_e( 'Contributor Handbook', 'wporg' ); ?></a></h3>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph {"fontSize":"small"} -->
-<p class="has-small-font-size"><?php esc_html_e( 'Help document.', 'wporg' ); ?></p>
-<!-- /wp:paragraph --></div>
+<!-- /wp:heading --></div>
 <!-- /wp:column -->
 
 <!-- wp:column {"style":{"spacing":{"blockGap":"var:preset|spacing|10"}}} -->
 <div class="wp-block-column"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"700","lineHeight":1.6},"elements":{"link":{"color":{"text":"var:preset|color|blueberry-2"}}}},"textColor":"blueberry-2","className":"is-style-short-text","fontSize":"normal","fontFamily":"inter"} -->
-<h3 class="wp-block-heading is-style-short-text has-blueberry-2-color has-text-color has-link-color has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:700;line-height:1.6"><a href="https://make.wordpress.org/core/handbook/"><?php esc_html_e( 'Core Contributor', 'wporg' ); ?><br><?php esc_html_e( 'Handbook', 'wporg' ); ?></a></h3>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph {"fontSize":"small"} -->
-<p class="has-small-font-size"><?php esc_html_e( 'Start contributing.', 'wporg' ); ?></p>
-<!-- /wp:paragraph --></div>
+<h3 class="wp-block-heading is-style-short-text has-blueberry-2-color has-text-color has-link-color has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:700;line-height:1.6"><a href="https://make.wordpress.org/core/handbook/"><?php esc_html_e( 'Core Contributor', 'wporg' ); ?><br>Handbook</a></h3>
+<!-- /wp:heading --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns --></div>
 <!-- /wp:column -->
@@ -225,11 +217,7 @@
 <h3 class="wp-block-heading is-style-short-text has-blueberry-2-color has-text-color has-link-color has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:700;line-height:1.6"><a href="https://learn.wordpress.org"><?php esc_html_e( 'Learn WordPress', 'wporg' ); ?></a></h3>
 <!-- /wp:heading -->
 
-<!-- wp:paragraph {"fontSize":"small"} -->
-<p class="has-small-font-size"><?php esc_html_e( 'Gain skills.', 'wporg' ); ?></p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:column -->
-
+</div><!-- /wp:column -->
 </div><!-- /wp:columns -->
 </div><!-- /wp:column -->
 </div><!-- /wp:columns -->
