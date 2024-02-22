@@ -3,14 +3,14 @@
  * templates or theme.json settings.
  */
 
+body.handbook-landing-page {
+	--wp--custom--wporg-sidebar-container--spacing--margin--top: 100px;
+}
+
 .wporg-breadcrumbs {
 	// If the breadcrumbs are present, the space after them needs to be reduced.
 	// The next content is typically the search field.
 	margin-bottom: calc(var(--wp--preset--spacing--10) * -1);
-
-	@media (max-width: 767px) {
-		display: none !important;
-	}
 }
 
 pre {

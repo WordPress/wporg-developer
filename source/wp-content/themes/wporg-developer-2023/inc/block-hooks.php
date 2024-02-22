@@ -8,6 +8,7 @@
 use function DevHub\is_parsed_post_type;
 
 add_filter( 'render_block', __NAMESPACE__ . '\filter_handbook_meta_link_block', 10, 2 );
+add_filter( 'render_block_data', __NAMESPACE__ . '\modify_header_template_part' );
 
 /**
  * Filters the search block and conditionally inserts search filters.
@@ -76,4 +77,33 @@ function filter_handbook_meta_link_block( $block_content, $block ) {
 	}
 
 	return $block_content;
+}
+
+/**
+ * Update header template based on current query.
+ *
+ * @param array $parsed_block The block being rendered.
+ *
+ * @return array The updated block.
+ */
+function modify_header_template_part( $parsed_block ) {
+	if (
+		'core/template-part' === $parsed_block['blockName'] &&
+		! empty( $parsed_block['attrs']['slug'] ) &&
+		str_starts_with( $parsed_block['attrs']['slug'], 'header' )
+	) {
+		$template_slug = 'header-third';
+		if (
+			function_exists( 'wporg_is_handbook' ) &&
+			wporg_is_handbook() &&
+			! wporg_is_handbook_landing_page()
+		) {
+			$parsed_block['attrs']['slug'] = $template_slug;
+		} elseif ( 'command' === get_post_type() && is_single() ) {
+			$parsed_block['attrs']['slug'] = $template_slug;
+		} elseif ( is_parsed_post_type() && ! is_search() ) {
+			$parsed_block['attrs']['slug'] = $template_slug;
+		}
+	}
+	return $parsed_block;
 }
