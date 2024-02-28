@@ -569,6 +569,8 @@ function set_site_breadcrumbs() {
  * Provide a list of local navigation menus.
  */
 function add_site_navigation_menus( $menus ) {
+	global $wp;
+	$is_cli_home = ( is_archive() && isset( $wp->request ) && 'cli/commands' === $wp->request );
 	return array(
 		'developer' => array(
 			array(
@@ -582,6 +584,7 @@ function add_site_navigation_menus( $menus ) {
 			array(
 				'label' => __( 'WP-CLI Commands', 'wporg' ),
 				'url' => '/cli/commands/',
+				'className' => $is_cli_home ? 'current-menu-item' : 'test',
 			),
 		),
 	);
