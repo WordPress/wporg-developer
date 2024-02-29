@@ -584,7 +584,7 @@ function add_site_navigation_menus( $menus ) {
 			array(
 				'label' => __( 'WP-CLI Commands', 'wporg' ),
 				'url' => '/cli/commands/',
-				'className' => $is_cli_home ? 'current-menu-item' : 'test',
+				'className' => $is_cli_home ? 'current-menu-item' : '',
 			),
 		),
 	);
