@@ -1,29 +1,25 @@
 {
-	"name": "wporg-developer",
-	"version": "1.0.0",
-	"description": "The codebase and development environment for Developer.WordPress.org.",
+    "name": "wporg-developer-2023",
+    "version": "1.0.0",
+    "description": "Theme for WordPress Developer Resources",
 	"author": "WordPress.org",
 	"license": "GPL-2.0-or-later",
 	"private": true,
-	"dependencies": {
+	"devDependencies": {
+		"@wordpress/eslint-plugin": "^17.7.0",
 		"@wordpress/scripts": "27.1.0"
 	},
-	"devDependencies": {
-		"@wordpress/env": "9.2.0"
+	"eslintConfig": {
+		"extends": "../../../../.eslintrc.js"
+	},
+	"stylelint": {
+		"extends": "../../../../.stylelintrc"
 	},
 	"scripts": {
-		"setup:tools": "yarn && composer install && TEXTDOMAIN=wporg composer exec update-configs && composer --working-dir=./source/wp-content/plugins/phpdoc-parser install",
-		"setup": "yarn setup:wp && yarn parse",
-		"setup:wp": "wp-env run cli bash env/setup.sh",
-		"parse": "wp-env run cli wp devhub parse --user_id=1",
-		"update:tools": "composer update && TEXTDOMAIN=wporg composer exec update-configs && composer --working-dir=./source/wp-content/plugins/phpdoc-parser update",
-		"wp-env": "wp-env",
-		"build": "yarn workspaces run build",
-		"build:theme": "yarn workspace wporg-developer-2023 build",
-		"start:theme": "yarn workspace wporg-developer-2023 start",
-		"lint:css": "wp-scripts lint-style"
-	},
-	"workspaces": [
-		"source/wp-content/themes/wporg-developer-2023"
-	]
+		"build": "wp-scripts build",
+		"start": "wp-scripts start",
+		"lint:js": "wp-scripts lint-js src",
+		"lint:css": "wp-scripts lint-style *.css src/**/*.scss",
+		"format": "wp-scripts format src"
+	}
 }

@@ -1,0 +1,1 @@
+window.addEventListener("load",(()=>{const e=document.querySelector("#wp-block-wporg-resource-select");e&&e.addEventListener("change",(e=>{window.location=e.target.value}))}));
