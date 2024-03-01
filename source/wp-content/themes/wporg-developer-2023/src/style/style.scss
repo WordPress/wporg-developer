@@ -39,7 +39,7 @@ pre {
 		padding: 20px;
 		background-color: #f7f7f7;
 		border: 1px solid var(--wp--preset--color--light-grey-1);
-		border-radius: 2px;
+		border-radius: var(--wp--custom--code--border--radius);
 		overflow: scroll;
 	}
 
@@ -47,9 +47,9 @@ pre {
 		display: inline-block;
 		line-height: var(--wp--custom--body--extra-small--typography--line-height);
 		background: var(--wp--preset--color--light-grey-2);
-		border-radius: 2px;
-		padding-inline-start: 3px;
-		padding-inline-end: 3px;
+		border-radius: var(--wp--custom--code--border--radius);
+		padding-inline-start: 0.25em;
+		padding-inline-end: 0.25em;
 		max-width: 100%;
 	}
 
@@ -144,10 +144,7 @@ pre {
 
 // Style code tags but not ones inside of the code block.
 .wporg-has-embedded-code *:not(.wp-block-code):not(.wp-code-block-button-container) > code {
-	padding: 4px 6px;
-	background-color: var(--wp--preset--color--light-grey-2);
 	font-size: var(--wp--preset--font-size--small);
-	border-radius: 2px;
 }
 
 .wporg-dot-link-list {
@@ -397,7 +394,7 @@ pre {
 
 .wporg-developer-code-block {
 	$half_padding: calc(var(--wp--preset--spacing--10) / 2);
-	$border_radius: 2px;
+	$border_radius: var(--wp--custom--code--border--radius);
 
 	.wp-code-block-button-container {
 		background-color: var(--wp--preset--color--light-grey-2);
@@ -596,7 +593,7 @@ pre {
 	color: var(--wp--custom--wporg-callout--color--text);
 	background-color: var(--wp--custom--wporg-callout--color--background);
 	border-width: 0;
-	border-radius: 2px;
+	border-radius: var(--wp--custom--button--border--radius);
 	font-size: var(--wp--preset--font-size--small);
 
 	&::before {
