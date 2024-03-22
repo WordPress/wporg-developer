@@ -78,12 +78,20 @@ pre {
 
 // Wrap meta on smaller screens. Double class needed to override core style.
 .entry-meta.entry-meta {
+	a {
+		color: var(--wp--custom--link--color--text);
+		text-decoration: underline;
+	}
 
 	@media (max-width: 781px) {
 		flex-wrap: wrap;
+		margin: 0 !important;
+		padding: 15px var(--wp--preset--spacing--20) !important;
+		flex-direction: row;
+		gap: 20px !important;
 
 		> * {
-			min-width: calc(50% - var(--wp--preset--spacing--20) / 2);
+			min-width: 30%;
 		}
 	}
 
