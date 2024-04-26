@@ -28,6 +28,7 @@ function render() {
 	$posts = get_posts(
 		array(
 			'post_type'      => 'command',
+			'orderby'        => 'title',
 			'order'          => 'ASC',
 			'post_parent'    => 0,
 			'nopaging'       => true,
