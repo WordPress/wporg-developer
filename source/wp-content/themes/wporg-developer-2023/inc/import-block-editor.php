@@ -64,7 +64,10 @@ class DevHub_Block_Editor_Importer extends DevHub_Docs_Importer {
 			'reference-guides/block-api/versions'                 => 'reference-guides/block-api/block-api-versions',
 			'reference-guides/packages/packages-experiments'      => 'reference-guides/packages/packages-private-apis',
 
-			// After handbook restructuring, January 2023.
+			// After IAPI restructuring, April 2024.
+			'reference-guides/packages/packages-interactivity/packages-interactivity-api-reference' => 'reference-guides/interactivity-api/api-reference',
+
+			// After handbook restructuring, January 2024.
 			'how-to-guides/block-tutorial/generate-blocks-with-wp-cli'        => 'getting-started/devenv/get-started-with-create-block',
 			'how-to-guides/block-tutorial/block-controls-toolbar-and-sidebar' => 'getting-started/fundamentals/block-in-the-editor',
 			'how-to-guides/block-tutorial/writing-your-first-block-type'      => 'getting-started/tutorial',
