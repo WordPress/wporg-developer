@@ -64,7 +64,7 @@ add_shortcode(
 	'article_title',
 	function() {
 		global $post;
-		return $post->post_title;
+		return get_the_title();
 	}
 );
 
