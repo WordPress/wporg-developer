@@ -1,9 +1,12 @@
 <?php
 /**
- * Title: Article Meta
- * Slug: wporg-developer-2023/article-meta
+ * Title: Article Meta for the Block Editor GitHub handbook
+ * Slug: wporg-developer-2023/article-meta-block-editor
  * Inserter: no
  */
+
+// get title fot the current post
+$title = get_the_title();
 
 ?>
 
@@ -30,5 +33,26 @@
 	</div>
 	<!-- /wp:group -->
 
+	<!-- wp:group {"style":{"spacing":{"blockGap":"0"}},"layout":{"type":"constrained"}} -->
+	<div class="wp-block-group">
+
+		<!-- wp:paragraph {"style":{"typography":{"fontStyle":"normal","fontWeight":"700"}}} -->
+		<p style="font-style:normal;font-weight:700"><?php esc_html_e( 'Edit article', 'wporg' ); ?></p>
+		<!-- /wp:paragraph -->
+
+		<!-- wp:paragraph {"className":"external-link"} -->
+		<p class="external-link"><a href="[article_edit_link]">
+			<?php echo wp_kses_post(
+				sprintf(
+					/* translators: %s: article title */
+					__( 'Improve it on GitHub<span class="screen-reader-text">: %s</span>', 'wporg' ),
+					'[article_title]'
+				)
+			); ?>
+		</a></p>
+		<!-- /wp:paragraph -->
+
+	</div>
+	<!-- /wp:group -->
 </div>
 <!-- /wp:group -->

@@ -150,7 +150,6 @@ require __DIR__ . '/inc/shortcode-dashicons.php';
 require __DIR__ . '/inc/block-hooks.php';
 
 // Block files
-require_once __DIR__ . '/src/article-meta-date/block.php';
 require_once __DIR__ . '/src/chapter-list/block.php';
 require_once __DIR__ . '/src/cli-command-table/block.php';
 require_once __DIR__ . '/src/code-changelog/block.php';
@@ -599,12 +598,19 @@ function add_site_navigation_menus( $menus ) {
 function add_handbook_templates( $templates ) {
 	$is_handbook      = function_exists( 'wporg_is_handbook' ) && wporg_is_handbook();
 	$is_github_source = ! empty( get_post_meta( get_the_ID(), 'wporg_markdown_source', true ) );
+
 	if ( $is_handbook ) {
 		array_unshift( $templates, 'single-handbook.php' );
 	}
+
 	if ( $is_github_source ) {
-		array_unshift( $templates, 'single-handbook-github.php' );
+		if ( get_post_type() === 'blocks-handbook' ) {
+			array_unshift( $templates, 'single-handbook-block-editor.php' );
+		} else {
+			array_unshift( $templates, 'single-handbook-github.php' );
+		}
 	}
+
 	return $templates;
 }
 

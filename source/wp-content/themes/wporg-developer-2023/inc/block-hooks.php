@@ -7,7 +7,6 @@
 
 use function DevHub\is_parsed_post_type;
 
-add_filter( 'render_block', __NAMESPACE__ . '\filter_handbook_meta_link_block', 10, 2 );
 add_filter( 'render_block_data', __NAMESPACE__ . '\modify_header_template_part' );
 
 /**
@@ -50,33 +49,6 @@ function get_block_content_by_home_url( $block_content, $replacement_home_url = 
 		'action="' . esc_url( $replacement_home_url ) . '"',
 		$block_content
 	);
-}
-
-/**
- * Filters an article meta block and conditionally removes it.
- *
- * @param string $block_content
- * @param array  $block
- * @return string
- */
-function filter_handbook_meta_link_block( $block_content, $block ) {
-	if ( 'wporg/handbook-meta-link' === $block['blockName'] ) {
-		// Not all handbooks come from GitHub.
-		$local_handbooks = array( 'apis-handbook', 'plugin-handbook', 'theme-handbook' );
-		$post_type = get_post_type();
-
-		if ( in_array( $post_type, $local_handbooks ) ) {
-			return '';
-		}
-
-		// The block editor handbook doesn't have a changelog.
-		// We only know it's the changelog because of the linkURL attribute.
-		if ( 'blocks-handbook' === $post_type && '[article_changelog_link]' === $block['attrs']['linkURL'] ) {
-			return '';
-		}
-	}
-
-	return $block_content;
 }
 
 /**
