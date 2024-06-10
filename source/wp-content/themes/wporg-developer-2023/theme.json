@@ -158,13 +158,6 @@
 				"paddingVertical": "calc(( var(--wp--custom--select--height) - (var(--wp--custom--select--font-size) * var(--wp--custom--select--line-height))) / 2)",
 				"borderRadius": "var(--wp--custom--button--border--radius)"
 			},
-			"wporg-sidebar-container": {
-				"spacing": {
-					"margin": {
-						"top": "150px"
-					}
-				}
-			},
 			"wporg-command-github": {
 				"color": {
 					"open": "var(--wp--custom--color--green-60)",
