@@ -153,15 +153,17 @@ a):not(.wporg-developer-code-block a) {
 		display: none !important;
 	}
 
-	// Hide the file name in comments.
-	.wporg-developer-code-block {
-		.wp-code-block-button-container {
-			justify-content: end;
+	.wporg-developer-code-block .wp-code-block-button-container {
+		align-items: initial;
+	}
 
-			code {
-				display: none;
-			}
-		}
+	// Hide the file name in comments.
+	.wporg-developer-code-block .wp-code-block-button-container code {
+		display: none;
+	}
+
+	.wporg-developer-code-block .wp-code-block-button-container code + span {
+		grid-column: 2;
 	}
 }
 
