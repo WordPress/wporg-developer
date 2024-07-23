@@ -86,37 +86,36 @@
 	// Override tab within user notes textarea to actually insert a tab character.
 	// Copied from code within core's wp-admin/js/common.js.
 	commentForm.bind( 'keydown.wpevent_InsertTab', function ( e ) {
-		const element_target = e.target;
+		const elementTarget = e.target;
 		let scroll, sel;
 
 		if ( e.key === 'Escape' ) {
-			console.log( 'Escape' );
 			// When pressing Escape: Opera 12 and 27 blur form fields, IE 8 clears them.
 			e.preventDefault();
-			element_target.setAttribute( 'data-tab-out', 'true' );
+			elementTarget.setAttribute( 'data-tab-out', 'true' );
 			return;
 		}
 
 		if ( e.key !== 'Tab' || e.ctrlKey || e.altKey || e.shiftKey ) return;
 
-		if ( element_target.getAttribute( 'data-tab-out' ) === 'true' ) {
-			element_target.setAttribute( 'data-tab-out', 'false' );
+		if ( elementTarget.getAttribute( 'data-tab-out' ) === 'true' ) {
+			elementTarget.setAttribute( 'data-tab-out', 'false' );
 			return;
 		}
 
-		const selStart = element_target.selectionStart;
-		const selEnd = element_target.selectionEnd;
-		const val = element_target.value;
+		const selStart = elementTarget.selectionStart;
+		const selEnd = elementTarget.selectionEnd;
+		const val = elementTarget.value;
 
 		if ( document.selection ) {
-			element_target.focus();
+			elementTarget.focus();
 			sel = document.selection.createRange();
 			sel.text = '\t';
 		} else if ( selStart >= 0 ) {
-			scroll = element_target.scrollTop;
-			element_target.value = val.substring( 0, selStart ).concat( '\t', val.substring( selEnd ) );
-			element_target.selectionStart = element_target.selectionEnd = selStart + 1;
-			element_target.scrollTop = scroll;
+			scroll = elementTarget.scrollTop;
+			elementTarget.value = val.substring( 0, selStart ).concat( '\t', val.substring( selEnd ) );
+			elementTarget.selectionStart = elementTarget.selectionEnd = selStart + 1;
+			elementTarget.scrollTop = scroll;
 		}
 
 		if ( e.stopPropagation ) e.stopPropagation();
