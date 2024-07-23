@@ -31,26 +31,13 @@
 		if ( ! comment.length ) {
 			return;
 		}
-
+		console.log( 'patata' );
 		// Scroll to top level comment and adjust for admin bar.
 		const pos = comment.getBoundingClientRect();
 		window.scrollTo( {
 			top: window.scrollY + pos.top - wpAdminBar,
 			behavior: 'smooth',
 		} );
-	} );
-
-	// Scroll to comment if comment date link is clicked
-	$( '#comments' ).on( 'click', '.comment-date', function ( e ) {
-		// Scroll to comment and adjust for admin bar
-		// Add 16px for child comments
-		const pos = $( this ).offset();
-		$( 'html,body' ).animate(
-			{
-				scrollTop: pos.top - wpAdminBar - 16,
-			},
-			1
-		);
 	} );
 
 	// Scroll to comment if comment date link is clicked.
@@ -64,6 +51,7 @@
 				top: offsetTop - wpAdminBar - 16,
 				behavior: 'smooth',
 			} );
+			console.log( 'patata' );
 		} );
 	} );
 
@@ -72,7 +60,7 @@
 		if ( target ) {
 			const pos = target.getBoundingClientRect();
 			const offsetTop = pos.top + window.scrollY;
-
+			console.log( 'patata' );
 			window.scrollTo( {
 				top: offsetTop - wpAdminBar,
 				behavior: 'smooth',
@@ -90,6 +78,7 @@
 		element.addEventListener( 'click', function ( e ) {
 			e.preventDefault();
 			showCommentForm();
+			console.log( 'patata' );
 		} );
 	} );
 
