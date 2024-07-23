@@ -1,5 +1,7 @@
 <?php
 
+namespace WordPressdotorg\Theme\Developer_2023\Block_Dashicons_Page;
+
 require_once dirname( dirname( __DIR__ ) ) . '/inc/dashicons.php';
 
 wp_enqueue_style(
@@ -9,36 +11,59 @@ wp_enqueue_style(
 	get_stylesheet_directory() . '/stylesheets/page-dashicons.css'
 );
 
+$icons = array();
 $icons_sections = array();
-foreach ( \DevHub_Dashicons::get_dashicons() as $section ) {
-	$icons = array();
-	foreach ( $section['icons'] as $k => $v ) {
-		$v['slug'] = $k;
-		$icons[] = $v;
-	}
-	$icons_sections[] = array(
+
+foreach ( \DevHub_Dashicons::get_dashicons() as $section_group => $section ) {
+	$icon_section = array(
 		'label' => $section['label'],
-		'icons' => $icons,
+		'slug' => sanitize_title( $section_group ),
+		'icons' => array(),
 	);
+	foreach ( $section['icons'] as $k => $v ) {
+		$icons[$k] = $v;
+		$icons[$k]['sectionLabel'] = $section['label'];
+		$icon_section['icons'][] = $k;
+	}
+	$icons_sections[] = $icon_section;
 }
 
-$selected_icon = array_rand( array_merge( ...$icons_sections ) );
+$selected_icon = array_rand( $icons );
 
 wp_interactivity_state(
 	'wporg/dashicons-page',
 	array(
-		/*'sectionAnchorTarget' => function() {*/
-		/*	return 'icons-' . wp_interactivity_get_context()['section']['label'];*/
-		/*},*/
-		/*'sectionAnchorHref' => function () {*/
-		/*	return '#icons-' . wp_interactivity_get_context()['section']['label'];*/
-		/*}*/
+		/*
+		 * START: Derived state.
+		 *
+		 * All these "derived state" getters must be defined in view.js as well
+		 */
+		'iconClass' => function() {
+			return 'dashicons ' . wp_interactivity_get_context()['icon'];
+		},
+		'sectionAnchorTarget' => function() {
+			return 'icons-' . wp_interactivity_get_context()['section']['slug'];
+		},
+		'sectionAnchorHref' => function () {
+			return '#icons-' . wp_interactivity_get_context()['section']['slug'];
+		},
+		'iconSectionLabel' => function() {
+			return wp_interactivity_get_context()['section']['label'];
+		},
+		'eachIcon' => function() use ( $icons ) {
+			return $icons[ wp_interactivity_get_context()['icon'] ];
+		},
+		/*
+		 * END: Derived state
+		 */
+
+		'iconsSections' => $icons_sections,
+		'icons' => $icons,
+		'selectedIcon' => $selected_icon,
 	)
 );
 
 $interactivity_context = array(
-	'iconsSections' => $icons_sections,
-	'selectedIcon' => $selected_icon,
 );
 
 $deprecation_notice = sprintf(
@@ -59,7 +84,19 @@ $deprecation_notice = sprintf(
 		<?php echo do_blocks( wp_kses_post( $deprecation_notice ) ); ?>
 
 		<div class="details clear">
-			<div id="glyph"></div>
+			<div id="glyph">
+				<template data-wp-each--icon="state.selectedIconDetails" data-wp-each-key="state.eachIcon.slug">
+					<div data-wp-bind--class="state.iconClass"></div>
+					<div class="info">
+						<span><strong data-wp-text="state.eachIcon.sectionLabel"></strong></span>
+						<span class="name"><code data-wp-text="state.selectedIcon"></code></span>
+						<span class="charCode"><code data-wp-text="state.eachIcon.code"></code></span>
+						<span class="link"><a href='javascript:dashicons.copy( "content: \"\\{{data.attr}}\";", "css" )'><?php _e( 'Copy CSS', 'wporg' ); ?></a></span>
+						<span class="link"><a href="javascript:dashicons.copy( '{{data.html}}', 'html' )"><?php _e( 'Copy HTML', 'wporg' ); ?></a></span>
+						<span class="link"><a href="javascript:dashicons.copy( '{{data.glyph}}' )"><?php _e( 'Copy Glyph', 'wporg' ); ?></a></span>
+					</div>
+				</template>
+			</div>
 			<div class="entry-content">
 				<?php the_content(); ?>
 			</div><!-- .entry-content -->
@@ -70,8 +107,8 @@ $deprecation_notice = sprintf(
 		<div id="icons">
 			<div id="iconlist">
 				<template
-					data-wp-each--section="context.iconsSections"
-					data-wp-each-key="context.section.label"
+					data-wp-each--section="state.iconsSections"
+					data-wp-each-key="context.section.slug"
 				>
 					<h4 data-wp-bind--id="state.sectionAnchorTarget">
 						<span data-wp-text="context.section.label"></span>
@@ -80,10 +117,10 @@ $deprecation_notice = sprintf(
 					<ul>
 						<template
 							data-wp-each--icon="context.section.icons"
-							data-wp-each-key="context.icon.slug"
+							data-wp-each-key="state.eachIcon.slug"
 						>
-							<li data-wp-bind--data-keywords="context.icon.keywords" data-wp-bind--data-code="context.icon.code" data-wp-bind--class="state.iconClass">
-								<span data-wp-text="context.icon.label"></span>
+							<li data-wp-bind--data-keywords="state.eachIcon.keywords" data-wp-bind--data-code="state.sectionIcon.code" data-wp-bind--class="state.iconClass" data-wp-on--click="actions.handleIconClick">
+								<span data-wp-text="state.eachIcon.label"></span>
 							</li>
 						</template>
 					</ul>
@@ -206,15 +243,6 @@ const MyDashicon = () =&gt; (
 	<div id="temp" style="display:none;"></div>
 	<!--
 	<script type="text/html" id="tmpl-glyphs">
-		<div class="dashicons {{data.cssClass}}"></div>
-		<div class="info">
-			<span><strong>{{data.sectionName}}</strong></span>
-			<span class="name"><code>{{data.cssClass}}</code></span>
-			<span class="charCode"><code>{{data.charCode}}</code></span>
-			<span class="link"><a href='javascript:dashicons.copy( "content: \"\\{{data.attr}}\";", "css" )'><?php _e( 'Copy CSS', 'wporg' ); ?></a></span>
-			<span class="link"><a href="javascript:dashicons.copy( '{{data.html}}', 'html' )"><?php _e( 'Copy HTML', 'wporg' ); ?></a></span>
-			<span class="link"><a href="javascript:dashicons.copy( '{{data.glyph}}' )"><?php _e( 'Copy Glyph', 'wporg' ); ?></a></span>
-		</div>
 	</script>
 	-->
 </div><!-- #primary -->

@@ -3,20 +3,32 @@ import * as IAPI from '@wordpress/interactivity';
 const { state } = IAPI.store( 'wporg/dashicons-page', {
 	state: {
 		get iconClass() {
-			return `dashicons ${ IAPI.getContext().icon.slug }`;
-		},
-
-		get iconSectionSlug() {
-			return IAPI.getContext().section.label.toLowerCase().replace( ' ', '-' );
+			return `dashicons ${ IAPI.getContext().icon }`;
 		},
 
 		get sectionAnchorTarget() {
-			return `icons-${ state.iconSectionSlug }`;
+			return `icons-${ IAPI.getContext().section.slug }`;
 		},
 
 		get sectionAnchorHref() {
-			return `#icons-${ state.iconSectionSlug }`;
+			return `#icons-${ IAPI.getContext().section.slug }`;
+		},
+
+		get iconSectionLabel() {
+			return IAPI.getContext().section.label;
+		},
+
+		get eachIcon() {
+			return state.icons[ IAPI.getContext().icon ];
+		},
+
+		get selectedIconDetails() {
+			return state.selectedIcon ? [ state.selectedIcon ] : [];
 		},
 	},
-	actions: {},
+	actions: {
+		handleIconClick() {
+			state.selectedIcon = IAPI.getContext().icon;
+		},
+	},
 } );
