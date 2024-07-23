@@ -31,7 +31,6 @@
 		if ( ! comment.length ) {
 			return;
 		}
-		console.log( 'patata' );
 		// Scroll to top level comment and adjust for admin bar.
 		const pos = comment.getBoundingClientRect();
 		window.scrollTo( {
@@ -51,7 +50,6 @@
 				top: offsetTop - wpAdminBar - 16,
 				behavior: 'smooth',
 			} );
-			console.log( 'patata' );
 		} );
 	} );
 
@@ -60,7 +58,6 @@
 		if ( target ) {
 			const pos = target.getBoundingClientRect();
 			const offsetTop = pos.top + window.scrollY;
-			console.log( 'patata' );
 			window.scrollTo( {
 				top: offsetTop - wpAdminBar,
 				behavior: 'smooth',
@@ -78,7 +75,6 @@
 		element.addEventListener( 'click', function ( e ) {
 			e.preventDefault();
 			showCommentForm();
-			console.log( 'patata' );
 		} );
 	} );
 
@@ -94,16 +90,14 @@
 		let scroll, sel;
 
 		if ( e.key === 'Escape' ) {
-			// escape key
-			// when pressing Escape: Opera 12 and 27 blur form fields, IE 8 clears them
+			console.log( 'Escape' );
+			// When pressing Escape: Opera 12 and 27 blur form fields, IE 8 clears them.
 			e.preventDefault();
 			element_target.setAttribute( 'data-tab-out', 'true' );
 			return;
 		}
 
-		if ( e.key !== 'Tab' || e.ctrlKey || e.altKey || e.shiftKey )
-			// tab key
-			return;
+		if ( e.key !== 'Tab' || e.ctrlKey || e.altKey || e.shiftKey ) return;
 
 		if ( element_target.getAttribute( 'data-tab-out' ) === 'true' ) {
 			element_target.setAttribute( 'data-tab-out', 'false' );
