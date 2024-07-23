@@ -186,6 +186,7 @@ require_once __DIR__ . '/src/reference-new-updated/block.php';
 require_once __DIR__ . '/src/resource-select/index.php';
 require_once __DIR__ . '/src/search-filters/index.php';
 require_once __DIR__ . '/src/search-post/index.php';
+require_once __DIR__ . '/src/dashicons-page/index.php';
 
 add_action( 'init', __NAMESPACE__ . '\\init' );
 add_filter( 'wporg_block_site_breadcrumbs', __NAMESPACE__ . '\set_site_breadcrumbs' );

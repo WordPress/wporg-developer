@@ -1,0 +1,19 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "wporg/dashicons-page",
+	"title": "Dashicons page",
+	"category": "widgets",
+	"description": "Dashicons page block",
+	"keywords": [],
+	"textdomain": "wporg",
+	"attributes": {},
+	"supports": {
+		"inserter": false,
+		"interactivity": true
+	},
+	"allowedBlocks": [ "wporg/notice" ],
+	"style": "file:../../stylesheets/page-dashicons.css",
+	"render": "file:./render.php",
+	"viewScriptModule": "file:./view.js"
+}
