@@ -185,7 +185,7 @@ class DevHub_User_Submitted_Content {
 			wp_enqueue_script(
 				'wporg-developer-user-notes',
 				get_stylesheet_directory_uri() . '/js/user-notes.js',
-				array( 'jquery', 'quicktags' ),
+				array( 'quicktags' ),
 				filemtime( dirname( __DIR__ ) . '/js/user-notes.js' ),
 				true
 			);
