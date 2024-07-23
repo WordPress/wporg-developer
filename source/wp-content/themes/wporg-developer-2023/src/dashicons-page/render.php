@@ -32,11 +32,8 @@ $interactivity_context = array(
 
 
 ?>
-
 <div id="content-area" <?php body_class( 'dashicons-page' ); ?> data-wp-interactive="@wporg-developer-2023/dashicons"
 				<?php echo wp_interactivity_data_wp_context( $interactivity_context ); ?>>
-				<?php while ( have_posts() ) :
-					the_post(); ?>
 				<main id="main" <?php post_class( 'site-main' ); ?> role="main">
 
 <!-- wp:wporg/notice {"type":"alert"} -->
@@ -211,6 +208,4 @@ const MyDashicon = () =&gt; (
 		</div>
 	</script>
 	-->
-	<?php endwhile; // end of the loop. ?>
 </div><!-- #primary -->
-
