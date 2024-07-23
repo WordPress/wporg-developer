@@ -21,14 +21,10 @@ const { state } = IAPI.store( 'wporg/dashicons-page', {
 		get eachIcon() {
 			return state.icons[ IAPI.getContext().icon ];
 		},
-
-		get selectedIconDetails() {
-			return state.selectedIcon ? [ state.selectedIcon ] : [];
-		},
 	},
 	actions: {
 		handleIconClick() {
-			state.selectedIcon = IAPI.getContext().icon;
+			state.selectedIcon = [ IAPI.getContext().icon ];
 		},
 	},
 } );

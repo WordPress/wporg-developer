@@ -59,7 +59,7 @@ wp_interactivity_state(
 
 		'iconsSections' => $icons_sections,
 		'icons' => $icons,
-		'selectedIcon' => $selected_icon,
+		'selectedIcon' => array( $selected_icon ),
 	)
 );
 
@@ -85,11 +85,11 @@ $deprecation_notice = sprintf(
 
 		<div class="details clear">
 			<div id="glyph">
-				<template data-wp-each--icon="state.selectedIconDetails" data-wp-each-key="state.eachIcon.slug">
+				<template data-wp-each--icon="state.selectedIcon" data-wp-each-key="state.eachIcon.slug">
 					<div data-wp-bind--class="state.iconClass"></div>
 					<div class="info">
 						<span><strong data-wp-text="state.eachIcon.sectionLabel"></strong></span>
-						<span class="name"><code data-wp-text="state.selectedIcon"></code></span>
+						<span class="name"><code data-wp-text="state.selectedIcon.0"></code></span>
 						<span class="charCode"><code data-wp-text="state.eachIcon.code"></code></span>
 						<span class="link"><a href='javascript:dashicons.copy( "content: \"\\{{data.attr}}\";", "css" )'><?php _e( 'Copy CSS', 'wporg' ); ?></a></span>
 						<span class="link"><a href="javascript:dashicons.copy( '{{data.html}}', 'html' )"><?php _e( 'Copy HTML', 'wporg' ); ?></a></span>
