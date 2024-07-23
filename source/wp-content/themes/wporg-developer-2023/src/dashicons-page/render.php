@@ -1,9 +1,13 @@
 <?php
 
-namespace WordPressdotorg\Theme\Developer_2023;
-
 require_once dirname( dirname( __DIR__ ) ) . '/inc/dashicons.php';
 
+wp_enqueue_style(
+	'dashicons-page',
+	get_stylesheet_directory_uri() . '/stylesheets/page-dashicons.css',
+	array(),
+	get_stylesheet_directory() . '/stylesheets/page-dashicons.css'
+);
 
 $icons_sections = array();
 foreach ( \DevHub_Dashicons::get_dashicons() as $section ) {
@@ -21,8 +25,15 @@ foreach ( \DevHub_Dashicons::get_dashicons() as $section ) {
 $selected_icon = array_rand( array_merge( ...$icons_sections ) );
 
 wp_interactivity_state(
-	'@wporg-developer-2023/dashicons',
-	array()
+	'wporg/dashicons-page',
+	array(
+		/*'sectionAnchorTarget' => function() {*/
+		/*	return 'icons-' . wp_interactivity_get_context()['section']['label'];*/
+		/*},*/
+		/*'sectionAnchorHref' => function () {*/
+		/*	return '#icons-' . wp_interactivity_get_context()['section']['label'];*/
+		/*}*/
+	)
 );
 
 $interactivity_context = array(
@@ -30,73 +41,71 @@ $interactivity_context = array(
 	'selectedIcon' => $selected_icon,
 );
 
-
-?>
-<div id="content-area" <?php body_class( 'dashicons-page' ); ?> data-wp-interactive="@wporg-developer-2023/dashicons"
-				<?php echo wp_interactivity_data_wp_context( $interactivity_context ); ?>>
-				<main id="main" <?php post_class( 'site-main' ); ?> role="main">
-
-<!-- wp:wporg/notice {"type":"alert"} -->
+$deprecation_notice = sprintf(
+	'<!-- wp:wporg/notice {"type":"alert"} -->
 <div class="wp-block-wporg-notice is-alert-notice">
 <div class="wp-block-wporg-notice__icon"></div>
-<div class="wp-block-wporg-notice__content"><p><?php
-echo __( 'The Dashicons project is no longer accepting icon requests. Here’s why:&nbsp;<a href="https://make.wordpress.org/design/2020/04/20/next-steps-for-dashicons/">Next steps for Dashicons</a>.', 'wporg' );
-?></p></div>
+<div class="wp-block-wporg-notice__content"><p>%s</p></div>
 </div>
-<!-- /wp:wporg/notice -->
-					
-					<div class="details clear">
-						<div id="glyph"></div>
-						<div class="entry-content">
-							<?php the_content(); ?>
-						</div><!-- .entry-content -->
-						<div class="icon-filter">
-							<input placeholder="<?php esc_attr_e( 'Filter&hellip;', 'wporg' ); ?>" name="search" id="search" type="text" value="" maxlength="150">
-						</div>
-					</div>
-					<div id="icons">
-						<div id="iconlist">
-							<template
-								data-wp-each--section="context.iconsSections"
-								data-wp-each-key="context.section.label"
-							>
-								<h4>
-									<span data-wp-text="context.section.label"></span>
-									<a data-wp-bind-href="" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text" data-wp-text="context.section.label"></span></a>
-								</h4>
-								<ul>
-									<template
-										data-wp-each--icon="context.section.icons"
-										data-wp-each-key="context.icon.slug"
-									>
-										<li data-wp-bind--data-keywords="context.icon.keywords" data-wp-bind--data-code="context.icon.code" data-wp-bind--class="state.iconClass">
-											<span data-wp-text="context.icon.label"></span>
-										</li>
-									</template>
-								</ul>
-							</template>
-						</div>
-					</div>
-		
-					<div id="instructions">
-		
-						<h3><?php _e( 'WordPress Usage', 'wporg' ); ?></h3>
-		
-						<p>
-						<?php  printf(
-							__( 'Admin menu items can be added with <code><a href="%1$s">register_post_type()</a></code> and <code><a href="%2$s">add_menu_page()</a></code>, which both have an option to set an icon. To show the current icon, you should pass in %3$s.', 'wporg' ),
-							'https://developer.wordpress.org/reference/functions/register_post_type/',
-							'https://developer.wordpress.org/reference/functions/add_menu_page/',
-							'<code>\'dashicons-<span id="wp-class-example">{icon}</span>\'</code>'
-						); ?></p>
-		
-						<h4><?php _e( 'Examples', 'wporg' ); ?></h4>
-		
-						<p>
-						<?php printf(
-							__( 'In <code><a href="%s">register_post_type()</a></code>, set <code>menu_icon</code> in the arguments array.', 'wporg' ),
-							'https://developer.wordpress.org/reference/functions/register_post_type/'
-						); ?></p>
+<!-- /wp:wporg/notice -->',
+	__( 'The Dashicons project is no longer accepting icon requests. Here’s why:&nbsp;<a href="https://make.wordpress.org/design/2020/04/20/next-steps-for-dashicons/">Next steps for Dashicons</a>.', 'wporg' )
+);
+
+?>
+<div id="content-area" <?php body_class( 'dashicons-page' ); ?> data-wp-interactive="wporg/dashicons-page"
+	<?php echo wp_interactivity_data_wp_context( $interactivity_context ); ?>>
+	<main id="main" <?php post_class( 'site-main' ); ?> role="main">
+
+		<?php echo do_blocks( wp_kses_post( $deprecation_notice ) ); ?>
+
+		<div class="details clear">
+			<div id="glyph"></div>
+			<div class="entry-content">
+				<?php the_content(); ?>
+			</div><!-- .entry-content -->
+			<div class="icon-filter">
+				<input placeholder="<?php esc_attr_e( 'Filter&hellip;', 'wporg' ); ?>" name="search" id="search" type="text" value="" maxlength="150">
+			</div>
+		</div>
+		<div id="icons">
+			<div id="iconlist">
+				<template
+					data-wp-each--section="context.iconsSections"
+					data-wp-each-key="context.section.label"
+				>
+					<h4 data-wp-bind--id="state.sectionAnchorTarget">
+						<span data-wp-text="context.section.label"></span>
+						<a data-wp-bind--href="state.sectionAnchorHref" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text" data-wp-text="context.section.label"></span></a>
+					</h4>
+					<ul>
+						<template
+							data-wp-each--icon="context.section.icons"
+							data-wp-each-key="context.icon.slug"
+						>
+							<li data-wp-bind--data-keywords="context.icon.keywords" data-wp-bind--data-code="context.icon.code" data-wp-bind--class="state.iconClass">
+								<span data-wp-text="context.icon.label"></span>
+							</li>
+						</template>
+					</ul>
+				</template>
+			</div>
+		</div>
+
+		<div id="instructions">
+			<h3><?php _e( 'WordPress Usage', 'wporg' ); ?></h3>
+			<p>
+			<?php  printf(
+				__( 'Admin menu items can be added with <code><a href="%1$s">register_post_type()</a></code> and <code><a href="%2$s">add_menu_page()</a></code>, which both have an option to set an icon. To show the current icon, you should pass in %3$s.', 'wporg' ),
+				'https://developer.wordpress.org/reference/functions/register_post_type/',
+				'https://developer.wordpress.org/reference/functions/add_menu_page/',
+				'<code>\'dashicons-<span id="wp-class-example">{icon}</span>\'</code>'
+			); ?></p>
+
+			<h4><?php _e( 'Examples', 'wporg' ); ?></h4>
+			<p><?php printf(
+				__( 'In <code><a href="%s">register_post_type()</a></code>, set <code>menu_icon</code> in the arguments array.', 'wporg' ),
+				'https://developer.wordpress.org/reference/functions/register_post_type/'
+			); ?></p>
 		
 <pre>&lt;?php
 /**
