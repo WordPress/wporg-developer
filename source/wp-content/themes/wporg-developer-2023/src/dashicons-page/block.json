@@ -12,8 +12,6 @@
 		"inserter": false,
 		"interactivity": true
 	},
-	"allowedBlocks": [ "wporg/notice" ],
-	"style": "file:../../stylesheets/page-dashicons.css",
 	"render": "file:./render.php",
 	"viewScriptModule": "file:./view.js"
 }
