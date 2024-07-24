@@ -38,8 +38,10 @@ wp_interactivity_config(
 			'copyHtml' =>  _( 'Copy this, then paste in your HTML.' ),
 			'copyGlyph' => _( 'Copy this, then paste in your Photoshop textfield.' ),
 		),
+		'icons' => $icons,
 	)
 );
+
 wp_interactivity_state(
 	'wporg/dashicons-page',
 	array(
@@ -68,8 +70,9 @@ wp_interactivity_state(
 		 */
 
 		'iconsSections' => $icons_sections,
-		'icons' => $icons,
 		'selectedIcon' => array( $selected_icon ),
+		'filter' => '',
+		'style' => '',
 	)
 );
 
@@ -85,6 +88,7 @@ $deprecation_notice = sprintf(
 
 ?>
 <div id="content-area" <?php body_class( 'dashicons-page' ); ?> data-wp-interactive="wporg/dashicons-page">
+	<style data-wp-text="state.style"></style>
 	<main id="main" <?php post_class( 'site-main' ); ?> role="main">
 
 		<?php echo do_blocks( wp_kses_post( $deprecation_notice ) ); ?>
@@ -96,7 +100,7 @@ $deprecation_notice = sprintf(
 					<div class="info">
 						<span><strong data-wp-text="state.eachIcon.sectionLabel"></strong></span>
 						<span class="name"><code data-wp-text="context.icon"></code></span>
-						<span class="charCode"><code data-wp-bind--data-code="state.eachIcon.code" data-wp-text="state.eachIcon.code"></code></span>
+						<span class="charCode"><code data-wp-text="state.eachIcon.code"></code></span>
 						<span class="link"><button data-wp-on--click="copyClickHandlers.css" type="button"><?php _e( 'Copy CSS', 'wporg' ); ?></button></span>
 						<span class="link"><button data-wp-on--click="copyClickHandlers.html"  type="button"><?php _e( 'Copy HTML', 'wporg' ); ?></button></span>
 						<span class="link"><button data-wp-on--click="copyClickHandlers.glyph" type="button"><?php _e( 'Copy Glyph', 'wporg' ); ?></button></span>
@@ -107,7 +111,7 @@ $deprecation_notice = sprintf(
 				<?php the_content(); ?>
 			</div><!-- .entry-content -->
 			<div class="icon-filter">
-				<input placeholder="<?php esc_attr_e( 'Filter&hellip;', 'wporg' ); ?>" name="search" id="search" type="text" value="" maxlength="150">
+				<input data-wp-on--input="handleIconFilter" placeholder="<?php esc_attr_e( 'Filter&hellip;', 'wporg' ); ?>" name="search" id="search" type="text" value="" maxlength="150">
 			</div>
 		</div>
 		<div id="icons">
@@ -119,7 +123,7 @@ $deprecation_notice = sprintf(
 					</h4>
 					<ul>
 						<template data-wp-each--icon="context.section.icons" >
-							<li data-wp-bind--data-keywords="state.eachIcon.keywords" data-wp-bind--data-code="state.sectionIcon.code" data-wp-bind--class="state.iconClass" data-wp-on--click="handleIconClick">
+							<li data-wp-bind--data-keywords="state.eachIcon.keywords" data-wp-bind--class="state.iconClass" data-wp-on--click="handleIconClick">
 								<span data-wp-text="state.eachIcon.label"></span>
 							</li>
 						</template>

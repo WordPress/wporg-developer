@@ -20,12 +20,24 @@ const { state } = IAPI.store( 'wporg/dashicons-page', {
 		},
 
 		get eachIcon() {
-			return state.icons[ IAPI.getContext().icon ];
+			return config.icons[ IAPI.getContext().icon ];
+		},
+
+		get style() {
+			const cleanedValue = state.filter.replace( /[^a-zA-Z0-9]/, '' );
+			return cleanedValue.length < 3
+				? ''
+				: `#iconlist li:not([data-keywords*="${ cleanedValue }" i]) { display: none; }`;
 		},
 	},
 
 	handleIconClick: () => {
 		state.selectedIcon = [ IAPI.getContext().icon ];
+	},
+
+	/** @param {InputEvent} event */
+	handleIconFilter: ( event ) => {
+		state.filter = event.target.value;
 	},
 
 	copyClickHandlers: {
