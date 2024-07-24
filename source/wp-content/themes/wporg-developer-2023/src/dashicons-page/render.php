@@ -85,15 +85,15 @@ $deprecation_notice = sprintf(
 
 		<div class="details clear">
 			<div id="glyph">
-				<template data-wp-each--icon="state.selectedIcon" data-wp-each-key="state.eachIcon.slug">
+				<template data-wp-each--icon="state.selectedIcon">
 					<div data-wp-bind--class="state.iconClass"></div>
 					<div class="info">
 						<span><strong data-wp-text="state.eachIcon.sectionLabel"></strong></span>
-						<span class="name"><code data-wp-text="state.selectedIcon.0"></code></span>
-						<span class="charCode"><code data-wp-text="state.eachIcon.code"></code></span>
-						<span class="link"><a href='javascript:dashicons.copy( "content: \"\\{{data.attr}}\";", "css" )'><?php _e( 'Copy CSS', 'wporg' ); ?></a></span>
-						<span class="link"><a href="javascript:dashicons.copy( '{{data.html}}', 'html' )"><?php _e( 'Copy HTML', 'wporg' ); ?></a></span>
-						<span class="link"><a href="javascript:dashicons.copy( '{{data.glyph}}' )"><?php _e( 'Copy Glyph', 'wporg' ); ?></a></span>
+						<span class="name"><code data-wp-text="context.icon"></code></span>
+						<span class="charCode"><code data-wp-bind--data-code="state.eachIcon.code" data-wp-text="state.eachIcon.code"></code></span>
+						<span class="link"><button data-wp-on--click="copyClickHandlers.css" type="button"><?php _e( 'Copy CSS', 'wporg' ); ?></button></span>
+						<span class="link"><button data-wp-on--click="copyClickHandlers.html"  type="button"><?php _e( 'Copy HTML', 'wporg' ); ?></button></span>
+						<span class="link"><button data-wp-on--click="copyClickHandlers.glyph" type="button"><?php _e( 'Copy Glyph', 'wporg' ); ?></button></span>
 					</div>
 				</template>
 			</div>
@@ -106,20 +106,14 @@ $deprecation_notice = sprintf(
 		</div>
 		<div id="icons">
 			<div id="iconlist">
-				<template
-					data-wp-each--section="state.iconsSections"
-					data-wp-each-key="context.section.slug"
-				>
+				<template data-wp-each--section="state.iconsSections">
 					<h4 data-wp-bind--id="state.sectionAnchorTarget">
 						<span data-wp-text="context.section.label"></span>
 						<a data-wp-bind--href="state.sectionAnchorHref" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text" data-wp-text="context.section.label"></span></a>
 					</h4>
 					<ul>
-						<template
-							data-wp-each--icon="context.section.icons"
-							data-wp-each-key="state.eachIcon.slug"
-						>
-							<li data-wp-bind--data-keywords="state.eachIcon.keywords" data-wp-bind--data-code="state.sectionIcon.code" data-wp-bind--class="state.iconClass" data-wp-on--click="actions.handleIconClick">
+						<template data-wp-each--icon="context.section.icons" >
+							<li data-wp-bind--data-keywords="state.eachIcon.keywords" data-wp-bind--data-code="state.sectionIcon.code" data-wp-bind--class="state.iconClass" data-wp-on--click="handleIconClick">
 								<span data-wp-text="state.eachIcon.label"></span>
 							</li>
 						</template>
