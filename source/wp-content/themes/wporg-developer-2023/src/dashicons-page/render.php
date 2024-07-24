@@ -28,7 +28,10 @@ foreach ( \DevHub_Dashicons::get_dashicons() as $section_group => $section ) {
 	$icons_sections[] = $icon_section;
 }
 
-$selected_icon = array_rand( $icons );
+$selected_icon = $_GET['icon'] ?? '';
+if ( ! array_key_exists( $selected_icon, $icons ) ) {
+	$selected_icon = array_rand( $icons );
+}
 
 wp_interactivity_config(
 	'wporg/dashicons-page',
