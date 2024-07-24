@@ -63,9 +63,6 @@ wp_interactivity_state(
 	)
 );
 
-$interactivity_context = array(
-);
-
 $deprecation_notice = sprintf(
 	'<!-- wp:wporg/notice {"type":"alert"} -->
 <div class="wp-block-wporg-notice is-alert-notice">
@@ -77,8 +74,7 @@ $deprecation_notice = sprintf(
 );
 
 ?>
-<div id="content-area" <?php body_class( 'dashicons-page' ); ?> data-wp-interactive="wporg/dashicons-page"
-	<?php echo wp_interactivity_data_wp_context( $interactivity_context ); ?>>
+<div id="content-area" <?php body_class( 'dashicons-page' ); ?> data-wp-interactive="wporg/dashicons-page">
 	<main id="main" <?php post_class( 'site-main' ); ?> role="main">
 
 		<?php echo do_blocks( wp_kses_post( $deprecation_notice ) ); ?>
