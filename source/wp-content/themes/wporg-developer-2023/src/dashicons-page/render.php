@@ -90,7 +90,7 @@ $deprecation_notice = sprintf(
 );
 
 ?>
-<div id="content-area" <?php body_class( 'dashicons-page' ); ?> data-wp-interactive="wporg/dashicons-page">
+<div id="content-area" <?php body_class( 'dashicons-page' ); ?> data-wp-interactive="wporg/dashicons-page" data-wp-init="init">
 	<style data-wp-text="state.style"></style>
 	<main id="main" <?php post_class( 'site-main' ); ?> role="main">
 

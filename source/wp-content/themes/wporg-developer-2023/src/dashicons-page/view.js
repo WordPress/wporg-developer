@@ -45,6 +45,27 @@ const { state } = IAPI.store( 'wporg/dashicons-page', {
 		state.filter = event.target.value;
 	},
 
+	/**
+	 * A previous implementation used #icon-slug to pick an ico.
+	 * Respect those links, but replace the URL with our query-based version.
+	 */
+	init: () => {
+		const url = new URL( document.location.href );
+		const iconFromQuery = url.searchParams.get( 'icon' );
+
+		// Prefer an icon from query, but if a hash (legacy link) includes it, fall-back to that.
+		if ( ! Object.hasOwn( config.icons, iconFromQuery ) && url.hash ) {
+			const iconFromHash = `dashicons-${ url.hash.substring( 1 ) }`;
+			console.log( iconFromQuery, iconFromHash );
+			if ( Object.hasOwn( config.icons, iconFromHash ) ) {
+				url.hash = '';
+				state.selectedIcon = [ iconFromHash ];
+				url.searchParams.set( 'icon', iconFromHash );
+				window.history.replaceState( undefined, undefined, url );
+			}
+		}
+	},
+
 	copyClickHandlers: {
 		css: makeCopyHandler( 'css' ),
 		html: makeCopyHandler( 'html' ),
