@@ -56,7 +56,6 @@ const { state } = IAPI.store( 'wporg/dashicons-page', {
 		// Prefer an icon from query, but if a hash (legacy link) includes it, fall-back to that.
 		if ( ! Object.hasOwn( config.icons, iconFromQuery ) && url.hash ) {
 			const iconFromHash = `dashicons-${ url.hash.substring( 1 ) }`;
-			console.log( iconFromQuery, iconFromHash );
 			if ( Object.hasOwn( config.icons, iconFromHash ) ) {
 				url.hash = '';
 				state.selectedIcon = [ iconFromHash ];
