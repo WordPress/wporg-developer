@@ -30,6 +30,16 @@ foreach ( \DevHub_Dashicons::get_dashicons() as $section_group => $section ) {
 
 $selected_icon = array_rand( $icons );
 
+wp_interactivity_config(
+	'wporg/dashicons-page',
+	array(
+		'texts' => array(
+			'copyCss' => _( 'Copy this, then paste in your CSS :before selector.' ),
+			'copyHtml' =>  _( 'Copy this, then paste in your HTML.' ),
+			'copyGlyph' => _( 'Copy this, then paste in your Photoshop textfield.' ),
+		),
+	)
+);
 wp_interactivity_state(
 	'wporg/dashicons-page',
 	array(

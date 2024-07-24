@@ -1,5 +1,6 @@
 import * as IAPI from '@wordpress/interactivity';
 
+const config = IAPI.getConfig( 'wporg/dashicons-page' );
 const { state } = IAPI.store( 'wporg/dashicons-page', {
 	state: {
 		get iconClass() {
@@ -39,22 +40,21 @@ const { state } = IAPI.store( 'wporg/dashicons-page', {
  */
 function makeCopyHandler( type ) {
 	return () => {
-		console.log( 'clicked %s', type );
 		let text;
 		let copyText;
 		switch ( type ) {
 			case 'css':
-				text = 'Copy this, then paste in your CSS :before selector.';
+				text = config.texts.copyCss;
 				copyText = `content: "\\${ state.eachIcon.code }"`;
 				break;
 
 			case 'html':
-				text = 'Copy this, then paste in your HTML.';
+				text = config.texts.copyHtml;
 				copyText = `<span class="dashicons ${ IAPI.getContext().icon }"></span>`;
 				break;
 
 			case 'glyph':
-				text = 'Copy this, then paste in your Photoshop textfield.';
+				text = config.texts.copyGlyph;
 				const span = document.createElement( 'span' );
 				span.innerHTML = `&#x${ state.eachIcon.code };`;
 				copyText = span.textContent;
