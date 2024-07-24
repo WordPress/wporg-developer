@@ -25,11 +25,7 @@ const { state } = IAPI.store( 'wporg/dashicons-page', {
 	},
 
 	handleIconClick: () => {
-		const icon = IAPI.getContext().icon;
 		state.selectedIcon = [ IAPI.getContext().icon ];
-		const url = new URL( document.location.href );
-		url.searchParams.set( 'icon', icon );
-		window.history.replaceState( undefined, undefined, url );
 	},
 
 	copyClickHandlers: {
