@@ -1,7 +1,7 @@
 import * as IAPI from '@wordpress/interactivity';
 
-const config = IAPI.getConfig( 'wporg/dashicons-page' );
-const { state } = IAPI.store( 'wporg/dashicons-page', {
+const config = IAPI.getConfig( 'wporg/developer/dashicons-page' );
+const { state } = IAPI.store( 'wporg/developer/dashicons-page', {
 	state: {
 		get iconClass() {
 			return `dashicons ${ IAPI.getContext().icon }`;

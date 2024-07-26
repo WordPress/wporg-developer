@@ -34,7 +34,7 @@ if ( ! array_key_exists( $selected_icon, $icons ) ) {
 }
 
 wp_interactivity_config(
-	'wporg/dashicons-page',
+	'wporg/developer/dashicons-page',
 	array(
 		'texts' => array(
 			'copyCss' => __( 'Copy this, then paste in your CSS :before selector.', 'wporg' ),
@@ -46,7 +46,7 @@ wp_interactivity_config(
 );
 
 wp_interactivity_state(
-	'wporg/dashicons-page',
+	'wporg/developer/dashicons-page',
 	array(
 		/*
 		 * START: Derived state.
@@ -97,7 +97,7 @@ $deprecation_notice = sprintf(
 );
 
 ?>
-<div id="content-area" <?php body_class( 'dashicons-page' ); ?> data-wp-interactive="wporg/dashicons-page" data-wp-init="init">
+<div id="content-area" <?php body_class( 'dashicons-page' ); ?> data-wp-interactive="wporg/developer/dashicons-page" data-wp-init="init">
 	<style data-wp-text="state.style"></style>
 	<main id="main" <?php post_class( 'site-main' ); ?> role="main">
 
