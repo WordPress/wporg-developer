@@ -24,7 +24,7 @@ const { state } = IAPI.store( 'wporg/developer/dashicons-page', {
 		},
 
 		get style() {
-			const cleanedValue = state.filter.replace( /[^a-zA-Z0-9]/, '' );
+			const cleanedValue = state.filter.replace( /[^a-zA-Z0-9-]/g, '' );
 			return cleanedValue.length < 3
 				? ''
 				: `#iconlist li:not([data-keywords*="${ cleanedValue }" i]) { display: none; }`;
