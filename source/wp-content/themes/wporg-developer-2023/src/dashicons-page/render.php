@@ -2,7 +2,7 @@
 
 namespace WordPressdotorg\Theme\Developer_2023\Block_Dashicons_Page;
 
-require_once dirname( __DIR__, 2) . '/inc/dashicons.php';
+require_once dirname( __DIR__, 2 ) . '/inc/dashicons.php';
 
 wp_enqueue_style(
 	'dashicons-page',
@@ -21,9 +21,9 @@ foreach ( \DevHub_Dashicons::get_dashicons() as $section_group => $section ) {
 		'icons' => array(),
 	);
 	foreach ( $section['icons'] as $k => $v ) {
-		$icons[$k]                 = $v;
-		$icons[$k]['sectionLabel'] = $section['label'];
-		$icon_section['icons'][]   = $k;
+		$icons[ $k ]                 = $v;
+		$icons[ $k ]['sectionLabel'] = $section['label'];
+		$icon_section['icons'][]     = $k;
 	}
 	$icons_sections[] = $icon_section;
 }
@@ -53,16 +53,16 @@ wp_interactivity_state(
 		 *
 		 * All these "derived state" getters must be defined in view.js as well
 		 */
-		'iconClass'           => function() {
+		'iconClass'           => function () {
 			return 'dashicons ' . wp_interactivity_get_context()['icon'];
 		},
-		'sectionAnchorTarget' => function() {
+		'sectionAnchorTarget' => function () {
 			return 'icons-' . wp_interactivity_get_context()['section']['slug'];
 		},
 		'sectionAnchorHref'   => function () {
 			return '#icons-' . wp_interactivity_get_context()['section']['slug'];
 		},
-		'iconSectionLabel'    => function() {
+		'iconSectionLabel'    => function () {
 			return wp_interactivity_get_context()['section']['label'];
 		},
 
