@@ -11,19 +11,19 @@ wp_enqueue_style(
 	filemtime( get_stylesheet_directory() . '/stylesheets/page-dashicons.css' )
 );
 
-$icons = array();
+$icons          = array();
 $icons_sections = array();
 
 foreach ( \DevHub_Dashicons::get_dashicons() as $section_group => $section ) {
 	$icon_section = array(
 		'label' => $section['label'],
-		'slug' => sanitize_title( $section_group ),
+		'slug'  => sanitize_title( $section_group ),
 		'icons' => array(),
 	);
 	foreach ( $section['icons'] as $k => $v ) {
-		$icons[$k] = $v;
+		$icons[$k]                 = $v;
 		$icons[$k]['sectionLabel'] = $section['label'];
-		$icon_section['icons'][] = $k;
+		$icon_section['icons'][]   = $k;
 	}
 	$icons_sections[] = $icon_section;
 }
@@ -37,8 +37,8 @@ wp_interactivity_config(
 	'wporg/developer/dashicons-page',
 	array(
 		'texts' => array(
-			'copyCss' => __( 'Copy this, then paste in your CSS :before selector.', 'wporg' ),
-			'copyHtml' =>  __( 'Copy this, then paste in your HTML.', 'wporg' ),
+			'copyCss'   => __( 'Copy this, then paste in your CSS :before selector.', 'wporg' ),
+			'copyHtml'  => __( 'Copy this, then paste in your HTML.', 'wporg' ),
 			'copyGlyph' => __( 'Copy this, then paste in your Photoshop textfield.', 'wporg' ),
 		),
 		'icons' => $icons,
@@ -53,16 +53,16 @@ wp_interactivity_state(
 		 *
 		 * All these "derived state" getters must be defined in view.js as well
 		 */
-		'iconClass' => function() {
+		'iconClass'           => function() {
 			return 'dashicons ' . wp_interactivity_get_context()['icon'];
 		},
 		'sectionAnchorTarget' => function() {
 			return 'icons-' . wp_interactivity_get_context()['section']['slug'];
 		},
-		'sectionAnchorHref' => function () {
+		'sectionAnchorHref'   => function () {
 			return '#icons-' . wp_interactivity_get_context()['section']['slug'];
 		},
-		'iconSectionLabel' => function() {
+		'iconSectionLabel'    => function() {
 			return wp_interactivity_get_context()['section']['label'];
 		},
 
@@ -72,17 +72,17 @@ wp_interactivity_state(
 		 * Expected in WordPress 6.6.2
 		 */
 		// 'eachIcon' => function() use ( $icons ) {
-		// 	return $icons[ wp_interactivity_get_context()['icon'] ];
+		//   return $icons[ wp_interactivity_get_context()['icon'] ];
 		// },
 
 		/*
 		 * END: Derived state
 		 */
 
-		'iconsSections' => $icons_sections,
-		'selectedIcon' => array( $selected_icon ),
-		'filter' => '',
-		'style' => '',
+		'iconsSections'       => $icons_sections,
+		'selectedIcon'        => array( $selected_icon ),
+		'filter'              => '',
+		'style'               => '',
 	)
 );
 
