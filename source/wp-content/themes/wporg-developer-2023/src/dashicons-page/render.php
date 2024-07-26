@@ -4,13 +4,6 @@ namespace WordPressdotorg\Theme\Developer_2023\Block_Dashicons_Page;
 
 require_once dirname( __DIR__, 2 ) . '/inc/dashicons.php';
 
-wp_enqueue_style(
-	'dashicons-page',
-	get_stylesheet_directory_uri() . '/stylesheets/page-dashicons.css',
-	array(),
-	filemtime( get_stylesheet_directory() . '/stylesheets/page-dashicons.css' )
-);
-
 $icons          = array();
 $icons_sections = array();
 

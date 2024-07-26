@@ -13,5 +13,6 @@
 		"interactivity": true
 	},
 	"render": "file:./render.php",
+	"viewStyle": "file:./../../stylesheets/page-dashicons.css",
 	"viewScriptModule": "file:./view.js"
 }
