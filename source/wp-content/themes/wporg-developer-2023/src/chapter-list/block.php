@@ -70,8 +70,9 @@ function render( $attributes, $content, $block ) {
 
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(
-		'<aside %1$s><nav>%2$s<ul class="wporg-chapter-list__list">%3$s</ul></nav></aside>',
+		'<aside %1$s>%2$s<nav>%3$s<ul class="wporg-chapter-list__list">%4$s</ul></nav></aside>',
 		$wrapper_attributes,
+		do_blocks( '<!-- wp:pattern {"slug":"wporg-developer-2023/article-meta"} /-->' ),
 		$header,
 		$content
 	);
