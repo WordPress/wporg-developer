@@ -37,9 +37,9 @@ wp_interactivity_config(
 	'wporg/dashicons-page',
 	array(
 		'texts' => array(
-			'copyCss' => _( 'Copy this, then paste in your CSS :before selector.' ),
-			'copyHtml' =>  _( 'Copy this, then paste in your HTML.' ),
-			'copyGlyph' => _( 'Copy this, then paste in your Photoshop textfield.' ),
+			'copyCss' => __( 'Copy this, then paste in your CSS :before selector.', 'wporg' ),
+			'copyHtml' =>  __( 'Copy this, then paste in your HTML.', 'wporg' ),
+			'copyGlyph' => __( 'Copy this, then paste in your Photoshop textfield.', 'wporg' ),
 		),
 		'icons' => $icons,
 	)
