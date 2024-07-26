@@ -8,7 +8,7 @@ wp_enqueue_style(
 	'dashicons-page',
 	get_stylesheet_directory_uri() . '/stylesheets/page-dashicons.css',
 	array(),
-	get_stylesheet_directory() . '/stylesheets/page-dashicons.css'
+	filemtime( get_stylesheet_directory() . '/stylesheets/page-dashicons.css' )
 );
 
 $icons = array();
