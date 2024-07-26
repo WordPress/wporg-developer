@@ -19,6 +19,6 @@ add_action( 'init', __NAMESPACE__ . '\init' );
  */
 function init() {
 	register_block_type(
-		dirname( dirname( __DIR__ ) ) . '/build/dashicons-page/block.json'
+		dirname( __DIR__, 2 ) . '/build/dashicons-page/block.json'
 	);
 }

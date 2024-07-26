@@ -2,7 +2,7 @@
 
 namespace WordPressdotorg\Theme\Developer_2023\Block_Dashicons_Page;
 
-require_once dirname( dirname( __DIR__ ) ) . '/inc/dashicons.php';
+require_once dirname( __DIR__, 2) . '/inc/dashicons.php';
 
 wp_enqueue_style(
 	'dashicons-page',
