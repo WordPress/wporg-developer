@@ -30,19 +30,6 @@ class DevHub_Search_Form_Autocomplete {
 						'methods'             => 'POST',
 						'callback'            => array( $this, 'autocomplete_rest_handler' ),
 						'permission_callback' => '__return_true',
-						'schema' => function () {
-							return array(
-								'html' => array(
-									'description' => 'The HTML to process.',
-									'type' => 'string',
-									'required' => true,
-								),
-								'quirksMode' => array(
-									'description' => 'Process the document in quirks mode.',
-									'type' => 'boolean',
-								),
-							);
-						},
 					)
 				);
 			}
