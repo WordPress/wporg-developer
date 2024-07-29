@@ -78,18 +78,17 @@ class DevHub_Search_Form_Autocomplete {
 		/*);*/
 		/**/
 
-		wp_enqueue_script(
-			'awesomplete',
-			get_stylesheet_directory_uri() . '/js/awesomplete.min.js',
+		wp_register_script_module(
+			'@wporg-developer/awesomplete',
+			get_stylesheet_directory_uri() . '/js/awesomplete.js',
 			array(),
-			filemtime( dirname( __DIR__ ) . '/js/awesomplete.min.js' ),
-			true
+			filemtime( get_stylesheet_directory() . '/js/awesomplete.js' )
 		);
 		wp_enqueue_script_module(
 			'@wporg-developer/autocomplete',
 			get_stylesheet_directory_uri() . '/js/autocomplete.js',
-			array(),
-			filemtime( get_stylesheet_directory() . '/js/autocomplete.js' ),
+			array( array( 'id' => '@wporg-developer/awesomplete', 'type' => 'dynamic' ) ),
+			filemtime( get_stylesheet_directory() . '/js/autocomplete.js' )
 		);
 
 		/*wp_register_script(*/
