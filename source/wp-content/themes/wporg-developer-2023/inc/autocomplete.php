@@ -132,7 +132,7 @@ class DevHub_Search_Form_Autocomplete {
 		}
 
 		// No search query.
-		$req_search = $req_json['s'] ?? '';
+		$req_search = $req_json['search'] ?? '';
 		if ( '' === $req_search ) {
 			return new WP_REST_Response(
 				array( 'error' => __( 'Missing or invalid "s" search.', 'wporg' ) ),

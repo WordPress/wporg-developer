@@ -34,9 +34,9 @@ function init() {
 		return;
 	}
 
-	let processing = false,
-		search = '',
-		autocompleteResults = {};
+	let processing = false;
+	let search = '';
+	let autocompleteResults = new Map();
 
 	const awesome = new Awesomplete( searchfield, {
 		maxItems: 9999,
@@ -93,8 +93,8 @@ function init() {
 		replace: function ( text ) {
 			searchfield.val( text );
 
-			if ( text in autocompleteResults ) {
-				window.location = autocompleteResults[ text ];
+			if ( autocompleteResults.has( text ) ) {
+				window.location = autocompleteResults.get( text );
 			}
 		},
 	} );
@@ -110,8 +110,6 @@ function init() {
 		}
 	} );
 
-	console.log( data, searchfield );
-
 	/**
 	 * Updates the autocomplete list
 	 */
@@ -120,15 +118,16 @@ function init() {
 
 		const url = new URL( data.rest_url, document.location.href );
 
-		const requestData = { s: '', post_types: [], nonce: data.nonce };
-		requestData.s = form.elements.namedItem( 's' )?.value ?? '';
+		const requestData = {
+			search: form.elements.namedItem( 's' )?.value ?? '',
+			post_types: [],
+			nonce: data.nonce,
+		};
 		for ( const postTypeEl of form.elements.namedItem( 'post_type[]' ) ) {
 			if ( postTypeEl.checked ) {
 				requestData.post_types.push( postTypeEl.value );
 			}
 		}
-
-		console.log( requestData );
 
 		/** @type {Response} */
 		let response;
@@ -139,40 +138,21 @@ function init() {
 				headers: { 'Content-Type': 'application/json' },
 			} );
 			if ( ! response.ok ) {
-				throw new Error( 'Response not OK' );
+				throw new Error( 'Bad response.' );
 			}
 			response = await response.json();
 		} finally {
 			processing = false;
 		}
 
-		console.log( response );
+		/** @type {Record<string,string>|undefined} */
+		const posts = response.posts;
+		if ( ! posts ) {
+			return;
+		}
 
-		//$.post( autocomplete.ajaxurl, data )
-		//	.done( function ( response ) {
-		//		if ( typeof response.success === 'undefined' ) {
-		//			return false;
-		//		}
-		//
-		//		if ( typeof response.data === 'undefined' ) {
-		//			return false;
-		//		}
-		//
-		//		if ( response.success === true && Object.values( response.data.posts ).length ) {
-		//			autocompleteResults = response.data.posts;
-		//
-		//			// Update the autocomplete list
-		//			awesome.list = Object.keys( response.data.posts );
-		//		}
-		//	} )
-		//	.always( function () {
-		//		processing = false;
-		//
-		//		// Check if the search was updated during processing
-		//		if ( search !== searchfield.val() ) {
-		//			searchfield.trigger( 'input.autocomplete' );
-		//		}
-		//	} );
+		autocompleteResults = new Map( Object.entries( posts ) );
+		awesome.list = Object.keys( posts );
 	}
 }
 
