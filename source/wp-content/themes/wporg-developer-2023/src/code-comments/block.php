@@ -73,7 +73,7 @@ function render( $attributes, $content, $block ) {
 		__( 'User Contributed Notes', 'wporg' )
 	);
 
-	$wrapper_attributes = get_block_wrapper_attributes();
+	$wrapper_attributes = get_block_wrapper_attributes( [ 'data-nosnippet' => 'true' ] );
 	return sprintf(
 		'<section %1$s>%2$s <ol class="comment-list">%3$s</ol></section>',
 		$wrapper_attributes,
