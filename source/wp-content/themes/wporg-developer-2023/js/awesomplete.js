@@ -1,8 +1,7 @@
 /**
- * Simple, lightweight, usable local autocomplete library for modern browsers
- * Because there weren’t enough autocomplete scripts in the world? Because I’m completely insane and have NIH syndrome? Probably both. :P
- * @author Lea Verou http://leaverou.github.io/awesomplete
- * MIT license
+ * Awesomplete module.
+ *
+ * Adapted from (MIT license): https://leaverou.github.io/awesomplete/
  */
 
 const slice = Array.prototype.slice;
@@ -52,7 +51,7 @@ export class Awesomplete {
 				autoFirst: false,
 				filter: Awesomplete.FILTER_CONTAINS,
 				sort: Awesomplete.SORT_BYLENGTH,
-				item: function ( text, itemInput ) {
+				item: ( text, itemInput ) => {
 					const html =
 						itemInput === ''
 							? text
@@ -65,7 +64,7 @@ export class Awesomplete {
 						'aria-selected': 'false',
 					} );
 				},
-				replace: function ( text ) {
+				replace: ( text ) => {
 					this.input.value = text;
 				},
 			},
@@ -185,9 +184,7 @@ export class Awesomplete {
 			list = Awesomplete.$( list );
 
 			if ( list && list.children ) {
-				this._list = slice.apply( list.children ).map( function ( el ) {
-					return el.textContent.trim();
-				} );
+				this._list = slice.apply( list.children ).map( ( el ) => el.textContent.trim() );
 			}
 		}
 

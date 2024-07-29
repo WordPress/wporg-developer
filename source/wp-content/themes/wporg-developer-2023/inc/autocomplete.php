@@ -64,19 +64,18 @@ class DevHub_Search_Form_Autocomplete {
 		/*	return;*/
 		/*}*/
 		/**/
-		/*wp_enqueue_style(*/
-		/*	'awesomplete-css',*/
-		/*	get_stylesheet_directory_uri() . '/stylesheets/awesomplete.css',*/
-		/*	array(),*/
-		/*	filemtime( dirname( __DIR__ ) . '/stylesheets/awesomplete.css' )*/
-		/*);*/
-		/*wp_enqueue_style(*/
-		/*	'autocomplete-css',*/
-		/*	get_stylesheet_directory_uri() . '/stylesheets/autocomplete.css',*/
-		/*	array(),*/
-		/*	filemtime( dirname( __DIR__ ) . '/stylesheets/autocomplete.css' )*/
-		/*);*/
-		/**/
+		wp_enqueue_style(
+			'awesomplete-css',
+			get_stylesheet_directory_uri() . '/stylesheets/awesomplete.css',
+			array(),
+			filemtime( get_stylesheet_directory() . '/stylesheets/awesomplete.css' )
+		);
+		wp_enqueue_style(
+			'autocomplete-css',
+			get_stylesheet_directory_uri() . '/stylesheets/autocomplete.css',
+			array(),
+			filemtime( get_stylesheet_directory() . '/stylesheets/autocomplete.css' )
+		);
 
 		wp_register_script_module(
 			'@wporg-developer/awesomplete',
@@ -87,36 +86,16 @@ class DevHub_Search_Form_Autocomplete {
 		wp_enqueue_script_module(
 			'@wporg-developer/autocomplete',
 			get_stylesheet_directory_uri() . '/js/autocomplete.js',
-			array( array( 'id' => '@wporg-developer/awesomplete', 'type' => 'dynamic' ) ),
+			array( array( 'id' => '@wporg-developer/awesomplete', 'import' => 'dynamic' ) ),
 			filemtime( get_stylesheet_directory() . '/js/autocomplete.js' )
 		);
-
-		/*wp_register_script(*/
-		/*	'autocomplete',*/
-		/*	get_stylesheet_directory_uri() . '/js/autocomplete.js',*/
-		/*	array( 'awesomplete' ),*/
-		/*	filemtime( dirname( __DIR__ ) . '/js/autocomplete.js' ),*/
-		/*	true*/
-		/*);*/
-		/*wp_localize_script(*/
-		/*	'autocomplete',*/
-		/*	'autocomplete',*/
-		/*	array(*/
-		/*		'ajaxurl'   => admin_url( 'admin-ajax.php' ),*/
-		/*		'nonce'     => wp_create_nonce( 'autocomplete_nonce' ),*/
-		/*		'post_type' => get_post_type(),*/
-		/*	)*/
-		/*);*/
-
-		/*wp_enqueue_script( 'autocomplete' );*/
 
 		add_filter(
 			"script_module_data_@wporg-developer/autocomplete",
 			function ( $data ) {
 				return array_merge( $data, array(
-					'rest_url' => rest_url('wporg-developer/v1/autocomplete'),
+					'endpoint_url' => rest_url('wporg-developer/v1/autocomplete'),
 					'nonce'       => wp_create_nonce( 'wporg/autocomplete' ),
-					'post_type'   => get_post_type(),
 				) );
 			}
 		);
