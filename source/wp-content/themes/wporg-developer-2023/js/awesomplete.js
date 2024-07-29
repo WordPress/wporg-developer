@@ -152,10 +152,10 @@ export class Awesomplete {
 		Awesomplete.all.push( this );
 	}
 
-	configure( properties, o ) {
-		for ( var i in properties ) {
-			var initial = properties[ i ],
-				attrValue = this.input.getAttribute( 'data-' + i.toLowerCase() );
+	configure( properties, opts ) {
+		for ( const i in properties ) {
+			const initial = properties[ i ];
+			const attrValue = this.input.getAttribute( 'data-' + i.toLowerCase() );
 
 			if ( typeof initial === 'number' ) {
 				this[ i ] = parseInt( attrValue );
@@ -169,7 +169,7 @@ export class Awesomplete {
 			}
 
 			if ( ! this[ i ] && this[ i ] !== 0 ) {
-				this[ i ] = i in o ? o[ i ] : initial;
+				this[ i ] = i in opts ? opts[ i ] : initial;
 			}
 		}
 	}
@@ -184,7 +184,7 @@ export class Awesomplete {
 			list = Awesomplete.$( list );
 
 			if ( list && list.children ) {
-				this._list = slice.apply( list.children ).map( ( el ) => el.textContent.trim() );
+				this._list = slice.apply( list.children ).map( ( element ) => element.textContent.trim() );
 			}
 		}
 
@@ -219,13 +219,13 @@ export class Awesomplete {
 	}
 
 	next() {
-		var count = this.ul.children.length;
+		const count = this.ul.children.length;
 
 		this.goto( this.index < count - 1 ? this.index + 1 : -1 );
 	}
 
 	previous() {
-		var count = this.ul.children.length;
+		const count = this.ul.children.length;
 
 		this.goto( this.selected ? this.index - 1 : count - 1 );
 	}
@@ -300,11 +300,11 @@ export class Awesomplete {
 	}
 }
 
-Awesomplete.$.create = function ( tag, o ) {
+Awesomplete.$.create = function ( tag, opts ) {
 	const element = document.createElement( tag );
 
-	for ( const i in o ) {
-		const val = o[ i ];
+	for ( const i in opts ) {
+		const val = opts[ i ];
 
 		if ( i === 'inside' ) {
 			Awesomplete.$( val ).appendChild( element );
