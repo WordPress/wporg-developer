@@ -89,13 +89,6 @@
 		const elementTarget = e.target;
 		let scroll, sel;
 
-		if ( e.key === 'Escape' ) {
-			// When pressing Escape: Opera 12 and 27 blur form fields, IE 8 clears them.
-			e.preventDefault();
-			elementTarget.setAttribute( 'data-tab-out', 'true' );
-			return;
-		}
-
 		if ( e.key !== 'Tab' || e.ctrlKey || e.altKey || e.shiftKey ) return;
 
 		if ( elementTarget.getAttribute( 'data-tab-out' ) === 'true' ) {
