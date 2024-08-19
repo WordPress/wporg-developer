@@ -16,7 +16,8 @@
 	// Actions for when the page is ready.
 	document.addEventListener( 'DOMContentLoaded', function () {
 		// Set wpAdminBar.
-		wpAdminBar = document.querySelector( '#wpadminbar' ).length ? 32 : 0;
+		wpAdminBar =
+			! document.querySelector( '#wpadminbar' ) || document.querySelector( '#wpadminbar' ).length ? 32 : 0;
 		// Display form and scroll to it
 		if ( '#respond' === window.location.hash ) {
 			showCommentForm();
@@ -24,11 +25,8 @@
 		if ( ! wpAdminBar || ! commentID ) {
 			return;
 		}
-		const comment = document
-			.querySelector( '#comments' )
-			.find( commentID + '.depth-1' )
-			.first();
-		if ( ! comment.length ) {
+		const comment = document.querySelector( `.comment-list ${ commentID } .depth-1` );
+		if ( ! comment || ! comment.length ) {
 			return;
 		}
 		// Scroll to top level comment and adjust for admin bar.
@@ -40,10 +38,11 @@
 	} );
 
 	// Scroll to comment if comment date link is clicked.
-	document.querySelectorAll( '#comments .comment-date' ).forEach( ( element ) => {
-		element.addEventListener( 'click', function () {
+	document.querySelectorAll( '.comment-list .comment-date' ).forEach( ( element ) => {
+		element.addEventListener( 'click', function ( event ) {
 			// Scroll to comment and adjust for admin bar.
 			// Add 16px for child comments.
+			event.preventDefault();
 			const pos = this.getBoundingClientRect();
 			const offsetTop = pos.top + window.scrollY;
 			window.scrollTo( {
@@ -67,7 +66,7 @@
 		}
 	}
 
-	if ( ! commentForm.length ) {
+	if ( ! commentForm || ! commentForm.length ) {
 		return;
 	}
 
