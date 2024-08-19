@@ -41,12 +41,12 @@
 	document.querySelectorAll( '.comment-list .comment-date' ).forEach( ( element ) => {
 		element.addEventListener( 'click', function ( event ) {
 			// Scroll to comment and adjust for admin bar.
-			// Add 16px for child comments.
+			// Add 16px for child comments and 60px for the new header.
 			event.preventDefault();
 			const pos = this.getBoundingClientRect();
 			const offsetTop = pos.top + window.scrollY;
 			window.scrollTo( {
-				top: offsetTop - wpAdminBar - 16,
+				top: offsetTop - wpAdminBar - 76,
 				behavior: 'smooth',
 			} );
 		} );
