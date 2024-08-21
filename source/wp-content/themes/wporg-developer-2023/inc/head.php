@@ -48,7 +48,7 @@ class DevHub_Head {
 			if ( get_post_type_object( $post_type ) ) {
 				$parts['title'] .= " $sep " . get_post_type_object( $post_type )->labels->singular_name;
 			}
-		} elseif ( ( is_singular() || is_post_type_archive() ) && false !== strpos( $post_type, 'handbook' ) ) {
+		} elseif ( ( is_singular() || is_post_type_archive() ) && is_string( $post_type ) && false !== strpos( $post_type, 'handbook' ) ) {
 			// Add handbook name to title if relevant.
 			if ( get_post_type_object( $post_type ) ) {
 				$handbook_label = get_post_type_object( $post_type )->labels->name;
