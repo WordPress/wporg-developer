@@ -150,6 +150,11 @@ require __DIR__ . '/inc/shortcode-dashicons.php';
 require __DIR__ . '/inc/block-hooks.php';
 
 // Block files
+wp_register_block_metadata_collection(
+	__DIR__ . '/build',
+	__DIR__ . '/build/blocks-manifest.php'
+);
+
 require_once __DIR__ . '/src/cli-command-table/block.php';
 require_once __DIR__ . '/src/code-changelog/block.php';
 require_once __DIR__ . '/src/code-deprecated/block.php';

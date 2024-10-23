@@ -7,7 +7,7 @@
 	"private": true,
 	"devDependencies": {
 		"@wordpress/eslint-plugin": "^17.7.0",
-		"@wordpress/scripts": "27.1.0"
+		"@wordpress/scripts": "30.3.0"
 	},
 	"eslintConfig": {
 		"extends": "../../../../.eslintrc.js"
@@ -17,6 +17,7 @@
 	},
 	"scripts": {
 		"build": "wp-scripts build",
+		"build-blocks-manifest": "wp-scripts build-blocks-manifest",
 		"start": "wp-scripts start",
 		"lint:js": "wp-scripts lint-js src",
 		"lint:css": "wp-scripts lint-style *.css src/**/*.scss",

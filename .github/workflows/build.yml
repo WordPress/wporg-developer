@@ -30,7 +30,9 @@ jobs:
                   yarn
 
             - name: Build
-              run: yarn workspaces run build
+              run: |
+                  yarn build
+                  yarn build:theme:blocks-manifest
 
             - name: Trim the repo down to just the theme
               run: |

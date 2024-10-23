@@ -6,7 +6,7 @@
 	"license": "GPL-2.0-or-later",
 	"private": true,
 	"dependencies": {
-		"@wordpress/scripts": "27.1.0"
+		"@wordpress/scripts": "30.3.0"
 	},
 	"devDependencies": {
 		"@wordpress/env": "9.2.0"
@@ -20,6 +20,7 @@
 		"wp-env": "wp-env",
 		"build": "yarn workspaces run build",
 		"build:theme": "yarn workspace wporg-developer-2023 build",
+		"build:theme:blocks-manifest": "yarn workspace wporg-developer-2023 build-blocks-manifest",
 		"start:theme": "yarn workspace wporg-developer-2023 start",
 		"lint:css": "wp-scripts lint-style"
 	},
