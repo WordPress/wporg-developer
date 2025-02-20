@@ -81,6 +81,9 @@ if ( class_exists( '\\WordPressdotorg\\Markdown\\Importer' ) ) {
 	// REST API handbook.
 	require __DIR__ . '/inc/rest-api.php';
 
+	// Secure Custom Fields handbook.
+	require __DIR__ . '/inc/import-scf.php';
+
 	// Advanced Administration handbook.
 	require __DIR__ . '/inc/import-advanced-admin.php';
 }
@@ -588,7 +591,7 @@ function add_site_navigation_menus( $menus ) {
 }
 
 /**
- * Filter the template heiarchy to add in a general handbook & github handbook template.
+ * Filter the template hierarchy to add in a general handbook & github handbook template.
  *
  * @param string[] $templates A list of template candidates, in descending order of priority.
  * @return string[] Updated list of templates.
