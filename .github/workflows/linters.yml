@@ -29,6 +29,9 @@ jobs:
               env:
                 COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+            - name: Install SVN
+              run: sudo apt-get update && sudo apt-get install -y subversion
+
             - name: Install dependencies & setup configs
               run: |
                   composer install || composer update wporg/*
