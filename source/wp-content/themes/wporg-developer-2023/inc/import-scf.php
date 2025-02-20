@@ -6,7 +6,7 @@ class DevHub_SCF extends DevHub_Docs_Importer {
 	 */
 	public function init() {
 		parent::do_init(
-			'secure-custom-fields',
+			'scf',
 			'secure-custom-fields',
 			'https://raw.githubusercontent.com/WordPress/secure-custom-fields/trunk/docs/bin/manifest.json'
 		);
