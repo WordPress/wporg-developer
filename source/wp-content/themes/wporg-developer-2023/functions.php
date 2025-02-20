@@ -81,6 +81,9 @@ if ( class_exists( '\\WordPressdotorg\\Markdown\\Importer' ) ) {
 	// REST API handbook.
 	require __DIR__ . '/inc/rest-api.php';
 
+	// Secure Custom Fields handbook.
+	require __DIR__ . '/inc/scf.php';
+
 	// Advanced Administration handbook.
 	require __DIR__ . '/inc/import-advanced-admin.php';
 }
