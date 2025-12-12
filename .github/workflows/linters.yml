@@ -14,16 +14,16 @@ jobs:
 
         steps:
             - name: Checkout repository
-              uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3.0.2
+              uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
             - name: Install NodeJS
-              uses: actions/setup-node@eeb10cff27034e7acf239c5d29f62154018672fd # v3.3.0
+              uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
               with:
                   node-version-file: '.nvmrc'
                   cache: yarn
 
             - name: Setup PHP with PECL extension
-              uses: shivammathur/setup-php@1a18b2267f80291a81ca1d33e7c851fe09e7dfc4 # v2.22.0
+              uses: shivammathur/setup-php@44454db4f0199b8b9685a5d763dc37cbf79108e1 # v2.36.0
               with:
                 php-version: '7.4'
               env:
