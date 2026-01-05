@@ -10,25 +10,12 @@
  * and Method-editing screens.
  */
 class WPORG_Edit_Parsed_Content {
-
-	/**
-	 * Post types array.
-	 *
-	 * Includes the Code Reference post types.
-	 *
-	 * @access public
-	 * @var array
-	 */
-	public $post_types;
-
 	/**
 	 * Constructor.
 	 *
 	 * @access public
 	 */
 	public function __construct() {
-		$this->post_types = DevHub\get_parsed_post_types();
-
 		// Data.
 		add_action( 'add_meta_boxes',              array( $this, 'add_meta_boxes'        ) );
 		add_action( 'save_post',                   array( $this, 'save_post'             ) );
@@ -52,7 +39,7 @@ class WPORG_Edit_Parsed_Content {
 	 * @access public
 	 */
 	public function add_meta_boxes() {
-		if ( in_array( $screen = get_current_screen()->id, $this->post_types ) ) {
+		if ( in_array( $screen = get_current_screen()->id, DevHub\get_parsed_post_types() ) ) {
 			remove_meta_box( 'postexcerpt', $screen, 'normal' );
 			add_meta_box( 'wporg_parsed_content', __( 'Parsed Content', 'wporg' ), array( $this, 'parsed_meta_box_cb' ), $screen, 'normal' );
 		}
@@ -166,7 +153,7 @@ class WPORG_Edit_Parsed_Content {
 	 */
 	public function admin_enqueue_scripts() {
 		// Only enqueue 'wporg-parsed-content' script and styles on Code Reference post type screens.
-		if ( in_array( get_current_screen()->id, $this->post_types ) ) {
+		if ( in_array( get_current_screen()->id, DevHub\get_parsed_post_types() ) ) {
 			wp_enqueue_script(
 				'wporg-parsed-content',
 				get_stylesheet_directory_uri() . '/js/parsed-content.js',
