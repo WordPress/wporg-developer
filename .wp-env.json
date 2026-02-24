@@ -26,6 +26,8 @@
 		".htaccess": "./env/.htaccess",
 		"wp-content/mu-plugins": "./source/wp-content/mu-plugins",
 		"wp-content/mu-plugins/0-sandbox.php": "./env/0-sandbox.php",
-		"wp-content/plugins/phpdoc-parser": "./source/wp-content/plugins/phpdoc-parser"
+		"wp-content/plugins/phpdoc-parser": "./source/wp-content/plugins/phpdoc-parser",
+		"wp-cli.yml": "./wp-cli.yml",
+		"vendor/dd32/wpcli-cron-concurrent": "./vendor/dd32/wpcli-cron-concurrent"
 	}
 }

@@ -6,8 +6,6 @@
 /vendor
 *.map
 *.lock
-wp-cli.yml
-
 # Allow local environment overrides.
 .wp-env.override.json
 .env/0-sandbox.php
