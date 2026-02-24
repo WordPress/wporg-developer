@@ -112,6 +112,11 @@ class DevHub_Block_Editor_Importer extends DevHub_Docs_Importer {
 			'tutorials/devenv'                => 'getting-started/devenv',
 			'tutorials/devenv/docker-ubuntu'  => 'getting-started/devenv/docker-ubuntu',
 			'tutorials/block-based-theme'     => 'how-to-guides/themes/block-theme-overview',
+
+			// After IAPI restructuring, Feb 2025 - PRs #75357 & #74974.
+			'reference-guides/interactivity-api/api-reference'                                                              => 'reference-guides/interactivity-api/directives-and-store',
+			'reference-guides/interactivity-api/core-concepts/undestanding-global-state-local-context-and-derived-state'    => 'reference-guides/interactivity-api/core-concepts/understanding-global-state-local-context-derived-state-and-config',
+
 		];
 
 		// General path redirects. (More specific path first.)
