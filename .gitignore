@@ -5,6 +5,7 @@
 /**/node_modules
 /vendor
 *.map
+*.lock
 wp-cli.yml
 
 # Allow local environment overrides.
