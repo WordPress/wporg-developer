@@ -8,6 +8,7 @@
 	},
 	"core": "WordPress/WordPress#master",
 	"phpVersion": "8.1",
+	"testsEnvironment": false,
 	"plugins": [
 		"./source/wp-content/plugins/gutenberg",
 		"./source/wp-content/plugins/handbook",
