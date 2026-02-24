@@ -9,7 +9,7 @@
 	"minimum-stability": "dev",
 	"config": {
 		"platform": {
-			"php": "7.4"
+			"php": "8.1"
 		},
 		"allow-plugins": {
 			"dealerdirect/phpcodesniffer-composer-installer": true,
@@ -29,8 +29,64 @@
 	},
 	"repositories": [
 		{
-			"type": "composer",
-			"url": "https://wpackagist.org/"
+			"type": "package",
+			"package": {
+				"name": "wordpress-plugin/gutenberg",
+				"type": "wordpress-plugin",
+				"version": "1",
+				"dist": {
+					"type": "zip",
+					"url": "https://downloads.wordpress.org/plugin/gutenberg.zip"
+				}
+			}
+		},
+		{
+			"type": "package",
+			"package": {
+				"name": "wordpress-plugin/wordpress-importer",
+				"type": "wordpress-plugin",
+				"version": "1",
+				"dist": {
+					"type": "zip",
+					"url": "https://downloads.wordpress.org/plugin/wordpress-importer.zip"
+				}
+			}
+		},
+		{
+			"type": "package",
+			"package": {
+				"name": "wordpress-plugin/code-syntax-block",
+				"type": "wordpress-plugin",
+				"version": "1",
+				"dist": {
+					"type": "zip",
+					"url": "https://downloads.wordpress.org/plugin/code-syntax-block.zip"
+				}
+			}
+		},
+		{
+			"type": "package",
+			"package": {
+				"name": "wordpress-plugin/posts-to-posts",
+				"type": "wordpress-plugin",
+				"version": "1",
+				"dist": {
+					"type": "zip",
+					"url": "https://downloads.wordpress.org/plugin/posts-to-posts.zip"
+				}
+			}
+		},
+		{
+			"type": "package",
+			"package": {
+				"name": "wordpress-plugin/jetpack",
+				"type": "wordpress-plugin",
+				"version": "1",
+				"dist": {
+					"type": "zip",
+					"url": "https://downloads.wordpress.org/plugin/jetpack.zip"
+				}
+			}
 		},
 		{
 			"type": "vcs",
@@ -86,11 +142,11 @@
 	],
 	"require-dev": {
 		"composer/installers": "~1.0",
-		"wpackagist-plugin/gutenberg": "*",
-		"wpackagist-plugin/wordpress-importer": "*",
-		"wpackagist-plugin/code-syntax-block": "*",
-		"wpackagist-plugin/posts-to-posts": "*",
-		"wpackagist-plugin/jetpack": "*",
+		"wordpress-plugin/gutenberg": "*",
+		"wordpress-plugin/wordpress-importer": "*",
+		"wordpress-plugin/code-syntax-block": "*",
+		"wordpress-plugin/posts-to-posts": "*",
+		"wordpress-plugin/jetpack": "*",
 		"wordpress-meta/pub": "1",
 		"wordpress-meta/wporg-markdown": "1",
 		"wordpress-meta/handbook": "2",
