@@ -18,6 +18,9 @@
 		"preferred-install": {
 			"wordpress/*": "source",
 			"wporg/*": "source"
+		},
+		"audit": {
+			"ignore": ["PKSA-z3gr-8qht-p93v"]
 		}
 	},
 	"extra": {
@@ -97,8 +100,17 @@
 			"url": "git@github.com:WordPress/wporg-mu-plugins.git"
 		},
 		{
-			"type": "vcs",
-			"url": "git@github.com:WordPress/phpdoc-parser.git"
+			"type": "package",
+			"package": {
+				"name": "wordpress/phpdoc-parser",
+				"type": "wordpress-plugin",
+				"version": "dev-master",
+				"source": {
+					"type": "git",
+					"url": "git@github.com:WordPress/phpdoc-parser.git",
+					"reference": "master"
+				}
+			}
 		},
 		{
 			"type": "vcs",
@@ -141,7 +153,7 @@
 		}
 	],
 	"require-dev": {
-		"composer/installers": "~1.0",
+		"composer/installers": "^2.0",
 		"wordpress-plugin/gutenberg": "*",
 		"wordpress-plugin/wordpress-importer": "*",
 		"wordpress-plugin/code-syntax-block": "*",
@@ -156,11 +168,10 @@
 		"wporg/wporg-parent-2021": "dev-build",
 		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
 		"wp-coding-standards/wpcs": "^3.0",
-		"phpcompatibility/phpcompatibility-wp": "*",
-		"wp-phpunit/wp-phpunit": "^5.4",
-		"phpunit/phpunit": "^7.5.20",
-		"rmccue/requests": "^1.8.1",
-		"yoast/phpunit-polyfills": "^1.0",
+		"phpcompatibility/phpcompatibility-wp": "^2.0",
+		"wp-phpunit/wp-phpunit": "^6.0",
+		"phpunit/phpunit": "^10.5",
+		"yoast/phpunit-polyfills": "^2.0",
 		"dd32/wpcli-cron-concurrent": "dev-trunk"
 	},
 	"scripts": {
