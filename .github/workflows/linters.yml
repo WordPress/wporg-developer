@@ -34,7 +34,8 @@ jobs:
             - name: Install dependencies & setup configs
               run: |
                   composer install || composer update wporg/*
-                  yarn setup:tools
+                  yarn
+                  TEXTDOMAIN=wporg composer exec update-configs
             - name: Lint CSS
               run: |
                   yarn workspace wporg-developer-2023 lint:css
