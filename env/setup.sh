@@ -16,5 +16,4 @@ wp option update page_on_front `wp post list --post_type=page --name=home --form
 wp option update show_on_front page
 
 # Run manifest imports first, then all remaining cron tasks concurrently.
-wp cron-concurrent run --filter=import_manifest
-wp cron-concurrent run
+( wp cron-concurrent run --filter=import_manifest && wp cron-concurrent run ) || wp cron event run --all
