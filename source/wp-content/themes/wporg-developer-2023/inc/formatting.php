@@ -260,6 +260,8 @@ class DevHub_Formatting {
 	 * @return string The HTML for the link.
 	 */
 	public static function generate_link( $url, $text ) {
+		$url = trailingslashit( $url );
+
 		/**
 		 * Filters the HTML attributes applied to a link's anchor element.
 		 *
