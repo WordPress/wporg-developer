@@ -210,6 +210,14 @@ class DevHub_Formatting {
 		elseif ( false !== strpos( $link, '::' ) ) {
 			$url = get_post_type_archive_link( 'wp-parser-class' ) .
 			        str_replace( array( '::', '()' ), array( '/', '' ), $link );
+			// Fix a self::method() reference to actually reference the class.
+			if ( 0 === strpos( $link, 'self::' ) ) {
+				$parent = get_post_parent();
+				if ( $parent && ( 'wp-parser-class' === $parent->post_type ) ) {
+					$link = str_replace( 'self::', $parent->post_title . '::', $link );
+					$url = str_replace( '/self/', '/' . sanitize_key( $parent->post_name ) . '/', $url );
+				}
+			}
 		}
 
 		// Link to hook: {@see 'pre_get_search_form'}
