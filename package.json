@@ -12,7 +12,7 @@
 		"@wordpress/env": "9.2.0"
 	},
 	"scripts": {
-		"setup:tools": "yarn && composer install && TEXTDOMAIN=wporg composer exec update-configs && composer --working-dir=./source/wp-content/plugins/phpdoc-parser install",
+      "setup:tools": "yarn && composer install || composer update 'wporg/*' && TEXTDOMAIN=wporg composer exec update-configs && composer --working-dir=./source/wp-content/plugins/phpdoc-parser install",
 		"setup": "yarn setup:wp && yarn parse",
 		"setup:wp": "wp-env run cli bash env/setup.sh",
 		"parse": "wp-env run cli wp devhub parse --user_id=1",
