@@ -7,7 +7,7 @@
 		"WPORG_SANDBOXED": true
 	},
 	"core": "WordPress/WordPress#master",
-	"phpVersion": "8.1",
+	"phpVersion": "8.4",
 	"testsEnvironment": false,
 	"plugins": [
 		"./source/wp-content/plugins/gutenberg",
