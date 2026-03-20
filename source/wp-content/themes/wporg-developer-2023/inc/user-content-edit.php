@@ -96,10 +96,11 @@ class DevHub_User_Content_Edit {
 		$can_user_edit = DevHub\can_user_edit_note( $comment_id );
 		$action        = 'update_user_note_' . $comment_id;
 		$nonce         = wp_verify_nonce( $comment_data['_wpnonce'], $action );
+		$existing      = get_comment( $comment_id );
 
-		if ( $nonce && $can_user_edit ) {
-			$comment_data['comment_content'] = $comment;
-			$updated = wp_update_comment( $comment_data );
+		if ( $nonce && $can_user_edit && $existing ) {
+			$update_data = self::build_comment_update_data( $comment_id, $comment );
+			$updated = wp_update_comment( $update_data );
 		}
 
 		$location = get_permalink( $post_id );
@@ -109,6 +110,26 @@ class DevHub_User_Content_Edit {
 			wp_safe_redirect( $location . $query );
 			exit;
 		}
+	}
+
+	/**
+	 * Builds safe comment data for wp_update_comment().
+	 *
+	 * Only fields intended for front-end user-note editing are included.
+	 *
+	 * @param int    $comment_id Comment ID.
+	 * @param string $comment    Updated note content.
+	 * @return array
+	 */
+	protected static function build_comment_update_data( $comment_id, $comment ) {
+		/*
+		 * Build the minimal update payload for front-end note editing to
+		 * prevent injection of sensitive comment fields via extra POST inputs.
+		 */
+		return [
+			'comment_ID'      => $comment_id,
+			'comment_content' => $comment,
+		];
 	}
 
 	/**
