@@ -843,6 +843,7 @@ namespace DevHub {
 						$default_strings = [
 							"default is {$default}.",
 							"Default {$default}.",
+							"Default <code>{$default}</code>.",
 							'Default empty.',
 							'Default empty string.',
 							'Default empty array.',
