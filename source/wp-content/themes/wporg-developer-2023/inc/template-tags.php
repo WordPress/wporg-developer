@@ -840,23 +840,18 @@ namespace DevHub {
 						// If a known default is stated in the parameter's description, try to remove it
 						// since the actual default value is displayed immediately following description.
 						$default = htmlentities( $arg['default'] );
-						$params[ $arg['name'] ]['content'] = str_replace( "default is {$default}.", '', $params[ $arg['name'] ]['content'] );
-						$params[ $arg['name'] ]['content'] = str_replace( "Default {$default}.", '', $params[ $arg['name'] ]['content'] );
+						$default_strings = [
+							"default is {$default}.",
+							"Default {$default}.",
+							'Default empty.',
+							'Default empty string.',
+							'Default empty array.',
+						];
 
-						// When the default is '', docs sometimes say "Default empty." or similar.
-						if ( "''" == $arg['default'] ) {
-							$params[ $arg['name'] ]['content'] = str_replace( "Default empty.", '', $params[ $arg['name'] ]['content'] );
-							$params[ $arg['name'] ]['content'] = str_replace( "Default empty string.", '', $params[ $arg['name'] ]['content'] );
+						foreach ( $default_strings as $default_string ) {
+							$params[ $arg['name'] ]['content'] = str_replace( $default_string, '', $params[ $arg['name'] ]['content'] );
+						}
 
-							// Only a few cases of this. Remove once core is fixed.
-							$params[ $arg['name'] ]['content'] = str_replace( "default is empty string.", '', $params[ $arg['name'] ]['content'] );
-						}
-						// When the default is array(), docs sometimes say "Default empty array." or similar.
-						elseif (  'array()' == $arg['default'] ) {
-							$params[ $arg['name'] ]['content'] = str_replace( "Default empty array.", '', $params[ $arg['name'] ]['content'] );
-							// Not as common.
-							$params[ $arg['name'] ]['content'] = str_replace( "Default empty.", '', $params[ $arg['name'] ]['content'] );
-						}
 					}
 				}
 			}
