@@ -1134,11 +1134,22 @@ namespace DevHub {
 			}
 		}
 
-		/* translators: 1: parsed post post, 2: String for alternative function (if one exists) */
-		$contents = sprintf( __( 'This %1$s has been deprecated.%2$s', 'wporg' ),
-			$type,
-			$deprecation_info
-		);
+		$deprecation_version = $deprecated['content'] ?? '';
+
+		if ( $deprecation_version ) {
+			/* translators: 1: parsed post post, 2: WP version of deprecation, 3: String for alternative function (if one exists) */
+			$contents = sprintf( __( 'This %1$s has been deprecated since %2$s.%3$s', 'wporg' ),
+				$type,
+				$deprecation_version,
+				$deprecation_info
+			);
+		} else {
+			/* translators: 1: parsed post post, 2: String for alternative function (if one exists) */
+			$contents = sprintf( __( 'This %1$s has been deprecated.%2$s', 'wporg' ),
+				$type,
+				$deprecation_info
+			);
+		}
 
 		return $contents;
 	}
