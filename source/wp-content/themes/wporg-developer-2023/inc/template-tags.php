@@ -1895,8 +1895,9 @@ namespace DevHub {
 			return '';
 		}
 
-		// Currently only handling private access messages for functions, hooks, and methods.
-		if ( ! in_array( get_post_type( $post ), array( 'wp-parser-function', 'wp-parser-hook', 'wp-parser-method' ) ) ) {
+		$post_type = get_post_type( $post );
+
+		if ( ! is_parsed_post_type( $post_type ) ) {
 			return '';
 		}
 
@@ -1934,9 +1935,15 @@ namespace DevHub {
 		}
 
 		/* translators: 1: String for alternative function (if one exists) */
-		$contents = sprintf( __( 'This function&#8217;s access is marked private. This means it is not intended for use by plugin or theme developers, only in other core functions. It is listed here for completeness.%s', 'wporg' ),
-			$alternative_string
-		);
+		if ( 'wp-parser-class' === $post_type ) {
+			$msg = __( 'This class&#8217;s access is marked private. This means it is not intended for use by plugin or theme developers, only by core. It is listed here for completeness.%s', 'wporg' );
+		} elseif ( 'wp-parser-hook' === $post_type ) {
+			$msg = __( 'This hook&#8217;s access is marked private. This means it is not intended for use by plugin or theme developers, only by core. It is listed here for completeness.%s', 'wporg' );
+		} else {
+			$msg = __( 'This function&#8217;s access is marked private. This means it is not intended for use by plugin or theme developers, only by core. It is listed here for completeness.%s', 'wporg' );
+		}
+
+		$contents = sprintf( $msg, $alternative_string );
 
 		return $contents;
 	}
