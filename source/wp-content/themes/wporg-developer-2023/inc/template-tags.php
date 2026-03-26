@@ -1099,13 +1099,11 @@ namespace DevHub {
 			return '';
 		}
 
-		$deprecation_info = '';
-
-		$referral = wp_filter_object_list( $tags, array( 'name' => 'see' ) );
-		$referral = array_shift( $referral );
-
 		// Construct message pointing visitor to preferred alternative, as provided
 		// via @see, if present.
+		$deprecation_info = '';
+		$referral = wp_filter_object_list( $tags, array( 'name' => 'see' ) );
+		$referral = array_shift( $referral );
 		if ( ! empty( $referral['refers'] ) ) {
 			$refers = sanitize_text_field( $referral['refers'] );
 
@@ -1116,7 +1114,10 @@ namespace DevHub {
 				}
 
 				/* translators: %s: Linked internal element name */
-				$deprecation_info = ' ' . sprintf( __( 'Use %s instead.', 'wporg' ), \DevHub_Formatting::link_internal_element( $refers ) );
+				$link = \DevHub_Formatting::link_internal_element( $refers );
+				if ( $link !== $refers ) {
+					$deprecation_info = ' ' . sprintf( __( 'Use %s instead.', 'wporg' ), $link );
+				}
 			}
 		}
 
