@@ -182,11 +182,14 @@ class DevHub_Formatting {
 	/**
 	 * Parses and links an internal element if a valid element is found.
 	 *
+	 * Note: This function does not attempt to verify that the referenced internal element exists. If the syntax
+	 * looks like an internal element reference, it assumes the target exists and creates the link accordingly.
+	 *
 	 * @static
 	 * @access public
 	 *
 	 * @param string $link Element string.
-	 * @return string HTML link markup if a valid element was found.
+	 * @return string HTML link markup if syntax looks like an internal element reference, original value if not.
 	 */
 	public static function link_internal_element( $link ) {
 		$url = '';
@@ -208,8 +211,7 @@ class DevHub_Formatting {
 
 		// Link to class method: {@see WP_Query::query()}
 		elseif ( false !== strpos( $link, '::' ) ) {
-			$url = get_post_type_archive_link( 'wp-parser-class' ) .
-			        str_replace( array( '::', '()' ), array( '/', '' ), $link );
+			$url = get_post_type_archive_link( 'wp-parser-class' ) . str_replace( [ '::', '()' ], [ '/', '' ], $link );
 			// Fix a self::method() reference to actually reference the class.
 			if ( 0 === strpos( $link, 'self::' ) ) {
 				$parent = get_post_parent();
@@ -241,7 +243,7 @@ class DevHub_Formatting {
 		}
 
 		// Link to function: {@see esc_attr()}
-		else {
+		elseif ( str_ends_with( $link, '()' ) ) {
 			$url = get_post_type_archive_link( 'wp-parser-function' ) .
 					sanitize_title_with_dashes( html_entity_decode( $link ) );
 		}
