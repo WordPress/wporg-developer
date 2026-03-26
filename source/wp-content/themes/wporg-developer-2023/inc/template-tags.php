@@ -1005,7 +1005,7 @@ namespace DevHub {
 		if ( $deprecated ) {
 			$deprecated = array_shift( $deprecated );
 			// Prepend 'Deprecated.' to the description to make clear the changelog entry's purpose.
-			$deprecated['description'] = 'Deprecated. ' . $deprecated['description'];
+			$deprecated['description'] = 'Deprecated. ' . ( $deprecated['description'] ?? '' );
 
 			if ( $term = get_term_by( 'name', $deprecated['content'], 'wp-parser-since' ) ) {
 				// Terms.
