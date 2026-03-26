@@ -491,7 +491,7 @@ pre {
 		border-top: unset;
 	}
 
-	/* stylelint-disable-next-line max-line-length */
+	/* stylelint-disable-next-line @stylistic/max-line-length */
 	// All these button styles match those from wporg-parent-2021 theme. See https://github.com/WordPress/wporg-parent-2021/blob/trunk/source/wp-content/themes/wporg-parent-2021/sass/blocks/_button-mixins.scss
 	#wp-link-submit,
 	#wp-link-cancel button {
@@ -508,11 +508,11 @@ pre {
 		// This ensures the outline and filled button are the same height.
 		border-width: 0;
 		padding-top: calc(var(--wp--custom--button--spacing--padding--top) + var(--wp--custom--button--border--width));
-		/* stylelint-disable-next-line max-line-length */
+		/* stylelint-disable-next-line @stylistic/max-line-length */
 		padding-bottom: calc(var(--wp--custom--button--spacing--padding--bottom) + var(--wp--custom--button--border--width));
-		/* stylelint-disable-next-line max-line-length */
+		/* stylelint-disable-next-line @stylistic/max-line-length */
 		padding-inline-start: calc(var(--wp--custom--button--spacing--padding--left) + var(--wp--custom--button--border--width));
-		/* stylelint-disable-next-line max-line-length */
+		/* stylelint-disable-next-line @stylistic/max-line-length */
 		padding-inline-end: calc(var(--wp--custom--button--spacing--padding--right) + var(--wp--custom--button--border--width));
 	}
 

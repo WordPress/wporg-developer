@@ -6,14 +6,26 @@
 	"license": "GPL-2.0-or-later",
 	"private": true,
 	"devDependencies": {
-		"@wordpress/eslint-plugin": "^17.7.0",
-		"@wordpress/scripts": "27.1.0"
+		"@wordpress/eslint-plugin": "^24.2.0",
+		"@wordpress/scripts": "31.5.0"
 	},
 	"eslintConfig": {
-		"extends": "../../../../.eslintrc.js"
+		"extends": "../../../../.eslintrc.js",
+		"rules": {
+			"import/no-unresolved": [ "error", { "ignore": [ "^@wordpress/" ] } ]
+		}
 	},
 	"stylelint": {
-		"extends": "../../../../.stylelintrc"
+		"extends": "@wordpress/stylelint-config/scss-stylistic",
+		"rules": {
+			"@stylistic/max-line-length": 115,
+			"no-descending-specificity": null,
+			"rule-empty-line-before": [ "always-multi-line", {
+				"except": [ "first-nested", "after-single-line-comment" ]
+			} ],
+			"selector-class-pattern": null,
+			"value-keyword-case": [ "lower", { "camelCaseSvgKeywords": true } ]
+		}
 	},
 	"scripts": {
 		"build": "wp-scripts build",

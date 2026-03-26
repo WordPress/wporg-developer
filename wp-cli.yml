@@ -1,0 +1,2 @@
+require:
+    - vendor/dd32/wpcli-cron-concurrent/cron-concurrent.php

@@ -9,7 +9,7 @@
 	"minimum-stability": "dev",
 	"config": {
 		"platform": {
-			"php": "7.4"
+			"php": "8.4"
 		},
 		"allow-plugins": {
 			"dealerdirect/phpcodesniffer-composer-installer": true,
@@ -18,6 +18,9 @@
 		"preferred-install": {
 			"wordpress/*": "source",
 			"wporg/*": "source"
+		},
+		"audit": {
+			"ignore": ["PKSA-z3gr-8qht-p93v"]
 		}
 	},
 	"extra": {
@@ -29,8 +32,64 @@
 	},
 	"repositories": [
 		{
-			"type": "composer",
-			"url": "https://wpackagist.org/"
+			"type": "package",
+			"package": {
+				"name": "wordpress-plugin/gutenberg",
+				"type": "wordpress-plugin",
+				"version": "1",
+				"dist": {
+					"type": "zip",
+					"url": "https://downloads.wordpress.org/plugin/gutenberg.zip"
+				}
+			}
+		},
+		{
+			"type": "package",
+			"package": {
+				"name": "wordpress-plugin/wordpress-importer",
+				"type": "wordpress-plugin",
+				"version": "1",
+				"dist": {
+					"type": "zip",
+					"url": "https://downloads.wordpress.org/plugin/wordpress-importer.zip"
+				}
+			}
+		},
+		{
+			"type": "package",
+			"package": {
+				"name": "wordpress-plugin/code-syntax-block",
+				"type": "wordpress-plugin",
+				"version": "1",
+				"dist": {
+					"type": "zip",
+					"url": "https://downloads.wordpress.org/plugin/code-syntax-block.zip"
+				}
+			}
+		},
+		{
+			"type": "package",
+			"package": {
+				"name": "wordpress-plugin/posts-to-posts",
+				"type": "wordpress-plugin",
+				"version": "1",
+				"dist": {
+					"type": "zip",
+					"url": "https://downloads.wordpress.org/plugin/posts-to-posts.zip"
+				}
+			}
+		},
+		{
+			"type": "package",
+			"package": {
+				"name": "wordpress-plugin/jetpack",
+				"type": "wordpress-plugin",
+				"version": "1",
+				"dist": {
+					"type": "zip",
+					"url": "https://downloads.wordpress.org/plugin/jetpack.zip"
+				}
+			}
 		},
 		{
 			"type": "vcs",
@@ -41,8 +100,17 @@
 			"url": "git@github.com:WordPress/wporg-mu-plugins.git"
 		},
 		{
-			"type": "vcs",
-			"url": "git@github.com:WordPress/phpdoc-parser.git"
+			"type": "package",
+			"package": {
+				"name": "wordpress/phpdoc-parser",
+				"type": "wordpress-plugin",
+				"version": "dev-master",
+				"source": {
+					"type": "git",
+					"url": "git@github.com:WordPress/phpdoc-parser.git",
+					"reference": "master"
+				}
+			}
 		},
 		{
 			"type": "vcs",
@@ -85,12 +153,12 @@
 		}
 	],
 	"require-dev": {
-		"composer/installers": "~1.0",
-		"wpackagist-plugin/gutenberg": "*",
-		"wpackagist-plugin/wordpress-importer": "*",
-		"wpackagist-plugin/code-syntax-block": "*",
-		"wpackagist-plugin/posts-to-posts": "*",
-		"wpackagist-plugin/jetpack": "*",
+		"composer/installers": "^2.0",
+		"wordpress-plugin/gutenberg": "*",
+		"wordpress-plugin/wordpress-importer": "*",
+		"wordpress-plugin/code-syntax-block": "*",
+		"wordpress-plugin/posts-to-posts": "*",
+		"wordpress-plugin/jetpack": "*",
 		"wordpress-meta/pub": "1",
 		"wordpress-meta/wporg-markdown": "1",
 		"wordpress-meta/handbook": "2",
@@ -100,11 +168,11 @@
 		"wporg/wporg-parent-2021": "dev-build",
 		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
 		"wp-coding-standards/wpcs": "^3.0",
-		"phpcompatibility/phpcompatibility-wp": "*",
-		"wp-phpunit/wp-phpunit": "^5.4",
-		"phpunit/phpunit": "^7.5.20",
-		"rmccue/requests": "^1.8.1",
-		"yoast/phpunit-polyfills": "^1.0"
+		"phpcompatibility/phpcompatibility-wp": "^2.0",
+		"wp-phpunit/wp-phpunit": "^6.0",
+		"phpunit/phpunit": "^10.5",
+		"yoast/phpunit-polyfills": "^2.0",
+		"dd32/wpcli-cron-concurrent": "dev-trunk"
 	},
 	"scripts": {
 		"format": "phpcbf -p",
