@@ -1929,30 +1929,14 @@ namespace DevHub {
 			return '';
 		}
 
-		$referral = wp_filter_object_list( $tags, array( 'name' => 'see' ) );
-		$referral = array_shift( $referral );
-
-		if ( ! empty( $referral['refers'] ) ) {
-			$refers = sanitize_text_field( $referral['refers'] );
-
-			if ( ! empty( $refers ) ) {
-				/* translators: 1: Linked internal element name */
-				$alternative_string = sprintf( __( ' Use %s instead.', 'wporg' ), \DevHub_Formatting::link_internal_element( $refers ) );
-			}
-		} else {
-			$alternative_string = '';
-		}
-
 		/* translators: 1: String for alternative function (if one exists) */
 		if ( 'wp-parser-class' === $post_type ) {
-			$msg = __( 'This class&#8217;s access is marked private. This means it is not intended for use by plugin or theme developers, only by core. It is listed here for completeness.%s', 'wporg' );
+			$contents = __( 'This class&#8217;s access is marked private. This means it is not intended for use by plugin or theme developers, only by core. It is listed here for completeness.', 'wporg' );
 		} elseif ( 'wp-parser-hook' === $post_type ) {
-			$msg = __( 'This hook&#8217;s access is marked private. This means it is not intended for use by plugin or theme developers, only by core. It is listed here for completeness.%s', 'wporg' );
+			$contents = __( 'This hook&#8217;s access is marked private. This means it is not intended for use by plugin or theme developers, only by core. It is listed here for completeness.', 'wporg' );
 		} else {
-			$msg = __( 'This function&#8217;s access is marked private. This means it is not intended for use by plugin or theme developers, only by core. It is listed here for completeness.%s', 'wporg' );
+			$contents = __( 'This function&#8217;s access is marked private. This means it is not intended for use by plugin or theme developers, only by core. It is listed here for completeness.', 'wporg' );
 		}
-
-		$contents = sprintf( $msg, $alternative_string );
 
 		return $contents;
 	}
