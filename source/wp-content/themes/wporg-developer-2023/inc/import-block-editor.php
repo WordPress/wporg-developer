@@ -12,6 +12,8 @@ class DevHub_Block_Editor_Importer extends DevHub_Docs_Importer {
 			'block-editor',
 			$manifest
 		);
+		
+		$this->posts_per_page = 1000;
 
 		add_filter( 'template_redirect', array( $this, 'redirects' ), 1 );
 		add_filter( 'handbook_label', array( $this, 'change_handbook_label' ), 10, 2 );
