@@ -119,6 +119,11 @@ require __DIR__ . '/inc/autocomplete.php';
 require __DIR__ . '/inc/search.php';
 
 /**
+ * Suppress unwanted sections on ?output_format=md requests.
+ */
+require __DIR__ . '/inc/markdown-output.php';
+
+/**
  * Parser customizations.
  */
 require __DIR__ . '/inc/parser.php';
