@@ -211,7 +211,7 @@ class DevHub_Block_Editor_Importer extends DevHub_Docs_Importer {
 
 	/**
 	 * Fixes fetched value of markdown_source meta field to not be the
-	 * raw.githubcontent.com domain that is currently incorrectly used
+	 * raw.githubusercontent.com domain that is currently incorrectly used
 	 * in the block editor manifest.
 	 *
 	 * @param mixed  $null      A value for the meta if its data retrieval is
