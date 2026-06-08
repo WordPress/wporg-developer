@@ -208,7 +208,7 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 		return '';
 	}
 
-	if ( isset( $snippet['expected_output'] ) && ! is_string( $snippet['expected_output'] ) ) {
+	if ( array_key_exists( 'expected_output', $snippet ) && ! is_string( $snippet['expected_output'] ) ) {
 		return '';
 	}
 
@@ -234,7 +234,10 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 
 	$output .= '<php-snippet' . render_php_code_snippet_attributes( $attributes ) . '>';
 	$output .= '<script type="application/x-php">' . escape_script_data( $code ) . '</script>';
-	$output .= '<script type="text/expected-output">' . escape_script_data( $snippet['expected_output'] ?? '' ) . '</script>';
+
+	if ( array_key_exists( 'expected_output', $snippet ) ) {
+		$output .= '<script type="text/expected-output">' . escape_script_data( $snippet['expected_output'] ) . '</script>';
+	}
 
 	$output .= '</php-snippet>';
 
