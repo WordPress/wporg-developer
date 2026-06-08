@@ -4,6 +4,8 @@ namespace WordPressdotorg\Theme\Developer_2023\Dynamic_Code_Description;
 use function DevHub\get_description;
 use function DevHub\get_see_tags;
 
+const PHP_CODE_SNIPPET_SCRIPT_URL = 'https://playground.wordpress.net/php-code-snippet.js';
+
 add_action( 'init', __NAMESPACE__ . '\init' );
 add_filter( 'script_loader_tag', __NAMESPACE__ . '\add_php_code_snippet_script_type', 10, 3 );
 
@@ -130,14 +132,15 @@ function get_code_snippets_content( $post_id ) {
 		$setup_blueprints = array();
 	}
 
-	$snippet_output = '';
+	$snippet_output        = '';
+	$used_setup_blueprints = array();
 
 	foreach ( array_values( $snippets ) as $index => $snippet ) {
 		if ( ! is_array( $snippet ) || ( $snippet['type'] ?? '' ) !== 'php-code-snippet' ) {
 			continue;
 		}
 
-		$snippet_output .= render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints );
+		$snippet_output .= render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints, $used_setup_blueprints );
 	}
 
 	if ( '' === $snippet_output ) {
@@ -148,12 +151,8 @@ function get_code_snippets_content( $post_id ) {
 
 	$output = '<div class="wporg-code-snippets">';
 
-	foreach ( $setup_blueprints as $name => $blueprint ) {
-		if ( ! is_string( $name ) || '' === $name ) {
-			continue;
-		}
-
-		$output .= render_blueprint_script( get_setup_blueprint_id( $post_id, $name ), $blueprint );
+	foreach ( array_keys( $used_setup_blueprints ) as $name ) {
+		$output .= render_blueprint_script( get_setup_blueprint_id( $post_id, $name ), $setup_blueprints[ $name ] );
 	}
 
 	$output .= $snippet_output;
@@ -168,7 +167,7 @@ function get_code_snippets_content( $post_id ) {
 function enqueue_php_code_snippet_script() {
 	wp_enqueue_script(
 		'wporg-developer-php-code-snippet',
-		'https://playground.wordpress.net/php-code-snippet.js',
+		PHP_CODE_SNIPPET_SCRIPT_URL,
 		array(),
 		null,
 		true
@@ -201,17 +200,27 @@ function add_php_code_snippet_script_type( $tag, $handle, $src ) {
  * @param int   $index            Zero-based snippet index.
  * @param array $snippet          Snippet data.
  * @param array $setup_blueprints Reusable setup Blueprints keyed by name.
+ * @param array $used_blueprints  Reusable setup Blueprint names referenced by rendered snippets.
  * @return string
  */
-function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints ) {
-	$code       = $snippet['code'] ?? '';
+function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints, &$used_blueprints ) {
+	if ( ! isset( $snippet['code'] ) || ! is_string( $snippet['code'] ) ) {
+		return '';
+	}
+
+	if ( isset( $snippet['expected_output'] ) && ! is_string( $snippet['expected_output'] ) ) {
+		return '';
+	}
+
+	$code       = $snippet['code'];
 	$attributes = array(
 		'name' => get_php_code_snippet_name( $post_id, $index ),
 	);
 
 	if ( isset( $snippet['blueprint'] ) ) {
 		if ( is_string( $snippet['blueprint'] ) && array_key_exists( $snippet['blueprint'], $setup_blueprints ) ) {
-			$attributes['blueprint'] = get_setup_blueprint_id( $post_id, $snippet['blueprint'] );
+			$attributes['blueprint']                 = get_setup_blueprint_id( $post_id, $snippet['blueprint'] );
+			$used_blueprints[ $snippet['blueprint'] ] = true;
 		} elseif ( is_array( $snippet['blueprint'] ) || is_string( $snippet['blueprint'] ) ) {
 			$attributes['blueprint'] = get_inline_blueprint_id( $post_id, $index );
 		}
@@ -225,10 +234,7 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints 
 
 	$output .= '<php-snippet' . render_php_code_snippet_attributes( $attributes ) . '>';
 	$output .= '<script type="application/x-php">' . escape_script_data( $code ) . '</script>';
-
-	if ( array_key_exists( 'expected_output', $snippet ) ) {
-		$output .= '<script type="text/expected-output">' . escape_script_data( $snippet['expected_output'] ) . '</script>';
-	}
+	$output .= '<script type="text/expected-output">' . escape_script_data( $snippet['expected_output'] ?? '' ) . '</script>';
 
 	$output .= '</php-snippet>';
 
