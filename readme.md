@@ -8,6 +8,7 @@
 * Node/npm
 * Yarn
 * Composer
+* PHP v7.4
 
 ### Setup
 
