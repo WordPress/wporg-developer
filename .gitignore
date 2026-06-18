@@ -22,5 +22,6 @@ phpcs.xml.dist
 /source/wp-content/themes/*
 
 # ...except the actual source of this project.
+!/source/wp-content/blueprint.json
 !/source/wp-content/themes
 !/source/wp-content/themes/wporg-developer-2023

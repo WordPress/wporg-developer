@@ -39,6 +39,16 @@
 
 1. Log in with username `admin` and password `password`.
 
+### WordPress Playground
+
+To run the environment without Docker, use WordPress Playground:
+
+```bash
+yarn playground
+```
+
+The Playground setup mounts the same WordPress.org sandbox bootstrap used by `wp-env`, activates the local plugins and theme, and creates the starter pages.
+
 ### Environment management
 
 These must be run in the project's root folder, _not_ in theme/plugin subfolders.
