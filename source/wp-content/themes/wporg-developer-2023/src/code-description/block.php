@@ -69,14 +69,71 @@ function get_description_content( $post_id ) {
 
 	$description = get_description( $post_id );
 	$see_tags    = get_see_tags( $post_id );
-	$snippets    = get_code_snippets_content( $post_id );
 
-	if ( ! $description && ! $see_tags && ! $snippets ) {
+	$snippets = get_post_meta( $post_id, '_wp-parser_code_snippets', true );
+	if ( ! is_array( $snippets ) ) {
+		$snippets = array();
+	}
+	$setup_blueprints = get_post_meta( $post_id, '_wp-parser_setup_blueprints', true );
+	if ( ! is_array( $setup_blueprints ) ) {
+		$setup_blueprints = array();
+	}
+
+	$used_setup_blueprints = array();
+	$placed                = array();
+
+	// Render each snippet in place, where the parser left its placeholder
+	// ( <!-- wp-parser-code-snippet:N --> ), so snippets stay between the
+	// surrounding prose instead of collapsing to the end of the description.
+	$description = preg_replace_callback(
+		'/<!--\s*wp-parser-code-snippet:(\d+)\s*-->/',
+		function ( $matches ) use ( $post_id, $snippets, $setup_blueprints, &$used_setup_blueprints, &$placed ) {
+			$index = (int) $matches[1];
+			if ( ! isset( $snippets[ $index ] ) || ! is_array( $snippets[ $index ] ) ) {
+				return '';
+			}
+			$placed[ $index ] = true;
+			return render_php_code_snippet( $post_id, $index, $snippets[ $index ], $setup_blueprints, $used_setup_blueprints );
+		},
+		(string) $description
+	);
+
+	// Fallback: any snippet without a placeholder (e.g. metadata imported from an
+	// older parser that stripped fences without leaving markers) is appended, so
+	// nothing is silently dropped.
+	$appended = '';
+	foreach ( array_values( $snippets ) as $index => $snippet ) {
+		if ( isset( $placed[ $index ] ) ) {
+			continue;
+		}
+		if ( ! is_array( $snippet ) || ( $snippet['type'] ?? '' ) !== 'php-code-snippet' ) {
+			continue;
+		}
+		$appended .= render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints, $used_setup_blueprints );
+	}
+
+	$has_snippets = ! empty( $placed ) || '' !== $appended;
+
+	if ( ! $description && ! $see_tags && ! $has_snippets ) {
 		return '';
 	}
 
+	if ( $has_snippets ) {
+		enqueue_php_code_snippet_script();
+	}
+
+	// Emit the referenced setup Blueprint <script> tags once, up front.
+	foreach ( array_keys( $used_setup_blueprints ) as $name ) {
+		if ( isset( $setup_blueprints[ $name ] ) ) {
+			$output .= render_blueprint_script( get_setup_blueprint_id( $post_id, $name ), $setup_blueprints[ $name ] );
+		}
+	}
+
 	$output .= $description;
-	$output .= $snippets;
+
+	if ( '' !== $appended ) {
+		$output .= '<div class="wporg-code-snippets">' . $appended . '</div>';
+	}
 
 	if ( $see_tags ) {
 		$output .= '<h3 class="has-heading-5-font-size">' . __( 'See also', 'wporg' ) . '</h3>';
