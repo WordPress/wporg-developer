@@ -49,6 +49,14 @@ yarn playground
 
 The Playground setup mounts the same WordPress.org sandbox bootstrap used by `wp-env`, activates the local plugins and theme, and creates the starter pages.
 
+To import docs from a local manifest, generate a temporary importer and run it through Playground:
+
+```bash
+yarn playground:import-docs --slug=playground --manifest=http://127.0.0.1:8765/manifest.json --label="Playground Handbook"
+```
+
+This creates ignored local files for the importer and a matching boot/import blueprint, then starts Playground with that blueprint.
+
 ### Environment management
 
 These must be run in the project's root folder, _not_ in theme/plugin subfolders.

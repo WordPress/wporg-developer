@@ -13,6 +13,7 @@
 	},
 	"scripts": {
 		"playground": "npx @wp-playground/cli start --no-auto-mount --mount=./source/wp-content/mu-plugins:/wordpress/wp-content/mu-plugins --mount=./env/0-sandbox.php:/wordpress/wp-content/mu-plugins/0-sandbox.php --mount=./source/wp-content/plugins:/wordpress/wp-content/plugins --mount=./source/wp-content/themes:/wordpress/wp-content/themes --blueprint=./source/wp-content/blueprint.json",
+		"playground:import-docs": "node scripts/playground-import-docs.js",
 		"setup:tools": "yarn && composer install && TEXTDOMAIN=wporg composer exec update-configs && composer --working-dir=./source/wp-content/plugins/phpdoc-parser install",
 		"setup": "yarn setup:wp && yarn parse",
 		"setup:wp": "wp-env run cli bash env/setup.sh",
