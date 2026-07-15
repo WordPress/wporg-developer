@@ -87,12 +87,8 @@ if ( class_exists( '\\WordPressdotorg\\Markdown\\Importer' ) ) {
 	// Advanced Administration handbook.
 	require __DIR__ . '/inc/import-advanced-admin.php';
 
-	$local_importers_dir = __DIR__ . '/inc/local-importers';
-	if ( is_dir( $local_importers_dir ) ) {
-		foreach ( glob( $local_importers_dir . '/*.php' ) as $local_importer ) {
-			require $local_importer;
-		}
-	}
+	// Playground handbook.
+	require __DIR__ . '/inc/import-playground.php';
 }
 
 /**
