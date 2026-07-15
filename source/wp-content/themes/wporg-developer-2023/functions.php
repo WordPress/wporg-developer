@@ -86,6 +86,9 @@ if ( class_exists( '\\WordPressdotorg\\Markdown\\Importer' ) ) {
 
 	// Advanced Administration handbook.
 	require __DIR__ . '/inc/import-advanced-admin.php';
+
+	// Playground handbook.
+	require __DIR__ . '/inc/import-playground.php';
 }
 
 /**

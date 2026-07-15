@@ -49,6 +49,12 @@ yarn playground
 
 The Playground setup mounts the same WordPress.org sandbox bootstrap used by `wp-env`, activates the local plugins and theme, and creates the starter pages.
 
+The `playground:import-docs` command starts Playground after importing the manifest and Markdown content for a documentation post type. For example, to import the Playground documentation, run:
+
+```bash
+IMPORT_POST_TYPE=playground yarn playground:import-docs
+```
+
 ### Environment management
 
 These must be run in the project's root folder, _not_ in theme/plugin subfolders.
