@@ -5,12 +5,10 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 	 * Initializes object.
 	 */
 	public function init() {
-		$branch = defined( 'PLAYGROUND_BRANCH' ) ? PLAYGROUND_BRANCH : 'trunk';
-
 		parent::do_init(
 			'playground',
 			'playground',
-			"https://raw.githubusercontent.com/WordPress/wordpress-playground/{$branch}/packages/docs/site/manifest.json"
+			'https://raw.githubusercontent.com/WordPress/wordpress-playground/trunk/packages/docs/site/manifest.json'
 		);
 
 		add_filter( 'handbook_label', array( $this, 'change_handbook_label' ), 10, 2 );
