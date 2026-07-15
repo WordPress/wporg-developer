@@ -13,6 +13,7 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 
 		add_filter( 'handbook_label', array( $this, 'change_handbook_label' ), 10, 2 );
 		add_filter( 'wporg_markdown_after_transform', array( $this, 'parse_callout_markdown' ), 10, 2 );
+		add_filter( 'wporg_markdown_after_transform', array( $this, 'rewrite_root_relative_links' ), 20, 2 );
 	}
 
 	/**
@@ -68,6 +69,31 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 				}
 
 				return '<div' . $callout[1] . '>' . $content . '</div>';
+			},
+			$html
+		);
+	}
+
+	/**
+	 * Rewrites links rooted at the Playground docs site to the handbook base.
+	 *
+	 * The source documentation is built at the root of its own site and uses
+	 * links such as `/blueprints`. On Developer Resources, the documentation is
+	 * mounted below `/playground`, so those links need the handbook base added.
+	 *
+	 * @param string $html      The transformed HTML.
+	 * @param string $post_type The post type being imported.
+	 * @return string
+	 */
+	public function rewrite_root_relative_links( $html, $post_type ) {
+		if ( $this->get_post_type() !== $post_type ) {
+			return $html;
+		}
+
+		return preg_replace_callback(
+			'#(<a\b[^>]*\bhref=["\'])/(?!/)([^"\']*)(["\'])#i',
+			function ( $matches ) {
+				return $matches[1] . trailingslashit( $this->get_base() ) . $matches[2] . $matches[3];
 			},
 			$html
 		);

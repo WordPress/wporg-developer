@@ -20,8 +20,18 @@ You can run an import in this repo with this command which is part of the setup:
     yarn parse
     ```
 
+To import the Playground documentation from PHP, import the manifest first and
+then import all Markdown files:
+
+```php
+do_action( 'devhub_playground_import_manifest' );
+
+// Reprocess unchanged sources instead of skipping them based on their ETags.
+add_filter( 'wporg_markdown_check_etags', '__return_false' );
+do_action( 'devhub_playground_import_all_markdown' );
+```
+
 ## Explanations
 
 See `source/wp-content/themes/wporg-developer/inc/explanations.php` - a CPT where additional "Explanation" text can be stored for each function in the reference. The Explanation content is displayed under a `More Information` heading on the reference page for that function.
-
 
