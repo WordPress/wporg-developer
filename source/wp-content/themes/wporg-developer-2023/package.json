@@ -5,6 +5,9 @@
 	"author": "WordPress.org",
 	"license": "GPL-2.0-or-later",
 	"private": true,
+	"dependencies": {
+		"@wordpress/i18n": "^6.24.0"
+	},
 	"devDependencies": {
 		"@wordpress/eslint-plugin": "^24.2.0",
 		"@wordpress/scripts": "31.5.0"
