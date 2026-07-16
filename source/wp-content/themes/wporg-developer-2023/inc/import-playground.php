@@ -16,6 +16,7 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 		add_filter( 'handbook_label', array( $this, 'change_handbook_label' ), 10, 2 );
 		add_filter( 'wporg_markdown_before_transform', array( $this, 'transform_mdx' ), 10, 2 );
 		add_filter( 'wporg_markdown_after_transform', array( $this, 'parse_callout_markdown' ), 10, 2 );
+		add_filter( 'wporg_markdown_after_transform', array( $this, 'format_run_blueprint_links' ), 15, 2 );
 		add_filter( 'wporg_markdown_after_transform', array( $this, 'rewrite_root_relative_links' ), 20, 2 );
 		add_filter( 'script_loader_tag', array( $this, 'add_php_code_snippet_script_type' ), 10, 3 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
@@ -212,6 +213,36 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 				$content = make_clickable( $content );
 
 				return '<div' . $callout[1] . '>' . $content . '</div>';
+			},
+			$html
+		);
+	}
+
+	/**
+	 * Formats Blueprint action keyboard links as WordPress buttons.
+	 *
+	 * @param string $html      The transformed HTML.
+	 * @param string $post_type The post type being imported.
+	 * @return string
+	 */
+	public function format_run_blueprint_links( $html, $post_type ) {
+		if ( $this->get_post_type() !== $post_type ) {
+			return $html;
+		}
+
+		return preg_replace_callback(
+			'#<a([^>]*)>\s*<kbd>(.*?)</kbd>\s*</a>#is',
+			function ( $matches ) {
+				$label = html_entity_decode( wp_strip_all_tags( $matches[2] ), ENT_QUOTES | ENT_HTML5, 'UTF-8' );
+				$label = preg_replace( '/\s+/u', ' ', trim( $label ) );
+
+				if ( ! in_array( $label, array( 'Run Blueprint', 'See blueprint.json' ), true ) ) {
+					return $matches[0];
+				}
+
+				$attributes = preg_replace( '/\sclass=(["\']).*?\1/i', '', $matches[1] );
+
+				return '<span class="wp-block-button"><a' . $attributes . ' class="wp-block-button__link wp-element-button">' . esc_html( $label ) . '</a></span>';
 			},
 			$html
 		);
