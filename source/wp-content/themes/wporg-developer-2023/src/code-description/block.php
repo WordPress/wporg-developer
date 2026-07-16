@@ -331,20 +331,21 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 		$output .= render_blueprint_script( $attributes['blueprint'], $snippet['blueprint'] );
 	}
 
-	$output .= '<php-snippet' . render_php_code_snippet_attributes( $attributes ) . '>';
-	$output .= wp_get_inline_script_tag(
+	$snippet_output = '<php-snippet>';
+	$snippet_output .= wp_get_inline_script_tag(
 		escape_php_source_script_contents( $code ),
 		array( 'type' => 'application/x-php' )
 	);
 
 	if ( array_key_exists( 'expected_output', $snippet ) ) {
-		$output .= wp_get_inline_script_tag(
+		$snippet_output .= wp_get_inline_script_tag(
 			$snippet['expected_output'],
 			array( 'type' => 'text/expected-output' )
 		);
 	}
 
-	$output .= '</php-snippet>';
+	$snippet_output .= '</php-snippet>';
+	$output         .= render_php_code_snippet_element( $snippet_output, $attributes );
 
 	return $output;
 }
@@ -376,19 +377,23 @@ function render_blueprint_script( $id, $blueprint ) {
 }
 
 /**
- * Render attributes for the php-snippet element.
+ * Render the php-snippet element with its attributes.
  *
- * @param array $attributes Attributes keyed by name.
+ * @param string $html       php-snippet element markup.
+ * @param array  $attributes Attributes keyed by name.
  * @return string
  */
-function render_php_code_snippet_attributes( $attributes ) {
-	$output = '';
-
-	foreach ( $attributes as $name => $value ) {
-		$output .= sprintf( ' %s="%s"', esc_attr( $name ), esc_attr( $value ) );
+function render_php_code_snippet_element( $html, $attributes ) {
+	$tags = new \WP_HTML_Tag_Processor( $html );
+	if ( ! $tags->next_tag( 'php-snippet' ) ) {
+		return $html;
 	}
 
-	return $output;
+	foreach ( $attributes as $name => $value ) {
+		$tags->set_attribute( $name, $value );
+	}
+
+	return $tags->get_updated_html();
 }
 
 /**
