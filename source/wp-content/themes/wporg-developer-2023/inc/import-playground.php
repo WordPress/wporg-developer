@@ -85,7 +85,8 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 
 		if ( ! preg_match( '/\bnoButton(?:=\{true\})?/', $attributes ) ) {
 			$encoded_blueprint = base64_encode( wp_json_encode( $parsed_blueprint, JSON_UNESCAPED_SLASHES ) );
-			$output[] = '[Try it out!](https://playground.wordpress.net/?mode=seamless#' . $encoded_blueprint . ')';
+			$playground_url = 'https://playground.wordpress.net/?mode=seamless#' . $encoded_blueprint;
+			$output[] = '<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="' . esc_url( $playground_url ) . '">Try it out!</a></div>';
 		}
 
 		return "\n\n" . implode( "\n\n", $output ) . "\n\n";
