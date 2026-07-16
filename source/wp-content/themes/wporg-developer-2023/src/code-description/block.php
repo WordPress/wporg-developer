@@ -7,7 +7,6 @@ use function DevHub\get_see_tags;
 const PHP_CODE_SNIPPET_SCRIPT_URL = 'https://playground.wordpress.net/php-code-snippet.js';
 
 add_action( 'init', __NAMESPACE__ . '\init' );
-add_filter( 'script_loader_tag', __NAMESPACE__ . '\add_php_code_snippet_script_type', 10, 3 );
 
 /**
  * Registers the block using the metadata loaded from the `block.json` file.
@@ -222,31 +221,11 @@ function get_code_snippets_content( $post_id ) {
  * Enqueue the web component that renders and runs PHP snippets.
  */
 function enqueue_php_code_snippet_script() {
-	wp_enqueue_script(
+	wp_enqueue_script_module(
 		'wporg-developer-php-code-snippet',
 		PHP_CODE_SNIPPET_SCRIPT_URL,
 		array(),
-		null,
-		true
-	);
-}
-
-/**
- * Load the PHP snippet web component as an ES module.
- *
- * @param string $tag    The script tag.
- * @param string $handle The script handle.
- * @param string $src    The script source URL.
- * @return string
- */
-function add_php_code_snippet_script_type( $tag, $handle, $src ) {
-	if ( 'wporg-developer-php-code-snippet' !== $handle ) {
-		return $tag;
-	}
-
-	return sprintf(
-		'<script type="module" src="%s"></script>' . "\n",
-		esc_url( $src )
+		null
 	);
 }
 
