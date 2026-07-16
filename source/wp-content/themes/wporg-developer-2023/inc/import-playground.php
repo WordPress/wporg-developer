@@ -209,6 +209,7 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 				} else {
 					$content = $parser->transform( $content );
 				}
+				$content = make_clickable( $content );
 
 				return '<div' . $callout[1] . '>' . $content . '</div>';
 			},
