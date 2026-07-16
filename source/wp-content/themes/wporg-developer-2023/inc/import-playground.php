@@ -21,6 +21,7 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 		add_filter( 'wporg_markdown_after_transform', array( $this, 'rewrite_root_relative_links' ), 20, 2 );
 		add_filter( 'wporg_markdown_after_transform', array( $this, 'rewrite_root_relative_image_sources' ), 20, 2 );
 		add_filter( 'script_loader_tag', array( $this, 'add_php_code_snippet_script_type' ), 10, 3 );
+		add_filter( 'get_edit_post_link', array( $this, 'rewrite_markdown_edit_link' ), 11, 3 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_shortcode( 'playground_php_snippet', array( $this, 'render_php_code_snippet' ) );
 	}
@@ -38,6 +39,26 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 		}
 
 		return $label;
+	}
+
+	/**
+	 * Rewrites raw GitHub Markdown sources to their GitHub editor URLs.
+	 *
+	 * @param string $link    The post edit link.
+	 * @param int    $post_id The post ID.
+	 * @param string $context How to output the ampersand in the URL.
+	 * @return string
+	 */
+	public function rewrite_markdown_edit_link( $link, $post_id, $context ) {
+		if ( $this->get_post_type() !== get_post_type( $post_id ) ) {
+			return $link;
+		}
+
+		return preg_replace(
+			'!^https?://raw.githubusercontent.com/([^/]+/[^/]+)/(.*)$!i',
+			'https://github.com/$1/edit/$2',
+			$link
+		);
 	}
 
 	/**
