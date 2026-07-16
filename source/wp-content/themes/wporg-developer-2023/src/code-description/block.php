@@ -309,12 +309,19 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 		'name' => get_php_code_snippet_name( $post_id, $index ),
 	);
 
-	if ( isset( $snippet['blueprint'] ) ) {
-		if ( is_string( $snippet['blueprint'] ) && array_key_exists( $snippet['blueprint'], $setup_blueprints ) ) {
+	if ( array_key_exists( 'blueprint', $snippet ) ) {
+		if (
+			is_string( $snippet['blueprint'] ) &&
+			isset( $setup_blueprints[ $snippet['blueprint'] ] ) &&
+			is_array( $setup_blueprints[ $snippet['blueprint'] ] )
+		) {
 			$attributes['blueprint']                 = get_setup_blueprint_id( $post_id, $snippet['blueprint'] );
 			$used_blueprints[ $snippet['blueprint'] ] = true;
-		} elseif ( is_array( $snippet['blueprint'] ) || is_string( $snippet['blueprint'] ) ) {
+		} elseif ( is_array( $snippet['blueprint'] ) ) {
 			$attributes['blueprint'] = get_inline_blueprint_id( $post_id, $index );
+		} else {
+			// Keep snippets with unusable setup visible without offering a Run action that cannot succeed.
+			$attributes['runnable'] = 'false';
 		}
 	}
 
@@ -339,13 +346,18 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 /**
  * Render a setup Blueprint script tag.
  *
- * @param string       $id        Script tag ID.
- * @param array|string $blueprint Blueprint data.
+ * @param string $id        Script tag ID.
+ * @param array  $blueprint Blueprint data.
  * @return string
  */
 function render_blueprint_script( $id, $blueprint ) {
-	if ( is_array( $blueprint ) ) {
-		$blueprint = wp_json_encode( $blueprint );
+	if ( ! is_array( $blueprint ) ) {
+		return '';
+	}
+
+	$blueprint = wp_json_encode( $blueprint, JSON_HEX_TAG | JSON_UNESCAPED_SLASHES );
+	if ( ! is_string( $blueprint ) ) {
+		return '';
 	}
 
 	return sprintf(
