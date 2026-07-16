@@ -254,10 +254,17 @@ function render_php_code_snippet_placeholders( $description, $post_id, $snippets
 			continue;
 		}
 
-		$placed[ $index ] = true;
-		$processor->replace_current_token(
-			render_php_code_snippet( $post_id, $index, $snippets[ $index ], $setup_blueprints, $used_blueprints )
+		$snippet_output = render_php_code_snippet(
+			$post_id,
+			$index,
+			$snippets[ $index ],
+			$setup_blueprints,
+			$used_blueprints
 		);
+		$processor->replace_current_token( $snippet_output );
+		if ( '' !== $snippet_output ) {
+			$placed[ $index ] = true;
+		}
 	}
 
 	return $processor->get_updated_html();
@@ -296,6 +303,10 @@ function get_php_code_snippet_placeholder_index( $comment_text ) {
  * @return string
  */
 function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints, &$used_blueprints ) {
+	if ( ( $snippet['type'] ?? '' ) !== 'php-code-snippet' ) {
+		return '';
+	}
+
 	if ( ! isset( $snippet['code'] ) || ! is_string( $snippet['code'] ) ) {
 		return '';
 	}
