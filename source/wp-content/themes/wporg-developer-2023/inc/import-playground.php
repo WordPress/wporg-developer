@@ -80,8 +80,7 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 
 		$output = array();
 		if ( ! preg_match( '/\bjustButton(?:=\{true\})?/', $attributes ) ) {
-			$formatted_blueprint = wp_json_encode( $parsed_blueprint, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
-			$output[] = '<pre class="language-json">' . esc_html( $formatted_blueprint ) . '</pre>';
+			$output[] = "```json\n" . wp_json_encode( $parsed_blueprint, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES ) . "\n```";
 		}
 
 		if ( ! preg_match( '/\bnoButton(?:=\{true\})?/', $attributes ) ) {
