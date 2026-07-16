@@ -109,6 +109,14 @@ pre[class*="language-"] {
 	color: get-color(gray-100);
 }
 
+.language-yaml .token.atrule {
+	color: get-color(blue-60);
+}
+
+.language-yaml .token.scalar.string {
+	color: get-color(red-60);
+}
+
 .token.important,
 .token.bold {
 	font-weight: 700;
@@ -272,4 +280,3 @@ pre.line-numbers > code {
 		margin-bottom: -1.1em;
 	}
 }
-
