@@ -338,7 +338,10 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 	);
 
 	if ( array_key_exists( 'expected_output', $snippet ) ) {
-		$output .= '<script type="text/expected-output">' . escape_script_data( $snippet['expected_output'] ) . '</script>';
+		$output .= wp_get_inline_script_tag(
+			$snippet['expected_output'],
+			array( 'type' => 'text/expected-output' )
+		);
 	}
 
 	$output .= '</php-snippet>';
@@ -439,16 +442,6 @@ function get_inline_blueprint_id( $post_id, $index ) {
  * @return string
  */
 function escape_php_source_script_contents( $content ) {
-	return str_ireplace( '</script', '<\/script', $content );
-}
-
-/**
- * Escape content inside script tags while preserving ordinary PHP/HTML text.
- *
- * @param string $content Script tag content.
- * @return string
- */
-function escape_script_data( $content ) {
 	return str_ireplace( '</script', '<\/script', $content );
 }
 
