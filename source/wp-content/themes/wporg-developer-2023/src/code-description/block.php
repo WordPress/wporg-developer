@@ -332,7 +332,10 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 	}
 
 	$output .= '<php-snippet' . render_php_code_snippet_attributes( $attributes ) . '>';
-	$output .= '<script type="application/x-php">' . escape_script_data( $code ) . '</script>';
+	$output .= wp_get_inline_script_tag(
+		escape_php_source_script_contents( $code ),
+		array( 'type' => 'application/x-php' )
+	);
 
 	if ( array_key_exists( 'expected_output', $snippet ) ) {
 		$output .= '<script type="text/expected-output">' . escape_script_data( $snippet['expected_output'] ) . '</script>';
@@ -427,6 +430,16 @@ function get_setup_blueprint_id( $post_id, $name ) {
  */
 function get_inline_blueprint_id( $post_id, $index ) {
 	return 'wporg-code-snippet-blueprint-' . absint( $post_id ) . '-' . absint( $index + 1 );
+}
+
+/**
+ * Escape PHP source for embedding in script tags.
+ *
+ * @param string $content Script tag content.
+ * @return string
+ */
+function escape_php_source_script_contents( $content ) {
+	return str_ireplace( '</script', '<\/script', $content );
 }
 
 /**
