@@ -234,7 +234,7 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 			'#<a([^>]*)>\s*<kbd>(.*?)</kbd>\s*</a>#is',
 			function ( $matches ) {
 				$label = html_entity_decode( wp_strip_all_tags( $matches[2] ), ENT_QUOTES | ENT_HTML5, 'UTF-8' );
-				$label = preg_replace( '/\s+/u', ' ', trim( $label ) );
+				$label = trim( preg_replace( '/\s+/u', ' ', $label ) );
 
 				if ( ! in_array( $label, array( 'Run Blueprint', 'See blueprint.json' ), true ) ) {
 					return $matches[0];
