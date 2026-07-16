@@ -360,10 +360,12 @@ function render_blueprint_script( $id, $blueprint ) {
 		return '';
 	}
 
-	return sprintf(
-		'<script id="%s" type="application/json">%s</script>',
-		esc_attr( $id ),
-		escape_script_data( (string) $blueprint )
+	return wp_get_inline_script_tag(
+		$blueprint,
+		array(
+			'id'   => $id,
+			'type' => 'application/json',
+		)
 	);
 }
 
