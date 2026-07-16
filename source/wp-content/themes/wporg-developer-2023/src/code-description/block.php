@@ -167,53 +167,6 @@ function get_description_content( $post_id ) {
 }
 
 /**
- * Return runnable code examples parsed from the DocBlock description.
- *
- * @param int $post_id Post ID.
- * @return string
- */
-function get_code_snippets_content( $post_id ) {
-	$snippets = get_post_meta( $post_id, '_wp-parser_code_snippets', true );
-
-	if ( empty( $snippets ) || ! is_array( $snippets ) ) {
-		return '';
-	}
-
-	$setup_blueprints = get_post_meta( $post_id, '_wp-parser_setup_blueprints', true );
-	if ( ! is_array( $setup_blueprints ) ) {
-		$setup_blueprints = array();
-	}
-
-	$snippet_output        = '';
-	$used_setup_blueprints = array();
-
-	foreach ( array_values( $snippets ) as $index => $snippet ) {
-		if ( ! is_array( $snippet ) || ( $snippet['type'] ?? '' ) !== 'php-code-snippet' ) {
-			continue;
-		}
-
-		$snippet_output .= render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints, $used_setup_blueprints );
-	}
-
-	if ( '' === $snippet_output ) {
-		return '';
-	}
-
-	enqueue_php_code_snippet_script();
-
-	$output = '<div class="wporg-code-snippets">';
-
-	foreach ( array_keys( $used_setup_blueprints ) as $name ) {
-		$output .= render_blueprint_script( get_setup_blueprint_id( $post_id, $name ), $setup_blueprints[ $name ] );
-	}
-
-	$output .= $snippet_output;
-	$output .= '</div>';
-
-	return $output;
-}
-
-/**
  * Enqueue the web component that renders and runs PHP snippets.
  */
 function enqueue_php_code_snippet_script() {
