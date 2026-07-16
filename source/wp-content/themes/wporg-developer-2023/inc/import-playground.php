@@ -2,6 +2,7 @@
 
 class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 	const PHP_CODE_SNIPPET_SCRIPT_URL = 'https://playground.wordpress.net/php-code-snippet.js';
+	const PLAYGROUND_DOCS_ASSET_URL   = 'https://wordpress.github.io/wordpress-playground/';
 
 	/**
 	 * Initializes object.
@@ -18,6 +19,7 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 		add_filter( 'wporg_markdown_after_transform', array( $this, 'parse_callout_markdown' ), 10, 2 );
 		add_filter( 'wporg_markdown_after_transform', array( $this, 'format_run_blueprint_links' ), 15, 2 );
 		add_filter( 'wporg_markdown_after_transform', array( $this, 'rewrite_root_relative_links' ), 20, 2 );
+		add_filter( 'wporg_markdown_after_transform', array( $this, 'rewrite_root_relative_image_sources' ), 20, 2 );
 		add_filter( 'script_loader_tag', array( $this, 'add_php_code_snippet_script_type' ), 10, 3 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_shortcode( 'playground_php_snippet', array( $this, 'render_php_code_snippet' ) );
@@ -269,6 +271,25 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 			function ( $matches ) {
 				return $matches[1] . trailingslashit( $this->get_base() ) . $matches[2] . $matches[3];
 			},
+			$html
+		);
+	}
+
+	/**
+	 * Rewrites images rooted at the Docusaurus site to its deployed asset URL.
+	 *
+	 * @param string $html      The transformed HTML.
+	 * @param string $post_type The post type being imported.
+	 * @return string
+	 */
+	public function rewrite_root_relative_image_sources( $html, $post_type ) {
+		if ( $this->get_post_type() !== $post_type ) {
+			return $html;
+		}
+
+		return preg_replace(
+			'#(<img\b[^>]*\bsrc=["\'])/(?!/)#i',
+			'$1' . self::PLAYGROUND_DOCS_ASSET_URL,
 			$html
 		);
 	}
