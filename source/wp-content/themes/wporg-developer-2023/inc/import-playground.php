@@ -15,6 +15,7 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 		add_filter( 'wporg_markdown_before_transform', array( $this, 'transform_mdx' ), 10, 2 );
 		add_filter( 'wporg_markdown_after_transform', array( $this, 'parse_callout_markdown' ), 10, 2 );
 		add_filter( 'wporg_markdown_after_transform', array( $this, 'rewrite_root_relative_links' ), 20, 2 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 	}
 
 	/**
@@ -30,6 +31,25 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 		}
 
 		return $label;
+	}
+
+	/**
+	 * Enqueues the interactive Blueprint example script.
+	 */
+	public function enqueue_scripts() {
+		if ( ! is_singular( $this->get_post_type() ) ) {
+			return;
+		}
+
+		$script_path = dirname( __DIR__ ) . '/js/playground-examples.js';
+
+		wp_enqueue_script(
+			'wporg-developer-playground-examples',
+			get_stylesheet_directory_uri() . '/js/playground-examples.js',
+			array(),
+			filemtime( $script_path ),
+			true
+		);
 	}
 
 	/**
@@ -86,7 +106,7 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 		if ( ! preg_match( '/\bnoButton(?:=\{true\})?/', $attributes ) ) {
 			$encoded_blueprint = base64_encode( wp_json_encode( $parsed_blueprint, JSON_UNESCAPED_SLASHES ) );
 			$playground_url = 'https://playground.wordpress.net/?mode=seamless#' . $encoded_blueprint;
-			$output[] = '<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="' . esc_url( $playground_url ) . '">Try it out!</a></div>';
+			$output[] = '<div class="wp-block-button"><a class="wp-block-button__link wp-element-button playground-example-run" href="' . esc_url( $playground_url ) . '">Try it out!</a></div>';
 		}
 
 		return "\n\n" . implode( "\n\n", $output ) . "\n\n";
