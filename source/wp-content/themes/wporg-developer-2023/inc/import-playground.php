@@ -74,7 +74,7 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 			'/<BlueprintExample\b(.*?)\/\s*>/s',
 			array( $this, 'transform_blueprint_example' ),
 			preg_replace_callback(
-				'/<PhpCodeSnippet(?:LiveExample|Example)\b[^>]*\/\s*>\s*(?=```html[ \t]*\r?\n(.*?)\r?\n```)/s',
+				'/<PhpCodeSnippet(?:LiveExample|Example)\b[^>]*\/\s*>\s*(?=.*?```html[ \t]*\r?\n(.*?)\r?\n```)/s',
 				array( $this, 'transform_php_code_snippet' ),
 				$markdown
 			)
