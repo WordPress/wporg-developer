@@ -113,6 +113,10 @@ pre[class*="language-"] {
 	color: get-color(blue-60);
 }
 
+.language-yaml .token.scalar.string {
+	color: get-color(red-60);
+}
+
 .token.important,
 .token.bold {
 	font-weight: 700;
