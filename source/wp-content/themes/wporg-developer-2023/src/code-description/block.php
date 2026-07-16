@@ -84,17 +84,13 @@ function get_description_content( $post_id ) {
 	// Render each snippet in place, where the parser left its placeholder
 	// ( <!-- wp-parser-code-snippet:N --> ), so snippets stay between the
 	// surrounding prose instead of collapsing to the end of the description.
-	$description = preg_replace_callback(
-		'/<!--\s*wp-parser-code-snippet:(\d+)\s*-->/',
-		function ( $matches ) use ( $post_id, $snippets, $setup_blueprints, &$used_setup_blueprints, &$placed ) {
-			$index = (int) $matches[1];
-			if ( ! isset( $snippets[ $index ] ) || ! is_array( $snippets[ $index ] ) ) {
-				return '';
-			}
-			$placed[ $index ] = true;
-			return render_php_code_snippet( $post_id, $index, $snippets[ $index ], $setup_blueprints, $used_setup_blueprints );
-		},
-		(string) $description
+	$description = render_php_code_snippet_placeholders(
+		(string) $description,
+		$post_id,
+		$snippets,
+		$setup_blueprints,
+		$used_setup_blueprints,
+		$placed
 	);
 
 	// Fallback: any snippet without a placeholder (e.g. metadata imported from an
@@ -227,6 +223,66 @@ function enqueue_php_code_snippet_script() {
 		array(),
 		null
 	);
+}
+
+/**
+ * Render parser snippet placeholders in HTML comments.
+ *
+ * @param string $description      Description HTML.
+ * @param int    $post_id          Post ID.
+ * @param array  $snippets         Parsed snippets.
+ * @param array  $setup_blueprints Reusable setup Blueprints keyed by name.
+ * @param array  $used_blueprints  Reusable setup Blueprint names referenced by rendered snippets.
+ * @param array  $placed           Snippet indexes rendered in place.
+ * @return string
+ */
+function render_php_code_snippet_placeholders( $description, $post_id, $snippets, $setup_blueprints, &$used_blueprints, &$placed ) {
+	$processor = new Code_Snippet_Placeholder_Processor( $description );
+
+	while ( $processor->next_token() ) {
+		if ( \WP_HTML_Tag_Processor::COMMENT_AS_HTML_COMMENT !== $processor->get_comment_type() ) {
+			continue;
+		}
+
+		$index = get_php_code_snippet_placeholder_index( $processor->get_modifiable_text() );
+		if ( null === $index ) {
+			continue;
+		}
+
+		if ( ! isset( $snippets[ $index ] ) || ! is_array( $snippets[ $index ] ) ) {
+			$processor->replace_current_token( '' );
+			continue;
+		}
+
+		$placed[ $index ] = true;
+		$processor->replace_current_token(
+			render_php_code_snippet( $post_id, $index, $snippets[ $index ], $setup_blueprints, $used_blueprints )
+		);
+	}
+
+	return $processor->get_updated_html();
+}
+
+/**
+ * Return the parser snippet placeholder index from exact HTML comment text.
+ *
+ * @param string $comment_text HTML comment text.
+ * @return int|null
+ */
+function get_php_code_snippet_placeholder_index( $comment_text ) {
+	$prefix = ' wp-parser-code-snippet:';
+	$suffix = ' ';
+
+	if ( ! str_starts_with( $comment_text, $prefix ) || ! str_ends_with( $comment_text, $suffix ) ) {
+		return null;
+	}
+
+	$index = substr( $comment_text, strlen( $prefix ), -strlen( $suffix ) );
+	if ( ! ctype_digit( $index ) ) {
+		return null;
+	}
+
+	return (int) $index;
 }
 
 /**
@@ -367,4 +423,23 @@ function get_inline_blueprint_id( $post_id, $index ) {
  */
 function escape_script_data( $content ) {
 	return str_ireplace( '</script', '<\/script', $content );
+}
+
+/**
+ * HTML processor for replacing parser snippet placeholder comments.
+ */
+class Code_Snippet_Placeholder_Processor extends \WP_HTML_Tag_Processor {
+	/**
+	 * Replace the currently matched token with HTML.
+	 *
+	 * @param string $html Replacement HTML.
+	 */
+	public function replace_current_token( $html ) {
+		$bookmark_name = 'wporg-code-snippet-placeholder';
+
+		$this->set_bookmark( $bookmark_name );
+		$span                    = $this->bookmarks[ $bookmark_name ];
+		$this->lexical_updates[] = new \WP_HTML_Text_Replacement( $span->start, $span->length, $html );
+		$this->release_bookmark( $bookmark_name );
+	}
 }
