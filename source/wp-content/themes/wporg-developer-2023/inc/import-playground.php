@@ -70,7 +70,7 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 
 		$markdown = preg_replace( '/^\s*import\s+.+?\s+from\s+([\'\"]).+?\1;\s*$/m', '', $markdown );
 
-		return preg_replace_callback(
+		$markdown = preg_replace_callback(
 			'/<BlueprintExample\b(.*?)\/\s*>/s',
 			array( $this, 'transform_blueprint_example' ),
 			preg_replace_callback(
@@ -79,6 +79,8 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 				$markdown
 			)
 		);
+
+		return trim( $markdown );
 	}
 
 	/**
