@@ -1,6 +1,8 @@
 <?php
 
 class DevHub_Playground_Importer extends DevHub_Docs_Importer {
+	const PHP_CODE_SNIPPET_SCRIPT_URL = 'https://playground.wordpress.net/php-code-snippet.js';
+
 	/**
 	 * Initializes object.
 	 */
@@ -15,7 +17,9 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 		add_filter( 'wporg_markdown_before_transform', array( $this, 'transform_mdx' ), 10, 2 );
 		add_filter( 'wporg_markdown_after_transform', array( $this, 'parse_callout_markdown' ), 10, 2 );
 		add_filter( 'wporg_markdown_after_transform', array( $this, 'rewrite_root_relative_links' ), 20, 2 );
+		add_filter( 'script_loader_tag', array( $this, 'add_php_code_snippet_script_type' ), 10, 3 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		add_shortcode( 'playground_php_snippet', array( $this, 'render_php_code_snippet' ) );
 	}
 
 	/**
@@ -69,8 +73,63 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 		return preg_replace_callback(
 			'/<BlueprintExample\b(.*?)\/\s*>/s',
 			array( $this, 'transform_blueprint_example' ),
-			$markdown
+			preg_replace_callback(
+				'/<PhpCodeSnippet(?:LiveExample|Example)\b[^>]*\/\s*>\s*(?=```html[ \t]*\r?\n(.*?)\r?\n```)/s',
+				array( $this, 'transform_php_code_snippet' ),
+				$markdown
+			)
 		);
+	}
+
+	/**
+	 * Transforms a PHP snippet preview into a shortcode containing its adjacent embed.
+	 *
+	 * @param array $matches The matched component and HTML embed.
+	 * @return string
+	 */
+	public function transform_php_code_snippet( $matches ) {
+		return '[playground_php_snippet encoded="' . base64_encode( trim( $matches[1] ) ) . '"]' . "\n\n";
+	}
+
+	/**
+	 * Renders a PHP snippet embed after post KSES has run.
+	 *
+	 * @param array $attributes Shortcode attributes.
+	 * @return string
+	 */
+	public function render_php_code_snippet( $attributes ) {
+		$attributes = shortcode_atts( array( 'encoded' => '' ), $attributes );
+		$html       = base64_decode( $attributes['encoded'], true );
+
+		if ( false === $html || false === strpos( $html, '<php-snippet' ) ) {
+			return '';
+		}
+
+		wp_enqueue_script(
+			'wporg-developer-php-code-snippet',
+			self::PHP_CODE_SNIPPET_SCRIPT_URL,
+			array(),
+			null,
+			true
+		);
+
+		return '<div class="php-code-snippet-live-example">' . $html . '</div>';
+	}
+
+	/**
+	 * Loads the PHP snippet web component as an ES module.
+	 *
+	 * @param string $tag    The script tag.
+	 * @param string $handle The script handle.
+	 * @param string $src    The script source URL.
+	 * @return string
+	 */
+	public function add_php_code_snippet_script_type( $tag, $handle, $src ) {
+		if ( 'wporg-developer-php-code-snippet' !== $handle ) {
+			return $tag;
+		}
+
+		return sprintf( '<script type="module" src="%s"></script>' . "\n", esc_url( $src ) );
 	}
 
 	/**
