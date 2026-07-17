@@ -126,7 +126,7 @@ function get_description_content( $post_id ) {
 	foreach ( array_keys( $used_setup_blueprints ) as $name ) {
 		if ( isset( $setup_blueprints[ $name ] ) ) {
 			$output .= render_php_code_snippet_blueprint_script(
-				get_php_code_snippet_setup_blueprint_id( $post_id, $name ),
+				get_php_code_snippet_blueprint_id( $post_id, 'setup:' . $name ),
 				$setup_blueprints[ $name ]
 			);
 		}
@@ -255,7 +255,7 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 		$post_slug = 'example';
 	}
 
-	$inline_blueprint_id = 'wporg-code-snippet-blueprint-' . absint( $post_id ) . '-' . absint( $index + 1 );
+	$inline_blueprint_id = get_php_code_snippet_blueprint_id( $post_id, 'inline:' . ( $index + 1 ) );
 	$attributes = array(
 		'name' => $post_slug . '-' . ( $index + 1 ) . '.php',
 	);
@@ -266,7 +266,7 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 			isset( $setup_blueprints[ $snippet['blueprint'] ] ) &&
 			is_array( $setup_blueprints[ $snippet['blueprint'] ] )
 		) {
-			$attributes['blueprint']                 = get_php_code_snippet_setup_blueprint_id( $post_id, $snippet['blueprint'] );
+			$attributes['blueprint']                 = get_php_code_snippet_blueprint_id( $post_id, 'setup:' . $snippet['blueprint'] );
 			$used_blueprints[ $snippet['blueprint'] ] = true;
 		} elseif ( is_array( $snippet['blueprint'] ) ) {
 			$attributes['blueprint'] = $inline_blueprint_id;
@@ -338,20 +338,17 @@ function render_php_code_snippet_blueprint_script( $id, $blueprint ) {
 }
 
 /**
- * Return a stable script ID for a reusable setup Blueprint.
+ * Return a stable script ID for a snippet Blueprint.
+ *
+ * URL encoding preserves distinct Blueprint keys while removing the ASCII
+ * whitespace that HTML IDs prohibit.
  *
  * @param int    $post_id Post ID.
- * @param string $name    Blueprint name.
+ * @param string $key     Blueprint key.
  * @return string
  */
-function get_php_code_snippet_setup_blueprint_id( $post_id, $name ) {
-	$slug = sanitize_title( $name );
-
-	if ( '' === $slug ) {
-		$slug = substr( md5( $name ), 0, 8 );
-	}
-
-	return 'wporg-code-snippet-blueprint-' . absint( $post_id ) . '-' . $slug;
+function get_php_code_snippet_blueprint_id( $post_id, $key ) {
+	return 'wporg-code-snippet-blueprint-' . absint( $post_id ) . '-' . rawurlencode( $key );
 }
 
 /**
