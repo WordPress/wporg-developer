@@ -473,7 +473,7 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 
 		$source_url = esc_url_raw( $source_url );
 
-		$alt           = isset( $attributes['alt']['value'] ) ? $attributes['alt']['value'] : '';
+		$alt           = isset( $attributes['alt']['value'] ) ? html_entity_decode( $attributes['alt']['value'], ENT_QUOTES | ENT_HTML5, 'UTF-8' ) : '';
 		$image_record  = $this->get_image_record( $this->current_post_id, $source_url );
 		$attachment_id = attachment_url_to_postid( $source_url );
 		if ( ! $attachment_id && $image_record && 'downloaded' === $image_record['status'] ) {
