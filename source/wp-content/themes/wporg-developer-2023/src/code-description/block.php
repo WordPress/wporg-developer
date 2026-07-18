@@ -264,11 +264,11 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 		if (
 			is_string( $snippet['blueprint'] ) &&
 			isset( $setup_blueprints[ $snippet['blueprint'] ] ) &&
-			is_array( $setup_blueprints[ $snippet['blueprint'] ] )
+			( is_array( $setup_blueprints[ $snippet['blueprint'] ] ) || is_object( $setup_blueprints[ $snippet['blueprint'] ] ) )
 		) {
 			$attributes['blueprint']                 = get_php_code_snippet_blueprint_id( $post_id, 'setup:' . $snippet['blueprint'] );
 			$used_blueprints[ $snippet['blueprint'] ] = true;
-		} elseif ( is_array( $snippet['blueprint'] ) ) {
+		} elseif ( is_array( $snippet['blueprint'] ) || is_object( $snippet['blueprint'] ) ) {
 			$attributes['blueprint'] = $inline_blueprint_id;
 		} else {
 			// Keep snippets with unusable setup visible without offering a Run action that cannot succeed.
@@ -314,12 +314,16 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 /**
  * Render a setup Blueprint script tag.
  *
- * @param string $id        Script tag ID.
- * @param array  $blueprint Blueprint data.
+ * @param string       $id        Script tag ID.
+ * @param array|object $blueprint Blueprint data.
  * @return string
  */
 function render_php_code_snippet_blueprint_script( $id, $blueprint ) {
-	if ( ! is_array( $blueprint ) ) {
+	if ( is_array( $blueprint ) ) {
+		// The parser's JSON importer uses associative arrays. Cast only the
+		// Blueprint root back to its required JSON object type before encoding.
+		$blueprint = (object) $blueprint;
+	} elseif ( ! is_object( $blueprint ) ) {
 		return '';
 	}
 
