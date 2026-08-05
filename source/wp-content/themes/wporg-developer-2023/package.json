@@ -9,8 +9,8 @@
 		"@wordpress/i18n": "^6.24.0"
 	},
 	"devDependencies": {
-		"@wordpress/eslint-plugin": "^24.2.0",
-		"@wordpress/scripts": "31.5.0"
+		"@wordpress/eslint-plugin": "^25.6.0",
+		"@wordpress/scripts": "32.6.0"
 	},
 	"eslintConfig": {
 		"extends": "../../../../.eslintrc.js",
@@ -33,7 +33,7 @@
 	"scripts": {
 		"build": "wp-scripts build",
 		"start": "wp-scripts start",
-		"lint:js": "wp-scripts lint-js src",
+		"lint:js": "wp-scripts lint-js --config ../../../../eslint.config.js src",
 		"lint:css": "wp-scripts lint-style *.css src/**/*.scss",
 		"format": "wp-scripts format src"
 	}

@@ -12,6 +12,7 @@
 
 # Configs from wporg-repo-tools.
 .eslintrc.js
+eslint.config.js
 .prettierrc.js
 .stylelintrc
 phpcs.xml.dist
