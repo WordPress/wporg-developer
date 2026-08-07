@@ -75,23 +75,29 @@ function get_source_content( $post_id ) {
 	if ( ! empty( $source_file ) ) {
 		$source_code = post_type_has_source_code( $post_type ) ? get_source_code( $post_id ) : '';
 
-		$view_reference_button = sprintf(
+		$buttons = array();
+
+		$buttons[] = sprintf(
 			'<a href="%s">%s</a>',
 			esc_url( get_source_file_archive_link( $source_file ) ),
 			__( 'View all references', 'wporg' )
 		);
 
-		$view_trac_button = sprintf(
-			'<a href="%s">%s</a>',
-			esc_url( get_source_file_link( $post_id ) ),
-			__( 'View on Trac', 'wporg' )
-		);
+		/**
+		 * Filters whether to show the Trac source link for a parsed post type.
+		 *
+		 * @param bool $show_trac_link Whether to show the Trac source link. Default true.
+		 * @param int  $post_id        Post ID of the parsed function, method, hook, or class.
+		 */
+		$show_trac_link = apply_filters( 'wporg_developer_show_trac_source_link', true, $post_id );
 
-		$view_github_button = sprintf(
-			'<a href="%s">%s</a>',
-			esc_url( get_github_source_file_link( $post_id ) ),
-			__( 'View on GitHub', 'wporg' )
-		);
+		if ( $show_trac_link ) {
+			$buttons[] = sprintf(
+				'<a href="%s">%s</a>',
+				esc_url( get_source_file_link( $post_id ) ),
+				__( 'View on Trac', 'wporg' )
+			);
+		}
 
 		if ( ! empty( $source_code ) ) {
 			$output .= do_blocks(
@@ -103,10 +109,14 @@ function get_source_content( $post_id ) {
 				)
 			);
 
-			$output .= sprintf( '<p class="wporg-dot-link-list">%s</p>', implode( ' ', array( $view_reference_button, $view_trac_button, $view_github_button ) ) );
-		} else {
-			$output .= sprintf( '<p class="wporg-dot-link-list">%s</p>', implode( ' ', array( $view_reference_button, $view_trac_button ) ) );
+			$buttons[] = sprintf(
+				'<a href="%s">%s</a>',
+				esc_url( get_github_source_file_link( $post_id ) ),
+				__( 'View on GitHub', 'wporg' )
+			);
 		}
+
+		$output .= sprintf( '<p class="wporg-dot-link-list">%s</p>', implode( ' ', $buttons ) );
 	}
 
 	return $output;

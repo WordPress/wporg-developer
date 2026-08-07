@@ -1213,7 +1213,7 @@ namespace DevHub {
 		if ( ! empty( $source_file ) ) {
 			$url = 'https://core.trac.wordpress.org/browser/tags/' . get_current_version() . '/src/' . $source_file;
 			// Line number.
-			if ( $line_number = get_post_meta( get_the_ID(), '_wp-parser_line_num', true ) ) {
+			if ( $line_number = get_post_meta( $post_id, '_wp-parser_line_num', true ) ) {
 				$url .= "#L{$line_number}";
 			}
 		}
@@ -1237,13 +1237,22 @@ namespace DevHub {
 		if ( ! empty( $source_file ) ) {
 			$url = 'https://github.com/WordPress/wordpress-develop/blob/' . get_current_version() . '/src/' . $source_file;
 			// Line number.
-			if ( $line_number = get_post_meta( get_the_ID(), '_wp-parser_line_num', true ) ) {
+			if ( $line_number = get_post_meta( $post_id, '_wp-parser_line_num', true ) ) {
 				$url .= "#L{$line_number}";
-				if ( $end_line_number = get_post_meta( get_the_ID(), '_wp-parser_end_line_num', true ) ) {
+				if ( $end_line_number = get_post_meta( $post_id, '_wp-parser_end_line_num', true ) ) {
 					$url .= "-L{$end_line_number}";
 				}
 			}
 		}
+
+		/**
+		 * Filters the GitHub source file URL for a parsed post type.
+		 *
+		 * @param string $url     The URL to the source file on GitHub. Empty string
+		 *                        if no source file is associated with the post.
+		 * @param int    $post_id Post ID of the parsed function, method, hook, or class.
+		 */
+		$url = apply_filters( 'wporg_developer_github_source_file_link', $url, $post_id );
 
 		return esc_url( $url );
 	}
