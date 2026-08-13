@@ -245,11 +245,22 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 		return '';
 	}
 
-	if ( array_key_exists( 'expected_output', $snippet ) && ! is_string( $snippet['expected_output'] ) ) {
+	$code = wp_json_encode( $snippet['code'], JSON_HEX_TAG | JSON_UNESCAPED_SLASHES );
+	if ( ! is_string( $code ) ) {
 		return '';
 	}
 
-	$code      = $snippet['code'];
+	if ( array_key_exists( 'expected_output', $snippet ) ) {
+		if ( ! is_string( $snippet['expected_output'] ) ) {
+			return '';
+		}
+
+		$expected_output = wp_json_encode( $snippet['expected_output'], JSON_HEX_TAG | JSON_UNESCAPED_SLASHES );
+		if ( ! is_string( $expected_output ) ) {
+			return '';
+		}
+	}
+
 	$post_slug = get_post_field( 'post_name', $post_id );
 	if ( ! $post_slug ) {
 		$post_slug = 'example';
@@ -284,15 +295,14 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 
 	$snippet_output = '<php-snippet>';
 	$snippet_output .= wp_get_inline_script_tag(
-		// Prevent the HTML parser from closing the script before the component reads the PHP source.
-		str_ireplace( '</script', '<\/script', $code ),
-		array( 'type' => 'application/x-php' )
+		$code,
+		array( 'type' => 'application/x-php+json' )
 	);
 
 	if ( array_key_exists( 'expected_output', $snippet ) ) {
 		$snippet_output .= wp_get_inline_script_tag(
-			$snippet['expected_output'],
-			array( 'type' => 'text/expected-output' )
+			$expected_output,
+			array( 'type' => 'text/expected-output+json' )
 		);
 	}
 
