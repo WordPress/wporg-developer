@@ -7,10 +7,10 @@ use function DevHub\get_see_tags;
 const PHP_CODE_SNIPPET_SCRIPT_URL = 'https://playground.wordpress.net/php-code-snippet.js';
 
 /**
- * ID of the shared WordPress run-before script tag. The script is identical
+ * ID of the shared WordPress auto-prepend script tag. The script is identical
  * for every snippet, so a single element per page serves them all.
  */
-const PHP_CODE_SNIPPET_RUN_BEFORE_ID = 'wporg-code-snippet-run-before';
+const PHP_CODE_SNIPPET_AUTO_PREPEND_ID = 'wporg-code-snippet-auto-prepend';
 
 add_action( 'init', __NAMESPACE__ . '\init' );
 
@@ -127,9 +127,9 @@ function get_description_content( $post_id ) {
 			null
 		);
 
-		// Emit the shared WordPress run-before script once, ahead of the snippets
-		// that reference it.
-		$output .= render_php_code_snippet_run_before_script();
+		// Emit the shared WordPress auto-prepend script once, ahead of the
+		// snippets that reference it.
+		$output .= render_php_code_snippet_auto_prepend_script();
 	}
 
 	// Emit the referenced setup Blueprint <script> tags once, up front.
@@ -278,9 +278,9 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 
 	$inline_blueprint_id = get_php_code_snippet_blueprint_id( $post_id, 'inline:' . ( $index + 1 ) );
 	$attributes = array(
-		'name'         => $post_slug . '-' . ( $index + 1 ) . '.php',
-		'run-before'   => '#' . PHP_CODE_SNIPPET_RUN_BEFORE_ID,
-		'php-fragment' => '',
+		'name'                => $post_slug . '-' . ( $index + 1 ) . '.php',
+		'auto-prepend-script' => '#' . PHP_CODE_SNIPPET_AUTO_PREPEND_ID,
+		'php-fragment'        => '',
 	);
 
 	if ( array_key_exists( 'blueprint', $snippet ) ) {
@@ -364,35 +364,38 @@ function render_php_code_snippet_blueprint_script( $id, $blueprint ) {
 }
 
 /**
- * Render the shared WordPress run-before script tag for PHP code snippets.
+ * Render the shared WordPress auto-prepend script tag for PHP code snippets.
  *
- * Snippets reference this element from their `run-before` attribute so they
- * run with WordPress loaded, without repeating the wp-load boilerplate in
- * the visible example code. JSON encoding matches the snippet code payloads:
- * JSON_HEX_TAG escapes `<` so the payload stays inert in HTML.
+ * Snippets reference this element from their `auto-prepend-script` attribute
+ * so it runs before the visible example, mirroring PHP's auto_prepend_file
+ * directive. JSON encoding matches the snippet code payloads: JSON_HEX_TAG
+ * escapes `<` so the payload stays inert in HTML.
  *
  * Only the first call renders the tag, so a page with several code
  * descriptions still holds a single element with this ID.
  *
  * @return string
  */
-function render_php_code_snippet_run_before_script() {
+function render_php_code_snippet_auto_prepend_script() {
 	static $rendered = false;
 	if ( $rendered ) {
 		return '';
 	}
 
-	$run_before = wp_json_encode( "<?php require_once '/wordpress/wp-load.php';", JSON_HEX_TAG | JSON_UNESCAPED_SLASHES );
-	if ( ! is_string( $run_before ) ) {
+	$auto_prepend_script = wp_json_encode(
+		"<?php require_once '/wordpress/wp-load.php';",
+		JSON_HEX_TAG | JSON_UNESCAPED_SLASHES
+	);
+	if ( ! is_string( $auto_prepend_script ) ) {
 		return '';
 	}
 
 	$rendered = true;
 
 	return wp_get_inline_script_tag(
-		$run_before,
+		$auto_prepend_script,
 		array(
-			'id'   => PHP_CODE_SNIPPET_RUN_BEFORE_ID,
+			'id'   => PHP_CODE_SNIPPET_AUTO_PREPEND_ID,
 			'type' => 'application/x-php+json',
 		)
 	);
