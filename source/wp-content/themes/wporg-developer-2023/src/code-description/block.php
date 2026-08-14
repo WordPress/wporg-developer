@@ -120,6 +120,10 @@ function get_description_content( $post_id ) {
 			array(),
 			null
 		);
+
+		// Emit the shared WordPress bootstrap once, ahead of the snippets
+		// that reference it.
+		$output .= render_php_code_snippet_bootstrap_script( $post_id );
 	}
 
 	// Emit the referenced setup Blueprint <script> tags once, up front.
@@ -268,7 +272,8 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 
 	$inline_blueprint_id = get_php_code_snippet_blueprint_id( $post_id, 'inline:' . ( $index + 1 ) );
 	$attributes = array(
-		'name' => $post_slug . '-' . ( $index + 1 ) . '.php',
+		'name'      => $post_slug . '-' . ( $index + 1 ) . '.php',
+		'bootstrap' => '#' . get_php_code_snippet_bootstrap_id( $post_id ),
 	);
 
 	if ( array_key_exists( 'blueprint', $snippet ) ) {
@@ -352,6 +357,28 @@ function render_php_code_snippet_blueprint_script( $id, $blueprint ) {
 }
 
 /**
+ * Render the shared WordPress bootstrap script tag for PHP code snippets.
+ *
+ * Snippets reference this element from their `bootstrap` attribute so they
+ * run with WordPress loaded, without repeating the wp-load boilerplate in
+ * the visible example code. The payload never reaches the browser as
+ * executable JavaScript: `application/x-php` scripts are inert until the
+ * snippet component reads them.
+ *
+ * @param int $post_id Post ID.
+ * @return string
+ */
+function render_php_code_snippet_bootstrap_script( $post_id ) {
+	return wp_get_inline_script_tag(
+		"<?php require_once '/wordpress/wp-load.php';",
+		array(
+			'id'   => get_php_code_snippet_bootstrap_id( $post_id ),
+			'type' => 'application/x-php',
+		)
+	);
+}
+
+/**
  * Return a stable script ID for a snippet Blueprint.
  *
  * URL encoding preserves distinct Blueprint keys while removing the ASCII
@@ -363,6 +390,16 @@ function render_php_code_snippet_blueprint_script( $id, $blueprint ) {
  */
 function get_php_code_snippet_blueprint_id( $post_id, $key ) {
 	return 'wporg-code-snippet-blueprint-' . absint( $post_id ) . '-' . rawurlencode( $key );
+}
+
+/**
+ * Return a stable script ID for the shared WordPress bootstrap.
+ *
+ * @param int $post_id Post ID.
+ * @return string
+ */
+function get_php_code_snippet_bootstrap_id( $post_id ) {
+	return 'wporg-code-snippet-bootstrap-' . absint( $post_id );
 }
 
 /**
