@@ -7,10 +7,10 @@ use function DevHub\get_see_tags;
 const PHP_CODE_SNIPPET_SCRIPT_URL = 'https://playground.wordpress.net/php-code-snippet.js';
 
 /**
- * ID of the shared WordPress bootstrap script tag. The bootstrap is identical
+ * ID of the shared WordPress run-before script tag. The script is identical
  * for every snippet, so a single element per page serves them all.
  */
-const PHP_CODE_SNIPPET_BOOTSTRAP_ID = 'wporg-code-snippet-bootstrap';
+const PHP_CODE_SNIPPET_RUN_BEFORE_ID = 'wporg-code-snippet-run-before';
 
 add_action( 'init', __NAMESPACE__ . '\init' );
 
@@ -127,9 +127,9 @@ function get_description_content( $post_id ) {
 			null
 		);
 
-		// Emit the shared WordPress bootstrap once, ahead of the snippets
+		// Emit the shared WordPress run-before script once, ahead of the snippets
 		// that reference it.
-		$output .= render_php_code_snippet_bootstrap_script();
+		$output .= render_php_code_snippet_run_before_script();
 	}
 
 	// Emit the referenced setup Blueprint <script> tags once, up front.
@@ -279,7 +279,7 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 	$inline_blueprint_id = get_php_code_snippet_blueprint_id( $post_id, 'inline:' . ( $index + 1 ) );
 	$attributes = array(
 		'name'         => $post_slug . '-' . ( $index + 1 ) . '.php',
-		'bootstrap'    => '#' . PHP_CODE_SNIPPET_BOOTSTRAP_ID,
+		'run-before'   => '#' . PHP_CODE_SNIPPET_RUN_BEFORE_ID,
 		'php-fragment' => '',
 	);
 
@@ -364,9 +364,9 @@ function render_php_code_snippet_blueprint_script( $id, $blueprint ) {
 }
 
 /**
- * Render the shared WordPress bootstrap script tag for PHP code snippets.
+ * Render the shared WordPress run-before script tag for PHP code snippets.
  *
- * Snippets reference this element from their `bootstrap` attribute so they
+ * Snippets reference this element from their `run-before` attribute so they
  * run with WordPress loaded, without repeating the wp-load boilerplate in
  * the visible example code. JSON encoding matches the snippet code payloads:
  * JSON_HEX_TAG escapes `<` so the payload stays inert in HTML.
@@ -376,23 +376,23 @@ function render_php_code_snippet_blueprint_script( $id, $blueprint ) {
  *
  * @return string
  */
-function render_php_code_snippet_bootstrap_script() {
+function render_php_code_snippet_run_before_script() {
 	static $rendered = false;
 	if ( $rendered ) {
 		return '';
 	}
 
-	$bootstrap = wp_json_encode( "<?php require_once '/wordpress/wp-load.php';", JSON_HEX_TAG | JSON_UNESCAPED_SLASHES );
-	if ( ! is_string( $bootstrap ) ) {
+	$run_before = wp_json_encode( "<?php require_once '/wordpress/wp-load.php';", JSON_HEX_TAG | JSON_UNESCAPED_SLASHES );
+	if ( ! is_string( $run_before ) ) {
 		return '';
 	}
 
 	$rendered = true;
 
 	return wp_get_inline_script_tag(
-		$bootstrap,
+		$run_before,
 		array(
-			'id'   => PHP_CODE_SNIPPET_BOOTSTRAP_ID,
+			'id'   => PHP_CODE_SNIPPET_RUN_BEFORE_ID,
 			'type' => 'application/x-php+json',
 		)
 	);
