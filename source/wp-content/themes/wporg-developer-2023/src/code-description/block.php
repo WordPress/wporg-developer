@@ -6,6 +6,12 @@ use function DevHub\get_see_tags;
 
 const PHP_CODE_SNIPPET_SCRIPT_URL = 'https://playground.wordpress.net/php-code-snippet.js';
 
+/**
+ * ID of the shared WordPress bootstrap script tag. The bootstrap is identical
+ * for every snippet, so a single element per page serves them all.
+ */
+const PHP_CODE_SNIPPET_BOOTSTRAP_ID = 'wporg-code-snippet-bootstrap';
+
 add_action( 'init', __NAMESPACE__ . '\init' );
 
 /**
@@ -123,7 +129,7 @@ function get_description_content( $post_id ) {
 
 		// Emit the shared WordPress bootstrap once, ahead of the snippets
 		// that reference it.
-		$output .= render_php_code_snippet_bootstrap_script( $post_id );
+		$output .= render_php_code_snippet_bootstrap_script();
 	}
 
 	// Emit the referenced setup Blueprint <script> tags once, up front.
@@ -273,7 +279,7 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 	$inline_blueprint_id = get_php_code_snippet_blueprint_id( $post_id, 'inline:' . ( $index + 1 ) );
 	$attributes = array(
 		'name'      => $post_slug . '-' . ( $index + 1 ) . '.php',
-		'bootstrap' => '#' . get_php_code_snippet_bootstrap_id( $post_id ),
+		'bootstrap' => '#' . PHP_CODE_SNIPPET_BOOTSTRAP_ID,
 	);
 
 	if ( array_key_exists( 'blueprint', $snippet ) ) {
@@ -364,19 +370,28 @@ function render_php_code_snippet_blueprint_script( $id, $blueprint ) {
  * the visible example code. JSON encoding matches the snippet code payloads:
  * JSON_HEX_TAG escapes `<` so the payload stays inert in HTML.
  *
- * @param int $post_id Post ID.
+ * Only the first call renders the tag, so a page with several code
+ * descriptions still holds a single element with this ID.
+ *
  * @return string
  */
-function render_php_code_snippet_bootstrap_script( $post_id ) {
+function render_php_code_snippet_bootstrap_script() {
+	static $rendered = false;
+	if ( $rendered ) {
+		return '';
+	}
+
 	$bootstrap = wp_json_encode( "<?php require_once '/wordpress/wp-load.php';", JSON_HEX_TAG | JSON_UNESCAPED_SLASHES );
 	if ( ! is_string( $bootstrap ) ) {
 		return '';
 	}
 
+	$rendered = true;
+
 	return wp_get_inline_script_tag(
 		$bootstrap,
 		array(
-			'id'   => get_php_code_snippet_bootstrap_id( $post_id ),
+			'id'   => PHP_CODE_SNIPPET_BOOTSTRAP_ID,
 			'type' => 'application/x-php+json',
 		)
 	);
@@ -394,16 +409,6 @@ function render_php_code_snippet_bootstrap_script( $post_id ) {
  */
 function get_php_code_snippet_blueprint_id( $post_id, $key ) {
 	return 'wporg-code-snippet-blueprint-' . absint( $post_id ) . '-' . rawurlencode( $key );
-}
-
-/**
- * Return a stable script ID for the shared WordPress bootstrap.
- *
- * @param int $post_id Post ID.
- * @return string
- */
-function get_php_code_snippet_bootstrap_id( $post_id ) {
-	return 'wporg-code-snippet-bootstrap-' . absint( $post_id );
 }
 
 /**
