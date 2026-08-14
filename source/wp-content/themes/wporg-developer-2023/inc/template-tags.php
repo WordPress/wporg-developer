@@ -1252,7 +1252,7 @@ namespace DevHub {
 		 *                        if no source file is associated with the post.
 		 * @param int    $post_id Post ID of the parsed function, method, hook, or class.
 		 */
-		$url = apply_filters( 'wporg_developer_github_source_file_link', $url, $post_id );
+		$url = apply_filters( 'devhub-github-source-file-link', $url, $post_id );
 
 		return esc_url( $url );
 	}

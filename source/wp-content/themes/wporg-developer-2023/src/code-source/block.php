@@ -89,7 +89,7 @@ function get_source_content( $post_id ) {
 		 * @param bool $show_trac_link Whether to show the Trac source link. Default true.
 		 * @param int  $post_id        Post ID of the parsed function, method, hook, or class.
 		 */
-		$show_trac_link = apply_filters( 'wporg_developer_show_trac_source_link', true, $post_id );
+		$show_trac_link = apply_filters( 'devhub-show-trac-source-link', true, $post_id );
 
 		if ( $show_trac_link ) {
 			$buttons[] = sprintf(
@@ -103,7 +103,7 @@ function get_source_content( $post_id ) {
 			$output .= do_blocks(
 				sprintf(
 					'<!-- wp:code {"lineNumbers":true} --><pre class="wp-block-code" data-start="%1$s" aria-label="%2$s"><code id="wporg-source-code" lang="php" class="language-php line-numbers">%3$s</code></pre><!-- /wp:code -->',
-					esc_attr( get_post_meta( get_the_ID(), '_wp-parser_line_num', true ) ),
+					esc_attr( get_post_meta( $post_id, '_wp-parser_line_num', true ) ),
 					__( 'Function source code', 'wporg' ),
 					htmlentities( $source_code )
 				)
