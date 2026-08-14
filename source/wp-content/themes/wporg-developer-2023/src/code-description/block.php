@@ -361,19 +361,23 @@ function render_php_code_snippet_blueprint_script( $id, $blueprint ) {
  *
  * Snippets reference this element from their `bootstrap` attribute so they
  * run with WordPress loaded, without repeating the wp-load boilerplate in
- * the visible example code. The payload never reaches the browser as
- * executable JavaScript: `application/x-php` scripts are inert until the
- * snippet component reads them.
+ * the visible example code. JSON encoding matches the snippet code payloads:
+ * JSON_HEX_TAG escapes `<` so the payload stays inert in HTML.
  *
  * @param int $post_id Post ID.
  * @return string
  */
 function render_php_code_snippet_bootstrap_script( $post_id ) {
+	$bootstrap = wp_json_encode( "<?php require_once '/wordpress/wp-load.php';", JSON_HEX_TAG | JSON_UNESCAPED_SLASHES );
+	if ( ! is_string( $bootstrap ) ) {
+		return '';
+	}
+
 	return wp_get_inline_script_tag(
-		"<?php require_once '/wordpress/wp-load.php';",
+		$bootstrap,
 		array(
 			'id'   => get_php_code_snippet_bootstrap_id( $post_id ),
-			'type' => 'application/x-php',
+			'type' => 'application/x-php+json',
 		)
 	);
 }
