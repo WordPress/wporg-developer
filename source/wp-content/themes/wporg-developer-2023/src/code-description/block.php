@@ -278,9 +278,9 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 
 	$inline_blueprint_id = get_php_code_snippet_blueprint_id( $post_id, 'inline:' . ( $index + 1 ) );
 	$attributes = array(
-		'name'                => $post_slug . '-' . ( $index + 1 ) . '.php',
-		'auto-prepend-script' => '#' . PHP_CODE_SNIPPET_AUTO_PREPEND_ID,
-		'php-fragment'        => '',
+		'name'                  => $post_slug . '-' . ( $index + 1 ) . '.php',
+		'auto-prepend-script'   => '#' . PHP_CODE_SNIPPET_AUTO_PREPEND_ID,
+		'implicit-php-open-tag' => '',
 	);
 
 	if ( array_key_exists( 'blueprint', $snippet ) ) {
