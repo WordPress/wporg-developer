@@ -280,7 +280,7 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 	$attributes = array(
 		'name'                  => $post_slug . '-' . ( $index + 1 ) . '.php',
 		'auto-prepend-script'   => '#' . PHP_CODE_SNIPPET_AUTO_PREPEND_ID,
-		'implicit-php-open-tag' => '',
+		'implicit-php-open-tag' => true,
 	);
 
 	if ( array_key_exists( 'blueprint', $snippet ) ) {
