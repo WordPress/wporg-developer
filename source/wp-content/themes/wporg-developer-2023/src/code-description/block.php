@@ -366,14 +366,6 @@ function render_php_code_snippet_blueprint_script( $id, $blueprint ) {
 /**
  * Render the shared WordPress auto-prepend script tag for PHP code snippets.
  *
- * Snippets reference this element from their `auto-prepend-script` attribute
- * so it runs before the visible example, mirroring PHP's auto_prepend_file
- * directive. JSON encoding matches the snippet code payloads: JSON_HEX_TAG
- * escapes `<` so the payload stays inert in HTML.
- *
- * Only the first call renders the tag, so a page with several code
- * descriptions still holds a single element with this ID.
- *
  * @return string
  */
 function render_php_code_snippet_auto_prepend_script() {
