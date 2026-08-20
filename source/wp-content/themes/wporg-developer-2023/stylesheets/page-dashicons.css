@@ -131,6 +131,11 @@
 	padding: 0;
 }
 
+.dashicons-page #iconlist li {
+	display: inline-block;
+	list-style: none;
+}
+
 .dashicons-page #iconlist .dashicons {
 	position: relative;
 	box-sizing: content-box;
@@ -142,9 +147,13 @@
 	font-size: 60px;
 	line-height: 1;
 	cursor: pointer;
+	background: none;
+	border: 0;
+	color: inherit;
 }
 
-.dashicons-page #iconlist .dashicons:hover {
+.dashicons-page #iconlist .dashicons:hover,
+.dashicons-page #iconlist .dashicons:focus-visible {
 	color: #d54e21;
 }
 

@@ -123,8 +123,10 @@ $deprecation_notice = sprintf(
 					</h4>
 					<ul>
 						<template data-wp-each--icon="context.section.icons" >
-							<li data-wp-bind--data-keywords="state.eachIcon.keywords" data-wp-bind--class="state.iconClass" data-wp-on--click="handleIconClick">
-								<span data-wp-text="state.eachIcon.label"></span>
+							<li data-wp-bind--data-keywords="state.eachIcon.keywords">
+								<button type="button" data-wp-bind--class="state.iconClass" data-wp-on--click="handleIconClick">
+									<span data-wp-text="state.eachIcon.label"></span>
+								</button>
 							</li>
 						</template>
 					</ul>
