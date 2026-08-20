@@ -58,15 +58,9 @@ wp_interactivity_state(
 		'iconSectionLabel'    => function () {
 			return wp_interactivity_get_context()['section']['label'];
 		},
-
-		/*
-		 * @todo Restore this when Core supports server-side derived state in non-final position.
-		 * @see https://github.com/WordPress/wordpress-develop/pull/7075
-		 * Expected in WordPress 6.6.2
-		 */
-		// 'eachIcon' => function() use ( $icons ) {
-		//   return $icons[ wp_interactivity_get_context()['icon'] ];
-		// },
+		'eachIcon'            => function () use ( $icons ) {
+			return $icons[ wp_interactivity_get_context()['icon'] ] ?? null;
+		},
 
 		/*
 		 * END: Derived state
