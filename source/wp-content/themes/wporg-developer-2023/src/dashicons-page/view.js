@@ -23,6 +23,10 @@ const { state } = IAPI.store( 'wporg/developer/dashicons-page', {
 			return config.icons[ IAPI.getContext().icon ];
 		},
 
+		get selectedIconName() {
+			return state.selectedIcon[ 0 ].replace( /^dashicons-/, '' );
+		},
+
 		get style() {
 			const cleanedValue = state.filter.replace( /[^a-zA-Z0-9-]/g, '' );
 			return cleanedValue.length < 3

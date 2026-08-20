@@ -61,6 +61,9 @@ wp_interactivity_state(
 		'eachIcon'            => function () use ( $icons ) {
 			return $icons[ wp_interactivity_get_context()['icon'] ] ?? null;
 		},
+		'selectedIconName'    => function () use ( $selected_icon ) {
+			return preg_replace( '/^dashicons-/', '', $selected_icon );
+		},
 
 		/*
 		 * END: Derived state
@@ -136,7 +139,7 @@ $deprecation_notice = sprintf(
 				__( 'Admin menu items can be added with <code><a href="%1$s">register_post_type()</a></code> and <code><a href="%2$s">add_menu_page()</a></code>, which both have an option to set an icon. To show the current icon, you should pass in %3$s.', 'wporg' ),
 				'https://developer.wordpress.org/reference/functions/register_post_type/',
 				'https://developer.wordpress.org/reference/functions/add_menu_page/',
-				'<code>\'dashicons-<span id="wp-class-example">{icon}</span>\'</code>'
+				'<code>\'dashicons-<span id="wp-class-example" data-wp-text="state.selectedIconName">{icon}</span>\'</code>'
 			); ?></p>
 
 			<h4><?php _e( 'Examples', 'wporg' ); ?></h4>
