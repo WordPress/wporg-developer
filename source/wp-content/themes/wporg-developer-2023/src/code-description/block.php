@@ -8,7 +8,8 @@ const PHP_CODE_SNIPPET_SCRIPT_URL = 'https://playground.wordpress.net/php-code-s
 
 /**
  * ID of the shared WordPress auto-prepend script tag. The script is identical
- * for every snippet, so a single element per page serves them all.
+ * for every snippet, so a single element per page, printed in the footer,
+ * serves them all.
  */
 const PHP_CODE_SNIPPET_AUTO_PREPEND_ID = 'wporg-code-snippet-auto-prepend';
 
@@ -127,9 +128,12 @@ function get_description_content( $post_id ) {
 			null
 		);
 
-		// Emit the shared WordPress auto-prepend script once, ahead of the
-		// snippets that reference it.
-		$output .= render_php_code_snippet_auto_prepend_script();
+		// Print the shared WordPress auto-prepend script once per page. The
+		// code reference blocks render twice per request (once for the table
+		// of contents, once for the content), so the script is printed from
+		// `wp_footer` rather than inline; registering the same callback again
+		// is a no-op.
+		add_action( 'wp_footer', __NAMESPACE__ . '\print_php_code_snippet_auto_prepend_script' );
 	}
 
 	// Emit the referenced setup Blueprint <script> tags once, up front.
@@ -364,27 +368,20 @@ function render_php_code_snippet_blueprint_script( $id, $blueprint ) {
 }
 
 /**
- * Render the shared WordPress auto-prepend script tag for PHP code snippets.
+ * Print the shared WordPress auto-prepend script tag for PHP code snippets.
  *
- * @return string
+ * Hooked to `wp_footer` when a page renders snippets.
  */
-function render_php_code_snippet_auto_prepend_script() {
-	static $rendered = false;
-	if ( $rendered ) {
-		return '';
-	}
-
+function print_php_code_snippet_auto_prepend_script() {
 	$auto_prepend_script = wp_json_encode(
 		"<?php require_once '/wordpress/wp-load.php';",
 		JSON_HEX_TAG | JSON_UNESCAPED_SLASHES
 	);
 	if ( ! is_string( $auto_prepend_script ) ) {
-		return '';
+		return;
 	}
 
-	$rendered = true;
-
-	return wp_get_inline_script_tag(
+	wp_print_inline_script_tag(
 		$auto_prepend_script,
 		array(
 			'id'   => PHP_CODE_SNIPPET_AUTO_PREPEND_ID,
