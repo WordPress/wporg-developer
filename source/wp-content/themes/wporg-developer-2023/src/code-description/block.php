@@ -259,7 +259,16 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 		return '';
 	}
 
-	$code = wp_json_encode( $snippet['code'], JSON_HEX_TAG | JSON_UNESCAPED_SLASHES );
+	$code = $snippet['code'];
+
+	// The two class_list() examples in WordPress 7.1 load WordPress themselves.
+	// Remove once the parser strips this or Core ships without it.
+	$preamble = "<?php\nrequire '/wordpress/wp-load.php';\n";
+	if ( str_starts_with( $code, $preamble ) ) {
+		$code = substr( $code, strlen( $preamble ) );
+	}
+
+	$code = wp_json_encode( $code, JSON_HEX_TAG | JSON_UNESCAPED_SLASHES );
 	if ( ! is_string( $code ) ) {
 		return '';
 	}
