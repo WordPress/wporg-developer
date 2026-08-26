@@ -6,6 +6,13 @@ use function DevHub\get_see_tags;
 
 const PHP_CODE_SNIPPET_SCRIPT_URL = 'https://playground.wordpress.net/php-code-snippet.js';
 
+/**
+ * ID of the shared WordPress auto-prepend script tag. The script is identical
+ * for every snippet, so a single element per page, printed in the footer,
+ * serves them all.
+ */
+const PHP_CODE_SNIPPET_AUTO_PREPEND_ID = 'wporg-code-snippet-auto-prepend';
+
 add_action( 'init', __NAMESPACE__ . '\init' );
 
 /**
@@ -120,6 +127,13 @@ function get_description_content( $post_id ) {
 			array(),
 			null
 		);
+
+		// Print the shared WordPress auto-prepend script once per page. The
+		// code reference blocks render twice per request (once for the table
+		// of contents, once for the content), so the script is printed from
+		// `wp_footer` rather than inline; registering the same callback again
+		// is a no-op.
+		add_action( 'wp_footer', __NAMESPACE__ . '\print_php_code_snippet_auto_prepend_script' );
 	}
 
 	// Emit the referenced setup Blueprint <script> tags once, up front.
@@ -245,7 +259,16 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 		return '';
 	}
 
-	$code = wp_json_encode( $snippet['code'], JSON_HEX_TAG | JSON_UNESCAPED_SLASHES );
+	$code = $snippet['code'];
+
+	// The two class_list() examples in WordPress 7.1 load WordPress themselves.
+	// Remove once the parser strips this or Core ships without it.
+	$preamble = "<?php\nrequire '/wordpress/wp-load.php';\n";
+	if ( str_starts_with( $code, $preamble ) ) {
+		$code = substr( $code, strlen( $preamble ) );
+	}
+
+	$code = wp_json_encode( $code, JSON_HEX_TAG | JSON_UNESCAPED_SLASHES );
 	if ( ! is_string( $code ) ) {
 		return '';
 	}
@@ -268,7 +291,9 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 
 	$inline_blueprint_id = get_php_code_snippet_blueprint_id( $post_id, 'inline:' . ( $index + 1 ) );
 	$attributes = array(
-		'name' => $post_slug . '-' . ( $index + 1 ) . '.php',
+		'name'                  => $post_slug . '-' . ( $index + 1 ) . '.php',
+		'auto-prepend-script'   => '#' . PHP_CODE_SNIPPET_AUTO_PREPEND_ID,
+		'implicit-php-open-tag' => true,
 	);
 
 	if ( array_key_exists( 'blueprint', $snippet ) ) {
@@ -347,6 +372,29 @@ function render_php_code_snippet_blueprint_script( $id, $blueprint ) {
 		array(
 			'id'   => $id,
 			'type' => 'application/json',
+		)
+	);
+}
+
+/**
+ * Print the shared WordPress auto-prepend script tag for PHP code snippets.
+ *
+ * Hooked to `wp_footer` when a page renders snippets.
+ */
+function print_php_code_snippet_auto_prepend_script() {
+	$auto_prepend_script = wp_json_encode(
+		"<?php require_once '/wordpress/wp-load.php';",
+		JSON_HEX_TAG | JSON_UNESCAPED_SLASHES
+	);
+	if ( ! is_string( $auto_prepend_script ) ) {
+		return;
+	}
+
+	wp_print_inline_script_tag(
+		$auto_prepend_script,
+		array(
+			'id'   => PHP_CODE_SNIPPET_AUTO_PREPEND_ID,
+			'type' => 'application/x-php+json',
 		)
 	);
 }
