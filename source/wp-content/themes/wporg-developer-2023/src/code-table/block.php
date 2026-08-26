@@ -25,7 +25,11 @@ function init() {
  * @return string Returns the block markup.
  */
 function render( $attributes ) {
-	$table  = '<!-- wp:table {"className":"' . $attributes['className'] . '"} --><figure class="wp-block-table ' . $attributes['className'] . '">';
+	$class_name = isset( $attributes['className'] ) ? (string) $attributes['className'] : '';
+
+	// serialize_block_attributes() keeps className from breaking out of the delimiter comment.
+	$table  = '<!-- wp:table ' . serialize_block_attributes( array( 'className' => $class_name ) ) . ' -->';
+	$table .= '<figure class="' . esc_attr( 'wp-block-table ' . $class_name ) . '">';
 	$table .= '<table>';
 	$table .= '<thead>';
 	$table .= '<tr>';
