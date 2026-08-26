@@ -68,16 +68,14 @@ function render( $attributes, $content, $block ) {
 
 	$output = ob_get_clean();
 
-	$title_block = sprintf(
-		'<!-- wp:heading --><h2 class="wp-block-heading">%s</h2><!-- /wp:heading -->',
-		__( 'User Contributed Notes', 'wporg' )
-	);
+	// filter_code_content() re-parses this output via do_blocks(), so neutralize any block delimiter before it reaches the parser.
+	$output = preg_replace( '/<!--(\s*\/?wp:)/', '&lt;!--$1', $output );
 
 	$wrapper_attributes = get_block_wrapper_attributes( [ 'data-nosnippet' => 'true' ] );
 	return sprintf(
-		'<section %1$s>%2$s <ol class="comment-list">%3$s</ol></section>',
+		'<section %1$s><h2 class="wp-block-heading">%2$s</h2> <ol class="comment-list">%3$s</ol></section>',
 		$wrapper_attributes,
-		$title_block,
+		esc_html__( 'User Contributed Notes', 'wporg' ),
 		$output
 	);
 }

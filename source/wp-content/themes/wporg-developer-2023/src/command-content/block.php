@@ -46,7 +46,8 @@ function render( $attributes, $content, $block ) {
 	}
 
 	$repo_slug = str_replace( 'https://github.com/', '', $repo_url );
-	$command = get_the_title( $post_ID );
+	// Title flows into HTML that do_blocks() re-parses, so escape it.
+	$command = esc_html( get_the_title( $post_ID ) );
 	$installing_instructions = sprintf(
 		'<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">%1$s</h3><!-- /wp:heading -->',
 		__( 'Installing', 'wporg' )
