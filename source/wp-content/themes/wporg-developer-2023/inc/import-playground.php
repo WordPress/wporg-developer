@@ -3,7 +3,10 @@
 class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 	const PHP_CODE_SNIPPET_SCRIPT_URL = 'https://playground.wordpress.net/php-code-snippet.js';
 	const PLAYGROUND_DOCS_ASSET_URL   = 'https://wordpress.github.io/wordpress-playground/';
+	const BLUEPRINT_STEPS_URL         = 'https://wordpress.github.io/wordpress-playground/blueprints/steps/';
 	const PLAYGROUND_IMAGE_META_KEY   = '_playground_image';
+	const CONTENT_TRANSFORM_META_KEY  = '_playground_content_transform_version';
+	const CONTENT_TRANSFORM_VERSION   = 2;
 
 	/**
 	 * The post currently being updated from Markdown.
@@ -36,11 +39,54 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 		add_filter( 'wporg_markdown_after_transform', array( $this, 'rewrite_root_relative_links' ), 20, 2 );
 		add_filter( 'wporg_markdown_after_transform', array( $this, 'rewrite_root_relative_image_sources' ), 20, 2 );
 		add_filter( 'wporg_markdown_after_transform', array( $this, 'import_images' ), 25, 2 );
+		add_filter( 'wporg_markdown_check_etags', array( $this, 'check_content_transform_etag' ) );
+		add_filter( 'wporg_markdown_check_etags', array( $this, 'check_blueprint_steps_import_etag' ) );
 		add_filter( 'wporg_markdown_check_etags', array( $this, 'check_image_import_etag' ) );
 		add_filter( 'script_loader_tag', array( $this, 'add_php_code_snippet_script_type' ), 10, 3 );
 		add_filter( 'get_edit_post_link', array( $this, 'rewrite_markdown_edit_link' ), 11, 3 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_shortcode( 'playground_php_snippet', array( $this, 'render_php_code_snippet' ) );
+	}
+
+	/**
+	 * Bypasses source ETags after the importer transformation logic changes.
+	 *
+	 * @param bool $check_etags Whether to check the stored ETag.
+	 * @return bool
+	 */
+	public function check_content_transform_etag( $check_etags ) {
+		if ( ! $check_etags || ! $this->current_post_id ) {
+			return $check_etags;
+		}
+
+		$version = (int) get_post_meta( $this->current_post_id, self::CONTENT_TRANSFORM_META_KEY, true );
+		if ( self::CONTENT_TRANSFORM_VERSION !== $version ) {
+			return false;
+		}
+
+		return $check_etags;
+	}
+
+	/**
+	 * Bypasses the source ETag for the generated Blueprint step reference.
+	 *
+	 * The rendered step reference can change when the TypeDoc model changes even
+	 * when its Markdown source remains unchanged.
+	 *
+	 * @param bool $check_etags Whether to check the stored ETag.
+	 * @return bool
+	 */
+	public function check_blueprint_steps_import_etag( $check_etags ) {
+		if ( ! $check_etags || ! $this->current_post_id ) {
+			return $check_etags;
+		}
+
+		$source_url = get_post_meta( $this->current_post_id, $this->meta_key, true );
+		if ( preg_match( '#/docs/blueprints/05-steps\.md$#', $source_url ) ) {
+			return false;
+		}
+
+		return $check_etags;
 	}
 
 	/**
@@ -116,7 +162,12 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 		}
 
 		try {
-			return parent::update_post_from_markdown_source( $post_id );
+			$result = parent::update_post_from_markdown_source( $post_id );
+			if ( true === $result ) {
+				update_post_meta( $post_id, self::CONTENT_TRANSFORM_META_KEY, self::CONTENT_TRANSFORM_VERSION );
+			}
+
+			return $result;
 		} finally {
 			$this->current_post_id = 0;
 			$this->download_images = false;
@@ -192,6 +243,12 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 		$markdown = preg_replace( '/^\s*import\s+.+?\s+from\s+([\'\"]).+?\1;\s*$/m', '', $markdown );
 
 		$markdown = preg_replace_callback(
+			'#<UpdateTopLevelToc\b.*?/\s*>\s*<span>\s*\{BlueprintSteps\.map\(.*?</span>#s',
+			array( $this, 'transform_blueprint_steps' ),
+			$markdown
+		);
+
+		$markdown = preg_replace_callback(
 			'/<BlueprintExample\b(.*?)\/\s*>/s',
 			array( $this, 'transform_blueprint_example' ),
 			preg_replace_callback(
@@ -202,6 +259,96 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 		);
 
 		return trim( $markdown );
+	}
+
+	/**
+	 * Replaces the dynamic Blueprint step reference with its rendered HTML.
+	 *
+	 * The source document builds this reference from TypeDoc data with React.
+	 * The Markdown importer cannot execute that MDX, but the deployed Playground
+	 * documentation contains the same sections rendered on the server.
+	 *
+	 * @param array $matches The dynamic Blueprint step MDX block.
+	 * @return string
+	 */
+	public function transform_blueprint_steps( $matches ) {
+		$response = wp_safe_remote_get( self::BLUEPRINT_STEPS_URL );
+		if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
+			return $matches[0];
+		}
+
+		$document        = new DOMDocument();
+		$previous_errors = libxml_use_internal_errors( true );
+		$loaded          = $document->loadHTML( wp_remote_retrieve_body( $response ) );
+		libxml_clear_errors();
+		libxml_use_internal_errors( $previous_errors );
+		if ( ! $loaded ) {
+			return $matches[0];
+		}
+
+		$xpath    = new DOMXPath( $document );
+		$sections = $xpath->query( '//article//section[contains(concat(" ", normalize-space(@class), " "), " markdown ")]' );
+		if ( ! $sections || 0 === $sections->length ) {
+			return $matches[0];
+		}
+
+		$output = array();
+		foreach ( $sections as $section ) {
+			$code_blocks = $xpath->query( './/pre', $section );
+			foreach ( $code_blocks as $pre ) {
+				$lines = $xpath->query( './/*[contains(concat(" ", normalize-space(@class), " "), " token-line ")]', $pre );
+				if ( ! $lines || 0 === $lines->length ) {
+					continue;
+				}
+
+				$code_lines = array();
+				foreach ( $lines as $line ) {
+					$code_lines[] = $line->textContent;
+				}
+
+				$language = '';
+				if ( preg_match( '/(?:^|\s)language-([a-z0-9_-]+)/i', $pre->getAttribute( 'class' ), $language_match ) ) {
+					$language = $language_match[1];
+				}
+
+				while ( $pre->firstChild ) {
+					$pre->removeChild( $pre->firstChild );
+				}
+
+				$code = $document->createElement( 'code' );
+				if ( $language ) {
+					$code->setAttribute( 'class', 'language-' . $language );
+				}
+				$code->appendChild( $document->createTextNode( implode( "\n", $code_lines ) ) );
+				$pre->appendChild( $code );
+			}
+
+			$run_buttons = $xpath->query( './/button[normalize-space(.)="Try it out!"]', $section );
+			foreach ( $run_buttons as $button ) {
+				$example = $xpath->query( './/pre/code[contains(concat(" ", normalize-space(@class), " "), " language-json ")]', $section )->item( 0 );
+				if ( ! $example ) {
+					continue;
+				}
+
+				$blueprint = json_decode( $example->textContent, true );
+				if ( JSON_ERROR_NONE !== json_last_error() ) {
+					continue;
+				}
+
+				$playground_url = 'https://playground.wordpress.net/?mode=seamless#' . base64_encode( wp_json_encode( $blueprint, JSON_UNESCAPED_SLASHES ) );
+				$wrapper        = $document->createElement( 'div' );
+				$link           = $document->createElement( 'a', 'Try it out!' );
+				$wrapper->setAttribute( 'class', 'wp-block-button' );
+				$link->setAttribute( 'class', 'wp-block-button__link wp-element-button playground-example-run' );
+				$link->setAttribute( 'href', esc_url( $playground_url ) );
+				$wrapper->appendChild( $link );
+				$button->parentNode->replaceChild( $wrapper, $button );
+			}
+
+			$output[] = $document->saveHTML( $section );
+		}
+
+		return "\n\n" . implode( "\n\n<hr>\n\n", $output ) . "\n\n";
 	}
 
 	/**
