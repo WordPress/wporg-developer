@@ -375,6 +375,12 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 	 * links such as `/blueprints`. On Developer Resources, the documentation is
 	 * mounted below `/playground`, so those links need the handbook base added.
 	 *
+	 * Some of those links point at a sibling doc using the path Docusaurus
+	 * derives from its source filename (e.g. `/blueprints/tutorial/build-your-first-blueprint`,
+	 * from `03-build-your-first-blueprint.md`), rather than the shorter `slug`
+	 * the manifest assigns that doc (`build-your-first`). Such links are
+	 * translated to the manifest slug path so they resolve.
+	 *
 	 * @param string $html      The transformed HTML.
 	 * @param string $post_type The post type being imported.
 	 * @return string
@@ -384,13 +390,90 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 			return $html;
 		}
 
+		$link_map = $this->get_manifest_link_map();
+
 		return preg_replace_callback(
 			'#(<a\b[^>]*\bhref=["\'])/(?!/)([^"\']*)(["\'])#i',
-			function ( $matches ) {
-				return $matches[1] . trailingslashit( $this->get_base() ) . $matches[2] . $matches[3];
+			function ( $matches ) use ( $link_map ) {
+				$path        = $matches[2];
+				$suffix_pos  = strcspn( $path, '?#' );
+				$base_path   = rtrim( substr( $path, 0, $suffix_pos ), '/' );
+				$suffix      = substr( $path, $suffix_pos );
+
+				if ( isset( $link_map[ $base_path ] ) ) {
+					$path = $link_map[ $base_path ] . $suffix;
+				}
+
+				return $matches[1] . trailingslashit( $this->get_base() ) . $path . $matches[3];
 			},
 			$html
 		);
+	}
+
+	/**
+	 * Builds a map of Docusaurus source-derived doc paths to their manifest slug paths.
+	 *
+	 * Docusaurus builds a doc's own link path from its filename, stripped of
+	 * any leading numeric ordering prefix (e.g. `01-`) and extension, while
+	 * keeping its directory structure. The manifest instead assigns each doc
+	 * its own explicit path via `slug`/`parent`, which can differ from that
+	 * derived path. Cross-links within the docs that use the source-derived
+	 * path therefore need translating to the manifest path to resolve once
+	 * imported.
+	 *
+	 * @return array Map of source-derived path to manifest key, for docs
+	 *               where the two differ.
+	 */
+	protected function get_manifest_link_map() {
+		$transient_key = 'devhub_playground_manifest_link_map';
+		$map           = get_transient( $transient_key );
+		if ( is_array( $map ) ) {
+			return $map;
+		}
+
+		$map      = array();
+		$response = wp_remote_get( $this->get_manifest_url() );
+
+		if ( ! is_wp_error( $response ) && 200 === wp_remote_retrieve_response_code( $response ) ) {
+			$manifest = json_decode( wp_remote_retrieve_body( $response ), true );
+
+			if ( is_array( $manifest ) ) {
+				foreach ( $manifest as $key => $doc ) {
+					if ( ! is_string( $key ) || empty( $doc['markdown_source'] ) ) {
+						continue;
+					}
+
+					$source_path = $this->derive_source_link_path( $doc['markdown_source'] );
+					if ( $source_path && $source_path !== $key ) {
+						$map[ $source_path ] = $key;
+					}
+				}
+			}
+		}
+
+		set_transient( $transient_key, $map, 15 * MINUTE_IN_SECONDS );
+
+		return $map;
+	}
+
+	/**
+	 * Derives the link path Docusaurus would generate for a doc's own source file.
+	 *
+	 * @param string $markdown_source The markdown_source value from the manifest.
+	 * @return string
+	 */
+	protected function derive_source_link_path( $markdown_source ) {
+		$path = preg_replace( '#^docs/#', '', $markdown_source );
+		$path = preg_replace( '#\.mdx?$#', '', $path );
+
+		$segments = array_map(
+			function ( $segment ) {
+				return preg_replace( '/^\d+-/', '', $segment );
+			},
+			explode( '/', $path )
+		);
+
+		return implode( '/', $segments );
 	}
 
 	/**
