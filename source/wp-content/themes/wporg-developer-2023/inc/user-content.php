@@ -34,8 +34,8 @@ class DevHub_User_Submitted_Content {
 		// Force comment registration to be true
 		add_filter( 'pre_option_comment_registration', '__return_true' );
 
-		// Force comment moderation to be true
-		add_filter( 'pre_option_comment_moderation',   '__return_true' );
+		// Force comment moderation to be true. check_comment() compares against the string '1'.
+		add_filter( 'pre_option_comment_moderation',   array( __CLASS__, 'hold_comments_for_moderation' ) );
 
 		// Remove reply to link
 		add_filter( 'comment_reply_link',              '__return_empty_string' );
@@ -49,8 +49,8 @@ class DevHub_User_Submitted_Content {
 		// Disable capital_P_dangit
 		remove_filter( 'comment_text',                 'capital_P_dangit',   31 );
 
-		// Enable shortcodes for comments
-		add_filter( 'comment_text',                    'do_shortcode' );
+		// Allow only formatting shortcodes in notes; anything else stays opt-in.
+		add_filter( 'comment_text', array( __CLASS__, 'do_note_shortcodes' ) );
 
 		// Customize allowed tags
 		add_filter( 'wp_kses_allowed_html',            array( __CLASS__, 'wp_kses_allowed_html' ), 10, 2 );
@@ -69,6 +69,38 @@ class DevHub_User_Submitted_Content {
 
 		// Disable moderation emails to post author.
 		add_filter( 'comment_notification_recipients', array( __CLASS__, 'disable_comment_notifications' ), 10, 2 );
+	}
+
+	/**
+	 * Forces every note into the moderation queue.
+	 *
+	 * @return string
+	 */
+	public static function hold_comments_for_moderation() {
+		return '1';
+	}
+
+	/**
+	 * Expands only the formatting shortcodes over comment text.
+	 *
+	 * @param string $text Comment text.
+	 * @return string Comment text with the formatting shortcodes expanded.
+	 */
+	public static function do_note_shortcodes( $text ) {
+		$allowed = array( 'code', 'php', 'js', 'css' );
+		$removed = array_diff_key( $GLOBALS['shortcode_tags'], array_flip( $allowed ) );
+
+		foreach ( array_keys( $removed ) as $tag ) {
+			remove_shortcode( $tag );
+		}
+
+		$text = do_shortcode( $text );
+
+		foreach ( $removed as $tag => $callback ) {
+			add_shortcode( $tag, $callback );
+		}
+
+		return $text;
 	}
 
 	/**
