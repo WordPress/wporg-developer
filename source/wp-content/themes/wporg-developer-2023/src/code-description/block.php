@@ -318,15 +318,7 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 		$output .= render_php_code_snippet_blueprint_script( $attributes['blueprint'], $snippet['blueprint'] );
 	}
 
-	/*
-	 * A `<pre>` start tag closes an open `<p>`, and the description renders
-	 * snippets inside one: `wpautop()` puts a bare placeholder comment in a
-	 * paragraph. Without a wrapper the parser carries the code block alone out
-	 * of the paragraph, tearing it off the element it belongs to. A `<div>`
-	 * closes the paragraph the same way but takes the whole snippet with it,
-	 * so the code block stays where it was written.
-	 */
-	$snippet_output = '<div class="wporg-php-snippet"><php-snippet>';
+	$snippet_output = '<php-snippet>';
 	$snippet_output .= wp_get_inline_script_tag(
 		$json_encoded_code,
 		array( 'type' => 'application/x-php+json' )
@@ -340,7 +332,7 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 	}
 
 	$snippet_output .= render_php_code_snippet_source( $code );
-	$snippet_output .= '</php-snippet></div>';
+	$snippet_output .= '</php-snippet>';
 
 	$tags = new \WP_HTML_Tag_Processor( $snippet_output );
 	if ( $tags->next_tag( 'php-snippet' ) ) {
