@@ -27,8 +27,8 @@ function init() {
 function render( $attributes ) {
 	$class_name = isset( $attributes['className'] ) ? (string) $attributes['className'] : '';
 
-	// Escape className for the class attribute and JSON-encode it for the delimiter.
-	$table  = '<!-- wp:table {"className":' . wp_json_encode( $class_name ) . '} -->';
+	// serialize_block_attributes() keeps className from breaking out of the delimiter comment.
+	$table  = '<!-- wp:table ' . serialize_block_attributes( array( 'className' => $class_name ) ) . ' -->';
 	$table .= '<figure class="' . esc_attr( 'wp-block-table ' . $class_name ) . '">';
 	$table .= '<table>';
 	$table .= '<thead>';

@@ -56,19 +56,18 @@ function render( $attributes, $content, $block ) {
 		);
 	}
 
-	ob_start(); // Capture all output
-
 	$ordered_comments = wporg_developer_get_ordered_notes();
 
 	if ( empty( $ordered_comments ) ) {
 		return '';
 	}
 
+	ob_start(); // Capture all output
 	wporg_developer_list_notes( $ordered_comments, array() );
 
 	$output = ob_get_clean();
 
-	// filter_code_content() re-parses this output via do_blocks(), so neutralize any block delimiter before it reaches the parser.
+	// This output is block-parsed a second time (core's do_blocks at the_content priority 9), so neutralize any block delimiter in it.
 	$output = preg_replace( '/<!--(\s*\/?wp:)/', '&lt;!--$1', $output );
 
 	$wrapper_attributes = get_block_wrapper_attributes( [ 'data-nosnippet' => 'true' ] );
