@@ -3,6 +3,21 @@
 class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 	const PHP_CODE_SNIPPET_SCRIPT_URL = 'https://playground.wordpress.net/php-code-snippet.js';
 	const PLAYGROUND_DOCS_ASSET_URL   = 'https://wordpress.github.io/wordpress-playground/';
+	const PLAYGROUND_IMAGE_META_KEY   = '_playground_image';
+
+	/**
+	 * The post currently being updated from Markdown.
+	 *
+	 * @var int
+	 */
+	protected $current_post_id = 0;
+
+	/**
+	 * Whether missing images may be downloaded in the current environment.
+	 *
+	 * @var bool
+	 */
+	protected $download_images = false;
 
 	/**
 	 * Initializes object.
@@ -20,10 +35,92 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 		add_filter( 'wporg_markdown_after_transform', array( $this, 'format_run_blueprint_links' ), 15, 2 );
 		add_filter( 'wporg_markdown_after_transform', array( $this, 'rewrite_root_relative_links' ), 20, 2 );
 		add_filter( 'wporg_markdown_after_transform', array( $this, 'rewrite_root_relative_image_sources' ), 20, 2 );
+		add_filter( 'wporg_markdown_after_transform', array( $this, 'import_images' ), 25, 2 );
+		add_filter( 'wporg_markdown_check_etags', array( $this, 'check_image_import_etag' ) );
 		add_filter( 'script_loader_tag', array( $this, 'add_php_code_snippet_script_type' ), 10, 3 );
 		add_filter( 'get_edit_post_link', array( $this, 'rewrite_markdown_edit_link' ), 11, 3 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_shortcode( 'playground_php_snippet', array( $this, 'render_php_code_snippet' ) );
+	}
+
+	/**
+	 * Bypasses the ETag on production while a post has images to import.
+	 *
+	 * @param bool $check_etags Whether to check the stored ETag.
+	 * @return bool
+	 */
+	public function check_image_import_etag( $check_etags ) {
+		if ( ! $check_etags || ! $this->download_images || ! $this->current_post_id ) {
+			return $check_etags;
+		}
+
+		$post = get_post( $this->current_post_id );
+		if ( ! $post ) {
+			return $check_etags;
+		}
+
+		foreach ( $this->get_external_image_urls( $post->post_content ) as $source_url ) {
+			$image = $this->get_image_record( $post->ID, $source_url );
+			if ( ! $image || ( 'downloaded' === $image['status'] && wp_get_attachment_url( $image['attachment_id'] ) ) ) {
+				return false;
+			}
+		}
+
+		return $check_etags;
+	}
+
+	/**
+	 * Gets external standalone image URLs from content.
+	 *
+	 * @param string $html Post content.
+	 * @return string[]
+	 */
+	protected function get_external_image_urls( $html ) {
+		$attribute_sets = array();
+		preg_match_all( '#<p\b[^>]*>\s*<img\b([^>]*)/?\s*>\s*</p>#i', $html, $paragraph_matches );
+		preg_match_all( '#^[\t ]*<img\b([^>]*)/?\s*>[\t ]*$#im', $html, $line_matches );
+		$attribute_sets = array_merge( $paragraph_matches[1], $line_matches[1] );
+		$upload_url     = trailingslashit( wp_get_upload_dir()['baseurl'] );
+		$source_urls    = array();
+
+		foreach ( $attribute_sets as $attribute_string ) {
+			$attributes = wp_kses_hair( $attribute_string, wp_allowed_protocols() );
+			$source_url = isset( $attributes['src']['value'] ) ? html_entity_decode( $attributes['src']['value'], ENT_QUOTES | ENT_HTML5, 'UTF-8' ) : '';
+			if ( ! wp_http_validate_url( $source_url ) || 0 === strpos( $source_url, $upload_url ) || attachment_url_to_postid( $source_url ) ) {
+				continue;
+			}
+
+			$source_urls[] = esc_url_raw( $source_url );
+		}
+
+		return array_values( array_unique( $source_urls ) );
+	}
+
+	/**
+	 * Makes the post ID available while Markdown filters reuse imported images.
+	 *
+	 * @param int $post_id Post ID to update.
+	 * @return bool|WP_Error Whether the post was updated, or an error.
+	 */
+	protected function update_post_from_markdown_source( $post_id ) {
+		$this->current_post_id = (int) $post_id;
+		$this->download_images = 'production' === wp_get_environment_type();
+		/**
+		 * Filters whether Playground image import metadata should be cleared.
+		 *
+		 * @param bool $clear   Whether to clear image import records.
+		 * @param int  $post_id Post ID being imported.
+		 */
+		if ( apply_filters( 'devhub_playground_clear_image_meta', false, $post_id ) ) {
+			delete_post_meta( $post_id, self::PLAYGROUND_IMAGE_META_KEY );
+		}
+
+		try {
+			return parent::update_post_from_markdown_source( $post_id );
+		} finally {
+			$this->current_post_id = 0;
+			$this->download_images = false;
+		}
 	}
 
 	/**
@@ -278,6 +375,12 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 	 * links such as `/blueprints`. On Developer Resources, the documentation is
 	 * mounted below `/playground`, so those links need the handbook base added.
 	 *
+	 * Some of those links point at a sibling doc using the path Docusaurus
+	 * derives from its source filename (e.g. `/blueprints/tutorial/build-your-first-blueprint`,
+	 * from `03-build-your-first-blueprint.md`), rather than the shorter `slug`
+	 * the manifest assigns that doc (`build-your-first`). Such links are
+	 * translated to the manifest slug path so they resolve.
+	 *
 	 * @param string $html      The transformed HTML.
 	 * @param string $post_type The post type being imported.
 	 * @return string
@@ -287,13 +390,90 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 			return $html;
 		}
 
+		$link_map = $this->get_manifest_link_map();
+
 		return preg_replace_callback(
 			'#(<a\b[^>]*\bhref=["\'])/(?!/)([^"\']*)(["\'])#i',
-			function ( $matches ) {
-				return $matches[1] . trailingslashit( $this->get_base() ) . $matches[2] . $matches[3];
+			function ( $matches ) use ( $link_map ) {
+				$path        = $matches[2];
+				$suffix_pos  = strcspn( $path, '?#' );
+				$base_path   = rtrim( substr( $path, 0, $suffix_pos ), '/' );
+				$suffix      = substr( $path, $suffix_pos );
+
+				if ( isset( $link_map[ $base_path ] ) ) {
+					$path = $link_map[ $base_path ] . $suffix;
+				}
+
+				return $matches[1] . trailingslashit( $this->get_base() ) . $path . $matches[3];
 			},
 			$html
 		);
+	}
+
+	/**
+	 * Builds a map of Docusaurus source-derived doc paths to their manifest slug paths.
+	 *
+	 * Docusaurus builds a doc's own link path from its filename, stripped of
+	 * any leading numeric ordering prefix (e.g. `01-`) and extension, while
+	 * keeping its directory structure. The manifest instead assigns each doc
+	 * its own explicit path via `slug`/`parent`, which can differ from that
+	 * derived path. Cross-links within the docs that use the source-derived
+	 * path therefore need translating to the manifest path to resolve once
+	 * imported.
+	 *
+	 * @return array Map of source-derived path to manifest key, for docs
+	 *               where the two differ.
+	 */
+	protected function get_manifest_link_map() {
+		$transient_key = 'devhub_playground_manifest_link_map';
+		$map           = get_transient( $transient_key );
+		if ( is_array( $map ) ) {
+			return $map;
+		}
+
+		$map      = array();
+		$response = wp_remote_get( $this->get_manifest_url() );
+
+		if ( ! is_wp_error( $response ) && 200 === wp_remote_retrieve_response_code( $response ) ) {
+			$manifest = json_decode( wp_remote_retrieve_body( $response ), true );
+
+			if ( is_array( $manifest ) ) {
+				foreach ( $manifest as $key => $doc ) {
+					if ( ! is_string( $key ) || empty( $doc['markdown_source'] ) ) {
+						continue;
+					}
+
+					$source_path = $this->derive_source_link_path( $doc['markdown_source'] );
+					if ( $source_path && $source_path !== $key ) {
+						$map[ $source_path ] = $key;
+					}
+				}
+			}
+		}
+
+		set_transient( $transient_key, $map, 15 * MINUTE_IN_SECONDS );
+
+		return $map;
+	}
+
+	/**
+	 * Derives the link path Docusaurus would generate for a doc's own source file.
+	 *
+	 * @param string $markdown_source The markdown_source value from the manifest.
+	 * @return string
+	 */
+	protected function derive_source_link_path( $markdown_source ) {
+		$path = preg_replace( '#^docs/#', '', $markdown_source );
+		$path = preg_replace( '#\.mdx?$#', '', $path );
+
+		$segments = array_map(
+			function ( $segment ) {
+				return preg_replace( '/^\d+-/', '', $segment );
+			},
+			explode( '/', $path )
+		);
+
+		return implode( '/', $segments );
 	}
 
 	/**
@@ -313,6 +493,228 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 			'$1' . self::PLAYGROUND_DOCS_ASSET_URL,
 			$html
 		);
+	}
+
+	/**
+	 * Imports Playground documentation images and turns them into image blocks.
+	 *
+	 * @param string $html      The transformed HTML.
+	 * @param string $post_type The post type being imported.
+	 * @return string
+	 */
+	public function import_images( $html, $post_type ) {
+		if ( $this->get_post_type() !== $post_type || ! $this->current_post_id ) {
+			return $html;
+		}
+
+		$paragraph_pattern = '#<p\b[^>]*>\s*<img\b([^>]*)/?\s*>\s*</p>#i';
+		$line_pattern      = '#^[\t ]*<img\b([^>]*)/?\s*>[\t ]*$#im';
+		if ( class_exists( 'WP_CLI' ) ) {
+			$total_images      = preg_match_all( '#<img\b#i', $html );
+			$standalone_images = preg_match_all( $paragraph_pattern, $html ) + preg_match_all( $line_pattern, $html );
+			WP_CLI::log(
+				sprintf(
+					'Post %d contains %d image(s); %d can be imported as standalone image blocks.',
+					$this->current_post_id,
+					$total_images,
+					$standalone_images
+				)
+			);
+		}
+
+		$html = preg_replace_callback(
+			$paragraph_pattern,
+			array( $this, 'import_image' ),
+			$html
+		);
+
+		$html = preg_replace_callback(
+			$line_pattern,
+			array( $this, 'import_image' ),
+			$html
+		);
+		return $html;
+	}
+
+	/**
+	 * Imports an image and returns a serialized core/image block.
+	 *
+	 * @param array $matches The matched image paragraph and its attributes.
+	 * @return string
+	 */
+	protected function import_image( $matches ) {
+		$attributes = wp_kses_hair( $matches[1], wp_allowed_protocols() );
+		$source_url = isset( $attributes['src']['value'] ) ? html_entity_decode( $attributes['src']['value'], ENT_QUOTES | ENT_HTML5, 'UTF-8' ) : '';
+
+		if ( ! wp_http_validate_url( $source_url ) ) {
+			if ( class_exists( 'WP_CLI' ) ) {
+				WP_CLI::warning( sprintf( 'Skipped image with invalid URL: %s', $source_url ? $source_url : '(empty)' ) );
+			}
+
+			return $matches[0];
+		}
+
+		$source_url = esc_url_raw( $source_url );
+
+		$alt           = isset( $attributes['alt']['value'] ) ? html_entity_decode( $attributes['alt']['value'], ENT_QUOTES | ENT_HTML5, 'UTF-8' ) : '';
+		$image_record  = $this->get_image_record( $this->current_post_id, $source_url );
+		$attachment_id = attachment_url_to_postid( $source_url );
+		if ( ! $attachment_id && $image_record && 'downloaded' === $image_record['status'] ) {
+			$attachment_id = absint( $image_record['attachment_id'] );
+		}
+		if ( ! $attachment_id ) {
+			$attachment_id = $this->get_attachment_for_source( $source_url );
+		}
+
+		if ( $attachment_id ) {
+			if ( class_exists( 'WP_CLI' ) ) {
+				WP_CLI::log( sprintf( 'Reusing attachment %d for image %s.', $attachment_id, $source_url ) );
+			}
+		} else {
+			if ( $image_record ) {
+				if ( class_exists( 'WP_CLI' ) ) {
+					WP_CLI::log( sprintf( 'Skipping previously processed image %s.', $source_url ) );
+				}
+
+				return $matches[0];
+			}
+			if ( ! $this->download_images ) {
+				if ( class_exists( 'WP_CLI' ) ) {
+					WP_CLI::log( sprintf( 'No imported attachment found for image %s; leaving it unchanged.', $source_url ) );
+				}
+
+				return $matches[0];
+			}
+			if ( class_exists( 'WP_CLI' ) ) {
+				WP_CLI::log( sprintf( 'Downloading image %s.', $source_url ) );
+			}
+
+			if ( ! function_exists( 'media_sideload_image' ) ) {
+				require_once ABSPATH . 'wp-admin/includes/file.php';
+				require_once ABSPATH . 'wp-admin/includes/media.php';
+				require_once ABSPATH . 'wp-admin/includes/image.php';
+			}
+
+			$attachment_id = media_sideload_image( $source_url, $this->current_post_id, $alt, 'id' );
+			if ( is_wp_error( $attachment_id ) ) {
+				$this->set_image_record( $this->current_post_id, $source_url, 'failed' );
+				if ( class_exists( 'WP_CLI' ) ) {
+					WP_CLI::warning( sprintf( 'Could not import image %s: %s', $source_url, $attachment_id->get_error_message() ) );
+				}
+
+				return $matches[0];
+			}
+
+			if ( class_exists( 'WP_CLI' ) ) {
+				WP_CLI::log( sprintf( 'Imported image %s as attachment %d.', $source_url, $attachment_id ) );
+			}
+		}
+
+		$image_url = wp_get_attachment_image_url( $attachment_id, 'full' );
+		if ( ! $image_url ) {
+			if ( $this->download_images ) {
+				$this->set_image_record( $this->current_post_id, $source_url, 'failed' );
+			}
+			return $matches[0];
+		}
+		if ( $this->download_images ) {
+			$this->set_image_record( $this->current_post_id, $source_url, 'downloaded', $attachment_id );
+		}
+
+		$block_attributes = array(
+			'id'              => $attachment_id,
+			'sizeSlug'        => 'full',
+			'linkDestination' => 'none',
+		);
+		$image_attributes = array(
+			'src'   => $image_url,
+			'alt'   => $alt,
+			'class' => 'wp-image-' . $attachment_id,
+		);
+
+		return sprintf(
+			"<!-- wp:image %s -->\n<figure class=\"wp-block-image size-full\"><img%s></figure>\n<!-- /wp:image -->",
+			wp_json_encode( $block_attributes, JSON_UNESCAPED_SLASHES ),
+			$this->serialize_html_attributes( $image_attributes )
+		);
+	}
+
+	/**
+	 * Gets a post's import record for an image source URL.
+	 *
+	 * @param int    $post_id    Post ID.
+	 * @param string $source_url External image URL.
+	 * @return array|null
+	 */
+	protected function get_image_record( $post_id, $source_url ) {
+		foreach ( get_post_meta( $post_id, self::PLAYGROUND_IMAGE_META_KEY, false ) as $record ) {
+			if ( is_array( $record ) && isset( $record['url'], $record['status'], $record['attachment_id'] ) && $source_url === $record['url'] ) {
+				return $record;
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * Stores the production import result for an image.
+	 *
+	 * @param int    $post_id       Post ID.
+	 * @param string $source_url    External image URL.
+	 * @param string $status        Either downloaded or failed.
+	 * @param int    $attachment_id Attachment ID when downloaded.
+	 */
+	protected function set_image_record( $post_id, $source_url, $status, $attachment_id = 0 ) {
+		$existing = $this->get_image_record( $post_id, $source_url );
+		if ( $existing ) {
+			delete_post_meta( $post_id, self::PLAYGROUND_IMAGE_META_KEY, $existing );
+		}
+
+		add_post_meta(
+			$post_id,
+			self::PLAYGROUND_IMAGE_META_KEY,
+			array(
+				'url'           => $source_url,
+				'status'        => $status,
+				'attachment_id' => (int) $attachment_id,
+			)
+		);
+	}
+
+	/**
+	 * Finds an attachment previously imported from a source URL.
+	 *
+	 * @param string $source_url The remote image URL.
+	 * @return int
+	 */
+	protected function get_attachment_for_source( $source_url ) {
+		$attachments = get_posts(
+			array(
+				'post_type'      => 'attachment',
+				'post_status'    => 'inherit',
+				'fields'         => 'ids',
+				'posts_per_page' => 1,
+				'meta_key'       => '_source_url',
+				'meta_value'     => esc_url_raw( $source_url ),
+			)
+		);
+
+		return $attachments ? (int) $attachments[0] : 0;
+	}
+
+	/**
+	 * Serializes HTML attributes with escaping.
+	 *
+	 * @param array $attributes Attribute names and values.
+	 * @return string
+	 */
+	protected function serialize_html_attributes( $attributes ) {
+		$html = '';
+		foreach ( $attributes as $name => $value ) {
+			$html .= sprintf( ' %s="%s"', esc_attr( $name ), esc_attr( $value ) );
+		}
+
+		return $html;
 	}
 }
 
