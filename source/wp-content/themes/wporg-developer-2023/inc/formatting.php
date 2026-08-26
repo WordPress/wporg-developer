@@ -862,6 +862,8 @@ class DevHub_Formatting {
 		$lang = in_array( $attr['lang'] ?? '', $lang_list ) ? $attr['lang'] ?? '': 'php';
 
 		$content = self::_trim_code( $content );
+		// do_blocks() re-parses this content, so neutralize any block delimiter in it.
+		$content = preg_replace( '/<!--(\s*\/?wp:)/', '&lt;!--$1', $content );
 		// Hides numbers if <= 4 lines of code (last line has no linebreak).
 		$show_line_numbers = substr_count( $content, "\n" ) > 3;
 

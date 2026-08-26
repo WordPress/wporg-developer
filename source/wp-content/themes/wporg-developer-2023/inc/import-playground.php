@@ -368,6 +368,11 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 	 * @return string
 	 */
 	public function render_php_code_snippet( $attributes ) {
+		// This embed carries raw HTML, so only render it on its own imported handbook.
+		if ( get_post_type() !== $this->get_post_type() ) {
+			return '';
+		}
+
 		$attributes = shortcode_atts( array( 'encoded' => '' ), $attributes );
 		$html       = base64_decode( $attributes['encoded'], true );
 

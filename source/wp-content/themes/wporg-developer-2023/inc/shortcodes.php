@@ -49,9 +49,9 @@ add_shortcode(
 		$post = get_post();
 		$markdown_source = get_markdown_edit_link( $post->ID ?? 0 );
 		// If this is a github page, use the edit URL to generate the
-		// commit history URL
+		// commit history URL. wporg_markdown_source is unescaped post meta, so escape the URL.
 		if ( str_contains( $markdown_source, 'github.com' ) ) {
-			return str_replace( '/edit/', '/commits/', $markdown_source );
+			return esc_url( str_replace( '/edit/', '/commits/', $markdown_source ) );
 		}
 		return '#';
 	}
