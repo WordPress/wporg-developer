@@ -1690,6 +1690,11 @@ namespace DevHub {
 	function get_summary( $post = null ) {
 		$post = get_post( $post );
 
+		// Reading the raw excerpt column bypasses the password gate; withhold it when protected.
+		if ( post_password_required( $post ) ) {
+			return '';
+		}
+
 		$summary = $post->post_excerpt;
 
 		if ( $summary ) {
@@ -1733,6 +1738,11 @@ namespace DevHub {
 	 */
 	function get_description( $post = null ) {
 		$post = get_post( $post );
+
+		// Reading the raw content column bypasses the password gate; withhold it when protected.
+		if ( post_password_required( $post ) ) {
+			return '';
+		}
 
 		$description = $post->post_content;
 
