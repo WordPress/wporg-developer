@@ -559,6 +559,14 @@ class WPORG_Explanations {
 		$post_id = empty( $_REQUEST['post_id'] ) ? 0 : absint( $_REQUEST['post_id'] );
 		$context = empty( $_REQUEST['context'] ) ? '' : sanitize_text_field( $_REQUEST['context'] );
 
+		$parent = $post_id ? get_post( $post_id ) : null;
+		$type   = get_post_type_object( $this->exp_post_type );
+
+		// The 'create-expl' nonce is minted without a capability check, so authorize here.
+		if ( ! $parent || ! DevHub\is_parsed_post_type( $parent->post_type ) || ! current_user_can( $type->cap->create_posts ) ) {
+			wp_send_json_error( new WP_Error( 'forbidden', __( 'Sorry, you are not allowed to create explanations.', 'wporg' ) ) );
+		}
+
 		if ( DevHub\get_explanation( $post_id ) ) {
 			wp_send_json_error( new WP_Error( 'post_exists', __( 'Explanation already exists.', 'wporg' ) ) );
 		} else {
@@ -596,6 +604,10 @@ class WPORG_Explanations {
 		$post_id = empty( $_REQUEST['post_id'] ) ? 0 : absint( $_REQUEST['post_id'] );
 
 		if ( $explanation = \DevHub\get_explanation( $post_id ) ) {
+			if ( ! current_user_can( 'edit_post', $explanation->ID ) ) {
+				wp_send_json_error( new WP_Error( 'forbidden', __( 'Sorry, you are not allowed to un-publish this explanation.', 'wporg' ) ) );
+			}
+
 			$update = wp_update_post( array(
 				'ID'          => $explanation->ID,
 				'post_status' => 'draft'
