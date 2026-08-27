@@ -1549,8 +1549,7 @@ namespace DevHub {
 		if (
 			! $root_real || ! $file_on_disk ||
 			! str_starts_with( $file_on_disk, $root_real . DIRECTORY_SEPARATOR ) ||
-			! is_file( $file_on_disk ) ||
-			! preg_match( '/\.(php|js|jsx|ts|tsx|css)$/i', $file_on_disk )
+			! is_file( $file_on_disk )
 		) {
 			return '';
 		}

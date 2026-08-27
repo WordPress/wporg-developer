@@ -205,12 +205,10 @@ class DevHub_Registrations {
 			'sort'                  => false,
 			'update_count_callback' => '_update_post_term_count',
 			'show_in_rest'          => true,
-			// Terms come from the phpdoc importer (which bypasses these caps); no human should manage them.
+			// A term name resolves to a source file path, so terms come only from the importer (which bypasses these caps); block hand-editing.
 			'capabilities'          => array(
-				'manage_terms' => 'do_not_allow',
 				'edit_terms'   => 'do_not_allow',
 				'delete_terms' => 'do_not_allow',
-				'assign_terms' => 'edit_posts',
 			),
 		) );
 
