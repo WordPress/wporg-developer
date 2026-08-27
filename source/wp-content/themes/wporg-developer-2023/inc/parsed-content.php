@@ -182,6 +182,15 @@ class WPORG_Edit_Parsed_Content {
 	public function attach_ticket() {
 		check_ajax_referer( 'wporg-attach-ticket', 'nonce' );
 
+		$post_id = empty( $_REQUEST['post_id'] ) ? 0 : absint( $_REQUEST['post_id'] );
+
+		if ( ! $post_id || ! current_user_can( 'edit_post', $post_id ) ) {
+			wp_send_json_error( array(
+				'message'   => __( 'Insufficient permissions.', 'wporg' ),
+				'new_nonce' => wp_create_nonce( 'wporg-attach-ticket' ),
+			) );
+		}
+
 		$ticket_no  = empty( $_REQUEST['ticket'] ) ? 0 : absint( $_REQUEST['ticket'] );
 		$ticket_url = "https://core.trac.wordpress.org/ticket/{$ticket_no}";
 
@@ -210,16 +219,10 @@ class WPORG_Edit_Parsed_Content {
 				die( -1 );
 			}
 
-			$post_id = empty( $_REQUEST['post_id'] ) ? 0 : absint( $_REQUEST['post_id'] );
-
-			if ( ! $post_id || ! current_user_can( 'edit_post', $post_id ) ) {
-				wp_send_json_error( array( 'message' => __( 'Insufficient permissions.', 'wporg' ) ) );
-			}
-
 			update_post_meta( $post_id, 'wporg_ticket_number', $ticket_no );
 			update_post_meta( $post_id, 'wporg_ticket_title', $title );
 
-			$link = sprintf( '<a href="%1$s">%2$s</a>', esc_url( $ticket_url ), esc_html( apply_filters( 'the_title', $title ) ) );
+			$link = sprintf( '<a href="%1$s">%2$s</a>', esc_url( $ticket_url ), apply_filters( 'the_title', $title ) );
 
 			// Can haz success.
 			wp_send_json_success( array(
