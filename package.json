@@ -1,32 +1,40 @@
 {
-	"name": "wporg-developer",
-	"version": "1.0.0",
-	"description": "The codebase and development environment for Developer.WordPress.org.",
+    "name": "wporg-developer-2023",
+    "version": "1.0.0",
+    "description": "Theme for WordPress Developer Resources",
 	"author": "WordPress.org",
 	"license": "GPL-2.0-or-later",
 	"private": true,
 	"dependencies": {
-		"@wordpress/scripts": "32.6.0"
+		"@wordpress/i18n": "^6.24.0"
 	},
 	"devDependencies": {
-		"@wordpress/env": "11.0.0"
+		"@wordpress/eslint-plugin": "^25.6.0",
+		"@wordpress/scripts": "32.6.0"
+	},
+	"eslintConfig": {
+		"extends": "../../../../.eslintrc.js",
+		"rules": {
+			"import/no-unresolved": [ "error", { "ignore": [ "^@wordpress/" ] } ]
+		}
+	},
+	"stylelint": {
+		"extends": "@wordpress/stylelint-config/scss-stylistic",
+		"rules": {
+			"@stylistic/max-line-length": 115,
+			"no-descending-specificity": null,
+			"rule-empty-line-before": [ "always-multi-line", {
+				"except": [ "first-nested", "after-single-line-comment" ]
+			} ],
+			"selector-class-pattern": null,
+			"value-keyword-case": [ "lower", { "camelCaseSvgKeywords": true } ]
+		}
 	},
 	"scripts": {
-		"playground": "npx @wp-playground/cli start --no-auto-mount --mount=./source/wp-content/mu-plugins:/wordpress/wp-content/mu-plugins --mount=./env/0-sandbox.php:/wordpress/wp-content/mu-plugins/0-sandbox.php --mount=./source/wp-content/plugins:/wordpress/wp-content/plugins --mount=./source/wp-content/themes:/wordpress/wp-content/themes --blueprint=${PLAYGROUND_BLUEPRINT:-./source/wp-content/blueprint.json}",
-		"playground:import-docs": "jq --arg postType \"${IMPORT_POST_TYPE:?Usage: IMPORT_POST_TYPE=playground yarn playground:import-docs}\" '.steps += [{\"step\":\"defineWpConfigConsts\",\"consts\":{\"IMPORT_POST_TYPE\":$postType}},{\"step\":\"runPHP\",\"code\":\"<?php class WP_CLI { public static function log( $message ) { error_log( $message ); } public static function warning( $message ) { error_log( \\\"Warning: $message\\\" ); } public static function success( $message ) { error_log( \\\"Success: $message\\\" ); } public static function error( $message ) { throw new RuntimeException( $message ); } } require_once \\\"/wordpress/wp-load.php\\\"; do_action( \\\"devhub_\\\" . IMPORT_POST_TYPE . \\\"_import_manifest\\\" ); do_action( \\\"devhub_\\\" . IMPORT_POST_TYPE . \\\"_import_all_markdown\\\" );\"}]' \"${PLAYGROUND_BLUEPRINT:-./source/wp-content/blueprint.json}\" > ./source/wp-content/.playground-import-docs.blueprint.json && PLAYGROUND_BLUEPRINT=./source/wp-content/.playground-import-docs.blueprint.json yarn playground",
-		"setup:tools": "yarn && composer install && TEXTDOMAIN=wporg composer exec update-configs && composer --working-dir=./source/wp-content/plugins/phpdoc-parser install",
-		"setup": "yarn setup:wp && yarn parse",
-		"setup:wp": "wp-env run cli bash env/setup.sh",
-		"parse": "wp-env run cli wp devhub parse --user_id=1",
-		"update:tools": "composer update && TEXTDOMAIN=wporg composer exec update-configs && composer --working-dir=./source/wp-content/plugins/phpdoc-parser update",
-		"wp-env": "wp-env",
-		"build": "yarn workspaces run build",
-		"build:theme": "yarn workspace wporg-developer-2023 build",
-		"start:theme": "yarn workspace wporg-developer-2023 start",
-		"lint:css": "wp-scripts lint-style"
-	},
-	"workspaces": [
-		"source/wp-content/themes/wporg-developer-2023"
-	],
-	"packageManager": "yarn@1.22.22"
+		"build": "wp-scripts build",
+		"start": "wp-scripts start",
+		"lint:js": "wp-scripts lint-js --config ../../../../eslint.config.js src",
+		"lint:css": "wp-scripts lint-style *.css src/**/*.scss",
+		"format": "wp-scripts format src"
+	}
 }
