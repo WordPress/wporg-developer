@@ -170,7 +170,10 @@ class DevHub_Formatting {
 
 				// Link to an internal resource.
 				else {
-					$link = self::link_internal_element( $link );
+					$internal = self::link_internal_element( $link );
+
+					// Escape an unlinked value: unchanged input is untrusted (possibly decoded) text, not generated markup.
+					$link = ( $internal === $link ) ? esc_html( $link ) : $internal;
 				}
 
 				return $link;
