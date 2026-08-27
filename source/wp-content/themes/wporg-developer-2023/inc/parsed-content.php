@@ -222,7 +222,7 @@ class WPORG_Edit_Parsed_Content {
 			update_post_meta( $post_id, 'wporg_ticket_number', $ticket_no );
 			update_post_meta( $post_id, 'wporg_ticket_title', $title );
 
-			$link = sprintf( '<a href="%1$s">%2$s</a>', esc_url( $ticket_url ), esc_html( $title ) );
+			$link = sprintf( '<a href="%1$s">%2$s</a>', esc_url( $ticket_url ), esc_html( apply_filters( 'the_title', $title ) ) );
 
 			// Can haz success.
 			wp_send_json_success( array(
