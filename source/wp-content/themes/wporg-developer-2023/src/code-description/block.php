@@ -268,8 +268,8 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 		$code = substr( $code, strlen( $preamble ) );
 	}
 
-	$code = wp_json_encode( $code, JSON_HEX_TAG | JSON_UNESCAPED_SLASHES );
-	if ( ! is_string( $code ) ) {
+	$json_encoded_code = wp_json_encode( $code, JSON_HEX_TAG | JSON_UNESCAPED_SLASHES );
+	if ( ! is_string( $json_encoded_code ) ) {
 		return '';
 	}
 
@@ -320,7 +320,7 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 
 	$snippet_output = '<php-snippet>';
 	$snippet_output .= wp_get_inline_script_tag(
-		$code,
+		$json_encoded_code,
 		array( 'type' => 'application/x-php+json' )
 	);
 
@@ -331,6 +331,7 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 		);
 	}
 
+	$snippet_output .= render_php_code_snippet_source( $code );
 	$snippet_output .= '</php-snippet>';
 
 	$tags = new \WP_HTML_Tag_Processor( $snippet_output );
@@ -344,6 +345,35 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 	$output .= $snippet_output;
 
 	return $output;
+}
+
+/**
+ * Render the snippet source as a code block.
+ *
+ * `<php-snippet>` builds its interface in a shadow root with no slot, so this
+ * markup is what a reader sees before the Playground script upgrades the
+ * element, and all they see if it never loads.
+ *
+ * @param string $code Snippet PHP source.
+ * @return string
+ */
+function render_php_code_snippet_source( $code ) {
+	// The Tag Processor can replace text but cannot create it, so the code
+	// element carries a placeholder for `set_modifiable_text()` to overwrite.
+	$html = new \WP_HTML_Tag_Processor(
+		'<pre class="wp-block-code"><code class="language-php">placeholder</code></pre>'
+	);
+
+	if (
+		! $html->next_tag( 'CODE' ) ||
+		! $html->next_token() ||
+		'#text' !== $html->get_token_type() ||
+		! $html->set_modifiable_text( $code )
+	) {
+		return '';
+	}
+
+	return $html->get_updated_html();
 }
 
 /**
