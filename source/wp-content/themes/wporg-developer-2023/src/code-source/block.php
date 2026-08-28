@@ -75,38 +75,48 @@ function get_source_content( $post_id ) {
 	if ( ! empty( $source_file ) ) {
 		$source_code = post_type_has_source_code( $post_type ) ? get_source_code( $post_id ) : '';
 
-		$view_reference_button = sprintf(
+		$buttons = array();
+
+		$buttons[] = sprintf(
 			'<a href="%s">%s</a>',
 			esc_url( get_source_file_archive_link( $source_file ) ),
 			__( 'View all references', 'wporg' )
 		);
 
-		$view_trac_button = sprintf(
-			'<a href="%s">%s</a>',
-			esc_url( get_source_file_link( $post_id ) ),
-			__( 'View on Trac', 'wporg' )
-		);
+		/**
+		 * Filters whether to show the Trac source link for a parsed post type.
+		 *
+		 * @param bool $show_trac_link Whether to show the Trac source link. Default true.
+		 * @param int  $post_id        Post ID of the parsed function, method, hook, or class.
+		 */
+		$show_trac_link = apply_filters( 'devhub-show-trac-source-link', true, $post_id );
 
-		$view_github_button = sprintf(
-			'<a href="%s">%s</a>',
-			esc_url( get_github_source_file_link( $post_id ) ),
-			__( 'View on GitHub', 'wporg' )
-		);
+		if ( $show_trac_link ) {
+			$buttons[] = sprintf(
+				'<a href="%s">%s</a>',
+				esc_url( get_source_file_link( $post_id ) ),
+				__( 'View on Trac', 'wporg' )
+			);
+		}
 
 		if ( ! empty( $source_code ) ) {
 			$output .= do_blocks(
 				sprintf(
 					'<!-- wp:code {"lineNumbers":true} --><pre class="wp-block-code" data-start="%1$s" aria-label="%2$s"><code id="wporg-source-code" lang="php" class="language-php line-numbers">%3$s</code></pre><!-- /wp:code -->',
-					esc_attr( get_post_meta( get_the_ID(), '_wp-parser_line_num', true ) ),
+					esc_attr( get_post_meta( $post_id, '_wp-parser_line_num', true ) ),
 					__( 'Function source code', 'wporg' ),
 					htmlentities( $source_code )
 				)
 			);
 
-			$output .= sprintf( '<p class="wporg-dot-link-list">%s</p>', implode( ' ', array( $view_reference_button, $view_trac_button, $view_github_button ) ) );
-		} else {
-			$output .= sprintf( '<p class="wporg-dot-link-list">%s</p>', implode( ' ', array( $view_reference_button, $view_trac_button ) ) );
+			$buttons[] = sprintf(
+				'<a href="%s">%s</a>',
+				esc_url( get_github_source_file_link( $post_id ) ),
+				__( 'View on GitHub', 'wporg' )
+			);
 		}
+
+		$output .= sprintf( '<p class="wporg-dot-link-list">%s</p>', implode( ' ', $buttons ) );
 	}
 
 	return $output;
