@@ -3,37 +3,34 @@
  *
  */
 
-( function( $ ) {
-
-	var textarea, tabContentHeight, text, preview, previewContent, tabs, processing, spinner;
+( function () {
+	let textarea, preview, previewContent, tabs, processing, spinner;
 
 	function init() {
-
-		if ( undefined === wporg_note_preview ) {
+		if ( typeof wporg_note_preview === 'undefined' ) {
 			return;
 		}
 
-		textarea = $( '.comment-form textarea' );
-		preview = $( '#comment-preview' );
-		tabs = $( '#commentform .tablist' ).find( 'a' );
-		spinner = $( '<span class="spinner" style="display:none;"></span>' );
-		text = '';
+		textarea = document.querySelector( '.comment-form textarea' );
+		preview = document.querySelector( '#comment-preview' );
+		tabs = document.querySelectorAll( '#commentform .tablist a' );
+		spinner = document.createElement( 'span' );
+		spinner.className = 'spinner';
+		spinner.style.display = 'none';
 		processing = false;
 
-		// Show tabs with Javascript.
-		$( '#commentform .tablist').show();
+		// Show tabs with JavaScript.
+		document.querySelector( '#commentform .tablist' ).style.display = 'flex';
 
-		if ( textarea.length && preview.length && tabs.length ) {
+		if ( textarea && preview && tabs.length > 0 ) {
+			// Append spinner to preview tab.
+			tabs[ tabs.length - 1 ].parentNode.appendChild( spinner );
 
-			// Append spinner to preview tab
-			tabs.parents( 'li[role="presentation"]:last' ).append( spinner );
+			previewContent = preview.querySelector( '.preview-content' );
 
-			previewContent = $( '.preview-content', preview );
-
-			if ( previewContent.length ) {
-
-				if ( !textarea.val().length ) {
-					previewContent.text( wporg_note_preview.preview_empty );
+			if ( previewContent ) {
+				if ( ! textarea.value.length ) {
+					previewContent.textContent = wporg_note_preview.preview_empty;
 				}
 
 				previewEvents();
@@ -42,86 +39,87 @@
 	}
 
 	function previewEvents() {
+		const commentFormComment = document.getElementById( 'comment-form-comment' );
+		const tabContentHeight = commentFormComment.offsetHeight;
+		tabs.forEach( ( tab ) => {
+			tab.addEventListener( 'keydown', handlePreviewEvent );
+			tab.addEventListener( 'click', handlePreviewEvent );
+		} );
 
-		tabs.on( "keydown.note_preview, click.note_preview", function( e ) {
-
+		function handlePreviewEvent( e ) {
 			// Preview tab should be at least as tall input tab to prevent resizing wonkiness.
-			tabContentHeight = $( '#comment-form-comment' ).outerHeight( false );
 
-			if ( 0 < tabContentHeight ) {
-				preview.css( 'min-height', tabContentHeight + 'px' );
+			if ( tabContentHeight > 0 ) {
+				preview.style.minHeight = `${ tabContentHeight }px`;
 			}
 
-			if ( 'comment-preview' === $( this ).attr( 'aria-controls' ) ) {
-
-				if ( !processing ) {
-					current_text = $.trim( textarea.val() );
-					if ( current_text.length && ( current_text !== wporg_note_preview.preview_empty ) ) {
-						if ( wporg_note_preview.preview_empty === previewContent.text() ) {
+			if ( this.getAttribute( 'aria-controls' ) === 'comment-preview' ) {
+				if ( ! processing ) {
+					const current_text = textarea.value.trim();
+					if ( current_text.length && current_text !== wporg_note_preview.preview_empty ) {
+						if ( wporg_note_preview.preview_empty === previewContent.textContent ) {
 							// Remove "Nothing to preview" if there's new current text.
-							previewContent.text( '' );
+							previewContent.textContent = '';
 						}
 						// Update the preview.
 						updatePreview( current_text );
 					} else {
-						previewContent.text( wporg_note_preview.preview_empty );
+						previewContent.textContent = wporg_note_preview.preview_empty;
 					}
 				}
 
 				// Remove outline from tab if clicked.
-				if ( "click" === e.type ) {
-					$( this ).blur();
+				if ( e.type === 'click' ) {
+					this.blur();
 				}
 			} else {
 				textarea.focus();
 			}
-		} );
-	}
-
-	function updatePreview( content ) {
-
-		// Don't update preview if nothing changed
-		if ( text == content ) {
-			spinner.hide();
-			return;
 		}
+	}
+	async function updatePreview( content ) {
+		try {
+			spinner.style.display = 'inline-block'; // Show spinner.
+			processing = true;
 
-		spinner.show();
-		text = content;
-		processing = true;
+			const params = new URLSearchParams();
+			params.append( 'action', 'preview_comment' );
+			params.append( 'preview_nonce', wporg_note_preview.nonce );
+			params.append( 'preview_comment', content );
+			const response = await fetch( wporg_note_preview.ajaxurl, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded',
+				},
+				body: params,
+			} );
 
-		$.post( wporg_note_preview.ajaxurl, {
-			action: "preview_comment",
-			preview_nonce: wporg_note_preview.nonce,
-			preview_comment: content
-		} )
+			if ( ! response.ok ) {
+				throw new Error( `HTTP error! status: ${ response.status }` );
+			}
 
-		.done( function( response ) {
-			updatePreview_HTML( response.data.comment );
-		} )
-
-		.fail( function( response ) {
-			//console.log( 'fail', response );
-		} )
-
-		.always( function( response ) {
-			spinner.hide();
+			const data = await response.json();
+			updatePreview_HTML( data.data.comment );
+		} catch ( error ) {
+			console.error( 'Error:', error );
+		} finally {
+			spinner.style.display = 'none'; // Hide spinner.
 			processing = false;
 
-			// Make first child of the preview focusable
-			preview.children().first().attr( {
-				'tabindex': '0'
-			} );
-		} );
+			// Make first child of the preview focusable.
+			if ( preview.firstElementChild ) {
+				preview.firstElementChild.setAttribute( 'tabindex', '0' );
+			}
+		}
 	}
 
 	function updatePreview_HTML( content ) {
 		// Update preview content
-		previewContent.html( content );
+		previewContent.innerHTML = content;
 
-		spinner.hide();
+		// Hide spinner
+		spinner.style.display = 'none';
 	}
 
 	init();
-
-} )( jQuery );
+} )();
