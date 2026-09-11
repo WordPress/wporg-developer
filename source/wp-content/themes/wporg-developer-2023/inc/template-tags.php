@@ -1540,9 +1540,21 @@ namespace DevHub {
 		}
 
 		// Find just the relevant source code
-		$source_code  = '';
-		$file_on_disk = get_source_code_root_dir() . $source_file;
-		$handle       = file_exists( $file_on_disk ) ? fopen( $file_on_disk, 'r' ) : false;
+		$source_code = '';
+
+		// The source-file name is a taxonomy term, so resolve it and confirm it stays inside the parsed tree.
+		$root_real    = realpath( get_source_code_root_dir() );
+		$file_on_disk = realpath( get_source_code_root_dir() . $source_file );
+
+		if (
+			! $root_real || ! $file_on_disk ||
+			! str_starts_with( $file_on_disk, $root_real . DIRECTORY_SEPARATOR ) ||
+			! is_file( $file_on_disk )
+		) {
+			return '';
+		}
+
+		$handle = fopen( $file_on_disk, 'r' );
 		if ( $handle ) {
 			$line = -1;
 			while ( ! feof( $handle ) ) {
@@ -1690,6 +1702,11 @@ namespace DevHub {
 	function get_summary( $post = null ) {
 		$post = get_post( $post );
 
+		// Reading the raw excerpt column bypasses the password gate; withhold it when protected.
+		if ( post_password_required( $post ) ) {
+			return '';
+		}
+
 		$summary = $post->post_excerpt;
 
 		if ( $summary ) {
@@ -1733,6 +1750,11 @@ namespace DevHub {
 	 */
 	function get_description( $post = null ) {
 		$post = get_post( $post );
+
+		// Reading the raw content column bypasses the password gate; withhold it when protected.
+		if ( post_password_required( $post ) ) {
+			return '';
+		}
 
 		$description = $post->post_content;
 

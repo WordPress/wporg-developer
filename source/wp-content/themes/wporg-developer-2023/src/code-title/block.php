@@ -46,10 +46,15 @@ function render( $attributes, $content, $block ) {
 		);
 	}
 
+	// tagName is an element name, not an attribute value, so allow-list it instead of esc_attr().
+	$allowed_tags = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'dt', 'div', 'span' );
+	$tag_name     = isset( $attributes['tagName'] ) ? strtolower( (string) $attributes['tagName'] ) : 'h1';
+	$tag_name     = in_array( $tag_name, $allowed_tags, true ) ? $tag_name : 'h1';
+
 	$wrapper_attributes = get_block_wrapper_attributes();
 	return sprintf(
 		'<%1$s %2$s>%3$s</%1$s>',
-		esc_attr( $attributes['tagName'] ),
+		$tag_name,
 		$wrapper_attributes,
 		$content
 	);

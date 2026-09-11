@@ -170,7 +170,10 @@ class DevHub_Formatting {
 
 				// Link to an internal resource.
 				else {
-					$link = self::link_internal_element( $link );
+					$internal = self::link_internal_element( $link );
+
+					// Escape an unlinked value: unchanged input is untrusted (possibly decoded) text, not generated markup.
+					$link = ( $internal === $link ) ? esc_html( $link ) : $internal;
 				}
 
 				return $link;
@@ -862,6 +865,8 @@ class DevHub_Formatting {
 		$lang = in_array( $attr['lang'] ?? '', $lang_list ) ? $attr['lang'] ?? '': 'php';
 
 		$content = self::_trim_code( $content );
+		// do_blocks() re-parses this content, so neutralize any block delimiter in it.
+		$content = preg_replace( '/<!--(\s*\/?wp:)/', '&lt;!--$1', $content );
 		// Hides numbers if <= 4 lines of code (last line has no linebreak).
 		$show_line_numbers = substr_count( $content, "\n" ) > 3;
 

@@ -134,7 +134,8 @@ class DevHub_Head {
 			$desc = get_the_excerpt();
 		} elseif ( is_singular() ) {
 			$post = get_queried_object();
-			if ( $post ) {
+			// Reading post_content directly bypasses the password gate get_the_content() applies.
+			if ( $post && ! post_password_required( $post ) ) {
 				$desc = $post->post_content;
 			}
 		}

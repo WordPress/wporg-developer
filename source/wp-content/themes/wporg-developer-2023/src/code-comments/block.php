@@ -56,28 +56,25 @@ function render( $attributes, $content, $block ) {
 		);
 	}
 
-	ob_start(); // Capture all output
-
 	$ordered_comments = wporg_developer_get_ordered_notes();
 
 	if ( empty( $ordered_comments ) ) {
 		return '';
 	}
 
+	ob_start(); // Capture all output
 	wporg_developer_list_notes( $ordered_comments, array() );
 
 	$output = ob_get_clean();
 
-	$title_block = sprintf(
-		'<!-- wp:heading --><h2 class="wp-block-heading">%s</h2><!-- /wp:heading -->',
-		__( 'User Contributed Notes', 'wporg' )
-	);
+	// This output is block-parsed a second time (core's do_blocks at the_content priority 9), so neutralize any block delimiter in it.
+	$output = preg_replace( '/<!--(\s*\/?wp:)/', '&lt;!--$1', $output );
 
 	$wrapper_attributes = get_block_wrapper_attributes( [ 'data-nosnippet' => 'true' ] );
 	return sprintf(
-		'<section %1$s>%2$s <ol class="comment-list">%3$s</ol></section>',
+		'<section %1$s><h2 class="wp-block-heading">%2$s</h2> <ol class="comment-list">%3$s</ol></section>',
 		$wrapper_attributes,
-		$title_block,
+		esc_html__( 'User Contributed Notes', 'wporg' ),
 		$output
 	);
 }
