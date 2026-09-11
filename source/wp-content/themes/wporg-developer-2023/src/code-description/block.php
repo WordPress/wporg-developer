@@ -350,16 +350,13 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 /**
  * Render the snippet source as a code block.
  *
- * `<php-snippet>` builds its interface in a shadow root with no slot, so this
- * markup is what a reader sees before the Playground script upgrades the
- * element, and all they see if it never loads.
+ * Visible until the Playground script initializes the element's shadow root.
  *
  * @param string $code Snippet PHP source.
  * @return string
  */
 function render_php_code_snippet_source( $code ) {
-	// The Tag Processor can replace text but cannot create it, so the code
-	// element carries a placeholder for `set_modifiable_text()` to overwrite.
+	// set_modifiable_text() requires an existing text token.
 	$html = new \WP_HTML_Tag_Processor(
 		'<pre class="wp-block-code"><code class="language-php">placeholder</code></pre>'
 	);

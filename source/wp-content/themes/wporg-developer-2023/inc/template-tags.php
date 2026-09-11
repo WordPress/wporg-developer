@@ -1766,12 +1766,7 @@ namespace DevHub {
 			// Remove the filter that adds the code reference block to the content.
 			remove_filter( 'the_content', 'DevHub\filter_code_content', 4 );
 
-			// The parser rendered the description with Parsedown at import, so
-			// it arrives as complete HTML and `wpautop()` has nothing to add.
-			// What it does add is wrong: it wraps the `[code]` shortcode text
-			// and the snippet placeholder comment in paragraphs (or leaves an
-			// unclosed one inside a list item). Both expand to a `<pre>`, which
-			// closes the paragraph and is ejected from it by the HTML parser.
+			// Descriptions are already HTML. wpautop() adds invalid paragraphs around code blocks and snippets.
 			$wpautop_priority = has_filter( 'the_content', 'wpautop' );
 			if ( false !== $wpautop_priority ) {
 				remove_filter( 'the_content', 'wpautop', $wpautop_priority );
