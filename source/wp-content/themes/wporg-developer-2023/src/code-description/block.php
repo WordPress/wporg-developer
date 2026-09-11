@@ -200,7 +200,7 @@ function get_description_content( $post_id ) {
  * @return string
  */
 function render_php_code_snippet_placeholders( $description, $post_id, $snippets, $setup_blueprints, &$used_blueprints, &$placed ) {
-	$processor = new PHP_Code_Snippet_Placeholder_Processor( $description );
+	$processor = new PHP_Code_Snippet_Processor( $description );
 
 	while ( $processor->next_token() ) {
 		if ( \WP_HTML_Tag_Processor::COMMENT_AS_HTML_COMMENT !== $processor->get_comment_type() ) {
@@ -268,20 +268,8 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 		$code = substr( $code, strlen( $preamble ) );
 	}
 
-	$json_encoded_code = wp_json_encode( $code, JSON_HEX_TAG | JSON_UNESCAPED_SLASHES );
-	if ( ! is_string( $json_encoded_code ) ) {
+	if ( array_key_exists( 'expected_output', $snippet ) && ! is_string( $snippet['expected_output'] ) ) {
 		return '';
-	}
-
-	if ( array_key_exists( 'expected_output', $snippet ) ) {
-		if ( ! is_string( $snippet['expected_output'] ) ) {
-			return '';
-		}
-
-		$expected_output = wp_json_encode( $snippet['expected_output'], JSON_HEX_TAG | JSON_UNESCAPED_SLASHES );
-		if ( ! is_string( $expected_output ) ) {
-			return '';
-		}
 	}
 
 	$post_slug = get_post_field( 'post_name', $post_id );
@@ -312,62 +300,60 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 		}
 	}
 
+	$snippet_output = render_php_snippet( $code, $attributes, $snippet['expected_output'] ?? null );
+	if ( '' === $snippet_output ) {
+		return '';
+	}
+
 	$output = '';
 
 	if ( isset( $attributes['blueprint'] ) && $attributes['blueprint'] === $inline_blueprint_id ) {
 		$output .= render_php_code_snippet_blueprint_script( $attributes['blueprint'], $snippet['blueprint'] );
 	}
 
-	$snippet_output = '<php-snippet>';
-	$snippet_output .= wp_get_inline_script_tag(
-		$json_encoded_code,
-		array( 'type' => 'application/x-php+json' )
-	);
-
-	if ( array_key_exists( 'expected_output', $snippet ) ) {
-		$snippet_output .= wp_get_inline_script_tag(
-			$expected_output,
-			array( 'type' => 'text/expected-output+json' )
-		);
-	}
-
-	$snippet_output .= render_php_code_snippet_source( $code );
-	$snippet_output .= '</php-snippet>';
-
-	$tags = new \WP_HTML_Tag_Processor( $snippet_output );
-	if ( $tags->next_tag( 'php-snippet' ) ) {
-		foreach ( $attributes as $name => $value ) {
-			$tags->set_attribute( $name, $value );
-		}
-		$snippet_output = $tags->get_updated_html();
-	}
-
-	$output .= $snippet_output;
-
-	return $output;
+	return $output . $snippet_output;
 }
 
 /**
- * Render the snippet source as a code block.
+ * Render a PHP snippet with a source fallback visible before initialization.
  *
- * Visible until the Playground script initializes the element's shadow root.
- *
- * @param string $code Snippet PHP source.
+ * @param string      $code            Snippet PHP source.
+ * @param array       $attributes      Snippet element attributes.
+ * @param string|null $expected_output Expected output, or null when unspecified.
  * @return string
  */
-function render_php_code_snippet_source( $code ) {
-	// set_modifiable_text() requires an existing text token.
-	$html = new \WP_HTML_Tag_Processor(
-		'<pre class="wp-block-code"><code class="language-php">placeholder</code></pre>'
+function render_php_snippet( $code, $attributes, $expected_output = null ) {
+	$html = new PHP_Code_Snippet_Processor(
+		<<<'HTML'
+		<php-snippet>
+			<script type="application/x-php+json"></script>
+			<script type="text/expected-output+json"></script>
+			<pre class="wp-block-code"><code class="language-php">placeholder</code></pre>
+		</php-snippet>
+		HTML
 	);
 
-	if (
-		! $html->next_tag( 'CODE' ) ||
-		! $html->next_token() ||
-		'#text' !== $html->get_token_type() ||
-		! $html->set_modifiable_text( $code )
-	) {
-		return '';
+	while ( $html->next_tag() ) {
+		if ( 'PHP-SNIPPET' === $html->get_tag() ) {
+			foreach ( $attributes as $name => $value ) {
+				$html->set_attribute( $name, $value );
+			}
+		} elseif ( 'SCRIPT' === $html->get_tag() ) {
+			$is_expected_output = 'text/expected-output+json' === $html->get_attribute( 'type' );
+			if ( $is_expected_output && null === $expected_output ) {
+				$html->replace_current_token( '' );
+				continue;
+			}
+
+			$json = wp_json_encode( $is_expected_output ? $expected_output : $code, JSON_HEX_TAG | JSON_UNESCAPED_SLASHES );
+			if ( ! is_string( $json ) || ! $html->set_modifiable_text( $json ) ) {
+				return '';
+			}
+		} elseif ( 'CODE' === $html->get_tag() ) {
+			if ( ! $html->next_token() || ! $html->set_modifiable_text( $code ) ) {
+				return '';
+			}
+		}
 	}
 
 	return $html->get_updated_html();
@@ -441,9 +427,9 @@ function get_php_code_snippet_blueprint_id( $post_id, $key ) {
 }
 
 /**
- * HTML processor for replacing parser snippet placeholder comments.
+ * HTML processor for rendering snippets and replacing their placeholder comments.
  */
-class PHP_Code_Snippet_Placeholder_Processor extends \WP_HTML_Tag_Processor {
+class PHP_Code_Snippet_Processor extends \WP_HTML_Tag_Processor {
 	/**
 	 * Replace the currently matched token with HTML.
 	 *
