@@ -345,7 +345,7 @@ function render_php_snippet( $code, $attributes, $expected_output = null ) {
 				continue;
 			}
 
-			$json = wp_json_encode( $is_expected_output ? $expected_output : $code, JSON_HEX_TAG | JSON_UNESCAPED_SLASHES );
+			$json = wp_json_encode( $is_expected_output ? $expected_output : $code, JSON_HEX_TAG | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_LINE_TERMINATORS );
 			if ( ! is_string( $json ) || ! $html->set_modifiable_text( $json ) ) {
 				return '';
 			}
