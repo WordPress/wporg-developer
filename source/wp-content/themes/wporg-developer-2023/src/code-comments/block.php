@@ -67,8 +67,15 @@ function render( $attributes, $content, $block ) {
 
 	$output = ob_get_clean();
 
-	// This output is block-parsed a second time (core's do_blocks at the_content priority 9), so neutralize any block delimiter in it.
+	/*
+	 * This output is parsed a second time on its way through `the_content`: core's do_blocks at
+	 * priority 9 and do_shortcode at priority 11 both run after filter_code_content() has inserted it.
+	 * Neutralize the syntax of both parsers. The shortcodes a note may use (code, php, js, css) have
+	 * already been expanded by DevHub_User_Submitted_Content::do_note_shortcodes() on `comment_text`,
+	 * so any bracket still present here is literal text.
+	 */
 	$output = preg_replace( '/<!--(\s*\/?wp:)/', '&lt;!--$1', $output );
+	$output = str_replace( array( '[', ']' ), array( '&#91;', '&#93;' ), $output );
 
 	$wrapper_attributes = get_block_wrapper_attributes( [ 'data-nosnippet' => 'true' ] );
 	return sprintf(
