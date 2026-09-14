@@ -1766,7 +1766,17 @@ namespace DevHub {
 			// Remove the filter that adds the code reference block to the content.
 			remove_filter( 'the_content', 'DevHub\filter_code_content', 4 );
 
+			// Descriptions are already HTML. wpautop() adds invalid paragraphs around code blocks and snippets.
+			$wpautop_priority = has_filter( 'the_content', 'wpautop' );
+			if ( false !== $wpautop_priority ) {
+				remove_filter( 'the_content', 'wpautop', $wpautop_priority );
+			}
+
 			$description = apply_filters( 'the_content', apply_filters( 'get_the_content' , $description ) );
+
+			if ( false !== $wpautop_priority ) {
+				add_filter( 'the_content', 'wpautop', $wpautop_priority );
+			}
 
 			// Re-add the filter that adds this block to the content.
 			add_filter( 'the_content', 'DevHub\filter_code_content', 4 );
