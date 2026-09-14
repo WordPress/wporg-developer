@@ -87,20 +87,17 @@ class DevHub_User_Submitted_Content {
 	 * @return string Comment text with the formatting shortcodes expanded.
 	 */
 	public static function do_note_shortcodes( $text ) {
-		$allowed = array( 'code', 'php', 'js', 'css' );
-		$removed = array_diff_key( $GLOBALS['shortcode_tags'], array_flip( $allowed ) );
+		$allowed  = array( 'code', 'php', 'js', 'css' );
+		$original = $GLOBALS['shortcode_tags'];
 
-		foreach ( array_keys( $removed ) as $tag ) {
-			remove_shortcode( $tag );
-		}
+		// The registry is narrowed globally for the duration of the pass, so any do_blocks() call made by
+		// the allowed callbacks (see DevHub_Formatting::do_shortcode_code()) also sees only these four.
+		$GLOBALS['shortcode_tags'] = array_intersect_key( $original, array_flip( $allowed ) ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 
 		try {
 			$text = do_shortcode( $text );
 		} finally {
-			// Restore the registry even if a shortcode callback throws, so the rest of the request keeps its shortcodes.
-			foreach ( $removed as $tag => $callback ) {
-				add_shortcode( $tag, $callback );
-			}
+			$GLOBALS['shortcode_tags'] = $original; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 		}
 
 		return $text;

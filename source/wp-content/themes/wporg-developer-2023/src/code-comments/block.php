@@ -73,6 +73,9 @@ function render( $attributes, $content, $block ) {
 	 * Neutralize the syntax of both parsers. The shortcodes a note may use (code, php, js, css) have
 	 * already been expanded by DevHub_User_Submitted_Content::do_note_shortcodes() on `comment_text`,
 	 * so any bracket still present here is literal text.
+	 *
+	 * Nothing in this buffer may emit inline JavaScript or a JSON island: those are the only contexts
+	 * in which the entities below would not be decoded by the browser.
 	 */
 	$output = preg_replace( '/<!--(\s*\/?wp:)/', '&lt;!--$1', $output );
 	$output = str_replace( array( '[', ']' ), array( '&#91;', '&#93;' ), $output );
