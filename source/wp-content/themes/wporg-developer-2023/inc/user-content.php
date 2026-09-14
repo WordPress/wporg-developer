@@ -94,10 +94,13 @@ class DevHub_User_Submitted_Content {
 			remove_shortcode( $tag );
 		}
 
-		$text = do_shortcode( $text );
-
-		foreach ( $removed as $tag => $callback ) {
-			add_shortcode( $tag, $callback );
+		try {
+			$text = do_shortcode( $text );
+		} finally {
+			// Restore the registry even if a shortcode callback throws, so the rest of the request keeps its shortcodes.
+			foreach ( $removed as $tag => $callback ) {
+				add_shortcode( $tag, $callback );
+			}
 		}
 
 		return $text;
