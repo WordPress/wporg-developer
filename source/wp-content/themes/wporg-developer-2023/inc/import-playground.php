@@ -260,12 +260,7 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 		$links = array();
 
 		foreach ( $available_locales as $locale => $config ) {
-			if ( is_int( $locale ) ) {
-				$locale = $config;
-				$config = array();
-			}
-
-			if ( ! is_string( $locale ) || '' === $locale ) {
+			if ( ! is_string( $locale ) || '' === $locale || ! is_array( $config ) ) {
 				continue;
 			}
 
@@ -388,19 +383,14 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 	 * @return string
 	 */
 	protected function get_docs_source_path( $post_id ) {
-		$source_url = get_post_meta( $post_id, $this->meta_key, true );
-		if ( ! is_string( $source_url ) || '' === $source_url ) {
+		$manifest_entry = get_post_meta( $post_id, $this->manifest_entry_meta_key, true );
+		if ( empty( $manifest_entry['markdown_source'] ) || ! is_string( $manifest_entry['markdown_source'] ) ) {
 			return '';
 		}
 
-		$docs_source_prefix = trailingslashit( dirname( $this->get_manifest_url() ) ) . 'docs/';
-		$source_path = preg_replace(
-			'#^' . preg_quote( $docs_source_prefix, '#' ) . '#',
-			'',
-			$source_url
-		);
+		$source_path = preg_replace( '#^docs/#', '', $manifest_entry['markdown_source'] );
 
-		if ( $source_path === $source_url || ! preg_match( '#\.mdx?$#', $source_path ) ) {
+		if ( $source_path === $manifest_entry['markdown_source'] || ! preg_match( '#\.md$#', $source_path ) ) {
 			return '';
 		}
 
