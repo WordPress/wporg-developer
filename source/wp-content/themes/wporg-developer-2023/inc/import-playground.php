@@ -4,7 +4,6 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 	const PHP_CODE_SNIPPET_SCRIPT_URL  = 'https://playground.wordpress.net/php-code-snippet.js';
 	const PLAYGROUND_DOCS_ASSET_URL    = 'https://wordpress.github.io/wordpress-playground/';
 	const BLUEPRINT_STEPS_URL          = 'https://wordpress.github.io/wordpress-playground/blueprints/steps/';
-	const PLAYGROUND_DOCS_REPO_ROOT    = 'https://raw.githubusercontent.com/WordPress/wordpress-playground/trunk/packages/docs/site/';
 	const TRANSLATION_AVAILABILITY_URL = 'https://wordpress.github.io/wordpress-playground/translation-availability.json';
 	const PLAYGROUND_IMAGE_META_KEY    = '_playground_image';
 	const TRANSLATION_LOCALES_META_KEY = '_playground_translation_locales';
@@ -394,8 +393,9 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 			return '';
 		}
 
+		$docs_source_prefix = trailingslashit( dirname( $this->get_manifest_url() ) ) . 'docs/';
 		$source_path = preg_replace(
-			'#^' . preg_quote( self::PLAYGROUND_DOCS_REPO_ROOT, '#' ) . 'docs/#',
+			'#^' . preg_quote( $docs_source_prefix, '#' ) . '#',
 			'',
 			$source_url
 		);
