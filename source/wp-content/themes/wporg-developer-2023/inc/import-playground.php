@@ -256,7 +256,7 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 			return array();
 		}
 
-		$route = $this->get_current_upstream_route();
+		$route = $this->get_current_upstream_route( $post_id );
 		$links = array();
 
 		foreach ( $available_locales as $locale => $config ) {
@@ -402,7 +402,16 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 	 *
 	 * @return string
 	 */
-	protected function get_current_upstream_route() {
+	protected function get_current_upstream_route( $post_id = 0 ) {
+		if ( $post_id ) {
+			$source_path = $this->get_docs_source_path( $post_id );
+			$route_map   = $this->get_manifest_source_route_map();
+
+			if ( $source_path && isset( $route_map[ $source_path ] ) ) {
+				return trailingslashit( $route_map[ $source_path ] );
+			}
+		}
+
 		$path      = (string) wp_parse_url( get_permalink(), PHP_URL_PATH );
 		$base_path = (string) wp_parse_url( trailingslashit( $this->get_base() ), PHP_URL_PATH );
 
@@ -411,6 +420,43 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 		}
 
 		return $path ? trailingslashit( ltrim( $path, '/' ) ) : '';
+	}
+
+	/**
+	 * Builds a map of docs source paths to their upstream route paths.
+	 *
+	 * @return array Map of docs source path to manifest key.
+	 */
+	protected function get_manifest_source_route_map() {
+		$transient_key = 'devhub_playground_manifest_source_route_map';
+		$map           = get_transient( $transient_key );
+		if ( is_array( $map ) ) {
+			return $map;
+		}
+
+		$map      = array();
+		$response = wp_remote_get( $this->get_manifest_url() );
+
+		if ( ! is_wp_error( $response ) && 200 === wp_remote_retrieve_response_code( $response ) ) {
+			$manifest = json_decode( wp_remote_retrieve_body( $response ), true );
+
+			if ( is_array( $manifest ) ) {
+				foreach ( $manifest as $key => $doc ) {
+					if ( ! is_string( $key ) || empty( $doc['markdown_source'] ) || ! is_string( $doc['markdown_source'] ) ) {
+						continue;
+					}
+
+					$source_path = preg_replace( '#^docs/#', '', $doc['markdown_source'] );
+					if ( $source_path && $source_path !== $doc['markdown_source'] ) {
+						$map[ $source_path ] = $key;
+					}
+				}
+			}
+		}
+
+		set_transient( $transient_key, $map, 15 * MINUTE_IN_SECONDS );
+
+		return $map;
 	}
 
 	/**
