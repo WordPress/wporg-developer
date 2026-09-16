@@ -1,12 +1,14 @@
 <?php
 
 class DevHub_Playground_Importer extends DevHub_Docs_Importer {
-	const PHP_CODE_SNIPPET_SCRIPT_URL = 'https://playground.wordpress.net/php-code-snippet.js';
-	const PLAYGROUND_DOCS_ASSET_URL   = 'https://wordpress.github.io/wordpress-playground/';
-	const BLUEPRINT_STEPS_URL         = 'https://wordpress.github.io/wordpress-playground/blueprints/steps/';
-	const PLAYGROUND_IMAGE_META_KEY   = '_playground_image';
-	const CONTENT_TRANSFORM_META_KEY  = '_playground_content_transform_version';
-	const CONTENT_TRANSFORM_VERSION   = 2;
+	const PHP_CODE_SNIPPET_SCRIPT_URL  = 'https://playground.wordpress.net/php-code-snippet.js';
+	const PLAYGROUND_DOCS_ASSET_URL    = 'https://wordpress.github.io/wordpress-playground/';
+	const BLUEPRINT_STEPS_URL          = 'https://wordpress.github.io/wordpress-playground/blueprints/steps/';
+	const TRANSLATION_AVAILABILITY_URL = 'https://wordpress.github.io/wordpress-playground/translation-availability.json';
+	const PLAYGROUND_IMAGE_META_KEY    = '_playground_image';
+	const TRANSLATION_LOCALES_META_KEY = '_playground_translation_locales';
+	const CONTENT_TRANSFORM_META_KEY   = '_playground_content_transform_version';
+	const CONTENT_TRANSFORM_VERSION    = 2;
 
 	/**
 	 * The post currently being updated from Markdown.
@@ -21,6 +23,13 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 	 * @var bool
 	 */
 	protected $download_images = false;
+
+	/**
+	 * Translation availability manifest data for the current import request.
+	 *
+	 * @var array|false|null
+	 */
+	protected $translation_availability = null;
 
 	/**
 	 * Initializes object.
@@ -44,6 +53,7 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 		add_filter( 'wporg_markdown_check_etags', array( $this, 'check_image_import_etag' ) );
 		add_filter( 'script_loader_tag', array( $this, 'add_php_code_snippet_script_type' ), 10, 3 );
 		add_filter( 'get_edit_post_link', array( $this, 'rewrite_markdown_edit_link' ), 11, 3 );
+		add_filter( 'render_block', array( $this, 'add_translation_links_after_title' ), 10, 2 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_shortcode( 'playground_php_snippet', array( $this, 'render_php_code_snippet' ) );
 	}
@@ -167,6 +177,10 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 				update_post_meta( $post_id, self::CONTENT_TRANSFORM_META_KEY, self::CONTENT_TRANSFORM_VERSION );
 			}
 
+			if ( ! is_wp_error( $result ) ) {
+				$this->update_translation_locales( $post_id );
+			}
+
 			return $result;
 		} finally {
 			$this->current_post_id = 0;
@@ -187,6 +201,216 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 		}
 
 		return $label;
+	}
+
+	/**
+	 * Adds links to available upstream translations after the Playground page title.
+	 *
+	 * @param string $block_content The rendered block content.
+	 * @param array  $block         The parsed block.
+	 * @return string
+	 */
+	public function add_translation_links_after_title( $block_content, $block ) {
+		if (
+			! is_singular( $this->get_post_type() ) ||
+			empty( $block['blockName'] ) ||
+			'core/post-title' !== $block['blockName'] ||
+			get_queried_object_id() !== get_the_ID()
+		) {
+			return $block_content;
+		}
+
+		$links = $this->get_translation_links( get_the_ID() );
+		if ( empty( $links ) ) {
+			return $block_content;
+		}
+
+		$output  = '<div class="playground-translation-links">';
+		$output .= '<span class="playground-translation-links__label">' . esc_html__( 'Also available in:', 'wporg' ) . '</span> ';
+
+		$items = array();
+		foreach ( $links as $link ) {
+			$items[] = sprintf(
+				'<a href="%s" hreflang="%s">%s</a>',
+				esc_url( $link['url'] ),
+				esc_attr( $link['hreflang'] ),
+				esc_html( $link['label'] )
+			);
+		}
+
+		$output .= implode( esc_html_x( ', ', 'separator between translation links', 'wporg' ), $items );
+		$output .= '</div>';
+
+		return $block_content . $output;
+	}
+
+	/**
+	 * Gets links to upstream translations for an imported Playground page.
+	 *
+	 * @param int $post_id Post ID.
+	 * @return array
+	 */
+	protected function get_translation_links( $post_id ) {
+		$available_locales = get_post_meta( $post_id, self::TRANSLATION_LOCALES_META_KEY, true );
+		if ( ! is_array( $available_locales ) ) {
+			return array();
+		}
+
+		$route = $this->get_current_upstream_route();
+		$links = array();
+
+		foreach ( $available_locales as $locale => $config ) {
+			if ( ! is_string( $locale ) || '' === $locale || ! is_array( $config ) ) {
+				continue;
+			}
+
+			$config = wp_parse_args(
+				is_array( $config ) ? $config : array(),
+				array(
+					'label'    => $locale,
+					'hreflang' => $locale,
+					'url_path' => strtolower( $locale ),
+				)
+			);
+
+			$links[] = array(
+				'label'    => $config['label'],
+				'hreflang' => $config['hreflang'],
+				'url'      => self::PLAYGROUND_DOCS_ASSET_URL
+					. trailingslashit( $config['url_path'] )
+					. $route,
+			);
+		}
+
+		return $links;
+	}
+
+	/**
+	 * Stores the upstream translation locales available for an imported page.
+	 *
+	 * @param int $post_id Post ID.
+	 */
+	protected function update_translation_locales( $post_id ) {
+		$source_path = $this->get_docs_source_path( $post_id );
+		if ( ! $source_path ) {
+			delete_post_meta( $post_id, self::TRANSLATION_LOCALES_META_KEY );
+			return;
+		}
+
+		$translation_availability = $this->get_translation_availability();
+		if ( ! is_array( $translation_availability ) ) {
+			return;
+		}
+
+		$doc_locales = $translation_availability['docs'][ $source_path ] ?? array();
+		if ( ! is_array( $doc_locales ) ) {
+			$doc_locales = array();
+		}
+
+		$available_locales = array();
+		foreach ( $doc_locales as $locale ) {
+			if ( ! is_string( $locale ) || '' === $locale ) {
+				continue;
+			}
+
+			if ( empty( $translation_availability['locales'][ $locale ] ) ) {
+				continue;
+			}
+
+			$config = $translation_availability['locales'][ $locale ];
+			if ( ! is_array( $config ) ) {
+				$config = array();
+			}
+
+			$available_locales[ $locale ] = wp_parse_args(
+				array(
+					'label'    => $config['label'] ?? $locale,
+					'hreflang' => $config['hreflang'] ?? $locale,
+					'url_path' => strtolower( $locale ),
+				),
+				array(
+					'label'    => $locale,
+					'hreflang' => $locale,
+					'url_path' => strtolower( $locale ),
+				)
+			);
+		}
+
+		if ( $available_locales ) {
+			update_post_meta( $post_id, self::TRANSLATION_LOCALES_META_KEY, $available_locales );
+		} else {
+			delete_post_meta( $post_id, self::TRANSLATION_LOCALES_META_KEY );
+		}
+	}
+
+	/**
+	 * Gets the Playground translation availability manifest.
+	 *
+	 * @return array|false
+	 */
+	protected function get_translation_availability() {
+		if ( null !== $this->translation_availability ) {
+			return $this->translation_availability;
+		}
+
+		$response = wp_remote_get(
+			self::TRANSLATION_AVAILABILITY_URL,
+			array(
+				'timeout' => 10,
+			)
+		);
+
+		if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
+			$this->translation_availability = false;
+			return $this->translation_availability;
+		}
+
+		$manifest = json_decode( wp_remote_retrieve_body( $response ), true );
+		if ( ! is_array( $manifest ) || ! isset( $manifest['locales'], $manifest['docs'] ) || ! is_array( $manifest['locales'] ) || ! is_array( $manifest['docs'] ) ) {
+			$this->translation_availability = false;
+			return $this->translation_availability;
+		}
+
+		$this->translation_availability = $manifest;
+
+		return $this->translation_availability;
+	}
+
+	/**
+	 * Gets the docs source path for an imported post.
+	 *
+	 * @param int $post_id Post ID.
+	 * @return string
+	 */
+	protected function get_docs_source_path( $post_id ) {
+		$manifest_entry = get_post_meta( $post_id, $this->manifest_entry_meta_key, true );
+		if ( empty( $manifest_entry['markdown_source'] ) || ! is_string( $manifest_entry['markdown_source'] ) ) {
+			return '';
+		}
+
+		$source_path = preg_replace( '#^docs/#', '', $manifest_entry['markdown_source'] );
+
+		if ( $source_path === $manifest_entry['markdown_source'] || ! preg_match( '#\.md$#', $source_path ) ) {
+			return '';
+		}
+
+		return $source_path;
+	}
+
+	/**
+	 * Gets the matching upstream route for the current imported Playground page.
+	 *
+	 * @return string
+	 */
+	protected function get_current_upstream_route() {
+		$path      = (string) wp_parse_url( get_permalink(), PHP_URL_PATH );
+		$base_path = (string) wp_parse_url( trailingslashit( $this->get_base() ), PHP_URL_PATH );
+
+		if ( $base_path && 0 === strpos( $path, $base_path ) ) {
+			$path = substr( $path, strlen( $base_path ) );
+		}
+
+		return $path ? trailingslashit( ltrim( $path, '/' ) ) : '';
 	}
 
 	/**
