@@ -573,6 +573,7 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 
 				$code_lines = array();
 				foreach ( $lines as $line ) {
+					// phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase -- DOMDocument property.
 					$code_lines[] = $line->textContent;
 				}
 
@@ -581,7 +582,9 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 					$language = $language_match[1];
 				}
 
+				// phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase -- DOMDocument property.
 				while ( $pre->firstChild ) {
+					// phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase -- DOMDocument property.
 					$pre->removeChild( $pre->firstChild );
 				}
 
@@ -600,6 +603,7 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 					continue;
 				}
 
+				// phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase -- DOMDocument property.
 				$blueprint = json_decode( $example->textContent, true );
 				if ( JSON_ERROR_NONE !== json_last_error() ) {
 					continue;
@@ -612,6 +616,7 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 				$link->setAttribute( 'class', 'wp-block-button__link wp-element-button playground-example-run' );
 				$link->setAttribute( 'href', esc_url( $playground_url ) );
 				$wrapper->appendChild( $link );
+				// phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase -- DOMDocument property.
 				$button->parentNode->replaceChild( $wrapper, $button );
 			}
 
@@ -674,7 +679,12 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 			return $tag;
 		}
 
-		return sprintf( '<script type="module" src="%s"></script>' . "\n", esc_url( $src ) );
+		return wp_get_script_tag(
+			array(
+				'type' => 'module',
+				'src'  => esc_url( $src ),
+			)
+		);
 	}
 
 	/**
@@ -696,7 +706,7 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 			$blueprint = '{' . trim( $blueprint_match[1] ) . '}';
 		}
 
-		$shown_blueprint = $display ?: $blueprint;
+		$shown_blueprint  = $display ? $display : $blueprint;
 		$parsed_blueprint = json_decode( $shown_blueprint, true );
 		if ( JSON_ERROR_NONE !== json_last_error() ) {
 			return $matches[0];
