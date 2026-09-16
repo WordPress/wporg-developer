@@ -403,9 +403,12 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 	 * @return string
 	 */
 	protected function get_current_upstream_route( $post_id = 0 ) {
-		$route = $post_id ? $this->get_docs_route_path( $post_id ) : null;
-		if ( null !== $route ) {
-			return $route ? trailingslashit( $route ) : '';
+		if ( $post_id ) {
+			$route = $this->get_docs_route_path( $post_id );
+
+			if ( $route ) {
+				return trailingslashit( $route );
+			}
 		}
 
 		$path      = (string) wp_parse_url( get_permalink(), PHP_URL_PATH );
