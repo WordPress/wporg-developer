@@ -404,11 +404,10 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 	 */
 	protected function get_current_upstream_route( $post_id = 0 ) {
 		if ( $post_id ) {
-			$source_path = $this->get_docs_source_path( $post_id );
-			$route_map   = $this->get_manifest_source_route_map();
+			$route = $this->get_docs_route_path( $post_id );
 
-			if ( $source_path && isset( $route_map[ $source_path ] ) ) {
-				return trailingslashit( $route_map[ $source_path ] );
+			if ( null !== $route ) {
+				return $route ? trailingslashit( $route ) : '';
 			}
 		}
 
@@ -423,40 +422,27 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 	}
 
 	/**
-	 * Builds a map of docs source paths to their upstream route paths.
+	 * Gets the upstream route path for an imported post.
 	 *
-	 * @return array Map of docs source path to manifest key.
+	 * @param int $post_id Post ID.
+	 * @return string|null Route path, or null if it cannot be determined.
 	 */
-	protected function get_manifest_source_route_map() {
-		$transient_key = 'devhub_playground_manifest_source_route_map';
-		$map           = get_transient( $transient_key );
-		if ( is_array( $map ) ) {
-			return $map;
+	protected function get_docs_route_path( $post_id ) {
+		$manifest_entry = get_post_meta( $post_id, $this->manifest_entry_meta_key, true );
+		if ( ! is_array( $manifest_entry ) || empty( $manifest_entry['slug'] ) || ! is_string( $manifest_entry['slug'] ) ) {
+			return null;
 		}
 
-		$map      = array();
-		$response = wp_remote_get( $this->get_manifest_url() );
-
-		if ( ! is_wp_error( $response ) && 200 === wp_remote_retrieve_response_code( $response ) ) {
-			$manifest = json_decode( wp_remote_retrieve_body( $response ), true );
-
-			if ( is_array( $manifest ) ) {
-				foreach ( $manifest as $key => $doc ) {
-					if ( ! is_string( $key ) || empty( $doc['markdown_source'] ) || ! is_string( $doc['markdown_source'] ) ) {
-						continue;
-					}
-
-					$source_path = preg_replace( '#^docs/#', '', $doc['markdown_source'] );
-					if ( $source_path && $source_path !== $doc['markdown_source'] ) {
-						$map[ $source_path ] = $key;
-					}
-				}
-			}
+		if ( 'handbook' === $manifest_entry['slug'] && empty( $manifest_entry['parent'] ) ) {
+			return '';
 		}
 
-		set_transient( $transient_key, $map, 15 * MINUTE_IN_SECONDS );
+		$path = $manifest_entry['slug'];
+		if ( ! empty( $manifest_entry['parent'] ) && 'handbook' !== $manifest_entry['parent'] && is_string( $manifest_entry['parent'] ) ) {
+			$path = trailingslashit( $manifest_entry['parent'] ) . $path;
+		}
 
-		return $map;
+		return $path;
 	}
 
 	/**
