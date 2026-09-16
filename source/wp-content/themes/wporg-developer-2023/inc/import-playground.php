@@ -499,7 +499,7 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 		$markdown = preg_replace( '/^\s*import\s+.+?\s+from\s+([\'\"]).+?\1;\s*$/m', '', $markdown );
 
 		$markdown = preg_replace_callback(
-			'#<UpdateTopLevelToc\b.*?/\s*>\s*<span>\s*\{BlueprintSteps\.map\(.*?</span>#s',
+			'#<UpdateTopLevelToc\b.*?/\s*>\s*<span>\s*\{\s*BlueprintSteps\s*\.\s*map\s*\(.*?</span>#s',
 			array( $this, 'transform_blueprint_steps' ),
 			$markdown
 		);
