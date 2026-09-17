@@ -3,12 +3,13 @@
 class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 	const PHP_CODE_SNIPPET_SCRIPT_URL  = 'https://playground.wordpress.net/php-code-snippet.js';
 	const PLAYGROUND_DOCS_ASSET_URL    = 'https://wordpress.github.io/wordpress-playground/';
+	const BLUEPRINT_STEPS_REFERENCE_URL = 'https://wordpress.github.io/wordpress-playground/handbook/blueprints-steps.md';
 	const BLUEPRINT_STEPS_URL          = 'https://wordpress.github.io/wordpress-playground/blueprints/steps/';
 	const TRANSLATION_AVAILABILITY_URL = 'https://wordpress.github.io/wordpress-playground/translation-availability.json';
 	const PLAYGROUND_IMAGE_META_KEY    = '_playground_image';
 	const TRANSLATION_LOCALES_META_KEY = '_playground_translation_locales';
 	const CONTENT_TRANSFORM_META_KEY   = '_playground_content_transform_version';
-	const CONTENT_TRANSFORM_VERSION    = 2;
+	const CONTENT_TRANSFORM_VERSION    = 3;
 
 	/**
 	 * The post currently being updated from Markdown.
@@ -92,7 +93,7 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 		}
 
 		$source_url = get_post_meta( $this->current_post_id, $this->meta_key, true );
-		if ( preg_match( '#/docs/blueprints/05-steps\.md$#', $source_url ) ) {
+		if ( preg_match( '#/(?:docs/blueprints/05-steps|static/handbook/blueprints-steps)\.md$#', $source_url ) ) {
 			return false;
 		}
 
@@ -256,7 +257,7 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 			return array();
 		}
 
-		$route = $this->get_current_upstream_route();
+		$route = $this->get_current_upstream_route( $post_id );
 		$links = array();
 
 		foreach ( $available_locales as $locale => $config ) {
@@ -402,7 +403,15 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 	 *
 	 * @return string
 	 */
-	protected function get_current_upstream_route() {
+	protected function get_current_upstream_route( $post_id = 0 ) {
+		if ( $post_id ) {
+			$route = $this->get_docs_route_path( $post_id );
+
+			if ( $route ) {
+				return trailingslashit( $route );
+			}
+		}
+
 		$path      = (string) wp_parse_url( get_permalink(), PHP_URL_PATH );
 		$base_path = (string) wp_parse_url( trailingslashit( $this->get_base() ), PHP_URL_PATH );
 
@@ -411,6 +420,30 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 		}
 
 		return $path ? trailingslashit( ltrim( $path, '/' ) ) : '';
+	}
+
+	/**
+	 * Gets the upstream route path for an imported post.
+	 *
+	 * @param int $post_id Post ID.
+	 * @return string|null Route path, or null if it cannot be determined.
+	 */
+	protected function get_docs_route_path( $post_id ) {
+		$manifest_entry = get_post_meta( $post_id, $this->manifest_entry_meta_key, true );
+		if ( ! is_array( $manifest_entry ) || empty( $manifest_entry['slug'] ) || ! is_string( $manifest_entry['slug'] ) ) {
+			return null;
+		}
+
+		if ( 'handbook' === $manifest_entry['slug'] && empty( $manifest_entry['parent'] ) ) {
+			return '';
+		}
+
+		$path = $manifest_entry['slug'];
+		if ( ! empty( $manifest_entry['parent'] ) && 'handbook' !== $manifest_entry['parent'] && is_string( $manifest_entry['parent'] ) ) {
+			$path = trailingslashit( $manifest_entry['parent'] ) . $path;
+		}
+
+		return $path;
 	}
 
 	/**
@@ -467,7 +500,7 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 		$markdown = preg_replace( '/^\s*import\s+.+?\s+from\s+([\'\"]).+?\1;\s*$/m', '', $markdown );
 
 		$markdown = preg_replace_callback(
-			'#<UpdateTopLevelToc\b.*?/\s*>\s*<span>\s*\{BlueprintSteps\.map\(.*?</span>#s',
+			'#<UpdateTopLevelToc\b.*?/\s*>\s*<span>\s*\{\s*BlueprintSteps\s*\.\s*map\s*\(.*?</span>#s',
 			array( $this, 'transform_blueprint_steps' ),
 			$markdown
 		);
@@ -481,6 +514,8 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 				$markdown
 			)
 		);
+
+		$markdown = $this->format_blueprint_steps_reference_markdown( $markdown );
 
 		return trim( $markdown );
 	}
@@ -496,9 +531,14 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 	 * @return string
 	 */
 	public function transform_blueprint_steps( $matches ) {
+		$reference_markdown = $this->get_blueprint_steps_reference_markdown();
+		if ( false !== $reference_markdown ) {
+			return $reference_markdown;
+		}
+
 		$response = wp_safe_remote_get( self::BLUEPRINT_STEPS_URL );
 		if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
-			return $matches[0];
+			return '';
 		}
 
 		$document        = new DOMDocument();
@@ -507,13 +547,13 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 		libxml_clear_errors();
 		libxml_use_internal_errors( $previous_errors );
 		if ( ! $loaded ) {
-			return $matches[0];
+			return '';
 		}
 
 		$xpath    = new DOMXPath( $document );
 		$sections = $xpath->query( '//article//section[contains(concat(" ", normalize-space(@class), " "), " markdown ")]' );
 		if ( ! $sections || 0 === $sections->length ) {
-			return $matches[0];
+			return '';
 		}
 
 		$output = array();
@@ -527,6 +567,7 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 
 				$code_lines = array();
 				foreach ( $lines as $line ) {
+					// phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase -- DOMDocument property.
 					$code_lines[] = $line->textContent;
 				}
 
@@ -535,7 +576,9 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 					$language = $language_match[1];
 				}
 
+				// phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase -- DOMDocument property.
 				while ( $pre->firstChild ) {
+					// phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase -- DOMDocument property.
 					$pre->removeChild( $pre->firstChild );
 				}
 
@@ -554,6 +597,7 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 					continue;
 				}
 
+				// phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase -- DOMDocument property.
 				$blueprint = json_decode( $example->textContent, true );
 				if ( JSON_ERROR_NONE !== json_last_error() ) {
 					continue;
@@ -566,6 +610,7 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 				$link->setAttribute( 'class', 'wp-block-button__link wp-element-button playground-example-run' );
 				$link->setAttribute( 'href', esc_url( $playground_url ) );
 				$wrapper->appendChild( $link );
+				// phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase -- DOMDocument property.
 				$button->parentNode->replaceChild( $wrapper, $button );
 			}
 
@@ -573,6 +618,50 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 		}
 
 		return "\n\n" . implode( "\n\n<hr>\n\n", $output ) . "\n\n";
+	}
+
+	/**
+	 * Gets the generated Blueprint steps reference Markdown.
+	 *
+	 * @return string|false The generated reference Markdown, or false if unavailable.
+	 */
+	protected function get_blueprint_steps_reference_markdown() {
+		$response = wp_safe_remote_get( self::BLUEPRINT_STEPS_REFERENCE_URL );
+		if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
+			return false;
+		}
+
+		$markdown = trim( wp_remote_retrieve_body( $response ) );
+		if ( '' === $markdown ) {
+			return false;
+		}
+
+		$markdown = preg_replace( '#^---(.+)---#Us', '', $markdown );
+		$markdown = preg_replace( '/^#\s+Steps\s*/', '', trim( $markdown ) );
+		$markdown = preg_replace( '/\A.*?(?=^<a id="[^"]+Step"><\/a>\s*$)/sm', '', $markdown, 1 );
+		$markdown = $this->format_blueprint_steps_reference_markdown( $markdown );
+
+		return "\n\n" . $markdown . "\n\n";
+	}
+
+	/**
+	 * Formats the generated Blueprint steps reference for the handbook import.
+	 *
+	 * @param string $markdown The generated reference Markdown.
+	 * @return string
+	 */
+	protected function format_blueprint_steps_reference_markdown( $markdown ) {
+		if ( ! preg_match( '/^<a id="[^"]+Step"><\/a>\s*$/m', $markdown ) ) {
+			return $markdown;
+		}
+
+		$markdown = preg_replace( '/^(?:\s*<!--.*?-->\s*)+/s', '', $markdown );
+
+		return preg_replace(
+			'/^### (Parameters|Blueprint API example|Function API)$/m',
+			'**$1**',
+			$markdown
+		);
 	}
 
 	/**
@@ -628,7 +717,12 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 			return $tag;
 		}
 
-		return sprintf( '<script type="module" src="%s"></script>' . "\n", esc_url( $src ) );
+		return wp_get_script_tag(
+			array(
+				'type' => 'module',
+				'src'  => esc_url( $src ),
+			)
+		);
 	}
 
 	/**
@@ -650,7 +744,7 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 			$blueprint = '{' . trim( $blueprint_match[1] ) . '}';
 		}
 
-		$shown_blueprint = $display ?: $blueprint;
+		$shown_blueprint  = $display ? $display : $blueprint;
 		$parsed_blueprint = json_decode( $shown_blueprint, true );
 		if ( JSON_ERROR_NONE !== json_last_error() ) {
 			return $matches[0];
