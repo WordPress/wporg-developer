@@ -3,7 +3,7 @@
 class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 	const PHP_CODE_SNIPPET_SCRIPT_URL  = 'https://playground.wordpress.net/php-code-snippet.js';
 	const PLAYGROUND_DOCS_ASSET_URL    = 'https://wordpress.github.io/wordpress-playground/';
-	const BLUEPRINT_STEPS_REFERENCE_URL = 'https://wordpress.github.io/wordpress-playground/handbook/blueprint-steps.md';
+	const BLUEPRINT_STEPS_REFERENCE_URL = 'https://wordpress.github.io/wordpress-playground/handbook/blueprints-steps.md';
 	const BLUEPRINT_STEPS_URL          = 'https://wordpress.github.io/wordpress-playground/blueprints/steps/';
 	const TRANSLATION_AVAILABILITY_URL = 'https://wordpress.github.io/wordpress-playground/translation-availability.json';
 	const PLAYGROUND_IMAGE_META_KEY    = '_playground_image';
