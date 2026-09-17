@@ -10,6 +10,9 @@
 .wp-env.override.json
 .env/0-sandbox.php
 
+# Snippet sweep output.
+/env/sweep/results
+
 # Configs from wporg-repo-tools.
 .eslintrc.js
 eslint.config.js
