@@ -530,7 +530,7 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 	public function transform_blueprint_steps( $matches ) {
 		$response = wp_safe_remote_get( self::BLUEPRINT_STEPS_URL );
 		if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
-			return $matches[0];
+			return '';
 		}
 
 		$document        = new DOMDocument();
@@ -539,13 +539,13 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 		libxml_clear_errors();
 		libxml_use_internal_errors( $previous_errors );
 		if ( ! $loaded ) {
-			return $matches[0];
+			return '';
 		}
 
 		$xpath    = new DOMXPath( $document );
 		$sections = $xpath->query( '//article//section[contains(concat(" ", normalize-space(@class), " "), " markdown ")]' );
 		if ( ! $sections || 0 === $sections->length ) {
-			return $matches[0];
+			return '';
 		}
 
 		$output = array();
