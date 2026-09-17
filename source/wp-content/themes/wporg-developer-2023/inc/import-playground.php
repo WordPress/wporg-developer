@@ -5,6 +5,7 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 	const PLAYGROUND_DOCS_ASSET_URL    = 'https://wordpress.github.io/wordpress-playground/';
 	const BLUEPRINT_STEPS_REFERENCE_URL = 'https://wordpress.github.io/wordpress-playground/handbook/blueprints-steps.md';
 	const BLUEPRINT_STEPS_URL          = 'https://wordpress.github.io/wordpress-playground/blueprints/steps/';
+	const BLUEPRINT_STEPS_SOURCE_PATH  = 'blueprints/05-steps.md';
 	const TRANSLATION_AVAILABILITY_URL = 'https://wordpress.github.io/wordpress-playground/translation-availability.json';
 	const PLAYGROUND_IMAGE_META_KEY    = '_playground_image';
 	const TRANSLATION_LOCALES_META_KEY = '_playground_translation_locales';
@@ -387,6 +388,10 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 		$manifest_entry = get_post_meta( $post_id, $this->manifest_entry_meta_key, true );
 		if ( empty( $manifest_entry['markdown_source'] ) || ! is_string( $manifest_entry['markdown_source'] ) ) {
 			return '';
+		}
+
+		if ( 'static/handbook/blueprints-steps.md' === $manifest_entry['markdown_source'] ) {
+			return self::BLUEPRINT_STEPS_SOURCE_PATH;
 		}
 
 		$source_path = preg_replace( '#^docs/#', '', $manifest_entry['markdown_source'] );
