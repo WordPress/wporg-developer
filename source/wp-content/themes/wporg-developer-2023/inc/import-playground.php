@@ -3,6 +3,7 @@
 class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 	const PHP_CODE_SNIPPET_SCRIPT_URL  = 'https://playground.wordpress.net/php-code-snippet.js';
 	const PLAYGROUND_DOCS_ASSET_URL    = 'https://wordpress.github.io/wordpress-playground/';
+	const BLUEPRINT_STEPS_REFERENCE_URL = 'https://wordpress.github.io/wordpress-playground/handbook/blueprint-steps.md';
 	const BLUEPRINT_STEPS_URL          = 'https://wordpress.github.io/wordpress-playground/blueprints/steps/';
 	const TRANSLATION_AVAILABILITY_URL = 'https://wordpress.github.io/wordpress-playground/translation-availability.json';
 	const PLAYGROUND_IMAGE_META_KEY    = '_playground_image';
@@ -528,6 +529,11 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 	 * @return string
 	 */
 	public function transform_blueprint_steps( $matches ) {
+		$reference_markdown = $this->get_blueprint_steps_reference_markdown();
+		if ( false !== $reference_markdown ) {
+			return $reference_markdown;
+		}
+
 		$response = wp_safe_remote_get( self::BLUEPRINT_STEPS_URL );
 		if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
 			return '';
@@ -610,6 +616,25 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 		}
 
 		return "\n\n" . implode( "\n\n<hr>\n\n", $output ) . "\n\n";
+	}
+
+	/**
+	 * Gets the generated Blueprint steps reference Markdown.
+	 *
+	 * @return string|false The generated reference Markdown, or false if unavailable.
+	 */
+	protected function get_blueprint_steps_reference_markdown() {
+		$response = wp_safe_remote_get( self::BLUEPRINT_STEPS_REFERENCE_URL );
+		if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
+			return false;
+		}
+
+		$markdown = trim( wp_remote_retrieve_body( $response ) );
+		if ( '' === $markdown ) {
+			return false;
+		}
+
+		return "\n\n" . $markdown . "\n\n";
 	}
 
 	/**
