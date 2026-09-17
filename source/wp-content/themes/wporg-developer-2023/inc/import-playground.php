@@ -9,7 +9,7 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 	const PLAYGROUND_IMAGE_META_KEY    = '_playground_image';
 	const TRANSLATION_LOCALES_META_KEY = '_playground_translation_locales';
 	const CONTENT_TRANSFORM_META_KEY   = '_playground_content_transform_version';
-	const CONTENT_TRANSFORM_VERSION    = 2;
+	const CONTENT_TRANSFORM_VERSION    = 3;
 
 	/**
 	 * The post currently being updated from Markdown.
@@ -93,7 +93,7 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 		}
 
 		$source_url = get_post_meta( $this->current_post_id, $this->meta_key, true );
-		if ( preg_match( '#/docs/blueprints/05-steps\.md$#', $source_url ) ) {
+		if ( preg_match( '#/(?:docs/blueprints/05-steps|static/handbook/blueprints-steps)\.md$#', $source_url ) ) {
 			return false;
 		}
 
