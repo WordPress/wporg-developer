@@ -515,6 +515,8 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 			)
 		);
 
+		$markdown = $this->format_blueprint_steps_reference_markdown( $markdown );
+
 		return trim( $markdown );
 	}
 
@@ -634,6 +636,9 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 			return false;
 		}
 
+		$markdown = preg_replace( '#^---(.+)---#Us', '', $markdown );
+		$markdown = preg_replace( '/^#\s+Steps\s*/', '', trim( $markdown ) );
+		$markdown = preg_replace( '/\A.*?(?=^<a id="[^"]+Step"><\/a>\s*$)/sm', '', $markdown, 1 );
 		$markdown = $this->format_blueprint_steps_reference_markdown( $markdown );
 
 		return "\n\n" . $markdown . "\n\n";
@@ -646,6 +651,12 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 	 * @return string
 	 */
 	protected function format_blueprint_steps_reference_markdown( $markdown ) {
+		if ( ! preg_match( '/^<a id="[^"]+Step"><\/a>\s*$/m', $markdown ) ) {
+			return $markdown;
+		}
+
+		$markdown = preg_replace( '/^(?:\s*<!--.*?-->\s*)+/s', '', $markdown );
+
 		return preg_replace(
 			'/^### (Parameters|Blueprint API example|Function API)$/m',
 			'**$1**',
