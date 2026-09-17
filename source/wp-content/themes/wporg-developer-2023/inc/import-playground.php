@@ -634,7 +634,23 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 			return false;
 		}
 
+		$markdown = $this->format_blueprint_steps_reference_markdown( $markdown );
+
 		return "\n\n" . $markdown . "\n\n";
+	}
+
+	/**
+	 * Formats the generated Blueprint steps reference for the handbook import.
+	 *
+	 * @param string $markdown The generated reference Markdown.
+	 * @return string
+	 */
+	protected function format_blueprint_steps_reference_markdown( $markdown ) {
+		return preg_replace(
+			'/^### (Parameters|Blueprint API example|Function API)$/m',
+			'**$1**',
+			$markdown
+		);
 	}
 
 	/**
