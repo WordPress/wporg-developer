@@ -268,9 +268,8 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 		$code = substr( $code, strlen( $preamble ) );
 	}
 
-	if ( array_key_exists( 'expected_output', $snippet ) && ! is_string( $snippet['expected_output'] ) ) {
-		return '';
-	}
+	// An unusable expected output is ignored; the snippet still renders and runs.
+	$expected_output = is_string( $snippet['expected_output'] ?? null ) ? $snippet['expected_output'] : null;
 
 	$post_slug = get_post_field( 'post_name', $post_id );
 	if ( ! $post_slug ) {
@@ -300,7 +299,7 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 		}
 	}
 
-	$snippet_output = render_php_snippet( $code, $attributes, $snippet['expected_output'] ?? null );
+	$snippet_output = render_php_snippet( $code, $attributes, $expected_output );
 	if ( '' === $snippet_output ) {
 		return '';
 	}
@@ -323,36 +322,39 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
  * @return string
  */
 function render_php_snippet( $code, $attributes, $expected_output = null ) {
-	$html = new PHP_Code_Snippet_Placeholder_Processor(
-		<<<'HTML'
-		<php-snippet>
-			<script type="application/x-php+json"></script>
-			<script type="text/expected-output+json"></script>
-			<pre class="wp-block-code"><code class="language-php">placeholder</code></pre>
-		</php-snippet>
-		HTML
+	$json_code = wp_json_encode( $code, JSON_HEX_TAG | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_LINE_TERMINATORS );
+	if ( ! is_string( $json_code ) ) {
+		return '';
+	}
+
+	$scripts = wp_get_inline_script_tag( $json_code, array( 'type' => 'application/x-php+json' ) );
+
+	// Expected output is an enhancement. If it cannot be set, don't fail the whole snippet; just omit the expected output.
+	if ( null !== $expected_output ) {
+		$json_expected_output = wp_json_encode( $expected_output, JSON_HEX_TAG | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_LINE_TERMINATORS );
+		if ( is_string( $json_expected_output ) ) {
+			$scripts .= wp_get_inline_script_tag( $json_expected_output, array( 'type' => 'text/expected-output+json' ) );
+		}
+	}
+
+	$html = new \WP_HTML_Tag_Processor(
+		// The following line looks like a template replacement, but it is just a text node `{{PLACEHOLDER}}`.
+		"<php-snippet>{$scripts}<pre><code class='language-php'>{{PLACEHOLDER}}</code></pre></php-snippet>"
 	);
 
 	while ( $html->next_tag() ) {
-		if ( 'PHP-SNIPPET' === $html->get_tag() ) {
-			foreach ( $attributes as $name => $value ) {
-				$html->set_attribute( $name, $value );
-			}
-		} elseif ( 'SCRIPT' === $html->get_tag() ) {
-			$is_expected_output = 'text/expected-output+json' === $html->get_attribute( 'type' );
-			if ( $is_expected_output && null === $expected_output ) {
-				$html->replace_current_token( '' );
-				continue;
-			}
-
-			$json = wp_json_encode( $is_expected_output ? $expected_output : $code, JSON_HEX_TAG | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_LINE_TERMINATORS );
-			if ( ! is_string( $json ) || ! $html->set_modifiable_text( $json ) ) {
-				return '';
-			}
-		} elseif ( 'CODE' === $html->get_tag() ) {
-			if ( ! $html->next_token() || ! $html->set_modifiable_text( $code ) ) {
-				return '';
-			}
+		switch ( $html->get_tag() ) {
+			case 'PHP-SNIPPET':
+				foreach ( $attributes as $name => $value ) {
+					$html->set_attribute( $name, $value );
+				}
+				break;
+			case 'CODE':
+				// Move into the child text node and replace its text.
+				if ( ! $html->next_token() || ! $html->set_modifiable_text( $code ) ) {
+					return '';
+				}
+				break;
 		}
 	}
 
@@ -427,7 +429,7 @@ function get_php_code_snippet_blueprint_id( $post_id, $key ) {
 }
 
 /**
- * HTML processor for rendering snippets and replacing their placeholder comments.
+ * HTML processor for replacing parser snippet placeholder comments.
  */
 class PHP_Code_Snippet_Placeholder_Processor extends \WP_HTML_Tag_Processor {
 	/**
