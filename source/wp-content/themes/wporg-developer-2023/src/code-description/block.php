@@ -375,7 +375,7 @@ function render_php_code_snippet_blueprint_script( $id, $blueprint ) {
 		return '';
 	}
 
-	$blueprint = wp_json_encode( $blueprint, JSON_HEX_TAG | JSON_UNESCAPED_SLASHES );
+	$blueprint = wp_json_encode( $blueprint, JSON_HEX_TAG | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_LINE_TERMINATORS );
 	if ( ! is_string( $blueprint ) ) {
 		return '';
 	}
@@ -397,7 +397,7 @@ function render_php_code_snippet_blueprint_script( $id, $blueprint ) {
 function print_php_code_snippet_auto_prepend_script() {
 	$auto_prepend_script = wp_json_encode(
 		"<?php require_once '/wordpress/wp-load.php';",
-		JSON_HEX_TAG | JSON_UNESCAPED_SLASHES
+		JSON_HEX_TAG | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_LINE_TERMINATORS
 	);
 	if ( ! is_string( $auto_prepend_script ) ) {
 		return;
