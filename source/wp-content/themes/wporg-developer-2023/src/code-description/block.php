@@ -304,7 +304,7 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 		}
 	}
 
-	$snippet_output = render_php_snippet( $code, $attributes, $expected_output );
+	$snippet_output = render_php_code_snippet_element( $code, $attributes, $expected_output );
 	if ( '' === $snippet_output ) {
 		return '';
 	}
@@ -326,7 +326,7 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
  * @param string $expected_output Expected output, or an empty string when unspecified.
  * @return string
  */
-function render_php_snippet( $code, $attributes, $expected_output = '' ) {
+function render_php_code_snippet_element( $code, $attributes, $expected_output = '' ) {
 	$scripts = render_php_code_snippet_json_script( $code, array( 'type' => 'application/x-php+json' ) );
 	if ( '' === $scripts ) {
 		return '';
@@ -458,7 +458,7 @@ function get_php_code_snippet_blueprint_id( $post_id, $key ) {
 }
 
 /**
- * HTML processor for replacing parser snippet placeholder comments.
+ * HTML processor that can replace the current token with HTML.
  */
 class PHP_Code_Snippet_Placeholder_Processor extends \WP_HTML_Tag_Processor {
 	/**
