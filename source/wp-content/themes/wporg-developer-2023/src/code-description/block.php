@@ -269,7 +269,7 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 	}
 
 	// An unusable expected output is ignored; the snippet still renders and runs.
-	$expected_output = is_string( $snippet['expected_output'] ?? null ) ? $snippet['expected_output'] : null;
+	$expected_output = is_string( $snippet['expected_output'] ?? null ) ? $snippet['expected_output'] : '';
 
 	$post_slug = get_post_field( 'post_name', $post_id );
 	if ( ! $post_slug ) {
@@ -316,12 +316,12 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 /**
  * Render a PHP snippet with a source fallback visible before initialization.
  *
- * @param string      $code            Snippet PHP source.
- * @param array       $attributes      Snippet element attributes.
- * @param string|null $expected_output Expected output, or null when unspecified.
+ * @param string $code            Snippet PHP source.
+ * @param array  $attributes      Snippet element attributes.
+ * @param string $expected_output Expected output, or an empty string when unspecified.
  * @return string
  */
-function render_php_snippet( $code, $attributes, $expected_output = null ) {
+function render_php_snippet( $code, $attributes, $expected_output = '' ) {
 	$json_code = wp_json_encode( $code, JSON_HEX_TAG | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_LINE_TERMINATORS );
 	if ( ! is_string( $json_code ) ) {
 		return '';
@@ -330,7 +330,7 @@ function render_php_snippet( $code, $attributes, $expected_output = null ) {
 	$scripts = wp_get_inline_script_tag( $json_code, array( 'type' => 'application/x-php+json' ) );
 
 	// Expected output is an enhancement. If it cannot be set, don't fail the whole snippet; just omit the expected output.
-	if ( null !== $expected_output ) {
+	if ( '' !== $expected_output ) {
 		$json_expected_output = wp_json_encode( $expected_output, JSON_HEX_TAG | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_LINE_TERMINATORS );
 		if ( is_string( $json_expected_output ) ) {
 			$scripts .= wp_get_inline_script_tag( $json_expected_output, array( 'type' => 'text/expected-output+json' ) );
