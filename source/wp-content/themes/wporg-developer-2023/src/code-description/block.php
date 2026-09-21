@@ -136,10 +136,9 @@ function get_description_content( $post_id ) {
 		add_action( 'wp_footer', __NAMESPACE__ . '\print_php_code_snippet_auto_prepend_script' );
 	}
 
-	// Emit the referenced setup Blueprint <script> tags once, up front.
 	foreach ( array_keys( $used_setup_blueprints ) as $name ) {
 		if ( isset( $setup_blueprints[ $name ] ) ) {
-			$output .= render_php_code_snippet_blueprint_script(
+			enqueue_php_code_snippet_blueprint_script(
 				get_php_code_snippet_blueprint_id( $post_id, 'setup:' . $name ),
 				$setup_blueprints[ $name ]
 			);
@@ -304,13 +303,11 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 		return '';
 	}
 
-	$output = '';
-
 	if ( isset( $attributes['blueprint'] ) && $attributes['blueprint'] === $inline_blueprint_id ) {
-		$output .= render_php_code_snippet_blueprint_script( $attributes['blueprint'], $snippet['blueprint'] );
+		enqueue_php_code_snippet_blueprint_script( $attributes['blueprint'], $snippet['blueprint'] );
 	}
 
-	return $output . $snippet_output;
+	return $snippet_output;
 }
 
 /**
@@ -394,27 +391,75 @@ function render_php_code_snippet_json_script( string $value, array $attributes )
 }
 
 /**
- * Render a setup Blueprint script tag.
+ * Queue a Blueprint script tag to print from `wp_footer`.
+ *
+ * The code description block renders inside `the_content`, so its output
+ * passes through `do_shortcode` and the other content filters. The snippet
+ * element resolves its `blueprint` attribute by ID over the whole document,
+ * so the Blueprint JSON is printed outside the content instead. The block
+ * renders twice per request (table of contents and content), so the queue
+ * is keyed by ID and each Blueprint is printed once.
  *
  * @param string       $id        Script tag ID.
  * @param array|object $blueprint Blueprint data.
- * @return string
  */
-function render_php_code_snippet_blueprint_script( $id, $blueprint ) {
+function enqueue_php_code_snippet_blueprint_script( $id, $blueprint ) {
+	$queue        = php_code_snippet_blueprint_queue();
+	$queue[ $id ] = $blueprint;
+	php_code_snippet_blueprint_queue( $queue );
+
+	add_action( 'wp_footer', __NAMESPACE__ . '\print_php_code_snippet_blueprint_scripts' );
+}
+
+/**
+ * Get or replace the queue of Blueprints waiting to print.
+ *
+ * @param array|null $replacement New queue, or null to read the current one.
+ * @return array Blueprints keyed by script tag ID.
+ */
+function php_code_snippet_blueprint_queue( $replacement = null ) {
+	static $queue = array();
+
+	if ( null !== $replacement ) {
+		$queue = $replacement;
+	}
+
+	return $queue;
+}
+
+/**
+ * Print the queued Blueprint script tags and empty the queue.
+ *
+ * Hooked to `wp_footer` when a page queues Blueprints.
+ */
+function print_php_code_snippet_blueprint_scripts() {
+	foreach ( php_code_snippet_blueprint_queue() as $id => $blueprint ) {
+		print_php_code_snippet_blueprint_script( $id, $blueprint );
+	}
+	php_code_snippet_blueprint_queue( array() );
+}
+
+/**
+ * Print a Blueprint script tag.
+ *
+ * @param string       $id        Script tag ID.
+ * @param array|object $blueprint Blueprint data.
+ */
+function print_php_code_snippet_blueprint_script( $id, $blueprint ) {
 	if ( is_array( $blueprint ) ) {
 		// The parser's JSON importer uses associative arrays. Cast only the
 		// Blueprint root back to its required JSON object type before encoding.
 		$blueprint = (object) $blueprint;
 	} elseif ( ! is_object( $blueprint ) ) {
-		return '';
+		return;
 	}
 
 	$blueprint = wp_json_encode( $blueprint, JSON_HEX_TAG | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_LINE_TERMINATORS );
 	if ( ! is_string( $blueprint ) ) {
-		return '';
+		return;
 	}
 
-	return wp_get_inline_script_tag(
+	wp_print_inline_script_tag(
 		$blueprint,
 		array(
 			'id'   => $id,
