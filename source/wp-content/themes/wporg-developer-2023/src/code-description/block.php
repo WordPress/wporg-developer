@@ -322,14 +322,14 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
  * @return string
  */
 function render_php_snippet( $code, $attributes, $expected_output = '' ) {
-	$scripts = get_php_code_snippet_json_script_tag( $code, array( 'type' => 'application/x-php+json' ) );
+	$scripts = render_php_code_snippet_json_script( $code, array( 'type' => 'application/x-php+json' ) );
 	if ( '' === $scripts ) {
 		return '';
 	}
 
 	// Expected output is an enhancement. If it cannot be set, don't fail the whole snippet; just omit the expected output.
 	if ( '' !== $expected_output ) {
-		$scripts .= get_php_code_snippet_json_script_tag( $expected_output, array( 'type' => 'text/expected-output+json' ) );
+		$scripts .= render_php_code_snippet_json_script( $expected_output, array( 'type' => 'text/expected-output+json' ) );
 	}
 
 	$html = new PHP_Code_Snippet_Placeholder_Processor(
@@ -384,7 +384,7 @@ function render_php_snippet( $code, $attributes, $expected_output = '' ) {
  * @param array  $attributes Script tag attributes.
  * @return string Script tag, or an empty string on failure.
  */
-function get_php_code_snippet_json_script_tag( string $value, array $attributes ) {
+function render_php_code_snippet_json_script( string $value, array $attributes ) {
 	$json = wp_json_encode( $value, JSON_HEX_TAG | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_LINE_TERMINATORS );
 	if ( ! is_string( $json ) ) {
 		return '';
@@ -409,7 +409,7 @@ function render_php_code_snippet_blueprint_script( $id, $blueprint ) {
 		return '';
 	}
 
-	// Not passed through get_php_code_snippet_json_script_tag(): a Blueprint has arrays, and its structural `[` must stay.
+	// Not passed through render_php_code_snippet_json_script(): a Blueprint has arrays, and its structural `[` must stay.
 	$blueprint = wp_json_encode( $blueprint, JSON_HEX_TAG | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_LINE_TERMINATORS );
 	if ( ! is_string( $blueprint ) ) {
 		return '';
@@ -430,7 +430,7 @@ function render_php_code_snippet_blueprint_script( $id, $blueprint ) {
  * Hooked to `wp_footer` when a page renders snippets.
  */
 function print_php_code_snippet_auto_prepend_script() {
-	echo get_php_code_snippet_json_script_tag(
+	echo render_php_code_snippet_json_script(
 		"<?php require_once '/wordpress/wp-load.php';",
 		array(
 			'id'   => PHP_CODE_SNIPPET_AUTO_PREPEND_ID,
