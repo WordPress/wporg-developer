@@ -371,14 +371,12 @@ function render_php_snippet( $code, $attributes, $expected_output = '' ) {
 }
 
 /**
- * Get a script tag whose text is a snippet payload string encoded as JSON.
+ * Render a script tag whose text is a snippet payload string encoded as JSON.
  *
  * The tag is printed inside `the_content`, where `do_shortcode` runs later.
  * `[` is escaped in the JSON so a shortcode in the payload cannot match.
- *
- * Only a string may be passed. The escape assumes the result is a single
- * JSON string, where every `[` is text. An array or object would have the
- * `[` of its JSON array syntax escaped too, producing invalid JSON.
+ * Only a string is accepted: the escape assumes a single JSON string, and
+ * would corrupt JSON array syntax.
  *
  * @param string $value      String to encode.
  * @param array  $attributes Script tag attributes.
@@ -409,7 +407,6 @@ function render_php_code_snippet_blueprint_script( $id, $blueprint ) {
 		return '';
 	}
 
-	// Not passed through render_php_code_snippet_json_script(): a Blueprint has arrays, and its structural `[` must stay.
 	$blueprint = wp_json_encode( $blueprint, JSON_HEX_TAG | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_LINE_TERMINATORS );
 	if ( ! is_string( $blueprint ) ) {
 		return '';
