@@ -328,6 +328,9 @@ function render_php_snippet( $code, $attributes, $expected_output = '' ) {
 	}
 
 	$scripts = wp_get_inline_script_tag( $json_code, array( 'type' => 'application/x-php+json' ) );
+	if ( '' === $scripts ) {
+		return '';
+	}
 
 	// Expected output is an enhancement. If it cannot be set, don't fail the whole snippet; just omit the expected output.
 	if ( '' !== $expected_output ) {
@@ -337,26 +340,40 @@ function render_php_snippet( $code, $attributes, $expected_output = '' ) {
 		}
 	}
 
-	$html = new \WP_HTML_Tag_Processor(
+	$html = new PHP_Code_Snippet_Placeholder_Processor(
 		// The following line looks like a template replacement, but it is just a text node `{{PLACEHOLDER}}`.
 		"<php-snippet>{$scripts}<pre><code class='language-php'>{{PLACEHOLDER}}</code></pre></php-snippet>"
 	);
 
-	while ( $html->next_tag() ) {
-		switch ( $html->get_tag() ) {
-			case 'PHP-SNIPPET':
-				foreach ( $attributes as $name => $value ) {
-					$html->set_attribute( $name, $value );
-				}
-				break;
-			case 'CODE':
-				// Move into the child text node and replace its text.
-				if ( ! $html->next_token() || ! $html->set_modifiable_text( $code ) ) {
-					return '';
-				}
-				break;
+	if ( ! $html->next_tag( 'php-snippet' ) ) {
+		return '';
+	}
+	foreach ( $attributes as $name => $value ) {
+		if ( ! $html->set_attribute( $name, $value ) ) {
+			return '';
 		}
 	}
+
+	// Move into the CODE element's placeholder text node and replace it.
+	if ( ! $html->next_tag( 'code' ) || ! $html->next_token() ) {
+		return '';
+	}
+
+	/*
+	 * Escape HTML syntax characters, and `[` so that shortcode processing on
+	 * `the_content` cannot match anything in the snippet source.
+	 */
+	$html->replace_current_token(
+		strtr(
+			$code,
+			array(
+				'&' => '&amp;',
+				'<' => '&lt;',
+				'>' => '&gt;',
+				'[' => '&#91;',
+			)
+		)
+	);
 
 	return $html->get_updated_html();
 }
