@@ -322,22 +322,14 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
  * @return string
  */
 function render_php_snippet( $code, $attributes, $expected_output = '' ) {
-	$json_code = wp_json_encode( $code, JSON_HEX_TAG | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_LINE_TERMINATORS );
-	if ( ! is_string( $json_code ) ) {
-		return '';
-	}
-
-	$scripts = wp_get_inline_script_tag( $json_code, array( 'type' => 'application/x-php+json' ) );
+	$scripts = get_php_code_snippet_json_script_tag( $code, array( 'type' => 'application/x-php+json' ) );
 	if ( '' === $scripts ) {
 		return '';
 	}
 
 	// Expected output is an enhancement. If it cannot be set, don't fail the whole snippet; just omit the expected output.
 	if ( '' !== $expected_output ) {
-		$json_expected_output = wp_json_encode( $expected_output, JSON_HEX_TAG | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_LINE_TERMINATORS );
-		if ( is_string( $json_expected_output ) ) {
-			$scripts .= wp_get_inline_script_tag( $json_expected_output, array( 'type' => 'text/expected-output+json' ) );
-		}
+		$scripts .= get_php_code_snippet_json_script_tag( $expected_output, array( 'type' => 'text/expected-output+json' ) );
 	}
 
 	$html = new PHP_Code_Snippet_Placeholder_Processor(
@@ -379,6 +371,29 @@ function render_php_snippet( $code, $attributes, $expected_output = '' ) {
 }
 
 /**
+ * Get a script tag whose text is a snippet payload string encoded as JSON.
+ *
+ * The tag is printed inside `the_content`, where `do_shortcode` runs later.
+ * `[` is escaped in the JSON so a shortcode in the payload cannot match.
+ *
+ * Only a string may be passed. The escape assumes the result is a single
+ * JSON string, where every `[` is text. An array or object would have the
+ * `[` of its JSON array syntax escaped too, producing invalid JSON.
+ *
+ * @param string $value      String to encode.
+ * @param array  $attributes Script tag attributes.
+ * @return string Script tag, or an empty string on failure.
+ */
+function get_php_code_snippet_json_script_tag( string $value, array $attributes ) {
+	$json = wp_json_encode( $value, JSON_HEX_TAG | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_LINE_TERMINATORS );
+	if ( ! is_string( $json ) ) {
+		return '';
+	}
+
+	return wp_get_inline_script_tag( str_replace( '[', '\\u005B', $json ), $attributes );
+}
+
+/**
  * Render a setup Blueprint script tag.
  *
  * @param string       $id        Script tag ID.
@@ -394,6 +409,7 @@ function render_php_code_snippet_blueprint_script( $id, $blueprint ) {
 		return '';
 	}
 
+	// Not passed through get_php_code_snippet_json_script_tag(): a Blueprint has arrays, and its structural `[` must stay.
 	$blueprint = wp_json_encode( $blueprint, JSON_HEX_TAG | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_LINE_TERMINATORS );
 	if ( ! is_string( $blueprint ) ) {
 		return '';
@@ -414,16 +430,8 @@ function render_php_code_snippet_blueprint_script( $id, $blueprint ) {
  * Hooked to `wp_footer` when a page renders snippets.
  */
 function print_php_code_snippet_auto_prepend_script() {
-	$auto_prepend_script = wp_json_encode(
+	echo get_php_code_snippet_json_script_tag(
 		"<?php require_once '/wordpress/wp-load.php';",
-		JSON_HEX_TAG | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_LINE_TERMINATORS
-	);
-	if ( ! is_string( $auto_prepend_script ) ) {
-		return;
-	}
-
-	wp_print_inline_script_tag(
-		$auto_prepend_script,
 		array(
 			'id'   => PHP_CODE_SNIPPET_AUTO_PREPEND_ID,
 			'type' => 'application/x-php+json',
