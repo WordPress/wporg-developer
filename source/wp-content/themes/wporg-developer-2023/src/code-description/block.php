@@ -200,7 +200,7 @@ function get_description_content( $post_id ) {
  * @return string
  */
 function render_php_code_snippet_placeholders( $description, $post_id, $snippets, $setup_blueprints, &$used_blueprints, &$placed ) {
-	$processor = new PHP_Code_Snippet_Processor( $description );
+	$processor = new PHP_Code_Snippet_Placeholder_Processor( $description );
 
 	while ( $processor->next_token() ) {
 		if ( \WP_HTML_Tag_Processor::COMMENT_AS_HTML_COMMENT !== $processor->get_comment_type() ) {
@@ -323,7 +323,7 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
  * @return string
  */
 function render_php_snippet( $code, $attributes, $expected_output = null ) {
-	$html = new PHP_Code_Snippet_Processor(
+	$html = new PHP_Code_Snippet_Placeholder_Processor(
 		<<<'HTML'
 		<php-snippet>
 			<script type="application/x-php+json"></script>
@@ -429,7 +429,7 @@ function get_php_code_snippet_blueprint_id( $post_id, $key ) {
 /**
  * HTML processor for rendering snippets and replacing their placeholder comments.
  */
-class PHP_Code_Snippet_Processor extends \WP_HTML_Tag_Processor {
+class PHP_Code_Snippet_Placeholder_Processor extends \WP_HTML_Tag_Processor {
 	/**
 	 * Replace the currently matched token with HTML.
 	 *
