@@ -352,12 +352,14 @@ function render_php_snippet( $code, $attributes, $expected_output = '' ) {
 	}
 
 	/*
-	 * Escape HTML syntax characters, and `[` so that shortcode processing on
-	 * `the_content` cannot match anything in the snippet source.
+	 * The element trims the source before it renders; trim the fallback the
+	 * same way so nothing shifts when it upgrades. Escape HTML syntax
+	 * characters, and `[` so that shortcode processing on `the_content`
+	 * cannot match anything in the snippet source.
 	 */
 	$html->replace_current_token(
 		strtr(
-			$code,
+			trim( $code ),
 			array(
 				'&' => '&amp;',
 				'<' => '&lt;',
