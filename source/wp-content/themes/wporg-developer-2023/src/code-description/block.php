@@ -359,7 +359,7 @@ function render_php_code_snippet_element( $code, $attributes, $expected_output =
 	 */
 	$html->replace_current_token(
 		strtr(
-			trim( $code ),
+			trim_as_javascript( $code ),
 			array(
 				'&' => '&amp;',
 				'<' => '&lt;',
@@ -370,6 +370,23 @@ function render_php_code_snippet_element( $code, $attributes, $expected_output =
 	);
 
 	return $html->get_updated_html();
+}
+
+/**
+ * Trim a string as JavaScript's `String.prototype.trim()` does.
+ *
+ * PHP's `trim()` strips ASCII whitespace and NUL. JavaScript strips Unicode
+ * white space, the byte order mark, and line terminators, and keeps NUL.
+ * The snippet element trims its source in JavaScript; the fallback must
+ * match it or the text shifts when the element upgrades.
+ *
+ * @param string $text Text to trim.
+ * @return string Trimmed text, or the input unchanged if it is not valid UTF-8.
+ */
+function trim_as_javascript( string $text ) {
+	$white_space = '\x{9}\x{A}\x{B}\x{C}\x{D}\x{20}\x{A0}\x{1680}\x{2000}-\x{200A}\x{2028}\x{2029}\x{202F}\x{205F}\x{3000}\x{FEFF}';
+
+	return preg_replace( "/^[{$white_space}]+|[{$white_space}]+$/u", '', $text ) ?? $text;
 }
 
 /**
