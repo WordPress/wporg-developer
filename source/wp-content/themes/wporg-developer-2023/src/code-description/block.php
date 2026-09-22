@@ -291,7 +291,7 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints 
 	}
 
 	if ( null !== $blueprint ) {
-		PHP_Code_Snippet_Blueprint_Queue::enqueue( $attributes['blueprint'], $blueprint );
+		enqueue_php_code_snippet_blueprint_script( $attributes['blueprint'], $blueprint );
 	}
 
 	return $snippet_output;
@@ -436,47 +436,38 @@ function get_php_code_snippet_blueprint_id( $post_id, $key ) {
 }
 
 /**
- * Blueprint script tags queued to print from `wp_footer`.
+ * Queue a Blueprint script tag to print from `wp_footer`.
  *
  * The code description block renders inside `the_content`, so its output
  * passes through `do_shortcode` and the other content filters. The snippet
  * element resolves its `blueprint` attribute by ID over the whole document,
  * so the Blueprint JSON is printed outside the content instead. The block
  * renders twice per request (table of contents and content), so the queue
- * is keyed by ID and each Blueprint is printed once.
+ * is keyed by ID and the first Blueprint queued for an ID is printed.
+ *
+ * @param string       $id        Script tag ID.
+ * @param array|object $blueprint Blueprint data.
  */
-final class PHP_Code_Snippet_Blueprint_Queue {
-	/**
-	 * Blueprints waiting to print, keyed by script tag ID.
-	 *
-	 * @var array
-	 */
-	private static $blueprints = array();
+function enqueue_php_code_snippet_blueprint_script( $id, $blueprint ) {
+	static $queue = array();
 
-	/**
-	 * Queue a Blueprint. The first Blueprint queued for an ID is kept.
-	 *
-	 * @param string       $id        Script tag ID.
-	 * @param array|object $blueprint Blueprint data.
-	 */
-	public static function enqueue( $id, $blueprint ) {
-		if ( isset( self::$blueprints[ $id ] ) ) {
-			return;
-		}
-
-		self::$blueprints[ $id ] = $blueprint;
-		add_action( 'wp_footer', array( __CLASS__, 'print_scripts' ) );
+	if ( isset( $queue[ $id ] ) ) {
+		return;
 	}
 
-	/**
-	 * Print the queued Blueprint script tags and empty the queue.
-	 */
-	public static function print_scripts() {
-		foreach ( self::$blueprints as $id => $blueprint ) {
-			print_php_code_snippet_blueprint_script( $id, $blueprint );
-		}
-		self::$blueprints = array();
+	if ( ! $queue ) {
+		add_action(
+			'wp_footer',
+			function () use ( &$queue ) {
+				foreach ( $queue as $id => $blueprint ) {
+					print_php_code_snippet_blueprint_script( $id, $blueprint );
+				}
+				$queue = array();
+			}
+		);
 	}
+
+	$queue[ $id ] = $blueprint;
 }
 
 /**
