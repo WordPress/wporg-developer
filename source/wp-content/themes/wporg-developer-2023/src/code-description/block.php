@@ -85,8 +85,7 @@ function get_description_content( $post_id ) {
 		$setup_blueprints = array();
 	}
 
-	$used_setup_blueprints = array();
-	$placed                = array();
+	$placed = array();
 
 	// Render each snippet in place, where the parser left its placeholder
 	// ( <!-- wp-parser-code-snippet:N --> ), so snippets stay between the
@@ -96,7 +95,6 @@ function get_description_content( $post_id ) {
 		$post_id,
 		$snippets,
 		$setup_blueprints,
-		$used_setup_blueprints,
 		$placed
 	);
 
@@ -111,7 +109,7 @@ function get_description_content( $post_id ) {
 		if ( ! is_array( $snippet ) || ( $snippet['type'] ?? '' ) !== 'php-code-snippet' ) {
 			continue;
 		}
-		$appended .= render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints, $used_setup_blueprints );
+		$appended .= render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints );
 	}
 
 	$has_snippets = ! empty( $placed ) || '' !== $appended;
@@ -134,15 +132,6 @@ function get_description_content( $post_id ) {
 		// `wp_footer` rather than inline; registering the same callback again
 		// is a no-op.
 		add_action( 'wp_footer', __NAMESPACE__ . '\print_php_code_snippet_auto_prepend_script' );
-	}
-
-	foreach ( array_keys( $used_setup_blueprints ) as $name ) {
-		if ( isset( $setup_blueprints[ $name ] ) ) {
-			PHP_Code_Snippet_Blueprint_Queue::enqueue(
-				get_php_code_snippet_blueprint_id( $post_id, 'setup:' . $name ),
-				$setup_blueprints[ $name ]
-			);
-		}
 	}
 
 	$output .= $description;
@@ -194,11 +183,10 @@ function get_description_content( $post_id ) {
  * @param int    $post_id          Post ID.
  * @param array  $snippets         Parsed snippets.
  * @param array  $setup_blueprints Reusable setup Blueprints keyed by name.
- * @param array  $used_blueprints  Reusable setup Blueprint names referenced by rendered snippets.
  * @param array  $placed           Snippet indexes rendered in place.
  * @return string
  */
-function render_php_code_snippet_placeholders( $description, $post_id, $snippets, $setup_blueprints, &$used_blueprints, &$placed ) {
+function render_php_code_snippet_placeholders( $description, $post_id, $snippets, $setup_blueprints, &$placed ) {
 	$processor = new PHP_Code_Snippet_Placeholder_Processor( $description );
 
 	while ( $processor->next_token() ) {
@@ -227,8 +215,7 @@ function render_php_code_snippet_placeholders( $description, $post_id, $snippets
 			$post_id,
 			$index,
 			$snippets[ $index ],
-			$setup_blueprints,
-			$used_blueprints
+			$setup_blueprints
 		);
 		$processor->replace_current_token( $snippet_output );
 		if ( '' !== $snippet_output ) {
@@ -246,10 +233,9 @@ function render_php_code_snippet_placeholders( $description, $post_id, $snippets
  * @param int   $index            Zero-based snippet index.
  * @param array $snippet          Snippet data.
  * @param array $setup_blueprints Reusable setup Blueprints keyed by name.
- * @param array $used_blueprints  Reusable setup Blueprint names referenced by rendered snippets.
  * @return string
  */
-function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints, &$used_blueprints ) {
+function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints ) {
 	if ( ( $snippet['type'] ?? '' ) !== 'php-code-snippet' ) {
 		return '';
 	}
@@ -275,7 +261,7 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 		$post_slug = 'example';
 	}
 
-	$inline_blueprint_id = get_php_code_snippet_blueprint_id( $post_id, 'inline:' . ( $index + 1 ) );
+	$blueprint  = null;
 	$attributes = array(
 		'name'                  => $post_slug . '-' . ( $index + 1 ) . '.php',
 		'auto-prepend-script'   => '#' . PHP_CODE_SNIPPET_AUTO_PREPEND_ID,
@@ -288,10 +274,11 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 			isset( $setup_blueprints[ $snippet['blueprint'] ] ) &&
 			( is_array( $setup_blueprints[ $snippet['blueprint'] ] ) || is_object( $setup_blueprints[ $snippet['blueprint'] ] ) )
 		) {
-			$attributes['blueprint']                 = get_php_code_snippet_blueprint_id( $post_id, 'setup:' . $snippet['blueprint'] );
-			$used_blueprints[ $snippet['blueprint'] ] = true;
+			$attributes['blueprint'] = get_php_code_snippet_blueprint_id( $post_id, 'setup:' . $snippet['blueprint'] );
+			$blueprint               = $setup_blueprints[ $snippet['blueprint'] ];
 		} elseif ( is_array( $snippet['blueprint'] ) || is_object( $snippet['blueprint'] ) ) {
-			$attributes['blueprint'] = $inline_blueprint_id;
+			$attributes['blueprint'] = get_php_code_snippet_blueprint_id( $post_id, 'inline:' . ( $index + 1 ) );
+			$blueprint               = $snippet['blueprint'];
 		} else {
 			// Keep snippets with unusable setup visible without offering a Run action that cannot succeed.
 			$attributes['runnable'] = 'false';
@@ -303,8 +290,8 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 		return '';
 	}
 
-	if ( isset( $attributes['blueprint'] ) && $attributes['blueprint'] === $inline_blueprint_id ) {
-		PHP_Code_Snippet_Blueprint_Queue::enqueue( $attributes['blueprint'], $snippet['blueprint'] );
+	if ( null !== $blueprint ) {
+		PHP_Code_Snippet_Blueprint_Queue::enqueue( $attributes['blueprint'], $blueprint );
 	}
 
 	return $snippet_output;
