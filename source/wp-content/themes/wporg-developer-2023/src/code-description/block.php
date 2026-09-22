@@ -353,8 +353,9 @@ function render_php_code_snippet_element( $code, $attributes, $expected_output =
 
 	/*
 	 * The element trims the source before it renders; trim the fallback too
-	 * so nothing shifts when it upgrades. Escape HTML syntax characters, and `[` so that shortcode processing on `the_content`
-	 * cannot match anything in the snippet source.
+	 * so nothing shifts when it upgrades. Escape HTML syntax characters, and
+	 * `[` so that shortcode processing on `the_content` cannot match anything
+	 * in the snippet source.
 	 */
 	$html->replace_current_token(
 		strtr(
