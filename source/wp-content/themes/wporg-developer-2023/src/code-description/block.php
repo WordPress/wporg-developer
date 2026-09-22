@@ -102,10 +102,10 @@ function get_description_content( $post_id ) {
 
 	// Fallback: any snippet without a placeholder (e.g. metadata imported from an
 	// older parser that stripped fences without leaving markers) is appended, so
-	// nothing is silently dropped.
+	// nothing is silently dropped. Snippets are keyed by the N of their placeholder.
 	$appended = '';
-	foreach ( array_values( $snippets ) as $index => $snippet ) {
-		if ( isset( $placed[ $index ] ) ) {
+	foreach ( $snippets as $index => $snippet ) {
+		if ( ! is_int( $index ) || isset( $placed[ $index ] ) ) {
 			continue;
 		}
 		if ( ! is_array( $snippet ) || ( $snippet['type'] ?? '' ) !== 'php-code-snippet' ) {
