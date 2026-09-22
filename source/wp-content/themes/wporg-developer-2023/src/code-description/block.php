@@ -268,21 +268,8 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 		$code = substr( $code, strlen( $preamble ) );
 	}
 
-	$code = wp_json_encode( $code, JSON_HEX_TAG | JSON_UNESCAPED_SLASHES );
-	if ( ! is_string( $code ) ) {
-		return '';
-	}
-
-	if ( array_key_exists( 'expected_output', $snippet ) ) {
-		if ( ! is_string( $snippet['expected_output'] ) ) {
-			return '';
-		}
-
-		$expected_output = wp_json_encode( $snippet['expected_output'], JSON_HEX_TAG | JSON_UNESCAPED_SLASHES );
-		if ( ! is_string( $expected_output ) ) {
-			return '';
-		}
-	}
+	// An unusable expected output is ignored; the snippet still renders and runs.
+	$expected_output = is_string( $snippet['expected_output'] ?? null ) ? $snippet['expected_output'] : '';
 
 	$post_slug = get_post_field( 'post_name', $post_id );
 	if ( ! $post_slug ) {
@@ -312,38 +299,98 @@ function render_php_code_snippet( $post_id, $index, $snippet, $setup_blueprints,
 		}
 	}
 
+	$snippet_output = render_php_code_snippet_element( $code, $attributes, $expected_output );
+	if ( '' === $snippet_output ) {
+		return '';
+	}
+
 	$output = '';
 
 	if ( isset( $attributes['blueprint'] ) && $attributes['blueprint'] === $inline_blueprint_id ) {
 		$output .= render_php_code_snippet_blueprint_script( $attributes['blueprint'], $snippet['blueprint'] );
 	}
 
-	$snippet_output = '<php-snippet>';
-	$snippet_output .= wp_get_inline_script_tag(
-		$code,
-		array( 'type' => 'application/x-php+json' )
+	return $output . $snippet_output;
+}
+
+/**
+ * Render a PHP snippet with a source fallback visible before initialization.
+ *
+ * @param string $code            Snippet PHP source.
+ * @param array  $attributes      Snippet element attributes.
+ * @param string $expected_output Expected output, or an empty string when unspecified.
+ * @return string
+ */
+function render_php_code_snippet_element( $code, $attributes, $expected_output = '' ) {
+	$scripts = render_php_code_snippet_json_script( $code, array( 'type' => 'application/x-php+json' ) );
+	if ( '' === $scripts ) {
+		return '';
+	}
+
+	// Expected output is an enhancement. If it cannot be set, don't fail the whole snippet; just omit the expected output.
+	if ( '' !== $expected_output ) {
+		$scripts .= render_php_code_snippet_json_script( $expected_output, array( 'type' => 'text/expected-output+json' ) );
+	}
+
+	$html = new PHP_Code_Snippet_Placeholder_Processor(
+		// The following line looks like a template replacement, but it is just a text node `{{PLACEHOLDER}}`.
+		"<php-snippet>{$scripts}<pre><code class='language-php'>{{PLACEHOLDER}}</code></pre></php-snippet>"
 	);
 
-	if ( array_key_exists( 'expected_output', $snippet ) ) {
-		$snippet_output .= wp_get_inline_script_tag(
-			$expected_output,
-			array( 'type' => 'text/expected-output+json' )
-		);
+	if ( ! $html->next_tag( 'php-snippet' ) ) {
+		return '';
 	}
-
-	$snippet_output .= '</php-snippet>';
-
-	$tags = new \WP_HTML_Tag_Processor( $snippet_output );
-	if ( $tags->next_tag( 'php-snippet' ) ) {
-		foreach ( $attributes as $name => $value ) {
-			$tags->set_attribute( $name, $value );
+	foreach ( $attributes as $name => $value ) {
+		if ( ! $html->set_attribute( $name, $value ) ) {
+			return '';
 		}
-		$snippet_output = $tags->get_updated_html();
 	}
 
-	$output .= $snippet_output;
+	// Move into the CODE element's placeholder text node and replace it.
+	if ( ! $html->next_tag( 'code' ) || ! $html->next_token() ) {
+		return '';
+	}
 
-	return $output;
+	/*
+	 * The element trims the source before it renders; trim the fallback too
+	 * so nothing shifts when it upgrades. Escape HTML syntax characters, and
+	 * `[` so that shortcode processing on `the_content` cannot match anything
+	 * in the snippet source.
+	 */
+	$html->replace_current_token(
+		strtr(
+			trim( $code ),
+			array(
+				'&' => '&amp;',
+				'<' => '&lt;',
+				'>' => '&gt;',
+				'[' => '&#91;',
+			)
+		)
+	);
+
+	return $html->get_updated_html();
+}
+
+/**
+ * Render a script tag whose text is a snippet payload string encoded as JSON.
+ *
+ * The tag is printed inside `the_content`, where `do_shortcode` runs later.
+ * `[` is escaped in the JSON so a shortcode in the payload cannot match.
+ * Only a string is accepted: the escape assumes a single JSON string, and
+ * would corrupt JSON array syntax.
+ *
+ * @param string $value      String to encode.
+ * @param array  $attributes Script tag attributes.
+ * @return string Script tag, or an empty string on failure.
+ */
+function render_php_code_snippet_json_script( string $value, array $attributes ) {
+	$json = wp_json_encode( $value, JSON_HEX_TAG | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_LINE_TERMINATORS );
+	if ( ! is_string( $json ) ) {
+		return '';
+	}
+
+	return wp_get_inline_script_tag( str_replace( '[', '\\u005B', $json ), $attributes );
 }
 
 /**
@@ -362,7 +409,7 @@ function render_php_code_snippet_blueprint_script( $id, $blueprint ) {
 		return '';
 	}
 
-	$blueprint = wp_json_encode( $blueprint, JSON_HEX_TAG | JSON_UNESCAPED_SLASHES );
+	$blueprint = wp_json_encode( $blueprint, JSON_HEX_TAG | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_LINE_TERMINATORS );
 	if ( ! is_string( $blueprint ) ) {
 		return '';
 	}
@@ -382,16 +429,8 @@ function render_php_code_snippet_blueprint_script( $id, $blueprint ) {
  * Hooked to `wp_footer` when a page renders snippets.
  */
 function print_php_code_snippet_auto_prepend_script() {
-	$auto_prepend_script = wp_json_encode(
+	echo render_php_code_snippet_json_script(
 		"<?php require_once '/wordpress/wp-load.php';",
-		JSON_HEX_TAG | JSON_UNESCAPED_SLASHES
-	);
-	if ( ! is_string( $auto_prepend_script ) ) {
-		return;
-	}
-
-	wp_print_inline_script_tag(
-		$auto_prepend_script,
 		array(
 			'id'   => PHP_CODE_SNIPPET_AUTO_PREPEND_ID,
 			'type' => 'application/x-php+json',
@@ -414,7 +453,7 @@ function get_php_code_snippet_blueprint_id( $post_id, $key ) {
 }
 
 /**
- * HTML processor for replacing parser snippet placeholder comments.
+ * HTML processor that can replace the current token with HTML.
  */
 class PHP_Code_Snippet_Placeholder_Processor extends \WP_HTML_Tag_Processor {
 	/**
