@@ -449,13 +449,14 @@ function get_php_code_snippet_blueprint_id( $post_id, $key ) {
  * @param array|object $blueprint Blueprint data.
  */
 function enqueue_php_code_snippet_blueprint_script( $id, $blueprint ) {
-	static $queue = array();
+	static $queue      = array();
+	static $registered = false;
 
 	if ( isset( $queue[ $id ] ) ) {
 		return;
 	}
 
-	if ( ! $queue ) {
+	if ( ! $registered ) {
 		add_action(
 			'wp_footer',
 			function () use ( &$queue ) {
@@ -465,6 +466,7 @@ function enqueue_php_code_snippet_blueprint_script( $id, $blueprint ) {
 				$queue = array();
 			}
 		);
+		$registered = true;
 	}
 
 	$queue[ $id ] = $blueprint;
