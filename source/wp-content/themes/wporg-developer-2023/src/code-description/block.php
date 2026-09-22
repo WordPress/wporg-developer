@@ -13,11 +13,6 @@ const PHP_CODE_SNIPPET_SCRIPT_URL = 'https://playground.wordpress.net/php-code-s
  */
 const PHP_CODE_SNIPPET_AUTO_PREPEND_ID = 'wporg-code-snippet-auto-prepend';
 
-/**
- * Flags for every JSON payload printed for PHP code snippets.
- */
-const PHP_CODE_SNIPPET_JSON_FLAGS = JSON_HEX_TAG | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_LINE_TERMINATORS;
-
 add_action( 'init', __NAMESPACE__ . '\init' );
 
 /**
@@ -390,7 +385,7 @@ function render_php_code_snippet_element( $code, $attributes, $expected_output =
  * @return string Script tag, or an empty string on failure.
  */
 function render_php_code_snippet_json_script( string $value, array $attributes ) {
-	$json = wp_json_encode( $value, PHP_CODE_SNIPPET_JSON_FLAGS );
+	$json = wp_json_encode( $value, JSON_HEX_TAG | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_LINE_TERMINATORS );
 	if ( ! is_string( $json ) ) {
 		return '';
 	}
@@ -414,7 +409,7 @@ function render_php_code_snippet_blueprint_script( $id, $blueprint ) {
 		return '';
 	}
 
-	$blueprint = wp_json_encode( $blueprint, PHP_CODE_SNIPPET_JSON_FLAGS );
+	$blueprint = wp_json_encode( $blueprint, JSON_HEX_TAG | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_LINE_TERMINATORS );
 	if ( ! is_string( $blueprint ) ) {
 		return '';
 	}
