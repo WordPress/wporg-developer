@@ -31,8 +31,8 @@ add_shortcode(
 add_shortcode(
 	'article_edit_link',
 	function() {
-		global $post;
-		$markdown_source = get_markdown_edit_link( $post->ID );
+		$post = get_post();
+		$markdown_source = get_markdown_edit_link( $post->ID ?? 0 );
 		if ( $markdown_source ) {
 			return esc_url( $markdown_source );
 		}
@@ -46,14 +46,16 @@ add_shortcode(
 add_shortcode(
 	'article_changelog_link',
 	function() {
-		global $post;
-		$markdown_source = get_markdown_edit_link( $post->ID );
-		// If this is a github page, use the edit URL to generate the
-		// commit history URL
+		$url             = '';
+		$post            = get_post();
+		$markdown_source = get_markdown_edit_link( $post->ID ?? 0 );
+
+		// Rewrite the GitHub edit URL to a commit-history URL; esc_url() the unescaped meta and fall back to '#'.
 		if ( str_contains( $markdown_source, 'github.com' ) ) {
-			return str_replace( '/edit/', '/commits/', $markdown_source );
+			$url = esc_url( str_replace( '/edit/', '/commits/', $markdown_source ) );
 		}
-		return '#';
+
+		return $url ? $url : '#';
 	}
 );
 
@@ -63,7 +65,6 @@ add_shortcode(
 add_shortcode(
 	'article_title',
 	function() {
-		global $post;
 		return get_the_title();
 	}
 );
@@ -74,8 +75,8 @@ add_shortcode(
 add_shortcode(
 	'last_updated',
 	function() {
-		global $post;
-		if ( get_the_modified_date( 'Ymdhi', $post->ID ) > get_the_date( 'Ymdhi', $post->ID ) ) {
+		$post = get_post();
+		if ( $post && get_the_modified_date( 'Ymdhi', $post->ID ) > get_the_date( 'Ymdhi', $post->ID ) ) {
 			return '<p style="font-style:normal;font-weight:700">' . esc_html__( 'Last updated', 'wporg' ) . '</p>';
 		}
 		return '';
@@ -88,6 +89,10 @@ add_shortcode(
  * @param int $post_id Post ID.
  */
 function get_markdown_edit_link( $post_id ) {
+	if ( ! $post_id ) {
+		return;
+	}
+
 	$markdown_source = get_post_meta( $post_id, 'wporg_markdown_source', true );
 	if ( ! $markdown_source ) {
 		return;

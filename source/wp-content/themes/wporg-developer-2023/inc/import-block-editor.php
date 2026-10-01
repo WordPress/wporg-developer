@@ -64,6 +64,13 @@ class DevHub_Block_Editor_Importer extends DevHub_Docs_Importer {
 			'reference-guides/block-api/versions'                 => 'reference-guides/block-api/block-api-versions',
 			'reference-guides/packages/packages-experiments'      => 'reference-guides/packages/packages-private-apis',
 
+			// After Navigator restructuring, September 2024.
+			'reference-guides/components/navigator-back-button'      => 'reference-guides/components/navigator',
+			'reference-guides/components/navigator-button'           => 'reference-guides/components/navigator',
+			'reference-guides/components/navigator-provider'         => 'reference-guides/components/navigator',
+			'reference-guides/components/navigator-screen'           => 'reference-guides/components/navigator',
+			'reference-guides/components/navigator-to-parent-button' => 'reference-guides/components/navigator',
+
 			// After IAPI restructuring, April 2024.
 			'reference-guides/packages/packages-interactivity/packages-interactivity-api-reference' => 'reference-guides/interactivity-api/api-reference',
 
@@ -105,6 +112,11 @@ class DevHub_Block_Editor_Importer extends DevHub_Docs_Importer {
 			'tutorials/devenv'                => 'getting-started/devenv',
 			'tutorials/devenv/docker-ubuntu'  => 'getting-started/devenv/docker-ubuntu',
 			'tutorials/block-based-theme'     => 'how-to-guides/themes/block-theme-overview',
+
+			// After IAPI restructuring, Feb 2025 - PRs #75357 & #74974.
+			'reference-guides/interactivity-api/api-reference'                                                              => 'reference-guides/interactivity-api/directives-and-store',
+			'reference-guides/interactivity-api/core-concepts/undestanding-global-state-local-context-and-derived-state'    => 'reference-guides/interactivity-api/core-concepts/understanding-global-state-local-context-derived-state-and-config',
+
 		];
 
 		// General path redirects. (More specific path first.)
@@ -199,7 +211,7 @@ class DevHub_Block_Editor_Importer extends DevHub_Docs_Importer {
 
 	/**
 	 * Fixes fetched value of markdown_source meta field to not be the
-	 * raw.githubcontent.com domain that is currently incorrectly used
+	 * raw.githubusercontent.com domain that is currently incorrectly used
 	 * in the block editor manifest.
 	 *
 	 * @param mixed  $null      A value for the meta if its data retrieval is

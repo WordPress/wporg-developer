@@ -14,6 +14,8 @@ class DevHub_CLI {
 		add_action( 'pre_get_posts', array( __CLASS__, 'action_pre_get_posts' ) );
 		add_action( 'devhub_cli_manifest_import', array( __CLASS__, 'action_devhub_cli_manifest_import' ) );
 		add_action( 'devhub_cli_markdown_import', array( __CLASS__, 'action_devhub_cli_markdown_import' ) );
+
+		add_filter( 'the_content', array( __CLASS__, 'fix_formatting' ), 5 );
 	}
 
 	public static function action_init_register_cron_jobs() {
@@ -305,6 +307,26 @@ class DevHub_CLI {
 			$cleaned_parts[] = $part;
 		}
 		return implode( '/', $cleaned_parts );
+	}
+
+	/**
+	 * Fixes markdown formatting that didn't get properly handled.
+	 *
+	 * Currently this only fixes display of markdown for associative array-like syntax used to delineate values for WP-CLI command options.
+	 *
+	 * @param string $text The post content to fix.
+	 * @return string
+	 */
+	public static function fix_formatting( $text ) {
+		// An associative array-like list.
+		// Note: This preserves the list-like appearance rather than rewriting as an HTML list. See https://meta.trac.wordpress.org/ticket/7397.
+		if ( false !== strpos( $text, "&#045;--\n" ) ) {
+			$text = preg_replace_callback( '/&#045;\-\-(.+)&#045;\-\-/imsU', function( $matches ) {
+				return '<br>&mdash;<br>' . str_replace( "\n", "<br>\n", trim( $matches[1] ) ) . '<br>&mdash;<br>';
+			}, $text );
+		}
+
+		return $text;
 	}
 
 }

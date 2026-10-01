@@ -15,5 +15,5 @@ wp post create --post_type=page --post_title=Dashicons --post_status=publish --p
 wp option update page_on_front `wp post list --post_type=page --name=home --format=ids`
 wp option update show_on_front page
 
-# Run all cron tasks (Including Handbook imports from GitHub)
-wp cron event run --all
+# Run manifest imports first, then all remaining cron tasks concurrently.
+( wp cron-concurrent run --filter=import_manifest && wp cron-concurrent run ) || wp cron event run --all

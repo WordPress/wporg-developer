@@ -81,8 +81,14 @@ if ( class_exists( '\\WordPressdotorg\\Markdown\\Importer' ) ) {
 	// REST API handbook.
 	require __DIR__ . '/inc/rest-api.php';
 
+	// Secure Custom Fields handbook.
+	require __DIR__ . '/inc/import-scf.php';
+
 	// Advanced Administration handbook.
 	require __DIR__ . '/inc/import-advanced-admin.php';
+
+	// Playground handbook.
+	require __DIR__ . '/inc/import-playground.php';
 }
 
 /**
@@ -150,7 +156,6 @@ require __DIR__ . '/inc/shortcode-dashicons.php';
 require __DIR__ . '/inc/block-hooks.php';
 
 // Block files
-require_once __DIR__ . '/src/chapter-list/block.php';
 require_once __DIR__ . '/src/cli-command-table/block.php';
 require_once __DIR__ . '/src/code-changelog/block.php';
 require_once __DIR__ . '/src/code-deprecated/block.php';
@@ -181,7 +186,6 @@ require_once __DIR__ . '/src/reference-new-updated/block.php';
 require_once __DIR__ . '/src/resource-select/index.php';
 require_once __DIR__ . '/src/search-filters/index.php';
 require_once __DIR__ . '/src/search-post/index.php';
-require_once __DIR__ . '/src/search-results-context/index.php';
 
 add_action( 'init', __NAMESPACE__ . '\\init' );
 add_filter( 'wporg_block_site_breadcrumbs', __NAMESPACE__ . '\set_site_breadcrumbs' );
@@ -590,7 +594,7 @@ function add_site_navigation_menus( $menus ) {
 }
 
 /**
- * Filter the template heiarchy to add in a general handbook & github handbook template.
+ * Filter the template hierarchy to add in a general handbook & github handbook template.
  *
  * @param string[] $templates A list of template candidates, in descending order of priority.
  * @return string[] Updated list of templates.
@@ -732,6 +736,8 @@ function get_adjacent_handbook_post_link( $output, $format, $link, $post, $adjac
 			'post_type'   => get_post_type( $post_id ),
 		)
 	);
+
+	$adj_index   = 0;
 	$is_previous = 'previous' === $adjacent;
 
 	foreach ( $pages as $i => $page ) {

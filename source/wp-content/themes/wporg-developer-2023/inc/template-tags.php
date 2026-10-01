@@ -840,23 +840,19 @@ namespace DevHub {
 						// If a known default is stated in the parameter's description, try to remove it
 						// since the actual default value is displayed immediately following description.
 						$default = htmlentities( $arg['default'] );
-						$params[ $arg['name'] ]['content'] = str_replace( "default is {$default}.", '', $params[ $arg['name'] ]['content'] );
-						$params[ $arg['name'] ]['content'] = str_replace( "Default {$default}.", '', $params[ $arg['name'] ]['content'] );
+						$default_strings = [
+							"default is {$default}.",
+							"Default {$default}.",
+							"Default <code>{$default}</code>.",
+							'Default empty.',
+							'Default empty string.',
+							'Default empty array.',
+						];
 
-						// When the default is '', docs sometimes say "Default empty." or similar.
-						if ( "''" == $arg['default'] ) {
-							$params[ $arg['name'] ]['content'] = str_replace( "Default empty.", '', $params[ $arg['name'] ]['content'] );
-							$params[ $arg['name'] ]['content'] = str_replace( "Default empty string.", '', $params[ $arg['name'] ]['content'] );
+						foreach ( $default_strings as $default_string ) {
+							$params[ $arg['name'] ]['content'] = str_replace( $default_string, '', $params[ $arg['name'] ]['content'] );
+						}
 
-							// Only a few cases of this. Remove once core is fixed.
-							$params[ $arg['name'] ]['content'] = str_replace( "default is empty string.", '', $params[ $arg['name'] ]['content'] );
-						}
-						// When the default is array(), docs sometimes say "Default empty array." or similar.
-						elseif (  'array()' == $arg['default'] ) {
-							$params[ $arg['name'] ]['content'] = str_replace( "Default empty array.", '', $params[ $arg['name'] ]['content'] );
-							// Not as common.
-							$params[ $arg['name'] ]['content'] = str_replace( "Default empty.", '', $params[ $arg['name'] ]['content'] );
-						}
 					}
 				}
 			}
@@ -1008,6 +1004,8 @@ namespace DevHub {
 		// If deprecated, add the since version to the term and meta lists.
 		if ( $deprecated ) {
 			$deprecated = array_shift( $deprecated );
+			// Prepend 'Deprecated.' to the description to make clear the changelog entry's purpose.
+			$deprecated['description'] = 'Deprecated. ' . ( $deprecated['description'] ?? '' );
 
 			if ( $term = get_term_by( 'name', $deprecated['content'], 'wp-parser-since' ) ) {
 				// Terms.
@@ -1101,13 +1099,11 @@ namespace DevHub {
 			return '';
 		}
 
-		$deprecation_info = '';
-
-		$referral = wp_filter_object_list( $tags, array( 'name' => 'see' ) );
-		$referral = array_shift( $referral );
-
 		// Construct message pointing visitor to preferred alternative, as provided
 		// via @see, if present.
+		$deprecation_info = '';
+		$referral = wp_filter_object_list( $tags, array( 'name' => 'see' ) );
+		$referral = array_shift( $referral );
 		if ( ! empty( $referral['refers'] ) ) {
 			$refers = sanitize_text_field( $referral['refers'] );
 
@@ -1118,7 +1114,10 @@ namespace DevHub {
 				}
 
 				/* translators: %s: Linked internal element name */
-				$deprecation_info = ' ' . sprintf( __( 'Use %s instead.', 'wporg' ), \DevHub_Formatting::link_internal_element( $refers ) );
+				$link = \DevHub_Formatting::link_internal_element( $refers );
+				if ( $link !== $refers ) {
+					$deprecation_info = ' ' . sprintf( __( 'Use %s instead.', 'wporg' ), $link );
+				}
 			}
 		}
 
@@ -1134,11 +1133,22 @@ namespace DevHub {
 			}
 		}
 
-		/* translators: 1: parsed post post, 2: String for alternative function (if one exists) */
-		$contents = sprintf( __( 'This %1$s has been deprecated.%2$s', 'wporg' ),
-			$type,
-			$deprecation_info
-		);
+		$deprecation_version = $deprecated['content'] ?? '';
+
+		if ( $deprecation_version ) {
+			/* translators: 1: parsed post post, 2: WP version of deprecation, 3: String for alternative function (if one exists) */
+			$contents = sprintf( __( 'This %1$s has been deprecated since %2$s.%3$s', 'wporg' ),
+				$type,
+				$deprecation_version,
+				$deprecation_info
+			);
+		} else {
+			/* translators: 1: parsed post post, 2: String for alternative function (if one exists) */
+			$contents = sprintf( __( 'This %1$s has been deprecated.%2$s', 'wporg' ),
+				$type,
+				$deprecation_info
+			);
+		}
 
 		return $contents;
 	}
@@ -1422,7 +1432,7 @@ namespace DevHub {
 
 		$ids = $wpdb->get_col(
 			"SELECT p2p_to
-			FROM {$wpdb->p2p} p2p
+			FROM {$wpdb->prefix}p2p p2p
 			WHERE p2p_type IN ( 'methods_to_functions', 'functions_to_functions', 'methods_to_methods', 'functions_to_methods' )
 			GROUP BY p2p_to
 			HAVING COUNT(*) > 50"
@@ -1531,7 +1541,20 @@ namespace DevHub {
 
 		// Find just the relevant source code
 		$source_code = '';
-		$handle = @fopen( get_source_code_root_dir() . $source_file, 'r' );
+
+		// The source-file name is a taxonomy term, so resolve it and confirm it stays inside the parsed tree.
+		$root_real    = realpath( get_source_code_root_dir() );
+		$file_on_disk = realpath( get_source_code_root_dir() . $source_file );
+
+		if (
+			! $root_real || ! $file_on_disk ||
+			! str_starts_with( $file_on_disk, $root_real . DIRECTORY_SEPARATOR ) ||
+			! is_file( $file_on_disk )
+		) {
+			return '';
+		}
+
+		$handle = fopen( $file_on_disk, 'r' );
 		if ( $handle ) {
 			$line = -1;
 			while ( ! feof( $handle ) ) {
@@ -1679,6 +1702,11 @@ namespace DevHub {
 	function get_summary( $post = null ) {
 		$post = get_post( $post );
 
+		// Reading the raw excerpt column bypasses the password gate; withhold it when protected.
+		if ( post_password_required( $post ) ) {
+			return '';
+		}
+
 		$summary = $post->post_excerpt;
 
 		if ( $summary ) {
@@ -1723,6 +1751,11 @@ namespace DevHub {
 	function get_description( $post = null ) {
 		$post = get_post( $post );
 
+		// Reading the raw content column bypasses the password gate; withhold it when protected.
+		if ( post_password_required( $post ) ) {
+			return '';
+		}
+
 		$description = $post->post_content;
 
 		// Replace code blocks generated by Markdown with wp:code blocks.
@@ -1733,7 +1766,17 @@ namespace DevHub {
 			// Remove the filter that adds the code reference block to the content.
 			remove_filter( 'the_content', 'DevHub\filter_code_content', 4 );
 
+			// Descriptions are already HTML. wpautop() adds invalid paragraphs around code blocks and snippets.
+			$wpautop_priority = has_filter( 'the_content', 'wpautop' );
+			if ( false !== $wpautop_priority ) {
+				remove_filter( 'the_content', 'wpautop', $wpautop_priority );
+			}
+
 			$description = apply_filters( 'the_content', apply_filters( 'get_the_content' , $description ) );
+
+			if ( false !== $wpautop_priority ) {
+				add_filter( 'the_content', 'wpautop', $wpautop_priority );
+			}
 
 			// Re-add the filter that adds this block to the content.
 			add_filter( 'the_content', 'DevHub\filter_code_content', 4 );
@@ -1894,8 +1937,9 @@ namespace DevHub {
 			return '';
 		}
 
-		// Currently only handling private access messages for functions, hooks, and methods.
-		if ( ! in_array( get_post_type( $post ), array( 'wp-parser-function', 'wp-parser-hook', 'wp-parser-method' ) ) ) {
+		$post_type = get_post_type( $post );
+
+		if ( ! is_parsed_post_type( $post_type ) ) {
 			return '';
 		}
 
@@ -1918,24 +1962,14 @@ namespace DevHub {
 			return '';
 		}
 
-		$referral = wp_filter_object_list( $tags, array( 'name' => 'see' ) );
-		$referral = array_shift( $referral );
-
-		if ( ! empty( $referral['refers'] ) ) {
-			$refers = sanitize_text_field( $referral['refers'] );
-
-			if ( ! empty( $refers ) ) {
-				/* translators: 1: Linked internal element name */
-				$alternative_string = sprintf( __( ' Use %s instead.', 'wporg' ), \DevHub_Formatting::link_internal_element( $refers ) );
-			}
-		} else {
-			$alternative_string = '';
-		}
-
 		/* translators: 1: String for alternative function (if one exists) */
-		$contents = sprintf( __( 'This function&#8217;s access is marked private. This means it is not intended for use by plugin or theme developers, only in other core functions. It is listed here for completeness.%s', 'wporg' ),
-			$alternative_string
-		);
+		if ( 'wp-parser-class' === $post_type ) {
+			$contents = __( 'This class&#8217;s access is marked private. This means it is not intended for use by plugin or theme developers, only by core. It is listed here for completeness.', 'wporg' );
+		} elseif ( 'wp-parser-hook' === $post_type ) {
+			$contents = __( 'This hook&#8217;s access is marked private. This means it is not intended for use by plugin or theme developers, only by core. It is listed here for completeness.', 'wporg' );
+		} else {
+			$contents = __( 'This function&#8217;s access is marked private. This means it is not intended for use by plugin or theme developers, only by core. It is listed here for completeness.', 'wporg' );
+		}
 
 		return $contents;
 	}

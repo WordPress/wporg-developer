@@ -10,25 +10,12 @@
  * and Method-editing screens.
  */
 class WPORG_Edit_Parsed_Content {
-
-	/**
-	 * Post types array.
-	 *
-	 * Includes the Code Reference post types.
-	 *
-	 * @access public
-	 * @var array
-	 */
-	public $post_types;
-
 	/**
 	 * Constructor.
 	 *
 	 * @access public
 	 */
 	public function __construct() {
-		$this->post_types = DevHub\get_parsed_post_types();
-
 		// Data.
 		add_action( 'add_meta_boxes',              array( $this, 'add_meta_boxes'        ) );
 		add_action( 'save_post',                   array( $this, 'save_post'             ) );
@@ -52,7 +39,7 @@ class WPORG_Edit_Parsed_Content {
 	 * @access public
 	 */
 	public function add_meta_boxes() {
-		if ( in_array( $screen = get_current_screen()->id, $this->post_types ) ) {
+		if ( in_array( $screen = get_current_screen()->id, DevHub\get_parsed_post_types() ) ) {
 			remove_meta_box( 'postexcerpt', $screen, 'normal' );
 			add_meta_box( 'wporg_parsed_content', __( 'Parsed Content', 'wporg' ), array( $this, 'parsed_meta_box_cb' ), $screen, 'normal' );
 		}
@@ -166,7 +153,7 @@ class WPORG_Edit_Parsed_Content {
 	 */
 	public function admin_enqueue_scripts() {
 		// Only enqueue 'wporg-parsed-content' script and styles on Code Reference post type screens.
-		if ( in_array( get_current_screen()->id, $this->post_types ) ) {
+		if ( in_array( get_current_screen()->id, DevHub\get_parsed_post_types() ) ) {
 			wp_enqueue_script(
 				'wporg-parsed-content',
 				get_stylesheet_directory_uri() . '/js/parsed-content.js',
@@ -195,6 +182,15 @@ class WPORG_Edit_Parsed_Content {
 	public function attach_ticket() {
 		check_ajax_referer( 'wporg-attach-ticket', 'nonce' );
 
+		$post_id = empty( $_REQUEST['post_id'] ) ? 0 : absint( $_REQUEST['post_id'] );
+
+		if ( ! $post_id || ! current_user_can( 'edit_post', $post_id ) ) {
+			wp_send_json_error( array(
+				'message'   => __( 'Insufficient permissions.', 'wporg' ),
+				'new_nonce' => wp_create_nonce( 'wporg-attach-ticket' ),
+			) );
+		}
+
 		$ticket_no  = empty( $_REQUEST['ticket'] ) ? 0 : absint( $_REQUEST['ticket'] );
 		$ticket_url = "https://core.trac.wordpress.org/ticket/{$ticket_no}";
 
@@ -213,7 +209,9 @@ class WPORG_Edit_Parsed_Content {
 				@$doc->loadHTML( $body );
 
 				$nodes = $doc->getElementsByTagName( 'title' );
-				$title = $nodes->item( 0 )->nodeValue;
+
+				// nodeValue is decoded text; treat it as untrusted and guard the missing title.
+				$title = $nodes->item( 0 ) ? sanitize_text_field( $nodes->item( 0 )->nodeValue ) : '';
 
 				// Strip off the site name.
 				$title = str_ireplace( ' – WordPress Trac', '', $title );
@@ -221,12 +219,10 @@ class WPORG_Edit_Parsed_Content {
 				die( -1 );
 			}
 
-			$post_id = empty( $_REQUEST['post_id'] ) ? 0 : absint( $_REQUEST['post_id'] );
-
 			update_post_meta( $post_id, 'wporg_ticket_number', $ticket_no );
 			update_post_meta( $post_id, 'wporg_ticket_title', $title );
 
-			$link = sprintf( '<a href="%1$s">%2$s</a>', esc_url( $ticket_url ), apply_filters( 'the_title', $title ) );
+			$link = sprintf( '<a href="%1$s">%2$s</a>', esc_url( $ticket_url ), esc_html( apply_filters( 'the_title', $title ) ) );
 
 			// Can haz success.
 			wp_send_json_success( array(

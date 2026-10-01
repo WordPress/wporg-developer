@@ -1,12 +1,38 @@
-name: Build and push to build branch.
+name: Build branch to dist/<branch>.
+
+# Builds any branch and force-pushes the built theme (theme files at the repo
+# root, exactly as the live SVN theme expects) to `dist/<branch>`. This lets a
+# sandbox check out `dist/<branch>` at wp-content/themes/wporg-developer-2023
+# and get a ready-to-serve build without running the toolchain locally.
+#
+# Note: the production `build` branch (built from `trunk`) is handled by
+# build.yml. We use the `dist/` prefix here because git refs can't nest under
+# an existing `build` branch (`build` and `build/foo` collide).
 
 on:
     push:
-        branches: [trunk]
+        branches-ignore:
+            - trunk
+            - build
+            - build-old
+            - old
+            - dist/**
+    workflow_dispatch:
+
+permissions:
+    contents: read
+
+concurrency:
+    group: build-branch-${{ github.ref_name }}
+    cancel-in-progress: true
 
 jobs:
     build:
         runs-on: ubuntu-latest
+        permissions:
+            contents: write
+        env:
+            DIST_REF: dist/${{ github.ref_name }}
         steps:
             - name: Checkout repository
               uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -57,6 +83,6 @@ jobs:
               uses: actions-js/push@5a7cbd780d82c0c937b5977586e641b2fd94acc5 # 1.5
               with:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
-                  branch: build
+                  branch: ${{ env.DIST_REF }}
                   force: true
                   message: 'Build: ${{ github.sha }}'

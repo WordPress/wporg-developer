@@ -68,7 +68,7 @@ function render( $attributes, $content, $block ) {
 		__( 'Related', 'wporg' )
 	);
 
-	$wrapper_attributes = get_block_wrapper_attributes();
+	$wrapper_attributes = get_block_wrapper_attributes( [ 'data-nosnippet' => 'true' ] );
 	return sprintf(
 		'<section %1$s>%2$s %3$s %4$s</section>',
 		$wrapper_attributes,

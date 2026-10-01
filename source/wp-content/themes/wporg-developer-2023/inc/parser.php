@@ -26,6 +26,7 @@ class DevHub_Parser {
 		'wp-includes/block-patterns/',
 		'wp-includes/block-supports/',
 		'wp-includes/certificates/',
+		'wp-includes/class-avif-info.php',
 		'wp-includes/class-IXR.php',
 		'wp-includes/class-json.php',
 		'wp-includes/class-phpass.php',

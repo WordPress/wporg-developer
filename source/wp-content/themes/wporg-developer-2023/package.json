@@ -5,20 +5,35 @@
 	"author": "WordPress.org",
 	"license": "GPL-2.0-or-later",
 	"private": true,
+	"dependencies": {
+		"@wordpress/i18n": "^6.24.0"
+	},
 	"devDependencies": {
-		"@wordpress/eslint-plugin": "^17.7.0",
-		"@wordpress/scripts": "27.1.0"
+		"@wordpress/eslint-plugin": "^25.6.0",
+		"@wordpress/scripts": "32.6.0"
 	},
 	"eslintConfig": {
-		"extends": "../../../../.eslintrc.js"
+		"extends": "../../../../.eslintrc.js",
+		"rules": {
+			"import/no-unresolved": [ "error", { "ignore": [ "^@wordpress/" ] } ]
+		}
 	},
 	"stylelint": {
-		"extends": "../../../../.stylelintrc"
+		"extends": "@wordpress/stylelint-config/scss-stylistic",
+		"rules": {
+			"@stylistic/max-line-length": 115,
+			"no-descending-specificity": null,
+			"rule-empty-line-before": [ "always-multi-line", {
+				"except": [ "first-nested", "after-single-line-comment" ]
+			} ],
+			"selector-class-pattern": null,
+			"value-keyword-case": [ "lower", { "camelCaseSvgKeywords": true } ]
+		}
 	},
 	"scripts": {
 		"build": "wp-scripts build",
 		"start": "wp-scripts start",
-		"lint:js": "wp-scripts lint-js src",
+		"lint:js": "wp-scripts lint-js --config ../../../../eslint.config.js src",
 		"lint:css": "wp-scripts lint-style *.css src/**/*.scss",
 		"format": "wp-scripts format src"
 	}

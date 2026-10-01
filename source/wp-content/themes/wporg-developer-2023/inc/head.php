@@ -41,15 +41,14 @@ class DevHub_Head {
 
 		if ( is_front_page() || is_feed() ) {
 			$parts['title'] = 'WordPress Developer Resources';
+			$parts['tagline'] = '';
 			return $parts;
-		}
-
-		if ( is_singular() && ( \DevHub\is_parsed_post_type( $post_type ) ) ) {
+		} elseif ( is_singular() && ( \DevHub\is_parsed_post_type( $post_type ) ) ) {
 			// Add post type to title if it's a parsed item.
 			if ( get_post_type_object( $post_type ) ) {
 				$parts['title'] .= " $sep " . get_post_type_object( $post_type )->labels->singular_name;
 			}
-		} elseif ( ( is_singular() || is_post_type_archive() ) && false !== strpos( $post_type, 'handbook' ) ) {
+		} elseif ( ( is_singular() || is_post_type_archive() ) && is_string( $post_type ) && false !== strpos( $post_type, 'handbook' ) ) {
 			// Add handbook name to title if relevant.
 			if ( get_post_type_object( $post_type ) ) {
 				$handbook_label = get_post_type_object( $post_type )->labels->name;
@@ -135,7 +134,8 @@ class DevHub_Head {
 			$desc = get_the_excerpt();
 		} elseif ( is_singular() ) {
 			$post = get_queried_object();
-			if ( $post ) {
+			// Reading post_content directly bypasses the password gate get_the_content() applies.
+			if ( $post && ! post_password_required( $post ) ) {
 				$desc = $post->post_content;
 			}
 		}

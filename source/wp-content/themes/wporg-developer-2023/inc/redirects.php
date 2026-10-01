@@ -27,6 +27,7 @@ class DevHub_Redirects {
 		add_action( 'template_redirect', array( __CLASS__, 'redirect_resources' ) );
 		add_action( 'template_redirect', array( __CLASS__, 'redirect_singularized_handbooks' ), 1 );
 		add_action( 'template_redirect', array( __CLASS__, 'redirect_pluralized_reference_post_types' ), 1 );
+		add_action( 'template_redirect', array( __CLASS__, 'redirect_404_to_alternative_parsed_type' ), 1 );
 		add_action( 'template_redirect', array( __CLASS__, 'paginated_home_page_404' ) );
 		add_action( 'template_redirect', array( __CLASS__, 'user_note_edit' ) );
 	}
@@ -137,6 +138,36 @@ class DevHub_Redirects {
 			if ( 0 === stripos( $path, "/reference/{$post_type_slug_singular}/" ) ) {
 				$path = "/reference/{$post_type_slug_plural}/" . substr( $path, strlen( "/reference/{$post_type_slug_singular}/" ) );
 				wp_redirect( $path, 301 );
+				exit();
+			}
+		}
+	}
+
+	/**
+	 * Redirects a 404 request for a single parsed post type resource to one of another
+	 * parsed post type which has that same-named resource.
+	 *
+	 * E.g. a request for `functions/WP_Query` would redirect to `classes/WP_Query`.
+	 */
+	public static function redirect_404_to_alternative_parsed_type() {
+		if ( is_404() ) {
+			$parsed_post_types = \DevHub\get_parsed_post_types();
+			$post_type = get_query_var( 'post_type' );
+
+			if ( ! in_array( $post_type, $parsed_post_types ) ) {
+				return;
+			}
+
+			// Look for resource in any other parsed post type.
+			$posts = get_posts( [
+				'name'           => get_query_var( 'name' ),
+				'post_status'    => 'publish',
+				'post_type'      => $parsed_post_types,
+				'posts_per_page' => 1,
+			] );
+
+			if ( $posts ) {
+				wp_redirect( get_permalink( $posts[0] ) );
 				exit();
 			}
 		}

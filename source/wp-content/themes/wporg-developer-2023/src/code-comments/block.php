@@ -56,28 +56,35 @@ function render( $attributes, $content, $block ) {
 		);
 	}
 
-	ob_start(); // Capture all output
-
 	$ordered_comments = wporg_developer_get_ordered_notes();
 
 	if ( empty( $ordered_comments ) ) {
 		return '';
 	}
 
+	ob_start(); // Capture all output
 	wporg_developer_list_notes( $ordered_comments, array() );
 
 	$output = ob_get_clean();
 
-	$title_block = sprintf(
-		'<!-- wp:heading --><h2 class="wp-block-heading">%s</h2><!-- /wp:heading -->',
-		__( 'User Contributed Notes', 'wporg' )
-	);
+	/*
+	 * This output is parsed a second time on its way through `the_content`: core's do_blocks at
+	 * priority 9 and do_shortcode at priority 11 both run after filter_code_content() has inserted it.
+	 * Neutralize the syntax of both parsers. The shortcodes a note may use (code, php, js, css) have
+	 * already been expanded by DevHub_User_Submitted_Content::do_note_shortcodes() on `comment_text`,
+	 * so any bracket still present here is literal text.
+	 *
+	 * Nothing in this buffer may emit inline JavaScript or a JSON island: those are the only contexts
+	 * in which the entities below would not be decoded by the browser.
+	 */
+	$output = preg_replace( '/<!--(\s*\/?wp:)/', '&lt;!--$1', $output );
+	$output = str_replace( array( '[', ']' ), array( '&#91;', '&#93;' ), $output );
 
-	$wrapper_attributes = get_block_wrapper_attributes();
+	$wrapper_attributes = get_block_wrapper_attributes( [ 'data-nosnippet' => 'true' ] );
 	return sprintf(
-		'<section %1$s>%2$s <ol class="comment-list">%3$s</ol></section>',
+		'<section %1$s><h2 class="wp-block-heading">%2$s</h2> <ol class="comment-list">%3$s</ol></section>',
 		$wrapper_attributes,
-		$title_block,
+		esc_html__( 'User Contributed Notes', 'wporg' ),
 		$output
 	);
 }
