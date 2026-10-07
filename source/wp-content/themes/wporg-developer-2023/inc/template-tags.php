@@ -744,7 +744,7 @@ namespace DevHub {
 				$arg = (array) $arg;
 				$arg_string = '';
 				if ( ! empty( $arg['name'] ) && ! empty( $types[ $arg['name'] ] ) ) {
-					$arg_string .= ' <span class="arg-type">' . $types[ $arg['name'] ] . '</span>';
+					$arg_string .= ' <span class="arg-type">' . esc_html( $types[ $arg['name'] ] ) . '</span>';
 				}
 
 				if ( ! empty( $arg['name'] ) ) {
@@ -796,7 +796,7 @@ namespace DevHub {
 					$params[ $tag['variable'] ] = $tag;
 					$types = array();
 					foreach ( $tag['types'] as $i => $v ) {
-						$types[ $i ] = sprintf( '<span class="%s">%s</span>', $v, apply_filters( 'devhub-parameter-type', $v, $post_id ) );
+						$types[ $i ] = apply_filters( 'devhub-parameter-type', esc_html( $v ), $post_id );
 					}
 
 					// Normalize spacing at beginning of hash notation params.
