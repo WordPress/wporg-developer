@@ -125,7 +125,14 @@ class DevHub_Formatting {
 			return $content;
 		}
 
-		return preg_replace_callback(
+		// The parser linkified the URL on import. Restore the plain form so the reference sits in one text node.
+		$content = preg_replace(
+			'/\{@(link|see) <a [^>]*href=["\']([^"\']+)["\'][^>]*>[^<]*<\/a>([^}<]*)\}/',
+			'{@$1 $2$3}',
+			$content
+		);
+
+		return self::replace_in_text_nodes(
 			'/\{@(?:link|see) ([^\}]+)\}/',
 			function ( $matches ) {
 
@@ -180,6 +187,30 @@ class DevHub_Formatting {
 			},
 			$content
 		);
+	}
+
+	/**
+	 * Runs a regex replacement over the text nodes of an HTML string only.
+	 *
+	 * Tags and their attribute values pass through verbatim, so generated markup
+	 * only ever forms new elements in text context.
+	 *
+	 * @param string   $pattern  Regular expression to match within text nodes.
+	 * @param callable $callback Replacement callback, as for preg_replace_callback().
+	 * @param string   $content  The HTML content.
+	 * @return string
+	 */
+	public static function replace_in_text_nodes( $pattern, $callback, $content ) {
+		$pieces = wp_html_split( $content );
+
+		// wp_html_split() alternates text and tag pieces, starting with text.
+		foreach ( $pieces as $i => $piece ) {
+			if ( 0 === $i % 2 && '' !== $piece ) {
+				$pieces[ $i ] = preg_replace_callback( $pattern, $callback, $piece );
+			}
+		}
+
+		return implode( '', $pieces );
 	}
 
 	/**

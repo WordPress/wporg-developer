@@ -228,7 +228,7 @@ class Devhub_Handbooks {
 		// Only apply to the 'credits' (themes handbook) and 'credits-2' (plugin
 		// handbook) pages
 		if ( is_single( 'credits' ) || is_single( 'credits-2' ) ) {
-			$content = preg_replace_callback(
+			$content = DevHub_Formatting::replace_in_text_nodes(
 				'/\B@([\w\-]+)/i',
 				function ( $matches ) {
 					return sprintf(
