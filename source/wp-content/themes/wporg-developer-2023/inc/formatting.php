@@ -125,36 +125,11 @@ class DevHub_Formatting {
 			return $content;
 		}
 
-		// The parser linkified the URL on import. Restore the plain form so the reference sits in one text node.
-		$content = preg_replace(
-			'/\{@(link|see) <a [^>]*href=["\']([^"\']+)["\'][^>]*>[^<]*<\/a>([^}<]*)\}/',
-			'{@$1 $2$3}',
-			$content
-		);
-
 		return self::replace_in_text_nodes(
 			'/\{@(?:link|see) ([^\}]+)\}/',
 			function ( $matches ) {
 
 				$link = $matches[1];
-
-				// We may have encoded a link, so unencode if so.
-				// (This would never occur natually.)
-				if ( 0 === strpos( $link, '&lt;a ' ) ) {
-					$link = html_entity_decode( $link );
-				}
-
-				// Undo links made clickable during initial parsing
-				if ( 0 === strpos( $link, '<a ' ) ) {
-
-					if ( preg_match( '/^<a .*href=[\'\"]([^\'\"]+)[\'\"]>(.*)<\/a>(.*)$/', $link, $parts ) ) {
-						$link = $parts[1];
-						if ( $parts[3] ) {
-							$link .= ' ' . $parts[3];
-						}
-					}
-
-				}
 
 				// Link to an external resource.
 				if ( 0 === strpos( $link, 'http' ) ) {
@@ -185,7 +160,24 @@ class DevHub_Formatting {
 
 				return $link;
 			},
-			$content
+			self::unlinkify_references( $content )
+		);
+	}
+
+	/**
+	 * Restores the plain form of references whose URL the parser linkified on import.
+	 *
+	 * `{@link <a href="URL">URL</a> text}` becomes `{@link URL text}`, so the
+	 * reference sits in a single text node for make_doclink_clickable().
+	 *
+	 * @param string $text The text.
+	 * @return string
+	 */
+	public static function unlinkify_references( $text ) {
+		return preg_replace(
+			'/\{@(link|see) <a [^>]*href=["\']([^"\']+)["\'][^>]*>[^<]*<\/a>([^}<]*)\}/',
+			'{@$1 $2$3}',
+			$text
 		);
 	}
 
@@ -366,7 +358,7 @@ class DevHub_Formatting {
 		$text = str_replace( array( '<strong>', '</strong>' ), '__', $text );
 
 		// Encode all htmlentities (but don't double-encode).
-		$text = htmlentities( $text, ENT_COMPAT | ENT_HTML401, 'UTF-8', false );
+		$text = htmlentities( self::unlinkify_references( $text ), ENT_COMPAT | ENT_HTML401, 'UTF-8', false );
 
 		// Simple allowable tags that should get unencoded.
 		// Note: This precludes them from being able to be used in an encoded fashion
