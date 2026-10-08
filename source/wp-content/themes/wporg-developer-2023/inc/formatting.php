@@ -125,29 +125,11 @@ class DevHub_Formatting {
 			return $content;
 		}
 
-		return preg_replace_callback(
+		return self::replace_in_text_nodes(
 			'/\{@(?:link|see) ([^\}]+)\}/',
 			function ( $matches ) {
 
 				$link = $matches[1];
-
-				// We may have encoded a link, so unencode if so.
-				// (This would never occur natually.)
-				if ( 0 === strpos( $link, '&lt;a ' ) ) {
-					$link = html_entity_decode( $link );
-				}
-
-				// Undo links made clickable during initial parsing
-				if ( 0 === strpos( $link, '<a ' ) ) {
-
-					if ( preg_match( '/^<a .*href=[\'\"]([^\'\"]+)[\'\"]>(.*)<\/a>(.*)$/', $link, $parts ) ) {
-						$link = $parts[1];
-						if ( $parts[3] ) {
-							$link .= ' ' . $parts[3];
-						}
-					}
-
-				}
 
 				// Link to an external resource.
 				if ( 0 === strpos( $link, 'http' ) ) {
@@ -178,8 +160,51 @@ class DevHub_Formatting {
 
 				return $link;
 			},
-			$content
+			self::unlinkify_references( $content )
 		);
+	}
+
+	/**
+	 * Restores the plain form of references whose URL the parser linkified on import.
+	 *
+	 * `{@link <a href="URL">URL</a> text}` becomes `{@link URL text}`, so the
+	 * reference sits in a single text node for make_doclink_clickable().
+	 *
+	 * @param string $text The text.
+	 * @return string
+	 */
+	public static function unlinkify_references( $text ) {
+		return preg_replace_callback(
+			'/\{@(link|see) <a [^>]*href=["\']([^"\'<>]+)["\'][^>]*>[^<]*<\/a>\s*([^}<]*)\}/',
+			function ( $matches ) {
+				return '{@' . $matches[1] . ' ' . $matches[2] . ( '' === $matches[3] ? '' : ' ' . $matches[3] ) . '}';
+			},
+			$text
+		);
+	}
+
+	/**
+	 * Runs a regex replacement over the text nodes of an HTML string only.
+	 *
+	 * Tags and their attribute values pass through verbatim, so generated markup
+	 * only ever forms new elements in text context.
+	 *
+	 * @param string   $pattern  Regular expression to match within text nodes.
+	 * @param callable $callback Replacement callback, as for preg_replace_callback().
+	 * @param string   $content  The HTML content.
+	 * @return string
+	 */
+	public static function replace_in_text_nodes( $pattern, $callback, $content ) {
+		$pieces = wp_html_split( $content );
+
+		// wp_html_split() alternates text and tag pieces, starting with text.
+		foreach ( $pieces as $i => $piece ) {
+			if ( 0 === $i % 2 ) {
+				$pieces[ $i ] = preg_replace_callback( $pattern, $callback, $piece );
+			}
+		}
+
+		return implode( '', $pieces );
 	}
 
 	/**
@@ -335,7 +360,7 @@ class DevHub_Formatting {
 		$text = str_replace( array( '<strong>', '</strong>' ), '__', $text );
 
 		// Encode all htmlentities (but don't double-encode).
-		$text = htmlentities( $text, ENT_COMPAT | ENT_HTML401, 'UTF-8', false );
+		$text = htmlentities( self::unlinkify_references( $text ), ENT_COMPAT | ENT_HTML401, 'UTF-8', false );
 
 		// Simple allowable tags that should get unencoded.
 		// Note: This precludes them from being able to be used in an encoded fashion
