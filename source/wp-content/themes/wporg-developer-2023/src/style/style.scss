@@ -636,3 +636,21 @@ pre {
 		left: 0;
 	}
 }
+
+/* Spinner */
+.spinner {
+	&::after {
+		content: "";
+		display: inline-block;
+		box-sizing: border-box;
+		height: 16px;
+		width: 16px;
+		border: 1.5px solid;
+		border-color:
+			var(--wp--preset--color--light-grey-2)
+			var(--wp--preset--color--light-grey-2)
+			var(--wp--custom--link--color--text);
+		border-radius: 50%;
+		animation: rotate-360 1.4s linear infinite;
+	}
+}

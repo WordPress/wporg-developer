@@ -46,7 +46,7 @@ class DevHub_Note_Preview {
 			wp_enqueue_script(
 				'wporg-developer-preview',
 				get_stylesheet_directory_uri() . '/js/user-notes-preview.js',
-				array( 'jquery', 'wporg-developer-function-reference', 'wporg-developer-tabs' ),
+				array( 'wporg-developer-function-reference', 'wporg-developer-tabs' ),
 				filemtime( dirname( __DIR__ ) . '/js/user-notes-preview.js' ),
 				true
 			);
