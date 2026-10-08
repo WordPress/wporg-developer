@@ -174,9 +174,11 @@ class DevHub_Formatting {
 	 * @return string
 	 */
 	public static function unlinkify_references( $text ) {
-		return preg_replace(
-			'/\{@(link|see) <a [^>]*href=["\']([^"\']+)["\'][^>]*>[^<]*<\/a>([^}<]*)\}/',
-			'{@$1 $2$3}',
+		return preg_replace_callback(
+			'/\{@(link|see) <a [^>]*href=["\']([^"\'<>]+)["\'][^>]*>[^<]*<\/a>\s*([^}<]*)\}/',
+			function ( $matches ) {
+				return '{@' . $matches[1] . ' ' . $matches[2] . ( '' === $matches[3] ? '' : ' ' . $matches[3] ) . '}';
+			},
 			$text
 		);
 	}
@@ -197,7 +199,7 @@ class DevHub_Formatting {
 
 		// wp_html_split() alternates text and tag pieces, starting with text.
 		foreach ( $pieces as $i => $piece ) {
-			if ( 0 === $i % 2 && '' !== $piece ) {
+			if ( 0 === $i % 2 ) {
 				$pieces[ $i ] = preg_replace_callback( $pattern, $callback, $piece );
 			}
 		}
