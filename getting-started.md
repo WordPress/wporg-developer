@@ -31,6 +31,21 @@ add_filter( 'wporg_markdown_check_etags', '__return_false' );
 do_action( 'devhub_playground_import_all_markdown' );
 ```
 
+## Snippet sweep
+
+The interactive PHP examples that phpdoc-parser exports from DocBlocks can be swept end to end: parse, import, render, and run every snippet through WordPress Playground, then report which examples run to completion.
+
+```bash
+yarn wp-env start
+yarn sweep:prepare
+yarn sweep
+yarn sweep:report
+```
+
+`sweep:prepare` parses only the WordPress source files containing interactive snippet fences, so it is much faster than `yarn parse`.
+
+The Tools → PHP Snippets Report admin page renders the report as bucket totals, a per-page rollup, and a filterable table where each snippet expands to show its input, its expected output, and the output it produced. The page reads `env/sweep/results/report.json` when a local sweep has written one, and otherwise reads the `report.json` that the weekly sweep workflow publishes to the `sweep-report` branch.
+
 ## Explanations
 
 See `source/wp-content/themes/wporg-developer/inc/explanations.php` - a CPT where additional "Explanation" text can be stored for each function in the reference. The Explanation content is displayed under a `More Information` heading on the reference page for that function.
