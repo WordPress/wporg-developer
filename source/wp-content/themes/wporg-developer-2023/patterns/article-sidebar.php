@@ -11,4 +11,6 @@
 
 	<!-- wp:wporg/table-of-contents /-->
 
+	<!-- wp:wporg/copy-page /-->
+
 <!-- /wp:wporg/sidebar-container -->
