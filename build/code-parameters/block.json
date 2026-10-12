@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "wporg/code-reference-parameters",
+  "version": "0.1.0",
+  "title": "Code Reference: Parameters",
+  "category": "widgets",
+  "icon": "smiley",
+  "description": "Show the code parameters for a function, class, or method.",
+  "usesContext": [
+    "postId"
+  ],
+  "supports": {
+    "html": false,
+    "spacing": {
+      "margin": [
+        "top",
+        "bottom"
+      ],
+      "padding": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true
+    }
+  },
+  "textdomain": "wporg",
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css"
+}
