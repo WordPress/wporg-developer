@@ -237,7 +237,7 @@ class DevHub_Search {
 		if ( $query->is_main_query() && $query->is_search() && ! trim( get_search_query() ) ) {
 			// If search is filtered.
 			if ( isset( $_GET['post_type'] ) ) {
-				$post_types = $_GET['post_type'];
+				$post_types = (array) $_GET['post_type'];
 
 				// Redirect to post type archive if only a single parsed post type is defined.
 				if ( 1 === count( $post_types ) ) {
@@ -290,7 +290,7 @@ class DevHub_Search {
 			}
 			
 			// Retry HTML entity convertible search term after such a conversion.
-			elseif ( $s != ( $she = htmlentities( $s ) ) ) {
+			elseif ( $s != ( $she = htmlentities( $s, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401, 'UTF-8', false ) ) ) {
 				$query->set( 's', $she );
 				$posts = $query->get_posts();
 			}
