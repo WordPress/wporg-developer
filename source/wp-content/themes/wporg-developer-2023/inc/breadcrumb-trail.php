@@ -848,7 +848,21 @@ class Breadcrumb_Trail {
 	 * @return void
 	 */
 	public function do_search_items_by_home_url( $home_url ) {
-		$this->items[] = '<a href="' . $home_url . '">' . get_queried_object()->label . '</a>';
+		$queried_object = get_queried_object();
+		$label          = $queried_object->label ?? '';
+
+		// The queried object isn't always a post type, e.g. when a search is POSTed to a handbook page.
+		if ( ! $label ) {
+			$post_type_object = get_post_type_object( get_post_type() ?: get_query_var( 'post_type' ) );
+			$label            = $post_type_object->label ?? '';
+		}
+		if ( ! $label && function_exists( 'wporg_get_current_handbook_name' ) ) {
+			$label = wporg_get_current_handbook_name();
+		}
+
+		if ( $label ) {
+			$this->items[] = '<a href="' . $home_url . '">' . $label . '</a>';
+		}
 
 		if ( is_paged() ) {
 			$search_url    = add_query_arg( 's', get_search_query(), $home_url );
