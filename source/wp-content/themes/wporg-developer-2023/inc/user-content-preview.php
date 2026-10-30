@@ -71,7 +71,7 @@ class DevHub_Note_Preview {
 	public static function ajax_preview() {
 		check_ajax_referer( 'preview_nonce', 'preview_nonce' );
 
-		if ( ! isset( $_POST['preview_comment'] ) ) {
+		if ( ! isset( $_POST['preview_comment'] ) || ! is_string( $_POST['preview_comment'] ) ) {
 			wp_send_json_error( array( 'comment' => '' ) );
 		}
 
