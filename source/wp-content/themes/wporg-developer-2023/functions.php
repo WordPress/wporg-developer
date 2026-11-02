@@ -89,6 +89,9 @@ if ( class_exists( '\\WordPressdotorg\\Markdown\\Importer' ) ) {
 
 	// Playground handbook.
 	require __DIR__ . '/inc/import-playground.php';
+
+	// Reprint handbook.
+	require __DIR__ . '/inc/import-reprint.php';
 }
 
 /**
