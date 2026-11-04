@@ -10,7 +10,7 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 	const PLAYGROUND_IMAGE_META_KEY    = '_playground_image';
 	const TRANSLATION_LOCALES_META_KEY = '_playground_translation_locales';
 	const CONTENT_TRANSFORM_META_KEY   = '_playground_content_transform_version';
-	const CONTENT_TRANSFORM_VERSION    = 3;
+	const CONTENT_TRANSFORM_VERSION    = 4;
 
 	/**
 	 * The post currently being updated from Markdown.
@@ -502,7 +502,12 @@ class DevHub_Playground_Importer extends DevHub_Docs_Importer {
 			return $markdown;
 		}
 
-		$markdown = preg_replace( '/^\s*import\s+.+?\s+from\s+([\'\"]).+?\1;\s*$/m', '', $markdown );
+		// MDX component imports are not content, but imports in code examples are.
+		$markdown = preg_replace(
+			'/^ {0,3}(`{3,})[^\r\n]*\R[\s\S]*?(?:^ {0,3}\1`*[\t ]*\r?$|\z)(*SKIP)(*F)|^ {0,3}(~{3,})[^\r\n]*\R[\s\S]*?(?:^ {0,3}\2~*[\t ]*\r?$|\z)(*SKIP)(*F)|^[\t ]*import\s+.+?\s+from\s+([\'\"]).+?\3;[\t ]*\r?$/m',
+			'',
+			$markdown
+		);
 
 		$markdown = preg_replace_callback(
 			'#<UpdateTopLevelToc\b.*?/\s*>\s*<span>\s*\{\s*BlueprintSteps\s*\.\s*map\s*\(.*?</span>#s',
