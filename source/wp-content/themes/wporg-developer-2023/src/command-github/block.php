@@ -43,9 +43,11 @@ function render( $attributes, $content, $block ) {
 	if ( $repo_url ) {
 		$content .= sprintf(
 			'
-			<a href="%s">
-				<img src="https://make.wordpress.org/cli/wp-content/plugins/wporg-cli/assets/images/github-mark.svg" class="icon-github" alt="GitHub" />
-			</a>
+			<div class="btn-group">
+				<a class="button" href="%s" style="padding-top: 0;">GitHub Repository
+					<img decoding="async" src="https://make.wordpress.org/cli/wp-content/plugins/wporg-cli/assets/images/github-mark.svg" class="icon-github" alt="GitHub">
+				</a>
+			</div>
 			',
 			esc_url( $repo_url )
 		);
