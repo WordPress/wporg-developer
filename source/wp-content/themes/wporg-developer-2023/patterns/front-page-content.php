@@ -73,6 +73,16 @@
 <!-- wp:paragraph -->
 <p><?php esc_html_e( 'Run WordPress entirely in your browser.', 'wporg' ); ?></p>
 <!-- /wp:paragraph --></a>
+<!-- /wp:wporg/link-wrapper -->
+
+<!-- wp:wporg/link-wrapper -->
+<a class="wp-block-wporg-link-wrapper" href="<?php echo esc_url( site_url( '/secure-custom-fields/' ) ); ?>"><!-- wp:heading {"level":3,"style":{"typography":{"fontStyle":"normal","fontWeight":"600"}},"fontSize":"normal","fontFamily":"inter"} -->
+<h3 class="wp-block-heading has-inter-font-family has-normal-font-size" style="font-style:normal;font-weight:600"><?php esc_html_e( 'Secure Custom Fields', 'wporg' ); ?></h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><?php esc_html_e( 'Add custom fields and content types to your site.', 'wporg' ); ?></p>
+<!-- /wp:paragraph --></a>
 <!-- /wp:wporg/link-wrapper --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group --></div>
