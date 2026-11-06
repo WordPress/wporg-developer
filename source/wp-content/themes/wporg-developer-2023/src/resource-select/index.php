@@ -76,6 +76,10 @@ function render( $attributes, $content, $block ) {
 			'url' => '/advanced-administration/',
 			'label' => __( 'Advanced Administration', 'wporg' ),
 		),
+		array(
+			'url' => '/secure-custom-fields/',
+			'label' => __( 'Secure Custom Fields', 'wporg' ),
+		),
 	);
 
 	$options = '';
