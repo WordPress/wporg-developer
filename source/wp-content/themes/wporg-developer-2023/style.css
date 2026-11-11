@@ -14,3 +14,15 @@
  * Note: only add styles here in cases where you can't achieve the style with
  * templates or theme.json settings.
  */
+
+ .spinner {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	vertical-align: middle;
+	margin-left: 6px;
+	background: url(/wp-admin/images/spinner.gif) no-repeat;
+	background-size: 16px 16px;
+}
+
+
