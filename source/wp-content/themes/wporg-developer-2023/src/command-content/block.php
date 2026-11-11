@@ -32,7 +32,7 @@ function render( $attributes, $content, $block ) {
 		return '';
 	}
 
-	$content = format_headings( get_the_content( null, false, $post_ID ) );
+	$content = format_headings( preserve_hyphens( get_the_content( null, false, $post_ID ) ) );
 
 	$wrapper_attributes = get_block_wrapper_attributes();
 	$repo_url = get_post_meta( $post_ID, 'repo_url', true );
@@ -100,6 +100,40 @@ function is_bundled_commands( $repo_url ) {
 	}
 
 	return true;
+}
+
+/**
+ * Keeps runs of hyphens outside of code from being turned into dashes.
+ *
+ * The handbook escapes the hyphens it wants displayed verbatim, like those of
+ * option names (`\--count`), which Markdown turns into `&#45;-count`. As of
+ * WordPress 7.2, kses decodes that entity on import, so the stored content
+ * holds a plain `--` that wptexturize() would turn into an en dash. Encoding
+ * the first hyphen of each run again restores the form the content used to be
+ * stored in, which DevHub_CLI::fix_formatting() relies on, too.
+ *
+ * @param string $content The post content.
+ * @return string Content with the first hyphen of each run encoded.
+ */
+function preserve_hyphens( $content ) {
+	$pieces     = wp_html_split( $content );
+	$code_depth = 0;
+
+	// wp_html_split() alternates text and tag pieces, starting with text.
+	foreach ( $pieces as $i => $piece ) {
+		if ( 1 === $i % 2 ) {
+			if ( preg_match( '#^<(/?)(?:pre|code)\b#i', $piece, $matches ) ) {
+				$code_depth += '/' === $matches[1] ? -1 : 1;
+			}
+			continue;
+		}
+
+		if ( $code_depth < 1 ) {
+			$pieces[ $i ] = preg_replace( '/(?<!-)-(?=-)/', '&#045;', $piece );
+		}
+	}
+
+	return implode( '', $pieces );
 }
 
 /**
