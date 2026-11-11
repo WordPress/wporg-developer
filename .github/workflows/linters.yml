@@ -21,21 +21,28 @@ jobs:
               with:
                   node-version-file: '.nvmrc'
 
-            - name: Setup PHP with PECL extension
-              uses: shivammathur/setup-php@44454db4f0199b8b9685a5d763dc37cbf79108e1 # v2.36.0
+            - name: Checkout wporg-repo-tools
+              uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
               with:
-                php-version: '8.4'
-              env:
-                COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  repository: WordPress/wporg-repo-tools
+                  path: vendor/wporg/wporg-repo-tools
 
-            - name: Install SVN
-              run: sudo apt-get update && sudo apt-get install -y subversion
+            - name: Cache node_modules
+              id: node-modules
+              uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+              with:
+                  path: |
+                      node_modules
+                      source/wp-content/themes/wporg-developer-2023/node_modules
+                  key: node-modules-${{ runner.os }}-${{ hashFiles('.nvmrc', 'package.json', 'source/wp-content/themes/wporg-developer-2023/package.json') }}
 
-            - name: Install dependencies & setup configs
-              run: |
-                  composer install || composer update wporg/*
-                  yarn
-                  TEXTDOMAIN=wporg composer exec update-configs
+            - name: Install dependencies
+              if: steps.node-modules.outputs.cache-hit != 'true'
+              run: yarn
+
+            - name: Setup configs
+              run: TEXTDOMAIN=wporg bash vendor/wporg/wporg-repo-tools/bin/update-configs
+
             - name: Lint CSS
               run: |
                   yarn workspace wporg-developer-2023 lint:css

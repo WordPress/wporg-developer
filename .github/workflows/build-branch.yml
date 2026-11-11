@@ -42,20 +42,28 @@ jobs:
               with:
                   node-version-file: '.nvmrc'
 
-            - name: Setup PHP with PECL extension
-              uses: shivammathur/setup-php@44454db4f0199b8b9685a5d763dc37cbf79108e1 # v2.36.0
+            - name: Restore node_modules
+              id: node-modules
+              uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
               with:
-                php-version: '8.4'
-              env:
-                COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  path: |
+                      node_modules
+                      source/wp-content/themes/wporg-developer-2023/node_modules
+                  key: node-modules-${{ runner.os }}-${{ hashFiles('.nvmrc', 'package.json', 'source/wp-content/themes/wporg-developer-2023/package.json') }}
 
-            - name: Install SVN
-              run: sudo apt-get update && sudo apt-get install -y subversion
+            - name: Install dependencies
+              if: steps.node-modules.outputs.cache-hit != 'true'
+              run: yarn
 
-            - name: Install all dependencies
-              run: |
-                  composer install || composer update wporg/*
-                  yarn
+            # Saved here rather than in a post step, which would run after the repo is trimmed.
+            - name: Save node_modules
+              if: steps.node-modules.outputs.cache-hit != 'true'
+              uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+              with:
+                  path: |
+                      node_modules
+                      source/wp-content/themes/wporg-developer-2023/node_modules
+                  key: node-modules-${{ runner.os }}-${{ hashFiles('.nvmrc', 'package.json', 'source/wp-content/themes/wporg-developer-2023/package.json') }}
 
             - name: Build
               run: yarn workspaces run build
