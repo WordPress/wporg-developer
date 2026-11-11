@@ -44,7 +44,7 @@ jobs:
 
             - name: Install dependencies
               if: steps.node-modules.outputs.cache-hit != 'true'
-              run: npm ci --ignore-scripts
+              run: npm ci --ignore-scripts --no-audit --no-fund
 
             - name: Build
               run: npm run build

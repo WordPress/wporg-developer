@@ -57,7 +57,7 @@ jobs:
 
             - name: Install dependencies
               if: steps.node-modules.outputs.cache-hit != 'true'
-              run: npm ci --ignore-scripts
+              run: npm ci --ignore-scripts --no-audit --no-fund
 
             # Saved here rather than in a post step, which would run after the repo is trimmed.
             - name: Save node_modules

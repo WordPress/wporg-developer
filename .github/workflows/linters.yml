@@ -51,7 +51,7 @@ jobs:
 
             - name: Install dependencies
               if: steps.node-modules.outputs.cache-hit != 'true'
-              run: npm ci --ignore-scripts
+              run: npm ci --ignore-scripts --no-audit --no-fund
 
             - name: Setup configs
               run: TEXTDOMAIN=wporg bash vendor/wporg/wporg-repo-tools/bin/update-configs
