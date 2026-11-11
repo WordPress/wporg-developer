@@ -105,13 +105,6 @@ function is_bundled_commands( $repo_url ) {
 /**
  * Keeps runs of hyphens outside of code from being turned into dashes.
  *
- * The handbook escapes the hyphens it wants displayed verbatim, like those of
- * option names (`\--count`), which Markdown turns into `&#45;-count`. As of
- * WordPress 7.2, kses decodes that entity on import, so the stored content
- * holds a plain `--` that wptexturize() would turn into an en dash. Encoding
- * the first hyphen of each run again restores the form the content used to be
- * stored in, which DevHub_CLI::fix_formatting() relies on, too.
- *
  * @param string $content The post content.
  * @return string Content with the first hyphen of each run encoded.
  */
