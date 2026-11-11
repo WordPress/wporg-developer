@@ -839,7 +839,7 @@ namespace DevHub {
 
 						// If a known default is stated in the parameter's description, try to remove it
 						// since the actual default value is displayed immediately following description.
-						$default = htmlentities( $arg['default'] );
+						$default         = htmlentities( $arg['default'], ENT_COMPAT | ENT_HTML401, 'UTF-8', false ); // Same flags as format_param_description().
 						$default_strings = [
 							"default is {$default}.",
 							"Default {$default}.",
