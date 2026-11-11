@@ -68,7 +68,7 @@ function get_param_content( $params ) {
 	foreach ( $params as $param ) {
 		if ( ! empty( $param['variable'] ) ) {
 			$output .= '<dt>';
-			$output .= '<code>' . esc_html( $param['variable'] ) . '</code>';
+			$output .= '<code>' . ( ! empty( $param['variadic'] ) ? '...' : '' ) . esc_html( $param['variable'] ) . '</code>';
 
 			if ( ! empty( $param['types'] ) ) {
 				$output .= '<span class="type">' . wp_kses_post( $param['types'] ) . '</span>';

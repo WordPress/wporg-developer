@@ -748,7 +748,7 @@ namespace DevHub {
 				}
 
 				if ( ! empty( $arg['name'] ) ) {
-					$arg_string .= '&nbsp;<span class="arg-name">' . $arg['name'] . '</span>';
+					$arg_string .= '&nbsp;<span class="arg-name">' . ( ! empty( $arg['variadic'] ) ? '...' : '' ) . $arg['name'] . '</span>';
 				}
 
 				if ( ! empty( $arg['default'] ) ) {
@@ -829,7 +829,8 @@ namespace DevHub {
 		if ( $args ) {
 			foreach ( $args as $arg ) {
 				if ( ! empty( $arg['name'] ) && ! empty( $params[ $arg['name'] ] ) ) {
-					$params[ $arg['name'] ]['default'] = $arg['default'];
+					$params[ $arg['name'] ]['default']  = $arg['default'];
+					$params[ $arg['name'] ]['variadic'] = ! empty( $arg['variadic'] );
 
 					// If a default value was supplied
 					if ( ! empty( $arg['default'] ) ) {
