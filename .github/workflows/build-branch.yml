@@ -19,8 +19,7 @@ on:
             - dist/**
     workflow_dispatch:
 
-permissions:
-    contents: read
+permissions: {}
 
 concurrency:
     group: build-branch-${{ github.ref_name }}
@@ -29,33 +28,48 @@ concurrency:
 jobs:
     build:
         runs-on: ubuntu-latest
+        timeout-minutes: 10
         permissions:
-            contents: write
+            contents: write # Push the built theme.
         env:
             DIST_REF: dist/${{ github.ref_name }}
+
         steps:
             - name: Checkout repository
-              uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+              uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+              with:
+                  persist-credentials: false
 
             - name: Install NodeJS
-              uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
+              uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
               with:
                   node-version-file: '.nvmrc'
+                  package-manager-cache: false
 
-            - name: Setup PHP with PECL extension
-              uses: shivammathur/setup-php@44454db4f0199b8b9685a5d763dc37cbf79108e1 # v2.36.0
+            - name: Restore node_modules
+              id: node-modules
+              uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
               with:
-                php-version: '8.4'
-              env:
-                COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  path: |
+                      node_modules
+                      source/wp-content/themes/wporg-developer-2023/node_modules
+                  key: node-modules-${{ runner.os }}-${{ hashFiles('.nvmrc', 'package.json', 'source/wp-content/themes/wporg-developer-2023/package.json') }}
+                  restore-keys: |
+                      node-modules-${{ runner.os }}-
 
-            - name: Install SVN
-              run: sudo apt-get update && sudo apt-get install -y subversion
+            - name: Install dependencies
+              if: steps.node-modules.outputs.cache-hit != 'true'
+              run: yarn install --ignore-scripts
 
-            - name: Install all dependencies
-              run: |
-                  composer install || composer update wporg/*
-                  yarn
+            # Saved here rather than in a post step, which would run after the repo is trimmed.
+            - name: Save node_modules
+              if: steps.node-modules.outputs.cache-hit != 'true'
+              uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+              with:
+                  path: |
+                      node_modules
+                      source/wp-content/themes/wporg-developer-2023/node_modules
+                  key: node-modules-${{ runner.os }}-${{ hashFiles('.nvmrc', 'package.json', 'source/wp-content/themes/wporg-developer-2023/package.json') }}
 
             - name: Build
               run: yarn workspaces run build
@@ -64,25 +78,29 @@ jobs:
               run: |
                   rm -rf source/wp-content/themes/wporg-developer-2023/node_modules
                   rm -rf source/wp-content/themes/wporg-developer-2023/scss
-                  mv source/wp-content/themes/wporg-developer-2023 $RUNNER_TEMP
+                  mv source/wp-content/themes/wporg-developer-2023 "$RUNNER_TEMP"
+                  # Moving is much faster than deleting, and the runner is discarded anyway.
+                  mv node_modules "$RUNNER_TEMP"
                   git rm -rfq .
-                  rm -rf *
-                  mv $RUNNER_TEMP/wporg-developer-2023/* .
+                  rm -rf -- *
+                  mv "$RUNNER_TEMP"/wporg-developer-2023/* .
 
             - name: Add all the theme files
-              run: |
-                  git add * --force
+              run: git add --force -- *
 
             - name: Append build number to version
               run: |
                   current_version=$(grep -oP 'Version: \K[0-9]+\.[0-9]+\.[0-9]+' style.css)
                   new_version="${current_version}-${GITHUB_SHA::7}"
                   sed -i "s/Version: $current_version/Version: $new_version/" style.css
+                  git add style.css
 
+            # The token is only exposed here, so the dependencies run during the build can't read it.
             - name: Commit and push
-              uses: actions-js/push@5a7cbd780d82c0c937b5977586e641b2fd94acc5 # 1.5
-              with:
-                  github_token: ${{ secrets.GITHUB_TOKEN }}
-                  branch: ${{ env.DIST_REF }}
-                  force: true
-                  message: 'Build: ${{ github.sha }}'
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  git config user.name 'github-actions[bot]'
+                  git config user.email 'github-actions[bot]@users.noreply.github.com'
+                  git commit --quiet --message "Build: $GITHUB_SHA"
+                  git push --force "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:refs/heads/$DIST_REF"
