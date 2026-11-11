@@ -40,16 +40,14 @@ jobs:
                   path: |
                       node_modules
                       source/wp-content/themes/wporg-developer-2023/node_modules
-                  key: node-modules-${{ runner.os }}-${{ hashFiles('.nvmrc', 'package.json', 'source/wp-content/themes/wporg-developer-2023/package.json') }}
-                  restore-keys: |
-                      node-modules-${{ runner.os }}-
+                  key: node-modules-${{ runner.os }}-${{ hashFiles('.nvmrc', 'package-lock.json') }}
 
             - name: Install dependencies
               if: steps.node-modules.outputs.cache-hit != 'true'
-              run: yarn install --ignore-scripts
+              run: npm ci --ignore-scripts --no-audit --no-fund
 
             - name: Build
-              run: yarn workspaces run build
+              run: npm run build
 
             - name: Trim the repo down to just the theme
               run: |

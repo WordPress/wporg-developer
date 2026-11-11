@@ -17,7 +17,7 @@ The main parts of the code are:
 You can run an import in this repo with this command which is part of the setup:
 
     ```bash
-    yarn parse
+    npm run parse
     ```
 
 To import the Playground documentation from PHP, import the manifest first and

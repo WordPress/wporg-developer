@@ -13,20 +13,19 @@
 	},
 	"scripts": {
 		"playground": "npx @wp-playground/cli start --no-auto-mount --mount=./source/wp-content/mu-plugins:/wordpress/wp-content/mu-plugins --mount=./env/0-sandbox.php:/wordpress/wp-content/mu-plugins/0-sandbox.php --mount=./source/wp-content/plugins:/wordpress/wp-content/plugins --mount=./source/wp-content/themes:/wordpress/wp-content/themes --blueprint=${PLAYGROUND_BLUEPRINT:-./source/wp-content/blueprint.json}",
-		"playground:import-docs": "jq --arg postType \"${IMPORT_POST_TYPE:?Usage: IMPORT_POST_TYPE=playground yarn playground:import-docs}\" '.steps += [{\"step\":\"defineWpConfigConsts\",\"consts\":{\"IMPORT_POST_TYPE\":$postType}},{\"step\":\"runPHP\",\"code\":\"<?php class WP_CLI { public static function log( $message ) { error_log( $message ); } public static function warning( $message ) { error_log( \\\"Warning: $message\\\" ); } public static function success( $message ) { error_log( \\\"Success: $message\\\" ); } public static function error( $message ) { throw new RuntimeException( $message ); } } require_once \\\"/wordpress/wp-load.php\\\"; do_action( \\\"devhub_\\\" . IMPORT_POST_TYPE . \\\"_import_manifest\\\" ); do_action( \\\"devhub_\\\" . IMPORT_POST_TYPE . \\\"_import_all_markdown\\\" );\"}]' \"${PLAYGROUND_BLUEPRINT:-./source/wp-content/blueprint.json}\" > ./source/wp-content/.playground-import-docs.blueprint.json && PLAYGROUND_BLUEPRINT=./source/wp-content/.playground-import-docs.blueprint.json yarn playground",
-		"setup:tools": "yarn && composer install && TEXTDOMAIN=wporg composer exec update-configs && composer --working-dir=./source/wp-content/plugins/phpdoc-parser install",
-		"setup": "yarn setup:wp && yarn parse",
+		"playground:import-docs": "jq --arg postType \"${IMPORT_POST_TYPE:?Usage: IMPORT_POST_TYPE=playground npm run playground:import-docs}\" '.steps += [{\"step\":\"defineWpConfigConsts\",\"consts\":{\"IMPORT_POST_TYPE\":$postType}},{\"step\":\"runPHP\",\"code\":\"<?php class WP_CLI { public static function log( $message ) { error_log( $message ); } public static function warning( $message ) { error_log( \\\"Warning: $message\\\" ); } public static function success( $message ) { error_log( \\\"Success: $message\\\" ); } public static function error( $message ) { throw new RuntimeException( $message ); } } require_once \\\"/wordpress/wp-load.php\\\"; do_action( \\\"devhub_\\\" . IMPORT_POST_TYPE . \\\"_import_manifest\\\" ); do_action( \\\"devhub_\\\" . IMPORT_POST_TYPE . \\\"_import_all_markdown\\\" );\"}]' \"${PLAYGROUND_BLUEPRINT:-./source/wp-content/blueprint.json}\" > ./source/wp-content/.playground-import-docs.blueprint.json && PLAYGROUND_BLUEPRINT=./source/wp-content/.playground-import-docs.blueprint.json npm run playground",
+		"setup:tools": "npm install && composer install && TEXTDOMAIN=wporg composer exec update-configs && composer --working-dir=./source/wp-content/plugins/phpdoc-parser install",
+		"setup": "npm run setup:wp && npm run parse",
 		"setup:wp": "wp-env run cli bash env/setup.sh",
 		"parse": "wp-env run cli wp devhub parse --user_id=1",
 		"update:tools": "composer update && TEXTDOMAIN=wporg composer exec update-configs && composer --working-dir=./source/wp-content/plugins/phpdoc-parser update",
 		"wp-env": "wp-env",
-		"build": "yarn workspaces run build",
-		"build:theme": "yarn workspace wporg-developer-2023 build",
-		"start:theme": "yarn workspace wporg-developer-2023 start",
+		"build": "npm run build --workspaces",
+		"build:theme": "npm run build --workspace=wporg-developer-2023",
+		"start:theme": "npm run start --workspace=wporg-developer-2023",
 		"lint:css": "wp-scripts lint-style"
 	},
 	"workspaces": [
 		"source/wp-content/themes/wporg-developer-2023"
-	],
-	"packageManager": "yarn@1.22.22"
+	]
 }

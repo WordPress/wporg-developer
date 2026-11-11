@@ -6,7 +6,6 @@
 
 * Docker
 * Node/npm
-* Yarn
 * Composer
 
 ### Setup
@@ -14,25 +13,25 @@
 1. Set up repo dependencies.
 
     ```bash
-    yarn setup:tools
+    npm run setup:tools
     ```
 
 1. Build the assets. If there's anything that needs setting up.
 
     ```bash
-    yarn build
+    npm run build
     ```
 
 1. Start the local environment.
 
     ```bash
-    yarn wp-env start
+    npm run wp-env start
     ```
 
 1. Run the setup script.
 
     ```bash
-    yarn setup
+    npm run setup
     ```
 
 1. Visit site at [localhost:8888](http://localhost:8888).
@@ -44,7 +43,7 @@
 To run the environment without Docker, use WordPress Playground:
 
 ```bash
-yarn playground
+npm run playground
 ```
 
 The Playground setup mounts the same WordPress.org sandbox bootstrap used by `wp-env`, activates the local plugins and theme, and creates the starter pages.
@@ -52,7 +51,7 @@ The Playground setup mounts the same WordPress.org sandbox bootstrap used by `wp
 The `playground:import-docs` command starts Playground after importing the manifest and Markdown content for a documentation post type. For example, to import the Playground documentation, run:
 
 ```bash
-IMPORT_POST_TYPE=playground yarn playground:import-docs
+IMPORT_POST_TYPE=playground npm run playground:import-docs
 ```
 
 ### Environment management
@@ -62,46 +61,46 @@ These must be run in the project's root folder, _not_ in theme/plugin subfolders
 * Stop the environment.
 
     ```bash
-    yarn wp-env stop
+    npm run wp-env stop
     ```
 
 * Restart the environment.
 
     ```bash
-    yarn wp-env start
+    npm run wp-env start
     ```
 
 * Open a shell inside the docker container.
 
     ```bash
-    yarn wp-env run wordpress bash
+    npm run wp-env run wordpress bash
     ```
 
 * Run wp-cli commands. Keep the wp-cli command in quotes so that the flags are passed correctly.
 
     ```bash
-    yarn wp-env run cli "post list --post_status=publish"
+    npm run wp-env run cli "post list --post_status=publish"
     ```
 
 * Update composer dependencies and sync any `repo-tools` changes.
 
     ```bash
-    yarn update:tools
+    npm run update:tools
     ```
 
 * Watch for SCSS changes and rebuild the CSS as needed.
 
     ```bash
-    yarn start:theme
+    npm run start:theme
     ```
 
 * Parse the code reference again. This is run as part of the project setup.
 
     ```bash
-    yarn parse
+    npm run parse
     ```
 
 ### Asset management
 
-* Build assets once: `yarn build:theme`
-* Watch assets and build on changes: `yarn start:theme`
+* Build assets once: `npm run build:theme`
+* Watch assets and build on changes: `npm run start:theme`
