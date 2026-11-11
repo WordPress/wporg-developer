@@ -109,6 +109,10 @@ function is_bundled_commands( $repo_url ) {
  * @return string Content with the first hyphen of each run encoded.
  */
 function preserve_hyphens( $content ) {
+	if ( ! str_contains( $content, '--' ) ) {
+		return $content;
+	}
+
 	$pieces     = wp_html_split( $content );
 	$code_depth = 0;
 
@@ -116,13 +120,14 @@ function preserve_hyphens( $content ) {
 	foreach ( $pieces as $i => $piece ) {
 		if ( 1 === $i % 2 ) {
 			if ( preg_match( '#^<(/?)(?:pre|code)\b#i', $piece, $matches ) ) {
-				$code_depth += '/' === $matches[1] ? -1 : 1;
+				$code_depth = max( 0, $code_depth + ( '/' === $matches[1] ? -1 : 1 ) );
 			}
 			continue;
 		}
 
-		if ( $code_depth < 1 ) {
-			$pieces[ $i ] = preg_replace( '/(?<!-)-(?=-)/', '&#045;', $piece );
+		if ( 0 === $code_depth ) {
+			// The second lookbehind skips runs that are still stored in their encoded form.
+			$pieces[ $i ] = preg_replace( '/(?<!-)(?<!&#045;)-(?=-)/', '&#045;', $piece );
 		}
 	}
 
