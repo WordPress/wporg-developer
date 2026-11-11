@@ -104,11 +104,11 @@
 			"package": {
 				"name": "wordpress/phpdoc-parser",
 				"type": "wordpress-plugin",
-				"version": "dev-master",
+				"version": "dev-trunk",
 				"source": {
 					"type": "git",
 					"url": "git@github.com:WordPress/phpdoc-parser.git",
-					"reference": "master"
+					"reference": "trunk"
 				}
 			}
 		},
@@ -164,7 +164,7 @@
 		"wordpress-meta/handbook": "2",
 		"wporg/wporg-repo-tools": "dev-trunk",
 		"wporg/wporg-mu-plugins": "dev-build",
-		"wordpress/phpdoc-parser": "dev-master",
+		"wordpress/phpdoc-parser": "dev-trunk",
 		"wporg/wporg-parent-2021": "dev-build",
 		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
 		"squizlabs/php_codesniffer": "^3.13.6",
