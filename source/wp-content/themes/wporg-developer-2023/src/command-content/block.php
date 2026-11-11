@@ -32,7 +32,7 @@ function render( $attributes, $content, $block ) {
 		return '';
 	}
 
-	$content = format_headings( get_the_content( null, false, $post_ID ) );
+	$content = format_headings( preserve_hyphens( get_the_content( null, false, $post_ID ) ) );
 
 	$wrapper_attributes = get_block_wrapper_attributes();
 	$repo_url = get_post_meta( $post_ID, 'repo_url', true );
@@ -100,6 +100,38 @@ function is_bundled_commands( $repo_url ) {
 	}
 
 	return true;
+}
+
+/**
+ * Keeps runs of hyphens outside of code from being turned into dashes.
+ *
+ * @param string $content The post content.
+ * @return string Content with the first hyphen of each run encoded.
+ */
+function preserve_hyphens( $content ) {
+	if ( ! str_contains( $content, '--' ) ) {
+		return $content;
+	}
+
+	$pieces     = wp_html_split( $content );
+	$code_depth = 0;
+
+	// wp_html_split() alternates text and tag pieces, starting with text.
+	foreach ( $pieces as $i => $piece ) {
+		if ( 1 === $i % 2 ) {
+			if ( preg_match( '#^<(/?)(?:pre|code)\b#i', $piece, $matches ) ) {
+				$code_depth = max( 0, $code_depth + ( '/' === $matches[1] ? -1 : 1 ) );
+			}
+			continue;
+		}
+
+		if ( 0 === $code_depth ) {
+			// The second lookbehind skips runs that are still stored in their encoded form.
+			$pieces[ $i ] = preg_replace( '/(?<!-)(?<!&#045;)-(?=-)/', '&#045;', $piece );
+		}
+	}
+
+	return implode( '', $pieces );
 }
 
 /**
