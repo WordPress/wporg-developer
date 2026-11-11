@@ -22,7 +22,6 @@ class DevHub_Parser {
 		'wp-includes/Requests/',
 		'wp-includes/SimplePie/',
 		'wp-includes/Text/',
-		'wp-includes/blocks/',
 		'wp-includes/block-patterns/',
 		'wp-includes/block-supports/',
 		'wp-includes/certificates/',
