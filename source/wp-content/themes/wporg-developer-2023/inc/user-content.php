@@ -11,6 +11,13 @@
 class DevHub_User_Submitted_Content {
 
 	/**
+	 * Shortcodes that format code in notes.
+	 *
+	 * @var string[]
+	 */
+	const NOTE_SHORTCODES = array( 'code', 'php', 'js', 'css' );
+
+	/**
 	 * Initializer
 	 */
 	public static function init() {
@@ -52,6 +59,9 @@ class DevHub_User_Submitted_Content {
 		// Allow only formatting shortcodes in notes; anything else stays opt-in.
 		add_filter( 'comment_text', array( __CLASS__, 'do_note_shortcodes' ) );
 
+		// Keep code in formatting shortcodes as text; runs before kses on priority 10.
+		add_filter( 'pre_comment_content', array( __CLASS__, 'encode_note_shortcodes' ), 9 );
+
 		// Customize allowed tags
 		add_filter( 'wp_kses_allowed_html',            array( __CLASS__, 'wp_kses_allowed_html' ), 10, 2 );
 
@@ -87,12 +97,11 @@ class DevHub_User_Submitted_Content {
 	 * @return string Comment text with the formatting shortcodes expanded.
 	 */
 	public static function do_note_shortcodes( $text ) {
-		$allowed  = array( 'code', 'php', 'js', 'css' );
 		$original = $GLOBALS['shortcode_tags'];
 
 		// The registry is narrowed globally for the duration of the pass, so any do_blocks() call made by
 		// the allowed callbacks (see DevHub_Formatting::do_shortcode_code()) also sees only these four.
-		$GLOBALS['shortcode_tags'] = array_intersect_key( $original, array_flip( $allowed ) ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+		$GLOBALS['shortcode_tags'] = array_intersect_key( $original, array_flip( self::NOTE_SHORTCODES ) ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 
 		try {
 			$text = do_shortcode( $text );
@@ -101,6 +110,38 @@ class DevHub_User_Submitted_Content {
 		}
 
 		return $text;
+	}
+
+	/**
+	 * Encodes the code inside formatting shortcodes, so kses keeps `<?php` and markup in it as text.
+	 *
+	 * Existing entities are left alone, so code that was already encoded isn't encoded twice.
+	 *
+	 * @param string $content Slashed comment content.
+	 * @return string Slashed comment content.
+	 */
+	public static function encode_note_shortcodes( $content ) {
+		$pattern = get_shortcode_regex( self::NOTE_SHORTCODES );
+
+		$encoded = preg_replace_callback(
+			"/$pattern/",
+			function ( $matches ) {
+				// Escaped shortcodes ([[php]…[/php]]) and self-closing ones stay as they are.
+				if ( '[' === $matches[1] || '' === $matches[5] ) {
+					return $matches[0];
+				}
+
+				return sprintf(
+					'[%1$s%2$s]%3$s[/%1$s]',
+					$matches[2],
+					$matches[3],
+					htmlspecialchars( $matches[5], ENT_NOQUOTES | ENT_SUBSTITUTE, 'UTF-8', false )
+				);
+			},
+			wp_unslash( $content )
+		);
+
+		return null === $encoded ? $content : wp_slash( $encoded );
 	}
 
 	/**
