@@ -27,6 +27,7 @@ class DevHub_Redirects {
 		add_action( 'template_redirect', array( __CLASS__, 'redirect_resources' ) );
 		add_action( 'template_redirect', array( __CLASS__, 'redirect_singularized_handbooks' ), 1 );
 		add_action( 'template_redirect', array( __CLASS__, 'redirect_pluralized_reference_post_types' ), 1 );
+		add_action( 'template_redirect', array( __CLASS__, 'redirect_source_files' ), 1 );
 		add_action( 'template_redirect', array( __CLASS__, 'redirect_404_to_alternative_parsed_type' ), 1 );
 		add_action( 'template_redirect', array( __CLASS__, 'paginated_home_page_404' ) );
 		add_action( 'template_redirect', array( __CLASS__, 'user_note_edit' ) );
@@ -140,6 +141,19 @@ class DevHub_Redirects {
 				wp_redirect( $path, 301 );
 				exit();
 			}
+		}
+	}
+
+	/**
+	 * Redirects source file requests from `/reference/files/`, a path that
+	 * subdirectory multisite routes to ms-files.php, to `/reference/file/`.
+	 */
+	public static function redirect_source_files() {
+		global $wp;
+
+		if ( str_starts_with( $wp->request, 'reference/files/' ) ) {
+			wp_redirect( home_url( user_trailingslashit( 'reference/file/' . substr( $wp->request, strlen( 'reference/files/' ) ) ) ), 301 );
+			exit();
 		}
 	}
 
