@@ -89,7 +89,7 @@ function get_param_content( $params ) {
 
 			if ( $extra ) {
 				$output .= '<span class="description">' . wp_kses_post( $param['content'] ) . '</span>';
-				$output .= '<details class="extended-description">';
+				$output .= '<details class="extended-description" open>';
 				/* translators: 1: function name, 2: variable name */
 				$output .= '<summary>' . esc_html( sprintf( __( 'More Arguments from %1$s( ... %2$s )', 'wporg' ), $extra['parent'], $extra['parent_var'] ) ) . '</summary>';
 				$output .= '<span class="description">' . wp_kses_post( $extra['content'] ) . '</span>';
