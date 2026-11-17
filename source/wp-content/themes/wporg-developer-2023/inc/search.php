@@ -94,8 +94,7 @@ class DevHub_Search {
 		// Set the default number of posts per page.
 		$query->set( 'posts_per_page', 25 );
 
-		// Handbook autocomplete runs over admin-ajax, where is_handbook is never set,
-		// so recognize it by the handbook post type it searches.
+		// Admin-ajax autocomplete never sets is_handbook, so detect handbook searches by post type.
 		$post_type                = (array) $query->get( 'post_type' );
 		$is_handbook_autocomplete = $query->get( '_autocomplete_search' )
 			&& 1 === count( $post_type )

@@ -103,14 +103,16 @@ class DevHub_Search_Form_Autocomplete {
 			wp_send_json_error( $defaults );
 		}
 
-		$post_type  = isset( $_POST['post_type'] ) ? sanitize_key( wp_unslash( $_POST['post_type'] ) ) : '';
-		$post_types = $parser_post_types;
+		$post_type      = isset( $_POST['post_type'] ) ? sanitize_key( wp_unslash( $_POST['post_type'] ) ) : '';
+		$post_types     = $parser_post_types;
+		$search_columns = array();
 
 		if ( 'command' === $post_type ) {
 			$post_types = array( 'command' );
 		} elseif ( $this->is_searchable_handbook( $post_type ) ) {
-			// Handbook searches only look within the current handbook.
 			$post_types = array( $post_type );
+			// Suggestions only show titles containing the input, so content-only matches would fill the result cap.
+			$search_columns = array( 'post_title' );
 		}
 
 		$args = array(
@@ -120,6 +122,7 @@ class DevHub_Search_Form_Autocomplete {
 			'orderby'              => '',
 			'search_orderby_title' => 1,
 			'order'                => 'ASC',
+			'search_columns'       => $search_columns,
 			'_autocomplete_search' => true,
 		);
 
