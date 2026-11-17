@@ -36,11 +36,6 @@ class DevHub_Search_Form_Autocomplete {
 	 */
 	public function scripts_and_styles() {
 
-		// Handbook searches don't have autocomplete.
-		if ( function_exists( 'wporg_is_handbook' ) && wporg_is_handbook() ) {
-			return;
-		}
-
 		wp_enqueue_style(
 			'awesomplete-css',
 			get_stylesheet_directory_uri() . '/stylesheets/awesomplete.css',
@@ -70,7 +65,7 @@ class DevHub_Search_Form_Autocomplete {
 			array(
 				'ajaxurl'   => admin_url( 'admin-ajax.php' ),
 				'nonce'     => wp_create_nonce( 'autocomplete_nonce' ),
-				'post_type' => get_post_type(),
+				'post_type' => ( function_exists( 'wporg_is_handbook' ) && wporg_is_handbook() ) ? wporg_get_current_handbook() : get_post_type(),
 			)
 		);
 
@@ -108,9 +103,15 @@ class DevHub_Search_Form_Autocomplete {
 			wp_send_json_error( $defaults );
 		}
 
-		$post_types = isset( $_POST['post_type'] ) && 'command' === $_POST['post_type'] ?
-			array( 'command' ) :
-			$parser_post_types;
+		$post_type  = isset( $_POST['post_type'] ) ? sanitize_key( wp_unslash( $_POST['post_type'] ) ) : '';
+		$post_types = $parser_post_types;
+
+		if ( 'command' === $post_type ) {
+			$post_types = array( 'command' );
+		} elseif ( $this->is_searchable_handbook( $post_type ) ) {
+			// Handbook searches only look within the current handbook.
+			$post_types = array( $post_type );
+		}
 
 		$args = array(
 			'posts_per_page'       => -1,
@@ -144,6 +145,29 @@ class DevHub_Search_Form_Autocomplete {
 		}
 
 		wp_send_json_success( $form_data );
+	}
+
+	/**
+	 * Whether autocomplete may search the given handbook post type.
+	 *
+	 * Hidden handbooks are only searchable by logged-in users, matching
+	 * Devhub_Handbooks::redirect_hidden_handbooks().
+	 *
+	 * @access protected
+	 *
+	 * @param string $post_type Post type.
+	 * @return bool
+	 */
+	protected function is_searchable_handbook( $post_type ) {
+		if ( ! $post_type || ! function_exists( 'wporg_is_handbook_post_type' ) || ! wporg_is_handbook_post_type( $post_type ) ) {
+			return false;
+		}
+
+		if ( ! get_current_user_id() && in_array( $post_type, Devhub_Handbooks::$hidden_handbooks, true ) ) {
+			return false;
+		}
+
+		return true;
 	}
 
 }
