@@ -16,6 +16,11 @@
 
 	.arg-default {
 		color: var(--wp--preset--color--syntax-black);
+		// Match the rest of the signature rather than inline code styles.
+		background: none;
+		border-radius: 0;
+		font: inherit;
+		padding: 0;
 	}
 
 	a,

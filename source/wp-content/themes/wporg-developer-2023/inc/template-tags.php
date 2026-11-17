@@ -752,7 +752,8 @@ namespace DevHub {
 				}
 
 				if ( ! empty( $arg['default'] ) ) {
-					$arg_string .= '&nbsp;=&nbsp;<span class="arg-default">' . htmlentities( $arg['default'] ) . "</span>";
+					// Use <code> so wptexturize() leaves quotes in default values, like '', alone.
+					$arg_string .= '&nbsp;=&nbsp;<code class="arg-default">' . htmlentities( $arg['default'] ) . '</code>';
 				}
 
 				$args_strings[] = $arg_string;
