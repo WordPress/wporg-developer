@@ -94,13 +94,21 @@ class DevHub_Search {
 		// Set the default number of posts per page.
 		$query->set( 'posts_per_page', 25 );
 
+		// Handbook autocomplete runs over admin-ajax, where is_handbook is never set,
+		// so recognize it by the handbook post type it searches.
+		$post_type                = (array) $query->get( 'post_type' );
+		$is_handbook_autocomplete = $query->get( '_autocomplete_search' )
+			&& 1 === count( $post_type )
+			&& function_exists( 'wporg_is_handbook_post_type' )
+			&& wporg_is_handbook_post_type( reset( $post_type ) );
+
 		// Separates searches for handbook pages from non-handbook pages depending on
 		// whether the search was performed within context of a handbook page or not.
 		if ( $query->is_handbook ) {
 			// Search only in current handbook post type.
 			// Just to make sure. post type should already be set.
 			$query->set( 'post_type', wporg_get_current_handbook() );
-		} else {
+		} elseif ( ! $is_handbook_autocomplete ) {
 			// If user has '()' at end of a search string, assume they want a specific function/method.
 			$s = htmlentities( $query->get( 's' ) );
 			if ( '()' === substr( $s, -2 ) || '(' == substr( $s, -1 ) ) {
