@@ -66,7 +66,10 @@ jQuery( function ( $ ) {
 		const $container = $( document.createElement( 'div' ) );
 		$container.addClass( 'wp-code-block-button-container' );
 
-		$container.append( '<code>' + wporgFunctionReferenceI18n.sourceFile + '</code>' );
+		// Only the source code block comes from the source file, so examples elsewhere get no file label.
+		if ( $element.find( '#wporg-source-code' ).length ) {
+			$container.append( '<code>' + wporgFunctionReferenceI18n.sourceFile + '</code>' );
+		}
 
 		const $btnContainer = $( document.createElement( 'span' ) );
 
