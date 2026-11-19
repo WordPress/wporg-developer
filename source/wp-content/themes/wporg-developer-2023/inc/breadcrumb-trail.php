@@ -519,7 +519,16 @@ class Breadcrumb_Trail {
 		global $wp_rewrite;
 
 		/* Get some taxonomy and term variables. */
-		$term     = get_queried_object();
+		$term = get_queried_object();
+
+		/*
+		 * Bail if no term was found. Request vars (including POSTed ones) can flag a term
+		 * archive for a term that doesn't exist, leaving the queried object empty.
+		 */
+		if ( ! $term instanceof WP_Term ) {
+			return;
+		}
+
 		$taxonomy = get_taxonomy( $term->taxonomy );
 
 		/* If there are rewrite rules for the taxonomy. */
