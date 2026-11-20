@@ -24,6 +24,10 @@ pre {
 		}
 	}
 
+	span.wp-block-button > .wp-block-button__link {
+		display: inline-block;
+	}
+
 	blockquote {
 		border-left: 2px solid var(--wp--preset--color--charcoal-1);
 		margin-left: 0;
