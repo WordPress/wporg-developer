@@ -410,6 +410,11 @@ pre {
 			gap: 8px;
 			justify-content: end;
 		}
+
+		// Keep the buttons on the right when there is no file label.
+		> span:only-child {
+			grid-column: 2;
+		}
 	}
 
 	@media screen and (min-width: 600px) {
