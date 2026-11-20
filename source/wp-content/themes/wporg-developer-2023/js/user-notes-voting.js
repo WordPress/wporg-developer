@@ -1,32 +1,41 @@
 /**
  * Dynamic functionality for voting on user submitted notes.
  *
+ * @param {Object} wp The WordPress JavaScript object.
  */
 
-( function( $, wp ) {
-	$( '#comments' ).on( 'click', 'a.user-note-voting-up, a.user-note-voting-down', function( event ) {
-		event.preventDefault();
+( function ( wp ) {
+	document.addEventListener( 'DOMContentLoaded', function () {
+		document.querySelector( '.comment-list' ).addEventListener( 'click', function ( event ) {
+			if ( event.target.matches( 'a.user-note-voting-up, a.user-note-voting-down' ) ) {
+				event.preventDefault();
 
-		var $item = $( this ),
-			comment = $item.closest( '.comment' );
+				const item = event.target;
+				const comment = item.closest( '.comment' );
 
-		$.post(
-			wporg_note_voting.ajaxurl,
-			{
-				action:   'note_vote',
-				comment:  $item.attr( 'data-id' ),
-				vote:     $item.attr( 'data-vote' ),
-				_wpnonce: $item.parent().attr( 'data-nonce' )
-			},
-			function( data ) {
-				if ( '0' !== data ) {
-					$item.closest( '.user-note-voting' ).replaceWith( data );
-					wp.a11y.speak( $( '.user-note-voting-count', comment ).text() );
-				}
-			},
-			'text'
-		);
+				const params = new URLSearchParams();
+				params.append( 'action', 'note_vote' );
+				params.append( 'comment', item.getAttribute( 'data-id' ) );
+				params.append( 'vote', item.getAttribute( 'data-vote' ) );
+				params.append( '_wpnonce', item.parentNode.getAttribute( 'data-nonce' ) );
 
-		return false;
+				fetch( wporg_note_voting.ajaxurl, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded',
+					},
+					body: params,
+				} )
+					.then( ( response ) => response.text() )
+					.then( ( data ) => {
+						if ( data !== '0' ) {
+							item.closest( '.user-note-voting' ).outerHTML = data;
+							wp.a11y.speak( comment.querySelector( '.user-note-voting-count' ).textContent );
+						}
+					} );
+
+				return false;
+			}
+		} );
 	} );
-} )( window.jQuery, window.wp );
+} )( window.wp );
