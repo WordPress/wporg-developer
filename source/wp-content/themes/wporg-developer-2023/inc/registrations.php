@@ -201,7 +201,11 @@ class DevHub_Registrations {
 			'public'                => true,
 			// Hierarchical x 2 to enable (.+) rather than ([^/]+) for rewrites.
 			'hierarchical'          => true,
-			'rewrite'               => array( 'with_front' => false, 'slug' => 'reference/files', 'hierarchical' => true ),
+			'rewrite'               => array(
+				'with_front'   => false,
+				'slug'         => 'reference/file',
+				'hierarchical' => true,
+			),
 			'sort'                  => false,
 			'update_count_callback' => '_update_post_term_count',
 			'show_in_rest'          => true,

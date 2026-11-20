@@ -469,7 +469,7 @@ function taxonomy_permalink( $link, $term, $taxonomy ) {
 			$slug = substr( $slug, 0, -4 ) . '.php';
 			$slug = str_replace( '_', '/', $slug );
 		}
-		$link = home_url( user_trailingslashit( "reference/files/$slug" ) );
+		$link = home_url( user_trailingslashit( str_replace( "%$taxonomy%", $slug, $wp_rewrite->get_extra_permastruct( $taxonomy ) ) ) );
 	} elseif ( 'wp-parser-since' === $taxonomy ) {
 		$link = str_replace( $term->slug, str_replace( '-', '.', $term->slug ), $link );
 	}
