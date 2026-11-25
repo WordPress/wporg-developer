@@ -1,0 +1,116 @@
+name: Snippet Sweep Report
+
+# Runs every interactive PHP example on the parsed reference pages through
+# WordPress Playground and publishes the results to the sweep-report branch,
+# which feeds the PHP Snippets Report admin page.
+on:
+    push:
+        branches: [trunk]
+        paths:
+            - 'source/wp-content/themes/wporg-developer-2023/src/code-description/**'
+            - 'env/sweep/**'
+            - '.github/workflows/sweep.yml'
+    pull_request:
+        paths:
+            - 'source/wp-content/themes/wporg-developer-2023/src/code-description/**'
+            - 'env/sweep/**'
+            - '.github/workflows/sweep.yml'
+    schedule:
+        - cron: '0 6 * * 1'
+    workflow_dispatch:
+
+permissions:
+    contents: write
+
+concurrency:
+    group: sweep-${{ github.ref }}
+    cancel-in-progress: false
+
+jobs:
+    sweep:
+        runs-on: ubuntu-latest
+        timeout-minutes: 60
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+
+            - name: Install NodeJS
+              uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
+              with:
+                  node-version-file: '.nvmrc'
+
+            - name: Setup PHP with PECL extension
+              uses: shivammathur/setup-php@44454db4f0199b8b9685a5d763dc37cbf79108e1 # v2.36.0
+              with:
+                php-version: '8.4'
+              env:
+                COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Install SVN
+              run: sudo apt-get update && sudo apt-get install -y subversion
+
+            - name: Install dependencies & setup configs
+              run: |
+                  composer install || composer update wporg/*
+                  yarn
+                  TEXTDOMAIN=wporg composer exec update-configs
+                  composer --working-dir=./source/wp-content/plugins/phpdoc-parser install
+
+            - name: Build
+              run: yarn workspaces run build
+
+            - name: Start the environment
+              run: yarn wp-env start
+
+            - name: Prepare the reference content
+              # Create the results directory before the container writes into
+              # it as root, so later host-side steps can still write there.
+              run: |
+                  mkdir -p env/sweep/results
+                  yarn sweep:prepare
+
+            - name: Install Playwright
+              run: |
+                  npm install --no-save --no-audit --no-fund @playwright/test
+                  npx playwright install chromium --with-deps
+
+            - name: Sweep the snippets
+              env:
+                  PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
+              run: yarn sweep
+
+            - name: Merge the report
+              if: always()
+              run: yarn sweep:report
+
+            - name: Add the report to the job summary
+              if: always()
+              run: |
+                  if [ -f env/sweep/results/report.md ]; then
+                      cat env/sweep/results/report.md >> "$GITHUB_STEP_SUMMARY"
+                  fi
+
+            - name: Upload the sweep results
+              if: always()
+              uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+              with:
+                  name: snippet-sweep-report
+                  path: env/sweep/results
+                  retention-days: 90
+
+            - name: Trim the repo down to just the report
+              if: github.event_name != 'pull_request'
+              run: |
+                  mv env/sweep/results/report.json $RUNNER_TEMP
+                  git rm -rfq .
+                  rm -rf *
+                  mv $RUNNER_TEMP/report.json .
+                  git add report.json --force
+
+            - name: Commit and push
+              if: github.event_name != 'pull_request'
+              uses: actions-js/push@5a7cbd780d82c0c937b5977586e641b2fd94acc5 # 1.5
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  branch: sweep-report
+                  force: true

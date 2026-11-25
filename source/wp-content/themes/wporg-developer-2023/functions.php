@@ -141,6 +141,7 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
  */
 if ( is_admin() ) {
 	require __DIR__ . '/inc/admin.php';
+	require __DIR__ . '/inc/snippets-report.php';
 }
 
 /**

@@ -1,0 +1,253 @@
+/* =PHP Snippets Report
+----------------------------------------------- */
+.devhub-snippets-report h2 {
+  margin: 2em 0 0.6em;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #646970;
+}
+
+/* The padding keeps the overlay scrollbar clear of the content it scrolls. */
+.devhub-snippets-report .snippets-report-scroll {
+  padding-bottom: 14px;
+  overflow-x: auto;
+}
+
+.devhub-snippets-report .snippets-report-number {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.devhub-snippets-report .snippets-report-strong {
+  font-weight: 600;
+}
+
+/* Bucket totals */
+.snippets-report-cards {
+  display: flex;
+  gap: 12px;
+  width: max-content;
+}
+
+.snippets-report-card {
+  flex: 0 0 13rem;
+  box-sizing: border-box;
+  padding: 12px 16px;
+  text-align: left;
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid #dcdcde;
+  border-radius: 4px;
+}
+
+.snippets-report-card:hover,
+.snippets-report-card.is-selected {
+  border-color: #2271b1;
+}
+
+.snippets-report-card.is-selected {
+  background: #f0f6fc;
+}
+
+.snippets-report-card-label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 12px;
+  color: #646970;
+}
+
+.snippets-report-card-count {
+  display: block;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.snippets-report-card-share {
+  display: block;
+  margin-top: 2px;
+  font-size: 11px;
+  color: #787c82;
+}
+
+.snippets-report-card.is-ran-match .snippets-report-card-label,
+.snippets-report-card.is-ran-match .snippets-report-card-count {
+  color: #008a20;
+}
+
+.snippets-report-card.is-ran-ok .snippets-report-card-label,
+.snippets-report-card.is-ran-ok .snippets-report-card-count {
+  color: #2271b1;
+}
+
+.snippets-report-card.is-ran-mismatch .snippets-report-card-label,
+.snippets-report-card.is-ran-mismatch .snippets-report-card-count {
+  color: #bd8600;
+}
+
+.snippets-report-card.is-ran-error .snippets-report-card-label,
+.snippets-report-card.is-ran-error .snippets-report-card-count,
+.snippets-report-card.is-never-completed .snippets-report-card-label,
+.snippets-report-card.is-never-completed .snippets-report-card-count {
+  color: #d63638;
+}
+
+.snippets-report-card.is-no-output .snippets-report-card-label,
+.snippets-report-card.is-no-output .snippets-report-card-count,
+.snippets-report-card.is-not-runnable .snippets-report-card-label,
+.snippets-report-card.is-not-runnable .snippets-report-card-count {
+  color: #787c82;
+}
+
+/* Per-page rollup */
+.snippets-report-sortable {
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.snippets-report-sortable[aria-sort] .snippets-report-label {
+  color: #1d2327;
+}
+
+.snippets-report-sortable[aria-sort="ascending"] .snippets-report-arrow::after {
+  content: " \25B2";
+  color: #2271b1;
+}
+
+.snippets-report-sortable[aria-sort="descending"] .snippets-report-arrow::after {
+  content: " \25BC";
+  color: #2271b1;
+}
+
+.snippets-report-page {
+  font-family: Menlo, Consolas, monaco, monospace;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* All snippets */
+.snippets-report-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.snippets-report-search {
+  flex: 1;
+  min-width: 240px;
+}
+
+.snippets-report-count {
+  margin: 0 0 8px;
+  color: #646970;
+}
+
+.snippets-report-empty {
+  padding: 12px;
+  color: #646970;
+  border: 1px solid #dcdcde;
+  border-top: none;
+}
+
+.snippets-report-row {
+  cursor: pointer;
+}
+
+.snippets-report-row:hover {
+  background: #f6f7f7;
+}
+
+.snippets-report-row.is-expanded {
+  background: #f0f0f1;
+}
+
+.snippets-report-toggle {
+  width: 2em;
+  text-align: center;
+}
+
+.snippets-report-toggle .button-link::before {
+  content: "\25B8";
+  font-size: 14px;
+  line-height: 1;
+  color: #2271b1;
+}
+
+.snippets-report-row.is-expanded .snippets-report-toggle .button-link::before {
+  content: "\25BE";
+}
+
+.snippets-report-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: nowrap;
+  border-radius: 3px;
+  background: #f0f0f1;
+  color: #50575e;
+}
+
+.snippets-report-pill.is-ran-match {
+  background: #edfaef;
+  color: #005c12;
+}
+
+.snippets-report-pill.is-ran-ok {
+  background: #f0f6fc;
+  color: #0a4b78;
+}
+
+.snippets-report-pill.is-ran-mismatch {
+  background: #fcf9e8;
+  color: #614200;
+}
+
+.snippets-report-pill.is-ran-error,
+.snippets-report-pill.is-never-completed {
+  background: #fcf0f1;
+  color: #8a2424;
+}
+
+.snippets-report-detail > td {
+  background: #f6f7f7;
+}
+
+.snippets-report-payload-label {
+  margin: 12px 0 4px;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #646970;
+}
+
+.snippets-report-payload {
+  max-height: 360px;
+  margin: 0;
+  padding: 10px 12px;
+  overflow: auto;
+  font-size: 12px;
+  line-height: 1.45;
+  background: #fff;
+  border: 1px solid #dcdcde;
+  border-left-width: 3px;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+
+.snippets-report-payload.is-input {
+  border-left-color: #2271b1;
+}
+
+.snippets-report-payload.is-expected {
+  border-left-color: #008a20;
+}
+
+.snippets-report-payload.is-output {
+  border-left-color: #bd8600;
+}
