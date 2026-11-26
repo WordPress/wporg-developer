@@ -4,6 +4,8 @@ This document gives a few quick notes about how the codebase in this repo works 
 
 The environment in this repo will set up a local WP install with the DevHub theme, and several other plugins and dependencies necessary for running a local test copy. Some of those pieces (such as the main wporg theme in `source/wp-content/themes/wporg`) are dependencies needed in order to run the environment but are not part of DevHub itself. The main parts of the codebase you are likely to need to change or refer to are outlined below.
 
+This repository is primarily intended for contributors who want to improve WordPress developer documentation and related tooling. Most contributions focus on documentation clarity, import tooling, and presentation logic rather than core WordPress functionality.
+
 ## Structure
 
 The main parts of the code are:
